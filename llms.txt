@@ -1,0 +1,26 @@
+# Nyx
+
+Nyx is an open-source, local-first security scanner for developers.
+
+It finds source-to-sink attack paths in code, shows evidence in a browser UI, supports SARIF output, and can run in CI. Nyx is designed for developers who want private, understandable application security testing without uploading source code to a cloud service.
+
+Primary site: https://nyxscan.dev
+Source code: https://github.com/elicpeter/nyx
+Crate: https://crates.io/crates/nyx-scanner
+Docs: https://elicpeter.github.io/nyx/
+Rustdocs: https://docs.rs/nyx-scanner/latest/nyx_scanner/
+Releases: https://github.com/elicpeter/nyx/releases
+Security policy: https://github.com/elicpeter/nyx/blob/master/SECURITY.md
+Roadmap: https://github.com/elicpeter/nyx/blob/master/ROADMAP.md
+
+Key topics:
+- local-first security scanner
+- open-source security scanner
+- static application security testing
+- source-to-sink analysis
+- taint analysis
+- SARIF
+- GitHub Actions
+- browser triage UI
+- Rust security tooling
+- developer security workflow
