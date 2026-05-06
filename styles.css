@@ -485,14 +485,20 @@ p {
 .media-frame img {
   display: block;
   width: 100%;
+  height: auto;
   border: 1px solid var(--line-strong);
   border-radius: 8px;
   box-shadow: var(--shadow-md);
 }
 
+.media-frame--demo img {
+  width: min(100%, 960px);
+  margin-inline: auto;
+}
+
 .media-frame figcaption {
   max-width: 680px;
-  margin-top: 14px;
+  margin: 14px auto 0;
   color: var(--muted);
   font-size: 0.88rem;
   line-height: 1.6;
@@ -778,14 +784,25 @@ p {
   }
 
   .site-header__inner {
-    flex-direction: column;
-    align-items: flex-start;
-    height: auto;
-    padding: 14px 0;
+    justify-content: flex-start;
+    height: 64px;
+  }
+
+  .header-wordmark {
+    position: static;
+    transform: none;
+    margin-left: 10px;
+    margin-right: auto;
   }
 
   .nav {
-    justify-content: flex-start;
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+    margin-left: auto;
+  }
+
+  .nav a {
+    white-space: nowrap;
   }
 
   .install-layout {
