@@ -1,38 +1,47 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Nyx | Local-first security scanner for developers</title>
-    <meta name="description" content="Nyx is an open-source, local-first security scanner for developers. Find source-to-sink attack paths, inspect evidence in a browser UI, export SARIF, and run scans in CI.">
-    <meta name="robots" content="index, follow, max-image-preview:large">
-    <link rel="canonical" href="https://nyxscan.dev/">
-    <link rel="alternate" type="text/plain" href="llms.txt" title="llms.txt">
-    <link rel="alternate" type="text/plain" href="llms-full.txt" title="llms-full.txt">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
-    <link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="favicon-180.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
-    <link rel="preload" href="assets/screenshots/overview.webp" as="image" type="image/webp" fetchpriority="high">
-    <link rel="stylesheet" href="styles.css">
+    <meta
+      name="description"
+      content="Nyx is an open-source, local-first security scanner for developers. Find source-to-sink attack paths, inspect evidence in a browser UI, export SARIF, and run scans in CI."
+    />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="https://nyxscan.dev/" />
+    <link rel="alternate" type="text/plain" href="llms.txt" title="llms.txt" />
+    <link rel="alternate" type="text/plain" href="llms-full.txt" title="llms-full.txt" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon-180.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+    <link rel="preload" href="assets/screenshots/overview.webp" as="image" type="image/webp" fetchpriority="high" />
+    <link rel="stylesheet" href="styles.css" />
 
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Nyx">
-    <meta property="og:title" content="Nyx | Local-first security scanner for developers">
-    <meta property="og:description" content="Nyx is an open-source, local-first security scanner for developers. Find source-to-sink attack paths, inspect evidence in a browser UI, export SARIF, and run scans in CI.">
-    <meta property="og:url" content="https://nyxscan.dev/">
-    <meta property="og:image" content="https://nyxscan.dev/og-image.png">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Nyx local-first security scanner for developers">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Nyx | Local-first security scanner for developers">
-    <meta name="twitter:description" content="Open-source security scanning with source-to-sink analysis, local browser triage, SARIF, and CI support.">
-    <meta name="twitter:image" content="https://nyxscan.dev/og-image.png">
-    <meta name="theme-color" content="#F9F8F4">
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Nyx" />
+    <meta property="og:title" content="Nyx | Local-first security scanner for developers" />
+    <meta
+      property="og:description"
+      content="Nyx is an open-source, local-first security scanner for developers. Find source-to-sink attack paths, inspect evidence in a browser UI, export SARIF, and run scans in CI."
+    />
+    <meta property="og:url" content="https://nyxscan.dev/" />
+    <meta property="og:image" content="https://nyxscan.dev/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Nyx local-first security scanner for developers" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Nyx | Local-first security scanner for developers" />
+    <meta
+      name="twitter:description"
+      content="Open-source security scanning with source-to-sink analysis, local browser triage, SARIF, and CI support."
+    />
+    <meta name="twitter:image" content="https://nyxscan.dev/og-image.png" />
+    <meta name="theme-color" content="#F9F8F4" />
 
     <script type="application/ld+json">
       {
@@ -68,7 +77,7 @@
     <header class="site-header" aria-label="Primary navigation">
       <div class="container site-header__inner">
         <a class="brand" href="." aria-label="Nyx home">
-          <img src="assets/logo.png" alt="Nyx" class="brand-logo">
+          <img src="assets/logo.png" alt="Nyx" class="brand-logo" />
         </a>
         <span class="header-wordmark">NYX</span>
         <nav class="nav" aria-label="Main navigation">
@@ -79,30 +88,38 @@
     </header>
 
     <main id="main">
-
       <!-- Hero -->
       <section class="hero" aria-labelledby="hero-title">
         <div class="container hero__inner">
           <div class="hero__copy">
             <p class="eyebrow" data-reveal data-delay="0">Open-source Rust tooling</p>
-            <h1 id="hero-title" class="hero__subtitle" data-reveal data-delay="80">Local-first security scanning for developers.</h1>
-            <p class="hero__body" data-reveal data-delay="160">Find source-to-sink attack paths, inspect evidence in a browser UI, and keep triage decisions with your code.</p>
+            <h1 id="hero-title" class="hero__subtitle" data-reveal data-delay="80">
+              Local-first security scanning for developers.
+            </h1>
+            <p class="hero__body" data-reveal data-delay="160">
+              Find source-to-sink attack paths, inspect evidence in a browser UI, and keep triage decisions with your
+              code.
+            </p>
 
             <div class="button-row" data-reveal data-delay="240" aria-label="Primary links">
               <a class="button button--primary" href="#install">Get started</a>
               <a class="button button--ghost" href="https://github.com/elicpeter/nyx">View on GitHub</a>
             </div>
-
           </div>
 
           <div class="hero__visual" aria-hidden="true">
             <div class="app-frame" data-reveal data-delay="160">
-              <div class="app-frame__bar">
-                <span></span><span></span><span></span>
-              </div>
+              <div class="app-frame__bar"><span></span><span></span><span></span></div>
               <picture>
-                <source srcset="assets/screenshots/overview.webp" type="image/webp">
-                <img src="assets/screenshots/overview.png" width="1600" height="992" alt="" loading="eager" fetchpriority="high">
+                <source srcset="assets/screenshots/overview.webp" type="image/webp" />
+                <img
+                  src="assets/screenshots/overview.png"
+                  width="1600"
+                  height="992"
+                  alt=""
+                  loading="eager"
+                  fetchpriority="high"
+                />
               </picture>
             </div>
           </div>
@@ -115,7 +132,7 @@
               <li>Source-to-sink taint analysis</li>
               <li>Browser triage UI</li>
               <li>SARIF and GitHub Actions</li>
-<!--              <li>3 CVEs reported</li>-->
+              <!--              <li>3 CVEs reported</li>-->
             </ul>
           </div>
         </div>
@@ -127,12 +144,24 @@
           <div class="section-intro section-intro--wide" data-reveal>
             <p class="eyebrow">See it in action</p>
             <h2 id="demo-title">Scan in the CLI. Review in the browser.</h2>
-            <p>The same local engine runs in your terminal and in CI. After a scan, <code>nyx serve</code> opens the browser triage UI for findings, source context, and review state.</p>
+            <p>
+              The same local engine runs in your terminal and in CI. After a scan, <code>nyx serve</code> opens the
+              browser triage UI for findings, source context, and review state.
+            </p>
           </div>
 
           <figure class="media-frame" data-reveal>
-            <img src="assets/screenshots/cli-scan.gif" width="1600" height="992" alt="Nyx CLI scan showing local source-to-sink findings and security output" loading="lazy" decoding="async">
-            <figcaption>Scan locally in the CLI, then inspect source-to-sink evidence and triage findings in the Nyx UI.</figcaption>
+            <img
+              src="assets/screenshots/cli-scan.gif"
+              width="1600"
+              height="992"
+              alt="Nyx CLI scan showing local source-to-sink findings and security output"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>
+              Scan locally in the CLI, then inspect source-to-sink evidence and triage findings in the Nyx UI.
+            </figcaption>
           </figure>
         </div>
       </section>
@@ -147,9 +176,7 @@
           </div>
 
           <div class="terminal" data-reveal aria-label="Nyx install commands">
-            <div class="terminal__bar" aria-hidden="true">
-              <span></span><span></span><span></span>
-            </div>
+            <div class="terminal__bar" aria-hidden="true"><span></span><span></span><span></span></div>
             <pre><code>cargo install nyx-scanner
 nyx scan
 nyx serve</code></pre>
@@ -169,7 +196,11 @@ nyx serve</code></pre>
           <div class="section-intro" data-reveal>
             <p class="eyebrow">How it compares</p>
             <h2 id="compare-title">Private code should stay private.</h2>
-            <p>Most security scanners require a build environment, a cloud account, or both. Nyx runs analysis locally, shows the full source-to-sink path, and keeps triage state in your repo. No uploads, no signups. It has already found and reported 3 CVEs in widely-used open-source projects.</p>
+            <p>
+              Most security scanners require a build environment, a cloud account, or both. Nyx runs analysis locally,
+              shows the full source-to-sink path, and keeps triage state in your repo. No uploads, no signups. It has
+              already found and reported 3 CVEs in widely-used open-source projects.
+            </p>
           </div>
 
           <div class="compare-table-wrap" data-reveal>
@@ -242,32 +273,50 @@ nyx serve</code></pre>
           <div class="faq-list" data-reveal>
             <details class="faq-item">
               <summary><h3>Does Nyx upload my source code anywhere?</h3></summary>
-              <p>No. The scanner runs on your machine, the UI binds to <code>127.0.0.1</code> only, and there are no outbound connections at any point. No telemetry, no account, nothing leaves the box.</p>
+              <p>
+                No. The scanner runs on your machine, the UI binds to <code>127.0.0.1</code> only, and there are no
+                outbound connections at any point. No telemetry, no account, nothing leaves the box.
+              </p>
             </details>
 
             <details class="faq-item">
               <summary><h3>What languages does Nyx support?</h3></summary>
-              <p>Stable (CI-gateable): Python, JavaScript, TypeScript. Beta: Java, PHP, Ruby, Rust, Go. Preview (not recommended for gates yet): C, C++. All parse via tree-sitter and run through the same cross-file taint pipeline.</p>
+              <p>
+                Stable (CI-gateable): Python, JavaScript, TypeScript. Beta: Java, PHP, Ruby, Rust, Go. Preview (not
+                recommended for gates yet): C, C++. All parse via tree-sitter and run through the same cross-file taint
+                pipeline.
+              </p>
             </details>
 
             <details class="faq-item">
               <summary><h3>What kinds of bugs does it find?</h3></summary>
-              <p>Nyx runs four detector families: taint analysis (cross-file source-to-sink), CFG structural (auth gaps, unguarded sinks), state model (use-after-close, resource leaks), and AST patterns (banned APIs, weak crypto). Taint analysis finds SQL injection, command injection, path traversal, SSRF, XSS, unsafe deserialization, code execution (eval, SSTI), and open redirect. The CVE corpus covers 38 published advisories across all 10 languages.</p>
+              <p>
+                Nyx runs four detector families: taint analysis (cross-file source-to-sink), CFG structural (auth gaps,
+                unguarded sinks), state model (use-after-close, resource leaks), and AST patterns (banned APIs, weak
+                crypto). Taint analysis finds SQL injection, command injection, path traversal, SSRF, XSS, unsafe
+                deserialization, code execution (eval, SSTI), and open redirect. The CVE corpus covers 38 published
+                advisories across all 10 languages.
+              </p>
             </details>
 
             <details class="faq-item">
               <summary><h3>Can I use it in CI without sending code to a third party?</h3></summary>
-              <p>Yes. Run <code>nyx scan --format sarif --fail-on MEDIUM</code> in any pipeline. The GitHub Action at <code>elicpeter/nyx</code> uploads SARIF to GitHub Code Scanning. No code leaves the runner.</p>
+              <p>
+                Yes. Run <code>nyx scan --format sarif --fail-on MEDIUM</code> in any pipeline. The GitHub Action at
+                <code>elicpeter/nyx</code> uploads SARIF to GitHub Code Scanning. No code leaves the runner.
+              </p>
             </details>
 
             <details class="faq-item">
               <summary><h3>Is Nyx free?</h3></summary>
-              <p>Yes. GPL-3.0, no paid tier, no usage limits. <code>cargo install nyx-scanner</code> and you have the full thing.</p>
+              <p>
+                Yes. GPL-3.0, no paid tier, no usage limits. <code>cargo install nyx-scanner</code> and you have the
+                full thing.
+              </p>
             </details>
           </div>
         </div>
       </section>
-
     </main>
 
     <footer class="site-footer">
@@ -288,35 +337,42 @@ nyx serve</code></pre>
     <script>
       (function () {
         function revealHero() {
-          document.querySelectorAll('.hero [data-reveal]').forEach(function (el) {
-            var delay = parseInt(el.getAttribute('data-delay') || '0', 10);
-            el.style.setProperty('--reveal-delay', delay + 'ms');
-            setTimeout(function () { el.classList.add('is-visible'); }, delay);
+          document.querySelectorAll(".hero [data-reveal]").forEach(function (el) {
+            var delay = parseInt(el.getAttribute("data-delay") || "0", 10);
+            el.style.setProperty("--reveal-delay", delay + "ms");
+            setTimeout(function () {
+              el.classList.add("is-visible");
+            }, delay);
           });
         }
 
-        if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', revealHero);
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", revealHero);
         } else {
           revealHero();
         }
 
-        if ('IntersectionObserver' in window) {
-          var observer = new IntersectionObserver(function (entries) {
-            entries.forEach(function (entry) {
-              if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-                observer.unobserve(entry.target);
-              }
-            });
-          }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+        if ("IntersectionObserver" in window) {
+          var observer = new IntersectionObserver(
+            function (entries) {
+              entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add("is-visible");
+                  observer.unobserve(entry.target);
+                }
+              });
+            },
+            { threshold: 0.08, rootMargin: "0px 0px -30px 0px" },
+          );
 
-          document.querySelectorAll('[data-reveal]').forEach(function (el) {
-            if (!el.closest('.hero')) { observer.observe(el); }
+          document.querySelectorAll("[data-reveal]").forEach(function (el) {
+            if (!el.closest(".hero")) {
+              observer.observe(el);
+            }
           });
         } else {
-          document.querySelectorAll('[data-reveal]').forEach(function (el) {
-            el.classList.add('is-visible');
+          document.querySelectorAll("[data-reveal]").forEach(function (el) {
+            el.classList.add("is-visible");
           });
         }
       })();
