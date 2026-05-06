@@ -9,7 +9,9 @@
     <link rel="canonical" href="https://nyxscan.dev/">
     <link rel="alternate" type="text/plain" href="llms.txt" title="llms.txt">
     <link rel="alternate" type="text/plain" href="llms-full.txt" title="llms-full.txt">
-    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+    <link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon-180.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
@@ -65,11 +67,11 @@
 
     <header class="site-header" aria-label="Primary navigation">
       <div class="container site-header__inner">
-        <a class="brand" href="." aria-label="Nyx home">Nyx</a>
+        <a class="brand" href="." aria-label="Nyx home">
+          <img src="assets/logo.png" alt="Nyx" class="brand-logo">
+        </a>
+        <span class="header-wordmark">NYX</span>
         <nav class="nav" aria-label="Main navigation">
-          <a href="#install">Install</a>
-          <a href="#compare">Compare</a>
-          <a href="#faq">FAQ</a>
           <a href="https://elicpeter.github.io/nyx/">Docs</a>
           <a class="nav-github" href="https://github.com/elicpeter/nyx">GitHub</a>
         </nav>
@@ -82,25 +84,19 @@
       <section class="hero" aria-labelledby="hero-title">
         <div class="container hero__inner">
           <div class="hero__copy">
-            <p class="eyebrow">Open-source Rust security tooling</p>
-            <h1 id="hero-title">Nyx</h1>
-            <p class="hero__subtitle">Local-first security scanning for developers.</p>
-            <p class="hero__body">Find source-to-sink attack paths, inspect evidence in a browser UI, and keep triage decisions with your code.</p>
+            <p class="eyebrow" data-reveal data-delay="0">Open-source Rust tooling</p>
+            <h1 id="hero-title" class="hero__subtitle" data-reveal data-delay="80">Local-first security scanning for developers.</h1>
+            <p class="hero__body" data-reveal data-delay="160">Find source-to-sink attack paths, inspect evidence in a browser UI, and keep triage decisions with your code.</p>
 
-            <div class="button-row" aria-label="Primary links">
+            <div class="button-row" data-reveal data-delay="240" aria-label="Primary links">
               <a class="button button--primary" href="#install">Get started</a>
               <a class="button button--ghost" href="https://github.com/elicpeter/nyx">View on GitHub</a>
             </div>
 
-            <nav class="secondary-links" aria-label="Secondary project links">
-              <a href="https://crates.io/crates/nyx-scanner">crates.io</a>
-              <a href="https://elicpeter.github.io/nyx/">Docs</a>
-              <a href="https://docs.rs/nyx-scanner/latest/nyx_scanner/">Rustdocs</a>
-            </nav>
           </div>
 
           <div class="hero__visual" aria-hidden="true">
-            <div class="app-frame">
+            <div class="app-frame" data-reveal data-delay="160">
               <div class="app-frame__bar">
                 <span></span><span></span><span></span>
               </div>
@@ -112,7 +108,7 @@
           </div>
         </div>
 
-        <div class="hero__stats">
+        <div class="hero__stats" data-reveal data-delay="320">
           <div class="container">
             <ul class="hero-facts" aria-label="Nyx summary">
               <li>Runs locally, no account required</li>
@@ -128,13 +124,13 @@
       <!-- Demo -->
       <section class="section section--tinted" aria-labelledby="demo-title">
         <div class="container">
-          <div class="section-intro section-intro--wide">
+          <div class="section-intro section-intro--wide" data-reveal>
             <p class="eyebrow">See it in action</p>
             <h2 id="demo-title">Scan in the CLI. Review in the browser.</h2>
             <p>The same local engine runs in your terminal and in CI. After a scan, <code>nyx serve</code> opens the browser triage UI for findings, source context, and review state.</p>
           </div>
 
-          <figure class="media-frame">
+          <figure class="media-frame" data-reveal>
             <img src="assets/screenshots/cli-scan.gif" width="1600" height="992" alt="Nyx CLI scan showing local source-to-sink findings and security output" loading="lazy" decoding="async">
             <figcaption>Scan locally in the CLI, then inspect source-to-sink evidence and triage findings in the Nyx UI.</figcaption>
           </figure>
@@ -144,13 +140,13 @@
       <!-- Install -->
       <section class="section" id="install" aria-labelledby="install-title">
         <div class="container install-layout">
-          <div class="install-copy">
+          <div class="install-copy" data-reveal>
             <p class="eyebrow">Install</p>
             <h2 id="install-title">Start with Cargo.</h2>
             <p>Install the crate, scan a repository, then open the local review UI.</p>
           </div>
 
-          <div class="terminal" aria-label="Nyx install commands">
+          <div class="terminal" data-reveal aria-label="Nyx install commands">
             <div class="terminal__bar" aria-hidden="true">
               <span></span><span></span><span></span>
             </div>
@@ -170,13 +166,13 @@ nyx serve</code></pre>
       <!-- Why + Compare (merged) -->
       <section class="section section--tinted" id="compare" aria-labelledby="compare-title">
         <div class="container">
-          <div class="section-intro">
+          <div class="section-intro" data-reveal>
             <p class="eyebrow">How it compares</p>
             <h2 id="compare-title">Private code should stay private.</h2>
             <p>Most security scanners require a build environment, a cloud account, or both. Nyx runs analysis locally, shows the full source-to-sink path, and keeps triage state in your repo. No uploads, no signups. It has already found and reported 3 CVEs in widely-used open-source projects.</p>
           </div>
 
-          <div class="compare-table-wrap">
+          <div class="compare-table-wrap" data-reveal>
             <table class="compare-table" aria-label="Comparison of Nyx with Semgrep, CodeQL, Snyk, and Bandit">
               <thead>
                 <tr>
@@ -238,12 +234,12 @@ nyx serve</code></pre>
       <!-- FAQ -->
       <section class="section" id="faq" aria-labelledby="faq-title">
         <div class="container">
-          <div class="section-intro">
+          <div class="section-intro" data-reveal>
             <p class="eyebrow">Common questions</p>
             <h2 id="faq-title">Frequently asked questions.</h2>
           </div>
 
-          <div class="faq-list">
+          <div class="faq-list" data-reveal>
             <details class="faq-item">
               <summary><h3>Does Nyx upload my source code anywhere?</h3></summary>
               <p>No. The scanner runs on your machine, the UI binds to <code>127.0.0.1</code> only, and there are no outbound connections at any point. No telemetry, no account, nothing leaves the box.</p>
@@ -289,5 +285,41 @@ nyx serve</code></pre>
         </nav>
       </div>
     </footer>
+    <script>
+      (function () {
+        function revealHero() {
+          document.querySelectorAll('.hero [data-reveal]').forEach(function (el) {
+            var delay = parseInt(el.getAttribute('data-delay') || '0', 10);
+            el.style.setProperty('--reveal-delay', delay + 'ms');
+            setTimeout(function () { el.classList.add('is-visible'); }, delay);
+          });
+        }
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', revealHero);
+        } else {
+          revealHero();
+        }
+
+        if ('IntersectionObserver' in window) {
+          var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+          document.querySelectorAll('[data-reveal]').forEach(function (el) {
+            if (!el.closest('.hero')) { observer.observe(el); }
+          });
+        } else {
+          document.querySelectorAll('[data-reveal]').forEach(function (el) {
+            el.classList.add('is-visible');
+          });
+        }
+      })();
+    </script>
   </body>
 </html>
