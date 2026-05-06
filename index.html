@@ -10,6 +10,9 @@
     <link rel="alternate" type="text/plain" href="llms.txt" title="llms.txt">
     <link rel="alternate" type="text/plain" href="llms-full.txt" title="llms-full.txt">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
     <link rel="preload" href="assets/screenshots/overview.webp" as="image" type="image/webp" fetchpriority="high">
     <link rel="stylesheet" href="styles.css">
 
@@ -27,7 +30,7 @@
     <meta name="twitter:title" content="Nyx | Local-first security scanner for developers">
     <meta name="twitter:description" content="Open-source security scanning with source-to-sink analysis, local browser triage, SARIF, and CI support.">
     <meta name="twitter:image" content="https://nyxscan.dev/og-image.png">
-    <meta name="theme-color" content="#08090b">
+    <meta name="theme-color" content="#F9F8F4">
 
     <script type="application/ld+json">
       {
@@ -62,90 +65,71 @@
 
     <header class="site-header" aria-label="Primary navigation">
       <div class="container site-header__inner">
-        <a class="brand" href="." aria-label="Nyx home">
-          <span>Nyx</span>
-        </a>
+        <a class="brand" href="." aria-label="Nyx home">Nyx</a>
         <nav class="nav" aria-label="Main navigation">
           <a href="#install">Install</a>
-          <a href="#why">Why Nyx</a>
           <a href="#compare">Compare</a>
           <a href="#faq">FAQ</a>
           <a href="https://elicpeter.github.io/nyx/">Docs</a>
-          <a href="https://github.com/elicpeter/nyx">GitHub</a>
+          <a class="nav-github" href="https://github.com/elicpeter/nyx">GitHub</a>
         </nav>
       </div>
     </header>
 
     <main id="main">
+
+      <!-- Hero -->
       <section class="hero" aria-labelledby="hero-title">
-        <div class="hero__image" aria-hidden="true"></div>
-        <div class="hero__grid" aria-hidden="true"></div>
-        <div class="container hero__content">
-          <p class="eyebrow">Open-source Rust security tooling</p>
-          <h1 id="hero-title">Nyx</h1>
-          <p class="hero__subtitle">Local-first security scanning for developers.</p>
-          <p class="hero__copy">Find source-to-sink attack paths, inspect evidence in a browser UI, and keep triage decisions with your code.</p>
+        <div class="container hero__inner">
+          <div class="hero__copy">
+            <p class="eyebrow">Open-source Rust security tooling</p>
+            <h1 id="hero-title">Nyx</h1>
+            <p class="hero__subtitle">Local-first security scanning for developers.</p>
+            <p class="hero__body">Find source-to-sink attack paths, inspect evidence in a browser UI, and keep triage decisions with your code.</p>
 
-          <div class="button-row" aria-label="Primary links">
-            <a class="button button--primary" href="#install" aria-label="Get started with Nyx">Get started</a>
-            <a class="button button--secondary" href="https://github.com/elicpeter/nyx" aria-label="View Nyx on GitHub">View on GitHub</a>
+            <div class="button-row" aria-label="Primary links">
+              <a class="button button--primary" href="#install">Get started</a>
+              <a class="button button--ghost" href="https://github.com/elicpeter/nyx">View on GitHub</a>
+            </div>
+
+            <nav class="secondary-links" aria-label="Secondary project links">
+              <a href="https://crates.io/crates/nyx-scanner">crates.io</a>
+              <a href="https://elicpeter.github.io/nyx/">Docs</a>
+              <a href="https://docs.rs/nyx-scanner/latest/nyx_scanner/">Rustdocs</a>
+            </nav>
           </div>
 
-          <nav class="secondary-links" aria-label="Secondary project links">
-            <a href="https://crates.io/crates/nyx-scanner">crates.io</a>
-            <a href="https://elicpeter.github.io/nyx/">Docs</a>
-            <a href="https://docs.rs/nyx-scanner/latest/nyx_scanner/">Rustdocs</a>
-          </nav>
-
-          <ul class="hero-facts" aria-label="Nyx summary">
-            <li>Runs locally with no account</li>
-            <li>Source-to-sink taint analysis</li>
-            <li>Browser triage UI</li>
-            <li>SARIF and GitHub Actions</li>
-          </ul>
+          <div class="hero__visual" aria-hidden="true">
+            <div class="app-frame">
+              <div class="app-frame__bar">
+                <span></span><span></span><span></span>
+              </div>
+              <picture>
+                <source srcset="assets/screenshots/overview.webp" type="image/webp">
+                <img src="assets/screenshots/overview.png" width="1600" height="992" alt="" loading="eager" fetchpriority="high">
+              </picture>
+            </div>
+          </div>
         </div>
-      </section>
 
-      <section class="section" aria-labelledby="value-title">
-        <div class="container">
-          <div class="section-intro">
-            <p class="eyebrow">What it does</p>
-            <h2 id="value-title">Security findings you can inspect.</h2>
-            <p>Nyx focuses static application security testing on evidence developers can review, reproduce, and carry with the repository.</p>
-          </div>
-
-          <div class="card-grid">
-            <article class="info-card">
-              <span class="card-rule card-rule--green" aria-hidden="true"></span>
-              <h3>Local-first</h3>
-              <p>Runs on your machine. No account required. No source upload required.</p>
-            </article>
-
-            <article class="info-card">
-              <span class="card-rule card-rule--cyan" aria-hidden="true"></span>
-              <h3>Evidence-based findings</h3>
-              <p>Shows source, sink, severity, confidence, and the path that connects them.</p>
-            </article>
-
-            <article class="info-card">
-              <span class="card-rule card-rule--amber" aria-hidden="true"></span>
-              <h3>Browser triage UI</h3>
-              <p>Review findings locally, track decisions, and commit triage state with the repo.</p>
-            </article>
-
-            <article class="info-card">
-              <span class="card-rule card-rule--red" aria-hidden="true"></span>
-              <h3>CI-ready</h3>
-              <p>Export SARIF, run in GitHub Actions, and gate builds on security findings.</p>
-            </article>
+        <div class="hero__stats">
+          <div class="container">
+            <ul class="hero-facts" aria-label="Nyx summary">
+              <li>Runs locally, no account required</li>
+              <li>Source-to-sink taint analysis</li>
+              <li>Browser triage UI</li>
+              <li>SARIF and GitHub Actions</li>
+<!--              <li>3 CVEs reported</li>-->
+            </ul>
           </div>
         </div>
       </section>
 
-      <section class="section section--media" aria-labelledby="demo-title">
+      <!-- Demo -->
+      <section class="section section--tinted" aria-labelledby="demo-title">
         <div class="container">
           <div class="section-intro section-intro--wide">
-            <p class="eyebrow">Local review</p>
+            <p class="eyebrow">See it in action</p>
             <h2 id="demo-title">Scan in the CLI. Review in the browser.</h2>
             <p>The same local engine runs in your terminal and in CI. After a scan, <code>nyx serve</code> opens the browser triage UI for findings, source context, and review state.</p>
           </div>
@@ -157,6 +141,7 @@
         </div>
       </section>
 
+      <!-- Install -->
       <section class="section" id="install" aria-labelledby="install-title">
         <div class="container install-layout">
           <div class="install-copy">
@@ -167,9 +152,7 @@
 
           <div class="terminal" aria-label="Nyx install commands">
             <div class="terminal__bar" aria-hidden="true">
-              <span></span>
-              <span></span>
-              <span></span>
+              <span></span><span></span><span></span>
             </div>
             <pre><code>cargo install nyx-scanner
 nyx scan
@@ -184,22 +167,13 @@ nyx serve</code></pre>
         </div>
       </section>
 
-      <section class="section section--quiet" id="why" aria-labelledby="why-title">
-        <div class="container text-block">
-          <p class="eyebrow">Why Nyx exists</p>
-          <h2 id="why-title">Private code should stay private.</h2>
-          <p>Most security scanners either hide too much behind a service or stop at static warnings that are hard to trust. Nyx is built around local analysis, visible evidence, and developer-owned triage.</p>
-          <p>Nyx starts with static source-to-sink analysis and is designed to grow toward verified attack-path testing without requiring teams to upload private code.</p>
-          <p>Nyx has found and reported 3 vulnerabilities in widely-used open-source projects. One fix is merged. Two patches are in progress.</p>
-        </div>
-      </section>
-
-      <section class="section section--quiet" id="compare" aria-labelledby="compare-title">
+      <!-- Why + Compare (merged) -->
+      <section class="section section--tinted" id="compare" aria-labelledby="compare-title">
         <div class="container">
           <div class="section-intro">
             <p class="eyebrow">How it compares</p>
-            <h2 id="compare-title">Nyx vs other security scanners.</h2>
-            <p>Tools that track real data flow usually need a build environment or send your code to a server. Nyx does neither.</p>
+            <h2 id="compare-title">Private code should stay private.</h2>
+            <p>Most security scanners require a build environment, a cloud account, or both. Nyx runs analysis locally, shows the full source-to-sink path, and keeps triage state in your repo. No uploads, no signups. It has already found and reported 3 CVEs in widely-used open-source projects.</p>
           </div>
 
           <div class="compare-table-wrap">
@@ -255,44 +229,13 @@ nyx serve</code></pre>
                   <td class="cell--yes">Yes (cloud only)</td>
                   <td class="cell--no">No</td>
                 </tr>
-                <tr>
-                  <td>SARIF + GitHub Actions</td>
-                  <td class="cell--yes">Yes</td>
-                  <td class="cell--yes">Yes</td>
-                  <td class="cell--yes">Yes</td>
-                  <td class="cell--yes">Yes</td>
-                  <td class="cell--partial">Partial</td>
-                </tr>
-                <tr>
-                  <td>Open source</td>
-                  <td class="cell--yes">GPL-3.0</td>
-                  <td class="cell--partial">Core open (taint closed)</td>
-                  <td class="cell--yes">Yes</td>
-                  <td class="cell--no">No</td>
-                  <td class="cell--yes">Yes</td>
-                </tr>
-                <tr>
-                  <td>Free for all use</td>
-                  <td class="cell--yes">Yes (no paid tier)</td>
-                  <td class="cell--partial">Core free (Pro is paid)</td>
-                  <td class="cell--partial">Free for open source</td>
-                  <td class="cell--partial">Free tier (usage limits)</td>
-                  <td class="cell--yes">Yes</td>
-                </tr>
-                <tr>
-                  <td>No build step required</td>
-                  <td class="cell--yes">Yes</td>
-                  <td class="cell--yes">Yes</td>
-                  <td class="cell--no">No</td>
-                  <td class="cell--yes">Yes</td>
-                  <td class="cell--yes">Yes</td>
-                </tr>
               </tbody>
             </table>
           </div>
         </div>
       </section>
 
+      <!-- FAQ -->
       <section class="section" id="faq" aria-labelledby="faq-title">
         <div class="container">
           <div class="section-intro">
@@ -313,27 +256,12 @@ nyx serve</code></pre>
 
             <details class="faq-item">
               <summary><h3>What kinds of bugs does it find?</h3></summary>
-              <p>Nyx runs four detector families: taint analysis (cross-file source-to-sink), CFG structural (auth gaps, unguarded sinks), state model (use-after-close, resource leaks), and AST patterns (banned APIs, weak crypto). Taint analysis finds SQL injection, command injection, path traversal, SSRF, XSS, unsafe deserialization, code execution (eval, SSTI), and open redirect. The CVE corpus covers 38 published advisories across all 10 languages, including Ray (CVE-2023-48022), Apache Commons Collections (CVE-2015-7501), Rust stdlib (CVE-2024-24576), and others.</p>
-            </details>
-
-            <details class="faq-item">
-              <summary><h3>How is Nyx different from Semgrep?</h3></summary>
-              <p>Semgrep matches patterns. It does not follow data across function call boundaries by default. Cross-file taint tracking requires Semgrep Pro and is a paid feature. In Nyx that analysis runs in the open-source version at no cost.</p>
-            </details>
-
-            <details class="faq-item">
-              <summary><h3>How is Nyx different from CodeQL?</h3></summary>
-              <p>CodeQL needs a build step and either GitHub Actions or the CodeQL CLI set up locally. Nyx reads source files directly. No build, no extra toolchain, just <code>cargo install nyx-scanner</code>.</p>
+              <p>Nyx runs four detector families: taint analysis (cross-file source-to-sink), CFG structural (auth gaps, unguarded sinks), state model (use-after-close, resource leaks), and AST patterns (banned APIs, weak crypto). Taint analysis finds SQL injection, command injection, path traversal, SSRF, XSS, unsafe deserialization, code execution (eval, SSTI), and open redirect. The CVE corpus covers 38 published advisories across all 10 languages.</p>
             </details>
 
             <details class="faq-item">
               <summary><h3>Can I use it in CI without sending code to a third party?</h3></summary>
               <p>Yes. Run <code>nyx scan --format sarif --fail-on MEDIUM</code> in any pipeline. The GitHub Action at <code>elicpeter/nyx</code> uploads SARIF to GitHub Code Scanning. No code leaves the runner.</p>
-            </details>
-
-            <details class="faq-item">
-              <summary><h3>How does triage work across a team?</h3></summary>
-              <p>Triage state saves to <code>.nyx/triage.json</code> in the repo. Commit that file like any other and everyone reads the same decisions from git. No shared account or external service involved.</p>
             </details>
 
             <details class="faq-item">
@@ -344,53 +272,6 @@ nyx serve</code></pre>
         </div>
       </section>
 
-      <section class="section" aria-labelledby="links-title">
-        <div class="container">
-          <div class="section-intro">
-            <p class="eyebrow">Project links</p>
-            <h2 id="links-title">Read, install, contribute, support.</h2>
-          </div>
-
-          <div class="link-grid">
-            <a href="https://github.com/elicpeter/nyx">
-              <span>GitHub repo</span>
-              <small>Source, issues, actions, and releases.</small>
-            </a>
-            <a href="https://elicpeter.github.io/nyx/">
-              <span>Docs</span>
-              <small>mdBook for the CLI, output formats, configuration, and UI.</small>
-            </a>
-            <a href="https://docs.rs/nyx-scanner/latest/nyx_scanner/">
-              <span>Rustdocs</span>
-              <small>API reference for the <code>nyx_scanner</code> crate.</small>
-            </a>
-            <a href="https://crates.io/crates/nyx-scanner">
-              <span>crates.io</span>
-              <small>Install Nyx with Cargo.</small>
-            </a>
-            <a href="https://github.com/elicpeter/nyx/releases">
-              <span>Releases</span>
-              <small>Pre-built binaries and release notes.</small>
-            </a>
-            <a href="https://github.com/elicpeter/nyx/issues">
-              <span>Issues</span>
-              <small>Report bugs, crashes, or suspicious scan results.</small>
-            </a>
-            <a href="https://github.com/elicpeter/nyx/blob/master/ROADMAP.md">
-              <span>Roadmap</span>
-              <small>Current focus and longer-term direction.</small>
-            </a>
-            <a href="https://github.com/elicpeter/nyx/blob/master/SECURITY.md">
-              <span>Security policy</span>
-              <small>Private vulnerability reporting and supported versions.</small>
-            </a>
-            <a href="https://github.com/sponsors/elicpeter">
-              <span>Support</span>
-              <small>GitHub Sponsors for open-source maintenance.</small>
-            </a>
-          </div>
-        </div>
-      </section>
     </main>
 
     <footer class="site-footer">
@@ -401,7 +282,10 @@ nyx serve</code></pre>
           <a href="https://elicpeter.github.io/nyx/">Docs</a>
           <a href="https://crates.io/crates/nyx-scanner">crates.io</a>
           <a href="https://docs.rs/nyx-scanner/latest/nyx_scanner/">Rustdocs</a>
+          <a href="https://github.com/elicpeter/nyx/releases">Releases</a>
+          <a href="https://github.com/elicpeter/nyx/blob/master/ROADMAP.md">Roadmap</a>
           <a href="https://github.com/elicpeter/nyx/blob/master/SECURITY.md">Security</a>
+          <a href="https://github.com/sponsors/elicpeter">Sponsor</a>
         </nav>
       </div>
     </footer>
