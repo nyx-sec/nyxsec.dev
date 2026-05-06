@@ -246,10 +246,14 @@ p { margin-top: 0; }
   overflow: hidden;
 }
 
+.hero .container {
+  width: min(1280px, calc(100% - 40px));
+}
+
 .hero__inner {
   display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
-  gap: 72px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: 56px;
   align-items: flex-start;
   padding: 112px 0 96px;
 }
