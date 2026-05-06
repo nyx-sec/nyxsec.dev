@@ -1,0 +1,396 @@
+# Nyx — Full Reference
+
+Nyx is an open-source, local-first security scanner for developers. It runs cross-file interprocedural taint analysis on a repository and serves findings in a React UI bound to `127.0.0.1`. No cloud, no account, no source upload. Everything stays on your machine.
+
+- Primary site: https://nyxscan.dev
+- Source code: https://github.com/elicpeter/nyx
+- Crate: https://crates.io/crates/nyx-scanner
+- Docs: https://elicpeter.github.io/nyx/
+- Rustdocs: https://docs.rs/nyx-scanner/latest/nyx_scanner/
+- Releases: https://github.com/elicpeter/nyx/releases
+- Security policy: https://github.com/elicpeter/nyx/blob/master/SECURITY.md
+- Roadmap: https://github.com/elicpeter/nyx/blob/master/ROADMAP.md
+
+---
+
+## Install
+
+**Cargo (recommended):**
+```bash
+cargo install nyx-scanner
+```
+
+Requires stable Rust 1.88+. The frontend is compiled and embedded in the binary at build time; no separate install step for `nyx serve`.
+
+**Pre-built binaries:** Linux and macOS (x86_64, ARM64). Download from the [Releases page](https://github.com/elicpeter/nyx/releases), verify against `SHA256SUMS`, unzip, and drop `nyx` on your PATH.
+
+**From source:**
+```bash
+git clone https://github.com/elicpeter/nyx.git
+cd nyx && cargo build --release
+```
+
+---
+
+## Basic usage
+
+```bash
+nyx scan           # taint analysis, caches findings in .nyx/
+nyx serve          # opens http://localhost:9700 in the browser
+nyx scan --help    # full option reference
+```
+
+First run builds a SQLite index under `.nyx/`; later runs skip files whose content hash has not changed.
+
+---
+
+## CI / GitHub Actions
+
+```bash
+# Fail on medium or higher, emit SARIF
+nyx scan --format sarif --fail-on MEDIUM > results.sarif
+
+# Ad-hoc JSON, no index
+nyx scan ./server --format json --index off
+
+# AST patterns only (fastest; skips CFG and taint)
+nyx scan --mode ast
+
+# Engine depth shortcut
+nyx scan --engine-profile deep
+```
+
+GitHub Actions workflow:
+
+```yaml
+- uses: elicpeter/nyx@v0.6.1
+  with:
+    format: sarif
+    fail-on: MEDIUM
+- uses: github/codeql-action/upload-sarif@v3
+  with:
+    sarif_file: nyx-results.sarif
+```
+
+Action inputs: `path`, `version`, `format` (`sarif`|`json`|`console`), `fail-on`, `args`, `token`.
+Action outputs: `finding-count`, `sarif-file`, `exit-code`, `nyx-version`.
+Supported runners: Linux and macOS (x86_64, ARM64).
+
+---
+
+## Analysis modes and engine depth
+
+Two separate controls:
+
+**`--mode`** selects which detector families run:
+
+| Mode | Active detectors |
+|------|-----------------|
+| `full` (default) | Taint + CFG structural + State model + AST patterns |
+| `ast` | AST patterns only |
+| `cfg` | Taint + CFG + State (no AST patterns) |
+| `taint` | Taint + State |
+
+**`--engine-profile`** selects analysis depth within the taint engine:
+
+| Profile | What it does |
+|---------|-------------|
+| `fast` | AST patterns only, no CFG or taint |
+| `balanced` (default) | Cross-file taint, k=1 context-sensitive inlining |
+| `deep` | Adds symbolic execution + demand-driven backwards taint (~2-3x cost, higher precision) |
+
+Symex and backwards analysis can also be enabled individually: `--symex`, `--backwards-analysis`.
+
+---
+
+## Detector families
+
+Nyx ships four independent detector families:
+
+| Family | Rule prefix | What it finds |
+|--------|-------------|---------------|
+| Taint analysis | `taint-*` | Unsanitized data flowing source to sink across files |
+| CFG structural | `cfg-*` | Auth gaps, unguarded sinks, error fallthrough, resource release on all paths |
+| State model | `state-*` | Use-after-close, double-close, resource leaks, unauthenticated access |
+| AST patterns | `<lang>.<cat>.<name>` | Banned APIs, weak crypto, dangerous constructs |
+
+In `--mode full`, all four run together. Taint and AST can both fire on the same line with distinct rule IDs. State supersedes CFG on resource leaks at the same location.
+
+### Taint rule classes
+
+| Rule ID | Surface |
+|---------|---------|
+| `taint-unsanitised-flow` | Default taint flow (SQL injection, CMDI, path traversal, XSS, SSRF, deserialization, code execution, open redirect) |
+| `taint-data-exfiltration` | Sensitive data flowing into the payload of an outbound network request |
+| `rs.auth.missing_ownership_check.taint` | Rust auth subsystem: taint-aware ownership-check gap |
+
+---
+
+## Output formats
+
+| Format | Flag | Use case |
+|--------|------|----------|
+| Console | `--format console` | Human-readable terminal output, default |
+| SARIF 2.1 | `--format sarif` | GitHub Code Scanning, any SARIF viewer |
+| JSON | `--format json` | Scripting, custom pipelines |
+
+---
+
+## Supported languages
+
+All 10 languages parse via tree-sitter and run through the same cross-file taint pipeline. Rule-level F1 = 100% across all 10 languages on a 507-case benchmark corpus (P=1.000, R=1.000).
+
+| Tier | Languages | F1 | Use as CI gate? |
+|------|-----------|-----|-----------------|
+| Stable | Python, JavaScript, TypeScript | 100% | Yes |
+| Beta | Go, Java, PHP, Ruby, Rust | 100% | Yes, with light FP triage |
+| Preview | C, C++ | 100% on synthetic corpus | No — deep pointer aliasing and function pointers are not tracked |
+
+Stable tier has gated-sink modeling (argument-role-aware, e.g. `setAttribute("href", …)` only flags href-like attributes), the deepest rule sets, and full advanced-analysis coverage. Beta tier has solid rule depth but no gated sinks. Preview tier passes the synthetic corpus but has structural blind spots (deep pointer aliasing, function pointers) that matter on real codebases.
+
+---
+
+## What Nyx detects
+
+Cross-file, interprocedural taint analysis with sanitizer tracking. Finds:
+
+- **SQL injection** — user input reaching raw SQL without parameterization
+- **Command injection** — unsanitized input to shell execution (subprocess, exec, eval, system, Popen)
+- **Path traversal** — user-controlled path segments reaching filesystem operations
+- **SSRF** — user-controlled URLs reaching outbound HTTP clients
+- **XSS** — unsanitized input reaching HTML rendering or response sinks
+- **Unsafe deserialization** — untrusted data reaching pickle, YAML.load, Java ObjectInputStream, PHP unserialize, etc.
+- **Code execution** — eval, exec, SSTI (template injection)
+- **Open redirect** — user-controlled URLs in redirect responses
+- **Data exfiltration** — sensitive data (cookies, env vars, session tokens) in outbound request bodies
+
+CFG structural and state detectors additionally find: auth bypass gaps, unguarded sinks, use-after-close, double-close, resource leaks, and unauthenticated-access paths.
+
+---
+
+## Real-world findings
+
+Nyx has found and reported 3 vulnerabilities in widely-used open-source projects through active scanning of real codebases. One fix is merged. Two patches are in progress. Projects and details withheld pending advisory publication.
+
+---
+
+## Validated against published CVEs
+
+The benchmark corpus holds 40 vulnerable/patched fixture pairs from published advisories (38 detected, 2 deferred pending engine gaps). Nyx fires on the vulnerable file and emits zero findings on the patched file for each pair.
+
+| CVE | Project | Language | Class |
+|-----|---------|----------|-------|
+| CVE-2023-48022 | Ray | Python | Command injection |
+| CVE-2017-18342 | PyYAML | Python | Deserialization |
+| CVE-2025-69662 | geopandas | Python | SQL injection |
+| CVE-2026-33626 | LMDeploy | Python | SSRF |
+| CVE-2024-23334 | aiohttp | Python | Path traversal |
+| CVE-2023-6568 | MLflow | Python | XSS |
+| CVE-2024-21513 | LangChain Experimental | Python | Code execution |
+| CVE-2019-14939 | mongo-express | JavaScript | Code execution (eval) |
+| CVE-2025-64430 | Parse Server | JavaScript | SSRF |
+| CVE-2023-22621 | Strapi | JavaScript | Code execution (SSTI) |
+| CVE-2023-26159 | follow-redirects | TypeScript | SSRF |
+| GHSA-4x48-cgf9-q33f | Novu | TypeScript | SSRF |
+| CVE-2022-30323 | hashicorp/go-getter | Go | Command injection |
+| CVE-2023-3188 | owncast | Go | SSRF |
+| CVE-2024-31450 | owncast | Go | Path traversal |
+| CVE-2026-41422 | daptin | Go | SQL injection |
+| CVE-2015-7501 | Apache Commons Collections | Java | Deserialization |
+| CVE-2017-12629 | Apache Solr | Java | Command injection |
+| CVE-2022-1471 | SnakeYAML | Java | Deserialization |
+| CVE-2022-42889 | Apache Commons Text | Java | Code execution |
+| GHSA-h8cj-hpmg-636v | Appsmith | Java | SQL injection |
+| CVE-2013-0156 | Ruby on Rails | Ruby | Deserialization |
+| CVE-2020-8130 | Rake | Ruby | Command injection |
+| CVE-2021-21288 | CarrierWave | Ruby | SSRF |
+| CVE-2023-38337 | rswag | Ruby | Path traversal |
+| CVE-2017-9841 | PHPUnit | PHP | Code execution (eval) |
+| CVE-2018-15133 | Laravel | PHP | Deserialization |
+| CVE-2026-33486 | Roadiz CMS | PHP | SSRF |
+| CVE-2018-20997 | tar-rs | Rust | Path traversal |
+| CVE-2022-36113 | cargo | Rust | Path traversal |
+| CVE-2023-42456 | sudo-rs | Rust | Path traversal |
+| CVE-2024-24576 | Rust stdlib | Rust | Command injection |
+| CVE-2024-32884 | gitoxide | Rust | Command injection |
+| CVE-2025-53549 | matrix-rust-sdk | Rust | SQL injection |
+| CVE-2016-3714 | ImageMagick (ImageTragick) | C | Command injection |
+| CVE-2019-18634 | sudo (pwfeedback) | C | Memory safety |
+| CVE-2019-13132 | ZeroMQ libzmq | C++ | Memory safety |
+| CVE-2022-1941 | Protocol Buffers | C++ | Memory safety |
+
+---
+
+## Browser UI (`nyx serve`)
+
+`nyx serve` starts a local React UI at `127.0.0.1:9700` (default port). Flags: `--port <N>`, `--host <addr>` (loopback only), `--no-browser`.
+
+| Page | What it shows |
+|------|---------------|
+| Overview | Dashboard: finding counts by severity, health score, top offenders, engine profile |
+| Findings | Browsable list with severity badges, triage status, rule and language filters |
+| Finding detail | Flow-path visualizer with numbered steps (source to sanitizer to sink), code snippets, evidence, triage dropdown |
+| Triage | Bulk update states, audit trail, import/export JSON |
+| Explorer | File tree with per-file symbol list and finding overlay |
+| Scans | Run history, metrics, diff two scans to see what changed |
+| Rules | Built-in and custom rules per language; add rules from the UI |
+| Config | Live config editor; reload without restart |
+
+Triage states: `open`, `investigating`, `fixed`, `false_positive`, `accepted_risk`, `suppressed`.
+
+Triage decisions save to `.nyx/triage.json`. Commit that file and the team shares one triage state. No account or external service needed.
+
+---
+
+## Security model
+
+- Loopback-only bind (`127.0.0.1`). Host-header enforcement blocks DNS rebinding.
+- CSRF protection on every mutation.
+- No telemetry or analytics of any kind.
+- No outbound connections from the scanner or UI.
+- Source code never leaves the machine.
+
+---
+
+## Configuration
+
+Config lives in platform config directories:
+
+| Platform | Directory |
+|----------|-----------|
+| Linux | `~/.config/nyx/` |
+| macOS | `~/Library/Application Support/nyx/` |
+| Windows | `%APPDATA%\elicpeter\nyx\config\` |
+
+Run `nyx config path` to see the exact path. Two files: `nyx.conf` (defaults, auto-created on first run), `nyx.local` (user overrides loaded on top). CLI flags take precedence over both.
+
+```toml
+[scanner]
+mode         = "full"        # full | ast | cfg | taint
+min_severity = "Medium"
+include_nonprod = false      # true = keep original severity for test/vendor paths
+
+[server]
+host = "127.0.0.1"
+port = 9700
+open_browser = true
+
+# Project-specific sanitizer rule
+[[analysis.languages.javascript.rules]]
+matchers = ["escapeHtml"]
+kind     = "sanitizer"
+cap      = "html_escape"
+```
+
+Or add rules from the CLI: `nyx config add-rule --lang javascript --matcher escapeHtml --kind sanitizer --cap html_escape`.
+
+Available cap values: `env_var`, `html_escape`, `shell_escape`, `url_encode`, `json_parse`, `file_io`, `fmt_string`, `sql_query`, `deserialize`, `ssrf`, `data_exfil`, `code_exec`, `crypto`, `unauthorized_id`, `all`.
+
+Full schema: [Configuration docs](https://elicpeter.github.io/nyx/configuration.html).
+
+---
+
+## Custom rules
+
+Custom rules are YAML files. Add them via the Rules page in `nyx serve`, via `nyx config add-rule`, or by editing `nyx.local` directly. Each rule defines sources, sinks, and optional sanitizers with cap labels. Rule files are per-language under the `[[analysis.languages.<lang>.rules]]` array.
+
+---
+
+## How it works
+
+Two passes over the filesystem, with an optional SQLite index:
+
+1. **Pass 1**: parse each file via tree-sitter, build an intra-procedural CFG (petgraph), lower to pruned SSA (Cytron phi insertion over dominance frontiers), export per-function summaries (source/sanitizer/sink caps, taint transforms, points-to, callees).
+2. **Summary merge**: union all per-file summaries into a `GlobalSummaries` map.
+3. **Pass 2**: re-analyze each file with cross-file context under bounded context sensitivity (k=1 inlining for intra-file callees, SCC fixpoint capped at 64 iterations). A forward dataflow worklist propagates taint through the SSA lattice. Call-graph SCCs iterate to fixed-point so mutually recursive functions get accurate summaries.
+4. **Rank, dedupe, emit**: findings are scored by severity × evidence strength × source-kind exploitability, then emitted.
+
+The default `balanced` profile also runs abstract interpretation (interval and string prefix/suffix domains) to suppress false positives on bounded integers and locked URL prefixes. The `deep` profile adds symbolic execution and a demand-driven backwards walk for path-sensitive precision.
+
+---
+
+## Comparison with alternatives
+
+### Nyx vs Semgrep
+
+Semgrep matches patterns. It does not follow data across function call boundaries or file boundaries without Semgrep Pro. Cross-file taint analysis is a paid feature in Semgrep. Nyx does it in the free, open-source version.
+
+### Nyx vs CodeQL
+
+CodeQL needs a build step and either GitHub Actions or the CodeQL CLI installed locally. Nyx reads source files directly. No build, no extra toolchain, installs with `cargo install nyx-scanner`.
+
+### Nyx vs Snyk
+
+Snyk sends code to Snyk's cloud for analysis and requires an account. Nyx runs entirely on-device. No code upload, no login.
+
+### Nyx vs Bandit / ESLint security plugins
+
+Bandit and ESLint security plugins flag suspicious call patterns but do not track actual data flow across function boundaries. This produces false positives (sanitization elsewhere) and false negatives (unsanitized flow that doesn't match the pattern). Nyx traces the full source-to-sink path.
+
+### Feature comparison
+
+| | Nyx | Semgrep | CodeQL | Snyk | Bandit / ESLint |
+|---|---|---|---|---|---|
+| Cross-file taint | Yes | Pro only | Yes | Yes | No |
+| Fully offline | Yes | Yes | Local, needs CodeQL CLI + build | No | Yes |
+| No code upload | Yes | Yes | Needs GitHub or local build | No | Yes |
+| No account | Yes | Free tier needs signup | Needs GitHub | No | Yes |
+| Local browser UI | Yes | No | No | Cloud only | No |
+| SARIF + CI | Yes | Yes | Yes | Yes | Partial |
+| Open source | GPL-3.0 | Core open, taint is closed | Yes | No | Yes |
+| Free for all use | Yes, no paid tier | Core free; Pro is paid | Free for open source | Free tier, usage limits | Yes |
+| No build step | Yes | Yes | No | Yes | Yes |
+
+---
+
+## Engine limitations
+
+- Interprocedural precision is bounded (context-sensitive inlining is k=1 with a callee body-size cap; SCC fixpoint has an iteration cap). When the engine hits a bound it falls back to summaries and records an `engine_note` on the finding.
+- Cross-language calls (FFI, subprocess, WASM) are not traversed. Each language is analyzed independently.
+- Several language features are not modeled: macros, most dynamic dispatch, aliased imports, reflection.
+- C/C++ are Preview tier. STL container flow, builder chains, and inline class member functions are tracked. Deep pointer aliasing and function pointers are not.
+- Results may contain false positives or false negatives. Manual review is expected.
+
+---
+
+## Roadmap
+
+Current focus: recall and precision on real open-source codebases. Running Nyx against real repos and real CVEs, then closing the gap between what it finds and what it should find.
+
+Later: dynamic verification (local sandbox picks up entry points Nyx identifies, builds a harness, injects a payload, confirms the crash or shell). Scaffolding is in place, feature-gated, not yet in the default binary.
+
+Full roadmap: https://github.com/elicpeter/nyx/blob/master/ROADMAP.md
+
+---
+
+## License and cost
+
+GPL-3.0-or-later. Free, no paid tier, no usage limits.
+
+Support the project: https://github.com/sponsors/elicpeter
+
+---
+
+## Key topics
+
+- local-first security scanner
+- open-source SAST
+- static application security testing
+- source-to-sink taint analysis
+- cross-file interprocedural taint
+- no cloud security scanner
+- offline security scanner
+- developer security workflow
+- Rust security tooling
+- SARIF output
+- GitHub Actions security
+- browser triage UI
+- no code upload scanner
+- privacy-preserving SAST
+- security scanner without account
+- alternative to Semgrep
+- alternative to CodeQL
+- alternative to Snyk
+- Bandit alternative with taint analysis
+- cargo install security scanner
+- four detector families: taint, CFG, state model, AST patterns

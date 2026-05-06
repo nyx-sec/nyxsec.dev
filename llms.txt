@@ -1,6 +1,6 @@
 # Nyx
 
-Nyx is an open-source, local-first security scanner for developers. It finds source-to-sink attack paths in code, shows the full evidence chain in a browser UI, and lets you commit triage decisions with your repo. No cloud, no account, no source upload.
+Nyx is an open-source, local-first security scanner for developers. It runs cross-file interprocedural taint analysis on your repository, then serves findings in a React UI bound to `127.0.0.1`. No cloud, no account, no source upload. Everything stays on your machine.
 
 ## Install
 
@@ -8,16 +8,16 @@ Nyx is an open-source, local-first security scanner for developers. It finds sou
 cargo install nyx-scanner
 ```
 
-Pre-built binaries for Linux and macOS (x86_64 and ARM64) are on the [Releases page](https://github.com/elicpeter/nyx/releases).
+Requires Rust 1.88+. Pre-built binaries for Linux and macOS (x86_64, ARM64) are on the [Releases page](https://github.com/elicpeter/nyx/releases).
 
 ## Basic usage
 
 ```bash
-nyx scan           # runs taint analysis, caches findings in .nyx/
+nyx scan           # taint analysis, caches findings in .nyx/
 nyx serve          # opens http://localhost:9700 in your browser
 ```
 
-CI usage:
+## CI usage
 
 ```bash
 nyx scan --format sarif --fail-on MEDIUM > results.sarif
@@ -37,41 +37,34 @@ GitHub Action:
 
 ## Supported languages
 
-| Tier | Languages | CI gate? |
-|------|-----------|----------|
+| Tier | Languages | Use as CI gate? |
+|------|-----------|-----------------|
 | Stable | Python, JavaScript, TypeScript | Yes |
-| Beta | Java, PHP, Ruby, Rust, Go | Yes (light FP triage recommended) |
-| Preview | C, C++ | Not recommended for gates yet |
+| Beta | Go, Java, PHP, Ruby, Rust | Yes, with light FP triage |
+| Preview | C, C++ | No — deep pointer aliasing and function pointers not tracked |
 
-All languages parse via tree-sitter and run through the full cross-file taint pipeline. Rule depth and gated-sink coverage vary by tier. See the [Language maturity page](https://elicpeter.github.io/nyx/language-maturity.html) for details.
+All 10 languages parse via tree-sitter and run through the same cross-file taint pipeline. Rule-level F1 = 100% on a 507-case corpus across all 10 languages.
 
 ## What it detects
 
-Cross-file, interprocedural taint analysis. Source-to-sink paths with sanitizer tracking. Finds:
+Four detector families: taint analysis (cross-file source to sink), CFG structural (auth gaps, unguarded sinks), state model (use-after-close, resource leaks), AST patterns (banned APIs, weak crypto).
 
-- SQL injection
-- Command injection
-- Path traversal
-- SSRF
-- XSS
-- Deserialization vulnerabilities
-- Code execution (eval, SSTI)
-- Open redirect
+Taint analysis finds: SQL injection, command injection, path traversal, SSRF, XSS, unsafe deserialization, code execution (eval, SSTI), open redirect, data exfiltration.
 
-Verified against real CVEs including CVE-2023-48022 (Ray), CVE-2019-14939 (mongo-express), CVE-2026-25544 (Payload CMS), CVE-2022-30323 (hashicorp/go-getter), and others.
+Verified against 38 published CVEs across all 10 languages, including Ray (CVE-2023-48022), mongo-express (CVE-2019-14939), hashicorp/go-getter (CVE-2022-30323), Apache Commons Collections (CVE-2015-7501), Rust stdlib (CVE-2024-24576), and others.
 
 ## Browser UI
 
-`nyx serve` opens a local React UI at `127.0.0.1:9700`. It shows:
+`nyx serve` opens a local React UI at `127.0.0.1:9700`:
 
-- Finding list with severity, confidence, triage status, rule and language filters
-- Flow visualizer: numbered step-by-step path from source to sanitizer to sink with code snippets
+- Overview dashboard: finding counts, severity breakdown, health score
+- Finding list: severity, confidence, triage status, rule and language filters
+- Flow visualizer: numbered source to sanitizer to sink steps with code snippets
 - Bulk triage with audit trail (states: open, investigating, fixed, false_positive, accepted_risk, suppressed)
-- Scan history and diff view to compare runs
-- File explorer with per-file symbol list and finding overlay
-- Built-in and custom rules editor
-
-Triage decisions save to `.nyx/triage.json`. Commit that file and your team shares one triage state.
+- Scan history and diff view
+- File explorer with per-file finding overlay
+- Rules editor (built-in and custom)
+- Config editor
 
 ## Security model
 
@@ -80,30 +73,30 @@ Loopback-only bind (`127.0.0.1`). Host-header enforcement. CSRF on every mutatio
 ## Engine depth
 
 ```bash
-nyx scan --engine-profile fast      # AST patterns only
-nyx scan --engine-profile balanced  # default: cross-file taint
-nyx scan --engine-profile deep      # adds symex + backwards taint (~2-3x cost, higher precision)
+nyx scan --mode ast              # AST patterns only, fastest
+nyx scan --mode full             # default: taint + CFG + state + AST
+nyx scan --engine-profile deep   # adds symex + backwards taint (~2-3x cost)
 ```
 
 ## Output formats
 
-- `console` (default, human-readable)
-- `sarif` (GitHub Code Scanning, compatible with any SARIF viewer)
+- `console` (default)
+- `sarif` (GitHub Code Scanning, any SARIF viewer)
 - `json`
 
 ## Compared to alternatives
 
-**vs Semgrep:** Nyx tracks data flow across files and function boundaries. Semgrep is primarily pattern-matching and does not follow taint across call sites by default without Pro.
+**vs Semgrep:** Semgrep matches patterns. Cross-file taint tracking requires Semgrep Pro (paid). Nyx does it in the open-source version.
 
-**vs CodeQL:** CodeQL requires uploading code to GitHub or running a heavy local toolchain. Nyx runs fully offline with no build step required.
+**vs CodeQL:** CodeQL needs a build step and either GitHub Actions or the CodeQL CLI. Nyx reads source files directly with no build step required.
 
-**vs Snyk:** Snyk sends code to its cloud for analysis and requires an account. Nyx runs entirely on-device.
+**vs Snyk:** Snyk sends code to its cloud and requires an account. Nyx runs entirely on-device.
 
-**vs Bandit / ESLint security plugins:** Those are pattern-based linters. Nyx tracks actual data flow from user-controlled sources to dangerous sinks.
+**vs Bandit / ESLint plugins:** Pattern-based linters that do not track data flow. Nyx traces the full source-to-sink path.
 
 ## License and cost
 
-GPL-3.0-or-later. Free to use. Open source.
+GPL-3.0-or-later. Free, no paid tier, no usage limits.
 
 ## Links
 
@@ -113,8 +106,10 @@ GPL-3.0-or-later. Free to use. Open source.
 - Docs: https://elicpeter.github.io/nyx/
 - Rustdocs: https://docs.rs/nyx-scanner/latest/nyx_scanner/
 - Releases: https://github.com/elicpeter/nyx/releases
-- Security policy: https://github.com/elicpeter/nyx/blob/master/SECURITY.md
-- Roadmap: https://github.com/elicpeter/nyx/blob/master/ROADMAP.md
+
+## Real-world findings
+
+Nyx has been used to find and report 3 vulnerabilities in widely-used open-source projects. One fix is merged. Two patches are in progress. Projects and details withheld pending patch release.
 
 ## Key topics
 
@@ -123,9 +118,16 @@ GPL-3.0-or-later. Free to use. Open source.
 - static application security testing
 - source-to-sink taint analysis
 - cross-file interprocedural taint
-- SARIF
-- GitHub Actions
-- browser triage UI
 - no cloud security scanner
+- offline security scanner
 - developer security workflow
 - Rust security tooling
+- SARIF output
+- GitHub Actions security
+- browser triage UI
+- no code upload scanner
+- privacy-preserving SAST
+- security scanner without account
+- alternative to Semgrep
+- alternative to CodeQL
+- alternative to Snyk
