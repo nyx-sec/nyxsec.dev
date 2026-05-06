@@ -42,6 +42,7 @@
     />
     <meta name="twitter:image" content="https://nyxscan.dev/og-image.png" />
     <meta name="theme-color" content="#F9F8F4" />
+    <meta property="og:locale" content="en_US" />
 
     <script type="application/ld+json">
       {
@@ -50,12 +51,30 @@
         "name": "Nyx",
         "url": "https://nyxscan.dev/",
         "applicationCategory": "SecurityApplication",
+        "applicationSubCategory": "Static Application Security Testing",
         "operatingSystem": "Cross-platform",
         "programmingLanguage": "Rust",
         "codeRepository": "https://github.com/elicpeter/nyx",
         "downloadUrl": "https://crates.io/crates/nyx-scanner",
         "license": "https://spdx.org/licenses/GPL-3.0-or-later.html",
         "description": "Nyx is an open-source, local-first security scanner for developers. Find source-to-sink attack paths, inspect evidence in a browser UI, export SARIF, and run scans in CI.",
+        "featureList": [
+          "Cross-file interprocedural taint analysis",
+          "Source-to-sink attack path detection",
+          "Local browser triage UI",
+          "SARIF output for GitHub Code Scanning",
+          "GitHub Actions integration",
+          "No code upload, no account required",
+          "Runs fully offline",
+          "SQL injection detection",
+          "Command injection detection",
+          "Path traversal detection",
+          "SSRF detection",
+          "XSS detection",
+          "Unsafe deserialization detection",
+          "Python, JavaScript, TypeScript, Go, Java, PHP, Ruby, Rust, C, C++ support"
+        ],
+        "screenshot": "https://nyxscan.dev/og-image.png",
         "author": {
           "@type": "Person",
           "name": "Eli Peter",
@@ -67,6 +86,55 @@
           "https://crates.io/crates/nyx-scanner",
           "https://docs.rs/nyx-scanner/latest/nyx_scanner/",
           "https://elicpeter.github.io/nyx/"
+        ]
+      }
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Does Nyx upload my source code anywhere?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. The scanner runs on your machine, the UI binds to 127.0.0.1 only, and there are no outbound connections at any point. No telemetry, no account, nothing leaves the box."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What languages does Nyx support?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Stable (CI-gateable): Python, JavaScript, TypeScript. Beta: Java, PHP, Ruby, Rust, Go. Preview (not recommended for gates yet): C, C++. All parse via tree-sitter and run through the same cross-file taint pipeline."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What kinds of bugs does Nyx find?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Nyx runs four detector families: taint analysis (cross-file source-to-sink), CFG structural (auth gaps, unguarded sinks), state model (use-after-close, resource leaks), and AST patterns (banned APIs, weak crypto). Taint analysis finds SQL injection, command injection, path traversal, SSRF, XSS, unsafe deserialization, code execution (eval, SSTI), and open redirect."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I use Nyx in CI without sending code to a third party?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Run nyx scan --format sarif --fail-on MEDIUM in any pipeline. The GitHub Action at elicpeter/nyx uploads SARIF to GitHub Code Scanning. No code leaves the runner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is Nyx free?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. GPL-3.0, no paid tier, no usage limits. cargo install nyx-scanner and you have the full thing."
+            }
+          }
         ]
       }
     </script>

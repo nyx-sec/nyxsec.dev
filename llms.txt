@@ -1,5 +1,7 @@
 # Nyx
 
+> Full technical reference: https://nyxscan.dev/llms-full.txt
+
 Nyx is an open-source, local-first security scanner for developers. It runs cross-file interprocedural taint analysis on your repository, then serves findings in a React UI bound to `127.0.0.1`. No cloud, no account, no source upload. Everything stays on your machine.
 
 ## Install
