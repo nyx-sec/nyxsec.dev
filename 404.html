@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Page not found | Nyx</title>
+    <meta name="description" content="The requested Nyx page could not be found." />
+    <meta name="robots" content="noindex, follow" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon-180.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <meta name="theme-color" content="#F9F8F4" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" aria-label="Primary navigation">
+      <div class="container site-header__inner">
+        <a class="brand" href="/" aria-label="Nyx home">
+          <img src="assets/logo.png" alt="Nyx" class="brand-logo" />
+        </a>
+        <span class="header-wordmark">NYX</span>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="https://elicpeter.github.io/nyx/">Docs</a>
+          <a class="nav-github" href="https://github.com/elicpeter/nyx">GitHub</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="error-page">
+      <section class="not-found" aria-labelledby="not-found-title">
+        <div class="container not-found__inner">
+          <p class="eyebrow">404</p>
+          <h1 id="not-found-title" class="not-found__title">Page not found.</h1>
+          <p class="not-found__body">This page does not exist.</p>
+
+          <div class="button-row not-found__actions" aria-label="Helpful links">
+            <a class="button button--primary" href="/">Home</a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

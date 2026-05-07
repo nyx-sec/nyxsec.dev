@@ -4,13 +4,18 @@
   Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
   Strict-Transport-Security: max-age=31536000
   X-Frame-Options: DENY
-  X-Robots-Tag: index, follow, max-image-preview:large
 
 /
   Cache-Control: public, max-age=0, must-revalidate
+  X-Robots-Tag: index, follow, max-image-preview:large
 
 /index.html
   Cache-Control: public, max-age=0, must-revalidate
+  X-Robots-Tag: index, follow, max-image-preview:large
+
+/404.html
+  Cache-Control: public, max-age=3600, must-revalidate
+  X-Robots-Tag: noindex, follow
 
 /robots.txt
   Cache-Control: public, max-age=3600, must-revalidate
@@ -20,9 +25,11 @@
 
 /llms.txt
   Cache-Control: public, max-age=3600, must-revalidate
+  X-Robots-Tag: index, follow
 
 /llms-full.txt
   Cache-Control: public, max-age=3600, must-revalidate
+  X-Robots-Tag: index, follow
 
 /og-image.png
   Cache-Control: public, max-age=86400, must-revalidate
