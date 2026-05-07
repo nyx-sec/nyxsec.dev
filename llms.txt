@@ -4,6 +4,8 @@
 
 Nyx is an open-source, local-first security scanner for developers. It runs cross-file interprocedural taint analysis on your repository, then serves findings in a React UI bound to `127.0.0.1`. No cloud, no account, no source upload. Everything stays on your machine.
 
+Current package version: `nyx-scanner` v0.6.1. Requires stable Rust 1.88+ for Cargo installs.
+
 ## Install
 
 ```bash
@@ -53,7 +55,7 @@ Four detector families: taint analysis (cross-file source to sink), CFG structur
 
 Taint analysis finds: SQL injection, command injection, path traversal, SSRF, XSS, unsafe deserialization, code execution (eval, SSTI), open redirect, data exfiltration.
 
-Verified against 38 published CVEs across all 10 languages, including Ray (CVE-2023-48022), mongo-express (CVE-2019-14939), hashicorp/go-getter (CVE-2022-30323), Apache Commons Collections (CVE-2015-7501), Rust stdlib (CVE-2024-24576), and others.
+Validated against published CVE/GHSA fixtures across all 10 languages, including Ray (CVE-2023-48022), mongo-express (CVE-2019-14939), Payload CMS (CVE-2026-25544), hashicorp/go-getter (CVE-2022-30323), Apache Commons Collections (CVE-2015-7501), Rust stdlib (CVE-2024-24576), and others.
 
 ## Browser UI
 
@@ -109,9 +111,9 @@ GPL-3.0-or-later. Free, no paid tier, no usage limits.
 - Rustdocs: https://docs.rs/nyx-scanner/latest/nyx_scanner/
 - Releases: https://github.com/elicpeter/nyx/releases
 
-## Real-world findings
+## Status and caveats
 
-Nyx has been used to find and report 3 vulnerabilities in widely-used open-source projects. One fix is merged. Two patches are in progress. Projects and details withheld pending patch release.
+Nyx is under active development. APIs, detector behavior, and configuration options may change between releases. Results may contain false positives or false negatives; manual review is expected. C and C++ are Preview tier and should be paired with clang-based tooling before use as a hard CI gate.
 
 ## Key topics
 

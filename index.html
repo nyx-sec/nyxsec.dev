@@ -8,10 +8,18 @@
       name="description"
       content="Nyx is an open-source, local-first security scanner for developers. Find source-to-sink attack paths, inspect evidence in a browser UI, export SARIF, and run scans in CI."
     />
+    <meta name="author" content="Eli Peter" />
+    <meta name="application-name" content="Nyx" />
+    <meta
+      name="keywords"
+      content="Nyx, nyx-scanner, open-source SAST, static application security testing, local-first security scanner, source-to-sink taint analysis, SARIF, Rust security tooling"
+    />
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <link rel="canonical" href="https://nyxscan.dev/" />
-    <link rel="alternate" type="text/plain" href="llms.txt" title="llms.txt" />
-    <link rel="alternate" type="text/plain" href="llms-full.txt" title="llms-full.txt" />
+    <link rel="alternate" type="text/plain" href="https://nyxscan.dev/llms.txt" title="llms.txt" />
+    <link rel="alternate" type="text/plain" href="https://nyxscan.dev/llms-full.txt" title="llms-full.txt" />
+    <link rel="sitemap" type="application/xml" href="https://nyxscan.dev/sitemap.xml" />
+    <link rel="me" href="https://github.com/elicpeter" />
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
     <link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="favicon-180.png" />
@@ -41,23 +49,45 @@
       content="Open-source security scanning with source-to-sink analysis, local browser triage, SARIF, and CI support."
     />
     <meta name="twitter:image" content="https://nyxscan.dev/og-image.png" />
+    <meta name="twitter:image:alt" content="Nyx local-first security scanner for developers" />
+    <meta name="twitter:domain" content="nyxscan.dev" />
+    <meta name="twitter:url" content="https://nyxscan.dev/" />
     <meta name="theme-color" content="#F9F8F4" />
     <meta property="og:locale" content="en_US" />
+    <meta property="og:image:secure_url" content="https://nyxscan.dev/og-image.png" />
+    <meta property="og:updated_time" content="2026-05-07T00:00:00-04:00" />
 
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": ["SoftwareApplication", "SoftwareSourceCode"],
+        "@id": "https://nyxscan.dev/#software",
         "name": "Nyx",
+        "alternateName": ["Nyx Scanner", "nyx-scanner"],
         "url": "https://nyxscan.dev/",
+        "mainEntityOfPage": {
+          "@id": "https://nyxscan.dev/#webpage"
+        },
         "applicationCategory": "SecurityApplication",
         "applicationSubCategory": "Static Application Security Testing",
         "operatingSystem": "Cross-platform",
         "programmingLanguage": "Rust",
+        "softwareVersion": "0.6.1",
+        "softwareRequirements": "Rust 1.88+ for Cargo installs",
         "codeRepository": "https://github.com/elicpeter/nyx",
         "downloadUrl": "https://crates.io/crates/nyx-scanner",
+        "installUrl": "https://elicpeter.github.io/nyx/installation.html",
         "license": "https://spdx.org/licenses/GPL-3.0-or-later.html",
         "description": "Nyx is an open-source, local-first security scanner for developers. Find source-to-sink attack paths, inspect evidence in a browser UI, export SARIF, and run scans in CI.",
+        "keywords": [
+          "open-source SAST",
+          "static application security testing",
+          "local-first security scanner",
+          "source-to-sink taint analysis",
+          "cross-file interprocedural taint",
+          "SARIF",
+          "Rust security tooling"
+        ],
         "featureList": [
           "Cross-file interprocedural taint analysis",
           "Source-to-sink attack path detection",
@@ -80,12 +110,81 @@
           "name": "Eli Peter",
           "url": "https://github.com/elicpeter"
         },
+        "maintainer": {
+          "@type": "Person",
+          "name": "Eli Peter",
+          "url": "https://github.com/elicpeter"
+        },
+        "offers": {
+          "@type": "Offer",
+          "url": "https://crates.io/crates/nyx-scanner",
+          "price": 0,
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock"
+        },
         "isAccessibleForFree": true,
         "sameAs": [
           "https://github.com/elicpeter/nyx",
           "https://crates.io/crates/nyx-scanner",
           "https://docs.rs/nyx-scanner/latest/nyx_scanner/",
           "https://elicpeter.github.io/nyx/"
+        ]
+      }
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://nyxscan.dev/#website",
+            "url": "https://nyxscan.dev/",
+            "name": "Nyx",
+            "alternateName": "nyxscan.dev",
+            "description": "Open-source, local-first security scanning for developers.",
+            "inLanguage": "en-US",
+            "publisher": {
+              "@id": "https://nyxscan.dev/#person"
+            },
+            "about": {
+              "@id": "https://nyxscan.dev/#software"
+            },
+            "sameAs": [
+              "https://github.com/elicpeter/nyx",
+              "https://crates.io/crates/nyx-scanner",
+              "https://docs.rs/nyx-scanner/latest/nyx_scanner/",
+              "https://elicpeter.github.io/nyx/"
+            ]
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://nyxscan.dev/#webpage",
+            "url": "https://nyxscan.dev/",
+            "name": "Nyx | Local-first security scanner for developers",
+            "description": "Nyx is an open-source, local-first security scanner for developers. Find source-to-sink attack paths, inspect evidence in a browser UI, export SARIF, and run scans in CI.",
+            "isPartOf": {
+              "@id": "https://nyxscan.dev/#website"
+            },
+            "about": {
+              "@id": "https://nyxscan.dev/#software"
+            },
+            "primaryImageOfPage": {
+              "@type": "ImageObject",
+              "url": "https://nyxscan.dev/og-image.png",
+              "width": 1200,
+              "height": 630
+            },
+            "dateModified": "2026-05-07",
+            "inLanguage": "en-US"
+          },
+          {
+            "@type": "Person",
+            "@id": "https://nyxscan.dev/#person",
+            "name": "Eli Peter",
+            "url": "https://github.com/elicpeter",
+            "sameAs": ["https://github.com/elicpeter"]
+          }
         ]
       }
     </script>
@@ -267,7 +366,7 @@ nyx serve</code></pre>
             <p>
               Most security scanners require a build environment, a cloud account, or both. Nyx runs analysis locally,
               shows the full source-to-sink path, and keeps triage state in your repo. No uploads, no signups. It has
-              already found and reported 3 CVEs in widely-used open-source projects.
+              already found and reported three vulnerabilities in widely-used open-source projects.
             </p>
           </div>
 

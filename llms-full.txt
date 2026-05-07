@@ -2,6 +2,8 @@
 
 Nyx is an open-source, local-first security scanner for developers. It runs cross-file interprocedural taint analysis on a repository and serves findings in a React UI bound to `127.0.0.1`. No cloud, no account, no source upload. Everything stays on your machine.
 
+- Current package: `nyx-scanner` v0.6.1
+- Rust requirement: stable Rust 1.88+ for Cargo installs
 - Primary site: https://nyxscan.dev
 - Source code: https://github.com/elicpeter/nyx
 - Crate: https://crates.io/crates/nyx-scanner
@@ -168,15 +170,17 @@ CFG structural and state detectors additionally find: auth bypass gaps, unguarde
 
 ---
 
-## Real-world findings
+## Status and caveats
 
-Nyx has found and reported 3 vulnerabilities in widely-used open-source projects through active scanning of real codebases. One fix is merged. Two patches are in progress. Projects and details withheld pending advisory publication.
+Nyx is under active development. APIs, detector behavior, and configuration options may change between releases. Rule-level F1 on the 507-case corpus is the CI regression floor, but results may still contain false positives or false negatives on real code. Manual review is expected.
+
+C and C++ are Preview tier. Nyx tracks STL container flow, builder chains, and inline class member functions, but deep pointer aliasing and function pointers are not tracked. Pair C/C++ scans with clang-tidy, Clang Static Analyzer, Infer, or a comparable clang-based tool before using results as a hard CI gate.
 
 ---
 
 ## Validated against published CVEs
 
-The benchmark corpus holds 40 vulnerable/patched fixture pairs from published advisories (38 detected, 2 deferred pending engine gaps). Nyx fires on the vulnerable file and emits zero findings on the patched file for each pair.
+The benchmark corpus includes vulnerable/patched fixtures from published CVE/GHSA advisories listed in the source README. Nyx fires on the vulnerable file and emits zero findings on the patched file for each listed real-advisory pair.
 
 | CVE | Project | Language | Class |
 |-----|---------|----------|-------|
@@ -192,6 +196,7 @@ The benchmark corpus holds 40 vulnerable/patched fixture pairs from published ad
 | CVE-2023-22621 | Strapi | JavaScript | Code execution (SSTI) |
 | CVE-2023-26159 | follow-redirects | TypeScript | SSRF |
 | GHSA-4x48-cgf9-q33f | Novu | TypeScript | SSRF |
+| CVE-2026-25544 | Payload CMS | TypeScript | SQL injection |
 | CVE-2022-30323 | hashicorp/go-getter | Go | Command injection |
 | CVE-2023-3188 | owncast | Go | SSRF |
 | CVE-2024-31450 | owncast | Go | Path traversal |
@@ -207,7 +212,6 @@ The benchmark corpus holds 40 vulnerable/patched fixture pairs from published ad
 | CVE-2023-38337 | rswag | Ruby | Path traversal |
 | CVE-2017-9841 | PHPUnit | PHP | Code execution (eval) |
 | CVE-2018-15133 | Laravel | PHP | Deserialization |
-| CVE-2026-33486 | Roadiz CMS | PHP | SSRF |
 | CVE-2018-20997 | tar-rs | Rust | Path traversal |
 | CVE-2022-36113 | cargo | Rust | Path traversal |
 | CVE-2023-42456 | sudo-rs | Rust | Path traversal |

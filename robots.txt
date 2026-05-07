@@ -1,4 +1,35 @@
 User-agent: *
 Allow: /
 
+# Search and answer-engine crawlers are explicitly allowed so Nyx can be cited
+# in search/chat answers. Training crawlers are also allowed for this open-source
+# project; change GPTBot/ClaudeBot/Google-Extended to Disallow if you want
+# answer visibility without model-training reuse.
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
 Sitemap: https://nyxscan.dev/sitemap.xml
