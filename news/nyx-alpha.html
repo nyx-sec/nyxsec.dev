@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>The first scan path | Nyx News</title>
+    <meta
+      name="description"
+      content="The early Nyx alpha releases added tree-sitter pattern scanning, SQLite-backed indexes, and the first Rust CFG experiments."
+    />
+    <meta name="author" content="Eli Peter" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="https://nyxscan.dev/news/nyx-alpha.html" />
+    <link rel="sitemap" type="application/xml" href="https://nyxscan.dev/sitemap.xml" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="64x64" href="../favicon-64.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon-180.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles.css" />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Nyx" />
+    <meta property="og:title" content="The first scan path" />
+    <meta property="og:description" content="The first public shape of Nyx: scans, indexes, and early CFG work." />
+    <meta property="og:url" content="https://nyxscan.dev/news/nyx-alpha.html" />
+    <meta property="og:image" content="https://nyxscan.dev/og-image.png" />
+    <meta property="article:published_time" content="2025-06-25T00:00:00-04:00" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="The first scan path" />
+    <meta name="twitter:description" content="Release notes for the early Nyx alpha builds." />
+    <meta name="twitter:image" content="https://nyxscan.dev/og-image.png" />
+    <meta name="theme-color" content="#F9F8F4" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" aria-label="Primary navigation">
+      <div class="container site-header__inner">
+        <a class="brand" href="../" aria-label="Nyx home">
+          <img src="../assets/logo.png" alt="Nyx" class="brand-logo" />
+        </a>
+        <span class="header-wordmark">NYX</span>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="./" aria-current="page">News</a>
+          <a href="https://elicpeter.github.io/nyx/">Docs</a>
+          <a class="nav-github" href="https://github.com/elicpeter/nyx">GitHub</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <article>
+        <header class="article-hero">
+          <div class="container article-hero__inner">
+            <a class="article-back-link" href="./">Back to news</a>
+            <h1 class="article-title">The first scan path.</h1>
+            <div class="article-meta">
+              <span><time datetime="2025-06-25">Jun 25, 2025</time></span>
+            </div>
+          </div>
+        </header>
+
+        <div class="container">
+          <figure class="article-media">
+            <img src="../assets/news/nyx-alpha.png" alt="Nyx alpha release visual" loading="eager" decoding="async" />
+          </figure>
+        </div>
+
+        <div class="container">
+          <div class="article-body">
+            <h2>0.1.0-alpha</h2>
+            <p>
+              Nyx starts with multi-language AST pattern scanning through <code>tree-sitter</code>. Rust, C, C++, Java,
+              Go, PHP, Python, Ruby, TypeScript, and JavaScript are all in the initial language set. The CLI has the
+              basics: <code>scan</code>, <code>index</code>, <code>list</code>, and <code>clean</code>.
+            </p>
+            <p>
+              Indexes are SQLite-backed, and configuration lives in generated <code>nyx.conf</code> plus local overrides
+              in <code>nyx.local</code>. Findings use High, Medium, and Low severity levels.
+            </p>
+
+            <h2>What is included</h2>
+            <p>
+              The scan command walks the filesystem, executes language patterns, and prints console output. The index
+              command can build, rebuild, and report status for a project index. The list and clean commands round out
+              the first local workflow.
+            </p>
+
+            <p class="article-release-notes">
+              Release Notes for today's update can be found
+              <a href="https://github.com/elicpeter/nyx/releases/tag/v0.1.0-alpha">here</a>.
+            </p>
+          </div>
+        </div>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <p>Nyx is an independent open-source security project.</p>
+        <nav aria-label="Footer links">
+          <a href="https://github.com/elicpeter/nyx">GitHub</a>
+          <a href="./">News</a>
+          <a href="https://elicpeter.github.io/nyx/">Docs</a>
+          <a href="https://crates.io/crates/nyx-scanner">crates.io</a>
+          <a href="https://docs.rs/nyx-scanner/latest/nyx_scanner/">Rustdocs</a>
+          <a href="https://github.com/elicpeter/nyx/releases">Releases</a>
+          <a href="https://github.com/elicpeter/nyx/blob/master/ROADMAP.md">Roadmap</a>
+          <a href="https://github.com/elicpeter/nyx/blob/master/SECURITY.md">Security</a>
+          <a href="https://github.com/sponsors/elicpeter">Sponsor</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

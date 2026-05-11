@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "format": "prettier --write \"*.html\" \"*.css\"",
-    "format:check": "prettier --check \"*.html\" \"*.css\""
+    "format": "prettier --write \"*.html\" \"news/*.html\" \"*.css\"",
+    "format:check": "prettier --check \"*.html\" \"news/*.html\" \"*.css\""
   },
   "devDependencies": {
     "prettier": "^3.5.3"

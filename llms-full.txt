@@ -1,8 +1,8 @@
-# Nyx — Full Reference
+# Nyx - Full Reference
 
 Nyx is an open-source, local-first security scanner for developers. It runs cross-file interprocedural taint analysis on a repository and serves findings in a React UI bound to `127.0.0.1`. No cloud, no account, no source upload. Everything stays on your machine.
 
-- Current package: `nyx-scanner` v0.6.1
+- Current package: `nyx-scanner` v0.7.0
 - Rust requirement: stable Rust 1.88+ for Cargo installs
 - Primary site: https://nyxscan.dev
 - Source code: https://github.com/elicpeter/nyx
@@ -65,7 +65,7 @@ nyx scan --engine-profile deep
 GitHub Actions workflow:
 
 ```yaml
-- uses: elicpeter/nyx@v0.6.1
+- uses: elicpeter/nyx@v0.7.0
   with:
     format: sarif
     fail-on: MEDIUM
@@ -146,7 +146,7 @@ All 10 languages parse via tree-sitter and run through the same cross-file taint
 |------|-----------|-----|-----------------|
 | Stable | Python, JavaScript, TypeScript | 100% | Yes |
 | Beta | Go, Java, PHP, Ruby, Rust | 100% | Yes, with light FP triage |
-| Preview | C, C++ | 100% on synthetic corpus | No — deep pointer aliasing and function pointers are not tracked |
+| Preview | C, C++ | 100% on synthetic corpus | No - deep pointer aliasing and function pointers are not tracked |
 
 Stable tier has gated-sink modeling (argument-role-aware, e.g. `setAttribute("href", …)` only flags href-like attributes), the deepest rule sets, and full advanced-analysis coverage. Beta tier has solid rule depth but no gated sinks. Preview tier passes the synthetic corpus but has structural blind spots (deep pointer aliasing, function pointers) that matter on real codebases.
 
@@ -156,15 +156,15 @@ Stable tier has gated-sink modeling (argument-role-aware, e.g. `setAttribute("hr
 
 Cross-file, interprocedural taint analysis with sanitizer tracking. Finds:
 
-- **SQL injection** — user input reaching raw SQL without parameterization
-- **Command injection** — unsanitized input to shell execution (subprocess, exec, eval, system, Popen)
-- **Path traversal** — user-controlled path segments reaching filesystem operations
-- **SSRF** — user-controlled URLs reaching outbound HTTP clients
-- **XSS** — unsanitized input reaching HTML rendering or response sinks
-- **Unsafe deserialization** — untrusted data reaching pickle, YAML.load, Java ObjectInputStream, PHP unserialize, etc.
-- **Code execution** — eval, exec, SSTI (template injection)
-- **Open redirect** — user-controlled URLs in redirect responses
-- **Data exfiltration** — sensitive data (cookies, env vars, session tokens) in outbound request bodies
+- **SQL injection** - user input reaching raw SQL without parameterization
+- **Command injection** - unsanitized input to shell execution (subprocess, exec, eval, system, Popen)
+- **Path traversal** - user-controlled path segments reaching filesystem operations
+- **SSRF** - user-controlled URLs reaching outbound HTTP clients
+- **XSS** - unsanitized input reaching HTML rendering or response sinks
+- **Unsafe deserialization** - untrusted data reaching pickle, YAML.load, Java ObjectInputStream, PHP unserialize, etc.
+- **Code execution** - eval, exec, SSTI (template injection)
+- **Open redirect** - user-controlled URLs in redirect responses
+- **Data exfiltration** - sensitive data (cookies, env vars, session tokens) in outbound request bodies
 
 CFG structural and state detectors additionally find: auth bypass gaps, unguarded sinks, use-after-close, double-close, resource leaks, and unauthenticated-access paths.
 

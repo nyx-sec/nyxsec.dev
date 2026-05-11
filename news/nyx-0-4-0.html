@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ranking, state checks, and quieter output | Nyx News</title>
+    <meta
+      name="description"
+      content="Nyx 0.4.0 adds finding ranking, lower-noise defaults, state analysis, inline ignores, and a cleaner CLI."
+    />
+    <meta name="author" content="Eli Peter" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="https://nyxscan.dev/news/nyx-0-4-0.html" />
+    <link rel="sitemap" type="application/xml" href="https://nyxscan.dev/sitemap.xml" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="64x64" href="../favicon-64.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon-180.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles.css" />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Nyx" />
+    <meta property="og:title" content="Ranking, state checks, and quieter output" />
+    <meta
+      property="og:description"
+      content="Finding ranking, state analysis, inline ignores, and lower-noise defaults."
+    />
+    <meta property="og:url" content="https://nyxscan.dev/news/nyx-0-4-0.html" />
+    <meta property="og:image" content="https://nyxscan.dev/og-image.png" />
+    <meta property="article:published_time" content="2026-02-25T00:00:00-05:00" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Ranking, state checks, and quieter output" />
+    <meta name="twitter:description" content="Release notes for Nyx 0.4.0." />
+    <meta name="twitter:image" content="https://nyxscan.dev/og-image.png" />
+    <meta name="theme-color" content="#F9F8F4" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" aria-label="Primary navigation">
+      <div class="container site-header__inner">
+        <a class="brand" href="../" aria-label="Nyx home">
+          <img src="../assets/logo.png" alt="Nyx" class="brand-logo" />
+        </a>
+        <span class="header-wordmark">NYX</span>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="./" aria-current="page">News</a>
+          <a href="https://elicpeter.github.io/nyx/">Docs</a>
+          <a class="nav-github" href="https://github.com/elicpeter/nyx">GitHub</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <article>
+        <header class="article-hero">
+          <div class="container article-hero__inner">
+            <a class="article-back-link" href="./">Back to news</a>
+            <h1 class="article-title">Ranking, state checks, and quieter output.</h1>
+            <div class="article-meta">
+              <span><time datetime="2026-02-25">Feb 25, 2026</time></span>
+            </div>
+          </div>
+        </header>
+
+        <div class="container">
+          <figure class="article-media">
+            <img src="../assets/news/nyx-0-4-0.png" alt="Nyx 0.4.0 release visual" loading="eager" decoding="async" />
+          </figure>
+        </div>
+
+        <div class="container">
+          <div class="article-body">
+            <h2>What changed</h2>
+            <p>
+              Findings now get an exploitability score built from severity, analysis kind, evidence strength, and
+              path-validation. Console output shows the score, and <code>--min-score</code> lets you filter by it when a
+              repo is especially noisy.
+            </p>
+            <p>
+              Quality-category rules are excluded by default, high-frequency quality findings roll up by file and rule,
+              and low-severity budgets keep minor issues from burying the things you probably opened the scanner to
+              find.
+            </p>
+
+            <h2>State analysis</h2>
+            <p>
+              Nyx adds per-variable resource and auth-level state checks: use-after-close, double close, must leak, may
+              leak, and unauthenticated sink access. It also adds inline <code>nyx:ignore</code> comments with
+              same-line, next-line, comma-list, wildcard, and string-literal guard support.
+            </p>
+
+            <h2>CLI notes</h2>
+            <ul>
+              <li>
+                <code>--severity</code> replaced <code>--high-only</code> with expressions like
+                <code>&gt;=MEDIUM</code>.
+              </li>
+              <li><code>--mode</code> replaced the older AST and CFG toggles.</li>
+              <li><code>--fail-on</code> added CI exit-code gating by severity.</li>
+              <li>The console renderer was cleaned up, including confidence beside score.</li>
+            </ul>
+
+            <p class="article-release-notes">
+              Release Notes for today's update can be found
+              <a href="https://github.com/elicpeter/nyx/releases/tag/v0.4.0">here</a>.
+            </p>
+          </div>
+        </div>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <p>Nyx is an independent open-source security project.</p>
+        <nav aria-label="Footer links">
+          <a href="https://github.com/elicpeter/nyx">GitHub</a>
+          <a href="./">News</a>
+          <a href="https://elicpeter.github.io/nyx/">Docs</a>
+          <a href="https://crates.io/crates/nyx-scanner">crates.io</a>
+          <a href="https://docs.rs/nyx-scanner/latest/nyx_scanner/">Rustdocs</a>
+          <a href="https://github.com/elicpeter/nyx/releases">Releases</a>
+          <a href="https://github.com/elicpeter/nyx/blob/master/ROADMAP.md">Roadmap</a>
+          <a href="https://github.com/elicpeter/nyx/blob/master/SECURITY.md">Security</a>
+          <a href="https://github.com/sponsors/elicpeter">Sponsor</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>
