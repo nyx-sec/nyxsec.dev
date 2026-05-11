@@ -1,0 +1,1038 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Configuration | Nyx docs</title>
+    <meta name="description" content="Run nyx config path to see the exact directory on your system." />
+    <meta name="keywords" content="Nyx, Nyx scanner, SAST, static analysis, Rust security scanner, local-first SAST, Using nyx, Configuration, TOML, toml, cfg, taint" />
+    <meta name="author" content="Eli Peter" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <link rel="canonical" href="https://nyxscan.dev/docs/configuration.html" />
+    <link rel="sitemap" type="application/xml" href="https://nyxscan.dev/sitemap.xml" />
+    <link rel="alternate" hreflang="en" href="https://nyxscan.dev/docs/configuration.html" />
+    <link rel="alternate" hreflang="x-default" href="https://nyxscan.dev/docs/configuration.html" />
+    <link rel="prev" href="serve.html" />
+    <link rel="next" href="output.html" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="64x64" href="../favicon-64.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon-180.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles.css" />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Nyx" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="Configuration" />
+    <meta property="og:description" content="Run nyx config path to see the exact directory on your system." />
+    <meta property="og:url" content="https://nyxscan.dev/docs/configuration.html" />
+    <meta property="og:image" content="https://nyxscan.dev/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Nyx — local-first Rust SAST scanner" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Configuration" />
+    <meta name="twitter:description" content="Run nyx config path to see the exact directory on your system." />
+    <meta name="twitter:image" content="https://nyxscan.dev/og-image.png" />
+    <meta name="twitter:image:alt" content="Nyx — local-first Rust SAST scanner" />
+    <meta name="theme-color" content="#F9F8F4" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://nyxscan.dev/#person",
+      "name": "Eli Peter",
+      "url": "https://github.com/elicpeter",
+      "sameAs": [
+        "https://github.com/elicpeter",
+        "https://github.com/sponsors/elicpeter"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://nyxscan.dev/#website",
+      "url": "https://nyxscan.dev/",
+      "name": "Nyx",
+      "description": "Local-first, open-source SAST scanner written in Rust.",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://nyxscan.dev/#person"
+      }
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://nyxscan.dev/docs/configuration.html#article",
+      "headline": "Configuration",
+      "name": "Configuration",
+      "url": "https://nyxscan.dev/docs/configuration.html",
+      "description": "Run nyx config path to see the exact directory on your system.",
+      "inLanguage": "en",
+      "articleSection": "Using nyx",
+      "isPartOf": {
+        "@id": "https://nyxscan.dev/#website"
+      },
+      "publisher": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "author": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "image": "https://nyxscan.dev/og-image.png",
+      "mainEntityOfPage": "https://nyxscan.dev/docs/configuration.html"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://nyxscan.dev/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Docs",
+          "item": "https://nyxscan.dev/docs/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Configuration",
+          "item": "https://nyxscan.dev/docs/configuration.html"
+        }
+      ],
+      "@id": "https://nyxscan.dev/docs/configuration.html#breadcrumbs"
+    }
+  ]
+}
+    </script>
+  </head>
+  <body class="docs-body">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" aria-label="Primary navigation">
+      <div class="container site-header__inner">
+        <a class="brand" href="../" aria-label="Nyx home">
+          <img src="../assets/logo.png" alt="Nyx" class="brand-logo" />
+        </a>
+        <span class="header-wordmark">NYX</span>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="../news/">News</a>
+          <a href="../docs/" aria-current="page">Docs</a>
+          <a class="nav-github" href="https://github.com/elicpeter/nyx">GitHub</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="docs-page">
+      <div class="docs-shell">
+        <nav class="docs-sidebar" aria-label="Documentation"><a class="docs-sidebar__brand" href="">Docs</a><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Getting started</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="quickstart.html">Quickstart</a></li><li><a class="docs-sidebar__link" href="installation.html">Installation</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Using nyx</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="cli.html">CLI reference</a></li><li><a class="docs-sidebar__link" href="serve.html">Browser UI</a></li><li><a class="docs-sidebar__link" href="configuration.html" aria-current="page">Configuration</a></li><li><a class="docs-sidebar__link" href="output.html">Output formats</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Coverage</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="language-maturity.html">Language maturity</a></li><li><a class="docs-sidebar__link" href="rules.html">Rules</a></li><li><a class="docs-sidebar__link" href="auth.html">Auth analysis</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Under the hood</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="how-it-works.html">How it works</a></li><li><a class="docs-sidebar__link" href="advanced-analysis.html">Advanced analysis</a></li><li><a class="docs-sidebar__link" href="detectors.html">Detectors</a><ul class="docs-sidebar__sublist"><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/patterns.html">Patterns</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/cfg.html">CFG</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/state.html">State</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/taint.html">Taint</a></li></ul></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Project</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="roadmap.html">Roadmap</a></li><li><a class="docs-sidebar__link" href="changelog.html">Changelog</a></li></ul></div></nav>
+        <article class="docs-content">
+          <div class="docs-prose">
+<h1 id="configuration"><a class="docs-anchor" href="#configuration" aria-label="Link to configuration">#</a>Configuration</h1>
+<p>Nyx uses TOML configuration files. A default config is auto-generated on first run. If you&#39;d rather edit settings and rules from the browser, the <a href="serve.html#config">Config page in <code>nyx serve</code></a> is a live editor that writes back to <code>nyx.local</code>:</p>
+<p align="center"><img src="assets/screenshots/docs/serve-config.png" alt="Nyx config page: General settings, Triage Sync toggle, Sources panel with language/matcher/capability dropdowns and a per-language matcher table" width="900"/></p><h2 id="file-locations"><a class="docs-anchor" href="#file-locations" aria-label="Link to file-locations">#</a>File Locations</h2>
+<table>
+<thead>
+<tr>
+<th>Platform</th>
+<th>Directory</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Linux</td>
+<td><code>~/.config/nyx/</code></td>
+</tr>
+<tr>
+<td>macOS</td>
+<td><code>~/Library/Application Support/nyx/</code></td>
+</tr>
+<tr>
+<td>Windows</td>
+<td><code>%APPDATA%\elicpeter\nyx\config\</code></td>
+</tr>
+</tbody></table>
+<p>Run <code>nyx config path</code> to see the exact directory on your system.</p>
+<h2 id="file-precedence"><a class="docs-anchor" href="#file-precedence" aria-label="Link to file-precedence">#</a>File Precedence</h2>
+<ol>
+<li><strong><code>nyx.conf</code></strong> -- Default config (auto-created from built-in template on first run)</li>
+<li><strong><code>nyx.local</code></strong> -- User overrides (loaded on top of defaults)</li>
+</ol>
+<p>Both files are optional. CLI flags take precedence over both.</p>
+<h2 id="merge-strategy"><a class="docs-anchor" href="#merge-strategy" aria-label="Link to merge-strategy">#</a>Merge Strategy</h2>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Scalars (<code>mode</code>, <code>min_severity</code>, booleans)</td>
+<td>User value wins</td>
+</tr>
+<tr>
+<td>Arrays (<code>excluded_extensions</code>, <code>excluded_directories</code>, <code>excluded_files</code>)</td>
+<td>Union + deduplicate</td>
+</tr>
+<tr>
+<td>Analysis rules</td>
+<td>Per-language union with deduplication</td>
+</tr>
+<tr>
+<td>Profiles</td>
+<td>User profile with same name fully replaces built-in</td>
+</tr>
+<tr>
+<td>Server / Runs</td>
+<td>User value wins (full section override)</td>
+</tr>
+</tbody></table>
+<p>Example:</p>
+<pre><code class="hljs language-toml"><span class="hljs-comment"># nyx.conf (default):</span>
+<span class="hljs-attr">excluded_extensions</span> = [<span class="hljs-string">&quot;jpg&quot;</span>, <span class="hljs-string">&quot;png&quot;</span>, <span class="hljs-string">&quot;exe&quot;</span>]
+
+<span class="hljs-comment"># nyx.local (user):</span>
+<span class="hljs-attr">excluded_extensions</span> = [<span class="hljs-string">&quot;foo&quot;</span>, <span class="hljs-string">&quot;jpg&quot;</span>]
+
+<span class="hljs-comment"># Effective result:</span>
+<span class="hljs-comment"># [&quot;exe&quot;, &quot;foo&quot;, &quot;jpg&quot;, &quot;png&quot;]  -- sorted, deduped union</span></code></pre>
+<hr>
+<h2 id="full-schema"><a class="docs-anchor" href="#full-schema" aria-label="Link to full-schema">#</a>Full Schema</h2>
+<h3 id="scanner"><a class="docs-anchor" href="#scanner" aria-label="Link to scanner">#</a><code>[scanner]</code></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>mode</code></td>
+<td><code>&quot;full&quot;</code> | <code>&quot;ast&quot;</code> | <code>&quot;cfg&quot;</code> | <code>&quot;taint&quot;</code></td>
+<td><code>&quot;full&quot;</code></td>
+<td>Analysis mode</td>
+</tr>
+<tr>
+<td><code>min_severity</code></td>
+<td><code>&quot;Low&quot;</code> | <code>&quot;Medium&quot;</code> | <code>&quot;High&quot;</code></td>
+<td><code>&quot;Low&quot;</code></td>
+<td>Minimum severity to report</td>
+</tr>
+<tr>
+<td><code>max_file_size_mb</code></td>
+<td>int | null</td>
+<td>16</td>
+<td>Max file size in MiB; null = unlimited. Default is a safe ceiling for untrusted repos; lift explicitly when scanning trusted codebases with large generated files</td>
+</tr>
+<tr>
+<td><code>excluded_extensions</code></td>
+<td>[string]</td>
+<td><code>[&quot;jpg&quot;, &quot;png&quot;, &quot;gif&quot;, &quot;mp4&quot;, ...]</code></td>
+<td>File extensions to skip</td>
+</tr>
+<tr>
+<td><code>excluded_directories</code></td>
+<td>[string]</td>
+<td><code>[&quot;node_modules&quot;, &quot;.git&quot;, &quot;target&quot;, ...]</code></td>
+<td>Directories to skip</td>
+</tr>
+<tr>
+<td><code>excluded_files</code></td>
+<td>[string]</td>
+<td><code>[]</code></td>
+<td>Specific files to skip</td>
+</tr>
+<tr>
+<td><code>read_global_ignore</code></td>
+<td>bool</td>
+<td><code>false</code></td>
+<td>Honor global ignore file (RESERVED)</td>
+</tr>
+<tr>
+<td><code>read_vcsignore</code></td>
+<td>bool</td>
+<td><code>true</code></td>
+<td>Honor <code>.gitignore</code> / <code>.hgignore</code></td>
+</tr>
+<tr>
+<td><code>require_git_to_read_vcsignore</code></td>
+<td>bool</td>
+<td><code>true</code></td>
+<td>Require <code>.git</code> dir to apply gitignore</td>
+</tr>
+<tr>
+<td><code>one_file_system</code></td>
+<td>bool</td>
+<td><code>false</code></td>
+<td>Don&#39;t cross filesystem boundaries</td>
+</tr>
+<tr>
+<td><code>follow_symlinks</code></td>
+<td>bool</td>
+<td><code>false</code></td>
+<td>Follow symbolic links</td>
+</tr>
+<tr>
+<td><code>scan_hidden_files</code></td>
+<td>bool</td>
+<td><code>false</code></td>
+<td>Scan dot-files</td>
+</tr>
+<tr>
+<td><code>include_nonprod</code></td>
+<td>bool</td>
+<td><code>false</code></td>
+<td>Keep original severity for test/vendor paths</td>
+</tr>
+<tr>
+<td><code>enable_state_analysis</code></td>
+<td>bool</td>
+<td><code>true</code></td>
+<td>Enable resource lifecycle + auth state analysis. Detects use-after-close, double-close, resource leaks (per-function scope), and unauthenticated access. Requires <code>mode = &quot;full&quot;</code> or <code>mode = &quot;taint&quot;</code>.</td>
+</tr>
+</tbody></table>
+<h3 id="database"><a class="docs-anchor" href="#database" aria-label="Link to database">#</a><code>[database]</code></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>path</code></td>
+<td>string</td>
+<td><code>&quot;&quot;</code></td>
+<td>Custom SQLite DB path; empty = platform default (RESERVED)</td>
+</tr>
+<tr>
+<td><code>auto_cleanup_days</code></td>
+<td>int</td>
+<td><code>30</code></td>
+<td>Days to keep DB files (RESERVED)</td>
+</tr>
+<tr>
+<td><code>max_db_size_mb</code></td>
+<td>int</td>
+<td><code>1024</code></td>
+<td>Maximum DB size in MiB (RESERVED)</td>
+</tr>
+<tr>
+<td><code>vacuum_on_startup</code></td>
+<td>bool</td>
+<td><code>false</code></td>
+<td>Run VACUUM before indexed scans</td>
+</tr>
+</tbody></table>
+<h3 id="output"><a class="docs-anchor" href="#output" aria-label="Link to output">#</a><code>[output]</code></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>default_format</code></td>
+<td><code>&quot;console&quot;</code> | <code>&quot;json&quot;</code> | <code>&quot;sarif&quot;</code></td>
+<td><code>&quot;console&quot;</code></td>
+<td>Default output format (used when <code>--format</code> is not specified)</td>
+</tr>
+<tr>
+<td><code>quiet</code></td>
+<td>bool</td>
+<td><code>false</code></td>
+<td>Suppress status messages</td>
+</tr>
+<tr>
+<td><code>max_results</code></td>
+<td>int | null</td>
+<td>null</td>
+<td>Cap number of findings; null = unlimited</td>
+</tr>
+<tr>
+<td><code>attack_surface_ranking</code></td>
+<td>bool</td>
+<td><code>true</code></td>
+<td>Enable attack-surface ranking</td>
+</tr>
+<tr>
+<td><code>min_score</code></td>
+<td>int | null</td>
+<td>null</td>
+<td>Minimum rank score to include; null = no minimum</td>
+</tr>
+<tr>
+<td><code>min_confidence</code></td>
+<td>string | null</td>
+<td>null</td>
+<td>Minimum confidence level (<code>&quot;low&quot;</code>, <code>&quot;medium&quot;</code>, <code>&quot;high&quot;</code>); null = no minimum</td>
+</tr>
+<tr>
+<td><code>include_quality</code></td>
+<td>bool</td>
+<td><code>false</code></td>
+<td>Include Quality-category findings (hidden by default)</td>
+</tr>
+<tr>
+<td><code>show_all</code></td>
+<td>bool</td>
+<td><code>false</code></td>
+<td>Disable category filtering, rollups, and LOW budgets</td>
+</tr>
+<tr>
+<td><code>max_low</code></td>
+<td>int</td>
+<td><code>20</code></td>
+<td>Maximum total LOW findings to show (rollups count as 1)</td>
+</tr>
+<tr>
+<td><code>max_low_per_file</code></td>
+<td>int</td>
+<td><code>1</code></td>
+<td>Maximum LOW findings per file (rollups count as 1)</td>
+</tr>
+<tr>
+<td><code>max_low_per_rule</code></td>
+<td>int</td>
+<td><code>10</code></td>
+<td>Maximum LOW findings per rule (rollups count as 1)</td>
+</tr>
+<tr>
+<td><code>rollup_examples</code></td>
+<td>int</td>
+<td><code>5</code></td>
+<td>Number of example locations stored in rollup findings</td>
+</tr>
+</tbody></table>
+<h3 id="performance"><a class="docs-anchor" href="#performance" aria-label="Link to performance">#</a><code>[performance]</code></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>max_depth</code></td>
+<td>int | null</td>
+<td>null</td>
+<td>Max filesystem traversal depth; null = unlimited</td>
+</tr>
+<tr>
+<td><code>min_depth</code></td>
+<td>int | null</td>
+<td>null</td>
+<td>Min depth for reported entries (RESERVED)</td>
+</tr>
+<tr>
+<td><code>prune</code></td>
+<td>bool</td>
+<td><code>false</code></td>
+<td>Stop traversing into matching directories (RESERVED)</td>
+</tr>
+<tr>
+<td><code>worker_threads</code></td>
+<td>int | null</td>
+<td>null</td>
+<td>Worker thread count; null/0 = auto-detect</td>
+</tr>
+<tr>
+<td><code>batch_size</code></td>
+<td>int</td>
+<td><code>100</code></td>
+<td>Files per index batch</td>
+</tr>
+<tr>
+<td><code>channel_multiplier</code></td>
+<td>int</td>
+<td><code>4</code></td>
+<td>Channel capacity = threads x multiplier</td>
+</tr>
+<tr>
+<td><code>rayon_thread_stack_size</code></td>
+<td>int</td>
+<td><code>8388608</code></td>
+<td>Rayon thread stack size in bytes (8 MiB)</td>
+</tr>
+<tr>
+<td><code>scan_timeout_secs</code></td>
+<td>int | null</td>
+<td>null</td>
+<td>Per-file timeout in seconds (RESERVED)</td>
+</tr>
+<tr>
+<td><code>memory_limit_mb</code></td>
+<td>int</td>
+<td><code>512</code></td>
+<td>Max memory in MiB (RESERVED)</td>
+</tr>
+</tbody></table>
+<h3 id="server"><a class="docs-anchor" href="#server" aria-label="Link to server">#</a><code>[server]</code></h3>
+<p>Configuration for the local web UI (<code>nyx serve</code>).</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>enabled</code></td>
+<td>bool</td>
+<td><code>true</code></td>
+<td>Whether the serve command is enabled</td>
+</tr>
+<tr>
+<td><code>host</code></td>
+<td>string</td>
+<td><code>&quot;127.0.0.1&quot;</code></td>
+<td>Host to bind to (localhost by default)</td>
+</tr>
+<tr>
+<td><code>port</code></td>
+<td>int</td>
+<td><code>9700</code></td>
+<td>Port for the web UI</td>
+</tr>
+<tr>
+<td><code>open_browser</code></td>
+<td>bool</td>
+<td><code>true</code></td>
+<td>Open browser automatically on serve</td>
+</tr>
+<tr>
+<td><code>auto_reload</code></td>
+<td>bool</td>
+<td><code>true</code></td>
+<td>Auto-reload UI when scan results change</td>
+</tr>
+<tr>
+<td><code>persist_runs</code></td>
+<td>bool</td>
+<td><code>true</code></td>
+<td>Persist scan runs for history view</td>
+</tr>
+<tr>
+<td><code>max_saved_runs</code></td>
+<td>int</td>
+<td><code>50</code></td>
+<td>Maximum number of saved runs</td>
+</tr>
+</tbody></table>
+<h3 id="runs"><a class="docs-anchor" href="#runs" aria-label="Link to runs">#</a><code>[runs]</code></h3>
+<p>Configuration for scan run persistence and history.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>persist</code></td>
+<td>bool</td>
+<td><code>false</code></td>
+<td>Persist scan run history to disk</td>
+</tr>
+<tr>
+<td><code>max_runs</code></td>
+<td>int</td>
+<td><code>100</code></td>
+<td>Maximum number of runs to keep</td>
+</tr>
+<tr>
+<td><code>save_logs</code></td>
+<td>bool</td>
+<td><code>false</code></td>
+<td>Save scan logs with each run</td>
+</tr>
+<tr>
+<td><code>save_stdout</code></td>
+<td>bool</td>
+<td><code>false</code></td>
+<td>Save stdout capture with each run</td>
+</tr>
+<tr>
+<td><code>save_code_snippets</code></td>
+<td>bool</td>
+<td><code>true</code></td>
+<td>Save code snippets in findings</td>
+</tr>
+</tbody></table>
+<h3 id="profilesname"><a class="docs-anchor" href="#profilesname" aria-label="Link to profilesname">#</a><code>[profiles.&lt;name&gt;]</code></h3>
+<p>Named scan presets that override scan-related config. Activate with <code>--profile &lt;name&gt;</code>.</p>
+<p>All fields are optional; omitted fields inherit from the base config.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>mode</code></td>
+<td>string</td>
+<td>Analysis mode</td>
+</tr>
+<tr>
+<td><code>min_severity</code></td>
+<td>string</td>
+<td>Minimum severity</td>
+</tr>
+<tr>
+<td><code>max_file_size_mb</code></td>
+<td>int</td>
+<td>Max file size in MiB</td>
+</tr>
+<tr>
+<td><code>include_nonprod</code></td>
+<td>bool</td>
+<td>Keep original severity for test/vendor</td>
+</tr>
+<tr>
+<td><code>enable_state_analysis</code></td>
+<td>bool</td>
+<td>Enable state analysis</td>
+</tr>
+<tr>
+<td><code>default_format</code></td>
+<td>string</td>
+<td>Output format</td>
+</tr>
+<tr>
+<td><code>quiet</code></td>
+<td>bool</td>
+<td>Suppress status output</td>
+</tr>
+<tr>
+<td><code>attack_surface_ranking</code></td>
+<td>bool</td>
+<td>Enable ranking</td>
+</tr>
+<tr>
+<td><code>max_results</code></td>
+<td>int</td>
+<td>Max findings</td>
+</tr>
+<tr>
+<td><code>min_score</code></td>
+<td>int</td>
+<td>Min rank score</td>
+</tr>
+<tr>
+<td><code>show_all</code></td>
+<td>bool</td>
+<td>Show all findings</td>
+</tr>
+<tr>
+<td><code>include_quality</code></td>
+<td>bool</td>
+<td>Include quality findings</td>
+</tr>
+<tr>
+<td><code>worker_threads</code></td>
+<td>int</td>
+<td>Worker thread count</td>
+</tr>
+<tr>
+<td><code>max_depth</code></td>
+<td>int</td>
+<td>Max traversal depth</td>
+</tr>
+</tbody></table>
+<p><strong>Built-in profiles:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>quick</code></td>
+<td>AST-only, medium+ severity</td>
+</tr>
+<tr>
+<td><code>full</code></td>
+<td>Full analysis with state analysis enabled</td>
+</tr>
+<tr>
+<td><code>ci</code></td>
+<td>Full analysis, medium+ severity, quiet, SARIF output</td>
+</tr>
+<tr>
+<td><code>taint_only</code></td>
+<td>Taint analysis only</td>
+</tr>
+<tr>
+<td><code>conservative_large_repo</code></td>
+<td>AST-only, high severity, 5 MiB file limit, depth 10</td>
+</tr>
+</tbody></table>
+<p>User-defined profiles with the same name as a built-in will override it.</p>
+<h3 id="analysisengine"><a class="docs-anchor" href="#analysisengine" aria-label="Link to analysisengine">#</a><code>[analysis.engine]</code></h3>
+<p>Release-grade switches for the optional analysis passes.  Each toggle has a
+matching CLI flag (pair of <code>--foo</code> / <code>--no-foo</code>) that overrides the config
+value for a single run.  These used to be <code>NYX_*</code> environment variables
+(<code>NYX_CONSTRAINT</code>, <code>NYX_ABSTRACT_INTERP</code>, <code>NYX_SYMEX</code>, <code>NYX_CROSS_FILE_SYMEX</code>,
+<code>NYX_SYMEX_INTERPROC</code>, <code>NYX_CONTEXT_SENSITIVE</code>, <code>NYX_PARSE_TIMEOUT_MS</code>,
+<code>NYX_SMT</code>); those env vars are still honored as a last-resort override when
+nyx is used as a library (no CLI entry point), but the config/CLI surface is
+the stable path.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>constraint_solving</code></td>
+<td>bool</td>
+<td><code>true</code></td>
+<td>Path-constraint solving (prunes infeasible paths in taint)</td>
+</tr>
+<tr>
+<td><code>abstract_interpretation</code></td>
+<td>bool</td>
+<td><code>true</code></td>
+<td>Interval / string / bit abstract domains carried through the SSA worklist</td>
+</tr>
+<tr>
+<td><code>context_sensitive</code></td>
+<td>bool</td>
+<td><code>true</code></td>
+<td>k=1 context-sensitive callee inlining for intra-file calls</td>
+</tr>
+<tr>
+<td><code>backwards_analysis</code></td>
+<td>bool</td>
+<td><code>false</code></td>
+<td>Demand-driven backwards taint walk from sinks (adds scan time; default off)</td>
+</tr>
+<tr>
+<td><code>parse_timeout_ms</code></td>
+<td>int</td>
+<td><code>10000</code></td>
+<td>Per-file tree-sitter parse timeout; <code>0</code> disables the cap</td>
+</tr>
+</tbody></table>
+<p><strong><code>[analysis.engine.symex]</code></strong> sub-section:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>enabled</code></td>
+<td>bool</td>
+<td><code>true</code></td>
+<td>Run the symex pipeline after taint; adds witness strings and symbolic verdicts</td>
+</tr>
+<tr>
+<td><code>cross_file</code></td>
+<td>bool</td>
+<td><code>true</code></td>
+<td>Persist / consult cross-file SSA bodies so symex can reason about callees defined in other files</td>
+</tr>
+<tr>
+<td><code>interprocedural</code></td>
+<td>bool</td>
+<td><code>true</code></td>
+<td>Intra-file interprocedural symex (k ≥ 2 via frame stack)</td>
+</tr>
+<tr>
+<td><code>smt</code></td>
+<td>bool</td>
+<td><code>true</code></td>
+<td>Use the SMT backend when nyx is built with the <code>smt</code> feature; ignored otherwise</td>
+</tr>
+</tbody></table>
+<p>CLI flag map (each pair is <code>--enable / --no-enable</code>):</p>
+<table>
+<thead>
+<tr>
+<th>Config field</th>
+<th>CLI flags</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>constraint_solving</code></td>
+<td><code>--constraint-solving</code> / <code>--no-constraint-solving</code></td>
+</tr>
+<tr>
+<td><code>abstract_interpretation</code></td>
+<td><code>--abstract-interp</code> / <code>--no-abstract-interp</code></td>
+</tr>
+<tr>
+<td><code>context_sensitive</code></td>
+<td><code>--context-sensitive</code> / <code>--no-context-sensitive</code></td>
+</tr>
+<tr>
+<td><code>backwards_analysis</code></td>
+<td><code>--backwards-analysis</code> / <code>--no-backwards-analysis</code></td>
+</tr>
+<tr>
+<td><code>parse_timeout_ms</code></td>
+<td><code>--parse-timeout-ms &lt;N&gt;</code></td>
+</tr>
+<tr>
+<td><code>symex.enabled</code></td>
+<td><code>--symex</code> / <code>--no-symex</code></td>
+</tr>
+<tr>
+<td><code>symex.cross_file</code></td>
+<td><code>--cross-file-symex</code> / <code>--no-cross-file-symex</code></td>
+</tr>
+<tr>
+<td><code>symex.interprocedural</code></td>
+<td><code>--symex-interproc</code> / <code>--no-symex-interproc</code></td>
+</tr>
+<tr>
+<td><code>symex.smt</code></td>
+<td><code>--smt</code> / <code>--no-smt</code></td>
+</tr>
+</tbody></table>
+<p><strong>Engine-depth profile shortcut</strong>: instead of flipping individual toggles, pass <code>--engine-profile {fast,balanced,deep}</code> to set the whole stack at once.  Individual flags override the profile, so <code>--engine-profile fast --backwards-analysis</code> runs the fast stack with backwards analysis on.  See <code>docs/cli.md</code> for the exact toggle matrix.</p>
+<p><strong>Explain effective engine</strong>: pass <code>--explain-engine</code> to print the resolved engine configuration (profile + config + CLI overrides) and exit without scanning.</p>
+<h3 id="detectorsdataexfil"><a class="docs-anchor" href="#detectorsdataexfil" aria-label="Link to detectorsdataexfil">#</a><code>[detectors.data_exfil]</code></h3>
+<p>Per-project tuning for the <code>taint-data-exfiltration</code> rule. All fields are optional.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>enabled</code></td>
+<td>bool</td>
+<td><code>true</code></td>
+<td>Set <code>false</code> to strip <code>Cap::DATA_EXFIL</code> from sink caps before emission. No <code>taint-data-exfiltration</code> finding reaches the report. Other taint classes are not affected.</td>
+</tr>
+<tr>
+<td><code>trusted_destinations</code></td>
+<td>[string]</td>
+<td><code>[]</code></td>
+<td>URL prefixes that drop <code>Cap::DATA_EXFIL</code> on the call site. Matched against the abstract-string domain prefix of the destination arg, so a literal URL or a template literal with a static prefix both work. Use full origins or origin-pinned paths and include the trailing <code>/</code>, otherwise <code>https://api.</code> matches <code>https://api.evil.example.com/</code> too.</td>
+</tr>
+</tbody></table>
+<pre><code class="hljs language-toml"><span class="hljs-section">[detectors.data_exfil]</span>
+<span class="hljs-attr">enabled</span> = <span class="hljs-literal">true</span>
+<span class="hljs-attr">trusted_destinations</span> = [
+  <span class="hljs-string">&quot;https://api.internal/&quot;</span>,
+  <span class="hljs-string">&quot;https://telemetry.example.com/&quot;</span>,
+]</code></pre>
+<p>For the sanitizer convention, source sensitivity gate, and per-language sink coverage, see <a href="detectors/taint.html#data_exfil-suppression-layers">Detectors / Taint / DATA_EXFIL</a>.</p>
+<h3 id="analysislanguagesslug"><a class="docs-anchor" href="#analysislanguagesslug" aria-label="Link to analysislanguagesslug">#</a><code>[analysis.languages.&lt;slug&gt;]</code></h3>
+<p>Per-language custom rules. <code>&lt;slug&gt;</code> is one of: <code>rust</code>, <code>javascript</code>, <code>typescript</code>, <code>python</code>, <code>go</code>, <code>java</code>, <code>c</code>, <code>cpp</code>, <code>php</code>, <code>ruby</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>rules</code></td>
+<td>array of rule objects</td>
+<td>Custom label rules</td>
+</tr>
+<tr>
+<td><code>terminators</code></td>
+<td>[string]</td>
+<td>Functions that terminate execution</td>
+</tr>
+<tr>
+<td><code>event_handlers</code></td>
+<td>[string]</td>
+<td>Event handler function names</td>
+</tr>
+</tbody></table>
+<p><strong>Rule object</strong>:</p>
+<pre><code class="hljs language-toml"><span class="hljs-section">[[analysis.languages.javascript.rules]]</span>
+<span class="hljs-attr">matchers</span> = [<span class="hljs-string">&quot;escapeHtml&quot;</span>]
+<span class="hljs-attr">kind</span> = <span class="hljs-string">&quot;sanitizer&quot;</span>        <span class="hljs-comment"># &quot;source&quot; | &quot;sanitizer&quot; | &quot;sink&quot;</span>
+<span class="hljs-attr">cap</span> = <span class="hljs-string">&quot;html_escape&quot;</span>       <span class="hljs-comment"># &quot;env_var&quot; | &quot;html_escape&quot; | &quot;shell_escape&quot; |</span>
+                          <span class="hljs-comment"># &quot;url_encode&quot; | &quot;json_parse&quot; | &quot;file_io&quot; |</span>
+                          <span class="hljs-comment"># &quot;fmt_string&quot; | &quot;sql_query&quot; | &quot;deserialize&quot; |</span>
+                          <span class="hljs-comment"># &quot;ssrf&quot; | &quot;data_exfil&quot; | &quot;code_exec&quot; | &quot;crypto&quot; |</span>
+                          <span class="hljs-comment"># &quot;unauthorized_id&quot; | &quot;ldap_injection&quot; |</span>
+                          <span class="hljs-comment"># &quot;xpath_injection&quot; | &quot;header_injection&quot; |</span>
+                          <span class="hljs-comment"># &quot;open_redirect&quot; | &quot;ssti&quot; | &quot;xxe&quot; |</span>
+                          <span class="hljs-comment"># &quot;prototype_pollution&quot; | &quot;all&quot;</span></code></pre>
+<p>Aliases accepted by <code>parse_cap</code> and <code>[..rules].cap</code>: <code>data_exfiltration</code> for <code>data_exfil</code>, <code>ldapi</code> for <code>ldap_injection</code>, <code>xpathi</code> for <code>xpath_injection</code>, <code>crlf</code> and <code>response_splitting</code> for <code>header_injection</code>, <code>redirect</code> for <code>open_redirect</code>, <code>template_injection</code> for <code>ssti</code>, <code>proto_pollution</code> for <code>prototype_pollution</code>.</p>
+<hr>
+<h2 id="example-configurations"><a class="docs-anchor" href="#example-configurations" aria-label="Link to example-configurations">#</a>Example Configurations</h2>
+<h3 id="minimal-override-nyxlocal"><a class="docs-anchor" href="#minimal-override-nyxlocal" aria-label="Link to minimal-override-nyxlocal">#</a>Minimal override (<code>nyx.local</code>)</h3>
+<pre><code class="hljs language-toml"><span class="hljs-section">[scanner]</span>
+<span class="hljs-attr">min_severity</span> = <span class="hljs-string">&quot;Medium&quot;</span>
+
+<span class="hljs-section">[output]</span>
+<span class="hljs-attr">default_format</span> = <span class="hljs-string">&quot;json&quot;</span>
+<span class="hljs-attr">max_results</span> = <span class="hljs-number">100</span></code></pre>
+<h3 id="ci-optimized"><a class="docs-anchor" href="#ci-optimized" aria-label="Link to ci-optimized">#</a>CI-optimized</h3>
+<pre><code class="hljs language-toml"><span class="hljs-section">[scanner]</span>
+<span class="hljs-attr">mode</span> = <span class="hljs-string">&quot;full&quot;</span>
+<span class="hljs-attr">min_severity</span> = <span class="hljs-string">&quot;Medium&quot;</span>
+<span class="hljs-attr">excluded_directories</span> = [<span class="hljs-string">&quot;node_modules&quot;</span>, <span class="hljs-string">&quot;.git&quot;</span>, <span class="hljs-string">&quot;target&quot;</span>, <span class="hljs-string">&quot;vendor&quot;</span>, <span class="hljs-string">&quot;dist&quot;</span>]
+
+<span class="hljs-section">[output]</span>
+<span class="hljs-attr">quiet</span> = <span class="hljs-literal">true</span>
+<span class="hljs-attr">default_format</span> = <span class="hljs-string">&quot;sarif&quot;</span>
+
+<span class="hljs-section">[performance]</span>
+<span class="hljs-attr">worker_threads</span> = <span class="hljs-number">4</span></code></pre>
+<h3 id="using-a-scan-profile"><a class="docs-anchor" href="#using-a-scan-profile" aria-label="Link to using-a-scan-profile">#</a>Using a scan profile</h3>
+<pre><code class="hljs language-bash"><span class="hljs-comment"># Use a built-in profile</span>
+nyx scan --profile ci
+
+<span class="hljs-comment"># CLI flags still override profile values</span>
+nyx scan --profile ci --format json</code></pre>
+<h3 id="custom-profile"><a class="docs-anchor" href="#custom-profile" aria-label="Link to custom-profile">#</a>Custom profile</h3>
+<pre><code class="hljs language-toml"><span class="hljs-section">[profiles.security_audit]</span>
+<span class="hljs-attr">mode</span> = <span class="hljs-string">&quot;full&quot;</span>
+<span class="hljs-attr">min_severity</span> = <span class="hljs-string">&quot;Low&quot;</span>
+<span class="hljs-attr">enable_state_analysis</span> = <span class="hljs-literal">true</span>
+<span class="hljs-attr">show_all</span> = <span class="hljs-literal">true</span></code></pre>
+<h3 id="custom-rules-for-a-nodejs-project"><a class="docs-anchor" href="#custom-rules-for-a-nodejs-project" aria-label="Link to custom-rules-for-a-nodejs-project">#</a>Custom rules for a Node.js project</h3>
+<pre><code class="hljs language-toml"><span class="hljs-section">[analysis.languages.javascript]</span>
+<span class="hljs-attr">terminators</span> = [<span class="hljs-string">&quot;process.exit&quot;</span>, <span class="hljs-string">&quot;abort&quot;</span>]
+<span class="hljs-attr">event_handlers</span> = [<span class="hljs-string">&quot;addEventListener&quot;</span>]
+
+<span class="hljs-section">[[analysis.languages.javascript.rules]]</span>
+<span class="hljs-attr">matchers</span> = [<span class="hljs-string">&quot;escapeHtml&quot;</span>, <span class="hljs-string">&quot;sanitizeInput&quot;</span>]
+<span class="hljs-attr">kind</span> = <span class="hljs-string">&quot;sanitizer&quot;</span>
+<span class="hljs-attr">cap</span> = <span class="hljs-string">&quot;html_escape&quot;</span>
+
+<span class="hljs-section">[[analysis.languages.javascript.rules]]</span>
+<span class="hljs-attr">matchers</span> = [<span class="hljs-string">&quot;dangerouslySetInnerHTML&quot;</span>]
+<span class="hljs-attr">kind</span> = <span class="hljs-string">&quot;sink&quot;</span>
+<span class="hljs-attr">cap</span> = <span class="hljs-string">&quot;html_escape&quot;</span>
+
+<span class="hljs-section">[[analysis.languages.javascript.rules]]</span>
+<span class="hljs-attr">matchers</span> = [<span class="hljs-string">&quot;getRequestBody&quot;</span>, <span class="hljs-string">&quot;readUserInput&quot;</span>]
+<span class="hljs-attr">kind</span> = <span class="hljs-string">&quot;source&quot;</span>
+<span class="hljs-attr">cap</span> = <span class="hljs-string">&quot;all&quot;</span></code></pre>
+<h3 id="adding-rules-via-cli"><a class="docs-anchor" href="#adding-rules-via-cli" aria-label="Link to adding-rules-via-cli">#</a>Adding rules via CLI</h3>
+<pre><code class="hljs language-bash"><span class="hljs-comment"># Add a sanitizer</span>
+nyx config add-rule --lang javascript --matcher escapeHtml --kind sanitizer --<span class="hljs-built_in">cap</span> html_escape
+
+<span class="hljs-comment"># Add a terminator</span>
+nyx config add-terminator --lang javascript --name process.exit
+
+<span class="hljs-comment"># Verify</span>
+nyx config show</code></pre>
+<hr>
+<h2 id="config-validation"><a class="docs-anchor" href="#config-validation" aria-label="Link to config-validation">#</a>Config Validation</h2>
+<p>Config is validated after loading and merging. Validation checks include:</p>
+<ul>
+<li>Server port must be 1–65535</li>
+<li>Server host must not be empty</li>
+<li><code>max_saved_runs</code> must be &gt; 0 when <code>persist_runs</code> is true</li>
+<li><code>max_runs</code> must be &gt; 0 when <code>persist</code> is true</li>
+<li><code>batch_size</code> and <code>channel_multiplier</code> must be &gt; 0</li>
+<li><code>rollup_examples</code> must be &gt; 0</li>
+<li>Profile names must be alphanumeric with underscores only</li>
+</ul>
+<p>Invalid config produces structured error messages identifying the section, field, and issue.</p>
+<hr>
+<h2 id="state-analysis"><a class="docs-anchor" href="#state-analysis" aria-label="Link to state-analysis">#</a>State Analysis</h2>
+<p>State analysis detects resource lifecycle violations (use-after-close, double-close, resource leaks) and unauthenticated access patterns. It is <strong>enabled by default</strong>.</p>
+<p>To disable:</p>
+<pre><code class="hljs language-toml"><span class="hljs-section">[scanner]</span>
+<span class="hljs-attr">enable_state_analysis</span> = <span class="hljs-literal">false</span></code></pre>
+<p>State analysis requires <code>mode = &quot;full&quot;</code> or <code>mode = &quot;taint&quot;</code>. It has no effect in <code>mode = &quot;ast&quot;</code>.</p>
+<p><strong>Tradeoffs</strong>:</p>
+<ul>
+<li>Additional per-function state-machine pass adds some scan time</li>
+<li>May produce findings that require domain knowledge to evaluate (e.g., whether a resource handle is intentionally left open)</li>
+<li>Most useful for C, C++, Rust, Go, and Java where acquire/release patterns are common</li>
+</ul>
+<hr>
+<h2 id="upgrading"><a class="docs-anchor" href="#upgrading" aria-label="Link to upgrading">#</a>Upgrading</h2>
+<h3 id="engine-version-mismatch-is-handled-automatically"><a class="docs-anchor" href="#engine-version-mismatch-is-handled-automatically" aria-label="Link to engine-version-mismatch-is-handled-automatically">#</a>Engine-version mismatch is handled automatically</h3>
+<p>Nyx stores the scanner&#39;s <code>CARGO_PKG_VERSION</code> in the project index database.
+When the version recorded in the DB differs from the running binary; or the
+row is missing entirely; every cached summary, SSA body, and file-hash row
+is wiped on the next open so the next scan rebuilds the index against the new
+engine. No flag is needed; CI pipelines keep working across upgrades.</p>
+<p>The rebuild is logged at <code>info</code> level:</p>
+<pre><code class="hljs language-plain">engine <span class="hljs-keyword">version</span> changed (&lt;<span class="hljs-built_in">old</span>&gt; → &lt;<span class="hljs-built_in">new</span>&gt;), rebuilding <span class="hljs-keyword">index</span></code></pre>
+<p>If you see this once per upgrade it is working as intended. If you see it on
+every scan, the metadata row is not being persisted; file an issue.</p>
+<h3 id="forcing-a-reindex"><a class="docs-anchor" href="#forcing-a-reindex" aria-label="Link to forcing-a-reindex">#</a>Forcing a reindex</h3>
+<p>Use <code>--index rebuild</code> to throw away the current project&#39;s cached summaries
+and re-run pass 1 against the current rules. Useful after editing
+<code>nyx.local</code> rules, after an upgrade that changed label definitions without
+changing the engine version, or when you want a known-clean baseline:</p>
+<pre><code class="hljs language-bash">nyx scan --index rebuild .</code></pre>
+<p>This clears the current project&#39;s rows in <code>files</code>, <code>function_summaries</code>,
+<code>ssa_function_summaries</code>, and <code>ssa_function_bodies</code>; other projects sharing
+the same DB directory are untouched.</p>
+<h3 id="recovering-from-a-corrupt-database"><a class="docs-anchor" href="#recovering-from-a-corrupt-database" aria-label="Link to recovering-from-a-corrupt-database">#</a>Recovering from a corrupt database</h3>
+<p>If the <code>.sqlite</code> file itself is damaged (e.g. from a killed scan or full
+disk) and <code>nyx scan</code> fails to open it, delete the file and let the next
+scan recreate it:</p>
+<pre><code class="hljs language-bash"><span class="hljs-built_in">rm</span> <span class="hljs-string">&quot;<span class="hljs-subst">$(nyx config path)</span>&quot;</span>/&lt;project&gt;.sqlite*</code></pre>
+<p>On the next scan Nyx builds a fresh index from scratch.</p>
+<hr>
+<h2 id="reserved-fields"><a class="docs-anchor" href="#reserved-fields" aria-label="Link to reserved-fields">#</a>Reserved Fields</h2>
+<p>Some config fields are defined but not yet implemented. They are marked <code>(RESERVED)</code> in the default config and accept values without effect. This allows forward-compatible config files; settings will activate when the feature is implemented without requiring config changes.</p>
+
+          </div>
+          <nav class="docs-prevnext" aria-label="Page navigation"><a class="docs-prevnext__link docs-prevnext__link--prev" href="serve.html">
+        <span class="docs-prevnext__label">Previous</span>
+        <span class="docs-prevnext__title">Browser UI</span>
+      </a><a class="docs-prevnext__link docs-prevnext__link--next" href="output.html">
+        <span class="docs-prevnext__label">Next</span>
+        <span class="docs-prevnext__title">Output formats</span>
+      </a></nav>
+        </article>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <p class="site-footer__copy">© 2026 Eli Peter · Nyx is open source under the Apache 2.0 license.</p>
+        <nav class="site-footer__nav" aria-label="Footer">
+          <a href="../">Home</a>
+          <a href="../news/">News</a>
+          <a href="../docs/">Docs</a>
+          <a href="https://github.com/elicpeter/nyx">GitHub</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

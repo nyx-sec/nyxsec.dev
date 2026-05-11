@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Quick start | Nyx docs</title>
+    <meta name="description" content="First run builds a SQLite index under .nyx/; later runs skip files whose content hash hasn't changed." />
+    <meta name="keywords" content="Nyx, Nyx scanner, SAST, static analysis, Rust security scanner, local-first SAST, Getting started, Quick start, taint, xss, XSS, cfg" />
+    <meta name="author" content="Eli Peter" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <link rel="canonical" href="https://nyxscan.dev/docs/quickstart.html" />
+    <link rel="sitemap" type="application/xml" href="https://nyxscan.dev/sitemap.xml" />
+    <link rel="alternate" hreflang="en" href="https://nyxscan.dev/docs/quickstart.html" />
+    <link rel="alternate" hreflang="x-default" href="https://nyxscan.dev/docs/quickstart.html" />
+    <link rel="next" href="installation.html" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="64x64" href="../favicon-64.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon-180.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles.css" />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Nyx" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="Quick start" />
+    <meta property="og:description" content="First run builds a SQLite index under .nyx/; later runs skip files whose content hash hasn't changed." />
+    <meta property="og:url" content="https://nyxscan.dev/docs/quickstart.html" />
+    <meta property="og:image" content="https://nyxscan.dev/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Nyx — local-first Rust SAST scanner" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Quick start" />
+    <meta name="twitter:description" content="First run builds a SQLite index under .nyx/; later runs skip files whose content hash hasn't changed." />
+    <meta name="twitter:image" content="https://nyxscan.dev/og-image.png" />
+    <meta name="twitter:image:alt" content="Nyx — local-first Rust SAST scanner" />
+    <meta name="theme-color" content="#F9F8F4" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://nyxscan.dev/#person",
+      "name": "Eli Peter",
+      "url": "https://github.com/elicpeter",
+      "sameAs": [
+        "https://github.com/elicpeter",
+        "https://github.com/sponsors/elicpeter"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://nyxscan.dev/#website",
+      "url": "https://nyxscan.dev/",
+      "name": "Nyx",
+      "description": "Local-first, open-source SAST scanner written in Rust.",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://nyxscan.dev/#person"
+      }
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://nyxscan.dev/docs/quickstart.html#article",
+      "headline": "Quick start",
+      "name": "Quick start",
+      "url": "https://nyxscan.dev/docs/quickstart.html",
+      "description": "First run builds a SQLite index under .nyx/; later runs skip files whose content hash hasn't changed.",
+      "inLanguage": "en",
+      "articleSection": "Getting started",
+      "isPartOf": {
+        "@id": "https://nyxscan.dev/#website"
+      },
+      "publisher": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "author": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "image": "https://nyxscan.dev/og-image.png",
+      "mainEntityOfPage": "https://nyxscan.dev/docs/quickstart.html"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://nyxscan.dev/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Docs",
+          "item": "https://nyxscan.dev/docs/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Quick start",
+          "item": "https://nyxscan.dev/docs/quickstart.html"
+        }
+      ],
+      "@id": "https://nyxscan.dev/docs/quickstart.html#breadcrumbs"
+    }
+  ]
+}
+    </script>
+  </head>
+  <body class="docs-body">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" aria-label="Primary navigation">
+      <div class="container site-header__inner">
+        <a class="brand" href="../" aria-label="Nyx home">
+          <img src="../assets/logo.png" alt="Nyx" class="brand-logo" />
+        </a>
+        <span class="header-wordmark">NYX</span>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="../news/">News</a>
+          <a href="../docs/" aria-current="page">Docs</a>
+          <a class="nav-github" href="https://github.com/elicpeter/nyx">GitHub</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="docs-page">
+      <div class="docs-shell">
+        <nav class="docs-sidebar" aria-label="Documentation"><a class="docs-sidebar__brand" href="">Docs</a><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Getting started</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="quickstart.html" aria-current="page">Quickstart</a></li><li><a class="docs-sidebar__link" href="installation.html">Installation</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Using nyx</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="cli.html">CLI reference</a></li><li><a class="docs-sidebar__link" href="serve.html">Browser UI</a></li><li><a class="docs-sidebar__link" href="configuration.html">Configuration</a></li><li><a class="docs-sidebar__link" href="output.html">Output formats</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Coverage</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="language-maturity.html">Language maturity</a></li><li><a class="docs-sidebar__link" href="rules.html">Rules</a></li><li><a class="docs-sidebar__link" href="auth.html">Auth analysis</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Under the hood</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="how-it-works.html">How it works</a></li><li><a class="docs-sidebar__link" href="advanced-analysis.html">Advanced analysis</a></li><li><a class="docs-sidebar__link" href="detectors.html">Detectors</a><ul class="docs-sidebar__sublist"><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/patterns.html">Patterns</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/cfg.html">CFG</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/state.html">State</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/taint.html">Taint</a></li></ul></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Project</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="roadmap.html">Roadmap</a></li><li><a class="docs-sidebar__link" href="changelog.html">Changelog</a></li></ul></div></nav>
+        <article class="docs-content">
+          <div class="docs-prose">
+<h1 id="quick-start"><a class="docs-anchor" href="#quick-start" aria-label="Link to quick-start">#</a>Quick start</h1>
+<p>After <code>cargo install nyx-scanner</code> (or dropping a release binary on your PATH), point Nyx at a directory:</p>
+<pre><code class="hljs language-bash">nyx scan ./my-project</code></pre>
+<p>First run builds a SQLite index under <code>.nyx/</code>; later runs skip files whose content hash hasn&#39;t changed.</p>
+<h2 id="what-a-finding-looks-like"><a class="docs-anchor" href="#what-a-finding-looks-like" aria-label="Link to what-a-finding-looks-like">#</a>What a finding looks like</h2>
+<p align="center"><img src="assets/screenshots/cli-scan.png" alt="nyx scan output: HIGH taint flows from req.params.user, req.query.url, and req.query.path into exec/fetch/fs.readFileSync, framed by the brand mint-cyan gradient" width="900"/></p><p>The same scan in console form:</p>
+<pre><code class="hljs language-plain">/tmp/demo/cmdi_direct<span class="hljs-selector-class">.py</span>
+  <span class="hljs-number">6</span>:<span class="hljs-number">5</span>  ✖ <span class="hljs-selector-attr">[HIGH]</span> taint-unsanitised-<span class="hljs-attribute">flow</span> (source <span class="hljs-number">5</span>:<span class="hljs-number">11</span>)  (Score: <span class="hljs-number">81</span>, Confidence: High)
+      Unsanitised user <span class="hljs-selector-tag">input</span> flows from request<span class="hljs-selector-class">.args</span><span class="hljs-selector-class">.get</span> → os<span class="hljs-selector-class">.system</span>
+
+      Source: request<span class="hljs-selector-class">.args</span><span class="hljs-selector-class">.get</span> (<span class="hljs-number">5</span>:<span class="hljs-number">11</span>)
+      Sink:   os<span class="hljs-selector-class">.system</span>
+
+  <span class="hljs-number">6</span>:<span class="hljs-number">5</span>  ✖ <span class="hljs-selector-attr">[HIGH]</span> py<span class="hljs-selector-class">.cmdi</span><span class="hljs-selector-class">.os_system</span>  (Score: <span class="hljs-number">64</span>, Confidence: High)
+      os<span class="hljs-selector-class">.system</span>() runs <span class="hljs-selector-tag">a</span> shell command
+
+/tmp/demo/xss_document_write<span class="hljs-selector-class">.js</span>
+  <span class="hljs-number">5</span>:<span class="hljs-number">5</span>  ✖ <span class="hljs-selector-attr">[HIGH]</span> taint-unsanitised-<span class="hljs-attribute">flow</span> (source <span class="hljs-number">3</span>:<span class="hljs-number">18</span>)  (Score: <span class="hljs-number">81</span>, Confidence: High)
+      Unsanitised user <span class="hljs-selector-tag">input</span> flows from req<span class="hljs-selector-class">.query</span><span class="hljs-selector-class">.content</span> → document<span class="hljs-selector-class">.write</span>
+
+      Source: req<span class="hljs-selector-class">.query</span><span class="hljs-selector-class">.content</span> (<span class="hljs-number">3</span>:<span class="hljs-number">18</span>)
+      Sink:   document<span class="hljs-selector-class">.write</span>
+
+  <span class="hljs-number">5</span>:<span class="hljs-number">5</span>  ⚠ <span class="hljs-selector-attr">[MEDIUM]</span> js<span class="hljs-selector-class">.xss</span><span class="hljs-selector-class">.document_write</span>  (Score: <span class="hljs-number">34</span>, Confidence: High)
+      document<span class="hljs-selector-class">.write</span>() is an XSS sink
+
+warning <span class="hljs-string">&#x27;demo&#x27;</span> generated <span class="hljs-number">10</span> issues.
+Finished <span class="hljs-keyword">in</span> <span class="hljs-number">0.054s</span>.</code></pre>
+<p>Each finding is one line of header plus evidence. Fields that matter:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>[HIGH]</code> / <code>[MEDIUM]</code> / <code>[LOW]</code></td>
+<td>Severity after the non-prod downgrade</td>
+</tr>
+<tr>
+<td>Rule ID</td>
+<td>Either a taint rule (<code>taint-unsanitised-flow</code>), a structural rule (<code>cfg-*</code>, <code>state-*</code>), or an AST pattern (<code>&lt;lang&gt;.&lt;category&gt;.&lt;name&gt;</code>)</td>
+</tr>
+<tr>
+<td>Score</td>
+<td>Attack-surface ranking (severity + analysis kind + source kind + evidence). Higher is more exploitable</td>
+</tr>
+<tr>
+<td>Confidence</td>
+<td><code>High</code>, <code>Medium</code>, <code>Low</code>. Drops for AST-only matches, capped widened flows, and lowered-to-Low backwards-infeasible findings</td>
+</tr>
+<tr>
+<td>Source / Sink</td>
+<td>Where tainted data entered and where the dangerous call happened</td>
+</tr>
+</tbody></table>
+<p>Two rules firing on the same line (the taint finding plus the AST pattern) is normal. The pattern matches the structural presence of <code>document.write</code>; the taint rule adds the evidence that <code>req.query.content</code> actually reached it. Both carry distinct rule IDs so suppressions can target one without the other.</p>
+<h2 id="fail-a-ci-job-on-high-findings"><a class="docs-anchor" href="#fail-a-ci-job-on-high-findings" aria-label="Link to fail-a-ci-job-on-high-findings">#</a>Fail a CI job on High findings</h2>
+<pre><code class="hljs language-bash">nyx scan . --fail-on HIGH --quiet</code></pre>
+<p>Exit 1 if any HIGH finding remains. <code>--quiet</code> drops the &quot;Using default configuration&quot; banner so CI logs stay tidy.</p>
+<h2 id="emit-sarif-for-github-code-scanning"><a class="docs-anchor" href="#emit-sarif-for-github-code-scanning" aria-label="Link to emit-sarif-for-github-code-scanning">#</a>Emit SARIF for GitHub Code Scanning</h2>
+<pre><code class="hljs language-bash">nyx scan . --format sarif &gt; results.sarif</code></pre>
+<p>Full SARIF schema and GitHub Actions wiring: <a href="cli.html">cli.md</a> and <a href="output.html">output.md</a>.</p>
+<h2 id="tighten-the-gate"><a class="docs-anchor" href="#tighten-the-gate" aria-label="Link to tighten-the-gate">#</a>Tighten the gate</h2>
+<pre><code class="hljs language-bash"><span class="hljs-comment"># Only HIGH findings</span>
+nyx scan . --severity HIGH
+
+<span class="hljs-comment"># HIGH + MEDIUM</span>
+nyx scan . --severity <span class="hljs-string">&quot;&gt;=MEDIUM&quot;</span>
+
+<span class="hljs-comment"># Drop anything below Medium confidence (useful for CI)</span>
+nyx scan . --min-confidence medium
+
+<span class="hljs-comment"># Also drop findings the engine could not fully resolve (widened / bailed)</span>
+nyx scan . --require-converged</code></pre>
+<p><code>--require-converged</code> keeps <code>under-report</code> findings (the emitted flow is still real) but drops over-reports and widenings. Intended for strict gates where a noisy finding is worse than nothing.</p>
+<h2 id="skip-dataflow-for-a-fast-first-pass"><a class="docs-anchor" href="#skip-dataflow-for-a-fast-first-pass" aria-label="Link to skip-dataflow-for-a-fast-first-pass">#</a>Skip dataflow for a fast first pass</h2>
+<pre><code class="hljs language-bash">nyx scan . --mode ast</code></pre>
+<p>AST-only mode runs tree-sitter patterns without building a CFG or running taint. It&#39;s fast and still catches banned-API uses, weak crypto, and obvious XSS sinks, but it can&#39;t tell <code>eval(&quot;1+1&quot;)</code> apart from <code>eval(userInput)</code>. Use it as a pre-commit filter, not as a CI gate replacement.</p>
+<h2 id="next"><a class="docs-anchor" href="#next" aria-label="Link to next">#</a>Next</h2>
+<ul>
+<li><a href="cli.html">CLI reference</a> for every flag and subcommand.</li>
+<li><a href="configuration.html">Configuration</a> for the <code>nyx.conf</code> / <code>nyx.local</code> schema, profiles, and custom rules.</li>
+<li><a href="serve.html"><code>nyx serve</code></a> for the browser UI, triage workflow, and scan history.</li>
+<li><a href="language-maturity.html">Language maturity</a> for per-language tier and known FP/FN patterns.</li>
+</ul>
+
+          </div>
+          <nav class="docs-prevnext" aria-label="Page navigation"><span class="docs-prevnext__spacer"></span><a class="docs-prevnext__link docs-prevnext__link--next" href="installation.html">
+        <span class="docs-prevnext__label">Next</span>
+        <span class="docs-prevnext__title">Installation</span>
+      </a></nav>
+        </article>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <p class="site-footer__copy">© 2026 Eli Peter · Nyx is open source under the Apache 2.0 license.</p>
+        <nav class="site-footer__nav" aria-label="Footer">
+          <a href="../">Home</a>
+          <a href="../news/">News</a>
+          <a href="../docs/">Docs</a>
+          <a href="https://github.com/elicpeter/nyx">GitHub</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

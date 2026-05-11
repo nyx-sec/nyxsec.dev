@@ -107,7 +107,7 @@ GPL-3.0-or-later. Free, no paid tier, no usage limits.
 - Primary site: https://nyxscan.dev
 - Source code: https://github.com/elicpeter/nyx
 - Crate: https://crates.io/crates/nyx-scanner
-- Docs: https://elicpeter.github.io/nyx/
+- Docs: https://nyxscan.dev/docs/
 - Rustdocs: https://docs.rs/nyx-scanner/latest/nyx_scanner/
 - Releases: https://github.com/elicpeter/nyx/releases
 

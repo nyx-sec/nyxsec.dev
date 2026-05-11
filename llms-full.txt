@@ -7,7 +7,7 @@ Nyx is an open-source, local-first security scanner for developers. It runs cros
 - Primary site: https://nyxscan.dev
 - Source code: https://github.com/elicpeter/nyx
 - Crate: https://crates.io/crates/nyx-scanner
-- Docs: https://elicpeter.github.io/nyx/
+- Docs: https://nyxscan.dev/docs/
 - Rustdocs: https://docs.rs/nyx-scanner/latest/nyx_scanner/
 - Releases: https://github.com/elicpeter/nyx/releases
 - Security policy: https://github.com/elicpeter/nyx/blob/master/SECURITY.md
@@ -290,7 +290,7 @@ Or add rules from the CLI: `nyx config add-rule --lang javascript --matcher esca
 
 Available cap values: `env_var`, `html_escape`, `shell_escape`, `url_encode`, `json_parse`, `file_io`, `fmt_string`, `sql_query`, `deserialize`, `ssrf`, `data_exfil`, `code_exec`, `crypto`, `unauthorized_id`, `all`.
 
-Full schema: [Configuration docs](https://elicpeter.github.io/nyx/configuration.html).
+Full schema: [Configuration docs](https://nyxscan.dev/docs/configuration.html).
 
 ---
 

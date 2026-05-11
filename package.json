@@ -4,9 +4,14 @@
   "private": true,
   "scripts": {
     "format": "prettier --write \"*.html\" \"news/*.html\" \"*.css\"",
-    "format:check": "prettier --check \"*.html\" \"news/*.html\" \"*.css\""
+    "format:check": "prettier --check \"*.html\" \"news/*.html\" \"*.css\"",
+    "docs:sync": "bash tools/sync-docs.sh",
+    "docs:build": "node tools/build-docs.js",
+    "docs": "npm run docs:sync && npm run docs:build"
   },
   "devDependencies": {
+    "highlight.js": "^11.11.1",
+    "marked": "^18.0.3",
     "prettier": "^3.5.3"
   }
 }

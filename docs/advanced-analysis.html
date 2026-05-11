@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Advanced Analysis | Nyx docs</title>
+    <meta name="description" content="Nyx layers several analysis passes on top of the core SSA taint engine. Most are switchable via config ([analysis.engine] in nyx.conf / nyx.local), a matching CLI flag pair, or, as a last-resort…" />
+    <meta name="keywords" content="Nyx, Nyx scanner, SAST, static analysis, Rust security scanner, local-first SAST, Under the hood, Advanced Analysis, SSA, taint, SSRF, Python" />
+    <meta name="author" content="Eli Peter" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <link rel="canonical" href="https://nyxscan.dev/docs/advanced-analysis.html" />
+    <link rel="sitemap" type="application/xml" href="https://nyxscan.dev/sitemap.xml" />
+    <link rel="alternate" hreflang="en" href="https://nyxscan.dev/docs/advanced-analysis.html" />
+    <link rel="alternate" hreflang="x-default" href="https://nyxscan.dev/docs/advanced-analysis.html" />
+    <link rel="prev" href="how-it-works.html" />
+    <link rel="next" href="detectors.html" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="64x64" href="../favicon-64.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon-180.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles.css" />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Nyx" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="Advanced Analysis" />
+    <meta property="og:description" content="Nyx layers several analysis passes on top of the core SSA taint engine. Most are switchable via config ([analysis.engine] in nyx.conf / nyx.local), a matching CLI flag pair, or, as a last-resort…" />
+    <meta property="og:url" content="https://nyxscan.dev/docs/advanced-analysis.html" />
+    <meta property="og:image" content="https://nyxscan.dev/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Nyx — local-first Rust SAST scanner" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Advanced Analysis" />
+    <meta name="twitter:description" content="Nyx layers several analysis passes on top of the core SSA taint engine. Most are switchable via config ([analysis.engine] in nyx.conf / nyx.local), a matching CLI flag pair, or, as a last-resort…" />
+    <meta name="twitter:image" content="https://nyxscan.dev/og-image.png" />
+    <meta name="twitter:image:alt" content="Nyx — local-first Rust SAST scanner" />
+    <meta name="theme-color" content="#F9F8F4" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://nyxscan.dev/#person",
+      "name": "Eli Peter",
+      "url": "https://github.com/elicpeter",
+      "sameAs": [
+        "https://github.com/elicpeter",
+        "https://github.com/sponsors/elicpeter"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://nyxscan.dev/#website",
+      "url": "https://nyxscan.dev/",
+      "name": "Nyx",
+      "description": "Local-first, open-source SAST scanner written in Rust.",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://nyxscan.dev/#person"
+      }
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://nyxscan.dev/docs/advanced-analysis.html#article",
+      "headline": "Advanced Analysis",
+      "name": "Advanced Analysis",
+      "url": "https://nyxscan.dev/docs/advanced-analysis.html",
+      "description": "Nyx layers several analysis passes on top of the core SSA taint engine. Most are switchable via config ([analysis.engine] in nyx.conf / nyx.local), a matching CLI flag pair, or, as a last-resort…",
+      "inLanguage": "en",
+      "articleSection": "Under the hood",
+      "isPartOf": {
+        "@id": "https://nyxscan.dev/#website"
+      },
+      "publisher": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "author": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "image": "https://nyxscan.dev/og-image.png",
+      "mainEntityOfPage": "https://nyxscan.dev/docs/advanced-analysis.html"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://nyxscan.dev/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Docs",
+          "item": "https://nyxscan.dev/docs/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Advanced Analysis",
+          "item": "https://nyxscan.dev/docs/advanced-analysis.html"
+        }
+      ],
+      "@id": "https://nyxscan.dev/docs/advanced-analysis.html#breadcrumbs"
+    }
+  ]
+}
+    </script>
+  </head>
+  <body class="docs-body">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" aria-label="Primary navigation">
+      <div class="container site-header__inner">
+        <a class="brand" href="../" aria-label="Nyx home">
+          <img src="../assets/logo.png" alt="Nyx" class="brand-logo" />
+        </a>
+        <span class="header-wordmark">NYX</span>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="../news/">News</a>
+          <a href="../docs/" aria-current="page">Docs</a>
+          <a class="nav-github" href="https://github.com/elicpeter/nyx">GitHub</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="docs-page">
+      <div class="docs-shell">
+        <nav class="docs-sidebar" aria-label="Documentation"><a class="docs-sidebar__brand" href="">Docs</a><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Getting started</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="quickstart.html">Quickstart</a></li><li><a class="docs-sidebar__link" href="installation.html">Installation</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Using nyx</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="cli.html">CLI reference</a></li><li><a class="docs-sidebar__link" href="serve.html">Browser UI</a></li><li><a class="docs-sidebar__link" href="configuration.html">Configuration</a></li><li><a class="docs-sidebar__link" href="output.html">Output formats</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Coverage</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="language-maturity.html">Language maturity</a></li><li><a class="docs-sidebar__link" href="rules.html">Rules</a></li><li><a class="docs-sidebar__link" href="auth.html">Auth analysis</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Under the hood</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="how-it-works.html">How it works</a></li><li><a class="docs-sidebar__link" href="advanced-analysis.html" aria-current="page">Advanced analysis</a></li><li><a class="docs-sidebar__link" href="detectors.html">Detectors</a><ul class="docs-sidebar__sublist"><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/patterns.html">Patterns</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/cfg.html">CFG</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/state.html">State</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/taint.html">Taint</a></li></ul></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Project</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="roadmap.html">Roadmap</a></li><li><a class="docs-sidebar__link" href="changelog.html">Changelog</a></li></ul></div></nav>
+        <article class="docs-content">
+          <div class="docs-prose">
+<h1 id="advanced-analysis"><a class="docs-anchor" href="#advanced-analysis" aria-label="Link to advanced-analysis">#</a>Advanced Analysis</h1>
+<p>Nyx layers several analysis passes on top of the core SSA taint engine.
+Most are switchable via config (<code>[analysis.engine]</code> in <code>nyx.conf</code> /
+<code>nyx.local</code>), a matching CLI flag pair, or, as a last-resort override for
+library users with no CLI entry point, a <code>NYX_*</code> environment variable. The
+five precision-tuning passes (abstract interpretation, context sensitivity,
+symbolic execution, constraint solving, field-sensitive points-to) are
+<strong>on by default</strong> because the benchmark numbers in
+<a href="language-maturity.html">language-maturity.md</a> are measured with them on.
+The demand-driven backwards walk and hierarchy fan-out sit alongside but
+are not user-toggleable in the same way.</p>
+<p>See <a href="configuration.html#analysisengine"><code>Configuration</code></a> for the full config
+surface and CLI flag table. This page explains what each pass does, why it
+helps, how to disable it, and what it does not cover.</p>
+<hr>
+<h2 id="abstract-interpretation"><a class="docs-anchor" href="#abstract-interpretation" aria-label="Link to abstract-interpretation">#</a>Abstract interpretation</h2>
+<p><strong>What it does.</strong> Propagates interval and string abstract domains through the
+SSA worklist alongside taint. Integer values carry <code>[lo, hi]</code> bounds;
+string values carry a prefix and suffix (plus a bit domain for known-zero /
+known-one bits). Values are joined at merge points and widened at loop
+heads so the worklist always terminates.</p>
+<p><strong>Why it helps.</strong> Lets Nyx suppress some findings that are obviously safe
+given the abstract value; a proven-bounded integer does not flow into a
+SQL sink as an injection risk; an SSRF sink whose URL prefix is locked to a
+trusted host stays quiet. This turns a large class of FPs on numeric and
+locked-prefix paths into true negatives.</p>
+<p><strong>Path traversal.</strong> The path domain accepts canonicalised-and-rooted
+shapes via <code>PathFact::is_path_traversal_safe</code>: a path that is
+dotdot-free and either non-absolute or carries a verified prefix-lock has
+its <code>Cap::FILE_IO</code> cleared. When the lock argument is a string literal
+the lock prefix is recorded directly; when it is a method call, field
+access, or configured root, an <code>OPAQUE_PREFIX_LOCK</code> marker captures the
+structural invariant (&quot;rooted under SOME prefix&quot;) instead. This closes
+the Ruby <code>File.expand_path + start_with?(root)</code>, Python
+<code>os.path.realpath + .startswith(root)</code>, and JS
+<code>path.resolve + .startsWith(root)</code> shapes. <code>classify_path_assertion</code>
+recognises JS <code>.startsWith(...)</code>, Python <code>.startswith(...)</code>, Ruby
+<code>.start_with?(...)</code> (paren and paren-less), and Go <code>strings.HasPrefix(...)</code>.
+Branch narrowing flips lock attachment under condition negation
+(<code>if !target.startsWith(ROOT) { return; }</code> attaches the lock to the
+surviving block, not the rejection arm).</p>
+<p><strong>How to turn it off.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Surface</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Config</td>
+<td><code>abstract_interpretation = false</code> under <code>[analysis.engine]</code></td>
+</tr>
+<tr>
+<td>CLI flag</td>
+<td><code>--no-abstract-interp</code></td>
+</tr>
+<tr>
+<td>Env var (legacy)</td>
+<td><code>NYX_ABSTRACT_INTERP=0</code></td>
+</tr>
+</tbody></table>
+<p><strong>Limitations.</strong> The interval domain is 64-bit signed; very wide or
+overflow-producing arithmetic degrades to <code>⊤</code> (unbounded). String prefix /
+suffix tracking is concat-only; it does not model reordering, reversal, or
+character-level regex constraints. Loop widening deliberately drops
+changing bounds rather than chasing fixpoints.</p>
+<p><strong>Source</strong>: <a href="https://github.com/elicpeter/nyx/tree/master/src/abstract_interp/"><code>src/abstract_interp/</code></a>.</p>
+<hr>
+<h2 id="context-sensitive-analysis"><a class="docs-anchor" href="#context-sensitive-analysis" aria-label="Link to context-sensitive-analysis">#</a>Context-sensitive analysis</h2>
+<p><strong>What it does.</strong> Adds k=1 call-site-sensitive taint propagation for
+intra-file callees. When a function is invoked, Nyx reanalyzes the callee
+body with the actual per-argument taint signature of the call site,
+producing call-site-specific return taint. Results are cached by
+<code>(function_name, ArgTaintSig)</code> so repeated calls with the same signature
+are free.</p>
+<p><strong>Why it helps.</strong> A helper called once with a tainted argument and once
+with a sanitized argument produces two different findings; without k=1
+sensitivity, the conservative union of both call sites would be applied
+to the sanitized call, producing a spurious finding there.</p>
+<p><strong>How to turn it off.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Surface</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Config</td>
+<td><code>context_sensitive = false</code> under <code>[analysis.engine]</code></td>
+</tr>
+<tr>
+<td>CLI flag</td>
+<td><code>--no-context-sensitive</code></td>
+</tr>
+<tr>
+<td>Env var (legacy)</td>
+<td><code>NYX_CONTEXT_SENSITIVE=0</code></td>
+</tr>
+</tbody></table>
+<p><strong>Limitations.</strong> Intra-file only. Cross-file callees are resolved via
+summaries (see <code>src/summary/</code>) rather than re-inlined. Depth is capped at
+k=1 to prevent cache blow-up and re-entrancy; higher k would require a
+different cache key design. Callee bodies larger than the internal
+<code>MAX_INLINE_BLOCKS</code> threshold fall back to the summary path. Cache keys
+hash per-argument <code>Cap</code> bits but not source-origin identity, so two
+callers with identical caps but different origins share cached
+origin-attribution.</p>
+<p><strong>Helper-validator propagation.</strong> SSA summaries carry a
+<code>validated_params_to_return</code> field listing parameter indices whose
+taint flow to the return value is fully validated by a dominating
+predicate (regex allowlist, type check, validation call) on every
+return path. At call sites, each tainted argument passed to a
+validated position, and the call&#39;s own return value, are marked
+<code>validated_must</code> / <code>validated_may</code> in the caller&#39;s SSA taint state,
+the same way an inline <code>if (!regex.test(x)) throw …</code> would validate
+the surviving branch. Sound because the summary is recorded only when
+the parameter&#39;s name is in <code>validated_must</code> at <em>every</em> return block; a
+normal-returning call therefore proves the validating arm. JS/TS
+object-pattern formals (<code>({ column, operator, value }) =&gt; …</code>) seed
+every destructured sibling in the per-parameter probe, so flow through
+any of them counts toward the slot being validated.</p>
+<p><strong>Source</strong>: <a href="https://github.com/elicpeter/nyx/tree/master/src/taint/ssa_transfer/"><code>src/taint/ssa_transfer/</code></a>
+(<code>ArgTaintSig</code>, <code>InlineCache</code>, <code>inline_analyse_callee</code>,
+<code>propagate_validated_params_to_return</code>).</p>
+<hr>
+<h2 id="field-sensitive-points-to"><a class="docs-anchor" href="#field-sensitive-points-to" aria-label="Link to field-sensitive-points-to">#</a>Field-sensitive points-to</h2>
+<p><strong>What it does.</strong> Runs a Steensgaard-style alias analysis that interns field
+accesses as their own abstract locations. <code>c.mu</code> becomes <code>Field(c, mu)</code>,
+distinct from <code>c</code> itself; a write to <code>obj.cache</code> and a read from
+<code>obj.cache</code> in different methods both land on the same abstract location;
+subscript reads and writes (<code>arr[i]</code>, <code>map[k] = v</code>) lower to synthetic
+<code>__index_get__</code> / <code>__index_set__</code> calls so the engine can model them
+through the same container store/load primitives used for STL containers,
+Python lists, JS arrays, and similar.</p>
+<p><strong>Why it helps.</strong> It splits a class of false positives that the
+whole-variable taint model produced. Before this pass, <code>obj.field = tainted; sink(obj.other_field)</code> would taint <code>obj</code> as a whole and fire on
+the safe field; the receiver-type / sub-field distinction is also what
+lets the resource-lifecycle pass attribute a <code>c.mu.Lock()</code> to the lock
+field rather than to its container. Cross-method field flow (writer in
+one method, reader in another) shows up only when fields have stable
+identity independent of the parent value.</p>
+<p><strong>How to turn it off.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Surface</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Env var</td>
+<td><code>NYX_POINTER_ANALYSIS=0</code></td>
+</tr>
+</tbody></table>
+<p>The pass is <strong>on by default</strong>. The env-var override exists so you can
+compare against the pre-pointer baseline.</p>
+<p><strong>Limitations.</strong> This is not a general escape analysis. Function pointers
+and arbitrary indirect calls still resolve to no callee, and deep alias
+chains through <code>*p</code> / <code>p-&gt;field</code> in C/C++ are not tracked beyond the
+direct field case. The points-to set per value is capped at
+<code>--max-pointsto</code> (default 32); when truncation happens, an engine note
+records the precision loss.</p>
+<p><strong>Source</strong>: <a href="https://github.com/elicpeter/nyx/tree/master/src/pointer/"><code>src/pointer/</code></a>.</p>
+<hr>
+<h2 id="hierarchy-fan-out-for-virtual-dispatch"><a class="docs-anchor" href="#hierarchy-fan-out-for-virtual-dispatch" aria-label="Link to hierarchy-fan-out-for-virtual-dispatch">#</a>Hierarchy fan-out for virtual dispatch</h2>
+<p><strong>What it does.</strong> Builds a per-language type-hierarchy index in pass 1
+(extends, implements, impl-for, includes; the exact construct depends on
+the language) and uses it in pass 2 to widen method-call resolution. When
+a call&#39;s receiver is statically typed as a super-class, trait, or
+interface, the resolver returns every concrete implementer it has seen
+in the codebase rather than just the first match.</p>
+<p><strong>Why it helps.</strong> Without it, a call like <code>repository.findById(id)</code> where
+<code>repository</code> is typed as the interface gets resolved against whatever the
+single-result resolver finds first; if the matching implementer is in
+another file the call effectively goes opaque. With the hierarchy, the
+taint engine sees the union of every implementer&#39;s transform and the
+flow shows up regardless of which file holds the concrete class.</p>
+<p><strong>Limitations.</strong> Fan-out is capped at 8 implementers per call site; over
+that, the tail is silently dropped (a debug log records the cap hit) and
+the call is treated as a non-deterministic union of the kept
+implementers. Languages that use structural / implicit interface
+satisfaction (Go) are deliberately skipped because per-file extraction
+is intractable; those calls fall back to the single-result resolver. The
+extractor covers Java, Rust, TS/JS/TSX, Python, Ruby, PHP, and C++.</p>
+<p><strong>Source</strong>: <a href="https://github.com/elicpeter/nyx/blob/master/src/cfg/hierarchy.rs"><code>src/cfg/hierarchy.rs</code></a>
+and <a href="https://github.com/elicpeter/nyx/blob/master/src/summary/mod.rs"><code>src/summary/mod.rs</code></a>
+(<code>TypeHierarchyIndex</code>, <code>resolve_callee_widened</code>).</p>
+<hr>
+<h2 id="symbolic-execution"><a class="docs-anchor" href="#symbolic-execution" aria-label="Link to symbolic-execution">#</a>Symbolic execution</h2>
+<p><strong>What it does.</strong> Builds a symbolic expression tree per tainted SSA value,
+generates a witness string for each taint finding (the concrete-looking
+shape of the dangerous value at the sink), and detects sanitization
+patterns that the taint engine alone would miss. Supports string
+operations (<code>trim</code>, <code>replace</code>, <code>toLower</code>, <code>substring</code>, <code>strlen</code>, …),
+arithmetic, concatenation, phi nodes, and opaque calls.</p>
+<p><strong>Why it helps.</strong> Raises finding quality. A taint finding with a rendered
+witness like <code>&quot;SELECT * FROM t WHERE id=&quot; + userInput</code> is substantially
+easier to triage than one without. Also powers some confidence-gating for
+downstream display.</p>
+<p><strong>How to turn it off.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Surface</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Config</td>
+<td><code>symex.enabled = false</code> under <code>[analysis.engine]</code></td>
+</tr>
+<tr>
+<td>CLI flag</td>
+<td><code>--no-symex</code></td>
+</tr>
+<tr>
+<td>Env var (legacy)</td>
+<td><code>NYX_SYMEX=0</code></td>
+</tr>
+</tbody></table>
+<p>Two nested switches refine the scope without disabling symex entirely:</p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>CLI</th>
+<th>Env</th>
+<th>Default</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>symex.cross_file</code></td>
+<td><code>--no-cross-file-symex</code></td>
+<td><code>NYX_CROSS_FILE_SYMEX=0</code></td>
+<td>on</td>
+<td>Consult cross-file SSA bodies so symex can reason about callees defined in other files</td>
+</tr>
+<tr>
+<td><code>symex.interprocedural</code></td>
+<td><code>--no-symex-interproc</code></td>
+<td><code>NYX_SYMEX_INTERPROC=0</code></td>
+<td>on</td>
+<td>Intra-file interprocedural symex (k ≥ 2 via frame stack)</td>
+</tr>
+</tbody></table>
+<p><strong>Limitations.</strong> Expression trees are bounded at <code>MAX_EXPR_DEPTH=32</code>;
+deeper expressions degrade to <code>Unknown</code> rather than growing unboundedly.
+Sanitizer detection is informational: string-replace sanitizer patterns
+are reported as witness metadata, not used to clear taint.</p>
+<p><strong>Source</strong>: <a href="https://github.com/elicpeter/nyx/tree/master/src/symex/"><code>src/symex/</code></a>.</p>
+<hr>
+<h2 id="demand-driven-analysis"><a class="docs-anchor" href="#demand-driven-analysis" aria-label="Link to demand-driven-analysis">#</a>Demand-driven analysis</h2>
+<p><strong>What it does.</strong> After the forward pass-2 taint analysis finishes, runs a
+<em>backwards</em> walk from each sink&#39;s tainted SSA operands.  The walk follows
+reverse SSA-edge transfer (phi fan-out, <code>Assign</code> operand-fanout, <code>Call</code>
+body-expansion or arg-fanout) until it reaches a taint source, proves
+the flow infeasible via an accumulated path predicate, or exhausts its
+budget.  Each forward finding is then annotated with the aggregate verdict:</p>
+<ul>
+<li><code>backwards-confirmed</code>; a matching source was reached.  Finding picks
+up a small confidence boost and the note appears in
+<code>evidence.symbolic.cutoff_notes</code>.</li>
+<li><code>backwards-infeasible</code>; every walk proved the flow unreachable.
+Finding is capped to Low confidence and a user-readable limiter is
+attached.</li>
+<li><code>backwards-budget-exhausted</code>; the walk hit <code>BACKWARDS_VALUE_BUDGET</code>
+without a verdict.  Recorded as a limiter so operators can see when
+the pass could not keep up.</li>
+<li>Inconclusive outcomes are a no-op: the forward finding is untouched.</li>
+</ul>
+<p>Because the backwards walk can consult <code>GlobalSummaries.bodies_by_key</code>
+(populated by the cross-file callee body persistence layer) it closes
+across file boundaries; when a callee body is not loadable the walk
+falls back to fanning out over the call&#39;s arguments so local reach-back
+is still possible.</p>
+<p><strong>Why it helps.</strong> Inverts the analysis direction so budget follows
+questions the scanner actually cares about; &quot;does any source reach
+<em>this</em> sink?&quot;; instead of proving every potential source-to-sink
+path.  Corroborated findings are a stronger signal than forward-only
+ones, and proven-infeasible flows provide a principled way to lower
+confidence on forward false positives without silently dropping them.</p>
+<p><strong>How to turn it on.</strong> Defaults off so the benchmark floor is preserved
+while the pass stabilises.</p>
+<table>
+<thead>
+<tr>
+<th>Surface</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Config</td>
+<td><code>backwards_analysis = true</code> under <code>[analysis.engine]</code></td>
+</tr>
+<tr>
+<td>CLI flag</td>
+<td><code>--backwards-analysis</code> / <code>--no-backwards-analysis</code></td>
+</tr>
+<tr>
+<td>Env var (legacy)</td>
+<td><code>NYX_BACKWARDS=1</code></td>
+</tr>
+</tbody></table>
+<p><strong>Limitations (first cut).</strong> Reverse call-graph expansion past a
+<code>ReachedParam</code> is deferred; the walk terminates at function parameters
+rather than crossing back into callers.  Path-constraint pruning is
+conservative: only the accumulated <code>PredicateSummary</code> bits are consulted,
+not the full symbolic predicate stack.  Depth-bounded at k=2 for
+cross-function body expansion.  See <code>DEFAULT_BACKWARDS_DEPTH</code>,
+<code>BACKWARDS_VALUE_BUDGET</code>, and <code>MAX_BACKWARDS_CALLEE_BLOCKS</code> in
+<code>src/taint/backwards.rs</code> for the exact bounds.</p>
+<p><strong>Cap parity.</strong> The walk treats <code>DemandState.caps</code> as opaque bitflags,
+every cap defined in <code>src/labels/mod.rs</code> round-trips identically through
+the demand transfer.  Including <code>Cap::DATA_EXFIL</code> (bit 13): a
+<code>taint-data-exfiltration</code> forward finding receives <code>backwards-confirmed</code>
+exactly like a <code>taint-unsanitised-flow</code> SQL/CMD/SSRF finding when its
+demand walk reaches a Sensitive source.  The cap-routing logic in
+<code>src/ast.rs</code> then surfaces the rule id correctly regardless of which
+direction confirmed the flow.  See
+<code>tests/backwards_analysis_tests.rs::demand_driven_suite</code> (the
+<code>data_exfil</code> sub-case) and
+<code>taint::backwards::tests::driver_walks_data_exfil_source_to_sink</code> for
+the regression guards.</p>
+<p><strong>Source</strong>: <a href="https://github.com/elicpeter/nyx/blob/master/src/taint/backwards.rs"><code>src/taint/backwards.rs</code></a>.</p>
+<hr>
+<h2 id="constraint-solving"><a class="docs-anchor" href="#constraint-solving" aria-label="Link to constraint-solving">#</a>Constraint solving</h2>
+<p><strong>What it does.</strong> Collects path constraints at each branch in SSA and
+propagates them alongside taint. Prunes paths whose accumulated constraint
+set is unsatisfiable; a taint flow guarded by <code>if x &lt; 0 &amp;&amp; x &gt; 10</code> is
+dropped rather than surfaced. Optionally delegates the satisfiability
+check to Z3 when Nyx is built with the <code>smt</code> Cargo feature.</p>
+<p><strong>Why it helps.</strong> Removes a class of FPs rooted in clearly-infeasible
+control-flow combinations. Without path constraints, a taint flow that
+only occurs when mutually-exclusive branches are simultaneously taken can
+still produce a finding.</p>
+<p><strong>How to turn it off.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Surface</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Config</td>
+<td><code>constraint_solving = false</code> under <code>[analysis.engine]</code></td>
+</tr>
+<tr>
+<td>CLI flag</td>
+<td><code>--no-constraint-solving</code></td>
+</tr>
+<tr>
+<td>Env var (legacy)</td>
+<td><code>NYX_CONSTRAINT=0</code></td>
+</tr>
+</tbody></table>
+<p>The SMT backend is a separate switch:</p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>CLI</th>
+<th>Env</th>
+<th>Default</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>symex.smt</code></td>
+<td><code>--no-smt</code></td>
+<td><code>NYX_SMT=0</code></td>
+<td>on when built with <code>smt</code> feature</td>
+<td>Delegate satisfiability checks to Z3; ignored if Nyx was built without <code>smt</code></td>
+</tr>
+</tbody></table>
+<p><strong>Limitations.</strong> The default path-constraint domain is syntactic;
+trivially-inconsistent pairs are caught without an SMT solver, but richer
+algebraic unsatisfiability requires the <code>smt</code> feature (Z3). Without <code>smt</code>,
+Nyx ships a lightweight satisfiability check that catches literal
+contradictions but not deeper reasoning.</p>
+<p><strong>Source</strong>: <a href="https://github.com/elicpeter/nyx/tree/master/src/constraint/"><code>src/constraint/</code></a>.</p>
+<hr>
+<h2 id="combining-the-switches"><a class="docs-anchor" href="#combining-the-switches" aria-label="Link to combining-the-switches">#</a>Combining the switches</h2>
+<p>The defaults (all on) are the configuration Nyx is benchmarked against.
+Turning any switch off trades precision for speed and may move findings
+relative to the published baseline; CI regression gates assume defaults.
+If you need a minimal-overhead scan (for very large repositories or a
+pre-commit fast path), the AST-only scan mode (<code>--mode ast</code>) skips CFG,
+taint, and all four advanced passes entirely and is the right tool.</p>
+
+          </div>
+          <nav class="docs-prevnext" aria-label="Page navigation"><a class="docs-prevnext__link docs-prevnext__link--prev" href="how-it-works.html">
+        <span class="docs-prevnext__label">Previous</span>
+        <span class="docs-prevnext__title">How it works</span>
+      </a><a class="docs-prevnext__link docs-prevnext__link--next" href="detectors.html">
+        <span class="docs-prevnext__label">Next</span>
+        <span class="docs-prevnext__title">Detectors</span>
+      </a></nav>
+        </article>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <p class="site-footer__copy">© 2026 Eli Peter · Nyx is open source under the Apache 2.0 license.</p>
+        <nav class="site-footer__nav" aria-label="Footer">
+          <a href="../">Home</a>
+          <a href="../news/">News</a>
+          <a href="../docs/">Docs</a>
+          <a href="https://github.com/elicpeter/nyx">GitHub</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

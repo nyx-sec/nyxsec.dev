@@ -10,3 +10,6 @@ node_modules/
 
 # Claude Code
 .claude/
+
+# Docs build input (synced from /Users/elipeter/nyx via `npm run docs:sync`)
+docs-src/

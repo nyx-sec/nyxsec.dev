@@ -1,0 +1,648 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Output Formats | Nyx docs</title>
+    <meta name="description" content="Nyx supports three output formats, selected with --format or output.defaultformat in config." />
+    <meta name="keywords" content="Nyx, Nyx scanner, SAST, static analysis, Rust security scanner, local-first SAST, Using nyx, Output Formats, go, taint, cfg, Taint" />
+    <meta name="author" content="Eli Peter" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <link rel="canonical" href="https://nyxscan.dev/docs/output.html" />
+    <link rel="sitemap" type="application/xml" href="https://nyxscan.dev/sitemap.xml" />
+    <link rel="alternate" hreflang="en" href="https://nyxscan.dev/docs/output.html" />
+    <link rel="alternate" hreflang="x-default" href="https://nyxscan.dev/docs/output.html" />
+    <link rel="prev" href="configuration.html" />
+    <link rel="next" href="language-maturity.html" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="64x64" href="../favicon-64.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon-180.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles.css" />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Nyx" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="Output Formats" />
+    <meta property="og:description" content="Nyx supports three output formats, selected with --format or output.defaultformat in config." />
+    <meta property="og:url" content="https://nyxscan.dev/docs/output.html" />
+    <meta property="og:image" content="https://nyxscan.dev/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Nyx — local-first Rust SAST scanner" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Output Formats" />
+    <meta name="twitter:description" content="Nyx supports three output formats, selected with --format or output.defaultformat in config." />
+    <meta name="twitter:image" content="https://nyxscan.dev/og-image.png" />
+    <meta name="twitter:image:alt" content="Nyx — local-first Rust SAST scanner" />
+    <meta name="theme-color" content="#F9F8F4" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://nyxscan.dev/#person",
+      "name": "Eli Peter",
+      "url": "https://github.com/elicpeter",
+      "sameAs": [
+        "https://github.com/elicpeter",
+        "https://github.com/sponsors/elicpeter"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://nyxscan.dev/#website",
+      "url": "https://nyxscan.dev/",
+      "name": "Nyx",
+      "description": "Local-first, open-source SAST scanner written in Rust.",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://nyxscan.dev/#person"
+      }
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://nyxscan.dev/docs/output.html#article",
+      "headline": "Output Formats",
+      "name": "Output Formats",
+      "url": "https://nyxscan.dev/docs/output.html",
+      "description": "Nyx supports three output formats, selected with --format or output.defaultformat in config.",
+      "inLanguage": "en",
+      "articleSection": "Using nyx",
+      "isPartOf": {
+        "@id": "https://nyxscan.dev/#website"
+      },
+      "publisher": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "author": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "image": "https://nyxscan.dev/og-image.png",
+      "mainEntityOfPage": "https://nyxscan.dev/docs/output.html"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://nyxscan.dev/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Docs",
+          "item": "https://nyxscan.dev/docs/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Output Formats",
+          "item": "https://nyxscan.dev/docs/output.html"
+        }
+      ],
+      "@id": "https://nyxscan.dev/docs/output.html#breadcrumbs"
+    }
+  ]
+}
+    </script>
+  </head>
+  <body class="docs-body">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" aria-label="Primary navigation">
+      <div class="container site-header__inner">
+        <a class="brand" href="../" aria-label="Nyx home">
+          <img src="../assets/logo.png" alt="Nyx" class="brand-logo" />
+        </a>
+        <span class="header-wordmark">NYX</span>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="../news/">News</a>
+          <a href="../docs/" aria-current="page">Docs</a>
+          <a class="nav-github" href="https://github.com/elicpeter/nyx">GitHub</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="docs-page">
+      <div class="docs-shell">
+        <nav class="docs-sidebar" aria-label="Documentation"><a class="docs-sidebar__brand" href="">Docs</a><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Getting started</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="quickstart.html">Quickstart</a></li><li><a class="docs-sidebar__link" href="installation.html">Installation</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Using nyx</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="cli.html">CLI reference</a></li><li><a class="docs-sidebar__link" href="serve.html">Browser UI</a></li><li><a class="docs-sidebar__link" href="configuration.html">Configuration</a></li><li><a class="docs-sidebar__link" href="output.html" aria-current="page">Output formats</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Coverage</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="language-maturity.html">Language maturity</a></li><li><a class="docs-sidebar__link" href="rules.html">Rules</a></li><li><a class="docs-sidebar__link" href="auth.html">Auth analysis</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Under the hood</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="how-it-works.html">How it works</a></li><li><a class="docs-sidebar__link" href="advanced-analysis.html">Advanced analysis</a></li><li><a class="docs-sidebar__link" href="detectors.html">Detectors</a><ul class="docs-sidebar__sublist"><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/patterns.html">Patterns</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/cfg.html">CFG</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/state.html">State</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/taint.html">Taint</a></li></ul></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Project</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="roadmap.html">Roadmap</a></li><li><a class="docs-sidebar__link" href="changelog.html">Changelog</a></li></ul></div></nav>
+        <article class="docs-content">
+          <div class="docs-prose">
+<h1 id="output-formats"><a class="docs-anchor" href="#output-formats" aria-label="Link to output-formats">#</a>Output Formats</h1>
+<p>Nyx supports three output formats, selected with <code>--format</code> or <code>output.default_format</code> in config.</p>
+<h2 id="console-default"><a class="docs-anchor" href="#console-default" aria-label="Link to console-default">#</a>Console (default)</h2>
+<p>Human-readable, color-coded output to stdout. Status messages go to stderr.</p>
+<pre><code class="hljs language-plain"><span class="hljs-selector-attr">[HIGH]</span>   <span class="hljs-selector-tag">taint-unsanitised-flow</span> (source <span class="hljs-number">5</span>:<span class="hljs-number">11</span>)  <span class="hljs-selector-tag">src</span>/<span class="hljs-selector-tag">handler</span><span class="hljs-selector-class">.rs</span>:<span class="hljs-number">12</span>:<span class="hljs-number">5</span> (<span class="hljs-attribute">Score</span>: <span class="hljs-number">76</span>, <span class="hljs-attribute">Confidence</span>: High)
+         <span class="hljs-selector-tag">Source</span>: <span class="hljs-selector-tag">env</span>::<span class="hljs-selector-tag">var</span>(<span class="hljs-string">&quot;CMD&quot;</span>) → <span class="hljs-selector-tag">Command</span>::<span class="hljs-selector-tag">new</span>(<span class="hljs-string">&quot;sh&quot;</span>)<span class="hljs-selector-class">.arg</span>(<span class="hljs-string">&quot;-c&quot;</span>)
+
+<span class="hljs-selector-attr">[MEDIUM]</span> <span class="hljs-selector-tag">cfg-unguarded-sink</span>                    <span class="hljs-selector-tag">src</span>/<span class="hljs-selector-tag">handler</span><span class="hljs-selector-class">.rs</span>:<span class="hljs-number">12</span>:<span class="hljs-number">5</span> (<span class="hljs-attribute">Score</span>: <span class="hljs-number">35</span>, <span class="hljs-attribute">Confidence</span>: Medium)
+
+<span class="hljs-selector-attr">[LOW]</span>    <span class="hljs-selector-tag">rs</span><span class="hljs-selector-class">.quality</span><span class="hljs-selector-class">.unwrap</span>                     <span class="hljs-selector-tag">src</span>/<span class="hljs-selector-tag">lib</span><span class="hljs-selector-class">.rs</span>:<span class="hljs-number">88</span>:<span class="hljs-number">5</span> (<span class="hljs-attribute">Score</span>: <span class="hljs-number">10</span>, <span class="hljs-attribute">Confidence</span>: High)</code></pre>
+<h3 id="severity-indicators"><a class="docs-anchor" href="#severity-indicators" aria-label="Link to severity-indicators">#</a>Severity indicators</h3>
+<table>
+<thead>
+<tr>
+<th>Tag</th>
+<th>Color</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>[HIGH]</code></td>
+<td>Red, bold</td>
+<td>Critical -- likely exploitable</td>
+</tr>
+<tr>
+<td><code>[MEDIUM]</code></td>
+<td>Orange, bold</td>
+<td>Important -- may be exploitable</td>
+</tr>
+<tr>
+<td><code>[LOW]</code></td>
+<td>Muted blue-gray</td>
+<td>Informational -- code quality or weak signal</td>
+</tr>
+</tbody></table>
+<h3 id="evidence-fields"><a class="docs-anchor" href="#evidence-fields" aria-label="Link to evidence-fields">#</a>Evidence fields</h3>
+<p>Taint and state findings include structured evidence:</p>
+<table>
+<thead>
+<tr>
+<th>Label</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Source</strong></td>
+<td>Where tainted data originated (function name + location)</td>
+</tr>
+<tr>
+<td><strong>Sink</strong></td>
+<td>Where the dangerous operation happens</td>
+</tr>
+<tr>
+<td><strong>Path guard</strong></td>
+<td>Type of validation predicate protecting the path</td>
+</tr>
+</tbody></table>
+<h3 id="score"><a class="docs-anchor" href="#score" aria-label="Link to score">#</a>Score</h3>
+<p>When attack-surface ranking is enabled (default), each finding shows a <code>Score</code> value. Higher scores indicate greater exploitability. See <a href="detectors.html">Detector Overview</a> for the scoring formula.</p>
+<h3 id="rollup-findings"><a class="docs-anchor" href="#rollup-findings" aria-label="Link to rollup-findings">#</a>Rollup findings</h3>
+<p>High-frequency LOW Quality findings (e.g. <code>rs.quality.unwrap</code>) are grouped into rollup findings by <code>(file, rule)</code>:</p>
+<pre><code class="hljs language-plain">  <span class="hljs-number">21</span>:<span class="hljs-number">10</span>  ● <span class="hljs-selector-attr">[LOW]</span>   rs<span class="hljs-selector-class">.quality</span><span class="hljs-selector-class">.unwrap</span>
+      rs<span class="hljs-selector-class">.quality</span><span class="hljs-selector-class">.unwrap</span> (<span class="hljs-number">38</span> occurrences)
+      Examples: <span class="hljs-number">21</span>:<span class="hljs-number">10</span>, <span class="hljs-number">50</span>:<span class="hljs-number">10</span>, <span class="hljs-number">79</span>:<span class="hljs-number">10</span>, <span class="hljs-number">105</span>:<span class="hljs-number">10</span>, <span class="hljs-number">134</span>:<span class="hljs-number">10</span>
+      Run: nyx scan <span class="hljs-attr">--show-instances</span> rs<span class="hljs-selector-class">.quality</span>.unwrap</code></pre>
+<p>Rollups count as <strong>one finding</strong> for LOW budget enforcement. Use <code>--show-instances &lt;RULE&gt;</code> to expand a specific rule or <code>--all</code> to disable rollups entirely.</p>
+<h3 id="suppression-footer"><a class="docs-anchor" href="#suppression-footer" aria-label="Link to suppression-footer">#</a>Suppression footer</h3>
+<p>When findings are suppressed by the prioritization pipeline, a footer is shown:</p>
+<pre><code class="hljs language-plain"><span class="hljs-attribute">Suppressed</span> <span class="hljs-number">195</span> LOW/Quality findings.
+<span class="hljs-attribute">Active</span> filters:
+  <span class="hljs-attribute">include_quality</span> = false
+  <span class="hljs-attribute">max_low</span> = <span class="hljs-number">20</span>
+  <span class="hljs-attribute">max_low_per_file</span> = <span class="hljs-number">1</span>
+  <span class="hljs-attribute">max_low_per_rule</span> = <span class="hljs-number">10</span>
+
+<span class="hljs-attribute">Use</span> --include-quality, --max-low, or --<span class="hljs-literal">all</span> to adjust.</code></pre>
+<hr>
+<h2 id="json"><a class="docs-anchor" href="#json" aria-label="Link to json">#</a>JSON</h2>
+<p>Machine-readable JSON array. Each finding is an object:</p>
+<pre><code class="hljs language-json"><span class="hljs-punctuation">[</span>
+  <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;path&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;src/handler.rs&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;line&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">12</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;col&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">5</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;severity&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;High&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;taint-unsanitised-flow (source 5:11)&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;path_validated&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;labels&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+      <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;Source&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;env::var(\&quot;CMD\&quot;) at 5:11&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;Sink&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;Command::new(\&quot;sh\&quot;).arg(\&quot;-c\&quot;)&quot;</span><span class="hljs-punctuation">]</span>
+    <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;confidence&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;High&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;evidence&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;source&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;path&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;src/handler.rs&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;line&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">5</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;col&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">11</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;kind&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;source&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;snippet&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;env::var(\&quot;CMD\&quot;)&quot;</span>
+      <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;sink&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;path&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;src/handler.rs&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;line&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">12</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;col&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">5</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;kind&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;sink&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;snippet&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Command::new(\&quot;sh\&quot;)&quot;</span>
+      <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;notes&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;source_kind:EnvironmentConfig&quot;</span><span class="hljs-punctuation">]</span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;rank_score&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">76.0</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;rank_reason&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+      <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;severity_base&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;60&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;analysis_kind&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;10&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;source_kind&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;5&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;evidence_count&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;1&quot;</span><span class="hljs-punctuation">]</span>
+    <span class="hljs-punctuation">]</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">]</span></code></pre>
+<h3 id="field-descriptions"><a class="docs-anchor" href="#field-descriptions" aria-label="Link to field-descriptions">#</a>Field descriptions</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Always present</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>path</code></td>
+<td>string</td>
+<td>yes</td>
+<td>File path relative to scan root</td>
+</tr>
+<tr>
+<td><code>line</code></td>
+<td>int</td>
+<td>yes</td>
+<td>1-indexed line number</td>
+</tr>
+<tr>
+<td><code>col</code></td>
+<td>int</td>
+<td>yes</td>
+<td>1-indexed column number</td>
+</tr>
+<tr>
+<td><code>severity</code></td>
+<td>string</td>
+<td>yes</td>
+<td><code>&quot;High&quot;</code>, <code>&quot;Medium&quot;</code>, or <code>&quot;Low&quot;</code></td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Rule ID</td>
+</tr>
+<tr>
+<td><code>category</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Finding category: <code>&quot;Security&quot;</code>, <code>&quot;Reliability&quot;</code>, or <code>&quot;Quality&quot;</code></td>
+</tr>
+<tr>
+<td><code>path_validated</code></td>
+<td>bool</td>
+<td>no</td>
+<td>True if guarded by validation predicate</td>
+</tr>
+<tr>
+<td><code>guard_kind</code></td>
+<td>string</td>
+<td>no</td>
+<td>Predicate type (e.g. <code>&quot;NullCheck&quot;</code>, <code>&quot;ValidationCall&quot;</code>)</td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td>string</td>
+<td>no</td>
+<td>Human-readable context (state analysis findings)</td>
+</tr>
+<tr>
+<td><code>labels</code></td>
+<td>array</td>
+<td>no</td>
+<td>Array of <code>[label, value]</code> pairs for console display</td>
+</tr>
+<tr>
+<td><code>confidence</code></td>
+<td>string</td>
+<td>no</td>
+<td>Confidence level: <code>&quot;Low&quot;</code>, <code>&quot;Medium&quot;</code>, or <code>&quot;High&quot;</code></td>
+</tr>
+<tr>
+<td><code>evidence</code></td>
+<td>object</td>
+<td>no</td>
+<td>Structured evidence (source/sink spans, state, notes)</td>
+</tr>
+<tr>
+<td><code>rank_score</code></td>
+<td>float</td>
+<td>no</td>
+<td>Attack-surface score (omitted when ranking disabled)</td>
+</tr>
+<tr>
+<td><code>rank_reason</code></td>
+<td>array</td>
+<td>no</td>
+<td>Score breakdown (omitted when ranking disabled)</td>
+</tr>
+<tr>
+<td><code>rollup</code></td>
+<td>object</td>
+<td>no</td>
+<td>Rollup data when findings are grouped (see below)</td>
+</tr>
+</tbody></table>
+<p>Fields marked &quot;no&quot; are omitted when empty/null/false to keep output compact.</p>
+<h3 id="confidence-levels"><a class="docs-anchor" href="#confidence-levels" aria-label="Link to confidence-levels">#</a>Confidence levels</h3>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>High</code></td>
+<td>Strong signal -- taint-confirmed flow, definite state violation</td>
+</tr>
+<tr>
+<td><code>Medium</code></td>
+<td>Moderate signal -- resource leak, path-validated taint, CFG structural</td>
+</tr>
+<tr>
+<td><code>Low</code></td>
+<td>Weak signal -- AST pattern match, possible resource leak, degraded analysis</td>
+</tr>
+</tbody></table>
+<h3 id="evidence-object"><a class="docs-anchor" href="#evidence-object" aria-label="Link to evidence-object">#</a>Evidence object</h3>
+<p>The <code>evidence</code> field provides structured provenance data:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>source</code></td>
+<td>object</td>
+<td>Source span (path, line, col, kind, snippet)</td>
+</tr>
+<tr>
+<td><code>sink</code></td>
+<td>object</td>
+<td>Sink span (path, line, col, kind, snippet)</td>
+</tr>
+<tr>
+<td><code>guards</code></td>
+<td>array</td>
+<td>Validation guard spans</td>
+</tr>
+<tr>
+<td><code>sanitizers</code></td>
+<td>array</td>
+<td>Sanitizer spans</td>
+</tr>
+<tr>
+<td><code>state</code></td>
+<td>object</td>
+<td>State-machine evidence (machine, subject, from_state, to_state)</td>
+</tr>
+<tr>
+<td><code>notes</code></td>
+<td>array</td>
+<td>Free-form notes (e.g. <code>&quot;source_kind:UserInput&quot;</code>, <code>&quot;path_validated&quot;</code>)</td>
+</tr>
+</tbody></table>
+<p>All fields are omitted when empty/null.</p>
+<h3 id="rollup-object"><a class="docs-anchor" href="#rollup-object" aria-label="Link to rollup-object">#</a>Rollup object</h3>
+<p>When a finding is a rollup (grouped from multiple occurrences), the <code>rollup</code> field is present:</p>
+<pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;rollup&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;count&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">38</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;occurrences&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+      <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;line&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">21</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;col&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">10</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;line&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">50</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;col&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">10</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;line&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">79</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;col&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">10</span> <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">]</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span></code></pre>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>count</code></td>
+<td>int</td>
+<td>Total number of occurrences</td>
+</tr>
+<tr>
+<td><code>occurrences</code></td>
+<td>array</td>
+<td>First N example locations (controlled by <code>rollup_examples</code>)</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="sarif-static-analysis-results-interchange-format"><a class="docs-anchor" href="#sarif-static-analysis-results-interchange-format" aria-label="Link to sarif-static-analysis-results-interchange-format">#</a>SARIF (Static Analysis Results Interchange Format)</h2>
+<p>SARIF 2.1.0 JSON, suitable for GitHub Code Scanning and other SARIF-compatible tools.</p>
+<pre><code class="hljs language-bash">nyx scan . --format sarif &gt; results.sarif</code></pre>
+<p>The SARIF output includes:</p>
+<ul>
+<li><strong>Tool metadata</strong> -- Nyx name and version</li>
+<li><strong>Rules</strong> -- Rule ID, description, severity mapping</li>
+<li><strong>Results</strong> -- One result per finding with location, message, and properties</li>
+<li><strong>Properties</strong> -- Each result includes <code>category</code> and optionally <code>confidence</code> and <code>rollup.count</code></li>
+<li><strong>Related locations</strong> -- Rollup findings include example locations in <code>relatedLocations</code></li>
+<li><strong>Artifacts</strong> -- File paths referenced by findings</li>
+</ul>
+<h3 id="github-code-scanning-integration"><a class="docs-anchor" href="#github-code-scanning-integration" aria-label="Link to github-code-scanning-integration">#</a>GitHub Code Scanning integration</h3>
+<pre><code class="hljs language-yaml"><span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Run</span> <span class="hljs-string">Nyx</span>
+  <span class="hljs-attr">run:</span> <span class="hljs-string">nyx</span> <span class="hljs-string">scan</span> <span class="hljs-string">.</span> <span class="hljs-string">--format</span> <span class="hljs-string">sarif</span> <span class="hljs-string">&gt;</span> <span class="hljs-string">results.sarif</span>
+
+<span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Upload</span> <span class="hljs-string">SARIF</span>
+  <span class="hljs-attr">uses:</span> <span class="hljs-string">github/codeql-action/upload-sarif@v3</span>
+  <span class="hljs-attr">with:</span>
+    <span class="hljs-attr">sarif_file:</span> <span class="hljs-string">results.sarif</span></code></pre>
+<hr>
+<h2 id="exit-codes"><a class="docs-anchor" href="#exit-codes" aria-label="Link to exit-codes">#</a>Exit Codes</h2>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>0</code></td>
+<td>Scan completed successfully; no findings matched <code>--fail-on</code> threshold</td>
+</tr>
+<tr>
+<td><code>1</code></td>
+<td><code>--fail-on</code> threshold breached (at least one finding meets or exceeds the specified severity)</td>
+</tr>
+<tr>
+<td>Non-zero</td>
+<td>Error (I/O, config, database, parse error)</td>
+</tr>
+</tbody></table>
+<p>Without <code>--fail-on</code>, Nyx always exits <code>0</code> on a successful scan regardless of findings count.</p>
+<hr>
+<h2 id="severity-levels"><a class="docs-anchor" href="#severity-levels" aria-label="Link to severity-levels">#</a>Severity Levels</h2>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Description</th>
+<th>Typical rules</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>High</strong></td>
+<td>Critical vulnerabilities -- likely exploitable</td>
+<td>Command injection, unsafe deserialization, banned C functions, taint-confirmed flows with user input sources</td>
+</tr>
+<tr>
+<td><strong>Medium</strong></td>
+<td>Important issues -- may be exploitable with additional context</td>
+<td>SQL concatenation, XSS sinks, reflection, unguarded sinks, resource leaks</td>
+</tr>
+<tr>
+<td><strong>Low</strong></td>
+<td>Informational -- code quality or weak signals</td>
+<td>Weak crypto algorithms, insecure randomness, <code>unwrap()</code>/<code>panic!()</code>, type-safety escapes</td>
+</tr>
+</tbody></table>
+<h3 id="non-production-severity-downgrade"><a class="docs-anchor" href="#non-production-severity-downgrade" aria-label="Link to non-production-severity-downgrade">#</a>Non-production severity downgrade</h3>
+<p>By default, findings in paths matching common non-production patterns (<code>tests/</code>, <code>test/</code>, <code>vendor/</code>, <code>build/</code>, <code>examples/</code>, <code>benchmarks/</code>) are downgraded by one tier:</p>
+<ul>
+<li>High → Medium</li>
+<li>Medium → Low</li>
+<li>Low → Low (unchanged)</li>
+</ul>
+<p>Use <code>--keep-nonprod-severity</code> to disable this behavior.</p>
+<hr>
+<h2 id="inline-suppressions"><a class="docs-anchor" href="#inline-suppressions" aria-label="Link to inline-suppressions">#</a>Inline Suppressions</h2>
+<p>Suppress specific findings directly in source code using <code>nyx:ignore</code> comments. Suppressed findings are excluded from output, severity counts, and <code>--fail-on</code> checks by default.</p>
+<h3 id="comment-syntax"><a class="docs-anchor" href="#comment-syntax" aria-label="Link to comment-syntax">#</a>Comment syntax</h3>
+<table>
+<thead>
+<tr>
+<th>Language</th>
+<th>Comment styles</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Rust, C, C++, Java, Go, JS, TS</td>
+<td><code>// nyx:ignore ...</code> or <code>/* nyx:ignore ... */</code></td>
+</tr>
+<tr>
+<td>Python, Ruby</td>
+<td><code># nyx:ignore ...</code></td>
+</tr>
+<tr>
+<td>PHP</td>
+<td><code>// nyx:ignore ...</code>, <code># nyx:ignore ...</code>, or <code>/* nyx:ignore ... */</code></td>
+</tr>
+</tbody></table>
+<h3 id="directive-forms"><a class="docs-anchor" href="#directive-forms" aria-label="Link to directive-forms">#</a>Directive forms</h3>
+<pre><code class="hljs language-python">x = dangerous()  <span class="hljs-comment"># nyx:ignore taint-unsanitised-flow     ← suppresses this line</span>
+<span class="hljs-comment"># nyx:ignore-next-line taint-unsanitised-flow</span>
+x = dangerous()                                           ← suppresses this line</code></pre>
+<ul>
+<li><code>nyx:ignore &lt;RULE_ID&gt;</code> -- suppresses findings on the <strong>same line</strong> as the comment.</li>
+<li><code>nyx:ignore-next-line &lt;RULE_ID&gt;</code> -- suppresses findings on the <strong>next line</strong>.</li>
+<li>For taint findings, the primary line is the <strong>sink line</strong> (the <code>line</code> field in output).</li>
+</ul>
+<h3 id="rule-id-matching"><a class="docs-anchor" href="#rule-id-matching" aria-label="Link to rule-id-matching">#</a>Rule ID matching</h3>
+<ul>
+<li><strong>Case-sensitive</strong>, exact match after canonicalization.</li>
+<li>Comma-separated: <code>nyx:ignore rule-a, rule-b</code></li>
+<li>Wildcard suffix: <code>nyx:ignore rs.quality.*</code> matches any ID starting with <code>rs.quality.</code></li>
+<li>Taint IDs are canonicalized: <code>nyx:ignore taint-unsanitised-flow</code> matches <code>taint-unsanitised-flow (source 5:1)</code> (parenthetical suffix stripped).</li>
+</ul>
+<h3 id="console-behavior"><a class="docs-anchor" href="#console-behavior" aria-label="Link to console-behavior">#</a>Console behavior</h3>
+<ul>
+<li><strong>Default</strong>: suppressed findings are hidden entirely.</li>
+<li><strong><code>--show-suppressed</code></strong>: suppressed findings appear dimmed with <code>[SUPPRESSED]</code> tag. Summary shows <code>&quot;N issues (M suppressed)&quot;</code>.</li>
+</ul>
+<h3 id="json-sarif-behavior"><a class="docs-anchor" href="#json-sarif-behavior" aria-label="Link to json-sarif-behavior">#</a>JSON / SARIF behavior</h3>
+<ul>
+<li><strong>Default</strong>: suppressed findings are excluded from JSON/SARIF output.</li>
+<li><strong><code>--show-suppressed</code></strong>: suppressed findings are included with additional fields:</li>
+</ul>
+<pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;suppressed&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;suppression&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;kind&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;SameLine&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;matched_pattern&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;taint-unsanitised-flow&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;directive_line&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">42</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span></code></pre>
+<h3 id="exit-code"><a class="docs-anchor" href="#exit-code" aria-label="Link to exit-code">#</a>Exit code</h3>
+<p>Suppressed findings do <strong>not</strong> trigger <code>--fail-on</code>. A scan with only suppressed findings exits <code>0</code>.</p>
+<hr>
+<h2 id="rule-id-format"><a class="docs-anchor" href="#rule-id-format" aria-label="Link to rule-id-format">#</a>Rule ID Format</h2>
+<table>
+<thead>
+<tr>
+<th>Prefix</th>
+<th>Detector</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>taint-*</code></td>
+<td>Taint analysis</td>
+<td><code>taint-unsanitised-flow (source 5:11)</code></td>
+</tr>
+<tr>
+<td><code>cfg-*</code></td>
+<td>CFG structural</td>
+<td><code>cfg-unguarded-sink</code>, <code>cfg-auth-gap</code></td>
+</tr>
+<tr>
+<td><code>state-*</code></td>
+<td>State model</td>
+<td><code>state-use-after-close</code>, <code>state-resource-leak</code></td>
+</tr>
+<tr>
+<td><code>&lt;lang&gt;.*.*</code></td>
+<td>AST patterns</td>
+<td><code>rs.memory.transmute</code>, <code>js.code_exec.eval</code></td>
+</tr>
+</tbody></table>
+<p>See the <a href="rules.html">Rule Reference</a> for a complete listing.</p>
+
+          </div>
+          <nav class="docs-prevnext" aria-label="Page navigation"><a class="docs-prevnext__link docs-prevnext__link--prev" href="configuration.html">
+        <span class="docs-prevnext__label">Previous</span>
+        <span class="docs-prevnext__title">Configuration</span>
+      </a><a class="docs-prevnext__link docs-prevnext__link--next" href="language-maturity.html">
+        <span class="docs-prevnext__label">Next</span>
+        <span class="docs-prevnext__title">Language maturity</span>
+      </a></nav>
+        </article>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <p class="site-footer__copy">© 2026 Eli Peter · Nyx is open source under the Apache 2.0 license.</p>
+        <nav class="site-footer__nav" aria-label="Footer">
+          <a href="../">Home</a>
+          <a href="../news/">News</a>
+          <a href="../docs/">Docs</a>
+          <a href="https://github.com/elicpeter/nyx">GitHub</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

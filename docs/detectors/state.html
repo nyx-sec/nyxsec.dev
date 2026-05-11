@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>State model analysis | Nyx docs</title>
+    <meta name="description" content="Tracks resource lifecycle and authentication state through a function. Detects use-after-close, double-close, leaks, and unauthenticated access to privileged operations." />
+    <meta name="keywords" content="Nyx, Nyx scanner, SAST, static analysis, Rust security scanner, local-first SAST, Under the hood, State model analysis, taint, Rust, Go, Python" />
+    <meta name="author" content="Eli Peter" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <link rel="canonical" href="https://nyxscan.dev/docs/detectors/state.html" />
+    <link rel="sitemap" type="application/xml" href="https://nyxscan.dev/sitemap.xml" />
+    <link rel="alternate" hreflang="en" href="https://nyxscan.dev/docs/detectors/state.html" />
+    <link rel="alternate" hreflang="x-default" href="https://nyxscan.dev/docs/detectors/state.html" />
+    <link rel="prev" href="../detectors/cfg.html" />
+    <link rel="next" href="../detectors/taint.html" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="64x64" href="../../favicon-64.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../../favicon-180.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../styles.css" />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Nyx" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="State model analysis" />
+    <meta property="og:description" content="Tracks resource lifecycle and authentication state through a function. Detects use-after-close, double-close, leaks, and unauthenticated access to privileged operations." />
+    <meta property="og:url" content="https://nyxscan.dev/docs/detectors/state.html" />
+    <meta property="og:image" content="https://nyxscan.dev/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Nyx — local-first Rust SAST scanner" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="State model analysis" />
+    <meta name="twitter:description" content="Tracks resource lifecycle and authentication state through a function. Detects use-after-close, double-close, leaks, and unauthenticated access to privileged operations." />
+    <meta name="twitter:image" content="https://nyxscan.dev/og-image.png" />
+    <meta name="twitter:image:alt" content="Nyx — local-first Rust SAST scanner" />
+    <meta name="theme-color" content="#F9F8F4" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://nyxscan.dev/#person",
+      "name": "Eli Peter",
+      "url": "https://github.com/elicpeter",
+      "sameAs": [
+        "https://github.com/elicpeter",
+        "https://github.com/sponsors/elicpeter"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://nyxscan.dev/#website",
+      "url": "https://nyxscan.dev/",
+      "name": "Nyx",
+      "description": "Local-first, open-source SAST scanner written in Rust.",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://nyxscan.dev/#person"
+      }
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://nyxscan.dev/docs/detectors/state.html#article",
+      "headline": "State model analysis",
+      "name": "State model analysis",
+      "url": "https://nyxscan.dev/docs/detectors/state.html",
+      "description": "Tracks resource lifecycle and authentication state through a function. Detects use-after-close, double-close, leaks, and unauthenticated access to privileged operations.",
+      "inLanguage": "en",
+      "articleSection": "Under the hood",
+      "isPartOf": {
+        "@id": "https://nyxscan.dev/#website"
+      },
+      "publisher": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "author": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "image": "https://nyxscan.dev/og-image.png",
+      "mainEntityOfPage": "https://nyxscan.dev/docs/detectors/state.html"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://nyxscan.dev/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Docs",
+          "item": "https://nyxscan.dev/docs/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Detectors",
+          "item": "https://nyxscan.dev/docs/detectors.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "State model analysis",
+          "item": "https://nyxscan.dev/docs/detectors/state.html"
+        }
+      ],
+      "@id": "https://nyxscan.dev/docs/detectors/state.html#breadcrumbs"
+    }
+  ]
+}
+    </script>
+  </head>
+  <body class="docs-body">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" aria-label="Primary navigation">
+      <div class="container site-header__inner">
+        <a class="brand" href="../../" aria-label="Nyx home">
+          <img src="../../assets/logo.png" alt="Nyx" class="brand-logo" />
+        </a>
+        <span class="header-wordmark">NYX</span>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="../../news/">News</a>
+          <a href="../../docs/" aria-current="page">Docs</a>
+          <a class="nav-github" href="https://github.com/elicpeter/nyx">GitHub</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="docs-page">
+      <div class="docs-shell">
+        <nav class="docs-sidebar" aria-label="Documentation"><a class="docs-sidebar__brand" href="../">Docs</a><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Getting started</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="../quickstart.html">Quickstart</a></li><li><a class="docs-sidebar__link" href="../installation.html">Installation</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Using nyx</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="../cli.html">CLI reference</a></li><li><a class="docs-sidebar__link" href="../serve.html">Browser UI</a></li><li><a class="docs-sidebar__link" href="../configuration.html">Configuration</a></li><li><a class="docs-sidebar__link" href="../output.html">Output formats</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Coverage</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="../language-maturity.html">Language maturity</a></li><li><a class="docs-sidebar__link" href="../rules.html">Rules</a></li><li><a class="docs-sidebar__link" href="../auth.html">Auth analysis</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Under the hood</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="../how-it-works.html">How it works</a></li><li><a class="docs-sidebar__link" href="../advanced-analysis.html">Advanced analysis</a></li><li><a class="docs-sidebar__link" href="../detectors.html">Detectors</a><ul class="docs-sidebar__sublist"><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="../detectors/patterns.html">Patterns</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="../detectors/cfg.html">CFG</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="../detectors/state.html" aria-current="page">State</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="../detectors/taint.html">Taint</a></li></ul></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Project</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="../roadmap.html">Roadmap</a></li><li><a class="docs-sidebar__link" href="../changelog.html">Changelog</a></li></ul></div></nav>
+        <article class="docs-content">
+          <div class="docs-prose">
+<h1 id="state-model-analysis"><a class="docs-anchor" href="#state-model-analysis" aria-label="Link to state-model-analysis">#</a>State model analysis</h1>
+<p>Tracks resource lifecycle and authentication state through a function. Detects use-after-close, double-close, leaks, and unauthenticated access to privileged operations.</p>
+<p>State analysis is on by default. Disable with <code>scanner.enable_state_analysis = false</code>. It runs in <code>--mode full</code> and <code>--mode taint</code>; AST-only mode skips it.</p>
+<h2 id="rule-ids"><a class="docs-anchor" href="#rule-ids" aria-label="Link to rule-ids">#</a>Rule IDs</h2>
+<table>
+<thead>
+<tr>
+<th>Rule ID</th>
+<th>Severity</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>state-use-after-close</code></td>
+<td>High</td>
+</tr>
+<tr>
+<td><code>state-double-close</code></td>
+<td>Medium</td>
+</tr>
+<tr>
+<td><code>state-resource-leak</code></td>
+<td>Medium</td>
+</tr>
+<tr>
+<td><code>state-resource-leak-possible</code></td>
+<td>Low</td>
+</tr>
+<tr>
+<td><code>state-unauthed-access</code></td>
+<td>High</td>
+</tr>
+</tbody></table>
+<h2 id="what-it-detects"><a class="docs-anchor" href="#what-it-detects" aria-label="Link to what-it-detects">#</a>What it detects</h2>
+<p><strong><code>state-use-after-close</code></strong>: Resource transitions to CLOSED (via <code>close</code>, <code>fclose</code>, <code>disconnect</code>, …), then a use operation happens on it.</p>
+<pre><code class="hljs language-c">FILE *f = fopen(<span class="hljs-string">&quot;data.txt&quot;</span>, <span class="hljs-string">&quot;r&quot;</span>);
+fclose(f);
+fread(buf, <span class="hljs-number">1</span>, <span class="hljs-number">100</span>, f);  <span class="hljs-comment">// state-use-after-close</span></code></pre>
+<p><strong><code>state-double-close</code></strong>: Resource closed twice. Crashes or undefined behaviour on most runtimes.</p>
+<p><strong><code>state-resource-leak</code></strong>: Resource opened but never closed on any path through the function. Definite leak.</p>
+<p><strong><code>state-resource-leak-possible</code></strong>: Resource closed on some paths but not others. Lower confidence; often an early-return error path.</p>
+<p><strong><code>state-unauthed-access</code></strong>: A function recognised as a web handler reaches a privileged sink without an auth call on the path.</p>
+<p>A function counts as a web handler if its name starts with <code>handle_</code>, <code>route_</code>, or <code>api_</code> (sufficient on its own), or starts with <code>serve_</code>/<code>process_</code> and the file uses web-shaped parameter names (<code>request</code>, <code>req</code>, <code>ctx</code>, <code>res</code>, <code>response</code>, <code>w</code>, <code>writer</code>, language-dependent). <code>main</code> is excluded.</p>
+<h2 id="managed-resource-suppression"><a class="docs-anchor" href="#managed-resource-suppression" aria-label="Link to managed-resource-suppression">#</a>Managed-resource suppression</h2>
+<p>Several language-specific cleanup patterns suppress leak findings:</p>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Languages</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>RAII / Drop</td>
+<td>Rust</td>
+<td>All leak findings suppressed except <code>alloc</code>/<code>dealloc</code></td>
+</tr>
+<tr>
+<td>Smart pointers</td>
+<td>C++</td>
+<td><code>make_unique</code>/<code>make_shared</code> treated as managed; raw <code>new</code>/<code>malloc</code> still tracked</td>
+</tr>
+<tr>
+<td><code>defer</code></td>
+<td>Go</td>
+<td><code>defer f.Close()</code> suppresses leak at exit</td>
+</tr>
+<tr>
+<td><code>with</code> context manager</td>
+<td>Python</td>
+<td><code>with open(f) as f:</code> suppresses leak for the bound name</td>
+</tr>
+<tr>
+<td>try-with-resources</td>
+<td>Java</td>
+<td>TWR-bound resources suppressed</td>
+</tr>
+</tbody></table>
+<h2 id="what-it-cant-detect"><a class="docs-anchor" href="#what-it-cant-detect" aria-label="Link to what-it-cant-detect">#</a>What it can&#39;t detect</h2>
+<ul>
+<li><strong>Cross-function resource ownership.</strong> Open in one function, close in another, leak gets reported in the opener. The most common FP source for leak detection.</li>
+<li><strong>Factory / builder functions</strong> that return a resource for the caller to manage.</li>
+<li><strong>Variable shadowing across scopes.</strong> Same name in inner and outer scope shares one symbol; an inner close masks an outer leak.</li>
+<li><strong>Resources stored in collections.</strong> Handles in arrays / maps / channels and cleaned up via iteration are not tracked.</li>
+<li><strong>Dynamic dispatch.</strong> Close called via trait object or interface may not be recognised.</li>
+<li><strong>Type-state authentication.</strong> <code>AuthenticatedRequest&lt;T&gt;</code> and similar Rust patterns are not recognised as auth.</li>
+</ul>
+<h2 id="common-false-positives"><a class="docs-anchor" href="#common-false-positives" aria-label="Link to common-false-positives">#</a>Common false positives</h2>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Why</th>
+<th>Mitigation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Factory returns a resource</td>
+<td>Caller owns it</td>
+<td>Known limitation</td>
+</tr>
+<tr>
+<td>Framework-managed handles</td>
+<td>Connection pool, request scope</td>
+<td>Exclude framework code or downgrade</td>
+</tr>
+<tr>
+<td>Variable name shadowing</td>
+<td>Same name reused</td>
+<td>Known limitation</td>
+</tr>
+</tbody></table>
+<h2 id="per-language-detection"><a class="docs-anchor" href="#per-language-detection" aria-label="Link to per-language-detection">#</a>Per-language detection</h2>
+<table>
+<thead>
+<tr>
+<th>Language</th>
+<th>Leak</th>
+<th>Double-close</th>
+<th>Use-after-close</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>C</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td><code>fopen</code>/<code>fclose</code>, <code>malloc</code>/<code>free</code>, <code>pthread_mutex_*</code></td>
+</tr>
+<tr>
+<td>C++</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>C pairs plus <code>new</code>/<code>delete</code>; smart pointers suppressed</td>
+</tr>
+<tr>
+<td>Python</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td><code>with</code> suppressed; <code>open</code>, <code>socket</code>, <code>connect</code></td>
+</tr>
+<tr>
+<td>Go</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td><code>defer</code> suppressed; <code>os.Open</code> / <code>.Close</code></td>
+</tr>
+<tr>
+<td>Rust</td>
+<td>unsafe only</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>RAII suppresses everything except <code>alloc</code>/<code>dealloc</code></td>
+</tr>
+<tr>
+<td>JavaScript</td>
+<td>yes</td>
+<td>yes</td>
+<td>partial</td>
+<td><code>fs.openSync</code>/<code>closeSync</code></td>
+</tr>
+<tr>
+<td>TypeScript</td>
+<td>yes</td>
+<td>yes</td>
+<td>partial</td>
+<td>Same as JS</td>
+</tr>
+<tr>
+<td>PHP</td>
+<td>yes</td>
+<td>yes</td>
+<td>partial</td>
+<td><code>fopen</code>/<code>fclose</code>, <code>curl_init</code>/<code>curl_close</code>, <code>mysqli_*</code></td>
+</tr>
+<tr>
+<td>Ruby</td>
+<td>partial</td>
+<td>partial</td>
+<td>partial</td>
+<td><code>File.open</code>/<code>close</code>, <code>TCPSocket</code></td>
+</tr>
+<tr>
+<td>Java</td>
+<td>limited</td>
+<td>limited</td>
+<td>limited</td>
+<td>Constructor-callee matching is incomplete</td>
+</tr>
+</tbody></table>
+<h2 id="tuning"><a class="docs-anchor" href="#tuning" aria-label="Link to tuning">#</a>Tuning</h2>
+<pre><code class="hljs language-bash">nyx scan . --severity <span class="hljs-string">&quot;&gt;=MEDIUM&quot;</span>   <span class="hljs-comment"># Skip &quot;possible&quot; leaks (Low)</span></code></pre>
+<pre><code class="hljs language-toml"><span class="hljs-section">[scanner]</span>
+<span class="hljs-attr">enable_state_analysis</span> = <span class="hljs-literal">true</span>        <span class="hljs-comment"># default</span>
+<span class="hljs-attr">excluded_directories</span>  = [<span class="hljs-string">&quot;tests&quot;</span>, <span class="hljs-string">&quot;test&quot;</span>, <span class="hljs-string">&quot;spec&quot;</span>]</code></pre>
+<h2 id="recognised-pairs"><a class="docs-anchor" href="#recognised-pairs" aria-label="Link to recognised-pairs">#</a>Recognised pairs</h2>
+<p>The state engine ships these acquire/release pairs. Custom pairs are not yet configurable; file an issue if you need one.</p>
+<p><strong>C / C++</strong></p>
+<table>
+<thead>
+<tr>
+<th>Acquire</th>
+<th>Release</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>fopen</code></td>
+<td><code>fclose</code></td>
+</tr>
+<tr>
+<td><code>open</code></td>
+<td><code>close</code></td>
+</tr>
+<tr>
+<td><code>socket</code></td>
+<td><code>close</code></td>
+</tr>
+<tr>
+<td><code>malloc</code>, <code>calloc</code>, <code>realloc</code></td>
+<td><code>free</code></td>
+</tr>
+<tr>
+<td><code>pthread_mutex_lock</code></td>
+<td><code>pthread_mutex_unlock</code></td>
+</tr>
+<tr>
+<td><code>new</code>, <code>new[]</code> <em>(C++)</em></td>
+<td><code>delete</code>, <code>delete[]</code></td>
+</tr>
+</tbody></table>
+<p><strong>Rust</strong></p>
+<table>
+<thead>
+<tr>
+<th>Acquire</th>
+<th>Release</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>File::open</code>, <code>File::create</code></td>
+<td><code>drop</code>, <code>close</code></td>
+</tr>
+<tr>
+<td><code>TcpStream::connect</code></td>
+<td><code>shutdown</code></td>
+</tr>
+<tr>
+<td><code>lock</code>, <code>read</code>, <code>write</code> (Mutex/RwLock)</td>
+<td><code>drop</code></td>
+</tr>
+</tbody></table>
+<p><strong>Java</strong></p>
+<table>
+<thead>
+<tr>
+<th>Acquire</th>
+<th>Release</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>new FileInputStream</code> (and friends)</td>
+<td><code>close</code></td>
+</tr>
+<tr>
+<td><code>getConnection</code></td>
+<td><code>close</code></td>
+</tr>
+<tr>
+<td><code>new Socket</code></td>
+<td><code>close</code></td>
+</tr>
+</tbody></table>
+<p>Go, Python, JavaScript, Ruby, PHP follow language-idiomatic equivalents.</p>
+<h2 id="use-after-close-triggers"><a class="docs-anchor" href="#use-after-close-triggers" aria-label="Link to use-after-close-triggers">#</a>Use-after-close triggers</h2>
+<p>These operations on a closed resource fire <code>state-use-after-close</code>:</p>
+<pre><code class="hljs language-plain"><span class="hljs-keyword">read</span>, <span class="hljs-keyword">write</span>, <span class="hljs-keyword">send</span>, <span class="hljs-keyword">recv</span>, fread, fwrite, fgets, fputs, fprintf, fscanf,
+fflush, fseek, ftell, rewind, feof, ferror, fgetc, fputc, <span class="hljs-keyword">getc</span>, putc,
+ungetc, query, execute, fetch, sendto, recvfrom, <span class="hljs-keyword">ioctl</span>, <span class="hljs-keyword">fcntl</span>,
+strcpy, strncpy, strcat, strncat, memcpy, memmove, memset, memcmp,
+strcmp, strncmp, strlen, <span class="hljs-keyword">sprintf</span>, snprintf</code></pre>
+
+          </div>
+          <nav class="docs-prevnext" aria-label="Page navigation"><a class="docs-prevnext__link docs-prevnext__link--prev" href="../detectors/cfg.html">
+        <span class="docs-prevnext__label">Previous</span>
+        <span class="docs-prevnext__title">CFG</span>
+      </a><a class="docs-prevnext__link docs-prevnext__link--next" href="../detectors/taint.html">
+        <span class="docs-prevnext__label">Next</span>
+        <span class="docs-prevnext__title">Taint</span>
+      </a></nav>
+        </article>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <p class="site-footer__copy">© 2026 Eli Peter · Nyx is open source under the Apache 2.0 license.</p>
+        <nav class="site-footer__nav" aria-label="Footer">
+          <a href="../../">Home</a>
+          <a href="../../news/">News</a>
+          <a href="../../docs/">Docs</a>
+          <a href="https://github.com/elicpeter/nyx">GitHub</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>
