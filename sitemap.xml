@@ -177,7 +177,7 @@
   <url>
     <loc>https://nyxscan.dev/llms.txt</loc>
     <lastmod>2026-05-11</lastmod>
-    <changefreq>monthly</changefreq>
+    <changefreq>weekly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
@@ -185,5 +185,11 @@
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://nyxscan.dev/news/feed.xml</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.4</priority>
   </url>
 </urlset>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+     xmlns:atom="http://www.w3.org/2005/Atom"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Nyx — News &amp; release notes</title>
+    <link>https://nyxscan.dev/news/</link>
+    <atom:link href="https://nyxscan.dev/news/feed.xml" rel="self" type="application/rss+xml" />
+    <description>Release notes and project updates for Nyx, the open-source, local-first SAST scanner written in Rust. Taint analysis, cross-file detection, SARIF output, and a local triage UI.</description>
+    <language>en-us</language>
+    <copyright>Eli Peter</copyright>
+    <managingEditor>noreply@nyxscan.dev (Eli Peter)</managingEditor>
+    <webMaster>noreply@nyxscan.dev (Eli Peter)</webMaster>
+    <generator>nyxscan.dev</generator>
+    <docs>https://www.rssboard.org/rss-specification</docs>
+    <ttl>1440</ttl>
+    <image>
+      <url>https://nyxscan.dev/og-image.png</url>
+      <title>Nyx — News &amp; release notes</title>
+      <link>https://nyxscan.dev/news/</link>
+      <width>1200</width>
+      <height>630</height>
+    </image>
+    <lastBuildDate>Mon, 11 May 2026 00:00:00 -0400</lastBuildDate>
+    <pubDate>Mon, 11 May 2026 00:00:00 -0400</pubDate>
+
+    <item>
+      <title>More bug classes, less auth noise</title>
+      <link>https://nyxscan.dev/news/nyx-0-7-0.html</link>
+      <guid isPermaLink="true">https://nyxscan.dev/news/nyx-0-7-0.html</guid>
+      <pubDate>Mon, 11 May 2026 00:00:00 -0400</pubDate>
+      <dc:creator>Eli Peter</dc:creator>
+      <description>Nyx 0.7.0 adds seven vulnerability classes, deeper FastAPI auth tracking, parser hardening checks, and a quieter auth report.</description>
+    </item>
+
+    <item>
+      <title>Data exfiltration gets its own lane</title>
+      <link>https://nyxscan.dev/news/nyx-0-6-0.html</link>
+      <guid isPermaLink="true">https://nyxscan.dev/news/nyx-0-6-0.html</guid>
+      <pubDate>Sat, 02 May 2026 00:00:00 -0400</pubDate>
+      <dc:creator>Eli Peter</dc:creator>
+      <description>Nyx 0.6.0 adds a data-exfiltration rule for outbound HTTP bodies, headers, and JSON payloads across the supported language packs.</description>
+    </item>
+
+    <item>
+      <title>The local UI lands</title>
+      <link>https://nyxscan.dev/news/nyx-0-5-0.html</link>
+      <guid isPermaLink="true">https://nyxscan.dev/news/nyx-0-5-0.html</guid>
+      <pubDate>Wed, 29 Apr 2026 00:00:00 -0400</pubDate>
+      <dc:creator>Eli Peter</dc:creator>
+      <description>Nyx 0.5.0 ships the local browser UI, an SSA-based taint engine, deeper cross-file analysis, and symbolic execution.</description>
+    </item>
+
+    <item>
+      <title>Ranking, state checks, and quieter output</title>
+      <link>https://nyxscan.dev/news/nyx-0-4-0.html</link>
+      <guid isPermaLink="true">https://nyxscan.dev/news/nyx-0-4-0.html</guid>
+      <pubDate>Wed, 25 Feb 2026 00:00:00 -0500</pubDate>
+      <dc:creator>Eli Peter</dc:creator>
+      <description>Nyx 0.4.0 adds finding ranking, lower-noise defaults, state analysis, inline ignores, and a cleaner CLI.</description>
+    </item>
+
+    <item>
+      <title>Config, SARIF, and a cleanup pass</title>
+      <link>https://nyxscan.dev/news/nyx-0-3-0.html</link>
+      <guid isPermaLink="true">https://nyxscan.dev/news/nyx-0-3-0.html</guid>
+      <pubDate>Wed, 25 Feb 2026 00:00:00 -0500</pubDate>
+      <dc:creator>Eli Peter</dc:creator>
+      <description>Nyx 0.3.0 adds configurable rules, SARIF output, source-kind severity, non-prod downgrades, and resource leak detection.</description>
+    </item>
+
+    <item>
+      <title>Cross-file analysis starts doing real work</title>
+      <link>https://nyxscan.dev/news/nyx-0-2-0.html</link>
+      <guid isPermaLink="true">https://nyxscan.dev/news/nyx-0-2-0.html</guid>
+      <pubDate>Tue, 24 Feb 2026 00:00:00 -0500</pubDate>
+      <dc:creator>Eli Peter</dc:creator>
+      <description>Nyx 0.2.0 adds two-pass cross-file taint analysis, CFG detectors, persisted function summaries, and multi-language analysis support.</description>
+    </item>
+
+    <item>
+      <title>The first scan path</title>
+      <link>https://nyxscan.dev/news/nyx-alpha.html</link>
+      <guid isPermaLink="true">https://nyxscan.dev/news/nyx-alpha.html</guid>
+      <pubDate>Wed, 25 Jun 2025 00:00:00 -0400</pubDate>
+      <dc:creator>Eli Peter</dc:creator>
+      <description>The early Nyx alpha releases added tree-sitter pattern scanning, SQLite-backed indexes, and the first Rust CFG experiments.</description>
+    </item>
+  </channel>
+</rss>

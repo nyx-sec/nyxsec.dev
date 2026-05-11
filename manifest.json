@@ -1,0 +1,36 @@
+{
+  "name": "Nyx — Local-first security scanner",
+  "short_name": "Nyx",
+  "description": "Open-source, local-first security scanner for developers. Source-to-sink taint analysis, browser triage UI, SARIF, CI.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "browser",
+  "background_color": "#F9F8F4",
+  "theme_color": "#F9F8F4",
+  "lang": "en",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/favicon-32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-64.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-180.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/og-image.png",
+      "sizes": "1200x630",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

@@ -2,6 +2,59 @@
 
 Nyx is an open-source, local-first security scanner for developers. It runs cross-file interprocedural taint analysis on a repository and serves findings in a React UI bound to `127.0.0.1`. No cloud, no account, no source upload. Everything stays on your machine.
 
+## Canonical URL map
+
+Site root and machine-readable indexes:
+- Home: https://nyxscan.dev/
+- Sitemap: https://nyxscan.dev/sitemap.xml
+- llms.txt (short): https://nyxscan.dev/llms.txt
+- llms-full.txt (this file): https://nyxscan.dev/llms-full.txt
+- News RSS feed: https://nyxscan.dev/news/feed.xml
+- robots.txt: https://nyxscan.dev/robots.txt
+
+Documentation:
+- Docs index: https://nyxscan.dev/docs/
+- Quickstart: https://nyxscan.dev/docs/quickstart.html
+- Installation: https://nyxscan.dev/docs/installation.html
+- CLI reference: https://nyxscan.dev/docs/cli.html
+- Configuration: https://nyxscan.dev/docs/configuration.html
+- Output formats: https://nyxscan.dev/docs/output.html
+- Local UI (`nyx serve`): https://nyxscan.dev/docs/serve.html
+- Authentication tracking: https://nyxscan.dev/docs/auth.html
+- Custom rules: https://nyxscan.dev/docs/rules.html
+- How it works: https://nyxscan.dev/docs/how-it-works.html
+- Advanced analysis: https://nyxscan.dev/docs/advanced-analysis.html
+- Detectors overview: https://nyxscan.dev/docs/detectors.html
+- Detectors — patterns: https://nyxscan.dev/docs/detectors/patterns.html
+- Detectors — CFG: https://nyxscan.dev/docs/detectors/cfg.html
+- Detectors — state: https://nyxscan.dev/docs/detectors/state.html
+- Detectors — taint: https://nyxscan.dev/docs/detectors/taint.html
+- Language maturity: https://nyxscan.dev/docs/language-maturity.html
+- Recall validation: https://nyxscan.dev/docs/recall-validation.html
+- Roadmap: https://nyxscan.dev/docs/roadmap.html
+- Changelog: https://nyxscan.dev/docs/changelog.html
+
+Release notes:
+- News index: https://nyxscan.dev/news/
+- Nyx 0.7.0: https://nyxscan.dev/news/nyx-0-7-0.html
+- Nyx 0.6.0: https://nyxscan.dev/news/nyx-0-6-0.html
+- Nyx 0.5.0: https://nyxscan.dev/news/nyx-0-5-0.html
+- Nyx 0.4.0: https://nyxscan.dev/news/nyx-0-4-0.html
+- Nyx 0.3.0: https://nyxscan.dev/news/nyx-0-3-0.html
+- Nyx 0.2.0: https://nyxscan.dev/news/nyx-0-2-0.html
+- Alpha releases: https://nyxscan.dev/news/nyx-alpha.html
+
+External:
+- Source code: https://github.com/elicpeter/nyx
+- Crate: https://crates.io/crates/nyx-scanner
+- Rustdocs: https://docs.rs/nyx-scanner/latest/nyx_scanner/
+- Releases: https://github.com/elicpeter/nyx/releases
+- Security policy: https://github.com/elicpeter/nyx/blob/master/SECURITY.md
+- Roadmap (repo): https://github.com/elicpeter/nyx/blob/master/ROADMAP.md
+- Sponsor: https://github.com/sponsors/elicpeter
+
+## Project metadata
+
 - Current package: `nyx-scanner` v0.7.0
 - Rust requirement: stable Rust 1.88+ for Cargo installs
 - Primary site: https://nyxscan.dev

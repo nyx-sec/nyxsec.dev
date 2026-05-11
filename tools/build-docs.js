@@ -387,6 +387,8 @@ function pageTemplate({
     <link rel="icon" type="image/png" sizes="32x32" href="${p}favicon-32.png" />
     <link rel="icon" type="image/png" sizes="64x64" href="${p}favicon-64.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="${p}favicon-180.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="alternate" type="application/rss+xml" title="Nyx — News &amp; release notes" href="/news/feed.xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />

@@ -35,12 +35,27 @@
   Cache-Control: public, max-age=3600, must-revalidate
 
 /llms.txt
-  Cache-Control: public, max-age=3600, must-revalidate
+  Cache-Control: public, max-age=86400, must-revalidate
   X-Robots-Tag: index, follow
+  Content-Type: text/plain; charset=utf-8
 
 /llms-full.txt
+  Cache-Control: public, max-age=86400, must-revalidate
+  X-Robots-Tag: index, follow
+  Content-Type: text/plain; charset=utf-8
+
+/news/feed.xml
   Cache-Control: public, max-age=3600, must-revalidate
   X-Robots-Tag: index, follow
+  Content-Type: application/rss+xml; charset=utf-8
+
+/manifest.json
+  Cache-Control: public, max-age=86400, must-revalidate
+  Content-Type: application/manifest+json; charset=utf-8
+
+/humans.txt
+  Cache-Control: public, max-age=86400, must-revalidate
+  Content-Type: text/plain; charset=utf-8
 
 /og-image.png
   Cache-Control: public, max-age=86400, must-revalidate
