@@ -343,10 +343,18 @@
           </div>
 
           <div class="terminal" data-reveal aria-label="Nyx install commands">
-            <div class="terminal__bar" aria-hidden="true"><span></span><span></span><span></span></div>
-            <pre><code>cargo install nyx-scanner
-nyx scan
-nyx serve</code></pre>
+            <div class="terminal__bar">
+              <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+              <button class="terminal__copy" type="button" data-copy-target="install-commands">Copy</button>
+            </div>
+            <input
+              id="install-commands"
+              class="terminal__field"
+              type="text"
+              value="cargo install nyx-scanner && nyx serve"
+              readonly
+              spellcheck="false"
+            />
           </div>
 
           <div class="inline-links" aria-label="Install resources">
@@ -541,6 +549,33 @@ nyx serve</code></pre>
             el.classList.add("is-visible");
           });
         }
+
+        document.querySelectorAll("[data-copy-target]").forEach(function (button) {
+          button.addEventListener("click", function () {
+            var target = document.getElementById(button.getAttribute("data-copy-target"));
+            if (!target) return;
+
+            var originalLabel = button.textContent;
+            var markCopied = function () {
+              button.textContent = "Copied";
+              window.setTimeout(function () {
+                button.textContent = originalLabel;
+              }, 1400);
+            };
+            var fallbackCopy = function () {
+              target.focus();
+              target.select();
+              document.execCommand("copy");
+              markCopied();
+            };
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              navigator.clipboard.writeText(target.value).then(markCopied).catch(fallbackCopy);
+            } else {
+              fallbackCopy();
+            }
+          });
+        });
       })();
     </script>
   </body>
