@@ -24,6 +24,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="../../styles.css" />
+    <script defer src="../../docs/search.js"></script>
 
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content="Nyx" />
@@ -143,15 +144,27 @@
       <div class="docs-shell">
         <nav class="docs-sidebar" aria-label="Documentation"><a class="docs-sidebar__brand" href="../">Docs</a><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Getting started</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="../quickstart.html">Quickstart</a></li><li><a class="docs-sidebar__link" href="../installation.html">Installation</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Using nyx</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="../cli.html">CLI reference</a></li><li><a class="docs-sidebar__link" href="../serve.html">Browser UI</a></li><li><a class="docs-sidebar__link" href="../configuration.html">Configuration</a></li><li><a class="docs-sidebar__link" href="../output.html">Output formats</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Coverage</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="../language-maturity.html">Language maturity</a></li><li><a class="docs-sidebar__link" href="../rules.html">Rules</a></li><li><a class="docs-sidebar__link" href="../auth.html">Auth analysis</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Under the hood</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="../how-it-works.html">How it works</a></li><li><a class="docs-sidebar__link" href="../advanced-analysis.html">Advanced analysis</a></li><li><a class="docs-sidebar__link" href="../detectors.html">Detectors</a><ul class="docs-sidebar__sublist"><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="../detectors/patterns.html" aria-current="page">Patterns</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="../detectors/cfg.html">CFG</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="../detectors/state.html">State</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="../detectors/taint.html">Taint</a></li></ul></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Project</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="../roadmap.html">Roadmap</a></li><li><a class="docs-sidebar__link" href="../changelog.html">Changelog</a></li></ul></div></nav>
         <article class="docs-content">
-          <div class="docs-prose">
-<h1 id="ast-patterns"><a class="docs-anchor" href="#ast-patterns" aria-label="Link to ast-patterns">#</a>AST patterns</h1>
+          <div class="docs-search docs-search--content" data-docs-search>
+    <label class="visually-hidden" for="docs-search-input">Search docs</label>
+    <div class="docs-search__control">
+      <span class="docs-search__icon" aria-hidden="true"></span>
+      <input id="docs-search-input" data-docs-search-input type="search" placeholder="Search docs" autocomplete="off" autocapitalize="none" spellcheck="false" role="combobox" aria-autocomplete="list" aria-controls="docs-search-results" aria-expanded="false" />
+      <kbd class="docs-search__key" aria-hidden="true">⌘K</kbd>
+    </div>
+    <div class="docs-search__panel" data-docs-search-panel hidden>
+      <div class="docs-search__status" data-docs-search-status></div>
+      <div class="docs-search__results" id="docs-search-results" data-docs-search-results role="listbox" aria-label="Search results"></div>
+    </div>
+  </div>
+          <div class="docs-prose" data-pagefind-body>
+<h1 id="ast-patterns"><a class="docs-anchor" href="#ast-patterns" aria-label="Link to ast-patterns" data-pagefind-ignore>#</a>AST patterns</h1>
 <p>AST patterns are tree-sitter queries that match dangerous structural shapes in source. No dataflow, no CFG. A match means the construct is present; it&#39;s not proof the construct is exploitable.</p>
 <p>Patterns run in every analysis mode. In <code>--mode ast</code> they&#39;re the only active detector.</p>
-<h2 id="rule-ids"><a class="docs-anchor" href="#rule-ids" aria-label="Link to rule-ids">#</a>Rule IDs</h2>
+<h2 id="rule-ids"><a class="docs-anchor" href="#rule-ids" aria-label="Link to rule-ids" data-pagefind-ignore>#</a>Rule IDs</h2>
 <pre><code class="hljs language-plain"><span class="hljs-tag">&lt;<span class="hljs-name">lang</span>&gt;</span>.<span class="hljs-tag">&lt;<span class="hljs-name">category</span>&gt;</span>.<span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span></code></pre>
 <p>Examples: <code>js.code_exec.eval</code>, <code>py.deser.pickle_loads</code>, <code>c.memory.gets</code>, <code>java.sqli.execute_concat</code>.</p>
 <p>Full list: <a href="../rules.html">rules.md</a>.</p>
-<h2 id="tiers"><a class="docs-anchor" href="#tiers" aria-label="Link to tiers">#</a>Tiers</h2>
+<h2 id="tiers"><a class="docs-anchor" href="#tiers" aria-label="Link to tiers" data-pagefind-ignore>#</a>Tiers</h2>
 <table>
 <thead>
 <tr>
@@ -168,7 +181,7 @@
 <td>Pattern includes a tree-sitter heuristic guard. Example: <code>java.sqli.execute_concat</code> only fires when <code>executeQuery</code> receives a <code>binary_expression</code> (string concatenation), not a literal or a parameterized statement</td>
 </tr>
 </tbody></table>
-<h2 id="categories"><a class="docs-anchor" href="#categories" aria-label="Link to categories">#</a>Categories</h2>
+<h2 id="categories"><a class="docs-anchor" href="#categories" aria-label="Link to categories" data-pagefind-ignore>#</a>Categories</h2>
 <table>
 <thead>
 <tr>
@@ -233,7 +246,7 @@
 <td><code>unwrap</code>, <code>panic!</code>, <code>as any</code></td>
 </tr>
 </tbody></table>
-<h2 id="what-patterns-cant-tell-you"><a class="docs-anchor" href="#what-patterns-cant-tell-you" aria-label="Link to what-patterns-cant-tell-you">#</a>What patterns can&#39;t tell you</h2>
+<h2 id="what-patterns-cant-tell-you"><a class="docs-anchor" href="#what-patterns-cant-tell-you" aria-label="Link to what-patterns-cant-tell-you" data-pagefind-ignore>#</a>What patterns can&#39;t tell you</h2>
 <ul>
 <li><strong>Dataflow.</strong> <code>eval(&quot;1+1&quot;)</code> (safe) and <code>eval(userInput)</code> (dangerous) both match <code>js.code_exec.eval</code>. The taint detector is the one that distinguishes them.</li>
 <li><strong>Reachability.</strong> A pattern in dead code matches identically.</li>
@@ -242,7 +255,7 @@
 <li><strong>Aliased imports.</strong> <code>from os import system as s; s(cmd)</code> won&#39;t match <code>system</code>.</li>
 <li><strong>Macro expansions.</strong> Tree-sitter parses the macro call site, not the expansion.</li>
 </ul>
-<h2 id="common-false-positives"><a class="docs-anchor" href="#common-false-positives" aria-label="Link to common-false-positives">#</a>Common false positives</h2>
+<h2 id="common-false-positives"><a class="docs-anchor" href="#common-false-positives" aria-label="Link to common-false-positives" data-pagefind-ignore>#</a>Common false positives</h2>
 <table>
 <thead>
 <tr>
@@ -287,7 +300,7 @@
 <td>Empty-string fallbacks are excluded from the rule. Non-empty literal fallbacks still fire.</td>
 </tr>
 </tbody></table>
-<h2 id="confidence-levels"><a class="docs-anchor" href="#confidence-levels" aria-label="Link to confidence-levels">#</a>Confidence levels</h2>
+<h2 id="confidence-levels"><a class="docs-anchor" href="#confidence-levels" aria-label="Link to confidence-levels" data-pagefind-ignore>#</a>Confidence levels</h2>
 <p>Every AST pattern carries an explicit confidence:</p>
 <table>
 <thead>
@@ -310,13 +323,13 @@
 </tr>
 </tbody></table>
 <p><code>--min-confidence medium</code> (or <code>output.min_confidence = &quot;medium&quot;</code>) drops Low-confidence matches.</p>
-<h2 id="tuning"><a class="docs-anchor" href="#tuning" aria-label="Link to tuning">#</a>Tuning</h2>
+<h2 id="tuning"><a class="docs-anchor" href="#tuning" aria-label="Link to tuning" data-pagefind-ignore>#</a>Tuning</h2>
 <pre><code class="hljs language-bash">nyx scan . --severity <span class="hljs-string">&quot;&gt;=MEDIUM&quot;</span>        <span class="hljs-comment"># drop Low-tier patterns</span>
 nyx scan . --severity HIGH              <span class="hljs-comment"># banned APIs and code-exec only</span>
 nyx scan . --mode cfg                   <span class="hljs-comment"># drop AST patterns; keep taint + state + cfg</span></code></pre>
 <pre><code class="hljs language-toml"><span class="hljs-section">[scanner]</span>
 <span class="hljs-attr">excluded_directories</span> = [<span class="hljs-string">&quot;node_modules&quot;</span>, <span class="hljs-string">&quot;vendor&quot;</span>, <span class="hljs-string">&quot;generated&quot;</span>]</code></pre>
-<h2 id="examples"><a class="docs-anchor" href="#examples" aria-label="Link to examples">#</a>Examples</h2>
+<h2 id="examples"><a class="docs-anchor" href="#examples" aria-label="Link to examples" data-pagefind-ignore>#</a>Examples</h2>
 <p>Tier A, structural presence:</p>
 <pre><code class="hljs language-c"><span class="hljs-type">char</span> buf[<span class="hljs-number">64</span>];
 gets(buf);                              <span class="hljs-comment">// c.memory.gets</span></code></pre>

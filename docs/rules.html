@@ -24,6 +24,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="../styles.css" />
+    <script defer src="../docs/search.js"></script>
 
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content="Nyx" />
@@ -137,14 +138,26 @@
       <div class="docs-shell">
         <nav class="docs-sidebar" aria-label="Documentation"><a class="docs-sidebar__brand" href="">Docs</a><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Getting started</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="quickstart.html">Quickstart</a></li><li><a class="docs-sidebar__link" href="installation.html">Installation</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Using nyx</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="cli.html">CLI reference</a></li><li><a class="docs-sidebar__link" href="serve.html">Browser UI</a></li><li><a class="docs-sidebar__link" href="configuration.html">Configuration</a></li><li><a class="docs-sidebar__link" href="output.html">Output formats</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Coverage</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="language-maturity.html">Language maturity</a></li><li><a class="docs-sidebar__link" href="rules.html" aria-current="page">Rules</a></li><li><a class="docs-sidebar__link" href="auth.html">Auth analysis</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Under the hood</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="how-it-works.html">How it works</a></li><li><a class="docs-sidebar__link" href="advanced-analysis.html">Advanced analysis</a></li><li><a class="docs-sidebar__link" href="detectors.html">Detectors</a><ul class="docs-sidebar__sublist"><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/patterns.html">Patterns</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/cfg.html">CFG</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/state.html">State</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/taint.html">Taint</a></li></ul></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Project</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="roadmap.html">Roadmap</a></li><li><a class="docs-sidebar__link" href="changelog.html">Changelog</a></li></ul></div></nav>
         <article class="docs-content">
-          <div class="docs-prose">
-<h1 id="rule-reference"><a class="docs-anchor" href="#rule-reference" aria-label="Link to rule-reference">#</a>Rule reference</h1>
+          <div class="docs-search docs-search--content" data-docs-search>
+    <label class="visually-hidden" for="docs-search-input">Search docs</label>
+    <div class="docs-search__control">
+      <span class="docs-search__icon" aria-hidden="true"></span>
+      <input id="docs-search-input" data-docs-search-input type="search" placeholder="Search docs" autocomplete="off" autocapitalize="none" spellcheck="false" role="combobox" aria-autocomplete="list" aria-controls="docs-search-results" aria-expanded="false" />
+      <kbd class="docs-search__key" aria-hidden="true">⌘K</kbd>
+    </div>
+    <div class="docs-search__panel" data-docs-search-panel hidden>
+      <div class="docs-search__status" data-docs-search-status></div>
+      <div class="docs-search__results" id="docs-search-results" data-docs-search-results role="listbox" aria-label="Search results"></div>
+    </div>
+  </div>
+          <div class="docs-prose" data-pagefind-body>
+<h1 id="rule-reference"><a class="docs-anchor" href="#rule-reference" aria-label="Link to rule-reference" data-pagefind-ignore>#</a>Rule reference</h1>
 <p>Every finding Nyx emits has a rule ID. This page enumerates the IDs that ship with the scanner, grouped by family.</p>
 <blockquote>
 <p>This page is written by hand and drifts against the code. Authoritative sources: <a href="https://github.com/elicpeter/nyx/tree/master/src/patterns"><code>src/patterns/&lt;lang&gt;.rs</code></a> for AST patterns, <a href="https://github.com/elicpeter/nyx/tree/master/src/labels"><code>src/labels/&lt;lang&gt;.rs</code></a> for taint matchers, and <a href="https://github.com/elicpeter/nyx/blob/master/src/auth_analysis/config.rs"><code>src/auth_analysis/config.rs</code></a> for auth rules. If a rule fires that isn&#39;t listed here, the source file is right and this page is wrong.</p>
 </blockquote>
 <p>If you&#39;d rather browse rules interactively, <a href="serve.html"><code>nyx serve</code></a> ships a Rules page that lists every loaded matcher with its language, kind, and capability:</p>
-<p align="center"><img src="assets/screenshots/docs/serve-rules.png" alt="Nyx Rules page: filterable list of 218 rules with language, kind (SOURCE/SANITIZER/SINK), capability, and finding count columns" width="900"/></p><h2 id="id-format"><a class="docs-anchor" href="#id-format" aria-label="Link to id-format">#</a>ID format</h2>
+<p align="center"><img src="assets/screenshots/docs/serve-rules.png" alt="Nyx Rules page: filterable list of 218 rules with language, kind (SOURCE/SANITIZER/SINK), capability, and finding count columns" width="900"/></p><h2 id="id-format"><a class="docs-anchor" href="#id-format" aria-label="Link to id-format" data-pagefind-ignore>#</a>ID format</h2>
 <table>
 <thead>
 <tr>
@@ -180,8 +193,8 @@
 </tr>
 </tbody></table>
 <p>Language prefixes: <code>rs</code>, <code>c</code>, <code>cpp</code>, <code>go</code>, <code>java</code>, <code>js</code>, <code>ts</code>, <code>py</code>, <code>php</code>, <code>rb</code>.</p>
-<h2 id="cross-language-rules"><a class="docs-anchor" href="#cross-language-rules" aria-label="Link to cross-language-rules">#</a>Cross-language rules</h2>
-<h3 id="taint"><a class="docs-anchor" href="#taint" aria-label="Link to taint">#</a>Taint</h3>
+<h2 id="cross-language-rules"><a class="docs-anchor" href="#cross-language-rules" aria-label="Link to cross-language-rules" data-pagefind-ignore>#</a>Cross-language rules</h2>
+<h3 id="taint"><a class="docs-anchor" href="#taint" aria-label="Link to taint" data-pagefind-ignore>#</a>Taint</h3>
 <p>The taint family is split into cap-specific rule classes. The <code>taint-unsanitised-flow</code> id is the catch-all for the legacy caps that have not migrated to a dedicated rule id yet (<code>sql_query</code>, <code>ssrf</code>, <code>code_exec</code>, <code>file_io</code>, <code>fmt_string</code>, <code>deserialize</code>, <code>crypto</code>). The seven new vulnerability classes plus auth and data-exfil emerge under their own rule id. The parenthetical identifies the source location.</p>
 <table>
 <thead>
@@ -243,7 +256,7 @@
 </tr>
 </tbody></table>
 <p>Each cap-class entry is registered in <code>CAP_RULE_REGISTRY</code> (<code>src/labels/mod.rs</code>). Browse the registry from the CLI with <code>nyx rules list --class-only</code>, or via the dashboard&#39;s Rules page. The matcher sets (sources, sanitizers, sinks, gated sinks) live per-language in <code>src/labels/&lt;lang&gt;.rs</code>. <a href="language-maturity.html">Language maturity</a> gives per-language counts and what&#39;s covered.</p>
-<h3 id="cfg-structural"><a class="docs-anchor" href="#cfg-structural" aria-label="Link to cfg-structural">#</a>CFG structural</h3>
+<h3 id="cfg-structural"><a class="docs-anchor" href="#cfg-structural" aria-label="Link to cfg-structural" data-pagefind-ignore>#</a>CFG structural</h3>
 <table>
 <thead>
 <tr>
@@ -284,7 +297,7 @@
 <td>Medium</td>
 </tr>
 </tbody></table>
-<h3 id="state-model"><a class="docs-anchor" href="#state-model" aria-label="Link to state-model">#</a>State model</h3>
+<h3 id="state-model"><a class="docs-anchor" href="#state-model" aria-label="Link to state-model" data-pagefind-ignore>#</a>State model</h3>
 <table>
 <thead>
 <tr>
@@ -313,7 +326,7 @@
 <td>High</td>
 </tr>
 </tbody></table>
-<h3 id="auth-analysis-rust-only-today"><a class="docs-anchor" href="#auth-analysis-rust-only-today" aria-label="Link to auth-analysis-rust-only-today">#</a>Auth analysis (Rust only, today)</h3>
+<h3 id="auth-analysis-rust-only-today"><a class="docs-anchor" href="#auth-analysis-rust-only-today" aria-label="Link to auth-analysis-rust-only-today" data-pagefind-ignore>#</a>Auth analysis (Rust only, today)</h3>
 <table>
 <thead>
 <tr>
@@ -331,10 +344,10 @@
 </tr>
 </tbody></table>
 <p>See <a href="auth.html">auth.md</a> for scope, the five sink-classes, and tuning.</p>
-<h2 id="ast-patterns-by-language"><a class="docs-anchor" href="#ast-patterns-by-language" aria-label="Link to ast-patterns-by-language">#</a>AST patterns by language</h2>
+<h2 id="ast-patterns-by-language"><a class="docs-anchor" href="#ast-patterns-by-language" aria-label="Link to ast-patterns-by-language" data-pagefind-ignore>#</a>AST patterns by language</h2>
 <p>Each language ships a tree-sitter pattern registry. Structural match on the pattern, no dataflow. Some patterns also have a Tier B heuristic guard (e.g. SQL execute must receive a concatenation, not a literal) noted in the registry.</p>
 <p>The tables below are generated from <code>src/patterns/&lt;lang&gt;.rs</code> by <a href="https://github.com/elicpeter/nyx/tree/master/tools/docgen"><code>tools/docgen</code></a>. Run <code>cargo run --features docgen --bin nyx-docgen</code> after changing the registry to refresh them.</p>
-<!-- BEGIN AUTOGEN rules-by-language --><h3 id="c-8-patterns"><a class="docs-anchor" href="#c-8-patterns" aria-label="Link to c-8-patterns">#</a>C: 8 patterns</h3>
+<!-- BEGIN AUTOGEN rules-by-language --><h3 id="c-8-patterns"><a class="docs-anchor" href="#c-8-patterns" aria-label="Link to c-8-patterns" data-pagefind-ignore>#</a>C: 8 patterns</h3>
 <table>
 <thead>
 <tr>
@@ -393,7 +406,7 @@
 <td>High</td>
 </tr>
 </tbody></table>
-<h3 id="c-9-patterns"><a class="docs-anchor" href="#c-9-patterns" aria-label="Link to c-9-patterns">#</a>C++: 9 patterns</h3>
+<h3 id="c-9-patterns"><a class="docs-anchor" href="#c-9-patterns" aria-label="Link to c-9-patterns" data-pagefind-ignore>#</a>C++: 9 patterns</h3>
 <table>
 <thead>
 <tr>
@@ -458,7 +471,7 @@
 <td>High</td>
 </tr>
 </tbody></table>
-<h3 id="go-8-patterns"><a class="docs-anchor" href="#go-8-patterns" aria-label="Link to go-8-patterns">#</a>Go: 8 patterns</h3>
+<h3 id="go-8-patterns"><a class="docs-anchor" href="#go-8-patterns" aria-label="Link to go-8-patterns" data-pagefind-ignore>#</a>Go: 8 patterns</h3>
 <table>
 <thead>
 <tr>
@@ -517,7 +530,7 @@
 <td>Medium</td>
 </tr>
 </tbody></table>
-<h3 id="java-10-patterns"><a class="docs-anchor" href="#java-10-patterns" aria-label="Link to java-10-patterns">#</a>Java: 10 patterns</h3>
+<h3 id="java-10-patterns"><a class="docs-anchor" href="#java-10-patterns" aria-label="Link to java-10-patterns" data-pagefind-ignore>#</a>Java: 10 patterns</h3>
 <table>
 <thead>
 <tr>
@@ -588,7 +601,7 @@
 <td>Medium</td>
 </tr>
 </tbody></table>
-<h3 id="javascript-22-patterns"><a class="docs-anchor" href="#javascript-22-patterns" aria-label="Link to javascript-22-patterns">#</a>JavaScript: 22 patterns</h3>
+<h3 id="javascript-22-patterns"><a class="docs-anchor" href="#javascript-22-patterns" aria-label="Link to javascript-22-patterns" data-pagefind-ignore>#</a>JavaScript: 22 patterns</h3>
 <table>
 <thead>
 <tr>
@@ -731,7 +744,7 @@
 <td>Medium</td>
 </tr>
 </tbody></table>
-<h3 id="php-11-patterns"><a class="docs-anchor" href="#php-11-patterns" aria-label="Link to php-11-patterns">#</a>PHP: 11 patterns</h3>
+<h3 id="php-11-patterns"><a class="docs-anchor" href="#php-11-patterns" aria-label="Link to php-11-patterns" data-pagefind-ignore>#</a>PHP: 11 patterns</h3>
 <table>
 <thead>
 <tr>
@@ -808,7 +821,7 @@
 <td>Medium</td>
 </tr>
 </tbody></table>
-<h3 id="python-15-patterns"><a class="docs-anchor" href="#python-15-patterns" aria-label="Link to python-15-patterns">#</a>Python: 15 patterns</h3>
+<h3 id="python-15-patterns"><a class="docs-anchor" href="#python-15-patterns" aria-label="Link to python-15-patterns" data-pagefind-ignore>#</a>Python: 15 patterns</h3>
 <table>
 <thead>
 <tr>
@@ -909,7 +922,7 @@
 <td>Medium</td>
 </tr>
 </tbody></table>
-<h3 id="ruby-11-patterns"><a class="docs-anchor" href="#ruby-11-patterns" aria-label="Link to ruby-11-patterns">#</a>Ruby: 11 patterns</h3>
+<h3 id="ruby-11-patterns"><a class="docs-anchor" href="#ruby-11-patterns" aria-label="Link to ruby-11-patterns" data-pagefind-ignore>#</a>Ruby: 11 patterns</h3>
 <table>
 <thead>
 <tr>
@@ -986,7 +999,7 @@
 <td>Medium</td>
 </tr>
 </tbody></table>
-<h3 id="rust-13-patterns"><a class="docs-anchor" href="#rust-13-patterns" aria-label="Link to rust-13-patterns">#</a>Rust: 13 patterns</h3>
+<h3 id="rust-13-patterns"><a class="docs-anchor" href="#rust-13-patterns" aria-label="Link to rust-13-patterns" data-pagefind-ignore>#</a>Rust: 13 patterns</h3>
 <table>
 <thead>
 <tr>
@@ -1075,7 +1088,7 @@
 <td>High</td>
 </tr>
 </tbody></table>
-<h3 id="typescript-22-patterns"><a class="docs-anchor" href="#typescript-22-patterns" aria-label="Link to typescript-22-patterns">#</a>TypeScript: 22 patterns</h3>
+<h3 id="typescript-22-patterns"><a class="docs-anchor" href="#typescript-22-patterns" aria-label="Link to typescript-22-patterns" data-pagefind-ignore>#</a>TypeScript: 22 patterns</h3>
 <table>
 <thead>
 <tr>
@@ -1218,7 +1231,7 @@
 <td>Medium</td>
 </tr>
 </tbody></table>
-<!-- END AUTOGEN rules-by-language --><h2 id="capability-list-for-custom-rules"><a class="docs-anchor" href="#capability-list-for-custom-rules" aria-label="Link to capability-list-for-custom-rules">#</a>Capability list for custom rules</h2>
+<!-- END AUTOGEN rules-by-language --><h2 id="capability-list-for-custom-rules"><a class="docs-anchor" href="#capability-list-for-custom-rules" aria-label="Link to capability-list-for-custom-rules" data-pagefind-ignore>#</a>Capability list for custom rules</h2>
 <p><code>nyx config add-rule --cap &lt;name&gt;</code> and <code>[analysis.languages.*.rules]</code> in config accept:</p>
 <p><code>env_var</code>, <code>html_escape</code>, <code>shell_escape</code>, <code>url_encode</code>, <code>json_parse</code>, <code>file_io</code>, <code>fmt_string</code>, <code>sql_query</code>, <code>deserialize</code>, <code>ssrf</code>, <code>code_exec</code>, <code>crypto</code>, <code>unauthorized_id</code>, <code>data_exfil</code>, <code>ldap_injection</code>, <code>xpath_injection</code>, <code>header_injection</code>, <code>open_redirect</code>, <code>ssti</code>, <code>xxe</code>, <code>prototype_pollution</code>, <code>all</code></p>
 <p>Aliases: <code>data_exfiltration</code> for <code>data_exfil</code>, <code>ldapi</code> for <code>ldap_injection</code>, <code>xpathi</code> for <code>xpath_injection</code>, <code>crlf</code> and <code>response_splitting</code> for <code>header_injection</code>, <code>redirect</code> for <code>open_redirect</code>, <code>template_injection</code> for <code>ssti</code>, <code>proto_pollution</code> for <code>prototype_pollution</code>.</p>

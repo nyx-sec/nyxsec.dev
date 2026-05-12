@@ -24,6 +24,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="../styles.css" />
+    <script defer src="../docs/search.js"></script>
 
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content="Nyx" />
@@ -137,10 +138,22 @@
       <div class="docs-shell">
         <nav class="docs-sidebar" aria-label="Documentation"><a class="docs-sidebar__brand" href="">Docs</a><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Getting started</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="quickstart.html">Quickstart</a></li><li><a class="docs-sidebar__link" href="installation.html" aria-current="page">Installation</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Using nyx</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="cli.html">CLI reference</a></li><li><a class="docs-sidebar__link" href="serve.html">Browser UI</a></li><li><a class="docs-sidebar__link" href="configuration.html">Configuration</a></li><li><a class="docs-sidebar__link" href="output.html">Output formats</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Coverage</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="language-maturity.html">Language maturity</a></li><li><a class="docs-sidebar__link" href="rules.html">Rules</a></li><li><a class="docs-sidebar__link" href="auth.html">Auth analysis</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Under the hood</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="how-it-works.html">How it works</a></li><li><a class="docs-sidebar__link" href="advanced-analysis.html">Advanced analysis</a></li><li><a class="docs-sidebar__link" href="detectors.html">Detectors</a><ul class="docs-sidebar__sublist"><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/patterns.html">Patterns</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/cfg.html">CFG</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/state.html">State</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/taint.html">Taint</a></li></ul></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Project</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="roadmap.html">Roadmap</a></li><li><a class="docs-sidebar__link" href="changelog.html">Changelog</a></li></ul></div></nav>
         <article class="docs-content">
-          <div class="docs-prose">
-<h1 id="installation"><a class="docs-anchor" href="#installation" aria-label="Link to installation">#</a>Installation</h1>
+          <div class="docs-search docs-search--content" data-docs-search>
+    <label class="visually-hidden" for="docs-search-input">Search docs</label>
+    <div class="docs-search__control">
+      <span class="docs-search__icon" aria-hidden="true"></span>
+      <input id="docs-search-input" data-docs-search-input type="search" placeholder="Search docs" autocomplete="off" autocapitalize="none" spellcheck="false" role="combobox" aria-autocomplete="list" aria-controls="docs-search-results" aria-expanded="false" />
+      <kbd class="docs-search__key" aria-hidden="true">⌘K</kbd>
+    </div>
+    <div class="docs-search__panel" data-docs-search-panel hidden>
+      <div class="docs-search__status" data-docs-search-status></div>
+      <div class="docs-search__results" id="docs-search-results" data-docs-search-results role="listbox" aria-label="Search results"></div>
+    </div>
+  </div>
+          <div class="docs-prose" data-pagefind-body>
+<h1 id="installation"><a class="docs-anchor" href="#installation" aria-label="Link to installation" data-pagefind-ignore>#</a>Installation</h1>
 <p>For the happy path (<code>cargo install nyx-scanner</code>, release binary on PATH), see the README. This page covers platform-specific notes and upgrade paths.</p>
-<h2 id="supported-platforms"><a class="docs-anchor" href="#supported-platforms" aria-label="Link to supported-platforms">#</a>Supported platforms</h2>
+<h2 id="supported-platforms"><a class="docs-anchor" href="#supported-platforms" aria-label="Link to supported-platforms" data-pagefind-ignore>#</a>Supported platforms</h2>
 <p>Release binaries are published for:</p>
 <table>
 <thead>
@@ -167,7 +180,7 @@
 </tr>
 </tbody></table>
 <p>Build from source works on any stable Rust 1.88+ target (edition 2024).</p>
-<h2 id="verify-the-download"><a class="docs-anchor" href="#verify-the-download" aria-label="Link to verify-the-download">#</a>Verify the download</h2>
+<h2 id="verify-the-download"><a class="docs-anchor" href="#verify-the-download" aria-label="Link to verify-the-download" data-pagefind-ignore>#</a>Verify the download</h2>
 <p>Each release attaches a <code>SHA256SUMS</code> file. When the maintainer signs the release, a detached <code>SHA256SUMS.asc</code> is published alongside it.</p>
 <pre><code class="hljs language-bash"><span class="hljs-comment"># Verify the checksum file&#x27;s signature (skip if .asc isn&#x27;t present)</span>
 gpg --verify SHA256SUMS.asc SHA256SUMS
@@ -175,12 +188,12 @@ gpg --verify SHA256SUMS.asc SHA256SUMS
 <span class="hljs-comment"># Then check your archive against it</span>
 <span class="hljs-built_in">sha256sum</span> -c SHA256SUMS --ignore-missing</code></pre>
 <p>If <code>sha256sum</code> is missing on macOS, <code>shasum -a 256 -c SHA256SUMS --ignore-missing</code> is equivalent.</p>
-<h2 id="windows"><a class="docs-anchor" href="#windows" aria-label="Link to windows">#</a>Windows</h2>
+<h2 id="windows"><a class="docs-anchor" href="#windows" aria-label="Link to windows" data-pagefind-ignore>#</a>Windows</h2>
 <pre><code class="hljs language-powershell"><span class="hljs-built_in">Expand-Archive</span> <span class="hljs-literal">-Path</span> nyx<span class="hljs-literal">-x86_64-pc-windows-msvc</span>.zip <span class="hljs-literal">-DestinationPath</span> .
 <span class="hljs-built_in">Move-Item</span> <span class="hljs-literal">-Path</span> .\nyx.exe <span class="hljs-literal">-Destination</span> <span class="hljs-string">&quot;C:\Program Files\Nyx\&quot;</span>
 <span class="hljs-comment"># Add C:\Program Files\Nyx to PATH in System Properties → Environment Variables</span>
 nyx <span class="hljs-literal">--version</span></code></pre>
-<h2 id="build-from-source"><a class="docs-anchor" href="#build-from-source" aria-label="Link to build-from-source">#</a>Build from source</h2>
+<h2 id="build-from-source"><a class="docs-anchor" href="#build-from-source" aria-label="Link to build-from-source" data-pagefind-ignore>#</a>Build from source</h2>
 <pre><code class="hljs language-bash">git <span class="hljs-built_in">clone</span> https://github.com/elicpeter/nyx.git
 <span class="hljs-built_in">cd</span> nyx
 cargo build --release
@@ -203,11 +216,11 @@ cargo build --release
 <td>Links against a system-installed Z3 instead of bundling</td>
 </tr>
 </tbody></table>
-<h2 id="upgrading"><a class="docs-anchor" href="#upgrading" aria-label="Link to upgrading">#</a>Upgrading</h2>
+<h2 id="upgrading"><a class="docs-anchor" href="#upgrading" aria-label="Link to upgrading" data-pagefind-ignore>#</a>Upgrading</h2>
 <p>Nyx stores its scanner version in the project&#39;s index database. When the binary&#39;s version differs from the stored version, the index is wiped on the next scan and rebuilt against the new engine. You&#39;ll see one info-level log line:</p>
 <pre><code class="hljs language-plain">engine <span class="hljs-keyword">version</span> changed (&lt;<span class="hljs-built_in">old</span>&gt; → &lt;<span class="hljs-built_in">new</span>&gt;), rebuilding <span class="hljs-keyword">index</span></code></pre>
 <p>No flag needed. If you see this on <em>every</em> scan, the metadata row isn&#39;t being persisted; file an issue.</p>
-<h2 id="corrupt-database-recovery"><a class="docs-anchor" href="#corrupt-database-recovery" aria-label="Link to corrupt-database-recovery">#</a>Corrupt database recovery</h2>
+<h2 id="corrupt-database-recovery"><a class="docs-anchor" href="#corrupt-database-recovery" aria-label="Link to corrupt-database-recovery" data-pagefind-ignore>#</a>Corrupt database recovery</h2>
 <p>If the SQLite file itself is damaged (killed scan, full disk), delete it and let the next scan rebuild from scratch:</p>
 <pre><code class="hljs language-bash"><span class="hljs-built_in">rm</span> <span class="hljs-string">&quot;<span class="hljs-subst">$(nyx config path)</span>&quot;</span>/&lt;project&gt;.sqlite*</code></pre>
 <p>Only the named project&#39;s rows are affected.</p>

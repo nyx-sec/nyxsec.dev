@@ -24,6 +24,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="../../styles.css" />
+    <script defer src="../../docs/search.js"></script>
 
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content="Nyx" />
@@ -143,14 +144,26 @@
       <div class="docs-shell">
         <nav class="docs-sidebar" aria-label="Documentation"><a class="docs-sidebar__brand" href="../">Docs</a><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Getting started</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="../quickstart.html">Quickstart</a></li><li><a class="docs-sidebar__link" href="../installation.html">Installation</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Using nyx</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="../cli.html">CLI reference</a></li><li><a class="docs-sidebar__link" href="../serve.html">Browser UI</a></li><li><a class="docs-sidebar__link" href="../configuration.html">Configuration</a></li><li><a class="docs-sidebar__link" href="../output.html">Output formats</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Coverage</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="../language-maturity.html">Language maturity</a></li><li><a class="docs-sidebar__link" href="../rules.html">Rules</a></li><li><a class="docs-sidebar__link" href="../auth.html">Auth analysis</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Under the hood</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="../how-it-works.html">How it works</a></li><li><a class="docs-sidebar__link" href="../advanced-analysis.html">Advanced analysis</a></li><li><a class="docs-sidebar__link" href="../detectors.html">Detectors</a><ul class="docs-sidebar__sublist"><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="../detectors/patterns.html">Patterns</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="../detectors/cfg.html">CFG</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="../detectors/state.html">State</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="../detectors/taint.html" aria-current="page">Taint</a></li></ul></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Project</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="../roadmap.html">Roadmap</a></li><li><a class="docs-sidebar__link" href="../changelog.html">Changelog</a></li></ul></div></nav>
         <article class="docs-content">
-          <div class="docs-prose">
-<h1 id="taint-analysis"><a class="docs-anchor" href="#taint-analysis" aria-label="Link to taint-analysis">#</a>Taint analysis</h1>
+          <div class="docs-search docs-search--content" data-docs-search>
+    <label class="visually-hidden" for="docs-search-input">Search docs</label>
+    <div class="docs-search__control">
+      <span class="docs-search__icon" aria-hidden="true"></span>
+      <input id="docs-search-input" data-docs-search-input type="search" placeholder="Search docs" autocomplete="off" autocapitalize="none" spellcheck="false" role="combobox" aria-autocomplete="list" aria-controls="docs-search-results" aria-expanded="false" />
+      <kbd class="docs-search__key" aria-hidden="true">⌘K</kbd>
+    </div>
+    <div class="docs-search__panel" data-docs-search-panel hidden>
+      <div class="docs-search__status" data-docs-search-status></div>
+      <div class="docs-search__results" id="docs-search-results" data-docs-search-results role="listbox" aria-label="Search results"></div>
+    </div>
+  </div>
+          <div class="docs-prose" data-pagefind-body>
+<h1 id="taint-analysis"><a class="docs-anchor" href="#taint-analysis" aria-label="Link to taint-analysis" data-pagefind-ignore>#</a>Taint analysis</h1>
 <p>Nyx tracks untrusted data from <strong>sources</strong> (where it enters the program) through assignments and function calls to <strong>sinks</strong> (where it&#39;s used dangerously). If the flow reaches a sink without passing a matching <strong>sanitizer</strong>, a finding fires.</p>
 <p>The engine is a monotone forward dataflow over a finite lattice with guaranteed termination. It&#39;s flow-sensitive inside a function, and interprocedural across files via persisted per-function summaries.</p>
-<h2 id="rule-id"><a class="docs-anchor" href="#rule-id" aria-label="Link to rule-id">#</a>Rule ID</h2>
+<h2 id="rule-id"><a class="docs-anchor" href="#rule-id" aria-label="Link to rule-id" data-pagefind-ignore>#</a>Rule ID</h2>
 <pre><code class="hljs language-plain">taint-unsanitised-<span class="hljs-attribute">flow</span> (<span class="hljs-selector-tag">source</span> &lt;<span class="hljs-selector-tag">line</span>&gt;:&lt;col&gt;)</code></pre>
 <p>One rule ID, parameterized by the source location. Suppressions can target either the base ID or the full string.</p>
-<h2 id="what-it-detects"><a class="docs-anchor" href="#what-it-detects" aria-label="Link to what-it-detects">#</a>What it detects</h2>
+<h2 id="what-it-detects"><a class="docs-anchor" href="#what-it-detects" aria-label="Link to what-it-detects" data-pagefind-ignore>#</a>What it detects</h2>
 <ul>
 <li>User input flowing to shell execution: <code>req.body.cmd</code> → <code>child_process.exec</code></li>
 <li>User input flowing to code evaluation: <code>req.query.code</code> → <code>eval</code></li>
@@ -160,14 +173,14 @@
 <li>File contents flowing to privileged sinks: <code>fs::read_to_string</code> → <code>db.execute</code></li>
 <li>Any other source-to-sink flow where the sink&#39;s required capability is not stripped along the way</li>
 </ul>
-<h2 id="what-it-cant-detect"><a class="docs-anchor" href="#what-it-cant-detect" aria-label="Link to what-it-cant-detect">#</a>What it can&#39;t detect</h2>
+<h2 id="what-it-cant-detect"><a class="docs-anchor" href="#what-it-cant-detect" aria-label="Link to what-it-cant-detect" data-pagefind-ignore>#</a>What it can&#39;t detect</h2>
 <ul>
 <li><strong>Library calls without summaries.</strong> If a callee has no summary (no source, binary-only dependency), Nyx treats it as neither propagating nor sanitizing. This is conservative for sanitization but lossy for propagation.</li>
 <li><strong>Deep pointer aliasing.</strong> <code>let y = &amp;x; sink(*y)</code> works through one level, but arbitrary chains of pointer arithmetic and aliased writes (<code>*p</code>, <code>p-&gt;field</code> in C/C++) are not tracked end-to-end. Function pointers and indirect calls resolve to no callee.</li>
 <li><strong>Implicit flows.</strong> Taint follows explicit data, not branching signal. <code>if (secret) x = 1 else x = 0</code> does not taint <code>x</code>.</li>
 <li><strong>Globals and statics across functions.</strong> Not tracked across function boundaries.</li>
 </ul>
-<h2 id="common-false-positives"><a class="docs-anchor" href="#common-false-positives" aria-label="Link to common-false-positives">#</a>Common false positives</h2>
+<h2 id="common-false-positives"><a class="docs-anchor" href="#common-false-positives" aria-label="Link to common-false-positives" data-pagefind-ignore>#</a>Common false positives</h2>
 <table>
 <thead>
 <tr>
@@ -197,7 +210,7 @@
 <td>Summarize the wrapper explicitly or add it as a sanitizer</td>
 </tr>
 </tbody></table>
-<h2 id="common-false-negatives"><a class="docs-anchor" href="#common-false-negatives" aria-label="Link to common-false-negatives">#</a>Common false negatives</h2>
+<h2 id="common-false-negatives"><a class="docs-anchor" href="#common-false-negatives" aria-label="Link to common-false-negatives" data-pagefind-ignore>#</a>Common false negatives</h2>
 <table>
 <thead>
 <tr>
@@ -222,7 +235,7 @@
 <td>Summary approximation loses precision at depth</td>
 </tr>
 </tbody></table>
-<h2 id="confidence-signals"><a class="docs-anchor" href="#confidence-signals" aria-label="Link to confidence-signals">#</a>Confidence signals</h2>
+<h2 id="confidence-signals"><a class="docs-anchor" href="#confidence-signals" aria-label="Link to confidence-signals" data-pagefind-ignore>#</a>Confidence signals</h2>
 <p>Higher confidence:</p>
 <ul>
 <li>Source + Sink both present in evidence with specific call locations.</li>
@@ -237,22 +250,22 @@
 <li>Source is a database read or internal file (pre-validated at insertion is common).</li>
 <li>Engine note <code>ForwardBailed</code> / <code>PathWidened</code>. Use <code>--require-converged</code> to drop these in strict gates.</li>
 </ul>
-<h2 id="tuning"><a class="docs-anchor" href="#tuning" aria-label="Link to tuning">#</a>Tuning</h2>
-<h3 id="custom-sanitizer"><a class="docs-anchor" href="#custom-sanitizer" aria-label="Link to custom-sanitizer">#</a>Custom sanitizer</h3>
+<h2 id="tuning"><a class="docs-anchor" href="#tuning" aria-label="Link to tuning" data-pagefind-ignore>#</a>Tuning</h2>
+<h3 id="custom-sanitizer"><a class="docs-anchor" href="#custom-sanitizer" aria-label="Link to custom-sanitizer" data-pagefind-ignore>#</a>Custom sanitizer</h3>
 <pre><code class="hljs language-toml"><span class="hljs-comment"># nyx.local</span>
 <span class="hljs-section">[[analysis.languages.javascript.rules]]</span>
 <span class="hljs-attr">matchers</span> = [<span class="hljs-string">&quot;escapeHtml&quot;</span>, <span class="hljs-string">&quot;sanitizeInput&quot;</span>]
 <span class="hljs-attr">kind</span>     = <span class="hljs-string">&quot;sanitizer&quot;</span>
 <span class="hljs-attr">cap</span>      = <span class="hljs-string">&quot;html_escape&quot;</span></code></pre>
 <p>Or: <code>nyx config add-rule --lang javascript --matcher escapeHtml --kind sanitizer --cap html_escape</code>.</p>
-<h3 id="filter-by-severity-or-confidence"><a class="docs-anchor" href="#filter-by-severity-or-confidence" aria-label="Link to filter-by-severity-or-confidence">#</a>Filter by severity or confidence</h3>
+<h3 id="filter-by-severity-or-confidence"><a class="docs-anchor" href="#filter-by-severity-or-confidence" aria-label="Link to filter-by-severity-or-confidence" data-pagefind-ignore>#</a>Filter by severity or confidence</h3>
 <pre><code class="hljs language-bash">nyx scan . --severity HIGH
 nyx scan . --min-confidence medium</code></pre>
-<h3 id="skip-dataflow-entirely"><a class="docs-anchor" href="#skip-dataflow-entirely" aria-label="Link to skip-dataflow-entirely">#</a>Skip dataflow entirely</h3>
+<h3 id="skip-dataflow-entirely"><a class="docs-anchor" href="#skip-dataflow-entirely" aria-label="Link to skip-dataflow-entirely" data-pagefind-ignore>#</a>Skip dataflow entirely</h3>
 <pre><code class="hljs language-bash">nyx scan . --mode ast</code></pre>
 <p>AST-only mode gives you structural pattern matches without taint.</p>
 <p>In the browser UI, taint findings render as a numbered flow walk so you can see each hop the engine took:</p>
-<p align="center"><img src="../assets/screenshots/docs/serve-finding-detail.png" alt="Nyx finding detail: HIGH taint-unsanitised-flow with numbered source → call → sink steps and How to fix guidance" width="900"/></p><h2 id="example"><a class="docs-anchor" href="#example" aria-label="Link to example">#</a>Example</h2>
+<p align="center"><img src="../assets/screenshots/docs/serve-finding-detail.png" alt="Nyx finding detail: HIGH taint-unsanitised-flow with numbered source → call → sink steps and How to fix guidance" width="900"/></p><h2 id="example"><a class="docs-anchor" href="#example" aria-label="Link to example" data-pagefind-ignore>#</a>Example</h2>
 <p>Rust:</p>
 <pre><code class="hljs language-rust"><span class="hljs-keyword">use</span> std::env;
 <span class="hljs-keyword">use</span> std::process::Command;
@@ -267,7 +280,7 @@ nyx scan . --min-confidence medium</code></pre>
 <span class="hljs-symbol">       Source:</span> env::var (<span class="hljs-number">5</span>:<span class="hljs-number">15</span>)
 <span class="hljs-symbol">       Sink:</span>   Command::new</code></pre>
 <p>Safe rewrite: drop the shell and pass the value as argv directly (<code>Command::new(&amp;cmd).output()</code>), or validate against an allowlist before passing to the shell.</p>
-<h2 id="capabilities"><a class="docs-anchor" href="#capabilities" aria-label="Link to capabilities">#</a>Capabilities</h2>
+<h2 id="capabilities"><a class="docs-anchor" href="#capabilities" aria-label="Link to capabilities" data-pagefind-ignore>#</a>Capabilities</h2>
 <p>Sources, sanitizers, and sinks are linked by named capabilities. A sanitizer only clears taint for the cap it declares. A sink only fires when the remaining taint still carries its required cap.</p>
 <table>
 <thead>
@@ -412,7 +425,7 @@ nyx scan . --min-confidence medium</code></pre>
 </tr>
 </tbody></table>
 <p>Sources typically use <code>cap = &quot;all&quot;</code> so they match every sink. Sinks declare the specific cap they need. Sanitizers only clear the cap they name.</p>
-<h2 id="source-sensitivity"><a class="docs-anchor" href="#source-sensitivity" aria-label="Link to source-sensitivity">#</a>Source sensitivity</h2>
+<h2 id="source-sensitivity"><a class="docs-anchor" href="#source-sensitivity" aria-label="Link to source-sensitivity" data-pagefind-ignore>#</a>Source sensitivity</h2>
 <p>Some detector classes need to know not just <em>that</em> a value is attacker-influenced but <em>what kind</em> of value it is. Each source carries a <code>SourceKind</code> (<code>UserInput</code>, <code>Cookie</code>, <code>Header</code>, <code>EnvironmentConfig</code>, <code>FileSystem</code>, <code>Database</code>, <code>CaughtException</code>, <code>Unknown</code>) and a derived sensitivity tier:</p>
 <table>
 <thead>
@@ -447,9 +460,9 @@ nyx scan . --min-confidence medium</code></pre>
 <span class="hljs-attr">kind</span>     = <span class="hljs-string">&quot;sanitizer&quot;</span>
 <span class="hljs-attr">cap</span>      = <span class="hljs-string">&quot;data_exfil&quot;</span></code></pre>
 <p>Or re-classify the source itself with a custom Source rule whose name matches one of the Sensitive substrings (<code>cookie</code>, <code>header</code>).</p>
-<h2 id="dataexfil-suppression-layers"><a class="docs-anchor" href="#dataexfil-suppression-layers" aria-label="Link to dataexfil-suppression-layers">#</a>DATA_EXFIL suppression layers</h2>
+<h2 id="dataexfil-suppression-layers"><a class="docs-anchor" href="#dataexfil-suppression-layers" aria-label="Link to dataexfil-suppression-layers" data-pagefind-ignore>#</a>DATA_EXFIL suppression layers</h2>
 <p>Three suppression knobs ship by default so projects can match the cap to their architecture without per-call suppressions.</p>
-<h3 id="1-forwarding-wrapper-sanitizer-convention"><a class="docs-anchor" href="#1-forwarding-wrapper-sanitizer-convention" aria-label="Link to 1-forwarding-wrapper-sanitizer-convention">#</a>1. Forwarding-wrapper sanitizer convention</h3>
+<h3 id="1-forwarding-wrapper-sanitizer-convention"><a class="docs-anchor" href="#1-forwarding-wrapper-sanitizer-convention" aria-label="Link to 1-forwarding-wrapper-sanitizer-convention" data-pagefind-ignore>#</a>1. Forwarding-wrapper sanitizer convention</h3>
 <p>A named function that exists to <em>forward</em> a payload across a known boundary is the developer&#39;s explicit decision to send the data. The default sanitizer rules treat the following identifiers as <code>Sanitizer(data_exfil)</code> in JavaScript and TypeScript:</p>
 <pre><code class="hljs language-plain">serializeForUpstream
 forwardPayload
@@ -463,7 +476,7 @@ logEvent</code></pre>
 <span class="hljs-attr">kind</span>     = <span class="hljs-string">&quot;sanitizer&quot;</span>
 <span class="hljs-attr">cap</span>      = <span class="hljs-string">&quot;data_exfil&quot;</span></code></pre>
 <p>The rule of thumb: a function that <em>only</em> exists to ship a payload to a known boundary belongs in this list. A function that <em>might</em> leak (a generic HTTP wrapper, a logging helper that writes to an arbitrary destination) does not.</p>
-<h3 id="2-destination-allowlist"><a class="docs-anchor" href="#2-destination-allowlist" aria-label="Link to 2-destination-allowlist">#</a>2. Destination allowlist</h3>
+<h3 id="2-destination-allowlist"><a class="docs-anchor" href="#2-destination-allowlist" aria-label="Link to 2-destination-allowlist" data-pagefind-ignore>#</a>2. Destination allowlist</h3>
 <p>Configure a set of trusted outbound prefixes once and the cap is dropped on every site whose destination argument has a static prefix that begins with one of them:</p>
 <pre><code class="hljs language-toml"><span class="hljs-section">[detectors.data_exfil]</span>
 <span class="hljs-attr">trusted_destinations</span> = [
@@ -472,12 +485,12 @@ logEvent</code></pre>
 ]</code></pre>
 <p>Use full origins or origin-pinned paths so a partial-host match across unrelated origins cannot occur. <code>https://api.</code> would also match <code>https://api.evil.example.com/</code>, so the entry must include the path separator (<code>/</code>) at the end of the host.</p>
 <p>The match consults the abstract string domain: a literal URL is a static prefix; a template literal <code>\</code><a href="https://api.internal/${id}\``">https://api.internal/${id}\``</a> exposes the prefix <code>https://api.internal/</code>; a fully dynamic URL has no prefix and the cap fires as usual.</p>
-<h3 id="3-detector-class-disable"><a class="docs-anchor" href="#3-detector-class-disable" aria-label="Link to 3-detector-class-disable">#</a>3. Detector-class disable</h3>
+<h3 id="3-detector-class-disable"><a class="docs-anchor" href="#3-detector-class-disable" aria-label="Link to 3-detector-class-disable" data-pagefind-ignore>#</a>3. Detector-class disable</h3>
 <p>Some projects forward user-bound payloads as a matter of architecture. Turn the entire detector class off when the noise is permanent:</p>
 <pre><code class="hljs language-toml"><span class="hljs-section">[detectors.data_exfil]</span>
 <span class="hljs-attr">enabled</span> = <span class="hljs-literal">false</span></code></pre>
 <p><code>enabled = false</code> strips <code>Cap::DATA_EXFIL</code> from sink caps before event emission, so no <code>taint-data-exfiltration</code> finding reaches the report. The decision is per-project; other projects loaded by the same <code>nyx serve</code> instance keep their own settings.</p>
-<h2 id="dataexfil-sinks-per-language"><a class="docs-anchor" href="#dataexfil-sinks-per-language" aria-label="Link to dataexfil-sinks-per-language">#</a>DATA_EXFIL sinks per language</h2>
+<h2 id="dataexfil-sinks-per-language"><a class="docs-anchor" href="#dataexfil-sinks-per-language" aria-label="Link to dataexfil-sinks-per-language" data-pagefind-ignore>#</a>DATA_EXFIL sinks per language</h2>
 <p>Sinks Nyx ships with for <code>Cap::DATA_EXFIL</code>. The body, headers, or json payload arg fires; the URL arg routes through the SSRF gate and emits <code>taint-unsanitised-flow</code> instead.</p>
 <table>
 <thead>
@@ -529,7 +542,7 @@ logEvent</code></pre>
 </tr>
 </tbody></table>
 <p>Add project-specific sinks with <code>nyx config add-rule --kind sink --cap data_exfil --matcher &lt;name&gt;</code> or the equivalent TOML rule.</p>
-<h2 id="dataexfil-calibration-ranges"><a class="docs-anchor" href="#dataexfil-calibration-ranges" aria-label="Link to dataexfil-calibration-ranges">#</a>DATA_EXFIL calibration ranges</h2>
+<h2 id="dataexfil-calibration-ranges"><a class="docs-anchor" href="#dataexfil-calibration-ranges" aria-label="Link to dataexfil-calibration-ranges" data-pagefind-ignore>#</a>DATA_EXFIL calibration ranges</h2>
 <p><code>taint-data-exfiltration</code> is calibrated below the other taint classes on purpose.</p>
 <table>
 <thead>

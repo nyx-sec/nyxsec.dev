@@ -12,6 +12,7 @@
   "devDependencies": {
     "highlight.js": "^11.11.1",
     "marked": "^18.0.3",
+    "pagefind": "^1.5.2",
     "prettier": "^3.5.3"
   }
 }

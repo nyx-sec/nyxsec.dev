@@ -157,12 +157,6 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://nyxscan.dev/docs/recall-validation.html</loc>
-    <lastmod>2026-05-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
     <loc>https://nyxscan.dev/docs/roadmap.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>monthly</changefreq>

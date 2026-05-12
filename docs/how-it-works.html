@@ -24,6 +24,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="../styles.css" />
+    <script defer src="../docs/search.js"></script>
 
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content="Nyx" />
@@ -137,10 +138,22 @@
       <div class="docs-shell">
         <nav class="docs-sidebar" aria-label="Documentation"><a class="docs-sidebar__brand" href="">Docs</a><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Getting started</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="quickstart.html">Quickstart</a></li><li><a class="docs-sidebar__link" href="installation.html">Installation</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Using nyx</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="cli.html">CLI reference</a></li><li><a class="docs-sidebar__link" href="serve.html">Browser UI</a></li><li><a class="docs-sidebar__link" href="configuration.html">Configuration</a></li><li><a class="docs-sidebar__link" href="output.html">Output formats</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Coverage</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="language-maturity.html">Language maturity</a></li><li><a class="docs-sidebar__link" href="rules.html">Rules</a></li><li><a class="docs-sidebar__link" href="auth.html">Auth analysis</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Under the hood</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="how-it-works.html" aria-current="page">How it works</a></li><li><a class="docs-sidebar__link" href="advanced-analysis.html">Advanced analysis</a></li><li><a class="docs-sidebar__link" href="detectors.html">Detectors</a><ul class="docs-sidebar__sublist"><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/patterns.html">Patterns</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/cfg.html">CFG</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/state.html">State</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/taint.html">Taint</a></li></ul></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Project</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="roadmap.html">Roadmap</a></li><li><a class="docs-sidebar__link" href="changelog.html">Changelog</a></li></ul></div></nav>
         <article class="docs-content">
-          <div class="docs-prose">
-<h1 id="how-nyx-works"><a class="docs-anchor" href="#how-nyx-works" aria-label="Link to how-nyx-works">#</a>How Nyx works</h1>
+          <div class="docs-search docs-search--content" data-docs-search>
+    <label class="visually-hidden" for="docs-search-input">Search docs</label>
+    <div class="docs-search__control">
+      <span class="docs-search__icon" aria-hidden="true"></span>
+      <input id="docs-search-input" data-docs-search-input type="search" placeholder="Search docs" autocomplete="off" autocapitalize="none" spellcheck="false" role="combobox" aria-autocomplete="list" aria-controls="docs-search-results" aria-expanded="false" />
+      <kbd class="docs-search__key" aria-hidden="true">⌘K</kbd>
+    </div>
+    <div class="docs-search__panel" data-docs-search-panel hidden>
+      <div class="docs-search__status" data-docs-search-status></div>
+      <div class="docs-search__results" id="docs-search-results" data-docs-search-results role="listbox" aria-label="Search results"></div>
+    </div>
+  </div>
+          <div class="docs-prose" data-pagefind-body>
+<h1 id="how-nyx-works"><a class="docs-anchor" href="#how-nyx-works" aria-label="Link to how-nyx-works" data-pagefind-ignore>#</a>How Nyx works</h1>
 <p>If you&#39;re going to act on a finding, it helps to know how the scanner got there. This page is the short version. Source paths are linked where the answer to &quot;exactly what does it do&quot; lives in the code.</p>
-<h2 id="the-pipeline"><a class="docs-anchor" href="#the-pipeline" aria-label="Link to the-pipeline">#</a>The pipeline</h2>
+<h2 id="the-pipeline"><a class="docs-anchor" href="#the-pipeline" aria-label="Link to the-pipeline" data-pagefind-ignore>#</a>The pipeline</h2>
 <p>A scan runs in two passes over the file tree, with an optional SQLite index that lets the second scan skip files whose content hash hasn&#39;t changed.</p>
 <p><strong>Pass 1, per file.</strong> Tree-sitter parses the file. Nyx builds an intra-procedural control-flow graph, lowers it to SSA, and extracts a summary per function describing what that function does at the boundary: which arguments flow to sinks, which sources it reads from, which sinks it calls, what taint it strips, what it returns. Summaries are persisted to SQLite (<a href="https://github.com/elicpeter/nyx/tree/master/src/summary/"><code>src/summary/</code></a>, <a href="https://github.com/elicpeter/nyx/blob/master/src/database.rs"><code>src/database.rs</code></a>).</p>
 <p><strong>Summary merge.</strong> All per-file summaries get unioned into a global map keyed by qualified function name.</p>
@@ -148,7 +161,7 @@
 <p>Two extra layers tune precision around calls. <strong>Context-sensitive inlining</strong> (k=1) re-runs intra-file callees with the actual argument taint at the call site, so a helper called once with tainted input and once with sanitized input produces the right result for each call. <strong>SCC fixed-point</strong>: when a group of mutually-recursive functions forms a strongly-connected component in the call graph, the engine iterates summaries to a joint fixed-point (capped at 64 iterations). SCCs that span files are also handled.</p>
 <p>When a method call has a receiver typed as a super-class, trait, or interface, <strong>hierarchy fan-out</strong> widens the resolved callee set to every concrete implementer the engine has seen. A class diagram extracted in pass 1 (Java extends/implements, Rust impl-for, TS/JS extends, Python bases, Ruby includes, PHP extends/implements, C++ inheritance) feeds an index that the call resolver consults during pass 2. The fan-out is capped at 8 implementers per call site; over-fanning is a precision tax, not a soundness issue.</p>
 <p>A separate <strong>field-sensitive points-to</strong> pass tracks abstract locations down to the field level, so <code>c.mu.Lock()</code> is a lock on <code>Field(c, mu)</code> rather than on <code>c</code> as a whole. That distinction is what lets the resource-lifecycle and taint passes tell <code>obj.field = tainted; sink(obj.other_field)</code> apart from the conservative whole-variable approximation. Subscript reads and writes (<code>arr[i]</code>, <code>map[k] = v</code>) lower to synthetic <code>__index_get__</code> / <code>__index_set__</code> calls so the same container model handles them. Set <code>NYX_POINTER_ANALYSIS=0</code> to fall back to the pre-pointer-pass behaviour for baseline comparison.</p>
-<h2 id="optional-analyses-on-top"><a class="docs-anchor" href="#optional-analyses-on-top" aria-label="Link to optional-analyses-on-top">#</a>Optional analyses on top</h2>
+<h2 id="optional-analyses-on-top"><a class="docs-anchor" href="#optional-analyses-on-top" aria-label="Link to optional-analyses-on-top" data-pagefind-ignore>#</a>Optional analyses on top</h2>
 <p>These run on top of the forward taint pass. They&#39;re independently switchable via <code>[analysis.engine]</code> config or matching CLI flags. See <a href="advanced-analysis.html">advanced-analysis.md</a> for the full description and tradeoffs.</p>
 <table>
 <thead>
@@ -195,7 +208,7 @@
 </tr>
 </tbody></table>
 <p><code>--engine-profile fast | balanced | deep</code> flips groups of these at once. <code>balanced</code> is the default and the configuration the benchmark numbers in <a href="language-maturity.html">language-maturity.md</a> are measured against.</p>
-<h2 id="where-bounds-live"><a class="docs-anchor" href="#where-bounds-live" aria-label="Link to where-bounds-live">#</a>Where bounds live</h2>
+<h2 id="where-bounds-live"><a class="docs-anchor" href="#where-bounds-live" aria-label="Link to where-bounds-live" data-pagefind-ignore>#</a>Where bounds live</h2>
 <p>Static analysis at scale means choosing where to stop. Nyx exposes its bounds rather than hiding them:</p>
 <ul>
 <li><strong>Inline depth</strong> is k=1. Callees larger than the inline body-size cap fall back to summary-based resolution.</li>
@@ -204,7 +217,7 @@
 <li><strong>Symbolic expressions</strong> cap at depth 32. Deeper expressions degrade to <code>Unknown</code> rather than growing without bound.</li>
 </ul>
 <p>Findings whose engine notes indicate a bound was hit can be filtered with <code>--require-converged</code> for strict CI gates. The flag drops over-reports and bails; under-reports (where the emitted finding is still real but the result set is a lower bound) are kept.</p>
-<h2 id="what-you-get-out"><a class="docs-anchor" href="#what-you-get-out" aria-label="Link to what-you-get-out">#</a>What you get out</h2>
+<h2 id="what-you-get-out"><a class="docs-anchor" href="#what-you-get-out" aria-label="Link to what-you-get-out" data-pagefind-ignore>#</a>What you get out</h2>
 <p>Each finding carries the source location, the sink location, the path in between (when symex produced one), the rule ID, severity, attack-surface score, confidence level, and a list of engine notes describing any precision loss along the way. Console output is human-readable; JSON and SARIF carry the full evidence object for tooling.</p>
 <p>For the JSON shape and SARIF mapping, see <a href="output.html">output.md</a>.</p>
 

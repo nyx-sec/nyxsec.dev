@@ -24,6 +24,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="../styles.css" />
+    <script defer src="../docs/search.js"></script>
 
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content="Nyx" />
@@ -137,10 +138,22 @@
       <div class="docs-shell">
         <nav class="docs-sidebar" aria-label="Documentation"><a class="docs-sidebar__brand" href="">Docs</a><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Getting started</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="quickstart.html">Quickstart</a></li><li><a class="docs-sidebar__link" href="installation.html">Installation</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Using nyx</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="cli.html">CLI reference</a></li><li><a class="docs-sidebar__link" href="serve.html">Browser UI</a></li><li><a class="docs-sidebar__link" href="configuration.html" aria-current="page">Configuration</a></li><li><a class="docs-sidebar__link" href="output.html">Output formats</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Coverage</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="language-maturity.html">Language maturity</a></li><li><a class="docs-sidebar__link" href="rules.html">Rules</a></li><li><a class="docs-sidebar__link" href="auth.html">Auth analysis</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Under the hood</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="how-it-works.html">How it works</a></li><li><a class="docs-sidebar__link" href="advanced-analysis.html">Advanced analysis</a></li><li><a class="docs-sidebar__link" href="detectors.html">Detectors</a><ul class="docs-sidebar__sublist"><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/patterns.html">Patterns</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/cfg.html">CFG</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/state.html">State</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/taint.html">Taint</a></li></ul></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Project</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="roadmap.html">Roadmap</a></li><li><a class="docs-sidebar__link" href="changelog.html">Changelog</a></li></ul></div></nav>
         <article class="docs-content">
-          <div class="docs-prose">
-<h1 id="configuration"><a class="docs-anchor" href="#configuration" aria-label="Link to configuration">#</a>Configuration</h1>
+          <div class="docs-search docs-search--content" data-docs-search>
+    <label class="visually-hidden" for="docs-search-input">Search docs</label>
+    <div class="docs-search__control">
+      <span class="docs-search__icon" aria-hidden="true"></span>
+      <input id="docs-search-input" data-docs-search-input type="search" placeholder="Search docs" autocomplete="off" autocapitalize="none" spellcheck="false" role="combobox" aria-autocomplete="list" aria-controls="docs-search-results" aria-expanded="false" />
+      <kbd class="docs-search__key" aria-hidden="true">⌘K</kbd>
+    </div>
+    <div class="docs-search__panel" data-docs-search-panel hidden>
+      <div class="docs-search__status" data-docs-search-status></div>
+      <div class="docs-search__results" id="docs-search-results" data-docs-search-results role="listbox" aria-label="Search results"></div>
+    </div>
+  </div>
+          <div class="docs-prose" data-pagefind-body>
+<h1 id="configuration"><a class="docs-anchor" href="#configuration" aria-label="Link to configuration" data-pagefind-ignore>#</a>Configuration</h1>
 <p>Nyx uses TOML configuration files. A default config is auto-generated on first run. If you&#39;d rather edit settings and rules from the browser, the <a href="serve.html#config">Config page in <code>nyx serve</code></a> is a live editor that writes back to <code>nyx.local</code>:</p>
-<p align="center"><img src="assets/screenshots/docs/serve-config.png" alt="Nyx config page: General settings, Triage Sync toggle, Sources panel with language/matcher/capability dropdowns and a per-language matcher table" width="900"/></p><h2 id="file-locations"><a class="docs-anchor" href="#file-locations" aria-label="Link to file-locations">#</a>File Locations</h2>
+<p align="center"><img src="assets/screenshots/docs/serve-config.png" alt="Nyx config page: General settings, Triage Sync toggle, Sources panel with language/matcher/capability dropdowns and a per-language matcher table" width="900"/></p><h2 id="file-locations"><a class="docs-anchor" href="#file-locations" aria-label="Link to file-locations" data-pagefind-ignore>#</a>File Locations</h2>
 <table>
 <thead>
 <tr>
@@ -162,13 +175,13 @@
 </tr>
 </tbody></table>
 <p>Run <code>nyx config path</code> to see the exact directory on your system.</p>
-<h2 id="file-precedence"><a class="docs-anchor" href="#file-precedence" aria-label="Link to file-precedence">#</a>File Precedence</h2>
+<h2 id="file-precedence"><a class="docs-anchor" href="#file-precedence" aria-label="Link to file-precedence" data-pagefind-ignore>#</a>File Precedence</h2>
 <ol>
 <li><strong><code>nyx.conf</code></strong> -- Default config (auto-created from built-in template on first run)</li>
 <li><strong><code>nyx.local</code></strong> -- User overrides (loaded on top of defaults)</li>
 </ol>
 <p>Both files are optional. CLI flags take precedence over both.</p>
-<h2 id="merge-strategy"><a class="docs-anchor" href="#merge-strategy" aria-label="Link to merge-strategy">#</a>Merge Strategy</h2>
+<h2 id="merge-strategy"><a class="docs-anchor" href="#merge-strategy" aria-label="Link to merge-strategy" data-pagefind-ignore>#</a>Merge Strategy</h2>
 <table>
 <thead>
 <tr>
@@ -207,8 +220,8 @@
 <span class="hljs-comment"># Effective result:</span>
 <span class="hljs-comment"># [&quot;exe&quot;, &quot;foo&quot;, &quot;jpg&quot;, &quot;png&quot;]  -- sorted, deduped union</span></code></pre>
 <hr>
-<h2 id="full-schema"><a class="docs-anchor" href="#full-schema" aria-label="Link to full-schema">#</a>Full Schema</h2>
-<h3 id="scanner"><a class="docs-anchor" href="#scanner" aria-label="Link to scanner">#</a><code>[scanner]</code></h3>
+<h2 id="full-schema"><a class="docs-anchor" href="#full-schema" aria-label="Link to full-schema" data-pagefind-ignore>#</a>Full Schema</h2>
+<h3 id="scanner"><a class="docs-anchor" href="#scanner" aria-label="Link to scanner" data-pagefind-ignore>#</a><code>[scanner]</code></h3>
 <table>
 <thead>
 <tr>
@@ -303,7 +316,7 @@
 <td>Enable resource lifecycle + auth state analysis. Detects use-after-close, double-close, resource leaks (per-function scope), and unauthenticated access. Requires <code>mode = &quot;full&quot;</code> or <code>mode = &quot;taint&quot;</code>.</td>
 </tr>
 </tbody></table>
-<h3 id="database"><a class="docs-anchor" href="#database" aria-label="Link to database">#</a><code>[database]</code></h3>
+<h3 id="database"><a class="docs-anchor" href="#database" aria-label="Link to database" data-pagefind-ignore>#</a><code>[database]</code></h3>
 <table>
 <thead>
 <tr>
@@ -338,7 +351,7 @@
 <td>Run VACUUM before indexed scans</td>
 </tr>
 </tbody></table>
-<h3 id="output"><a class="docs-anchor" href="#output" aria-label="Link to output">#</a><code>[output]</code></h3>
+<h3 id="output"><a class="docs-anchor" href="#output" aria-label="Link to output" data-pagefind-ignore>#</a><code>[output]</code></h3>
 <table>
 <thead>
 <tr>
@@ -421,7 +434,7 @@
 <td>Number of example locations stored in rollup findings</td>
 </tr>
 </tbody></table>
-<h3 id="performance"><a class="docs-anchor" href="#performance" aria-label="Link to performance">#</a><code>[performance]</code></h3>
+<h3 id="performance"><a class="docs-anchor" href="#performance" aria-label="Link to performance" data-pagefind-ignore>#</a><code>[performance]</code></h3>
 <table>
 <thead>
 <tr>
@@ -486,7 +499,7 @@
 <td>Max memory in MiB (RESERVED)</td>
 </tr>
 </tbody></table>
-<h3 id="server"><a class="docs-anchor" href="#server" aria-label="Link to server">#</a><code>[server]</code></h3>
+<h3 id="server"><a class="docs-anchor" href="#server" aria-label="Link to server" data-pagefind-ignore>#</a><code>[server]</code></h3>
 <p>Configuration for the local web UI (<code>nyx serve</code>).</p>
 <table>
 <thead>
@@ -540,7 +553,7 @@
 <td>Maximum number of saved runs</td>
 </tr>
 </tbody></table>
-<h3 id="runs"><a class="docs-anchor" href="#runs" aria-label="Link to runs">#</a><code>[runs]</code></h3>
+<h3 id="runs"><a class="docs-anchor" href="#runs" aria-label="Link to runs" data-pagefind-ignore>#</a><code>[runs]</code></h3>
 <p>Configuration for scan run persistence and history.</p>
 <table>
 <thead>
@@ -582,7 +595,7 @@
 <td>Save code snippets in findings</td>
 </tr>
 </tbody></table>
-<h3 id="profilesname"><a class="docs-anchor" href="#profilesname" aria-label="Link to profilesname">#</a><code>[profiles.&lt;name&gt;]</code></h3>
+<h3 id="profilesname"><a class="docs-anchor" href="#profilesname" aria-label="Link to profilesname" data-pagefind-ignore>#</a><code>[profiles.&lt;name&gt;]</code></h3>
 <p>Named scan presets that override scan-related config. Activate with <code>--profile &lt;name&gt;</code>.</p>
 <p>All fields are optional; omitted fields inherit from the base config.</p>
 <table>
@@ -694,7 +707,7 @@
 </tr>
 </tbody></table>
 <p>User-defined profiles with the same name as a built-in will override it.</p>
-<h3 id="analysisengine"><a class="docs-anchor" href="#analysisengine" aria-label="Link to analysisengine">#</a><code>[analysis.engine]</code></h3>
+<h3 id="analysisengine"><a class="docs-anchor" href="#analysisengine" aria-label="Link to analysisengine" data-pagefind-ignore>#</a><code>[analysis.engine]</code></h3>
 <p>Release-grade switches for the optional analysis passes.  Each toggle has a
 matching CLI flag (pair of <code>--foo</code> / <code>--no-foo</code>) that overrides the config
 value for a single run.  These used to be <code>NYX_*</code> environment variables
@@ -825,7 +838,7 @@ the stable path.</p>
 </tbody></table>
 <p><strong>Engine-depth profile shortcut</strong>: instead of flipping individual toggles, pass <code>--engine-profile {fast,balanced,deep}</code> to set the whole stack at once.  Individual flags override the profile, so <code>--engine-profile fast --backwards-analysis</code> runs the fast stack with backwards analysis on.  See <code>docs/cli.md</code> for the exact toggle matrix.</p>
 <p><strong>Explain effective engine</strong>: pass <code>--explain-engine</code> to print the resolved engine configuration (profile + config + CLI overrides) and exit without scanning.</p>
-<h3 id="detectorsdataexfil"><a class="docs-anchor" href="#detectorsdataexfil" aria-label="Link to detectorsdataexfil">#</a><code>[detectors.data_exfil]</code></h3>
+<h3 id="detectorsdataexfil"><a class="docs-anchor" href="#detectorsdataexfil" aria-label="Link to detectorsdataexfil" data-pagefind-ignore>#</a><code>[detectors.data_exfil]</code></h3>
 <p>Per-project tuning for the <code>taint-data-exfiltration</code> rule. All fields are optional.</p>
 <table>
 <thead>
@@ -856,7 +869,7 @@ the stable path.</p>
   <span class="hljs-string">&quot;https://telemetry.example.com/&quot;</span>,
 ]</code></pre>
 <p>For the sanitizer convention, source sensitivity gate, and per-language sink coverage, see <a href="detectors/taint.html#data_exfil-suppression-layers">Detectors / Taint / DATA_EXFIL</a>.</p>
-<h3 id="analysislanguagesslug"><a class="docs-anchor" href="#analysislanguagesslug" aria-label="Link to analysislanguagesslug">#</a><code>[analysis.languages.&lt;slug&gt;]</code></h3>
+<h3 id="analysislanguagesslug"><a class="docs-anchor" href="#analysislanguagesslug" aria-label="Link to analysislanguagesslug" data-pagefind-ignore>#</a><code>[analysis.languages.&lt;slug&gt;]</code></h3>
 <p>Per-language custom rules. <code>&lt;slug&gt;</code> is one of: <code>rust</code>, <code>javascript</code>, <code>typescript</code>, <code>python</code>, <code>go</code>, <code>java</code>, <code>c</code>, <code>cpp</code>, <code>php</code>, <code>ruby</code>.</p>
 <table>
 <thead>
@@ -896,15 +909,15 @@ the stable path.</p>
                           <span class="hljs-comment"># &quot;prototype_pollution&quot; | &quot;all&quot;</span></code></pre>
 <p>Aliases accepted by <code>parse_cap</code> and <code>[..rules].cap</code>: <code>data_exfiltration</code> for <code>data_exfil</code>, <code>ldapi</code> for <code>ldap_injection</code>, <code>xpathi</code> for <code>xpath_injection</code>, <code>crlf</code> and <code>response_splitting</code> for <code>header_injection</code>, <code>redirect</code> for <code>open_redirect</code>, <code>template_injection</code> for <code>ssti</code>, <code>proto_pollution</code> for <code>prototype_pollution</code>.</p>
 <hr>
-<h2 id="example-configurations"><a class="docs-anchor" href="#example-configurations" aria-label="Link to example-configurations">#</a>Example Configurations</h2>
-<h3 id="minimal-override-nyxlocal"><a class="docs-anchor" href="#minimal-override-nyxlocal" aria-label="Link to minimal-override-nyxlocal">#</a>Minimal override (<code>nyx.local</code>)</h3>
+<h2 id="example-configurations"><a class="docs-anchor" href="#example-configurations" aria-label="Link to example-configurations" data-pagefind-ignore>#</a>Example Configurations</h2>
+<h3 id="minimal-override-nyxlocal"><a class="docs-anchor" href="#minimal-override-nyxlocal" aria-label="Link to minimal-override-nyxlocal" data-pagefind-ignore>#</a>Minimal override (<code>nyx.local</code>)</h3>
 <pre><code class="hljs language-toml"><span class="hljs-section">[scanner]</span>
 <span class="hljs-attr">min_severity</span> = <span class="hljs-string">&quot;Medium&quot;</span>
 
 <span class="hljs-section">[output]</span>
 <span class="hljs-attr">default_format</span> = <span class="hljs-string">&quot;json&quot;</span>
 <span class="hljs-attr">max_results</span> = <span class="hljs-number">100</span></code></pre>
-<h3 id="ci-optimized"><a class="docs-anchor" href="#ci-optimized" aria-label="Link to ci-optimized">#</a>CI-optimized</h3>
+<h3 id="ci-optimized"><a class="docs-anchor" href="#ci-optimized" aria-label="Link to ci-optimized" data-pagefind-ignore>#</a>CI-optimized</h3>
 <pre><code class="hljs language-toml"><span class="hljs-section">[scanner]</span>
 <span class="hljs-attr">mode</span> = <span class="hljs-string">&quot;full&quot;</span>
 <span class="hljs-attr">min_severity</span> = <span class="hljs-string">&quot;Medium&quot;</span>
@@ -916,19 +929,19 @@ the stable path.</p>
 
 <span class="hljs-section">[performance]</span>
 <span class="hljs-attr">worker_threads</span> = <span class="hljs-number">4</span></code></pre>
-<h3 id="using-a-scan-profile"><a class="docs-anchor" href="#using-a-scan-profile" aria-label="Link to using-a-scan-profile">#</a>Using a scan profile</h3>
+<h3 id="using-a-scan-profile"><a class="docs-anchor" href="#using-a-scan-profile" aria-label="Link to using-a-scan-profile" data-pagefind-ignore>#</a>Using a scan profile</h3>
 <pre><code class="hljs language-bash"><span class="hljs-comment"># Use a built-in profile</span>
 nyx scan --profile ci
 
 <span class="hljs-comment"># CLI flags still override profile values</span>
 nyx scan --profile ci --format json</code></pre>
-<h3 id="custom-profile"><a class="docs-anchor" href="#custom-profile" aria-label="Link to custom-profile">#</a>Custom profile</h3>
+<h3 id="custom-profile"><a class="docs-anchor" href="#custom-profile" aria-label="Link to custom-profile" data-pagefind-ignore>#</a>Custom profile</h3>
 <pre><code class="hljs language-toml"><span class="hljs-section">[profiles.security_audit]</span>
 <span class="hljs-attr">mode</span> = <span class="hljs-string">&quot;full&quot;</span>
 <span class="hljs-attr">min_severity</span> = <span class="hljs-string">&quot;Low&quot;</span>
 <span class="hljs-attr">enable_state_analysis</span> = <span class="hljs-literal">true</span>
 <span class="hljs-attr">show_all</span> = <span class="hljs-literal">true</span></code></pre>
-<h3 id="custom-rules-for-a-nodejs-project"><a class="docs-anchor" href="#custom-rules-for-a-nodejs-project" aria-label="Link to custom-rules-for-a-nodejs-project">#</a>Custom rules for a Node.js project</h3>
+<h3 id="custom-rules-for-a-nodejs-project"><a class="docs-anchor" href="#custom-rules-for-a-nodejs-project" aria-label="Link to custom-rules-for-a-nodejs-project" data-pagefind-ignore>#</a>Custom rules for a Node.js project</h3>
 <pre><code class="hljs language-toml"><span class="hljs-section">[analysis.languages.javascript]</span>
 <span class="hljs-attr">terminators</span> = [<span class="hljs-string">&quot;process.exit&quot;</span>, <span class="hljs-string">&quot;abort&quot;</span>]
 <span class="hljs-attr">event_handlers</span> = [<span class="hljs-string">&quot;addEventListener&quot;</span>]
@@ -947,7 +960,7 @@ nyx scan --profile ci --format json</code></pre>
 <span class="hljs-attr">matchers</span> = [<span class="hljs-string">&quot;getRequestBody&quot;</span>, <span class="hljs-string">&quot;readUserInput&quot;</span>]
 <span class="hljs-attr">kind</span> = <span class="hljs-string">&quot;source&quot;</span>
 <span class="hljs-attr">cap</span> = <span class="hljs-string">&quot;all&quot;</span></code></pre>
-<h3 id="adding-rules-via-cli"><a class="docs-anchor" href="#adding-rules-via-cli" aria-label="Link to adding-rules-via-cli">#</a>Adding rules via CLI</h3>
+<h3 id="adding-rules-via-cli"><a class="docs-anchor" href="#adding-rules-via-cli" aria-label="Link to adding-rules-via-cli" data-pagefind-ignore>#</a>Adding rules via CLI</h3>
 <pre><code class="hljs language-bash"><span class="hljs-comment"># Add a sanitizer</span>
 nyx config add-rule --lang javascript --matcher escapeHtml --kind sanitizer --<span class="hljs-built_in">cap</span> html_escape
 
@@ -957,7 +970,7 @@ nyx config add-terminator --lang javascript --name process.exit
 <span class="hljs-comment"># Verify</span>
 nyx config show</code></pre>
 <hr>
-<h2 id="config-validation"><a class="docs-anchor" href="#config-validation" aria-label="Link to config-validation">#</a>Config Validation</h2>
+<h2 id="config-validation"><a class="docs-anchor" href="#config-validation" aria-label="Link to config-validation" data-pagefind-ignore>#</a>Config Validation</h2>
 <p>Config is validated after loading and merging. Validation checks include:</p>
 <ul>
 <li>Server port must be 1–65535</li>
@@ -970,7 +983,7 @@ nyx config show</code></pre>
 </ul>
 <p>Invalid config produces structured error messages identifying the section, field, and issue.</p>
 <hr>
-<h2 id="state-analysis"><a class="docs-anchor" href="#state-analysis" aria-label="Link to state-analysis">#</a>State Analysis</h2>
+<h2 id="state-analysis"><a class="docs-anchor" href="#state-analysis" aria-label="Link to state-analysis" data-pagefind-ignore>#</a>State Analysis</h2>
 <p>State analysis detects resource lifecycle violations (use-after-close, double-close, resource leaks) and unauthenticated access patterns. It is <strong>enabled by default</strong>.</p>
 <p>To disable:</p>
 <pre><code class="hljs language-toml"><span class="hljs-section">[scanner]</span>
@@ -983,8 +996,8 @@ nyx config show</code></pre>
 <li>Most useful for C, C++, Rust, Go, and Java where acquire/release patterns are common</li>
 </ul>
 <hr>
-<h2 id="upgrading"><a class="docs-anchor" href="#upgrading" aria-label="Link to upgrading">#</a>Upgrading</h2>
-<h3 id="engine-version-mismatch-is-handled-automatically"><a class="docs-anchor" href="#engine-version-mismatch-is-handled-automatically" aria-label="Link to engine-version-mismatch-is-handled-automatically">#</a>Engine-version mismatch is handled automatically</h3>
+<h2 id="upgrading"><a class="docs-anchor" href="#upgrading" aria-label="Link to upgrading" data-pagefind-ignore>#</a>Upgrading</h2>
+<h3 id="engine-version-mismatch-is-handled-automatically"><a class="docs-anchor" href="#engine-version-mismatch-is-handled-automatically" aria-label="Link to engine-version-mismatch-is-handled-automatically" data-pagefind-ignore>#</a>Engine-version mismatch is handled automatically</h3>
 <p>Nyx stores the scanner&#39;s <code>CARGO_PKG_VERSION</code> in the project index database.
 When the version recorded in the DB differs from the running binary; or the
 row is missing entirely; every cached summary, SSA body, and file-hash row
@@ -994,7 +1007,7 @@ engine. No flag is needed; CI pipelines keep working across upgrades.</p>
 <pre><code class="hljs language-plain">engine <span class="hljs-keyword">version</span> changed (&lt;<span class="hljs-built_in">old</span>&gt; → &lt;<span class="hljs-built_in">new</span>&gt;), rebuilding <span class="hljs-keyword">index</span></code></pre>
 <p>If you see this once per upgrade it is working as intended. If you see it on
 every scan, the metadata row is not being persisted; file an issue.</p>
-<h3 id="forcing-a-reindex"><a class="docs-anchor" href="#forcing-a-reindex" aria-label="Link to forcing-a-reindex">#</a>Forcing a reindex</h3>
+<h3 id="forcing-a-reindex"><a class="docs-anchor" href="#forcing-a-reindex" aria-label="Link to forcing-a-reindex" data-pagefind-ignore>#</a>Forcing a reindex</h3>
 <p>Use <code>--index rebuild</code> to throw away the current project&#39;s cached summaries
 and re-run pass 1 against the current rules. Useful after editing
 <code>nyx.local</code> rules, after an upgrade that changed label definitions without
@@ -1003,14 +1016,14 @@ changing the engine version, or when you want a known-clean baseline:</p>
 <p>This clears the current project&#39;s rows in <code>files</code>, <code>function_summaries</code>,
 <code>ssa_function_summaries</code>, and <code>ssa_function_bodies</code>; other projects sharing
 the same DB directory are untouched.</p>
-<h3 id="recovering-from-a-corrupt-database"><a class="docs-anchor" href="#recovering-from-a-corrupt-database" aria-label="Link to recovering-from-a-corrupt-database">#</a>Recovering from a corrupt database</h3>
+<h3 id="recovering-from-a-corrupt-database"><a class="docs-anchor" href="#recovering-from-a-corrupt-database" aria-label="Link to recovering-from-a-corrupt-database" data-pagefind-ignore>#</a>Recovering from a corrupt database</h3>
 <p>If the <code>.sqlite</code> file itself is damaged (e.g. from a killed scan or full
 disk) and <code>nyx scan</code> fails to open it, delete the file and let the next
 scan recreate it:</p>
 <pre><code class="hljs language-bash"><span class="hljs-built_in">rm</span> <span class="hljs-string">&quot;<span class="hljs-subst">$(nyx config path)</span>&quot;</span>/&lt;project&gt;.sqlite*</code></pre>
 <p>On the next scan Nyx builds a fresh index from scratch.</p>
 <hr>
-<h2 id="reserved-fields"><a class="docs-anchor" href="#reserved-fields" aria-label="Link to reserved-fields">#</a>Reserved Fields</h2>
+<h2 id="reserved-fields"><a class="docs-anchor" href="#reserved-fields" aria-label="Link to reserved-fields" data-pagefind-ignore>#</a>Reserved Fields</h2>
 <p>Some config fields are defined but not yet implemented. They are marked <code>(RESERVED)</code> in the default config and accept values without effect. This allows forward-compatible config files; settings will activate when the feature is implemented without requiring config changes.</p>
 
           </div>

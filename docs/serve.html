@@ -24,6 +24,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="../styles.css" />
+    <script defer src="../docs/search.js"></script>
 
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content="Nyx" />
@@ -137,18 +138,30 @@
       <div class="docs-shell">
         <nav class="docs-sidebar" aria-label="Documentation"><a class="docs-sidebar__brand" href="">Docs</a><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Getting started</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="quickstart.html">Quickstart</a></li><li><a class="docs-sidebar__link" href="installation.html">Installation</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Using nyx</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="cli.html">CLI reference</a></li><li><a class="docs-sidebar__link" href="serve.html" aria-current="page">Browser UI</a></li><li><a class="docs-sidebar__link" href="configuration.html">Configuration</a></li><li><a class="docs-sidebar__link" href="output.html">Output formats</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Coverage</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="language-maturity.html">Language maturity</a></li><li><a class="docs-sidebar__link" href="rules.html">Rules</a></li><li><a class="docs-sidebar__link" href="auth.html">Auth analysis</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Under the hood</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="how-it-works.html">How it works</a></li><li><a class="docs-sidebar__link" href="advanced-analysis.html">Advanced analysis</a></li><li><a class="docs-sidebar__link" href="detectors.html">Detectors</a><ul class="docs-sidebar__sublist"><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/patterns.html">Patterns</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/cfg.html">CFG</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/state.html">State</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/taint.html">Taint</a></li></ul></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Project</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="roadmap.html">Roadmap</a></li><li><a class="docs-sidebar__link" href="changelog.html">Changelog</a></li></ul></div></nav>
         <article class="docs-content">
-          <div class="docs-prose">
-<h1 id="nyx-serve-the-browser-ui"><a class="docs-anchor" href="#nyx-serve-the-browser-ui" aria-label="Link to nyx-serve-the-browser-ui">#</a><code>nyx serve</code>: the browser UI</h1>
+          <div class="docs-search docs-search--content" data-docs-search>
+    <label class="visually-hidden" for="docs-search-input">Search docs</label>
+    <div class="docs-search__control">
+      <span class="docs-search__icon" aria-hidden="true"></span>
+      <input id="docs-search-input" data-docs-search-input type="search" placeholder="Search docs" autocomplete="off" autocapitalize="none" spellcheck="false" role="combobox" aria-autocomplete="list" aria-controls="docs-search-results" aria-expanded="false" />
+      <kbd class="docs-search__key" aria-hidden="true">⌘K</kbd>
+    </div>
+    <div class="docs-search__panel" data-docs-search-panel hidden>
+      <div class="docs-search__status" data-docs-search-status></div>
+      <div class="docs-search__results" id="docs-search-results" data-docs-search-results role="listbox" aria-label="Search results"></div>
+    </div>
+  </div>
+          <div class="docs-prose" data-pagefind-body>
+<h1 id="nyx-serve-the-browser-ui"><a class="docs-anchor" href="#nyx-serve-the-browser-ui" aria-label="Link to nyx-serve-the-browser-ui" data-pagefind-ignore>#</a><code>nyx serve</code>: the browser UI</h1>
 <p>The CLI is fine for CI. For triage, you want context: the source snippet, the dataflow path, the history of how a finding has moved across scans, and a place to record decisions that survive the next run. <code>nyx serve</code> boots a local React UI bound to loopback.</p>
 <pre><code class="hljs language-bash">nyx serve                         <span class="hljs-comment"># opens http://localhost:9700 in your default browser</span>
 nyx serve ./my-project            <span class="hljs-comment"># serve a specific project root</span>
 nyx serve --port 9750             <span class="hljs-comment"># override port</span>
 nyx serve --no-browser            <span class="hljs-comment"># don&#x27;t auto-open</span></code></pre>
 <p>Persistent settings live under <code>[server]</code> in <code>nyx.conf</code> / <code>nyx.local</code>.</p>
-<p align="center"><img src="assets/screenshots/docs/serve-overview.png" alt="Nyx UI overview: total findings, severity breakdown, language and category distribution, top affected files" width="900"/></p><h2 id="what-it-serves-and-what-it-doesnt"><a class="docs-anchor" href="#what-it-serves-and-what-it-doesnt" aria-label="Link to what-it-serves-and-what-it-doesnt">#</a>What it serves, and what it doesn&#39;t</h2>
+<p align="center"><img src="assets/screenshots/docs/serve-overview.png" alt="Nyx UI overview: total findings, severity breakdown, language and category distribution, top affected files" width="900"/></p><h2 id="what-it-serves-and-what-it-doesnt"><a class="docs-anchor" href="#what-it-serves-and-what-it-doesnt" aria-label="Link to what-it-serves-and-what-it-doesnt" data-pagefind-ignore>#</a>What it serves, and what it doesn&#39;t</h2>
 <p>The frontend is built and embedded into the <code>nyx</code> binary at compile time. There&#39;s no separate install step, and the binary serves the entire UI from memory; nothing is fetched from a CDN. The UI talks to the local Nyx process over a small JSON API.</p>
 <p>There is <strong>no</strong> account, no telemetry, no remote logging, no auto-update ping. The data the UI shows is the data on your disk: the SQLite project index plus <code>.nyx/triage.json</code>.</p>
-<h2 id="security-model"><a class="docs-anchor" href="#security-model" aria-label="Link to security-model">#</a>Security model</h2>
+<h2 id="security-model"><a class="docs-anchor" href="#security-model" aria-label="Link to security-model" data-pagefind-ignore>#</a>Security model</h2>
 <p><code>nyx serve</code> enforces three things at the HTTP layer (<a href="https://github.com/elicpeter/nyx/blob/master/src/server/security.rs"><code>src/server/security.rs</code></a>):</p>
 <ol>
 <li><strong>Loopback bind only.</strong> <code>--host</code> and <code>[server].host</code> are clamped to <code>127.0.0.1</code>, <code>localhost</code>, or <code>::1</code>. Any other value is refused at startup with <code>Nyx serve only binds to loopback addresses; refused host &#39;&lt;value&gt;&#39;</code>.</li>
@@ -156,7 +169,7 @@ nyx serve --no-browser            <span class="hljs-comment"># don&#x27;t auto-o
 <li><strong>CSRF on mutations.</strong> <code>POST</code> / <code>PUT</code> / <code>PATCH</code> / <code>DELETE</code> requests must carry a per-process CSRF token in the <code>x-nyx-csrf</code> header. The token is generated once when the server starts and exposed at <code>GET /api/health</code> so the embedded SPA can read it. Cross-origin mutations are rejected before the CSRF check via the <code>Origin</code> header.</li>
 </ol>
 <p>If you forward the port over SSH or expose it through a reverse proxy, the host-header check will reject the request because the <code>Host</code> won&#39;t match <code>localhost:9700</code>. That&#39;s the intended behaviour. Don&#39;t do this without a deliberate reason; the loopback bind is part of the security model.</p>
-<h2 id="the-pages"><a class="docs-anchor" href="#the-pages" aria-label="Link to the-pages">#</a>The pages</h2>
+<h2 id="the-pages"><a class="docs-anchor" href="#the-pages" aria-label="Link to the-pages" data-pagefind-ignore>#</a>The pages</h2>
 <table>
 <thead>
 <tr>
@@ -206,9 +219,9 @@ nyx serve --no-browser            <span class="hljs-comment"># don&#x27;t auto-o
 </tr>
 </tbody></table>
 <p>The numeric <code>:id</code> for finding URLs is the position index in the current scan, not a stable fingerprint. Bookmarks across scans aren&#39;t reliable; rely on file path + line.</p>
-<h3 id="overview-and-health-score"><a class="docs-anchor" href="#overview-and-health-score" aria-label="Link to overview-and-health-score">#</a>Overview and Health Score</h3>
+<h3 id="overview-and-health-score"><a class="docs-anchor" href="#overview-and-health-score" aria-label="Link to overview-and-health-score" data-pagefind-ignore>#</a>Overview and Health Score</h3>
 <p>The overview is the landing page after a scan. Severity counts, top affected files, OWASP coverage, and a 0 to 100 Health Score with a letter grade.</p>
-<h4 id="how-the-health-score-is-calculated"><a class="docs-anchor" href="#how-the-health-score-is-calculated" aria-label="Link to how-the-health-score-is-calculated">#</a>How the Health Score is calculated</h4>
+<h4 id="how-the-health-score-is-calculated"><a class="docs-anchor" href="#how-the-health-score-is-calculated" aria-label="Link to how-the-health-score-is-calculated" data-pagefind-ignore>#</a>How the Health Score is calculated</h4>
 <p>Two things drive the score. The density of risk in the codebase, and hard guardrails that decide what the grade can mean.</p>
 <p>Each finding contributes weight = <code>severity_base × confidence_factor × verdict_factor × context_factor</code>:</p>
 <ul>
@@ -253,34 +266,34 @@ nyx serve --no-browser            <span class="hljs-comment"># don&#x27;t auto-o
 </tbody></table>
 <p>A repo with zero effective HIGHs never grades below C 70. That floor is the structural promise that the score isn&#39;t an automated F-machine for projects that have lots of LOW noise but no critical issues.</p>
 <p>Modifiers in the ±5 range nudge the result for trend (only after the second scan), triage coverage (only when total findings ≥ 20), reintroduced findings, and stale HIGHs more than 30 days old.</p>
-<h4 id="what-the-score-doesnt-measure"><a class="docs-anchor" href="#what-the-score-doesnt-measure" aria-label="Link to what-the-score-doesnt-measure">#</a>What the score doesn&#39;t measure</h4>
+<h4 id="what-the-score-doesnt-measure"><a class="docs-anchor" href="#what-the-score-doesnt-measure" aria-label="Link to what-the-score-doesnt-measure" data-pagefind-ignore>#</a>What the score doesn&#39;t measure</h4>
 <p>It&#39;s a Nyx-finding-pressure metric, not a security audit. Score 100 means Nyx didn&#39;t find anything under its current rules and language coverage; it doesn&#39;t certify the absence of vulnerabilities. The score doesn&#39;t see runtime config, IAM, secret stores, dependency CVEs, or anything outside the source tree being scanned. A repo of mostly Kotlin (where Nyx coverage is thin) will score artificially well because most of the code never gets evaluated.</p>
 <p>Ceilings are calibrated for the current scanner false-positive rates. As symex coverage and rule precision improve, the ceilings tighten. Calibration data and the rationale behind each tunable lives in <a href="health-score-audit.html">health-score-audit.md</a>.</p>
-<h3 id="findings-and-finding-detail"><a class="docs-anchor" href="#findings-and-finding-detail" aria-label="Link to findings-and-finding-detail">#</a>Findings and Finding detail</h3>
+<h3 id="findings-and-finding-detail"><a class="docs-anchor" href="#findings-and-finding-detail" aria-label="Link to findings-and-finding-detail" data-pagefind-ignore>#</a>Findings and Finding detail</h3>
 <p>The findings list is filterable by severity, confidence, category, language, rule ID, and triage state.</p>
 <p align="center"><img src="assets/screenshots/docs/serve-findings-list.png" alt="Nyx findings list: 13 findings filtered by severity/confidence/rule, with status badges, file paths, and language tags" width="900"/></p><p>Clicking through opens the <strong>flow visualiser</strong>: a numbered walk from source to sink with the snippet at each step, cross-file markers when the path leaves the current file, the rule&#39;s &quot;How to fix&quot; guidance, and the engine&#39;s evidence object inline.</p>
 <p align="center"><img src="assets/screenshots/docs/serve-finding-detail.png" alt="Nyx finding detail: HIGH taint-unsanitised-flow showing source → call → sink steps, How to fix guidance, and evidence panel" width="900"/></p><p>Engine notes call out when precision was bounded for that finding (<code>OriginsTruncated</code>, <code>PointsToTruncated</code>, <code>PathWidened</code>, <code>ForwardBailed</code>, etc.). Anything tagged <code>under-report</code> means the emitted flow is real and the result set is a lower bound; <code>over-report</code> means widening or bail. <code>--require-converged</code> in the CLI drops the over-report ones for strict gates.</p>
-<h3 id="triage"><a class="docs-anchor" href="#triage" aria-label="Link to triage">#</a>Triage</h3>
+<h3 id="triage"><a class="docs-anchor" href="#triage" aria-label="Link to triage" data-pagefind-ignore>#</a>Triage</h3>
 <p>Each finding carries a triage state: <code>open</code>, <code>investigating</code>, <code>false_positive</code>, <code>accepted_risk</code>, <code>suppressed</code>, or <code>fixed</code>. The triage page bulk-updates them and shows the audit trail.</p>
 <p align="center"><img src="assets/screenshots/docs/serve-triage.png" alt="Nyx triage page: 13 findings need attention, severity breakdown, Findings/Suppression rules/Audit log tabs, rule chips, Investigate buttons" width="900"/></p><p>State writes are persisted to SQLite immediately, and (when <code>[server].triage_sync = true</code>, default on) mirrored to <code>.nyx/triage.json</code> in the project root. Commit that file:</p>
 <pre><code class="hljs language-bash">git add .nyx/triage.json</code></pre>
 <p>It carries decisions across machines so a teammate&#39;s local scan reflects yours. The format is documented in <a href="https://github.com/elicpeter/nyx/blob/master/src/server/triage_sync.rs"><code>src/server/triage_sync.rs</code></a>; the schema is stable and round-trip-safe with <code>nyx serve</code> re-imports.</p>
-<h3 id="explorer"><a class="docs-anchor" href="#explorer" aria-label="Link to explorer">#</a>Explorer</h3>
+<h3 id="explorer"><a class="docs-anchor" href="#explorer" aria-label="Link to explorer" data-pagefind-ignore>#</a>Explorer</h3>
 <p>A file tree with per-file finding counts, syntax-highlighted source, and a right rail with the file&#39;s symbols and findings. Useful for &quot;what&#39;s wrong with this module&quot; rather than &quot;what&#39;s wrong with this finding&quot;.</p>
 <p align="center"><img src="assets/screenshots/docs/serve-explorer.png" alt="Nyx explorer: file tree with per-file finding counts, syntax-highlighted Python source with red sink marker on the os.system line, file-summary right rail with findings" width="900"/></p><p>The path query string preselects a file: <code>/explorer?file=src/handler.rs</code>.</p>
-<h3 id="scans-and-compare"><a class="docs-anchor" href="#scans-and-compare" aria-label="Link to scans-and-compare">#</a>Scans and compare</h3>
+<h3 id="scans-and-compare"><a class="docs-anchor" href="#scans-and-compare" aria-label="Link to scans-and-compare" data-pagefind-ignore>#</a>Scans and compare</h3>
 <p>Past runs are persisted when <code>[runs].persist = true</code> (off by default to avoid disk growth on heavy users). When persistence is on, <code>/scans</code> lists historical runs.</p>
 <p align="center"><img src="assets/screenshots/docs/serve-scans.png" alt="Nyx scans list: completed scan run with root, duration, finding count, languages, and started timestamp" width="900"/></p><p>Each run drills into a detail page with files scanned, findings count, duration, languages, and a per-pass timing breakdown.</p>
 <p align="center"><img src="assets/screenshots/docs/serve-scan-detail.png" alt="Nyx scan detail: Summary tab with files scanned, findings, duration, languages; Details panel with Scan ID, Root, Engine version, started/finished timestamps; Timing breakdown bar showing Walk/Pass 1/Call Graph/Pass 2/Post" width="900"/></p><p>Pick two scans to diff and see what got introduced, fixed, or rediscovered between runs. The retention cap is <code>[runs].max_runs</code> (default 100). Each run can also optionally save its log and stdout (<code>save_logs</code>, <code>save_stdout</code>); both are off by default. Code snippets are saved (<code>save_code_snippets = true</code>); turn off if storage is tight.</p>
-<h3 id="rules"><a class="docs-anchor" href="#rules" aria-label="Link to rules">#</a>Rules</h3>
+<h3 id="rules"><a class="docs-anchor" href="#rules" aria-label="Link to rules" data-pagefind-ignore>#</a>Rules</h3>
 <p>Every rule the engine knows about, built-in plus user-added. Each row shows the matchers, kind (source / sanitiser / sink), capability, language, and how many findings it produced in the latest scan. Filter by language, by kind, or by free text.</p>
 <p align="center"><img src="assets/screenshots/docs/serve-rules.png" alt="Nyx rules page: 218 rules with language/kind dropdowns and a matcher search; rows showing rule title, language, kind (SOURCE/SANITIZER/SINK), cap, and finding count" width="900"/></p><p>User-added rules can be deleted from this page; built-ins are immutable. Built-ins live in <code>src/labels/&lt;lang&gt;.rs</code> and <code>src/patterns/&lt;lang&gt;.rs</code>; user-added entries write to <code>nyx.local</code>.</p>
-<h3 id="config"><a class="docs-anchor" href="#config" aria-label="Link to config">#</a>Config</h3>
+<h3 id="config"><a class="docs-anchor" href="#config" aria-label="Link to config" data-pagefind-ignore>#</a>Config</h3>
 <p>A live config editor. Reads the merged config (<code>nyx.conf</code> + <code>nyx.local</code>), lets you flip switches and add custom source / sanitizer / sink rules, and writes back to <code>nyx.local</code>. Changes apply to the next scan; the running server uses its initial config snapshot.</p>
 <p align="center"><img src="assets/screenshots/docs/serve-config.png" alt="Nyx config page: General settings (analysis mode, max file size, excluded extensions, attack-surface ranking), Triage Sync toggle, Sources section with language/matcher/capability dropdowns and a per-language matcher table" width="900"/></p><p>The custom-rule form picks a language, a matcher (function or property name), and a capability. The capability list matches the <code>Cap</code> bitflags the taint engine uses; see <a href="rules.html#capability-list-for-custom-rules">rules.md</a> for what each one means.</p>
-<h2 id="api-surface"><a class="docs-anchor" href="#api-surface" aria-label="Link to api-surface">#</a>API surface</h2>
+<h2 id="api-surface"><a class="docs-anchor" href="#api-surface" aria-label="Link to api-surface" data-pagefind-ignore>#</a>API surface</h2>
 <p>For tooling, the JSON endpoints under <code>/api/</code> are stable enough to script against. The full route map lives in <a href="https://github.com/elicpeter/nyx/blob/master/src/server/routes/mod.rs"><code>src/server/routes/mod.rs</code></a>. Mutating endpoints require the <code>x-nyx-csrf</code> header (read it from <code>GET /api/health</code>).</p>
-<h2 id="disabling"><a class="docs-anchor" href="#disabling" aria-label="Link to disabling">#</a>Disabling</h2>
+<h2 id="disabling"><a class="docs-anchor" href="#disabling" aria-label="Link to disabling" data-pagefind-ignore>#</a>Disabling</h2>
 <p>If you don&#39;t want the UI for a project, set:</p>
 <pre><code class="hljs language-toml"><span class="hljs-section">[server]</span>
 <span class="hljs-attr">enabled</span> = <span class="hljs-literal">false</span></code></pre>

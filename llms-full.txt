@@ -30,7 +30,6 @@ Documentation:
 - Detectors — state: https://nyxscan.dev/docs/detectors/state.html
 - Detectors — taint: https://nyxscan.dev/docs/detectors/taint.html
 - Language maturity: https://nyxscan.dev/docs/language-maturity.html
-- Recall validation: https://nyxscan.dev/docs/recall-validation.html
 - Roadmap: https://nyxscan.dev/docs/roadmap.html
 - Changelog: https://nyxscan.dev/docs/changelog.html
 

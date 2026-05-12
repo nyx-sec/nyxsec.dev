@@ -26,7 +26,7 @@ npm run docs        # = docs:sync + docs:build
 - `npm run docs:sync` copies `*.md`, `detectors/*.md`, `CHANGELOG.md`, and `ROADMAP.md` from the Nyx repo into `docs-src/` (gitignored). Set `NYX_REPO=/path/to/nyx` to override the source location.
 - `npm run docs:build` walks `docs-src/`, renders each markdown file through `marked` with the site's editorial theme, parses `SUMMARY.md` for the sidebar, and writes HTML into `/docs/`.
 
-The build script (`tools/build-docs.js`) handles mdbook-style `{{#include ../FILE.md}}` directives, rewrites `.md` links to `.html`, generates heading anchors, and emits prev/next page navigation.
+The build script (`tools/build-docs.js`) handles mdbook-style `{{#include ../FILE.md}}` directives, rewrites `.md` links to `.html`, generates heading anchors, emits prev/next page navigation, and runs Pagefind to build the docs search index.
 
 The Nyx repo stays the single source of truth — edit markdown there, then re-run `npm run docs` here.
 

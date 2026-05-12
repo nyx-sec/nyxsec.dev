@@ -24,6 +24,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="../styles.css" />
+    <script defer src="../docs/search.js"></script>
 
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content="Nyx" />
@@ -137,18 +138,30 @@
       <div class="docs-shell">
         <nav class="docs-sidebar" aria-label="Documentation"><a class="docs-sidebar__brand" href="">Docs</a><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Getting started</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="quickstart.html">Quickstart</a></li><li><a class="docs-sidebar__link" href="installation.html">Installation</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Using nyx</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="cli.html" aria-current="page">CLI reference</a></li><li><a class="docs-sidebar__link" href="serve.html">Browser UI</a></li><li><a class="docs-sidebar__link" href="configuration.html">Configuration</a></li><li><a class="docs-sidebar__link" href="output.html">Output formats</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Coverage</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="language-maturity.html">Language maturity</a></li><li><a class="docs-sidebar__link" href="rules.html">Rules</a></li><li><a class="docs-sidebar__link" href="auth.html">Auth analysis</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Under the hood</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="how-it-works.html">How it works</a></li><li><a class="docs-sidebar__link" href="advanced-analysis.html">Advanced analysis</a></li><li><a class="docs-sidebar__link" href="detectors.html">Detectors</a><ul class="docs-sidebar__sublist"><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/patterns.html">Patterns</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/cfg.html">CFG</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/state.html">State</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/taint.html">Taint</a></li></ul></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Project</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="roadmap.html">Roadmap</a></li><li><a class="docs-sidebar__link" href="changelog.html">Changelog</a></li></ul></div></nav>
         <article class="docs-content">
-          <div class="docs-prose">
-<h1 id="cli-reference"><a class="docs-anchor" href="#cli-reference" aria-label="Link to cli-reference">#</a>CLI Reference</h1>
-<h2 id="global"><a class="docs-anchor" href="#global" aria-label="Link to global">#</a>Global</h2>
+          <div class="docs-search docs-search--content" data-docs-search>
+    <label class="visually-hidden" for="docs-search-input">Search docs</label>
+    <div class="docs-search__control">
+      <span class="docs-search__icon" aria-hidden="true"></span>
+      <input id="docs-search-input" data-docs-search-input type="search" placeholder="Search docs" autocomplete="off" autocapitalize="none" spellcheck="false" role="combobox" aria-autocomplete="list" aria-controls="docs-search-results" aria-expanded="false" />
+      <kbd class="docs-search__key" aria-hidden="true">⌘K</kbd>
+    </div>
+    <div class="docs-search__panel" data-docs-search-panel hidden>
+      <div class="docs-search__status" data-docs-search-status></div>
+      <div class="docs-search__results" id="docs-search-results" data-docs-search-results role="listbox" aria-label="Search results"></div>
+    </div>
+  </div>
+          <div class="docs-prose" data-pagefind-body>
+<h1 id="cli-reference"><a class="docs-anchor" href="#cli-reference" aria-label="Link to cli-reference" data-pagefind-ignore>#</a>CLI Reference</h1>
+<h2 id="global"><a class="docs-anchor" href="#global" aria-label="Link to global" data-pagefind-ignore>#</a>Global</h2>
 <pre><code class="hljs language-plain">nyx <span class="hljs-selector-attr">[COMMAND]</span>
 nyx <span class="hljs-attr">--version</span>
 nyx <span class="hljs-attr">--help</span></code></pre>
 <hr>
-<h2 id="nyx-scan"><a class="docs-anchor" href="#nyx-scan" aria-label="Link to nyx-scan">#</a><code>nyx scan</code></h2>
+<h2 id="nyx-scan"><a class="docs-anchor" href="#nyx-scan" aria-label="Link to nyx-scan" data-pagefind-ignore>#</a><code>nyx scan</code></h2>
 <p>Run a security scan on a directory.</p>
 <pre><code class="hljs language-plain">nyx scan <span class="hljs-selector-attr">[PATH]</span> <span class="hljs-selector-attr">[OPTIONS]</span></code></pre>
 <p><strong>PATH</strong> defaults to <code>.</code> (current directory).</p>
-<h3 id="analysis-mode"><a class="docs-anchor" href="#analysis-mode" aria-label="Link to analysis-mode">#</a>Analysis Mode</h3>
+<h3 id="analysis-mode"><a class="docs-anchor" href="#analysis-mode" aria-label="Link to analysis-mode" data-pagefind-ignore>#</a>Analysis Mode</h3>
 <table>
 <thead>
 <tr>
@@ -184,7 +197,7 @@ nyx <span class="hljs-attr">--help</span></code></pre>
 </tr>
 </tbody></table>
 <p><strong>Deprecated aliases</strong>: <code>--ast-only</code> (use <code>--mode ast</code>), <code>--cfg-only</code> (use <code>--mode cfg</code>), <code>--all-targets</code> (use <code>--mode full</code>).</p>
-<h3 id="index-control"><a class="docs-anchor" href="#index-control" aria-label="Link to index-control">#</a>Index Control</h3>
+<h3 id="index-control"><a class="docs-anchor" href="#index-control" aria-label="Link to index-control" data-pagefind-ignore>#</a>Index Control</h3>
 <table>
 <thead>
 <tr>
@@ -220,7 +233,7 @@ nyx <span class="hljs-attr">--help</span></code></pre>
 </tr>
 </tbody></table>
 <p><strong>Deprecated aliases</strong>: <code>--no-index</code> (use <code>--index off</code>), <code>--rebuild-index</code> (use <code>--index rebuild</code>).</p>
-<h3 id="output"><a class="docs-anchor" href="#output" aria-label="Link to output">#</a>Output</h3>
+<h3 id="output"><a class="docs-anchor" href="#output" aria-label="Link to output" data-pagefind-ignore>#</a>Output</h3>
 <table>
 <thead>
 <tr>
@@ -250,7 +263,7 @@ nyx <span class="hljs-attr">--help</span></code></pre>
 <td>Disable state-model analysis (resource lifecycle + auth state). Overrides <code>scanner.enable_state_analysis</code></td>
 </tr>
 </tbody></table>
-<h3 id="profiles"><a class="docs-anchor" href="#profiles" aria-label="Link to profiles">#</a>Profiles</h3>
+<h3 id="profiles"><a class="docs-anchor" href="#profiles" aria-label="Link to profiles" data-pagefind-ignore>#</a>Profiles</h3>
 <table>
 <thead>
 <tr>
@@ -265,7 +278,7 @@ nyx <span class="hljs-attr">--help</span></code></pre>
 <td>Apply a named scan profile. Built-ins: <code>quick</code>, <code>full</code>, <code>ci</code>, <code>taint_only</code>, <code>conservative_large_repo</code>. User-defined profiles override built-ins with the same name. CLI flags still take precedence over profile values</td>
 </tr>
 </tbody></table>
-<h3 id="filtering"><a class="docs-anchor" href="#filtering" aria-label="Link to filtering">#</a>Filtering</h3>
+<h3 id="filtering"><a class="docs-anchor" href="#filtering" aria-label="Link to filtering" data-pagefind-ignore>#</a>Filtering</h3>
 <table>
 <thead>
 <tr>
@@ -353,7 +366,7 @@ nyx <span class="hljs-attr">--help</span></code></pre>
 <p><strong>Deprecated aliases</strong>: <code>--high-only</code> (use <code>--severity HIGH</code>), <code>--include-nonprod</code> (use <code>--keep-nonprod-severity</code>).</p>
 <p><code>--fail-on</code> returns a non-zero exit code when the threshold trips, so CI jobs fail without further wiring:</p>
 <p align="center"><img src="assets/screenshots/docs/cli-failon.png" alt="nyx scan with --fail-on HIGH against a small fixture: three HIGH taint findings printed, followed by exit=1 from the shell" width="900"/></p><p>Quality-category and rollup-prone Low findings are filtered down by default. The footer tells you exactly what got dropped and which knob to turn:</p>
-<p align="center"><img src="assets/screenshots/docs/cli-rollup-tail.png" alt="nyx scan tail: warning '*' generated 57 issues; Suppressed 92 LOW/Quality findings; Active filters max_low=20, max_low_per_file=1, max_low_per_rule=10; Use --include-quality, --max-low, or --all to adjust" width="900"/></p><h3 id="analysis-engine-toggles"><a class="docs-anchor" href="#analysis-engine-toggles" aria-label="Link to analysis-engine-toggles">#</a>Analysis Engine Toggles</h3>
+<p align="center"><img src="assets/screenshots/docs/cli-rollup-tail.png" alt="nyx scan tail: warning '*' generated 57 issues; Suppressed 92 LOW/Quality findings; Active filters max_low=20, max_low_per_file=1, max_low_per_rule=10; Use --include-quality, --max-low, or --all to adjust" width="900"/></p><h3 id="analysis-engine-toggles"><a class="docs-anchor" href="#analysis-engine-toggles" aria-label="Link to analysis-engine-toggles" data-pagefind-ignore>#</a>Analysis Engine Toggles</h3>
 <p>Override the corresponding <code>[analysis.engine]</code> values in <code>nyx.conf</code> for a single run.  All default <strong>on</strong>; pass the <code>--no-*</code> variant to disable.</p>
 <table>
 <thead>
@@ -409,7 +422,7 @@ nyx <span class="hljs-attr">--help</span></code></pre>
 <td>Per-file tree-sitter parse timeout (ms); <code>0</code> disables the cap</td>
 </tr>
 </tbody></table>
-<h3 id="lattice-width-caps"><a class="docs-anchor" href="#lattice-width-caps" aria-label="Link to lattice-width-caps">#</a>Lattice-width Caps</h3>
+<h3 id="lattice-width-caps"><a class="docs-anchor" href="#lattice-width-caps" aria-label="Link to lattice-width-caps" data-pagefind-ignore>#</a>Lattice-width Caps</h3>
 <p>Two caps bound the width of taint origin sets and points-to sets per SSA value. When a set would exceed the cap, entries are truncated deterministically and an engine note (<code>OriginsTruncated</code> / <code>PointsToTruncated</code>) is recorded on affected findings so you can see when precision was lost.</p>
 <table>
 <thead>
@@ -431,7 +444,7 @@ nyx <span class="hljs-attr">--help</span></code></pre>
 </tr>
 </tbody></table>
 <p>See <a href="configuration.html#analysisengine">configuration.md</a> for the full schema.</p>
-<h3 id="engine-depth-profile"><a class="docs-anchor" href="#engine-depth-profile" aria-label="Link to engine-depth-profile">#</a>Engine-Depth Profile</h3>
+<h3 id="engine-depth-profile"><a class="docs-anchor" href="#engine-depth-profile" aria-label="Link to engine-depth-profile" data-pagefind-ignore>#</a>Engine-Depth Profile</h3>
 <p>Individual engine toggles are fine-grained but hard to remember in combination.  The <code>--engine-profile</code> shortcut sets the whole stack in one shot, and individual flags are layered on top after the profile is applied.</p>
 <table>
 <thead>
@@ -467,10 +480,10 @@ nyx <span class="hljs-attr">--help</span></code></pre>
 </tbody></table>
 <p>All three profiles build the AST, CFG, and SSA lattice and run forward taint; the columns above show which additional analyses each profile enables.  SMT (<code>symex.smt</code>) is always off unless Nyx was built with <code>--features smt</code>.</p>
 <p>Individual flags override the profile.  For example, <code>--engine-profile fast --backwards-analysis</code> runs the fast stack but with backwards analysis on.</p>
-<h3 id="explain-effective-engine"><a class="docs-anchor" href="#explain-effective-engine" aria-label="Link to explain-effective-engine">#</a>Explain Effective Engine</h3>
+<h3 id="explain-effective-engine"><a class="docs-anchor" href="#explain-effective-engine" aria-label="Link to explain-effective-engine" data-pagefind-ignore>#</a>Explain Effective Engine</h3>
 <p><code>--explain-engine</code> prints the resolved engine configuration (profile + config + CLI overrides + env-var fallbacks) to stdout and exits without scanning.  Useful for sanity-checking a CI invocation.</p>
 <pre><code class="hljs language-bash">nyx scan --engine-profile deep --no-smt --explain-engine</code></pre>
-<p align="center"><img src="assets/screenshots/docs/cli-explain-engine.png" alt="nyx scan --engine-profile deep --explain-engine output: resolved config showing every analysis pass, its current state, and the CLI flag/env var that controls it" width="900"/></p><h3 id="examples"><a class="docs-anchor" href="#examples" aria-label="Link to examples">#</a>Examples</h3>
+<p align="center"><img src="assets/screenshots/docs/cli-explain-engine.png" alt="nyx scan --engine-profile deep --explain-engine output: resolved config showing every analysis pass, its current state, and the CLI flag/env var that controls it" width="900"/></p><h3 id="examples"><a class="docs-anchor" href="#examples" aria-label="Link to examples" data-pagefind-ignore>#</a>Examples</h3>
 <pre><code class="hljs language-bash"><span class="hljs-comment"># Basic scan</span>
 nyx scan
 
@@ -504,9 +517,9 @@ nyx scan . --include-quality --show-instances rs.quality.unwrap
 <span class="hljs-comment"># Allow more LOW findings</span>
 nyx scan . --max-low 50 --max-low-per-file 5</code></pre>
 <hr>
-<h2 id="nyx-index"><a class="docs-anchor" href="#nyx-index" aria-label="Link to nyx-index">#</a><code>nyx index</code></h2>
+<h2 id="nyx-index"><a class="docs-anchor" href="#nyx-index" aria-label="Link to nyx-index" data-pagefind-ignore>#</a><code>nyx index</code></h2>
 <p>Manage the SQLite file index.</p>
-<h3 id="nyx-index-build"><a class="docs-anchor" href="#nyx-index-build" aria-label="Link to nyx-index-build">#</a><code>nyx index build</code></h3>
+<h3 id="nyx-index-build"><a class="docs-anchor" href="#nyx-index-build" aria-label="Link to nyx-index-build" data-pagefind-ignore>#</a><code>nyx index build</code></h3>
 <pre><code class="hljs language-plain">nyx <span class="hljs-keyword">index</span> <span class="hljs-keyword">build</span> [<span class="hljs-keyword">PATH</span>] [--<span class="hljs-keyword">force</span>]</code></pre>
 <p>Build or update the index for the given path (default: <code>.</code>).</p>
 <table>
@@ -521,11 +534,11 @@ nyx scan . --max-low 50 --max-low-per-file 5</code></pre>
 <td>Force full rebuild, ignoring cached file hashes</td>
 </tr>
 </tbody></table>
-<h3 id="nyx-index-status"><a class="docs-anchor" href="#nyx-index-status" aria-label="Link to nyx-index-status">#</a><code>nyx index status</code></h3>
+<h3 id="nyx-index-status"><a class="docs-anchor" href="#nyx-index-status" aria-label="Link to nyx-index-status" data-pagefind-ignore>#</a><code>nyx index status</code></h3>
 <pre><code class="hljs language-plain">nyx <span class="hljs-built_in">index</span> <span class="hljs-keyword">status</span> [PATH]</code></pre>
 <p>Display index statistics (file count, size, last modified) for the given path.</p>
 <p align="center"><img src="assets/screenshots/docs/cli-idxstatus.png" alt="nyx index status output: project name, index path under the platform config dir, exists/size/modified fields" width="900"/></p><hr>
-<h2 id="nyx-list"><a class="docs-anchor" href="#nyx-list" aria-label="Link to nyx-list">#</a><code>nyx list</code></h2>
+<h2 id="nyx-list"><a class="docs-anchor" href="#nyx-list" aria-label="Link to nyx-list" data-pagefind-ignore>#</a><code>nyx list</code></h2>
 <pre><code class="hljs language-plain"><span class="hljs-attribute">nyx</span> list<span class="hljs-meta"> [-v]</span></code></pre>
 <p>List all indexed projects.</p>
 <table>
@@ -541,7 +554,7 @@ nyx scan . --max-low 50 --max-low-per-file 5</code></pre>
 </tr>
 </tbody></table>
 <hr>
-<h2 id="nyx-clean"><a class="docs-anchor" href="#nyx-clean" aria-label="Link to nyx-clean">#</a><code>nyx clean</code></h2>
+<h2 id="nyx-clean"><a class="docs-anchor" href="#nyx-clean" aria-label="Link to nyx-clean" data-pagefind-ignore>#</a><code>nyx clean</code></h2>
 <pre><code class="hljs language-plain">nyx clean <span class="hljs-selector-attr">[PROJECT]</span> <span class="hljs-selector-attr">[--all]</span></code></pre>
 <p>Remove index data.</p>
 <table>
@@ -561,13 +574,13 @@ nyx scan . --max-low 50 --max-low-per-file 5</code></pre>
 </tr>
 </tbody></table>
 <hr>
-<h2 id="nyx-config"><a class="docs-anchor" href="#nyx-config" aria-label="Link to nyx-config">#</a><code>nyx config</code></h2>
+<h2 id="nyx-config"><a class="docs-anchor" href="#nyx-config" aria-label="Link to nyx-config" data-pagefind-ignore>#</a><code>nyx config</code></h2>
 <p>Manage configuration.</p>
-<h3 id="nyx-config-show"><a class="docs-anchor" href="#nyx-config-show" aria-label="Link to nyx-config-show">#</a><code>nyx config show</code></h3>
+<h3 id="nyx-config-show"><a class="docs-anchor" href="#nyx-config-show" aria-label="Link to nyx-config-show" data-pagefind-ignore>#</a><code>nyx config show</code></h3>
 <p>Print the effective merged configuration as TOML. Useful for sanity-checking what the scanner is actually using after <code>nyx.conf</code> and <code>nyx.local</code> merge:</p>
-<p align="center"><img src="assets/screenshots/docs/cli-configshow.png" alt="nyx config show output: TOML dump of the merged scanner config showing [scanner] mode/min_severity/excluded_extensions/excluded_directories, [database] settings, and resolved engine toggles" width="900"/></p><h3 id="nyx-config-path"><a class="docs-anchor" href="#nyx-config-path" aria-label="Link to nyx-config-path">#</a><code>nyx config path</code></h3>
+<p align="center"><img src="assets/screenshots/docs/cli-configshow.png" alt="nyx config show output: TOML dump of the merged scanner config showing [scanner] mode/min_severity/excluded_extensions/excluded_directories, [database] settings, and resolved engine toggles" width="900"/></p><h3 id="nyx-config-path"><a class="docs-anchor" href="#nyx-config-path" aria-label="Link to nyx-config-path" data-pagefind-ignore>#</a><code>nyx config path</code></h3>
 <p>Print the configuration directory path.</p>
-<h3 id="nyx-config-add-rule"><a class="docs-anchor" href="#nyx-config-add-rule" aria-label="Link to nyx-config-add-rule">#</a><code>nyx config add-rule</code></h3>
+<h3 id="nyx-config-add-rule"><a class="docs-anchor" href="#nyx-config-add-rule" aria-label="Link to nyx-config-add-rule" data-pagefind-ignore>#</a><code>nyx config add-rule</code></h3>
 <pre><code class="hljs language-plain">nyx config<span class="hljs-built_in"> add-rule </span>--lang &lt;LANG&gt; --matcher &lt;MATCHER&gt; --kind &lt;KIND&gt; --cap &lt;CAP&gt;</code></pre>
 <p>Add a custom taint rule. Written to <code>nyx.local</code>.</p>
 <table>
@@ -594,13 +607,13 @@ nyx scan . --max-low 50 --max-low-per-file 5</code></pre>
 <td><code>env_var</code>, <code>html_escape</code>, <code>shell_escape</code>, <code>url_encode</code>, <code>json_parse</code>, <code>file_io</code>, <code>fmt_string</code>, <code>sql_query</code>, <code>deserialize</code>, <code>ssrf</code>, <code>code_exec</code>, <code>crypto</code>, <code>unauthorized_id</code>, <code>data_exfil</code>, <code>ldap_injection</code>, <code>xpath_injection</code>, <code>header_injection</code>, <code>open_redirect</code>, <code>ssti</code>, <code>xxe</code>, <code>prototype_pollution</code>, <code>all</code></td>
 </tr>
 </tbody></table>
-<h3 id="nyx-config-add-terminator"><a class="docs-anchor" href="#nyx-config-add-terminator" aria-label="Link to nyx-config-add-terminator">#</a><code>nyx config add-terminator</code></h3>
+<h3 id="nyx-config-add-terminator"><a class="docs-anchor" href="#nyx-config-add-terminator" aria-label="Link to nyx-config-add-terminator" data-pagefind-ignore>#</a><code>nyx config add-terminator</code></h3>
 <pre><code class="hljs language-plain">nyx config<span class="hljs-built_in"> add-terminator </span>--lang &lt;LANG&gt; --name &lt;NAME&gt;</code></pre>
 <p>Add a terminator function (e.g. <code>process.exit</code>). Written to <code>nyx.local</code>.</p>
 <hr>
-<h2 id="nyx-rules"><a class="docs-anchor" href="#nyx-rules" aria-label="Link to nyx-rules">#</a><code>nyx rules</code></h2>
+<h2 id="nyx-rules"><a class="docs-anchor" href="#nyx-rules" aria-label="Link to nyx-rules" data-pagefind-ignore>#</a><code>nyx rules</code></h2>
 <p>Browse the built-in rule registry from the terminal. Same dataset the dashboard&#39;s Rules page reads from: cap-class entries (one per <code>Cap</code> with a canonical rule id), per-language label rules (sink / source / sanitizer), gated sinks, and any custom rules from your config.</p>
-<h3 id="nyx-rules-list"><a class="docs-anchor" href="#nyx-rules-list" aria-label="Link to nyx-rules-list">#</a><code>nyx rules list</code></h3>
+<h3 id="nyx-rules-list"><a class="docs-anchor" href="#nyx-rules-list" aria-label="Link to nyx-rules-list" data-pagefind-ignore>#</a><code>nyx rules list</code></h3>
 <pre><code class="hljs language-plain"><span class="hljs-comment">nyx rules list</span> <span class="hljs-title">[</span><span class="hljs-literal">--</span><span class="hljs-comment">lang</span> &lt;<span class="hljs-comment">SLUG</span>&gt;<span class="hljs-title">]</span> <span class="hljs-title">[</span><span class="hljs-literal">--</span><span class="hljs-comment">kind</span> &lt;<span class="hljs-comment">KIND</span>&gt;<span class="hljs-title">]</span> <span class="hljs-title">[</span><span class="hljs-literal">--</span><span class="hljs-comment">class</span><span class="hljs-literal">-</span><span class="hljs-comment">only|</span><span class="hljs-literal">--</span><span class="hljs-comment">no</span><span class="hljs-literal">-</span><span class="hljs-comment">class</span><span class="hljs-title">]</span> <span class="hljs-title">[</span><span class="hljs-literal">--</span><span class="hljs-comment">json</span><span class="hljs-title">]</span></code></pre>
 <table>
 <thead>
@@ -641,10 +654,10 @@ nyx rules list --lang java --kind sink
 nyx rules list --json | jq <span class="hljs-string">&#x27;.[] | select(.cap == &quot;ldap_injection&quot;)&#x27;</span></code></pre>
 <p>The <code>enabled</code> column reflects the <code>analysis.disabled_rules</code> overlay from your config, so a rule disabled in <code>nyx.local</code> shows up here too. Custom rules added via <code>nyx config add-rule</code> appear at the end with <code>is_custom: true</code>.</p>
 <hr>
-<h2 id="exit-codes"><a class="docs-anchor" href="#exit-codes" aria-label="Link to exit-codes">#</a>Exit codes</h2>
+<h2 id="exit-codes"><a class="docs-anchor" href="#exit-codes" aria-label="Link to exit-codes" data-pagefind-ignore>#</a>Exit codes</h2>
 <p>See <a href="output.html#exit-codes">output.md</a>. Summary: <code>0</code> on success (including findings without <code>--fail-on</code>), <code>1</code> when <code>--fail-on</code> trips, non-zero on scan errors.</p>
 <hr>
-<h2 id="environment-variables"><a class="docs-anchor" href="#environment-variables" aria-label="Link to environment-variables">#</a>Environment variables</h2>
+<h2 id="environment-variables"><a class="docs-anchor" href="#environment-variables" aria-label="Link to environment-variables" data-pagefind-ignore>#</a>Environment variables</h2>
 <p>Runtime behaviour:</p>
 <table>
 <thead>

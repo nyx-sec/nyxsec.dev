@@ -5,6 +5,7 @@
 
 const fs = require("fs");
 const path = require("path");
+const { execFileSync } = require("child_process");
 const { marked } = require("marked");
 const hljs = require("highlight.js");
 
@@ -57,7 +58,7 @@ function slugify(text) {
 renderer.heading = function ({ tokens, depth }) {
   const inner = this.parser.parseInline(tokens);
   const id = slugify(inner);
-  return `<h${depth} id="${id}"><a class="docs-anchor" href="#${id}" aria-label="Link to ${id}">#</a>${inner}</h${depth}>\n`;
+  return `<h${depth} id="${id}"><a class="docs-anchor" href="#${id}" aria-label="Link to ${id}" data-pagefind-ignore>#</a>${inner}</h${depth}>\n`;
 };
 
 // Rewrite *.md / *.MD links → *.html so cross-page links work after build.
@@ -80,10 +81,7 @@ renderer.link = function ({ href, title, tokens }) {
 function resolveIncludes(md, filePath) {
   return md.replace(/\{\{\s*#include\s+([^}\s]+)\s*\}\}/g, (_, inc) => {
     // Try relative to the file first, then docs-src root by basename.
-    const candidates = [
-      path.resolve(path.dirname(filePath), inc),
-      path.join(SRC, path.basename(inc)),
-    ];
+    const candidates = [path.resolve(path.dirname(filePath), inc), path.join(SRC, path.basename(inc))];
     for (const c of candidates) {
       if (fs.existsSync(c)) {
         let inner = fs.readFileSync(c, "utf8");
@@ -138,8 +136,7 @@ function flattenNav(sections) {
   for (const sec of sections) {
     for (const it of sec.items) {
       flat.push({ title: it.title, href: it.href, section: sec.title });
-      for (const c of it.children)
-        flat.push({ title: c.title, href: c.href, section: sec.title, parent: it });
+      for (const c of it.children) flat.push({ title: c.title, href: c.href, section: sec.title, parent: it });
     }
   }
   return flat;
@@ -152,19 +149,15 @@ function navIndex(flat) {
 }
 
 function deriveKeywords(title, section, body) {
-  const base = [
-    "Nyx",
-    "Nyx scanner",
-    "SAST",
-    "static analysis",
-    "Rust security scanner",
-    "local-first SAST",
-  ];
+  const base = ["Nyx", "Nyx scanner", "SAST", "static analysis", "Rust security scanner", "local-first SAST"];
   const extra = [];
   if (section) extra.push(section);
   if (title) extra.push(title);
   // Heuristic: pull a few ALL-CAPS tokens or common terms from body.
-  const tokens = (body.match(/\b(taint|SARIF|CFG|SSA|SBOM|CVE|RCE|SSRF|XSS|FastAPI|Rust|Python|Go|JavaScript|TypeScript|Java|TOML|JSON)\b/gi) || []);
+  const tokens =
+    body.match(
+      /\b(taint|SARIF|CFG|SSA|SBOM|CVE|RCE|SSRF|XSS|FastAPI|Rust|Python|Go|JavaScript|TypeScript|Java|TOML|JSON)\b/gi,
+    ) || [];
   for (const t of tokens) if (!extra.includes(t)) extra.push(t);
   return [...base, ...extra.slice(0, 6)];
 }
@@ -281,9 +274,7 @@ function renderSidebar(sections, currentHref) {
     parts.push(`<ul class="docs-sidebar__list">`);
     for (const it of sec.items) {
       const cur = isCurrent(it.href) ? ' aria-current="page"' : "";
-      parts.push(
-        `<li><a class="docs-sidebar__link" href="${rel(it.href)}"${cur}>${escapeHtml(it.title)}</a>`,
-      );
+      parts.push(`<li><a class="docs-sidebar__link" href="${rel(it.href)}"${cur}>${escapeHtml(it.title)}</a>`);
       if (it.children.length) {
         parts.push(`<ul class="docs-sidebar__sublist">`);
         for (const c of it.children) {
@@ -302,15 +293,26 @@ function renderSidebar(sections, currentHref) {
   return parts.join("");
 }
 
+function renderDocsSearch() {
+  return `<div class="docs-search docs-search--content" data-docs-search>
+    <label class="visually-hidden" for="docs-search-input">Search docs</label>
+    <div class="docs-search__control">
+      <span class="docs-search__icon" aria-hidden="true"></span>
+      <input id="docs-search-input" data-docs-search-input type="search" placeholder="Search docs" autocomplete="off" autocapitalize="none" spellcheck="false" role="combobox" aria-autocomplete="list" aria-controls="docs-search-results" aria-expanded="false" />
+      <kbd class="docs-search__key" aria-hidden="true">⌘K</kbd>
+    </div>
+    <div class="docs-search__panel" data-docs-search-panel hidden>
+      <div class="docs-search__status" data-docs-search-status></div>
+      <div class="docs-search__results" id="docs-search-results" data-docs-search-results role="listbox" aria-label="Search results"></div>
+    </div>
+  </div>`;
+}
+
 // ─────────────────────────────────────────
 // HTML helpers
 // ─────────────────────────────────────────
 function escapeHtml(s) {
-  return String(s)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
+  return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
 
 function extractFirstHeading(md) {
@@ -336,11 +338,19 @@ function plainSummary(md, max = 200) {
     .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
     .replace(/[`*_~>]/g, "")
     .trim();
-  const paras = stripped.split(/\n\s*\n/).map((p) => p.replace(/\s+/g, " ").trim()).filter(Boolean);
+  const paras = stripped
+    .split(/\n\s*\n/)
+    .map((p) => p.replace(/\s+/g, " ").trim())
+    .filter(Boolean);
   // Skip leads that end with a colon (set up a code/list); take the next.
   let para = paras.find((p) => p.length > 40 && !p.endsWith(":")) || paras[0] || "";
   if (para.length <= max) return para;
-  return para.slice(0, max - 1).replace(/\s+\S*$/, "").replace(/[,;:]\s*$/, "") + "…";
+  return (
+    para
+      .slice(0, max - 1)
+      .replace(/\s+\S*$/, "")
+      .replace(/[,;:]\s*$/, "") + "…"
+  );
 }
 
 function pageTemplate({
@@ -358,12 +368,9 @@ function pageTemplate({
   nextHref,
 }) {
   const p = depthPrefix;
-  const fullTitle = isIndex
-    ? `${title} | Nyx — local-first Rust SAST scanner`
-    : `${title} | Nyx docs`;
-  const kw = keywords && keywords.length
-    ? `\n    <meta name="keywords" content="${escapeHtml(keywords.join(", "))}" />`
-    : "";
+  const fullTitle = isIndex ? `${title} | Nyx — local-first Rust SAST scanner` : `${title} | Nyx docs`;
+  const kw =
+    keywords && keywords.length ? `\n    <meta name="keywords" content="${escapeHtml(keywords.join(", "))}" />` : "";
   const prevLink = prevHref ? `\n    <link rel="prev" href="${prevHref}" />` : "";
   const nextLink = nextHref ? `\n    <link rel="next" href="${nextHref}" />` : "";
   const ogType = isIndex ? "website" : "article";
@@ -393,6 +400,7 @@ function pageTemplate({
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="${p}styles.css" />
+    <script defer src="${p}docs/search.js"></script>
 
     <meta property="og:type" content="${ogType}" />
     <meta property="og:site_name" content="Nyx" />
@@ -433,7 +441,8 @@ function pageTemplate({
       <div class="docs-shell">
         ${sidebar}
         <article class="docs-content">
-          <div class="docs-prose">
+          ${renderDocsSearch()}
+          <div class="docs-prose" data-pagefind-body>
 ${body}
           </div>
           ${prevNext}
@@ -490,6 +499,38 @@ function copyAssets() {
   const dst = path.join(OUT, "assets");
   fs.mkdirSync(dst, { recursive: true });
   copyRecursive(srcAssets, dst);
+}
+
+function copySearchScript() {
+  const scriptSrc = path.join(ROOT, "docs-search.js");
+  if (!fs.existsSync(scriptSrc)) {
+    throw new Error("docs-search.js missing");
+  }
+  fs.copyFileSync(scriptSrc, path.join(OUT, "search.js"));
+}
+
+function runPagefind() {
+  const bin = path.join(ROOT, "node_modules", ".bin", process.platform === "win32" ? "pagefind.cmd" : "pagefind");
+  if (!fs.existsSync(bin)) {
+    throw new Error("Pagefind missing — run `npm install` first.");
+  }
+
+  execFileSync(
+    bin,
+    [
+      "--site",
+      ROOT,
+      "--glob",
+      "docs/**/*.html",
+      "--output-subdir",
+      "docs/pagefind",
+      "--force-language",
+      "en",
+      "--include-characters=-_./:#",
+      "--quiet",
+    ],
+    { stdio: "inherit" },
+  );
 }
 
 function copyRecursive(from, to) {
@@ -601,6 +642,10 @@ function build() {
   // Copy referenced assets.
   copyAssets();
 
+  // Emit the custom UI shell and Pagefind's generated search index.
+  copySearchScript();
+  runPagefind();
+
   // Warn about broken internal links so upstream markdown gets fixed.
   checkInternalLinks();
 
@@ -624,8 +669,7 @@ function checkInternalLinks() {
     let m;
     while ((m = re.exec(html))) {
       const h = m[1];
-      if (/^[a-z]+:/i.test(h) || h.startsWith("//") || h.startsWith("/") || h === "")
-        continue;
+      if (/^[a-z]+:/i.test(h) || h.startsWith("//") || h.startsWith("/") || h === "") continue;
       const target = path.resolve(dir, h);
       // Targets outside OUT (e.g., ../news/) aren't validated here.
       if (!target.startsWith(OUT)) continue;
@@ -649,12 +693,7 @@ function writeIndex(sections, flat) {
 
   const cards = sections
     .map((sec) => {
-      const items = sec.items
-        .map(
-          (it) =>
-            `<li><a href="${it.href}">${escapeHtml(it.title)}</a></li>`,
-        )
-        .join("");
+      const items = sec.items.map((it) => `<li><a href="${it.href}">${escapeHtml(it.title)}</a></li>`).join("");
       return `<section class="docs-index__group">
         <h2>${escapeHtml(sec.title)}</h2>
         <ul>${items}</ul>
@@ -662,7 +701,7 @@ function writeIndex(sections, flat) {
     })
     .join("");
 
-  const body = `<h1>Nyx documentation</h1>
+  const body = `<h1 id="nyx-documentation">Nyx documentation</h1>
 <p class="docs-index__lede">Local-first SAST for developers. Source-to-sink taint, browser triage, SARIF, CI. Get running in minutes, then read deeper.</p>
 <div class="docs-index__grid">
   ${cards}

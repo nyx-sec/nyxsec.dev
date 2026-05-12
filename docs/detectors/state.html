@@ -24,6 +24,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="../../styles.css" />
+    <script defer src="../../docs/search.js"></script>
 
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content="Nyx" />
@@ -143,11 +144,23 @@
       <div class="docs-shell">
         <nav class="docs-sidebar" aria-label="Documentation"><a class="docs-sidebar__brand" href="../">Docs</a><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Getting started</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="../quickstart.html">Quickstart</a></li><li><a class="docs-sidebar__link" href="../installation.html">Installation</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Using nyx</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="../cli.html">CLI reference</a></li><li><a class="docs-sidebar__link" href="../serve.html">Browser UI</a></li><li><a class="docs-sidebar__link" href="../configuration.html">Configuration</a></li><li><a class="docs-sidebar__link" href="../output.html">Output formats</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Coverage</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="../language-maturity.html">Language maturity</a></li><li><a class="docs-sidebar__link" href="../rules.html">Rules</a></li><li><a class="docs-sidebar__link" href="../auth.html">Auth analysis</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Under the hood</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="../how-it-works.html">How it works</a></li><li><a class="docs-sidebar__link" href="../advanced-analysis.html">Advanced analysis</a></li><li><a class="docs-sidebar__link" href="../detectors.html">Detectors</a><ul class="docs-sidebar__sublist"><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="../detectors/patterns.html">Patterns</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="../detectors/cfg.html">CFG</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="../detectors/state.html" aria-current="page">State</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="../detectors/taint.html">Taint</a></li></ul></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Project</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="../roadmap.html">Roadmap</a></li><li><a class="docs-sidebar__link" href="../changelog.html">Changelog</a></li></ul></div></nav>
         <article class="docs-content">
-          <div class="docs-prose">
-<h1 id="state-model-analysis"><a class="docs-anchor" href="#state-model-analysis" aria-label="Link to state-model-analysis">#</a>State model analysis</h1>
+          <div class="docs-search docs-search--content" data-docs-search>
+    <label class="visually-hidden" for="docs-search-input">Search docs</label>
+    <div class="docs-search__control">
+      <span class="docs-search__icon" aria-hidden="true"></span>
+      <input id="docs-search-input" data-docs-search-input type="search" placeholder="Search docs" autocomplete="off" autocapitalize="none" spellcheck="false" role="combobox" aria-autocomplete="list" aria-controls="docs-search-results" aria-expanded="false" />
+      <kbd class="docs-search__key" aria-hidden="true">⌘K</kbd>
+    </div>
+    <div class="docs-search__panel" data-docs-search-panel hidden>
+      <div class="docs-search__status" data-docs-search-status></div>
+      <div class="docs-search__results" id="docs-search-results" data-docs-search-results role="listbox" aria-label="Search results"></div>
+    </div>
+  </div>
+          <div class="docs-prose" data-pagefind-body>
+<h1 id="state-model-analysis"><a class="docs-anchor" href="#state-model-analysis" aria-label="Link to state-model-analysis" data-pagefind-ignore>#</a>State model analysis</h1>
 <p>Tracks resource lifecycle and authentication state through a function. Detects use-after-close, double-close, leaks, and unauthenticated access to privileged operations.</p>
 <p>State analysis is on by default. Disable with <code>scanner.enable_state_analysis = false</code>. It runs in <code>--mode full</code> and <code>--mode taint</code>; AST-only mode skips it.</p>
-<h2 id="rule-ids"><a class="docs-anchor" href="#rule-ids" aria-label="Link to rule-ids">#</a>Rule IDs</h2>
+<h2 id="rule-ids"><a class="docs-anchor" href="#rule-ids" aria-label="Link to rule-ids" data-pagefind-ignore>#</a>Rule IDs</h2>
 <table>
 <thead>
 <tr>
@@ -176,7 +189,7 @@
 <td>High</td>
 </tr>
 </tbody></table>
-<h2 id="what-it-detects"><a class="docs-anchor" href="#what-it-detects" aria-label="Link to what-it-detects">#</a>What it detects</h2>
+<h2 id="what-it-detects"><a class="docs-anchor" href="#what-it-detects" aria-label="Link to what-it-detects" data-pagefind-ignore>#</a>What it detects</h2>
 <p><strong><code>state-use-after-close</code></strong>: Resource transitions to CLOSED (via <code>close</code>, <code>fclose</code>, <code>disconnect</code>, …), then a use operation happens on it.</p>
 <pre><code class="hljs language-c">FILE *f = fopen(<span class="hljs-string">&quot;data.txt&quot;</span>, <span class="hljs-string">&quot;r&quot;</span>);
 fclose(f);
@@ -186,7 +199,7 @@ fread(buf, <span class="hljs-number">1</span>, <span class="hljs-number">100</sp
 <p><strong><code>state-resource-leak-possible</code></strong>: Resource closed on some paths but not others. Lower confidence; often an early-return error path.</p>
 <p><strong><code>state-unauthed-access</code></strong>: A function recognised as a web handler reaches a privileged sink without an auth call on the path.</p>
 <p>A function counts as a web handler if its name starts with <code>handle_</code>, <code>route_</code>, or <code>api_</code> (sufficient on its own), or starts with <code>serve_</code>/<code>process_</code> and the file uses web-shaped parameter names (<code>request</code>, <code>req</code>, <code>ctx</code>, <code>res</code>, <code>response</code>, <code>w</code>, <code>writer</code>, language-dependent). <code>main</code> is excluded.</p>
-<h2 id="managed-resource-suppression"><a class="docs-anchor" href="#managed-resource-suppression" aria-label="Link to managed-resource-suppression">#</a>Managed-resource suppression</h2>
+<h2 id="managed-resource-suppression"><a class="docs-anchor" href="#managed-resource-suppression" aria-label="Link to managed-resource-suppression" data-pagefind-ignore>#</a>Managed-resource suppression</h2>
 <p>Several language-specific cleanup patterns suppress leak findings:</p>
 <table>
 <thead>
@@ -222,7 +235,7 @@ fread(buf, <span class="hljs-number">1</span>, <span class="hljs-number">100</sp
 <td>TWR-bound resources suppressed</td>
 </tr>
 </tbody></table>
-<h2 id="what-it-cant-detect"><a class="docs-anchor" href="#what-it-cant-detect" aria-label="Link to what-it-cant-detect">#</a>What it can&#39;t detect</h2>
+<h2 id="what-it-cant-detect"><a class="docs-anchor" href="#what-it-cant-detect" aria-label="Link to what-it-cant-detect" data-pagefind-ignore>#</a>What it can&#39;t detect</h2>
 <ul>
 <li><strong>Cross-function resource ownership.</strong> Open in one function, close in another, leak gets reported in the opener. The most common FP source for leak detection.</li>
 <li><strong>Factory / builder functions</strong> that return a resource for the caller to manage.</li>
@@ -231,7 +244,7 @@ fread(buf, <span class="hljs-number">1</span>, <span class="hljs-number">100</sp
 <li><strong>Dynamic dispatch.</strong> Close called via trait object or interface may not be recognised.</li>
 <li><strong>Type-state authentication.</strong> <code>AuthenticatedRequest&lt;T&gt;</code> and similar Rust patterns are not recognised as auth.</li>
 </ul>
-<h2 id="common-false-positives"><a class="docs-anchor" href="#common-false-positives" aria-label="Link to common-false-positives">#</a>Common false positives</h2>
+<h2 id="common-false-positives"><a class="docs-anchor" href="#common-false-positives" aria-label="Link to common-false-positives" data-pagefind-ignore>#</a>Common false positives</h2>
 <table>
 <thead>
 <tr>
@@ -256,7 +269,7 @@ fread(buf, <span class="hljs-number">1</span>, <span class="hljs-number">100</sp
 <td>Known limitation</td>
 </tr>
 </tbody></table>
-<h2 id="per-language-detection"><a class="docs-anchor" href="#per-language-detection" aria-label="Link to per-language-detection">#</a>Per-language detection</h2>
+<h2 id="per-language-detection"><a class="docs-anchor" href="#per-language-detection" aria-label="Link to per-language-detection" data-pagefind-ignore>#</a>Per-language detection</h2>
 <table>
 <thead>
 <tr>
@@ -338,12 +351,12 @@ fread(buf, <span class="hljs-number">1</span>, <span class="hljs-number">100</sp
 <td>Constructor-callee matching is incomplete</td>
 </tr>
 </tbody></table>
-<h2 id="tuning"><a class="docs-anchor" href="#tuning" aria-label="Link to tuning">#</a>Tuning</h2>
+<h2 id="tuning"><a class="docs-anchor" href="#tuning" aria-label="Link to tuning" data-pagefind-ignore>#</a>Tuning</h2>
 <pre><code class="hljs language-bash">nyx scan . --severity <span class="hljs-string">&quot;&gt;=MEDIUM&quot;</span>   <span class="hljs-comment"># Skip &quot;possible&quot; leaks (Low)</span></code></pre>
 <pre><code class="hljs language-toml"><span class="hljs-section">[scanner]</span>
 <span class="hljs-attr">enable_state_analysis</span> = <span class="hljs-literal">true</span>        <span class="hljs-comment"># default</span>
 <span class="hljs-attr">excluded_directories</span>  = [<span class="hljs-string">&quot;tests&quot;</span>, <span class="hljs-string">&quot;test&quot;</span>, <span class="hljs-string">&quot;spec&quot;</span>]</code></pre>
-<h2 id="recognised-pairs"><a class="docs-anchor" href="#recognised-pairs" aria-label="Link to recognised-pairs">#</a>Recognised pairs</h2>
+<h2 id="recognised-pairs"><a class="docs-anchor" href="#recognised-pairs" aria-label="Link to recognised-pairs" data-pagefind-ignore>#</a>Recognised pairs</h2>
 <p>The state engine ships these acquire/release pairs. Custom pairs are not yet configurable; file an issue if you need one.</p>
 <p><strong>C / C++</strong></p>
 <table>
@@ -421,7 +434,7 @@ fread(buf, <span class="hljs-number">1</span>, <span class="hljs-number">100</sp
 </tr>
 </tbody></table>
 <p>Go, Python, JavaScript, Ruby, PHP follow language-idiomatic equivalents.</p>
-<h2 id="use-after-close-triggers"><a class="docs-anchor" href="#use-after-close-triggers" aria-label="Link to use-after-close-triggers">#</a>Use-after-close triggers</h2>
+<h2 id="use-after-close-triggers"><a class="docs-anchor" href="#use-after-close-triggers" aria-label="Link to use-after-close-triggers" data-pagefind-ignore>#</a>Use-after-close triggers</h2>
 <p>These operations on a closed resource fire <code>state-use-after-close</code>:</p>
 <pre><code class="hljs language-plain"><span class="hljs-keyword">read</span>, <span class="hljs-keyword">write</span>, <span class="hljs-keyword">send</span>, <span class="hljs-keyword">recv</span>, fread, fwrite, fgets, fputs, fprintf, fscanf,
 fflush, fseek, ftell, rewind, feof, ferror, fgetc, fputc, <span class="hljs-keyword">getc</span>, putc,

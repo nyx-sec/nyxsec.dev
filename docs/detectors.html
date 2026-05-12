@@ -24,6 +24,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="../styles.css" />
+    <script defer src="../docs/search.js"></script>
 
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content="Nyx" />
@@ -137,8 +138,20 @@
       <div class="docs-shell">
         <nav class="docs-sidebar" aria-label="Documentation"><a class="docs-sidebar__brand" href="">Docs</a><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Getting started</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="quickstart.html">Quickstart</a></li><li><a class="docs-sidebar__link" href="installation.html">Installation</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Using nyx</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="cli.html">CLI reference</a></li><li><a class="docs-sidebar__link" href="serve.html">Browser UI</a></li><li><a class="docs-sidebar__link" href="configuration.html">Configuration</a></li><li><a class="docs-sidebar__link" href="output.html">Output formats</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Coverage</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="language-maturity.html">Language maturity</a></li><li><a class="docs-sidebar__link" href="rules.html">Rules</a></li><li><a class="docs-sidebar__link" href="auth.html">Auth analysis</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Under the hood</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="how-it-works.html">How it works</a></li><li><a class="docs-sidebar__link" href="advanced-analysis.html">Advanced analysis</a></li><li><a class="docs-sidebar__link" href="detectors.html" aria-current="page">Detectors</a><ul class="docs-sidebar__sublist"><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/patterns.html">Patterns</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/cfg.html">CFG</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/state.html">State</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/taint.html">Taint</a></li></ul></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Project</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="roadmap.html">Roadmap</a></li><li><a class="docs-sidebar__link" href="changelog.html">Changelog</a></li></ul></div></nav>
         <article class="docs-content">
-          <div class="docs-prose">
-<h1 id="detectors"><a class="docs-anchor" href="#detectors" aria-label="Link to detectors">#</a>Detectors</h1>
+          <div class="docs-search docs-search--content" data-docs-search>
+    <label class="visually-hidden" for="docs-search-input">Search docs</label>
+    <div class="docs-search__control">
+      <span class="docs-search__icon" aria-hidden="true"></span>
+      <input id="docs-search-input" data-docs-search-input type="search" placeholder="Search docs" autocomplete="off" autocapitalize="none" spellcheck="false" role="combobox" aria-autocomplete="list" aria-controls="docs-search-results" aria-expanded="false" />
+      <kbd class="docs-search__key" aria-hidden="true">⌘K</kbd>
+    </div>
+    <div class="docs-search__panel" data-docs-search-panel hidden>
+      <div class="docs-search__status" data-docs-search-status></div>
+      <div class="docs-search__results" id="docs-search-results" data-docs-search-results role="listbox" aria-label="Search results"></div>
+    </div>
+  </div>
+          <div class="docs-prose" data-pagefind-body>
+<h1 id="detectors"><a class="docs-anchor" href="#detectors" aria-label="Link to detectors" data-pagefind-ignore>#</a>Detectors</h1>
 <p>Nyx ships four independent detector families. They run together in <code>--mode full</code>, the default. Findings are merged, deduplicated, ranked, and printed in one result set.</p>
 <table>
 <thead>
@@ -237,14 +250,14 @@
 <p>A single call site can fire several of these at once when it carries multiple gates. <code>fetch(taintedUrl, {body: tainted})</code> produces both an SSRF finding (URL flow) and a <code>taint-data-exfiltration</code> finding (body flow), each with its own cap mask rather than a conflated union.</p>
 <p>Each cap-class entry is registered in <code>CAP_RULE_REGISTRY</code> (<code>src/labels/mod.rs</code>) with its title, severity, OWASP 2021 code, and description. Browse the registry from the CLI with <code>nyx rules list --class-only</code>, or <code>nyx rules list --kind class --json</code> for machine output.</p>
 <p>For Rust auth-specific rules (<code>rs.auth.*</code>), see <a href="auth.html">auth.md</a>.</p>
-<h2 id="how-they-combine"><a class="docs-anchor" href="#how-they-combine" aria-label="Link to how-they-combine">#</a>How they combine</h2>
+<h2 id="how-they-combine"><a class="docs-anchor" href="#how-they-combine" aria-label="Link to how-they-combine" data-pagefind-ignore>#</a>How they combine</h2>
 <p>In <code>--mode full</code>:</p>
 <ol>
 <li><strong>Taint and AST can both fire on one line.</strong> If <code>eval(userInput)</code> triggers both <code>js.code_exec.eval</code> (AST) and <code>taint-unsanitised-flow</code> (taint), both are kept with distinct rule IDs. The taint finding ranks higher because of the analysis-kind bonus.</li>
 <li><strong>State supersedes CFG on resource leaks.</strong> When <code>state-resource-leak</code> and <code>cfg-resource-leak</code> fire at the same location, the CFG one is dropped.</li>
 <li><strong>Exact duplicates are removed.</strong> Same line, column, rule ID, severity → one finding.</li>
 </ol>
-<h2 id="modes"><a class="docs-anchor" href="#modes" aria-label="Link to modes">#</a>Modes</h2>
+<h2 id="modes"><a class="docs-anchor" href="#modes" aria-label="Link to modes" data-pagefind-ignore>#</a>Modes</h2>
 <table>
 <thead>
 <tr>
@@ -269,7 +282,7 @@
 <td>Taint + State</td>
 </tr>
 </tbody></table>
-<h2 id="attack-surface-ranking"><a class="docs-anchor" href="#attack-surface-ranking" aria-label="Link to attack-surface-ranking">#</a>Attack-surface ranking</h2>
+<h2 id="attack-surface-ranking"><a class="docs-anchor" href="#attack-surface-ranking" aria-label="Link to attack-surface-ranking" data-pagefind-ignore>#</a>Attack-surface ranking</h2>
 <p>Every finding gets a deterministic score. Findings are sorted by descending score by default. Disable with <code>--no-rank</code> or <code>output.attack_surface_ranking = false</code>.</p>
 <pre><code class="hljs language-plain"><span class="hljs-attr">score</span> = severity_base + analysis_kind + evidence_strength + state_bonus - validation_penalty</code></pre>
 <table>

@@ -24,6 +24,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="../styles.css" />
+    <script defer src="../docs/search.js"></script>
 
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content="Nyx" />
@@ -137,10 +138,22 @@
       <div class="docs-shell">
         <nav class="docs-sidebar" aria-label="Documentation"><a class="docs-sidebar__brand" href="">Docs</a><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Getting started</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="quickstart.html">Quickstart</a></li><li><a class="docs-sidebar__link" href="installation.html">Installation</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Using nyx</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="cli.html">CLI reference</a></li><li><a class="docs-sidebar__link" href="serve.html">Browser UI</a></li><li><a class="docs-sidebar__link" href="configuration.html">Configuration</a></li><li><a class="docs-sidebar__link" href="output.html" aria-current="page">Output formats</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Coverage</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="language-maturity.html">Language maturity</a></li><li><a class="docs-sidebar__link" href="rules.html">Rules</a></li><li><a class="docs-sidebar__link" href="auth.html">Auth analysis</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Under the hood</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="how-it-works.html">How it works</a></li><li><a class="docs-sidebar__link" href="advanced-analysis.html">Advanced analysis</a></li><li><a class="docs-sidebar__link" href="detectors.html">Detectors</a><ul class="docs-sidebar__sublist"><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/patterns.html">Patterns</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/cfg.html">CFG</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/state.html">State</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/taint.html">Taint</a></li></ul></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Project</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="roadmap.html">Roadmap</a></li><li><a class="docs-sidebar__link" href="changelog.html">Changelog</a></li></ul></div></nav>
         <article class="docs-content">
-          <div class="docs-prose">
-<h1 id="output-formats"><a class="docs-anchor" href="#output-formats" aria-label="Link to output-formats">#</a>Output Formats</h1>
+          <div class="docs-search docs-search--content" data-docs-search>
+    <label class="visually-hidden" for="docs-search-input">Search docs</label>
+    <div class="docs-search__control">
+      <span class="docs-search__icon" aria-hidden="true"></span>
+      <input id="docs-search-input" data-docs-search-input type="search" placeholder="Search docs" autocomplete="off" autocapitalize="none" spellcheck="false" role="combobox" aria-autocomplete="list" aria-controls="docs-search-results" aria-expanded="false" />
+      <kbd class="docs-search__key" aria-hidden="true">⌘K</kbd>
+    </div>
+    <div class="docs-search__panel" data-docs-search-panel hidden>
+      <div class="docs-search__status" data-docs-search-status></div>
+      <div class="docs-search__results" id="docs-search-results" data-docs-search-results role="listbox" aria-label="Search results"></div>
+    </div>
+  </div>
+          <div class="docs-prose" data-pagefind-body>
+<h1 id="output-formats"><a class="docs-anchor" href="#output-formats" aria-label="Link to output-formats" data-pagefind-ignore>#</a>Output Formats</h1>
 <p>Nyx supports three output formats, selected with <code>--format</code> or <code>output.default_format</code> in config.</p>
-<h2 id="console-default"><a class="docs-anchor" href="#console-default" aria-label="Link to console-default">#</a>Console (default)</h2>
+<h2 id="console-default"><a class="docs-anchor" href="#console-default" aria-label="Link to console-default" data-pagefind-ignore>#</a>Console (default)</h2>
 <p>Human-readable, color-coded output to stdout. Status messages go to stderr.</p>
 <pre><code class="hljs language-plain"><span class="hljs-selector-attr">[HIGH]</span>   <span class="hljs-selector-tag">taint-unsanitised-flow</span> (source <span class="hljs-number">5</span>:<span class="hljs-number">11</span>)  <span class="hljs-selector-tag">src</span>/<span class="hljs-selector-tag">handler</span><span class="hljs-selector-class">.rs</span>:<span class="hljs-number">12</span>:<span class="hljs-number">5</span> (<span class="hljs-attribute">Score</span>: <span class="hljs-number">76</span>, <span class="hljs-attribute">Confidence</span>: High)
          <span class="hljs-selector-tag">Source</span>: <span class="hljs-selector-tag">env</span>::<span class="hljs-selector-tag">var</span>(<span class="hljs-string">&quot;CMD&quot;</span>) → <span class="hljs-selector-tag">Command</span>::<span class="hljs-selector-tag">new</span>(<span class="hljs-string">&quot;sh&quot;</span>)<span class="hljs-selector-class">.arg</span>(<span class="hljs-string">&quot;-c&quot;</span>)
@@ -148,7 +161,7 @@
 <span class="hljs-selector-attr">[MEDIUM]</span> <span class="hljs-selector-tag">cfg-unguarded-sink</span>                    <span class="hljs-selector-tag">src</span>/<span class="hljs-selector-tag">handler</span><span class="hljs-selector-class">.rs</span>:<span class="hljs-number">12</span>:<span class="hljs-number">5</span> (<span class="hljs-attribute">Score</span>: <span class="hljs-number">35</span>, <span class="hljs-attribute">Confidence</span>: Medium)
 
 <span class="hljs-selector-attr">[LOW]</span>    <span class="hljs-selector-tag">rs</span><span class="hljs-selector-class">.quality</span><span class="hljs-selector-class">.unwrap</span>                     <span class="hljs-selector-tag">src</span>/<span class="hljs-selector-tag">lib</span><span class="hljs-selector-class">.rs</span>:<span class="hljs-number">88</span>:<span class="hljs-number">5</span> (<span class="hljs-attribute">Score</span>: <span class="hljs-number">10</span>, <span class="hljs-attribute">Confidence</span>: High)</code></pre>
-<h3 id="severity-indicators"><a class="docs-anchor" href="#severity-indicators" aria-label="Link to severity-indicators">#</a>Severity indicators</h3>
+<h3 id="severity-indicators"><a class="docs-anchor" href="#severity-indicators" aria-label="Link to severity-indicators" data-pagefind-ignore>#</a>Severity indicators</h3>
 <table>
 <thead>
 <tr>
@@ -173,7 +186,7 @@
 <td>Informational -- code quality or weak signal</td>
 </tr>
 </tbody></table>
-<h3 id="evidence-fields"><a class="docs-anchor" href="#evidence-fields" aria-label="Link to evidence-fields">#</a>Evidence fields</h3>
+<h3 id="evidence-fields"><a class="docs-anchor" href="#evidence-fields" aria-label="Link to evidence-fields" data-pagefind-ignore>#</a>Evidence fields</h3>
 <p>Taint and state findings include structured evidence:</p>
 <table>
 <thead>
@@ -195,16 +208,16 @@
 <td>Type of validation predicate protecting the path</td>
 </tr>
 </tbody></table>
-<h3 id="score"><a class="docs-anchor" href="#score" aria-label="Link to score">#</a>Score</h3>
+<h3 id="score"><a class="docs-anchor" href="#score" aria-label="Link to score" data-pagefind-ignore>#</a>Score</h3>
 <p>When attack-surface ranking is enabled (default), each finding shows a <code>Score</code> value. Higher scores indicate greater exploitability. See <a href="detectors.html">Detector Overview</a> for the scoring formula.</p>
-<h3 id="rollup-findings"><a class="docs-anchor" href="#rollup-findings" aria-label="Link to rollup-findings">#</a>Rollup findings</h3>
+<h3 id="rollup-findings"><a class="docs-anchor" href="#rollup-findings" aria-label="Link to rollup-findings" data-pagefind-ignore>#</a>Rollup findings</h3>
 <p>High-frequency LOW Quality findings (e.g. <code>rs.quality.unwrap</code>) are grouped into rollup findings by <code>(file, rule)</code>:</p>
 <pre><code class="hljs language-plain">  <span class="hljs-number">21</span>:<span class="hljs-number">10</span>  ● <span class="hljs-selector-attr">[LOW]</span>   rs<span class="hljs-selector-class">.quality</span><span class="hljs-selector-class">.unwrap</span>
       rs<span class="hljs-selector-class">.quality</span><span class="hljs-selector-class">.unwrap</span> (<span class="hljs-number">38</span> occurrences)
       Examples: <span class="hljs-number">21</span>:<span class="hljs-number">10</span>, <span class="hljs-number">50</span>:<span class="hljs-number">10</span>, <span class="hljs-number">79</span>:<span class="hljs-number">10</span>, <span class="hljs-number">105</span>:<span class="hljs-number">10</span>, <span class="hljs-number">134</span>:<span class="hljs-number">10</span>
       Run: nyx scan <span class="hljs-attr">--show-instances</span> rs<span class="hljs-selector-class">.quality</span>.unwrap</code></pre>
 <p>Rollups count as <strong>one finding</strong> for LOW budget enforcement. Use <code>--show-instances &lt;RULE&gt;</code> to expand a specific rule or <code>--all</code> to disable rollups entirely.</p>
-<h3 id="suppression-footer"><a class="docs-anchor" href="#suppression-footer" aria-label="Link to suppression-footer">#</a>Suppression footer</h3>
+<h3 id="suppression-footer"><a class="docs-anchor" href="#suppression-footer" aria-label="Link to suppression-footer" data-pagefind-ignore>#</a>Suppression footer</h3>
 <p>When findings are suppressed by the prioritization pipeline, a footer is shown:</p>
 <pre><code class="hljs language-plain"><span class="hljs-attribute">Suppressed</span> <span class="hljs-number">195</span> LOW/Quality findings.
 <span class="hljs-attribute">Active</span> filters:
@@ -215,7 +228,7 @@
 
 <span class="hljs-attribute">Use</span> --include-quality, --max-low, or --<span class="hljs-literal">all</span> to adjust.</code></pre>
 <hr>
-<h2 id="json"><a class="docs-anchor" href="#json" aria-label="Link to json">#</a>JSON</h2>
+<h2 id="json"><a class="docs-anchor" href="#json" aria-label="Link to json" data-pagefind-ignore>#</a>JSON</h2>
 <p>Machine-readable JSON array. Each finding is an object:</p>
 <pre><code class="hljs language-json"><span class="hljs-punctuation">[</span>
   <span class="hljs-punctuation">{</span>
@@ -256,7 +269,7 @@
     <span class="hljs-punctuation">]</span>
   <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">]</span></code></pre>
-<h3 id="field-descriptions"><a class="docs-anchor" href="#field-descriptions" aria-label="Link to field-descriptions">#</a>Field descriptions</h3>
+<h3 id="field-descriptions"><a class="docs-anchor" href="#field-descriptions" aria-label="Link to field-descriptions" data-pagefind-ignore>#</a>Field descriptions</h3>
 <table>
 <thead>
 <tr>
@@ -358,7 +371,7 @@
 </tr>
 </tbody></table>
 <p>Fields marked &quot;no&quot; are omitted when empty/null/false to keep output compact.</p>
-<h3 id="confidence-levels"><a class="docs-anchor" href="#confidence-levels" aria-label="Link to confidence-levels">#</a>Confidence levels</h3>
+<h3 id="confidence-levels"><a class="docs-anchor" href="#confidence-levels" aria-label="Link to confidence-levels" data-pagefind-ignore>#</a>Confidence levels</h3>
 <table>
 <thead>
 <tr>
@@ -379,7 +392,7 @@
 <td>Weak signal -- AST pattern match, possible resource leak, degraded analysis</td>
 </tr>
 </tbody></table>
-<h3 id="evidence-object"><a class="docs-anchor" href="#evidence-object" aria-label="Link to evidence-object">#</a>Evidence object</h3>
+<h3 id="evidence-object"><a class="docs-anchor" href="#evidence-object" aria-label="Link to evidence-object" data-pagefind-ignore>#</a>Evidence object</h3>
 <p>The <code>evidence</code> field provides structured provenance data:</p>
 <table>
 <thead>
@@ -421,7 +434,7 @@
 </tr>
 </tbody></table>
 <p>All fields are omitted when empty/null.</p>
-<h3 id="rollup-object"><a class="docs-anchor" href="#rollup-object" aria-label="Link to rollup-object">#</a>Rollup object</h3>
+<h3 id="rollup-object"><a class="docs-anchor" href="#rollup-object" aria-label="Link to rollup-object" data-pagefind-ignore>#</a>Rollup object</h3>
 <p>When a finding is a rollup (grouped from multiple occurrences), the <code>rollup</code> field is present:</p>
 <pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;rollup&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -453,7 +466,7 @@
 </tr>
 </tbody></table>
 <hr>
-<h2 id="sarif-static-analysis-results-interchange-format"><a class="docs-anchor" href="#sarif-static-analysis-results-interchange-format" aria-label="Link to sarif-static-analysis-results-interchange-format">#</a>SARIF (Static Analysis Results Interchange Format)</h2>
+<h2 id="sarif-static-analysis-results-interchange-format"><a class="docs-anchor" href="#sarif-static-analysis-results-interchange-format" aria-label="Link to sarif-static-analysis-results-interchange-format" data-pagefind-ignore>#</a>SARIF (Static Analysis Results Interchange Format)</h2>
 <p>SARIF 2.1.0 JSON, suitable for GitHub Code Scanning and other SARIF-compatible tools.</p>
 <pre><code class="hljs language-bash">nyx scan . --format sarif &gt; results.sarif</code></pre>
 <p>The SARIF output includes:</p>
@@ -465,7 +478,7 @@
 <li><strong>Related locations</strong> -- Rollup findings include example locations in <code>relatedLocations</code></li>
 <li><strong>Artifacts</strong> -- File paths referenced by findings</li>
 </ul>
-<h3 id="github-code-scanning-integration"><a class="docs-anchor" href="#github-code-scanning-integration" aria-label="Link to github-code-scanning-integration">#</a>GitHub Code Scanning integration</h3>
+<h3 id="github-code-scanning-integration"><a class="docs-anchor" href="#github-code-scanning-integration" aria-label="Link to github-code-scanning-integration" data-pagefind-ignore>#</a>GitHub Code Scanning integration</h3>
 <pre><code class="hljs language-yaml"><span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Run</span> <span class="hljs-string">Nyx</span>
   <span class="hljs-attr">run:</span> <span class="hljs-string">nyx</span> <span class="hljs-string">scan</span> <span class="hljs-string">.</span> <span class="hljs-string">--format</span> <span class="hljs-string">sarif</span> <span class="hljs-string">&gt;</span> <span class="hljs-string">results.sarif</span>
 
@@ -474,7 +487,7 @@
   <span class="hljs-attr">with:</span>
     <span class="hljs-attr">sarif_file:</span> <span class="hljs-string">results.sarif</span></code></pre>
 <hr>
-<h2 id="exit-codes"><a class="docs-anchor" href="#exit-codes" aria-label="Link to exit-codes">#</a>Exit Codes</h2>
+<h2 id="exit-codes"><a class="docs-anchor" href="#exit-codes" aria-label="Link to exit-codes" data-pagefind-ignore>#</a>Exit Codes</h2>
 <table>
 <thead>
 <tr>
@@ -497,7 +510,7 @@
 </tbody></table>
 <p>Without <code>--fail-on</code>, Nyx always exits <code>0</code> on a successful scan regardless of findings count.</p>
 <hr>
-<h2 id="severity-levels"><a class="docs-anchor" href="#severity-levels" aria-label="Link to severity-levels">#</a>Severity Levels</h2>
+<h2 id="severity-levels"><a class="docs-anchor" href="#severity-levels" aria-label="Link to severity-levels" data-pagefind-ignore>#</a>Severity Levels</h2>
 <table>
 <thead>
 <tr>
@@ -522,7 +535,7 @@
 <td>Weak crypto algorithms, insecure randomness, <code>unwrap()</code>/<code>panic!()</code>, type-safety escapes</td>
 </tr>
 </tbody></table>
-<h3 id="non-production-severity-downgrade"><a class="docs-anchor" href="#non-production-severity-downgrade" aria-label="Link to non-production-severity-downgrade">#</a>Non-production severity downgrade</h3>
+<h3 id="non-production-severity-downgrade"><a class="docs-anchor" href="#non-production-severity-downgrade" aria-label="Link to non-production-severity-downgrade" data-pagefind-ignore>#</a>Non-production severity downgrade</h3>
 <p>By default, findings in paths matching common non-production patterns (<code>tests/</code>, <code>test/</code>, <code>vendor/</code>, <code>build/</code>, <code>examples/</code>, <code>benchmarks/</code>) are downgraded by one tier:</p>
 <ul>
 <li>High → Medium</li>
@@ -531,9 +544,9 @@
 </ul>
 <p>Use <code>--keep-nonprod-severity</code> to disable this behavior.</p>
 <hr>
-<h2 id="inline-suppressions"><a class="docs-anchor" href="#inline-suppressions" aria-label="Link to inline-suppressions">#</a>Inline Suppressions</h2>
+<h2 id="inline-suppressions"><a class="docs-anchor" href="#inline-suppressions" aria-label="Link to inline-suppressions" data-pagefind-ignore>#</a>Inline Suppressions</h2>
 <p>Suppress specific findings directly in source code using <code>nyx:ignore</code> comments. Suppressed findings are excluded from output, severity counts, and <code>--fail-on</code> checks by default.</p>
-<h3 id="comment-syntax"><a class="docs-anchor" href="#comment-syntax" aria-label="Link to comment-syntax">#</a>Comment syntax</h3>
+<h3 id="comment-syntax"><a class="docs-anchor" href="#comment-syntax" aria-label="Link to comment-syntax" data-pagefind-ignore>#</a>Comment syntax</h3>
 <table>
 <thead>
 <tr>
@@ -554,7 +567,7 @@
 <td><code>// nyx:ignore ...</code>, <code># nyx:ignore ...</code>, or <code>/* nyx:ignore ... */</code></td>
 </tr>
 </tbody></table>
-<h3 id="directive-forms"><a class="docs-anchor" href="#directive-forms" aria-label="Link to directive-forms">#</a>Directive forms</h3>
+<h3 id="directive-forms"><a class="docs-anchor" href="#directive-forms" aria-label="Link to directive-forms" data-pagefind-ignore>#</a>Directive forms</h3>
 <pre><code class="hljs language-python">x = dangerous()  <span class="hljs-comment"># nyx:ignore taint-unsanitised-flow     ← suppresses this line</span>
 <span class="hljs-comment"># nyx:ignore-next-line taint-unsanitised-flow</span>
 x = dangerous()                                           ← suppresses this line</code></pre>
@@ -563,19 +576,19 @@ x = dangerous()                                           ← suppresses this li
 <li><code>nyx:ignore-next-line &lt;RULE_ID&gt;</code> -- suppresses findings on the <strong>next line</strong>.</li>
 <li>For taint findings, the primary line is the <strong>sink line</strong> (the <code>line</code> field in output).</li>
 </ul>
-<h3 id="rule-id-matching"><a class="docs-anchor" href="#rule-id-matching" aria-label="Link to rule-id-matching">#</a>Rule ID matching</h3>
+<h3 id="rule-id-matching"><a class="docs-anchor" href="#rule-id-matching" aria-label="Link to rule-id-matching" data-pagefind-ignore>#</a>Rule ID matching</h3>
 <ul>
 <li><strong>Case-sensitive</strong>, exact match after canonicalization.</li>
 <li>Comma-separated: <code>nyx:ignore rule-a, rule-b</code></li>
 <li>Wildcard suffix: <code>nyx:ignore rs.quality.*</code> matches any ID starting with <code>rs.quality.</code></li>
 <li>Taint IDs are canonicalized: <code>nyx:ignore taint-unsanitised-flow</code> matches <code>taint-unsanitised-flow (source 5:1)</code> (parenthetical suffix stripped).</li>
 </ul>
-<h3 id="console-behavior"><a class="docs-anchor" href="#console-behavior" aria-label="Link to console-behavior">#</a>Console behavior</h3>
+<h3 id="console-behavior"><a class="docs-anchor" href="#console-behavior" aria-label="Link to console-behavior" data-pagefind-ignore>#</a>Console behavior</h3>
 <ul>
 <li><strong>Default</strong>: suppressed findings are hidden entirely.</li>
 <li><strong><code>--show-suppressed</code></strong>: suppressed findings appear dimmed with <code>[SUPPRESSED]</code> tag. Summary shows <code>&quot;N issues (M suppressed)&quot;</code>.</li>
 </ul>
-<h3 id="json-sarif-behavior"><a class="docs-anchor" href="#json-sarif-behavior" aria-label="Link to json-sarif-behavior">#</a>JSON / SARIF behavior</h3>
+<h3 id="json-sarif-behavior"><a class="docs-anchor" href="#json-sarif-behavior" aria-label="Link to json-sarif-behavior" data-pagefind-ignore>#</a>JSON / SARIF behavior</h3>
 <ul>
 <li><strong>Default</strong>: suppressed findings are excluded from JSON/SARIF output.</li>
 <li><strong><code>--show-suppressed</code></strong>: suppressed findings are included with additional fields:</li>
@@ -588,10 +601,10 @@ x = dangerous()                                           ← suppresses this li
     <span class="hljs-attr">&quot;directive_line&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">42</span>
   <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span></code></pre>
-<h3 id="exit-code"><a class="docs-anchor" href="#exit-code" aria-label="Link to exit-code">#</a>Exit code</h3>
+<h3 id="exit-code"><a class="docs-anchor" href="#exit-code" aria-label="Link to exit-code" data-pagefind-ignore>#</a>Exit code</h3>
 <p>Suppressed findings do <strong>not</strong> trigger <code>--fail-on</code>. A scan with only suppressed findings exits <code>0</code>.</p>
 <hr>
-<h2 id="rule-id-format"><a class="docs-anchor" href="#rule-id-format" aria-label="Link to rule-id-format">#</a>Rule ID Format</h2>
+<h2 id="rule-id-format"><a class="docs-anchor" href="#rule-id-format" aria-label="Link to rule-id-format" data-pagefind-ignore>#</a>Rule ID Format</h2>
 <table>
 <thead>
 <tr>

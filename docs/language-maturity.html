@@ -24,6 +24,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="../styles.css" />
+    <script defer src="../docs/search.js"></script>
 
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content="Nyx" />
@@ -137,8 +138,20 @@
       <div class="docs-shell">
         <nav class="docs-sidebar" aria-label="Documentation"><a class="docs-sidebar__brand" href="">Docs</a><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Getting started</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="quickstart.html">Quickstart</a></li><li><a class="docs-sidebar__link" href="installation.html">Installation</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Using nyx</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="cli.html">CLI reference</a></li><li><a class="docs-sidebar__link" href="serve.html">Browser UI</a></li><li><a class="docs-sidebar__link" href="configuration.html">Configuration</a></li><li><a class="docs-sidebar__link" href="output.html">Output formats</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Coverage</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="language-maturity.html" aria-current="page">Language maturity</a></li><li><a class="docs-sidebar__link" href="rules.html">Rules</a></li><li><a class="docs-sidebar__link" href="auth.html">Auth analysis</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Under the hood</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="how-it-works.html">How it works</a></li><li><a class="docs-sidebar__link" href="advanced-analysis.html">Advanced analysis</a></li><li><a class="docs-sidebar__link" href="detectors.html">Detectors</a><ul class="docs-sidebar__sublist"><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/patterns.html">Patterns</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/cfg.html">CFG</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/state.html">State</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/taint.html">Taint</a></li></ul></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Project</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="roadmap.html">Roadmap</a></li><li><a class="docs-sidebar__link" href="changelog.html">Changelog</a></li></ul></div></nav>
         <article class="docs-content">
-          <div class="docs-prose">
-<h1 id="language-maturity-matrix"><a class="docs-anchor" href="#language-maturity-matrix" aria-label="Link to language-maturity-matrix">#</a>Language Maturity Matrix</h1>
+          <div class="docs-search docs-search--content" data-docs-search>
+    <label class="visually-hidden" for="docs-search-input">Search docs</label>
+    <div class="docs-search__control">
+      <span class="docs-search__icon" aria-hidden="true"></span>
+      <input id="docs-search-input" data-docs-search-input type="search" placeholder="Search docs" autocomplete="off" autocapitalize="none" spellcheck="false" role="combobox" aria-autocomplete="list" aria-controls="docs-search-results" aria-expanded="false" />
+      <kbd class="docs-search__key" aria-hidden="true">⌘K</kbd>
+    </div>
+    <div class="docs-search__panel" data-docs-search-panel hidden>
+      <div class="docs-search__status" data-docs-search-status></div>
+      <div class="docs-search__results" id="docs-search-results" data-docs-search-results role="listbox" aria-label="Search results"></div>
+    </div>
+  </div>
+          <div class="docs-prose" data-pagefind-body>
+<h1 id="language-maturity-matrix"><a class="docs-anchor" href="#language-maturity-matrix" aria-label="Link to language-maturity-matrix" data-pagefind-ignore>#</a>Language Maturity Matrix</h1>
 <p>Nyx supports ten languages, but support depth is not uniform. This page gives an
 honest per-language picture so you can calibrate expectations before depending
 on Nyx for a given stack.</p>
@@ -164,7 +177,7 @@ and <strong>structural idioms the corpus does not fully stress</strong> (deep po
 aliasing in C/C++, framework-specific context). All parser integrations
 use tree-sitter and are stable; parsing is not a differentiator.</p>
 <hr>
-<h2 id="tier-summary"><a class="docs-anchor" href="#tier-summary" aria-label="Link to tier-summary">#</a>Tier Summary</h2>
+<h2 id="tier-summary"><a class="docs-anchor" href="#tier-summary" aria-label="Link to tier-summary" data-pagefind-ignore>#</a>Tier Summary</h2>
 <table>
 <thead>
 <tr>
@@ -194,9 +207,9 @@ use tree-sitter and are stable; parsing is not a differentiator.</p>
 </tr>
 </tbody></table>
 <hr>
-<h2 id="per-language-detail"><a class="docs-anchor" href="#per-language-detail" aria-label="Link to per-language-detail">#</a>Per-Language Detail</h2>
-<h3 id="stable-tier"><a class="docs-anchor" href="#stable-tier" aria-label="Link to stable-tier">#</a>Stable tier</h3>
-<h4 id="python-100-p-100-r-100-f1-46-case-corpus"><a class="docs-anchor" href="#python-100-p-100-r-100-f1-46-case-corpus" aria-label="Link to python-100-p-100-r-100-f1-46-case-corpus">#</a>Python: 100% P / 100% R / 100% F1 <em>(46-case corpus)</em></h4>
+<h2 id="per-language-detail"><a class="docs-anchor" href="#per-language-detail" aria-label="Link to per-language-detail" data-pagefind-ignore>#</a>Per-Language Detail</h2>
+<h3 id="stable-tier"><a class="docs-anchor" href="#stable-tier" aria-label="Link to stable-tier" data-pagefind-ignore>#</a>Stable tier</h3>
+<h4 id="python-100-p-100-r-100-f1-46-case-corpus"><a class="docs-anchor" href="#python-100-p-100-r-100-f1-46-case-corpus" aria-label="Link to python-100-p-100-r-100-f1-46-case-corpus" data-pagefind-ignore>#</a>Python: 100% P / 100% R / 100% F1 <em>(46-case corpus)</em></h4>
 <ul>
 <li><strong>Rule depth</strong>: 5 source families, 7 sanitizer families, 21 sink matchers
 spanning HTML, URL, Shell, SQL, Code, SSRF, File I/O, and Deserialization.</li>
@@ -210,7 +223,7 @@ fixtures target Python.</li>
 distinct taint-producing construct; string-formatting flows are caught by
 the general concatenation path.</li>
 </ul>
-<h4 id="javascript-100-p-100-r-100-f1-42-case-corpus"><a class="docs-anchor" href="#javascript-100-p-100-r-100-f1-42-case-corpus" aria-label="Link to javascript-100-p-100-r-100-f1-42-case-corpus">#</a>JavaScript: 100% P / 100% R / 100% F1 <em>(42-case corpus)</em></h4>
+<h4 id="javascript-100-p-100-r-100-f1-42-case-corpus"><a class="docs-anchor" href="#javascript-100-p-100-r-100-f1-42-case-corpus" aria-label="Link to javascript-100-p-100-r-100-f1-42-case-corpus" data-pagefind-ignore>#</a>JavaScript: 100% P / 100% R / 100% F1 <em>(42-case corpus)</em></h4>
 <ul>
 <li><strong>Rule depth</strong>: 3 source families, 10 sanitizer families, 24 sink matchers
 spanning HTML, URL, JSON, Shell, SQL, Code, SSRF, and File I/O.</li>
@@ -226,7 +239,7 @@ language.</li>
 than modeled as a first-class taint operator; dynamic property access
 (<code>obj[user]</code>) is conservatively treated.</li>
 </ul>
-<h4 id="typescript-100-p-100-r-100-f1-47-case-corpus"><a class="docs-anchor" href="#typescript-100-p-100-r-100-f1-47-case-corpus" aria-label="Link to typescript-100-p-100-r-100-f1-47-case-corpus">#</a>TypeScript: 100% P / 100% R / 100% F1 <em>(47-case corpus)</em></h4>
+<h4 id="typescript-100-p-100-r-100-f1-47-case-corpus"><a class="docs-anchor" href="#typescript-100-p-100-r-100-f1-47-case-corpus" aria-label="Link to typescript-100-p-100-r-100-f1-47-case-corpus" data-pagefind-ignore>#</a>TypeScript: 100% P / 100% R / 100% F1 <em>(47-case corpus)</em></h4>
 <ul>
 <li><strong>Rule depth</strong>: Shares the JS ruleset (3 sources, 10 sanitizers, 24 sinks)
 plus TS-specific grammar handling.</li>
@@ -240,8 +253,8 @@ stressors.</li>
 <li><strong>Blind spots</strong>: <code>as any</code> casts and <code>any</code>-typed flows are handled
 conservatively (treated as tainted).</li>
 </ul>
-<h3 id="beta-tier"><a class="docs-anchor" href="#beta-tier" aria-label="Link to beta-tier">#</a>Beta tier</h3>
-<h4 id="go-100-p-100-r-100-f1-56-case-corpus"><a class="docs-anchor" href="#go-100-p-100-r-100-f1-56-case-corpus" aria-label="Link to go-100-p-100-r-100-f1-56-case-corpus">#</a>Go: 100% P / 100% R / 100% F1 <em>(56-case corpus)</em></h4>
+<h3 id="beta-tier"><a class="docs-anchor" href="#beta-tier" aria-label="Link to beta-tier" data-pagefind-ignore>#</a>Beta tier</h3>
+<h4 id="go-100-p-100-r-100-f1-56-case-corpus"><a class="docs-anchor" href="#go-100-p-100-r-100-f1-56-case-corpus" aria-label="Link to go-100-p-100-r-100-f1-56-case-corpus" data-pagefind-ignore>#</a>Go: 100% P / 100% R / 100% F1 <em>(56-case corpus)</em></h4>
 <ul>
 <li><strong>Rule depth</strong>: 4 source families, 4 sanitizer families, 9 sink matchers
 covering HTML, URL, Shell, SQL, SSRF, Crypto, and File I/O.</li>
@@ -256,7 +269,7 @@ tier and argument-role-aware sink modeling is not yet implemented for Go,
 so production CI gates may surface additional FPs the corpus does not
 exercise.</li>
 </ul>
-<h4 id="java-100-p-100-r-100-f1-35-case-corpus"><a class="docs-anchor" href="#java-100-p-100-r-100-f1-35-case-corpus" aria-label="Link to java-100-p-100-r-100-f1-35-case-corpus">#</a>Java: 100% P / 100% R / 100% F1 <em>(35-case corpus)</em></h4>
+<h4 id="java-100-p-100-r-100-f1-35-case-corpus"><a class="docs-anchor" href="#java-100-p-100-r-100-f1-35-case-corpus" aria-label="Link to java-100-p-100-r-100-f1-35-case-corpus" data-pagefind-ignore>#</a>Java: 100% P / 100% R / 100% F1 <em>(35-case corpus)</em></h4>
 <ul>
 <li><strong>Rule depth</strong>: 3 source families, 8 sanitizer families, 10 sink matchers
 covering HTML, URL, Shell, SQL, Code, SSRF, and Deserialization.</li>
@@ -268,7 +281,7 @@ resolution from receiver-type inference; flows where the receiver type
 cannot be inferred are conservatively over-tainted on unusual builder
 chains.</li>
 </ul>
-<h4 id="php-100-p-100-r-100-f1-37-case-corpus"><a class="docs-anchor" href="#php-100-p-100-r-100-f1-37-case-corpus" aria-label="Link to php-100-p-100-r-100-f1-37-case-corpus">#</a>PHP: 100% P / 100% R / 100% F1 <em>(37-case corpus)</em></h4>
+<h4 id="php-100-p-100-r-100-f1-37-case-corpus"><a class="docs-anchor" href="#php-100-p-100-r-100-f1-37-case-corpus" aria-label="Link to php-100-p-100-r-100-f1-37-case-corpus" data-pagefind-ignore>#</a>PHP: 100% P / 100% R / 100% F1 <em>(37-case corpus)</em></h4>
 <ul>
 <li><strong>Rule depth</strong>: 3 source families (<code>$_GET</code>, <code>$_POST</code>, <code>$_REQUEST</code>
 superglobals), 7 sanitizer families, 10 sink matchers covering HTML, URL,
@@ -277,7 +290,7 @@ Shell, SQL, Code, SSRF, File I/O, and Deserialization.</li>
 methods only). <code>echo</code> language-construct detection is wired but its
 inner-argument propagation is narrower than function-call sinks.</li>
 </ul>
-<h4 id="ruby-100-p-100-r-100-f1-39-case-corpus"><a class="docs-anchor" href="#ruby-100-p-100-r-100-f1-39-case-corpus" aria-label="Link to ruby-100-p-100-r-100-f1-39-case-corpus">#</a>Ruby: 100% P / 100% R / 100% F1 <em>(39-case corpus)</em></h4>
+<h4 id="ruby-100-p-100-r-100-f1-39-case-corpus"><a class="docs-anchor" href="#ruby-100-p-100-r-100-f1-39-case-corpus" aria-label="Link to ruby-100-p-100-r-100-f1-39-case-corpus" data-pagefind-ignore>#</a>Ruby: 100% P / 100% R / 100% F1 <em>(39-case corpus)</em></h4>
 <ul>
 <li><strong>Rule depth</strong>: 3 source families, 7 sanitizer families, 16 sink matchers
 covering HTML, Shell, SQL, Code, SSRF, File I/O, and Deserialization. SSRF
@@ -294,7 +307,7 @@ recognized structurally but not modeled as a distinct operator.
 <code>begin/rescue/ensure</code> exception-edge wiring is documented as deferred
 (structurally incompatible with <code>build_try()</code>).</li>
 </ul>
-<h4 id="rust-100-p-100-r-100-f1-70-case-adversarial-corpus"><a class="docs-anchor" href="#rust-100-p-100-r-100-f1-70-case-adversarial-corpus" aria-label="Link to rust-100-p-100-r-100-f1-70-case-adversarial-corpus">#</a>Rust: 100% P / 100% R / 100% F1 <em>(70-case adversarial corpus)</em></h4>
+<h4 id="rust-100-p-100-r-100-f1-70-case-adversarial-corpus"><a class="docs-anchor" href="#rust-100-p-100-r-100-f1-70-case-adversarial-corpus" aria-label="Link to rust-100-p-100-r-100-f1-70-case-adversarial-corpus" data-pagefind-ignore>#</a>Rust: 100% P / 100% R / 100% F1 <em>(70-case adversarial corpus)</em></h4>
 <p>Rust holds the largest per-language adversarial corpus. PathFact-driven
 path-domain narrowing covers the <code>rs-safe-*</code> regression set.</p>
 <ul>
@@ -321,7 +334,7 @@ cross-function <code>.contains(&quot;..&quot;)</code> rejection, and the
 <code>process::Command</code> async variants (not distinguished from sync),
 <code>hyper</code> / <code>surf</code> / <code>ureq</code> SSRF clients (reqwest family only).</li>
 </ul>
-<h3 id="preview-tier"><a class="docs-anchor" href="#preview-tier" aria-label="Link to preview-tier">#</a>Preview tier</h3>
+<h3 id="preview-tier"><a class="docs-anchor" href="#preview-tier" aria-label="Link to preview-tier" data-pagefind-ignore>#</a>Preview tier</h3>
 <p>C and C++ remain <strong>Preview</strong> despite reporting 100% rule-level F1 on the
 synthetic corpus. The engine follows taint through STL containers, builder
 chains, inline member functions, and the wider <code>std::sto*</code> family, so the
@@ -371,7 +384,7 @@ taint to <code>buf</code> as a whole; subscript-handling helps the general case 
 doesn&#39;t make <code>buf</code> an alias for every element.</li>
 <li>Nested classes beyond one level (C++ only).</li>
 </ul>
-<h4 id="c-100-p-100-r-100-f1-30-case-corpus"><a class="docs-anchor" href="#c-100-p-100-r-100-f1-30-case-corpus" aria-label="Link to c-100-p-100-r-100-f1-30-case-corpus">#</a>C: 100% P / 100% R / 100% F1 <em>(30-case corpus)</em></h4>
+<h4 id="c-100-p-100-r-100-f1-30-case-corpus"><a class="docs-anchor" href="#c-100-p-100-r-100-f1-30-case-corpus" aria-label="Link to c-100-p-100-r-100-f1-30-case-corpus" data-pagefind-ignore>#</a>C: 100% P / 100% R / 100% F1 <em>(30-case corpus)</em></h4>
 <ul>
 <li><strong>Rule depth</strong>: 3 source families, <strong>2</strong> sanitizer families (the
 <code>sanitize_*</code> prefix and numeric-parse functions), 5 sink matchers spanning
@@ -380,7 +393,7 @@ Shell, File, SSRF, and Format-String.</li>
 limitations listed above are the dominant concern; rule additions alone
 will not lift this language out of the Preview tier.</li>
 </ul>
-<h4 id="c-100-p-100-r-100-f1-33-case-corpus-plus-6-new-fixtures-for-stl-builder-inline-method-flows"><a class="docs-anchor" href="#c-100-p-100-r-100-f1-33-case-corpus-plus-6-new-fixtures-for-stl-builder-inline-method-flows" aria-label="Link to c-100-p-100-r-100-f1-33-case-corpus-plus-6-new-fixtures-for-stl-builder-inline-method-flows">#</a>C++: 100% P / 100% R / 100% F1 <em>(33-case corpus, plus 6 new fixtures for STL / builder / inline-method flows)</em></h4>
+<h4 id="c-100-p-100-r-100-f1-33-case-corpus-plus-6-new-fixtures-for-stl-builder-inline-method-flows"><a class="docs-anchor" href="#c-100-p-100-r-100-f1-33-case-corpus-plus-6-new-fixtures-for-stl-builder-inline-method-flows" aria-label="Link to c-100-p-100-r-100-f1-33-case-corpus-plus-6-new-fixtures-for-stl-builder-inline-method-flows" data-pagefind-ignore>#</a>C++: 100% P / 100% R / 100% F1 <em>(33-case corpus, plus 6 new fixtures for STL / builder / inline-method flows)</em></h4>
 <ul>
 <li><strong>Rule depth</strong>: Builds on the C ruleset with <code>std::cin</code> / <code>std::getline</code>
 sources and a wider numeric-sanitizer set covering the full <code>std::sto*</code>
@@ -391,7 +404,7 @@ structural blind spots are now narrower than they were a release ago
 pointer-aliasing patterns still produce false negatives.</li>
 </ul>
 <hr>
-<h2 id="how-the-tiers-were-assigned"><a class="docs-anchor" href="#how-the-tiers-were-assigned" aria-label="Link to how-the-tiers-were-assigned">#</a>How the tiers were assigned</h2>
+<h2 id="how-the-tiers-were-assigned"><a class="docs-anchor" href="#how-the-tiers-were-assigned" aria-label="Link to how-the-tiers-were-assigned" data-pagefind-ignore>#</a>How the tiers were assigned</h2>
 <p>Because rule-level F1 has saturated for nine of ten languages, the tier
 boundaries are drawn primarily on <strong>rule depth</strong> and <strong>engine coverage of
 real-world idioms</strong> rather than on benchmark scores alone.</p>
@@ -418,7 +431,7 @@ with structural gaps.</p>
 <p>(No language currently sits in the <strong>Experimental</strong> tier; it is reserved
 for future additions whose corpus has not yet stabilised.)</p>
 <hr>
-<h2 id="what-this-means-for-you"><a class="docs-anchor" href="#what-this-means-for-you" aria-label="Link to what-this-means-for-you">#</a>What this means for you</h2>
+<h2 id="what-this-means-for-you"><a class="docs-anchor" href="#what-this-means-for-you" aria-label="Link to what-this-means-for-you" data-pagefind-ignore>#</a>What this means for you</h2>
 <ul>
 <li><strong>CI gates</strong>: safe to set strict <code>--fail-on HIGH</code> gates on Stable-tier
 languages. On Beta-tier, expect occasional FP triage on production code
