@@ -443,7 +443,7 @@ ${body}
 
     <footer class="site-footer">
       <div class="container site-footer__inner">
-        <p class="site-footer__copy">© ${new Date().getFullYear()} Eli Peter · Nyx is open source under the Apache 2.0 license.</p>
+        <p class="site-footer__copy">© ${new Date().getFullYear()} Eli Peter · Nyx is licensed under GPL-3.0-or-later.</p>
         <nav class="site-footer__nav" aria-label="Footer">
           <a href="${p}">Home</a>
           <a href="${p}news/">News</a>
