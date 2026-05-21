@@ -136,7 +136,7 @@
 
     <main id="main" class="docs-page">
       <div class="docs-shell">
-        <nav class="docs-sidebar" aria-label="Documentation"><a class="docs-sidebar__brand" href="">Docs</a><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Getting started</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="quickstart.html">Quickstart</a></li><li><a class="docs-sidebar__link" href="installation.html">Installation</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Using nyx</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="cli.html" aria-current="page">CLI reference</a></li><li><a class="docs-sidebar__link" href="serve.html">Browser UI</a></li><li><a class="docs-sidebar__link" href="configuration.html">Configuration</a></li><li><a class="docs-sidebar__link" href="output.html">Output formats</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Coverage</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="language-maturity.html">Language maturity</a></li><li><a class="docs-sidebar__link" href="rules.html">Rules</a></li><li><a class="docs-sidebar__link" href="auth.html">Auth analysis</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Under the hood</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="how-it-works.html">How it works</a></li><li><a class="docs-sidebar__link" href="advanced-analysis.html">Advanced analysis</a></li><li><a class="docs-sidebar__link" href="detectors.html">Detectors</a><ul class="docs-sidebar__sublist"><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/patterns.html">Patterns</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/cfg.html">CFG</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/state.html">State</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/taint.html">Taint</a></li></ul></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Project</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="roadmap.html">Roadmap</a></li><li><a class="docs-sidebar__link" href="changelog.html">Changelog</a></li></ul></div></nav>
+        <nav class="docs-sidebar" aria-label="Documentation"><a class="docs-sidebar__brand" href="">Docs</a><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Getting started</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="quickstart.html">Quickstart</a></li><li><a class="docs-sidebar__link" href="installation.html">Installation</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Using nyx</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="cli.html" aria-current="page">CLI reference</a></li><li><a class="docs-sidebar__link" href="serve.html">Browser UI</a></li><li><a class="docs-sidebar__link" href="dynamic.html">Dynamic verification</a></li><li><a class="docs-sidebar__link" href="configuration.html">Configuration</a></li><li><a class="docs-sidebar__link" href="output.html">Output formats</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Coverage</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="language-maturity.html">Language maturity</a></li><li><a class="docs-sidebar__link" href="rules.html">Rules</a></li><li><a class="docs-sidebar__link" href="auth.html">Auth analysis</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Under the hood</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="how-it-works.html">How it works</a></li><li><a class="docs-sidebar__link" href="advanced-analysis.html">Advanced analysis</a></li><li><a class="docs-sidebar__link" href="detectors.html">Detectors</a><ul class="docs-sidebar__sublist"><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/patterns.html">Patterns</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/cfg.html">CFG</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/state.html">State</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/taint.html">Taint</a></li></ul></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Project</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="roadmap.html">Roadmap</a></li><li><a class="docs-sidebar__link" href="changelog.html">Changelog</a></li></ul></div></nav>
         <article class="docs-content">
           <div class="docs-search docs-search--content" data-docs-search>
     <label class="visually-hidden" for="docs-search-input">Search docs</label>
@@ -483,7 +483,78 @@ nyx <span class="hljs-attr">--help</span></code></pre>
 <h3 id="explain-effective-engine"><a class="docs-anchor" href="#explain-effective-engine" aria-label="Link to explain-effective-engine" data-pagefind-ignore>#</a>Explain Effective Engine</h3>
 <p><code>--explain-engine</code> prints the resolved engine configuration (profile + config + CLI overrides + env-var fallbacks) to stdout and exits without scanning.  Useful for sanity-checking a CI invocation.</p>
 <pre><code class="hljs language-bash">nyx scan --engine-profile deep --no-smt --explain-engine</code></pre>
-<p align="center"><img src="assets/screenshots/docs/cli-explain-engine.png" alt="nyx scan --engine-profile deep --explain-engine output: resolved config showing every analysis pass, its current state, and the CLI flag/env var that controls it" width="900"/></p><h3 id="examples"><a class="docs-anchor" href="#examples" aria-label="Link to examples" data-pagefind-ignore>#</a>Examples</h3>
+<p align="center"><img src="assets/screenshots/docs/cli-explain-engine.png" alt="nyx scan --engine-profile deep --explain-engine output: resolved config showing every analysis pass, its current state, and the CLI flag/env var that controls it" width="900"/></p><h3 id="dynamic-verification"><a class="docs-anchor" href="#dynamic-verification" aria-label="Link to dynamic-verification" data-pagefind-ignore>#</a>Dynamic verification</h3>
+<p>Available with <code>--features dynamic</code>. See <a href="dynamic.html">dynamic.md</a> for the full pipeline and verdict semantics.</p>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--verify</code></td>
+<td>on</td>
+<td>Enable dynamic verification (default when built with <code>dynamic</code>). Conflicts with <code>--no-verify</code></td>
+</tr>
+<tr>
+<td><code>--no-verify</code></td>
+<td>off</td>
+<td>Skip verification for this run. Useful for fast static-only scans without editing config</td>
+</tr>
+<tr>
+<td><code>--verify-all-confidence</code></td>
+<td>off</td>
+<td>Also verify findings below <code>Confidence &gt;= Medium</code>. Slower; intended for payload tuning</td>
+</tr>
+<tr>
+<td><code>--backend &lt;BACKEND&gt;</code></td>
+<td><code>auto</code></td>
+<td>Sandbox backend: <code>auto</code> (docker if available, else process), <code>docker</code> (required), <code>process</code> (in-process runner)</td>
+</tr>
+<tr>
+<td><code>--unsafe-sandbox</code></td>
+<td>off</td>
+<td>Force the process backend. Equivalent to <code>--backend process</code>. Cannot combine with <code>--backend docker</code></td>
+</tr>
+<tr>
+<td><code>--harden &lt;PROFILE&gt;</code></td>
+<td><code>standard</code></td>
+<td>Process-backend lockdown: <code>standard</code> (no-new-privs + rlimit on Linux) or <code>strict</code> (namespaces + chroot + seccomp on Linux; <code>sandbox-exec</code> on macOS)</td>
+</tr>
+<tr>
+<td><code>--verbose</code></td>
+<td>off</td>
+<td>Flush the per-finding <code>VerifyTrace</code> to stderr after each verdict. Same stream that lands in <code>expected/trace.jsonl</code> in the repro bundle</td>
+</tr>
+</tbody></table>
+<h3 id="baseline-patch-validation"><a class="docs-anchor" href="#baseline-patch-validation" aria-label="Link to baseline-patch-validation" data-pagefind-ignore>#</a>Baseline / patch validation</h3>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--baseline &lt;FILE&gt;</code></td>
+<td><em>(none)</em></td>
+<td>Read a prior scan&#39;s JSON (or a stripped <code>.nyx/baseline.json</code>) and diff it against this scan on <code>stable_hash</code>. Reports <code>New</code> / <code>Resolved</code> / <code>FlippedConfirmed</code> / <code>FlippedNotConfirmed</code> transitions</td>
+</tr>
+<tr>
+<td><code>--baseline-write &lt;FILE&gt;</code></td>
+<td><em>(none)</em></td>
+<td>After scanning, write a stripped baseline (only <code>stable_hash</code>, <code>dynamic_verdict</code>, <code>severity</code>, <code>path</code>, <code>rule_id</code>; no source). Safe to commit</td>
+</tr>
+<tr>
+<td><code>--gate &lt;GATE&gt;</code></td>
+<td><em>(none)</em></td>
+<td>CI gate to enforce when <code>--baseline</code> is active. <code>no-new-confirmed</code> exits 2 on any new Confirmed finding; <code>resolve-all-confirmed</code> exits 2 if any baseline-Confirmed finding is not fully resolved</td>
+</tr>
+</tbody></table>
+<h3 id="examples"><a class="docs-anchor" href="#examples" aria-label="Link to examples" data-pagefind-ignore>#</a>Examples</h3>
 <pre><code class="hljs language-bash"><span class="hljs-comment"># Basic scan</span>
 nyx scan
 
@@ -573,6 +644,60 @@ nyx scan . --max-low 50 --max-low-per-file 5</code></pre>
 <td>Clean all indexed projects</td>
 </tr>
 </tbody></table>
+<hr>
+<h2 id="nyx-surface"><a class="docs-anchor" href="#nyx-surface" aria-label="Link to nyx-surface" data-pagefind-ignore>#</a><code>nyx surface</code></h2>
+<p>Print the project&#39;s attack-surface map.</p>
+<pre><code class="hljs language-plain">nyx surface <span class="hljs-selector-attr">[PATH]</span> <span class="hljs-selector-attr">[--format &lt;FMT&gt;]</span> <span class="hljs-selector-attr">[--build]</span></code></pre>
+<p>Loads the <code>SurfaceMap</code> persisted by the most recent indexed scan when available; otherwise runs the per-language framework probes against the on-disk source to produce an entry-points-only map. Pass <code>--build</code> to force a full inline build (pass-1 summary extraction + call-graph construction) on an unscanned project, which adds <code>DataStore</code> / <code>ExternalService</code> / <code>DangerousLocal</code> nodes the entry-points-only fallback omits.</p>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--format &lt;FMT&gt;</code></td>
+<td><code>text</code></td>
+<td>Output format: <code>text</code> (indented tree), <code>json</code> (canonical SurfaceMap), <code>dot</code> (Graphviz source), or <code>svg</code> (spawns <code>dot</code> locally)</td>
+</tr>
+<tr>
+<td><code>--build</code></td>
+<td>off</td>
+<td>Force a full SurfaceMap build inline when no indexed scan exists. Same cost as <code>nyx index build</code></td>
+</tr>
+</tbody></table>
+<p>Pipe <code>dot</code> output through <code>dot -Tsvg</code> for a renderable graph, or use <code>--format svg</code> for a one-step render when graphviz is installed.</p>
+<hr>
+<h2 id="nyx-verify-feedback"><a class="docs-anchor" href="#nyx-verify-feedback" aria-label="Link to nyx-verify-feedback" data-pagefind-ignore>#</a><code>nyx verify-feedback</code></h2>
+<p>Record a correction or confirmation against a dynamic-verifier verdict. Requires <code>--features dynamic</code>.</p>
+<pre><code class="hljs language-plain"><span class="hljs-comment">nyx verify</span><span class="hljs-literal">-</span><span class="hljs-comment">feedback</span> &lt;<span class="hljs-comment">FINDING_ID</span>&gt; <span class="hljs-title">[</span><span class="hljs-literal">--</span><span class="hljs-comment">wrong</span> &lt;<span class="hljs-comment">REASON</span>&gt; <span class="hljs-comment">|</span> <span class="hljs-literal">--</span><span class="hljs-comment">right</span><span class="hljs-title">]</span> <span class="hljs-title">[</span><span class="hljs-literal">--</span><span class="hljs-comment">upload</span><span class="hljs-title">]</span></code></pre>
+<table>
+<thead>
+<tr>
+<th>Argument/Flag</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>FINDING_ID</code></td>
+<td>Stable 16-char hex id shown in <code>nyx scan --verify</code> output</td>
+</tr>
+<tr>
+<td><code>--wrong &lt;REASON&gt;</code></td>
+<td>Mark the verdict wrong and record the reason. Conflicts with <code>--right</code></td>
+</tr>
+<tr>
+<td><code>--right</code></td>
+<td>Confirm the verdict. Conflicts with <code>--wrong</code></td>
+</tr>
+<tr>
+<td><code>--upload</code></td>
+<td>Reserved; uploading to Nyx telemetry is not yet implemented</td>
+</tr>
+</tbody></table>
+<p>Feedback is written to the local telemetry log under the platform cache dir.</p>
 <hr>
 <h2 id="nyx-config"><a class="docs-anchor" href="#nyx-config" aria-label="Link to nyx-config" data-pagefind-ignore>#</a><code>nyx config</code></h2>
 <p>Manage configuration.</p>

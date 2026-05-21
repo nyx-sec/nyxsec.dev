@@ -13,7 +13,7 @@
     <link rel="sitemap" type="application/xml" href="https://nyxscan.dev/sitemap.xml" />
     <link rel="alternate" hreflang="en" href="https://nyxscan.dev/docs/configuration.html" />
     <link rel="alternate" hreflang="x-default" href="https://nyxscan.dev/docs/configuration.html" />
-    <link rel="prev" href="serve.html" />
+    <link rel="prev" href="dynamic.html" />
     <link rel="next" href="output.html" />
     <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png" />
     <link rel="icon" type="image/png" sizes="64x64" href="../favicon-64.png" />
@@ -136,7 +136,7 @@
 
     <main id="main" class="docs-page">
       <div class="docs-shell">
-        <nav class="docs-sidebar" aria-label="Documentation"><a class="docs-sidebar__brand" href="">Docs</a><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Getting started</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="quickstart.html">Quickstart</a></li><li><a class="docs-sidebar__link" href="installation.html">Installation</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Using nyx</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="cli.html">CLI reference</a></li><li><a class="docs-sidebar__link" href="serve.html">Browser UI</a></li><li><a class="docs-sidebar__link" href="configuration.html" aria-current="page">Configuration</a></li><li><a class="docs-sidebar__link" href="output.html">Output formats</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Coverage</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="language-maturity.html">Language maturity</a></li><li><a class="docs-sidebar__link" href="rules.html">Rules</a></li><li><a class="docs-sidebar__link" href="auth.html">Auth analysis</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Under the hood</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="how-it-works.html">How it works</a></li><li><a class="docs-sidebar__link" href="advanced-analysis.html">Advanced analysis</a></li><li><a class="docs-sidebar__link" href="detectors.html">Detectors</a><ul class="docs-sidebar__sublist"><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/patterns.html">Patterns</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/cfg.html">CFG</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/state.html">State</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/taint.html">Taint</a></li></ul></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Project</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="roadmap.html">Roadmap</a></li><li><a class="docs-sidebar__link" href="changelog.html">Changelog</a></li></ul></div></nav>
+        <nav class="docs-sidebar" aria-label="Documentation"><a class="docs-sidebar__brand" href="">Docs</a><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Getting started</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="quickstart.html">Quickstart</a></li><li><a class="docs-sidebar__link" href="installation.html">Installation</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Using nyx</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="cli.html">CLI reference</a></li><li><a class="docs-sidebar__link" href="serve.html">Browser UI</a></li><li><a class="docs-sidebar__link" href="dynamic.html">Dynamic verification</a></li><li><a class="docs-sidebar__link" href="configuration.html" aria-current="page">Configuration</a></li><li><a class="docs-sidebar__link" href="output.html">Output formats</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Coverage</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="language-maturity.html">Language maturity</a></li><li><a class="docs-sidebar__link" href="rules.html">Rules</a></li><li><a class="docs-sidebar__link" href="auth.html">Auth analysis</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Under the hood</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="how-it-works.html">How it works</a></li><li><a class="docs-sidebar__link" href="advanced-analysis.html">Advanced analysis</a></li><li><a class="docs-sidebar__link" href="detectors.html">Detectors</a><ul class="docs-sidebar__sublist"><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/patterns.html">Patterns</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/cfg.html">CFG</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/state.html">State</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/taint.html">Taint</a></li></ul></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Project</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="roadmap.html">Roadmap</a></li><li><a class="docs-sidebar__link" href="changelog.html">Changelog</a></li></ul></div></nav>
         <article class="docs-content">
           <div class="docs-search docs-search--content" data-docs-search>
     <label class="visually-hidden" for="docs-search-input">Search docs</label>
@@ -314,6 +314,48 @@
 <td>bool</td>
 <td><code>true</code></td>
 <td>Enable resource lifecycle + auth state analysis. Detects use-after-close, double-close, resource leaks (per-function scope), and unauthenticated access. Requires <code>mode = &quot;full&quot;</code> or <code>mode = &quot;taint&quot;</code>.</td>
+</tr>
+<tr>
+<td><code>enable_auth_analysis</code></td>
+<td>bool</td>
+<td><code>true</code></td>
+<td>Enable auth-state analysis within the state engine. When false, only resource lifecycle findings (leak, use-after-close, double-close) are produced.</td>
+</tr>
+<tr>
+<td><code>enable_panic_recovery</code></td>
+<td>bool</td>
+<td><code>false</code></td>
+<td>Catch per-file analysis panics as warnings and continue. When false, a panic aborts the scan, preserving the loud-fail behaviour for users debugging engine bugs.</td>
+</tr>
+<tr>
+<td><code>enable_auth_as_taint</code></td>
+<td>bool</td>
+<td><code>false</code></td>
+<td>Fold auth analysis into the SSA/taint engine via <code>Cap::UNAUTHORIZED_ID</code>. Off while the standalone path still carries stable detection.</td>
+</tr>
+<tr>
+<td><code>verify</code></td>
+<td>bool</td>
+<td><code>true</code></td>
+<td>Run dynamic verification on each <code>Confidence &gt;= Medium</code> finding after the static pass. Requires the binary to be built with <code>--features dynamic</code>. CLI overrides: <code>--verify</code> / <code>--no-verify</code>.</td>
+</tr>
+<tr>
+<td><code>verify_all_confidence</code></td>
+<td>bool</td>
+<td><code>false</code></td>
+<td>Extend dynamic verification to findings below <code>Confidence::Medium</code>. Intended for corpus-building, not production scans. CLI: <code>--verify-all-confidence</code>.</td>
+</tr>
+<tr>
+<td><code>verify_backend</code></td>
+<td>string</td>
+<td><code>&quot;auto&quot;</code></td>
+<td>Sandbox backend for dynamic verification. <code>&quot;auto&quot;</code> picks docker when available else process; <code>&quot;docker&quot;</code> requires docker; <code>&quot;process&quot;</code> runs in-process (same as <code>--unsafe-sandbox</code>).</td>
+</tr>
+<tr>
+<td><code>harden_profile</code></td>
+<td>string</td>
+<td><code>&quot;standard&quot;</code></td>
+<td>Process-backend hardening profile. <code>&quot;standard&quot;</code> engages <code>PR_SET_NO_NEW_PRIVS</code> + <code>setrlimit(RLIMIT_AS)</code> on Linux; <code>&quot;strict&quot;</code> adds namespace unshare, chroot to workdir, and a default-deny seccomp filter on Linux, plus <code>sandbox-exec</code> wrapping on macOS keyed off the finding&#39;s expected cap.</td>
 </tr>
 </tbody></table>
 <h3 id="database"><a class="docs-anchor" href="#database" aria-label="Link to database" data-pagefind-ignore>#</a><code>[database]</code></h3>
@@ -552,6 +594,12 @@
 <td><code>50</code></td>
 <td>Maximum number of saved runs</td>
 </tr>
+<tr>
+<td><code>triage_sync</code></td>
+<td>bool</td>
+<td><code>true</code></td>
+<td>Auto-sync triage decisions to <code>.nyx/triage.json</code> in the project root so changes can be committed to git.</td>
+</tr>
 </tbody></table>
 <h3 id="runs"><a class="docs-anchor" href="#runs" aria-label="Link to runs" data-pagefind-ignore>#</a><code>[runs]</code></h3>
 <p>Configuration for scan run persistence and history.</p>
@@ -712,10 +760,10 @@
 matching CLI flag (pair of <code>--foo</code> / <code>--no-foo</code>) that overrides the config
 value for a single run.  These used to be <code>NYX_*</code> environment variables
 (<code>NYX_CONSTRAINT</code>, <code>NYX_ABSTRACT_INTERP</code>, <code>NYX_SYMEX</code>, <code>NYX_CROSS_FILE_SYMEX</code>,
-<code>NYX_SYMEX_INTERPROC</code>, <code>NYX_CONTEXT_SENSITIVE</code>, <code>NYX_PARSE_TIMEOUT_MS</code>,
-<code>NYX_SMT</code>); those env vars are still honored as a last-resort override when
-nyx is used as a library (no CLI entry point), but the config/CLI surface is
-the stable path.</p>
+<code>NYX_SYMEX_INTERPROC</code>, <code>NYX_CONTEXT_SENSITIVE</code>, <code>NYX_BACKWARDS</code>,
+<code>NYX_PARSE_TIMEOUT_MS</code>, <code>NYX_SMT</code>); those env vars are still honored as a
+fallback default when nyx is used as a library (no CLI entry point), but the
+config/CLI surface is the stable path.</p>
 <table>
 <thead>
 <tr>
@@ -754,6 +802,18 @@ the stable path.</p>
 <td>int</td>
 <td><code>10000</code></td>
 <td>Per-file tree-sitter parse timeout; <code>0</code> disables the cap</td>
+</tr>
+<tr>
+<td><code>max_origins</code></td>
+<td>int</td>
+<td><code>32</code></td>
+<td>Maximum taint origins retained per lattice value. Excess origins are dropped deterministically (sorted by source location) and an <code>OriginsTruncated</code> engine note is recorded. CLI: <code>--max-origins</code>.</td>
+</tr>
+<tr>
+<td><code>max_pointsto</code></td>
+<td>int</td>
+<td><code>32</code></td>
+<td>Maximum abstract heap objects retained per intra-procedural points-to set. Excess objects are dropped and a <code>PointsToTruncated</code> engine note is recorded. CLI: <code>--max-pointsto</code>.</td>
 </tr>
 </tbody></table>
 <p><strong><code>[analysis.engine.symex]</code></strong> sub-section:</p>
@@ -835,9 +895,77 @@ the stable path.</p>
 <td><code>symex.smt</code></td>
 <td><code>--smt</code> / <code>--no-smt</code></td>
 </tr>
+<tr>
+<td><code>max_origins</code></td>
+<td><code>--max-origins &lt;N&gt;</code></td>
+</tr>
+<tr>
+<td><code>max_pointsto</code></td>
+<td><code>--max-pointsto &lt;N&gt;</code></td>
+</tr>
 </tbody></table>
 <p><strong>Engine-depth profile shortcut</strong>: instead of flipping individual toggles, pass <code>--engine-profile {fast,balanced,deep}</code> to set the whole stack at once.  Individual flags override the profile, so <code>--engine-profile fast --backwards-analysis</code> runs the fast stack with backwards analysis on.  See <code>docs/cli.md</code> for the exact toggle matrix.</p>
 <p><strong>Explain effective engine</strong>: pass <code>--explain-engine</code> to print the resolved engine configuration (profile + config + CLI overrides) and exit without scanning.</p>
+<h3 id="chain"><a class="docs-anchor" href="#chain" aria-label="Link to chain" data-pagefind-ignore>#</a><code>[chain]</code></h3>
+<p>Bounded-DFS path search across taint findings. Emits multi-step attack chains when several findings link through shared SSA values or call edges.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>max_depth</code></td>
+<td>int</td>
+<td><code>4</code></td>
+<td>Maximum per-finding hops in a single chain path.</td>
+</tr>
+<tr>
+<td><code>min_score</code></td>
+<td>float</td>
+<td><code>9.5</code></td>
+<td>Score threshold; chains below this value are dropped.</td>
+</tr>
+<tr>
+<td><code>reverify_top_n</code></td>
+<td>int</td>
+<td><code>5</code></td>
+<td>Only the top-N chains by score are eligible for composite dynamic re-verification. <code>0</code> disables composite re-verification.</td>
+</tr>
+</tbody></table>
+<h3 id="telemetry"><a class="docs-anchor" href="#telemetry" aria-label="Link to telemetry" data-pagefind-ignore>#</a><code>[telemetry]</code></h3>
+<p>Sampling policy for the on-disk event log written by dynamic verification (<code>~/.cache/nyx/dynamic/events.jsonl</code>). Confirmed and Inconclusive verdicts are calibration-critical and kept by default; other verdict statuses can be downsampled to bound log growth. Decisions are seeded by <code>spec_hash</code> for determinism. See <code>docs/dynamic.md</code> for the on-disk schema and <code>NYX_NO_TELEMETRY=1</code> opt-out.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>keep_all_confirmed</code></td>
+<td>bool</td>
+<td><code>true</code></td>
+<td>Always retain <code>Confirmed</code> verdicts.</td>
+</tr>
+<tr>
+<td><code>keep_all_inconclusive</code></td>
+<td>bool</td>
+<td><code>true</code></td>
+<td>Always retain <code>Inconclusive</code> verdicts.</td>
+</tr>
+<tr>
+<td><code>sample_rate_other</code></td>
+<td>float</td>
+<td><code>1.0</code></td>
+<td>Retention probability for verdicts not covered by the keep-all flags. <code>1.0</code> keeps everything, <code>0.0</code> drops everything.</td>
+</tr>
+</tbody></table>
 <h3 id="detectorsdataexfil"><a class="docs-anchor" href="#detectorsdataexfil" aria-label="Link to detectorsdataexfil" data-pagefind-ignore>#</a><code>[detectors.data_exfil]</code></h3>
 <p>Per-project tuning for the <code>taint-data-exfiltration</code> rule. All fields are optional.</p>
 <table>
@@ -973,7 +1101,7 @@ nyx config show</code></pre>
 <h2 id="config-validation"><a class="docs-anchor" href="#config-validation" aria-label="Link to config-validation" data-pagefind-ignore>#</a>Config Validation</h2>
 <p>Config is validated after loading and merging. Validation checks include:</p>
 <ul>
-<li>Server port must be 1–65535</li>
+<li>Server port must be 1 to 65535</li>
 <li>Server host must not be empty</li>
 <li><code>max_saved_runs</code> must be &gt; 0 when <code>persist_runs</code> is true</li>
 <li><code>max_runs</code> must be &gt; 0 when <code>persist</code> is true</li>
@@ -1027,9 +1155,9 @@ scan recreate it:</p>
 <p>Some config fields are defined but not yet implemented. They are marked <code>(RESERVED)</code> in the default config and accept values without effect. This allows forward-compatible config files; settings will activate when the feature is implemented without requiring config changes.</p>
 
           </div>
-          <nav class="docs-prevnext" aria-label="Page navigation"><a class="docs-prevnext__link docs-prevnext__link--prev" href="serve.html">
+          <nav class="docs-prevnext" aria-label="Page navigation"><a class="docs-prevnext__link docs-prevnext__link--prev" href="dynamic.html">
         <span class="docs-prevnext__label">Previous</span>
-        <span class="docs-prevnext__title">Browser UI</span>
+        <span class="docs-prevnext__title">Dynamic verification</span>
       </a><a class="docs-prevnext__link docs-prevnext__link--next" href="output.html">
         <span class="docs-prevnext__label">Next</span>
         <span class="docs-prevnext__title">Output formats</span>
