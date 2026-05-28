@@ -1,0 +1,929 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI runtime | Nyx Agent docs</title>
+    <meta name="description" content="nyx-agent-ai is the crate that turns a Prompt or AgentTask into model output. It owns one trait (AiRuntime), four shipped adapters (Anthropic Messages, local OpenAI-compatible, Claude Code CLI..." />
+    <meta name="keywords" content="Nyx Agent, nyx-agent, local pentesting, live appsec testing, verified vulnerabilities, stored evidence, Architecture, AI runtime, AI, ai, API, api" />
+    <meta name="author" content="Eli Peter" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <link rel="canonical" href="https://nyxscan.dev/docs/agent/ai-runtime.html" />
+    <link rel="sitemap" type="application/xml" href="https://nyxscan.dev/sitemap.xml" />
+    <link rel="alternate" hreflang="en" href="https://nyxscan.dev/docs/agent/ai-runtime.html" />
+    <link rel="alternate" hreflang="x-default" href="https://nyxscan.dev/docs/agent/ai-runtime.html" />
+    <link rel="prev" href="events.html" />
+    <link rel="next" href="api.html" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="64x64" href="../../favicon-64.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../../favicon-180.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="alternate" type="application/rss+xml" title="Nyx | News &amp; release notes" href="/news/feed.xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../styles.css" />
+    <script defer src="../../docs/search.js"></script>
+
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Nyx" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="AI runtime" />
+    <meta property="og:description" content="nyx-agent-ai is the crate that turns a Prompt or AgentTask into model output. It owns one trait (AiRuntime), four shipped adapters (Anthropic Messages, local OpenAI-compatible, Claude Code CLI..." />
+    <meta property="og:url" content="https://nyxscan.dev/docs/agent/ai-runtime.html" />
+    <meta property="og:image" content="https://nyxscan.dev/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Nyx Agent local pentesting documentation" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="AI runtime" />
+    <meta name="twitter:description" content="nyx-agent-ai is the crate that turns a Prompt or AgentTask into model output. It owns one trait (AiRuntime), four shipped adapters (Anthropic Messages, local OpenAI-compatible, Claude Code CLI..." />
+    <meta name="twitter:image" content="https://nyxscan.dev/og-image.png" />
+    <meta name="twitter:image:alt" content="Nyx Agent local pentesting documentation" />
+    <meta name="theme-color" content="#F9F8F4" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://nyxscan.dev/#person",
+      "name": "Eli Peter",
+      "url": "https://github.com/elicpeter",
+      "sameAs": [
+        "https://github.com/elicpeter",
+        "https://github.com/sponsors/elicpeter"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://nyxscan.dev/#website",
+      "url": "https://nyxscan.dev/",
+      "name": "Nyx",
+      "description": "Local security tooling for deterministic scanning and live testing.",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://nyxscan.dev/#person"
+      }
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://nyxscan.dev/docs/agent/ai-runtime.html#article",
+      "headline": "AI runtime",
+      "name": "AI runtime",
+      "url": "https://nyxscan.dev/docs/agent/ai-runtime.html",
+      "description": "nyx-agent-ai is the crate that turns a Prompt or AgentTask into model output. It owns one trait (AiRuntime), four shipped adapters (Anthropic Messages, local OpenAI-compatible, Claude Code CLI...",
+      "inLanguage": "en",
+      "articleSection": "Architecture",
+      "isPartOf": {
+        "@id": "https://nyxscan.dev/#website"
+      },
+      "publisher": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "author": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "image": "https://nyxscan.dev/og-image.png",
+      "mainEntityOfPage": "https://nyxscan.dev/docs/agent/ai-runtime.html"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://nyxscan.dev/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Docs",
+          "item": "https://nyxscan.dev/docs/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Nyx Agent docs",
+          "item": "https://nyxscan.dev/docs/agent/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "AI runtime",
+          "item": "https://nyxscan.dev/docs/agent/ai-runtime.html"
+        }
+      ],
+      "@id": "https://nyxscan.dev/docs/agent/ai-runtime.html#breadcrumbs"
+    }
+  ]
+}
+    </script>
+  </head>
+  <body class="docs-body">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" aria-label="Primary navigation">
+      <div class="container site-header__inner">
+        <a class="brand" href="../../" aria-label="Nyx home">
+          <img src="../../assets/logo.png" alt="Nyx" class="brand-logo" />
+        </a>
+        <span class="header-wordmark">NYX</span>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="../../scanner.html">Scanner</a>
+          <a href="../../agent.html">Agent</a>
+          <a href="../../news/">News</a>
+          <a href="../../docs/" aria-current="page">Docs</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="docs-page">
+      <div class="docs-shell">
+        <nav class="docs-sidebar" aria-label="Documentation"><a class="docs-sidebar__brand" href="./">Agent docs</a><a class="docs-sidebar__home" href="../">All docs</a><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Get started</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="install.html">Install</a></li><li><a class="docs-sidebar__link" href="quickstart.html">Quickstart</a></li><li><a class="docs-sidebar__link" href="cli.html">CLI</a></li><li><a class="docs-sidebar__link" href="config.html">Config</a></li><li><a class="docs-sidebar__link" href="state-dir.html">State Directory</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Architecture</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="architecture.html">Architecture</a></li><li><a class="docs-sidebar__link" href="runs.html">Runs</a></li><li><a class="docs-sidebar__link" href="attack-graph.html">Attack Graph</a></li><li><a class="docs-sidebar__link" href="business-logic-templates.html">Business Logic Templates</a></li><li><a class="docs-sidebar__link" href="events.html">Events</a></li><li><a class="docs-sidebar__link" href="ai-runtime.html" aria-current="page">AI Runtime</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Projects</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="cli.html#project">CLI: Project</a></li><li><a class="docs-sidebar__link" href="quickstart.html#create-a-project">Quickstart: Create a Project</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">HTTP API</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="api.html">API</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Triggers</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="triggers/index.html">Overview</a></li><li><a class="docs-sidebar__link" href="triggers/cron.html">Cron</a></li><li><a class="docs-sidebar__link" href="triggers/webhook.html">Webhook</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">CI integration</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="ci/github-actions.html">GitHub Actions</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Contributor docs</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="dev/sqlx.html">SQLx</a></li><li><a class="docs-sidebar__link" href="dev/frontend.html">Frontend</a></li></ul></div></nav>
+        <article class="docs-content">
+          <div class="docs-search docs-search--content" data-docs-search>
+    <label class="visually-hidden" for="docs-search-input">Search docs</label>
+    <div class="docs-search__control">
+      <span class="docs-search__icon" aria-hidden="true"></span>
+      <input id="docs-search-input" data-docs-search-input type="search" placeholder="Search docs" autocomplete="off" autocapitalize="none" spellcheck="false" role="combobox" aria-autocomplete="list" aria-controls="docs-search-results" aria-expanded="false" />
+      <kbd class="docs-search__key" aria-hidden="true">⌘K</kbd>
+    </div>
+    <div class="docs-search__panel" data-docs-search-panel hidden>
+      <div class="docs-search__status" data-docs-search-status></div>
+      <div class="docs-search__results" id="docs-search-results" data-docs-search-results role="listbox" aria-label="Search results"></div>
+    </div>
+  </div>
+          <div class="docs-prose" data-pagefind-body>
+<h1 id="ai-runtime"><a class="docs-anchor" href="#ai-runtime" aria-label="Link to ai-runtime" data-pagefind-ignore>#</a>AI runtime</h1>
+<p><code>nyx-agent-ai</code> is the crate that turns a <code>Prompt</code> or <code>AgentTask</code> into
+model output. It owns one trait (<code>AiRuntime</code>), four shipped adapters
+(Anthropic Messages, local OpenAI-compatible, Claude Code CLI, Codex
+CLI), one host port
+(<code>BudgetTracker</code>), and the six task implementations that build
+typed structured prompts on top of the trait. Everything else in
+the agent (the run dispatcher, the AI pipeline binary glue, the
+trace viewer) sees only the trait, not the vendor SDK.</p>
+<p>The crate stays vendor-neutral. Adapters depend on <code>nyx-agent-types</code>
+for the wire envelope and on the <code>BudgetTracker</code> port for spend
+accounting; nothing else. The binary at
+<code>crates/nyx-agent/src/main.rs:1793</code> is the only place that picks a
+concrete adapter from <code>[ai] runtime</code>, wires it to the
+<code>BudgetStore</code>-backed tracker, and hands it to the dispatcher.</p>
+<h2 id="the-airuntime-trait"><a class="docs-anchor" href="#the-airuntime-trait" aria-label="Link to the-airuntime-trait" data-pagefind-ignore>#</a>The <code>AiRuntime</code> trait</h2>
+<pre><code class="hljs language-text">trait AiRuntime: Send + Sync {
+    fn name(&amp;self) -&gt; &amp;&#x27;static str;
+    fn default_model(&amp;self) -&gt; &amp;str;
+    fn supports_agent_loop(&amp;self) -&gt; bool;
+    fn supports_prompt_cache(&amp;self) -&gt; bool;
+    fn supports_deterministic_sampling(&amp;self) -&gt; bool;
+
+    async fn one_shot(&amp;self, prompt, budget, sink) -&gt; Result&lt;Response, AiError&gt;;
+    async fn agent_loop(&amp;self, task, budget, sink) -&gt; Result&lt;AgentResult, AiError&gt;;
+    fn cost_estimate(&amp;self, prompt) -&gt; Option&lt;CostEstimate&gt;;
+}</code></pre>
+<p>Defined at <code>crates/nyx-agent-ai/src/runtime.rs:18</code>. Adapters that
+implement only one of the two execution modes return
+<code>AiError::UnsupportedMode(&quot;agent_loop&quot;)</code> (or <code>&quot;one_shot&quot;</code>) from the
+mode they do not support; the binary checks <code>supports_agent_loop</code>
+before dispatching exploration work, so the unsupported-mode error
+is a defence-in-depth, not the primary gate.</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Behaviour</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>name</code></td>
+<td>Stable adapter name persisted in trace rows (<code>&quot;anthropic&quot;</code>, <code>&quot;local-llm&quot;</code>, <code>&quot;claude-code&quot;</code>, <code>&quot;codex&quot;</code>).</td>
+</tr>
+<tr>
+<td><code>default_model</code></td>
+<td>Used when <code>Prompt.model</code> is <code>None</code>.</td>
+</tr>
+<tr>
+<td><code>supports_agent_loop</code></td>
+<td><code>false</code> for one-shot-only adapters; the dispatcher uses this to route.</td>
+</tr>
+<tr>
+<td><code>supports_prompt_cache</code></td>
+<td>Affects request body shape (<code>system</code> block array with <code>cache_control</code>).</td>
+</tr>
+<tr>
+<td><code>supports_deterministic_sampling</code></td>
+<td><code>false</code> today on both shipped adapters: <code>temperature: 0</code> is the only knob.</td>
+</tr>
+<tr>
+<td><code>one_shot</code></td>
+<td>Single round trip. Streams <code>AiEvent::TokenReceived</code> plus cache + budget ticks.</td>
+</tr>
+<tr>
+<td><code>agent_loop</code></td>
+<td>Multi-turn tool-use loop. Streams <code>ToolCallStarted</code> / <code>Finished</code> plus tokens.</td>
+</tr>
+<tr>
+<td><code>cost_estimate</code></td>
+<td>Pre-call min/max bound in USD micros. Optional; <code>None</code> for adapters that can&#39;t price ahead.</td>
+</tr>
+</tbody></table>
+<p>The trait is intentionally minimal. Anything richer (per-attempt
+retry, prompt-version tracking, structured-output validation) lives
+in <code>tasks/</code>, not in adapter implementations.</p>
+<p>The live candidate verification path intentionally uses a
+planner/reviewer split. <code>AttackPlanning</code> and <code>LiveTestPlan</code> propose
+safe executable probes, while <code>LiveEvidenceReview</code> receives the
+candidate, proposed plan, collected live evidence, and oracle result
+after deterministic verification. The deterministic oracle remains the
+hard gate; the reviewer can only downgrade or block weak confirmations
+before <code>verified_vulnerabilities</code> rows are created.</p>
+<h2 id="wire-envelope-prompt-response-agenttask-agentresult"><a class="docs-anchor" href="#wire-envelope-prompt-response-agenttask-agentresult" aria-label="Link to wire-envelope-prompt-response-agenttask-agentresult" data-pagefind-ignore>#</a>Wire envelope: <code>Prompt</code>, <code>Response</code>, <code>AgentTask</code>, <code>AgentResult</code></h2>
+<p>Defined in <code>crates/nyx-agent-types/src/agent.rs</code>. Both adapters
+consume the same shape so the binary never depends on a vendor
+schema.</p>
+<h3 id="prompt"><a class="docs-anchor" href="#prompt" aria-label="Link to prompt" data-pagefind-ignore>#</a><code>Prompt</code></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>prompt_version</code></td>
+<td><code>String</code></td>
+<td>Stable slug of the prompt template; persisted on every trace row.</td>
+</tr>
+<tr>
+<td><code>task_id</code></td>
+<td><code>String</code></td>
+<td>Echoed on every emitted <code>AiEvent</code> for fan-out.</td>
+</tr>
+<tr>
+<td><code>model</code></td>
+<td><code>Option&lt;String&gt;</code></td>
+<td><code>None</code> falls back to <code>default_model()</code>.</td>
+</tr>
+<tr>
+<td><code>system</code></td>
+<td><code>String</code></td>
+<td>System prompt. Adapters with prompt caching wrap it in a cache block.</td>
+</tr>
+<tr>
+<td><code>user</code></td>
+<td><code>String</code></td>
+<td>User message body.</td>
+</tr>
+<tr>
+<td><code>max_output_tokens</code></td>
+<td><code>u32</code></td>
+<td>Clamped to vendor limits inside the adapter.</td>
+</tr>
+<tr>
+<td><code>temperature</code></td>
+<td><code>f32</code></td>
+<td><code>0.0</code> for deterministic decoding.</td>
+</tr>
+<tr>
+<td><code>seed</code></td>
+<td><code>Option&lt;u64&gt;</code></td>
+<td>Honoured only by adapters that report <code>supports_deterministic_sampling = true</code>.</td>
+</tr>
+</tbody></table>
+<h3 id="response"><a class="docs-anchor" href="#response" aria-label="Link to response" data-pagefind-ignore>#</a><code>Response</code></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>prompt_version</code></td>
+<td><code>String</code></td>
+<td>Echoes the request.</td>
+</tr>
+<tr>
+<td><code>task_id</code></td>
+<td><code>String</code></td>
+<td>Echoes the request.</td>
+</tr>
+<tr>
+<td><code>model</code></td>
+<td><code>String</code></td>
+<td>Vendor-reported model id (may differ from the requested alias).</td>
+</tr>
+<tr>
+<td><code>content</code></td>
+<td><code>String</code></td>
+<td>Final completion text.</td>
+</tr>
+<tr>
+<td><code>usage</code></td>
+<td><code>TokenUsage</code></td>
+<td>Input / output token counts.</td>
+</tr>
+<tr>
+<td><code>cache</code></td>
+<td><code>Option&lt;CacheStats&gt;</code></td>
+<td>Set when the adapter reports cache deltas.</td>
+</tr>
+<tr>
+<td><code>cost_usd_micros</code></td>
+<td><code>i64</code></td>
+<td>Adapter-computed total in micros (1e-6 USD).</td>
+</tr>
+</tbody></table>
+<h3 id="agenttask-and-agentresult"><a class="docs-anchor" href="#agenttask-and-agentresult" aria-label="Link to agenttask-and-agentresult" data-pagefind-ignore>#</a><code>AgentTask</code> and <code>AgentResult</code></h3>
+<p><code>AgentTask</code> carries <code>tools: Vec&lt;String&gt;</code> and <code>max_turns: u32</code>
+alongside the prompt fields; the Claude Code adapter renders this
+into the markdown agent brief it pipes on stdin. <code>AgentResult</code>
+carries <code>turns</code>, <code>extracted: Vec&lt;ExtractedAgentResult&gt;</code>, plus the
+same token / cache / cost accounting as <code>Response</code>.</p>
+<p><code>ExtractedAgentResult</code> is the typed lift the adapter performs over
+the tool-use trace. Recognised tool names are classified at
+<code>agent.rs:261</code> (<code>classify_tool_use</code>):</p>
+<table>
+<thead>
+<tr>
+<th>Tool name</th>
+<th>Variant</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>record_payload</code></td>
+<td><code>PayloadFound { rule_id, body }</code></td>
+</tr>
+<tr>
+<td><code>record_spec</code></td>
+<td><code>SpecFound { capability, spec }</code></td>
+</tr>
+<tr>
+<td><code>record_chains</code></td>
+<td><code>ChainsRanked { chain_ids, rationale }</code></td>
+</tr>
+<tr>
+<td><code>record_exploration_finding</code></td>
+<td><code>ExplorationFinding { ... }</code></td>
+</tr>
+<tr>
+<td>anything else</td>
+<td><code>ExplorationEvent { message }</code></td>
+</tr>
+</tbody></table>
+<p>The task crates consume the typed variants; the binary never
+re-parses the raw transcript.</p>
+<h2 id="adapters"><a class="docs-anchor" href="#adapters" aria-label="Link to adapters" data-pagefind-ignore>#</a>Adapters</h2>
+<p>The official provider paths are BYOK/direct API or local endpoints.
+Claude Code and Codex are optional local CLI adapters for users who
+have installed and authenticated those tools themselves. Nyx Agent does
+not include, proxy, sublicense, or resell model access.</p>
+<h3 id="anthropic-messages-oneshot-only"><a class="docs-anchor" href="#anthropic-messages-oneshot-only" aria-label="Link to anthropic-messages-oneshot-only" data-pagefind-ignore>#</a>Anthropic Messages (<code>one_shot</code> only)</h3>
+<p><code>crates/nyx-agent-ai/src/adapter/anthropic.rs</code>.</p>
+<p>Direct <code>reqwest</code> against <code>POST /v1/messages</code>. No third-party SDK,
+so version drift on the SDK side cannot couple us to its release
+cadence. Constants:</p>
+<table>
+<thead>
+<tr>
+<th>Constant</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>DEFAULT_BASE_URL</code></td>
+<td><code>https://api.anthropic.com</code></td>
+</tr>
+<tr>
+<td><code>ANTHROPIC_VERSION</code></td>
+<td><code>2023-06-01</code></td>
+</tr>
+<tr>
+<td><code>DEFAULT_RANKING_MODEL</code></td>
+<td><code>claude-haiku-4-5</code></td>
+</tr>
+<tr>
+<td><code>DEFAULT_SYNTHESIS_MODEL</code></td>
+<td><code>claude-opus-4-7</code></td>
+</tr>
+</tbody></table>
+<p>Capability flags: <code>supports_agent_loop = false</code>,
+<code>supports_prompt_cache = true</code>,
+<code>supports_deterministic_sampling = false</code>. <code>agent_loop</code> returns
+<code>AiError::UnsupportedMode(&quot;agent_loop&quot;)</code>.</p>
+<p>Per-model pricing lives at <code>anthropic.rs:65</code> (<code>pricing_for</code>). Match
+order is prefix-based so <code>claude-opus-4-7-20260101</code> prices as the
+opus alias. Unknown model names default to opus pricing so a
+mis-typed model id does not silently price as the cheapest tier.</p>
+<p>Request body:</p>
+<pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;model&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;claude-opus-4-7&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;max_tokens&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">4096</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;temperature&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0.0</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;system&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;text&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;text&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&lt;system prompt&gt;&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;cache_control&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ephemeral&quot;</span> <span class="hljs-punctuation">}</span> <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;messages&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;role&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;user&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;content&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&lt;user&gt;&quot;</span> <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span></code></pre>
+<p>The <code>system</code> field is a single-element block array (not a string)
+when <code>supports_prompt_cache</code> is <code>true</code> so the <code>cache_control</code>
+attachment can ride along. Adapters that do not support caching
+emit a plain string for <code>system</code>.</p>
+<p>The non-streaming path is the shipping one. The Messages API
+supports SSE streaming via <code>stream: true</code>; a future revision can
+flip to streaming and emit one <code>AiEvent::TokenReceived</code> per delta
+without changing the trait.</p>
+<h3 id="local-openai-compatible-oneshot-only"><a class="docs-anchor" href="#local-openai-compatible-oneshot-only" aria-label="Link to local-openai-compatible-oneshot-only" data-pagefind-ignore>#</a>Local OpenAI-compatible (<code>one_shot</code> only)</h3>
+<p><code>crates/nyx-agent-ai/src/adapter/local_llm.rs</code>.</p>
+<p>Direct <code>reqwest</code> against <code>&lt;api_base&gt;/chat/completions</code>. The runtime
+expects <code>api_base</code> to point at a local OpenAI-compatible <code>/v1</code>
+endpoint such as LM Studio, Ollama, or vLLM. Any bearer token is read
+from the OS keychain; it is never written to TOML.</p>
+<p>Capability flags: <code>supports_agent_loop = false</code>,
+<code>supports_prompt_cache = false</code>,
+<code>supports_deterministic_sampling = false</code>. <code>agent_loop</code> returns
+<code>AiError::UnsupportedMode(&quot;agent_loop&quot;)</code>.</p>
+<p>Request body:</p>
+<pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;model&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;local-model&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;max_tokens&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">4096</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;temperature&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0.0</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;stream&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;messages&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;role&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;system&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;content&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&lt;system prompt&gt;&quot;</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;role&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;user&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;content&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&lt;user&gt;&quot;</span> <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span></code></pre>
+<p>Set <code>[ai].model</code> when the local server requires a specific model id.
+Local runs record token counts when the server reports <code>usage</code>, but
+cost is recorded as zero because Nyx Agent has no way to know a local
+operator&#39;s hardware or provider accounting.</p>
+<h3 id="claude-code-agentloop-only"><a class="docs-anchor" href="#claude-code-agentloop-only" aria-label="Link to claude-code-agentloop-only" data-pagefind-ignore>#</a>Claude Code (<code>agent_loop</code> only)</h3>
+<p><code>crates/nyx-agent-ai/src/adapter/claude_code.rs</code>.</p>
+<p>Spawns the <code>claude</code> CLI as a subprocess so the agent does not have
+to embed Anthropic&#39;s tool-use loop. Detection runs
+<code>which claude</code> (or <code>which claude-code</code> as a fallback alias) at
+construction time; failure surfaces as
+<code>AiError::AdapterUnavailable</code>. The binary path plus <code>--version</code>
+output is captured into <code>ClaudeBinary</code> and surfaced by
+<code>nyx-agent doctor</code>.</p>
+<p>Wire shape:</p>
+<ol>
+<li>Write <code>agent_task.md</code> into a per-task scratch directory.</li>
+<li>Spawn <code>claude --print --output-format stream-json --verbose --max-turns &lt;N&gt;</code>.</li>
+<li>Pipe the rendered task body on stdin and read the NDJSON event
+stream on stdout. A sibling task drains stderr into a bounded
+64 KiB trailing-window ring (<code>MAX_STDERR_CAPTURE_BYTES</code>) so a
+verbose child cannot block on a full pipe.</li>
+<li>Classify each tool-use block via <code>classify_tool_use</code> into a
+typed <code>ExtractedAgentResult</code>; emit <code>ToolCallStarted</code> and
+<code>ToolCallFinished</code> events on the bus.</li>
+<li>On timeout, kill the child, emit <code>TaskHalted { reason: OperatorCancelled }</code>, and annotate the returned
+<code>AiError::Transport</code> with the captured stderr.</li>
+</ol>
+<p>Default model: <code>claude-opus-4-7</code>. Default wall-clock timeout: 15
+minutes, with host phases able to override it; the unsafe attack-agent
+phase uses 30 minutes per pass. Capability flags:
+<code>supports_agent_loop = true</code>,
+<code>supports_prompt_cache = true</code>,
+<code>supports_deterministic_sampling = false</code>. <code>one_shot</code> returns
+<code>AiError::UnsupportedMode(&quot;one_shot&quot;)</code>.</p>
+<h3 id="codex-cli-oneshot-and-agentloop"><a class="docs-anchor" href="#codex-cli-oneshot-and-agentloop" aria-label="Link to codex-cli-oneshot-and-agentloop" data-pagefind-ignore>#</a>Codex CLI (<code>one_shot</code> and <code>agent_loop</code>)</h3>
+<p><code>crates/nyx-agent-ai/src/adapter/codex.rs</code>.</p>
+<p>Spawns the installed <code>codex</code> CLI and consumes the JSONL stream emitted
+by <code>codex exec</code>. This adapter is optional and depends on the user&#39;s own
+Codex installation and authentication. <code>nyx-agent doctor</code> reports the
+resolved binary and version when present.</p>
+<p>Default wall-clock timeout: 15 minutes, with host phases able to
+override it; the unsafe attack-agent phase uses 30 minutes per pass.</p>
+<h3 id="adapters-on-the-roadmap"><a class="docs-anchor" href="#adapters-on-the-roadmap" aria-label="Link to adapters-on-the-roadmap" data-pagefind-ignore>#</a>Adapters on the roadmap</h3>
+<p>OpenAI API, Bedrock, and Vertex.</p>
+<h2 id="budget-tracking"><a class="docs-anchor" href="#budget-tracking" aria-label="Link to budget-tracking" data-pagefind-ignore>#</a>Budget tracking</h2>
+<p><code>BudgetTracker</code> (<code>runtime.rs:55</code>) is the host-side port the
+adapter calls on every successful round trip. The contract is
+deliberately small:</p>
+<pre><code class="hljs language-text">async fn cap(run_id, kind) -&gt; Result&lt;Option&lt;i64&gt;, AiError&gt;;
+async fn current_spend(run_id, kind) -&gt; Result&lt;i64, AiError&gt;;
+async fn add_spend(run_id, kind, micros) -&gt; Result&lt;i64, AiError&gt;;</code></pre>
+<p>Adapters never write a <code>halted</code> flag; the host owns that audit
+trail in the <code>budgets</code> table. The boundary on both pre-call and
+post-call cap checks is strictly <code>&gt;</code>: a call landing exactly at
+the cap proceeds, the call after does not.</p>
+<p><code>BudgetKind</code> (<code>agent.rs:151</code>) has three variants:</p>
+<table>
+<thead>
+<tr>
+<th>Variant</th>
+<th>Used by</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>OneShot</code></td>
+<td><code>AiRuntime::one_shot</code> paths.</td>
+</tr>
+<tr>
+<td><code>AgentLoop</code></td>
+<td><code>AiRuntime::agent_loop</code> paths.</td>
+</tr>
+<tr>
+<td><code>Total</code></td>
+<td>Reserved for per-run aggregate the host writes itself.</td>
+</tr>
+</tbody></table>
+<p>Two implementations ship:</p>
+<ul>
+<li><code>InMemoryBudgetTracker</code> (<code>runtime.rs:74</code>). Process-local, used
+by adapter tests and any future in-memory dispatcher.</li>
+<li><code>BudgetStoreTracker</code> lives in the binary glue and forwards into
+<code>nyx_agent_core::store::BudgetStore</code>. The wizard picks a per-run
+cap (default unlimited from <code>AiConfig::DEFAULT_RUN_BUDGET_USD_MICROS</code>)
+and the tracker auto-creates the row on first <code>add_spend</code>.</li>
+</ul>
+<p><code>Budget</code> (<code>agent.rs:138</code>) is the per-call envelope:
+<code>{ run_id, kind, cap_usd_micros }</code>. The <code>cap_usd_micros</code> field on
+the envelope is the operator-visible per-call cap; the tracker
+sees the per-run accumulated total separately.</p>
+<h3 id="per-call-cap-allocation-ladder"><a class="docs-anchor" href="#per-call-cap-allocation-ladder" aria-label="Link to per-call-cap-allocation-ladder" data-pagefind-ignore>#</a>Per-call cap allocation ladder</h3>
+<p>Four <code>one_shot</code> tasks share a single
+<code>(run_id, BudgetKind::OneShot)</code> bucket: PayloadSynthesis,
+SpecDerivation, ChainReasoning, and NovelFindingDiscovery. The
+binary drives PayloadSynthesis and SpecDerivation before deeper
+candidate work, then runs NovelFindingDiscovery and finally
+post-live ChainReasoning after candidate/live verification has
+populated graph proof nodes (see the <code>scan_loop</code>
+function in <code>crates/nyx-agent/src/main.rs</code>), so earlier-pass spend
+reduces the budget every later pass sees through the same tracker.
+Each pass also carries its own per-call cap on the wire
+(<code>payload_synthesis_per_call_cap_usd_micros</code>,
+<code>spec_derivation_per_call_cap_usd_micros</code>,
+<code>chain_reasoning_per_call_cap_usd_micros</code>,
+<code>novel_discovery_per_call_cap_usd_micros</code>); each value clamps a
+single call below the shared per-run bucket and falls back to
+<code>AiConfig::DEFAULT_RUN_BUDGET_USD_MICROS</code> when unset.</p>
+<p>The invariant the binary commits to is: PayloadSynthesis and
+SpecDerivation get the full per-run cap to drive their fan-outs;
+NovelFindingDiscovery can spend on missed candidates, and
+ChainReasoning fires a single post-live call against whatever
+budget remains. For CLI-backed runtimes that support agent loops
+(Claude Code or Codex), that call is source-aware: the task is
+given repository workspace roots and can read/search code before
+returning the strict chain JSON. One-shot-only runtimes use the
+same graph input without repository tool access. The order is intentional. The static-pass
+refusals that PayloadSynthesis and SpecDerivation address are
+the most actionable signal in a run; novel discovery benefits
+from source context before live planning; chain reasoning is most
+valuable after candidate tests have created verification_attempt
+and verified_vulnerability graph nodes. These enrichments degrade
+gracefully when an earlier pass exhausted the cap (the adapter
+pre-call check refuses, the pass logs and continues). Operators
+who want chain reasoning or novel-discovery to see a larger
+headroom should raise
+<code>default_run_budget_usd_micros</code> rather than try to slice the
+shared pool. The <code>BudgetKind</code> enum does not sub-bucket today, and
+splitting <code>OneShot</code> into <code>OneShot.payload</code> / <code>OneShot.spec</code> /
+<code>OneShot.chain</code> / <code>OneShot.novel</code> would touch every adapter and
+every tracker in tree without changing the realised behaviour for
+a run that finishes inside its cap.</p>
+<p>AI Exploration is the only <code>agent_loop</code> task and lives in a
+separate <code>(run_id, BudgetKind::AgentLoop)</code> row with its own
+per-run hard cap (default <code>$10.00</code>). It does not draw from the
+OneShot pool.</p>
+<p>The <code>AgentLoop</code> bucket itself does not sub-bucket per adapter.
+Today only the Claude Code adapter consumes the bucket, so the
+question is academic. The shape that takes hold the moment a
+second <code>agent_loop</code>-capable adapter ships (an OpenAI assistant
+API path, a Bedrock agent path) is identical to the <code>OneShot</code>
+case: the bucket is the cap the operator pays for; the
+per-adapter accountability lives one layer down in the trace
+store. Every adapter call writes one <code>agent_traces</code> row with
+<code>runtime_name</code>, <code>model</code>, and <code>cost_usd_micros</code> columns, so an
+operator dashboard that needs &quot;how much did Claude Code burn vs
+the OpenAI assistant during this run&quot; sums <code>cost_usd_micros</code>
+grouped by <code>runtime_name</code> from <code>agent_traces</code> rather than asking
+the budget bucket to sub-bucket itself. Splitting
+<code>BudgetKind::AgentLoop</code> into <code>AgentLoop.claude_code</code> /
+<code>AgentLoop.openai</code> / etc. would touch every adapter and every
+tracker in tree without changing the realised behaviour for a
+run that finishes inside its cap; the per-adapter share is
+already recoverable from the trace store.</p>
+<h2 id="event-stream"><a class="docs-anchor" href="#event-stream" aria-label="Link to event-stream" data-pagefind-ignore>#</a>Event stream</h2>
+<p>Every model call publishes a fan-out of <code>AgentEvent::Ai { data: AiEvent }</code> frames on the bus (<code>crates/nyx-agent-types/src/event.rs:145</code>).
+The same <code>task_id</code> rides on every variant so subscribers can
+multiplex concurrent calls.</p>
+<table>
+<thead>
+<tr>
+<th>Variant</th>
+<th>Emitted when</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>TokenReceived { task_id, token }</code></td>
+<td>Each token batch the adapter materialises (or the full body for non-streaming Anthropic).</td>
+</tr>
+<tr>
+<td><code>ToolCallStarted { task_id, name }</code></td>
+<td>Agent loop sees a <code>ContentBlock::ToolUse</code>.</td>
+</tr>
+<tr>
+<td><code>ToolCallFinished { task_id, name, ok }</code></td>
+<td>After the tool-use block lands in <code>extracted</code>.</td>
+</tr>
+<tr>
+<td><code>CacheHit { task_id, tokens }</code></td>
+<td><code>usage.cache_read_input_tokens &gt; 0</code>.</td>
+</tr>
+<tr>
+<td><code>CacheMiss { task_id, tokens }</code></td>
+<td><code>usage.cache_creation_input_tokens &gt; 0</code>.</td>
+</tr>
+<tr>
+<td><code>BudgetTick { task_id, run_id, spent_usd_micros }</code></td>
+<td>After every successful <code>add_spend</code>.</td>
+</tr>
+<tr>
+<td><code>TaskHalted { task_id, reason }</code></td>
+<td>Cap overrun, timeout, or upstream refusal.</td>
+</tr>
+</tbody></table>
+<p><code>HaltReason</code> (<code>agent.rs:319</code>) has three variants:
+<code>BudgetCapReached</code>, <code>OperatorCancelled</code>, <code>UpstreamRefused</code>. See
+<a href="events.html">events.md</a> for the full envelope and the WebSocket
+filter contract.</p>
+<h2 id="tasks"><a class="docs-anchor" href="#tasks" aria-label="Link to tasks" data-pagefind-ignore>#</a>Tasks</h2>
+<p>Five task modules sit on top of the trait. Each task builds a
+typed <code>Prompt</code>, drives the model once (or twice on validation
+retry), parses the JSON contract, validates the result, and
+returns a typed outcome the binary persists.</p>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>File</th>
+<th>Outcome</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PayloadSynthesis</td>
+<td><code>tasks/payload_synthesis.rs</code></td>
+<td><code>Synthesised { output, ... }</code> or <code>Quarantined</code>.</td>
+</tr>
+<tr>
+<td>SpecDerivation</td>
+<td><code>tasks/spec_derivation.rs</code></td>
+<td><code>Synthesised { spec, spec_blob, ... }</code> or <code>Quarantined</code>.</td>
+</tr>
+<tr>
+<td>ChainReasoning</td>
+<td><code>tasks/chain_reasoning.rs</code></td>
+<td><code>Ranked { output, ... }</code> or <code>NoChains</code>.</td>
+</tr>
+<tr>
+<td>NovelFindingDiscovery</td>
+<td><code>tasks/novel_findings.rs</code></td>
+<td><code>Discovered { candidates, ... }</code> or <code>NoCandidates</code>.</td>
+</tr>
+<tr>
+<td>Exploration</td>
+<td><code>tasks/exploration.rs</code></td>
+<td><code>Completed { findings, ... }</code> plus halt reasons.</td>
+</tr>
+</tbody></table>
+<p>Common rules across the four <code>one_shot</code> tasks:</p>
+<ul>
+<li><strong>Two attempts max.</strong> First attempt uses the v1 prompt; the
+retry uses the <code>*_stricter</code> variant with explicit &quot;your previous
+reply did not validate&quot; framing.</li>
+<li><strong>Shared budget bucket.</strong> Both attempts charge the same
+<code>(run_id, BudgetKind::OneShot)</code> row; the tracker is the gate.</li>
+<li><strong><code>spent_usd_micros</code> and <code>attempts</code> ride on every outcome.</strong> The
+binary persists both on the agent-trace row even on quarantine.</li>
+<li><strong><code>metrics: AgentTraceMetrics</code></strong> (<code>agent.rs:88</code>) accumulates
+per-call observability across attempts via saturating add. The
+binary&#39;s <code>build_trace_row</code> lifts <code>usage</code> / <code>cache</code> / <code>model</code> from
+this envelope into the trace columns.</li>
+</ul>
+<h3 id="novelfindingdiscovery-file-priority"><a class="docs-anchor" href="#novelfindingdiscovery-file-priority" aria-label="Link to novelfindingdiscovery-file-priority" data-pagefind-ignore>#</a>NovelFindingDiscovery file priority</h3>
+<p>The walker behind <code>build_novel_inputs_for_repo</code> orders source files
+before chunking them into per-batch prompts. The score combines three
+inputs:</p>
+<ol>
+<li><strong>Keyword score.</strong> Path segments matching <code>route</code>, <code>controller</code>,
+<code>handler</code>, <code>view</code>, <code>api</code>, <code>model</code>, <code>auth</code>, <code>login</code>, <code>query</code>, <code>sql</code>,
+<code>db</code>, <code>exec</code> add 2 to 6 points each. Picks up the high-leverage
+surface (HTTP layer, ORM, auth flows) on a typical web app.</li>
+<li><strong>Size band.</strong> Tiny files (&lt;256 B) and oversize files (&gt;200 kB)
+subtract 5; the 2 kB to 50 kB band adds 3.</li>
+<li><strong>Historical promotion rate.</strong> When the run has prior
+AI-originated findings on disk, the walker calls
+<code>FindingStore::per_path_promotion_rate(repo)</code> and looks up each
+path. Rate = <code>promotions / (total + 5)</code> where <code>promotions</code> is the
+row count with <code>status IN (&#39;Open&#39;, &#39;Verified&#39;)</code> and <code>total</code> is
+every AI-originated row on the path (provenance
+<code>LlmSynthesised</code> or <code>AiExploration</code>). The denominator&#39;s <code>+ 5</code>
+smooths low-cardinality paths so a single observation does not
+peg the rate. The score adds up to +10 at rate = 1.0; the boost
+scales linearly.</li>
+</ol>
+<p>A store error on the rate lookup degrades to the keyword + size
+heuristic; the pass still produces a useful ordering when the
+findings table has not yet accumulated AI-promotion history.</p>
+<p>Exploration is the only <code>agent_loop</code> task. It runs against a
+chain-lane sandbox with three guard rails:</p>
+<ol>
+<li><strong>Escape suite gate.</strong> A pre-flight <code>EscapeSuiteGate</code> check
+refuses dispatch if the escape-regression suite is red.</li>
+<li><strong>Per-run hard cap.</strong> Default <code>$10.00</code> USD micros, in the
+<code>(run_id, BudgetKind::AgentLoop)</code> bucket.</li>
+<li><strong>Per-task soft cap.</strong> A separate warning threshold emits a
+<code>TokenReceived</code> event with a <code>[soft-cap]</code> prefix but does not
+halt; the hard cap is the only ceiling that aborts.</li>
+</ol>
+<p>Before dispatch, the binary also attaches a bounded <code>KNOWN SCANNER LEADS</code> digest built from <code>pentest_candidates</code> rows for the run. Nyx,
+route/API discovery, OpenAPI specs, JavaScript bundle endpoint
+extraction, form discovery, ZAP baseline, Nuclei, Trivy, OSV-Scanner,
+Gitleaks/detect-secrets, Katana, httpx, and future candidate-producing
+scanners reach exploration through this normalized summary rather than
+raw scanner JSON/log output, so the agent can pivot from existing leads
+without overloading the prompt or trusting them as verified proof. The
+candidate row&#39;s <code>source</code> and <code>source_ids</code> carry attribution; live
+verification remains the only path to <code>Verified</code>.</p>
+<h2 id="determinism"><a class="docs-anchor" href="#determinism" aria-label="Link to determinism" data-pagefind-ignore>#</a>Determinism</h2>
+<p><code>deterministic_seed(run_id, task_id)</code> (<code>runtime.rs:159</code>) produces a
+stable 64-bit seed via <code>BLAKE3(run_id || &quot;\0&quot; || task_id)</code>.
+Adapters that expose <code>random_seed</code> upstream pass it through;
+adapters that do not ignore the value but the function is still
+called so the binary&#39;s trace row carries the same number. Both
+shipped adapters report <code>supports_deterministic_sampling = false</code>
+today, so <code>temperature: 0</code> is the only knob; the seed becomes
+load-bearing once a vendor surfaces a sampling-seed parameter.</p>
+<h2 id="prompt-versions"><a class="docs-anchor" href="#prompt-versions" aria-label="Link to prompt-versions" data-pagefind-ignore>#</a>Prompt versions</h2>
+<p>Every prompt template lives in <code>crates/nyx-agent-ai/src/prompts/</code>.
+Stable version slugs are persisted on every trace row:</p>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Slug</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PayloadSynthesis</td>
+<td><code>PAYLOAD_SYNTHESIS_PROMPT_VERSION</code></td>
+</tr>
+<tr>
+<td>SpecDerivation</td>
+<td><code>SPEC_DERIVATION_PROMPT_VERSION</code></td>
+</tr>
+<tr>
+<td>ChainReasoning</td>
+<td><code>CHAIN_REASONING_PROMPT_VERSION</code></td>
+</tr>
+<tr>
+<td>NovelFindingDiscovery</td>
+<td><code>NOVEL_FINDING_DISCOVERY_PROMPT_VERSION</code></td>
+</tr>
+<tr>
+<td>Exploration</td>
+<td><code>EXPLORATION_PROMPT_VERSION</code></td>
+</tr>
+</tbody></table>
+<p>Slug constants live next to each task&#39;s <code>run</code> function. Rev a slug
+only when the prompt body changes in a way downstream consumers
+must distinguish; the trace store compares slugs verbatim.</p>
+<h2 id="configuration"><a class="docs-anchor" href="#configuration" aria-label="Link to configuration" data-pagefind-ignore>#</a>Configuration</h2>
+<p>Operators pick the runtime in <code>nyx-agent.toml</code> under the <code>[ai]</code>
+section (defined at <code>crates/nyx-agent-core/src/config.rs:166</code>):</p>
+<pre><code class="hljs language-toml"><span class="hljs-section">[ai]</span>
+<span class="hljs-attr">provider</span> = <span class="hljs-string">&quot;anthropic&quot;</span>
+<span class="hljs-attr">model</span> = <span class="hljs-string">&quot;claude-opus-4-7&quot;</span>
+<span class="hljs-attr">runtime</span> = <span class="hljs-string">&quot;anthropic&quot;</span>               <span class="hljs-comment"># none | anthropic | local-llm | claude-code | codex</span>
+<span class="hljs-attr">max_concurrent_one_shot</span> = <span class="hljs-number">4</span>
+<span class="hljs-comment"># Optional. Omit for unlimited AI runs.</span>
+<span class="hljs-attr">default_run_budget_usd_micros</span> = <span class="hljs-number">25_000_000</span>  <span class="hljs-comment"># $25.00 per run</span></code></pre>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Default</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>provider</code></td>
+<td><code>None</code></td>
+<td>Free-form provider hint surfaced by the wizard.</td>
+</tr>
+<tr>
+<td><code>model</code></td>
+<td><code>None</code></td>
+<td>Per-run model override; tasks may still pick a model per prompt.</td>
+</tr>
+<tr>
+<td><code>api_base</code></td>
+<td><code>None</code></td>
+<td>Endpoint URL for <code>local-llm</code>.</td>
+</tr>
+<tr>
+<td><code>runtime</code></td>
+<td><code>none</code></td>
+<td>One of <code>none</code>, <code>anthropic</code>, <code>local-llm</code>, <code>claude-code</code>, <code>codex</code>.</td>
+</tr>
+<tr>
+<td><code>max_concurrent_one_shot</code></td>
+<td><code>4</code></td>
+<td>In-flight one-shot fan-out. Floored to <code>1</code>.</td>
+</tr>
+<tr>
+<td><code>default_run_budget_usd_micros</code></td>
+<td>unset (unlimited)</td>
+<td>Optional per-run cap stamped on auto-created budget rows.</td>
+</tr>
+</tbody></table>
+<p>Secrets do not live in TOML. The wizard stashes the API key in the
+OS keychain under <code>secrets::ACCOUNT_AI_ANTHROPIC</code> (Anthropic) or
+<code>secrets::ACCOUNT_AI_LOCAL_LLM</code> (local LLM).</p>
+<h2 id="failure-modes"><a class="docs-anchor" href="#failure-modes" aria-label="Link to failure-modes" data-pagefind-ignore>#</a>Failure modes</h2>
+<table>
+<thead>
+<tr>
+<th>Error</th>
+<th>When</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>AiError::BudgetExceeded</code></td>
+<td>Pre-call or post-call cap check fails. Emits <code>TaskHalted { BudgetCapReached }</code>.</td>
+</tr>
+<tr>
+<td><code>AiError::UnsupportedMode</code></td>
+<td>Adapter does not implement the requested mode (anthropic/local-llm + <code>agent_loop</code>, claude-code + <code>one_shot</code>).</td>
+</tr>
+<tr>
+<td><code>AiError::UpstreamRefused</code></td>
+<td>Non-2xx HTTP status (anthropic/local-llm) or non-zero exit (CLI adapters). Body / stderr rides in the variant string.</td>
+</tr>
+<tr>
+<td><code>AiError::MalformedResponse</code></td>
+<td>JSON deserialisation failed on the response body.</td>
+</tr>
+<tr>
+<td><code>AiError::Transport</code></td>
+<td>Network, IO, or scratch-dir failure. CLI agent-loop timeout maps here with the captured stderr appended.</td>
+</tr>
+<tr>
+<td><code>AiError::BudgetTracker</code></td>
+<td>The host tracker returned an error (database write failure, etc.).</td>
+</tr>
+<tr>
+<td><code>AiError::AdapterUnavailable</code></td>
+<td>Construction failed (e.g. <code>claude</code> not on <code>PATH</code>).</td>
+</tr>
+</tbody></table>
+<p><code>thiserror</code> variants live at <code>crates/nyx-agent-types/src/agent.rs:326</code>.</p>
+<h2 id="related-pages"><a class="docs-anchor" href="#related-pages" aria-label="Link to related-pages" data-pagefind-ignore>#</a>Related pages</h2>
+<ul>
+<li><a href="architecture.html">architecture.md</a> for where the AI runtime sits
+in the crate map.</li>
+<li><a href="events.html">events.md</a> for the <code>AiEvent</code> stream and the
+WebSocket filter contract.</li>
+<li><a href="config.html">config.md</a> for the rest of <code>nyx-agent.toml</code>.</li>
+<li><a href="api.html">api.md</a> for the <code>/api/v1/budgets</code> route and the
+<code>/api/v1/traces</code> endpoints that read the per-call trace store.</li>
+</ul>
+
+          </div>
+          <nav class="docs-prevnext" aria-label="Page navigation"><a class="docs-prevnext__link docs-prevnext__link--prev" href="events.html">
+        <span class="docs-prevnext__label">Previous</span>
+        <span class="docs-prevnext__title">Events</span>
+      </a><a class="docs-prevnext__link docs-prevnext__link--next" href="api.html">
+        <span class="docs-prevnext__label">Next</span>
+        <span class="docs-prevnext__title">API</span>
+      </a></nav>
+        </article>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <p class="site-footer__copy">© 2026 Eli Peter · Nyx Agent is licensed under AGPL-3.0-or-later.</p>
+        <nav class="site-footer__nav" aria-label="Footer">
+          <a href="../../">Home</a>
+          <a href="../../scanner.html">Scanner</a>
+          <a href="../../agent.html">Agent</a>
+          <a href="../../news/">News</a>
+          <a href="../../docs/">Docs</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

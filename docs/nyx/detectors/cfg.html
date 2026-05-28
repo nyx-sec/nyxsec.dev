@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CFG structural analysis | Nyx docs</title>
+    <meta name="description" content="Nyx builds an intra-procedural control-flow graph per function and checks structural properties: whether sinks are guarded by sanitizers or validators, whether web handlers check authentication..." />
+    <meta name="keywords" content="Nyx, Nyx scanner, SAST, static analysis, Rust security scanner, local-first SAST, Under the hood, CFG structural analysis, CFG, cfg, Rust, Go" />
+    <meta name="author" content="Eli Peter" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <link rel="canonical" href="https://nyxscan.dev/docs/nyx/detectors/cfg.html" />
+    <link rel="sitemap" type="application/xml" href="https://nyxscan.dev/sitemap.xml" />
+    <link rel="alternate" hreflang="en" href="https://nyxscan.dev/docs/nyx/detectors/cfg.html" />
+    <link rel="alternate" hreflang="x-default" href="https://nyxscan.dev/docs/nyx/detectors/cfg.html" />
+    <link rel="prev" href="../detectors/patterns.html" />
+    <link rel="next" href="../detectors/state.html" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="64x64" href="../../../favicon-64.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../favicon-180.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="alternate" type="application/rss+xml" title="Nyx | News &amp; release notes" href="/news/feed.xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../styles.css" />
+    <script defer src="../../../docs/search.js"></script>
+
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Nyx" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="CFG structural analysis" />
+    <meta property="og:description" content="Nyx builds an intra-procedural control-flow graph per function and checks structural properties: whether sinks are guarded by sanitizers or validators, whether web handlers check authentication..." />
+    <meta property="og:url" content="https://nyxscan.dev/docs/nyx/detectors/cfg.html" />
+    <meta property="og:image" content="https://nyxscan.dev/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Nyx Scanner local-first security documentation" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="CFG structural analysis" />
+    <meta name="twitter:description" content="Nyx builds an intra-procedural control-flow graph per function and checks structural properties: whether sinks are guarded by sanitizers or validators, whether web handlers check authentication..." />
+    <meta name="twitter:image" content="https://nyxscan.dev/og-image.png" />
+    <meta name="twitter:image:alt" content="Nyx Scanner local-first security documentation" />
+    <meta name="theme-color" content="#F9F8F4" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://nyxscan.dev/#person",
+      "name": "Eli Peter",
+      "url": "https://github.com/elicpeter",
+      "sameAs": [
+        "https://github.com/elicpeter",
+        "https://github.com/sponsors/elicpeter"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://nyxscan.dev/#website",
+      "url": "https://nyxscan.dev/",
+      "name": "Nyx",
+      "description": "Local security tooling for deterministic scanning and live testing.",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://nyxscan.dev/#person"
+      }
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://nyxscan.dev/docs/nyx/detectors/cfg.html#article",
+      "headline": "CFG structural analysis",
+      "name": "CFG structural analysis",
+      "url": "https://nyxscan.dev/docs/nyx/detectors/cfg.html",
+      "description": "Nyx builds an intra-procedural control-flow graph per function and checks structural properties: whether sinks are guarded by sanitizers or validators, whether web handlers check authentication...",
+      "inLanguage": "en",
+      "articleSection": "Under the hood",
+      "isPartOf": {
+        "@id": "https://nyxscan.dev/#website"
+      },
+      "publisher": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "author": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "image": "https://nyxscan.dev/og-image.png",
+      "mainEntityOfPage": "https://nyxscan.dev/docs/nyx/detectors/cfg.html"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://nyxscan.dev/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Docs",
+          "item": "https://nyxscan.dev/docs/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Nyx Scanner docs",
+          "item": "https://nyxscan.dev/docs/nyx/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Detectors",
+          "item": "https://nyxscan.dev/docs/nyx/detectors.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "name": "CFG structural analysis",
+          "item": "https://nyxscan.dev/docs/nyx/detectors/cfg.html"
+        }
+      ],
+      "@id": "https://nyxscan.dev/docs/nyx/detectors/cfg.html#breadcrumbs"
+    }
+  ]
+}
+    </script>
+  </head>
+  <body class="docs-body">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" aria-label="Primary navigation">
+      <div class="container site-header__inner">
+        <a class="brand" href="../../../" aria-label="Nyx home">
+          <img src="../../../assets/logo.png" alt="Nyx" class="brand-logo" />
+        </a>
+        <span class="header-wordmark">NYX</span>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="../../../scanner.html">Scanner</a>
+          <a href="../../../agent.html">Agent</a>
+          <a href="../../../news/">News</a>
+          <a href="../../../docs/" aria-current="page">Docs</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="docs-page">
+      <div class="docs-shell">
+        <nav class="docs-sidebar" aria-label="Documentation"><a class="docs-sidebar__brand" href="../">Nyx docs</a><a class="docs-sidebar__home" href="../../">All docs</a><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Getting started</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="../quickstart.html">Quickstart</a></li><li><a class="docs-sidebar__link" href="../installation.html">Installation</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Using nyx</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="../cli.html">CLI reference</a></li><li><a class="docs-sidebar__link" href="../serve.html">Browser UI</a></li><li><a class="docs-sidebar__link" href="../dynamic.html">Dynamic verification</a></li><li><a class="docs-sidebar__link" href="../configuration.html">Configuration</a></li><li><a class="docs-sidebar__link" href="../output.html">Output formats</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Coverage</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="../language-maturity.html">Language maturity</a></li><li><a class="docs-sidebar__link" href="../rules.html">Rules</a></li><li><a class="docs-sidebar__link" href="../auth.html">Auth analysis</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Under the hood</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="../how-it-works.html">How it works</a></li><li><a class="docs-sidebar__link" href="../advanced-analysis.html">Advanced analysis</a></li><li><a class="docs-sidebar__link" href="../detectors.html">Detectors</a><ul class="docs-sidebar__sublist"><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="../detectors/patterns.html">Patterns</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="../detectors/cfg.html" aria-current="page">CFG</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="../detectors/state.html">State</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="../detectors/taint.html">Taint</a></li></ul></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Project</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="../roadmap.html">Roadmap</a></li><li><a class="docs-sidebar__link" href="../changelog.html">Changelog</a></li></ul></div></nav>
+        <article class="docs-content">
+          <div class="docs-search docs-search--content" data-docs-search>
+    <label class="visually-hidden" for="docs-search-input">Search docs</label>
+    <div class="docs-search__control">
+      <span class="docs-search__icon" aria-hidden="true"></span>
+      <input id="docs-search-input" data-docs-search-input type="search" placeholder="Search docs" autocomplete="off" autocapitalize="none" spellcheck="false" role="combobox" aria-autocomplete="list" aria-controls="docs-search-results" aria-expanded="false" />
+      <kbd class="docs-search__key" aria-hidden="true">⌘K</kbd>
+    </div>
+    <div class="docs-search__panel" data-docs-search-panel hidden>
+      <div class="docs-search__status" data-docs-search-status></div>
+      <div class="docs-search__results" id="docs-search-results" data-docs-search-results role="listbox" aria-label="Search results"></div>
+    </div>
+  </div>
+          <div class="docs-prose" data-pagefind-body>
+<h1 id="cfg-structural-analysis"><a class="docs-anchor" href="#cfg-structural-analysis" aria-label="Link to cfg-structural-analysis" data-pagefind-ignore>#</a>CFG structural analysis</h1>
+<p>Nyx builds an intra-procedural control-flow graph per function and checks structural properties: whether sinks are guarded by sanitizers or validators, whether web handlers check authentication, whether resources are released on all exit paths, and whether error paths terminate before reaching dangerous code.</p>
+<p>These detectors use dominator analysis. A guard dominates a sink when the guard must execute before the sink on every path from entry.</p>
+<h2 id="rule-ids"><a class="docs-anchor" href="#rule-ids" aria-label="Link to rule-ids" data-pagefind-ignore>#</a>Rule IDs</h2>
+<table>
+<thead>
+<tr>
+<th>Rule ID</th>
+<th>Severity</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>cfg-unguarded-sink</code></td>
+<td>High/Medium</td>
+</tr>
+<tr>
+<td><code>cfg-auth-gap</code></td>
+<td>High</td>
+</tr>
+<tr>
+<td><code>cfg-unreachable-sink</code></td>
+<td>Medium</td>
+</tr>
+<tr>
+<td><code>cfg-unreachable-sanitizer</code></td>
+<td>Low</td>
+</tr>
+<tr>
+<td><code>cfg-unreachable-source</code></td>
+<td>Low</td>
+</tr>
+<tr>
+<td><code>cfg-error-fallthrough</code></td>
+<td>High/Medium</td>
+</tr>
+<tr>
+<td><code>cfg-resource-leak</code></td>
+<td>Medium</td>
+</tr>
+<tr>
+<td><code>cfg-lock-not-released</code></td>
+<td>Medium</td>
+</tr>
+</tbody></table>
+<h2 id="what-it-detects"><a class="docs-anchor" href="#what-it-detects" aria-label="Link to what-it-detects" data-pagefind-ignore>#</a>What it detects</h2>
+<p><strong><code>cfg-unguarded-sink</code></strong>: A sink call (<code>system</code>, <code>eval</code>, <code>Command::new</code>, <code>db.execute</code>, etc.) is reachable from function entry without passing through any guard or sanitizer that matches the sink&#39;s capability.</p>
+<p><strong><code>cfg-auth-gap</code></strong>: A function identified as a web handler (by parameter naming conventions like <code>req</code>, <code>res</code>, <code>ctx</code>, <code>request</code>, language-dependent) reaches a privileged sink (shell execution, file I/O) without a preceding authentication call.</p>
+<p><strong><code>cfg-unreachable-*</code></strong>: Sinks, sanitizers, or sources in dead code. Usually signals a refactoring error that silently disabled security-relevant logic.</p>
+<p><strong><code>cfg-error-fallthrough</code></strong>: An error-handling branch (null check, error-return check) does not terminate. Execution falls through to a dangerous operation on the error path.</p>
+<p><strong><code>cfg-resource-leak</code>, <code>cfg-lock-not-released</code></strong>: A resource acquisition (<code>File::open</code>, <code>fopen</code>, <code>socket</code>, <code>Lock</code>) is not matched by a release on every exit path from the function.</p>
+<h2 id="what-it-cant-detect"><a class="docs-anchor" href="#what-it-cant-detect" aria-label="Link to what-it-cant-detect" data-pagefind-ignore>#</a>What it can&#39;t detect</h2>
+<ul>
+<li><strong>Inter-procedural guards.</strong> Middleware-level auth, helper functions that internally call auth, and cleanup performed in a caller are invisible.</li>
+<li><strong>Dynamic dispatch.</strong> Virtual calls, function pointers, closures resolve to no specific callee.</li>
+<li><strong>Correctness of guards.</strong> The detector checks <em>a</em> guard dominates the sink. It cannot check the guard is correct. A no-op <code>if true {}</code> would suppress the finding.</li>
+<li><strong>Custom validation logic.</strong> Only recognised guard names are checked. <code>if password == expected</code> is not a recognised guard.</li>
+<li><strong>Cross-function resource flows.</strong> If a file handle opens in one function and closes in another, the opener gets flagged as a leak. This is the largest source of FPs on factory-pattern code.</li>
+</ul>
+<h2 id="common-false-positives"><a class="docs-anchor" href="#common-false-positives" aria-label="Link to common-false-positives" data-pagefind-ignore>#</a>Common false positives</h2>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Why</th>
+<th>Mitigation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Framework middleware auth</td>
+<td>Handler doesn&#39;t call auth directly</td>
+<td>Expected; suppress with severity filter or exclude handlers</td>
+</tr>
+<tr>
+<td>RAII / defer cleanup</td>
+<td>Implicit release not visible to CFG (partially handled for Rust Drop and Go defer)</td>
+<td>Known limitation</td>
+</tr>
+<tr>
+<td>Custom guard name</td>
+<td>Function not in the recognised guard list</td>
+<td>Add it as a sanitizer rule in config</td>
+</tr>
+<tr>
+<td>Test handlers</td>
+<td>Intentional lack of auth</td>
+<td>Default non-prod downgrade reduces severity; or exclude test dirs</td>
+</tr>
+</tbody></table>
+<h2 id="common-false-negatives"><a class="docs-anchor" href="#common-false-negatives" aria-label="Link to common-false-negatives" data-pagefind-ignore>#</a>Common false negatives</h2>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Auth in a called helper</td>
+<td>Cross-function guards not tracked</td>
+</tr>
+<tr>
+<td>Type-system guards</td>
+<td>Rust <code>AuthenticatedUser&lt;T&gt;</code> wrappers, typestate patterns not analysed</td>
+</tr>
+<tr>
+<td>Cleanup in <code>finally</code>/<code>ensure</code>/<code>defer</code> in callers</td>
+<td>Cross-function cleanup not tracked</td>
+</tr>
+</tbody></table>
+<h2 id="tuning"><a class="docs-anchor" href="#tuning" aria-label="Link to tuning" data-pagefind-ignore>#</a>Tuning</h2>
+<h3 id="recognised-guard-names"><a class="docs-anchor" href="#recognised-guard-names" aria-label="Link to recognised-guard-names" data-pagefind-ignore>#</a>Recognised guard names</h3>
+<p>Nyx accepts these patterns as dominating guards:</p>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Applies to</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>validate*</code>, <code>sanitize*</code></td>
+<td>All sinks</td>
+</tr>
+<tr>
+<td><code>check_*</code>, <code>verify_*</code>, <code>assert_*</code></td>
+<td>All sinks</td>
+</tr>
+<tr>
+<td><code>shell_escape</code></td>
+<td>Shell sinks</td>
+</tr>
+<tr>
+<td><code>html_escape</code></td>
+<td>HTML/XSS sinks</td>
+</tr>
+<tr>
+<td><code>url_encode</code></td>
+<td>URL sinks</td>
+</tr>
+<tr>
+<td><code>which</code></td>
+<td>Shell execution (binary lookup)</td>
+</tr>
+</tbody></table>
+<h3 id="recognised-auth-names"><a class="docs-anchor" href="#recognised-auth-names" aria-label="Link to recognised-auth-names" data-pagefind-ignore>#</a>Recognised auth names</h3>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Language</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>is_authenticated</code>, <code>require_auth</code>, <code>check_permission</code>, <code>authorize</code>, <code>authenticate</code>, <code>require_login</code>, <code>check_auth</code>, <code>verify_token</code>, <code>validate_token</code></td>
+<td>Cross-language</td>
+</tr>
+<tr>
+<td><code>middleware.auth</code>, <code>auth.required</code></td>
+<td>Go</td>
+</tr>
+<tr>
+<td><code>isAuthenticated</code>, <code>checkPermission</code>, <code>hasAuthority</code>, <code>hasRole</code></td>
+<td>Java</td>
+</tr>
+</tbody></table>
+<p>For Rust auth checks (<code>require_*</code>, ownership equality, row-level checks), see <a href="../auth.html">auth.md</a>.</p>
+<h3 id="custom-guards"><a class="docs-anchor" href="#custom-guards" aria-label="Link to custom-guards" data-pagefind-ignore>#</a>Custom guards</h3>
+<pre><code class="hljs language-toml"><span class="hljs-section">[[analysis.languages.python.rules]]</span>
+<span class="hljs-attr">matchers</span> = [<span class="hljs-string">&quot;validate_request&quot;</span>, <span class="hljs-string">&quot;check_csrf&quot;</span>]
+<span class="hljs-attr">kind</span> = <span class="hljs-string">&quot;sanitizer&quot;</span>
+<span class="hljs-attr">cap</span>  = <span class="hljs-string">&quot;all&quot;</span></code></pre>
+<h3 id="custom-auth-functions"><a class="docs-anchor" href="#custom-auth-functions" aria-label="Link to custom-auth-functions" data-pagefind-ignore>#</a>Custom auth functions</h3>
+<pre><code class="hljs language-toml"><span class="hljs-section">[[analysis.languages.javascript.rules]]</span>
+<span class="hljs-attr">matchers</span> = [<span class="hljs-string">&quot;ensureLoggedIn&quot;</span>, <span class="hljs-string">&quot;requirePermission&quot;</span>]
+<span class="hljs-attr">kind</span> = <span class="hljs-string">&quot;sanitizer&quot;</span>
+<span class="hljs-attr">cap</span>  = <span class="hljs-string">&quot;all&quot;</span></code></pre>
+<h2 id="examples"><a class="docs-anchor" href="#examples" aria-label="Link to examples" data-pagefind-ignore>#</a>Examples</h2>
+<p>Unguarded sink:</p>
+<pre><code class="hljs language-go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">handler</span><span class="hljs-params">(w http.ResponseWriter, r *http.Request)</span></span> {
+    cmd := r.URL.Query().Get(<span class="hljs-string">&quot;cmd&quot;</span>)
+    exec.Command(<span class="hljs-string">&quot;sh&quot;</span>, <span class="hljs-string">&quot;-c&quot;</span>, cmd).Run()  <span class="hljs-comment">// cfg-unguarded-sink</span>
+}</code></pre>
+<p>Auth gap:</p>
+<pre><code class="hljs language-javascript">app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/admin/delete&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+    <span class="hljs-comment">// No auth call</span>
+    db.<span class="hljs-title function_">execute</span>(<span class="hljs-string">&quot;DELETE FROM users WHERE id = &quot;</span> + req.<span class="hljs-property">params</span>.<span class="hljs-property">id</span>);  <span class="hljs-comment">// cfg-auth-gap</span>
+});</code></pre>
+<p>Resource leak:</p>
+<pre><code class="hljs language-c"><span class="hljs-type">void</span> <span class="hljs-title function_">process</span><span class="hljs-params">()</span> {
+    FILE *f = fopen(<span class="hljs-string">&quot;data.txt&quot;</span>, <span class="hljs-string">&quot;r&quot;</span>);
+    <span class="hljs-keyword">if</span> (error) {
+        <span class="hljs-keyword">return</span>;           <span class="hljs-comment">// cfg-resource-leak: f not closed on this path</span>
+    }
+    fclose(f);
+}</code></pre>
+
+          </div>
+          <nav class="docs-prevnext" aria-label="Page navigation"><a class="docs-prevnext__link docs-prevnext__link--prev" href="../detectors/patterns.html">
+        <span class="docs-prevnext__label">Previous</span>
+        <span class="docs-prevnext__title">Patterns</span>
+      </a><a class="docs-prevnext__link docs-prevnext__link--next" href="../detectors/state.html">
+        <span class="docs-prevnext__label">Next</span>
+        <span class="docs-prevnext__title">State</span>
+      </a></nav>
+        </article>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <p class="site-footer__copy">© 2026 Eli Peter · Nyx is licensed under GPL-3.0-or-later.</p>
+        <nav class="site-footer__nav" aria-label="Footer">
+          <a href="../../../">Home</a>
+          <a href="../../../scanner.html">Scanner</a>
+          <a href="../../../agent.html">Agent</a>
+          <a href="../../../news/">News</a>
+          <a href="../../../docs/">Docs</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

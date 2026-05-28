@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>How Nyx works | Nyx docs</title>
+    <meta name="description" content="If you're going to act on a finding, it helps to know how the scanner got there. This page is the short version. Source paths are linked where the answer to &quot;exactly what does it do&quot; lives in the..." />
+    <meta name="keywords" content="Nyx, Nyx scanner, SAST, static analysis, Rust security scanner, local-first SAST, Under the hood, How Nyx works, SSA, taint, Java, Rust" />
+    <meta name="author" content="Eli Peter" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <link rel="canonical" href="https://nyxscan.dev/docs/nyx/how-it-works.html" />
+    <link rel="sitemap" type="application/xml" href="https://nyxscan.dev/sitemap.xml" />
+    <link rel="alternate" hreflang="en" href="https://nyxscan.dev/docs/nyx/how-it-works.html" />
+    <link rel="alternate" hreflang="x-default" href="https://nyxscan.dev/docs/nyx/how-it-works.html" />
+    <link rel="prev" href="auth.html" />
+    <link rel="next" href="advanced-analysis.html" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="64x64" href="../../favicon-64.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../../favicon-180.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="alternate" type="application/rss+xml" title="Nyx | News &amp; release notes" href="/news/feed.xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../styles.css" />
+    <script defer src="../../docs/search.js"></script>
+
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Nyx" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="How Nyx works" />
+    <meta property="og:description" content="If you're going to act on a finding, it helps to know how the scanner got there. This page is the short version. Source paths are linked where the answer to &quot;exactly what does it do&quot; lives in the..." />
+    <meta property="og:url" content="https://nyxscan.dev/docs/nyx/how-it-works.html" />
+    <meta property="og:image" content="https://nyxscan.dev/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Nyx Scanner local-first security documentation" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="How Nyx works" />
+    <meta name="twitter:description" content="If you're going to act on a finding, it helps to know how the scanner got there. This page is the short version. Source paths are linked where the answer to &quot;exactly what does it do&quot; lives in the..." />
+    <meta name="twitter:image" content="https://nyxscan.dev/og-image.png" />
+    <meta name="twitter:image:alt" content="Nyx Scanner local-first security documentation" />
+    <meta name="theme-color" content="#F9F8F4" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://nyxscan.dev/#person",
+      "name": "Eli Peter",
+      "url": "https://github.com/elicpeter",
+      "sameAs": [
+        "https://github.com/elicpeter",
+        "https://github.com/sponsors/elicpeter"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://nyxscan.dev/#website",
+      "url": "https://nyxscan.dev/",
+      "name": "Nyx",
+      "description": "Local security tooling for deterministic scanning and live testing.",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://nyxscan.dev/#person"
+      }
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://nyxscan.dev/docs/nyx/how-it-works.html#article",
+      "headline": "How Nyx works",
+      "name": "How Nyx works",
+      "url": "https://nyxscan.dev/docs/nyx/how-it-works.html",
+      "description": "If you're going to act on a finding, it helps to know how the scanner got there. This page is the short version. Source paths are linked where the answer to \"exactly what does it do\" lives in the...",
+      "inLanguage": "en",
+      "articleSection": "Under the hood",
+      "isPartOf": {
+        "@id": "https://nyxscan.dev/#website"
+      },
+      "publisher": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "author": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "image": "https://nyxscan.dev/og-image.png",
+      "mainEntityOfPage": "https://nyxscan.dev/docs/nyx/how-it-works.html"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://nyxscan.dev/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Docs",
+          "item": "https://nyxscan.dev/docs/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Nyx Scanner docs",
+          "item": "https://nyxscan.dev/docs/nyx/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "How Nyx works",
+          "item": "https://nyxscan.dev/docs/nyx/how-it-works.html"
+        }
+      ],
+      "@id": "https://nyxscan.dev/docs/nyx/how-it-works.html#breadcrumbs"
+    }
+  ]
+}
+    </script>
+  </head>
+  <body class="docs-body">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" aria-label="Primary navigation">
+      <div class="container site-header__inner">
+        <a class="brand" href="../../" aria-label="Nyx home">
+          <img src="../../assets/logo.png" alt="Nyx" class="brand-logo" />
+        </a>
+        <span class="header-wordmark">NYX</span>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="../../scanner.html">Scanner</a>
+          <a href="../../agent.html">Agent</a>
+          <a href="../../news/">News</a>
+          <a href="../../docs/" aria-current="page">Docs</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="docs-page">
+      <div class="docs-shell">
+        <nav class="docs-sidebar" aria-label="Documentation"><a class="docs-sidebar__brand" href="./">Nyx docs</a><a class="docs-sidebar__home" href="../">All docs</a><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Getting started</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="quickstart.html">Quickstart</a></li><li><a class="docs-sidebar__link" href="installation.html">Installation</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Using nyx</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="cli.html">CLI reference</a></li><li><a class="docs-sidebar__link" href="serve.html">Browser UI</a></li><li><a class="docs-sidebar__link" href="dynamic.html">Dynamic verification</a></li><li><a class="docs-sidebar__link" href="configuration.html">Configuration</a></li><li><a class="docs-sidebar__link" href="output.html">Output formats</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Coverage</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="language-maturity.html">Language maturity</a></li><li><a class="docs-sidebar__link" href="rules.html">Rules</a></li><li><a class="docs-sidebar__link" href="auth.html">Auth analysis</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Under the hood</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="how-it-works.html" aria-current="page">How it works</a></li><li><a class="docs-sidebar__link" href="advanced-analysis.html">Advanced analysis</a></li><li><a class="docs-sidebar__link" href="detectors.html">Detectors</a><ul class="docs-sidebar__sublist"><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/patterns.html">Patterns</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/cfg.html">CFG</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/state.html">State</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/taint.html">Taint</a></li></ul></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Project</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="roadmap.html">Roadmap</a></li><li><a class="docs-sidebar__link" href="changelog.html">Changelog</a></li></ul></div></nav>
+        <article class="docs-content">
+          <div class="docs-search docs-search--content" data-docs-search>
+    <label class="visually-hidden" for="docs-search-input">Search docs</label>
+    <div class="docs-search__control">
+      <span class="docs-search__icon" aria-hidden="true"></span>
+      <input id="docs-search-input" data-docs-search-input type="search" placeholder="Search docs" autocomplete="off" autocapitalize="none" spellcheck="false" role="combobox" aria-autocomplete="list" aria-controls="docs-search-results" aria-expanded="false" />
+      <kbd class="docs-search__key" aria-hidden="true">⌘K</kbd>
+    </div>
+    <div class="docs-search__panel" data-docs-search-panel hidden>
+      <div class="docs-search__status" data-docs-search-status></div>
+      <div class="docs-search__results" id="docs-search-results" data-docs-search-results role="listbox" aria-label="Search results"></div>
+    </div>
+  </div>
+          <div class="docs-prose" data-pagefind-body>
+<h1 id="how-nyx-works"><a class="docs-anchor" href="#how-nyx-works" aria-label="Link to how-nyx-works" data-pagefind-ignore>#</a>How Nyx works</h1>
+<p>If you&#39;re going to act on a finding, it helps to know how the scanner got there. This page is the short version. Source paths are linked where the answer to &quot;exactly what does it do&quot; lives in the code.</p>
+<h2 id="the-pipeline"><a class="docs-anchor" href="#the-pipeline" aria-label="Link to the-pipeline" data-pagefind-ignore>#</a>The pipeline</h2>
+<p>A scan runs in two passes over the file tree, with an optional SQLite index that lets the second scan skip files whose content hash hasn&#39;t changed.</p>
+<p><strong>Pass 1, per file.</strong> Tree-sitter parses the file. Nyx builds an intra-procedural control-flow graph, lowers it to SSA, and extracts a summary per function describing what that function does at the boundary: which arguments flow to sinks, which sources it reads from, which sinks it calls, what taint it strips, what it returns. Summaries are persisted to SQLite (<a href="https://github.com/elicpeter/nyx/tree/master/src/summary/"><code>src/summary/</code></a>, <a href="https://github.com/elicpeter/nyx/blob/master/src/database.rs"><code>src/database.rs</code></a>).</p>
+<p><strong>Summary merge.</strong> All per-file summaries get unioned into a global map keyed by qualified function name.</p>
+<p><strong>Pass 2, per file.</strong> Each file is reanalysed with the global summaries available. The taint engine runs a forward dataflow worklist over the SSA representation. When it hits a call, it consults summaries to decide whether the call propagates taint, sanitizes it, or terminates the flow. Findings are produced when tainted data reaches a sink whose required capability is still set on the value.</p>
+<p>Two extra layers tune precision around calls. <strong>Context-sensitive inlining</strong> (k=1) re-runs intra-file callees with the actual argument taint at the call site, so a helper called once with tainted input and once with sanitized input produces the right result for each call. <strong>SCC fixed-point</strong>: when a group of mutually-recursive functions forms a strongly-connected component in the call graph, the engine iterates summaries to a joint fixed-point (capped at 64 iterations). SCCs that span files are also handled.</p>
+<p>When a method call has a receiver typed as a super-class, trait, or interface, <strong>hierarchy fan-out</strong> widens the resolved callee set to every concrete implementer the engine has seen. A class diagram extracted in pass 1 (Java extends/implements, Rust impl-for, TS/JS extends, Python bases, Ruby includes, PHP extends/implements, C++ inheritance) feeds an index that the call resolver consults during pass 2. The fan-out is capped at 8 implementers per call site; over-fanning is a precision tax, not a soundness issue.</p>
+<p>A separate <strong>field-sensitive points-to</strong> pass tracks abstract locations down to the field level, so <code>c.mu.Lock()</code> is a lock on <code>Field(c, mu)</code> rather than on <code>c</code> as a whole. That distinction is what lets the resource-lifecycle and taint passes tell <code>obj.field = tainted; sink(obj.other_field)</code> apart from the conservative whole-variable approximation. Subscript reads and writes (<code>arr[i]</code>, <code>map[k] = v</code>) lower to synthetic <code>__index_get__</code> / <code>__index_set__</code> calls so the same container model handles them. Set <code>NYX_POINTER_ANALYSIS=0</code> to fall back to the pre-pointer-pass behaviour for baseline comparison.</p>
+<h2 id="optional-analyses-on-top"><a class="docs-anchor" href="#optional-analyses-on-top" aria-label="Link to optional-analyses-on-top" data-pagefind-ignore>#</a>Optional analyses on top</h2>
+<p>These run on top of the forward taint pass. They&#39;re independently switchable via <code>[analysis.engine]</code> config or matching CLI flags. See <a href="advanced-analysis.html">advanced-analysis.md</a> for the full description and tradeoffs.</p>
+<table>
+<thead>
+<tr>
+<th>Pass</th>
+<th>Purpose</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Abstract interpretation</td>
+<td>Carries interval and string prefix/suffix bounds alongside taint. Suppresses findings on proven-bounded integers and locked-prefix URLs</td>
+<td>on</td>
+</tr>
+<tr>
+<td>Context sensitivity</td>
+<td>k=1 inlining for intra-file callees</td>
+<td>on</td>
+</tr>
+<tr>
+<td>Field-sensitive points-to</td>
+<td>Distinguishes <code>obj.field</code> from <code>obj</code> itself, so a tainted write to one field does not poison reads from another. Also gives the resource-lifecycle pass per-field locks</td>
+<td>on</td>
+</tr>
+<tr>
+<td>Hierarchy fan-out</td>
+<td>When a method call&#39;s receiver is typed as a super-class, trait, or interface, widens callee resolution to every concrete implementer the engine has seen</td>
+<td>on</td>
+</tr>
+<tr>
+<td>Constraint solving</td>
+<td>Drops paths whose accumulated branch predicates are unsatisfiable. Optional Z3 backend with <code>--features smt</code></td>
+<td>on</td>
+</tr>
+<tr>
+<td>Symbolic execution</td>
+<td>Builds an expression tree per tainted value. Produces a witness string at the sink. Detects sanitization patterns the taint engine alone would miss</td>
+<td>on</td>
+</tr>
+<tr>
+<td>Backwards analysis</td>
+<td>After the forward pass, walks backwards from each sink to confirm or invalidate the flow. Annotates findings as <code>backwards-confirmed</code>, <code>backwards-infeasible</code>, or <code>backwards-budget-exhausted</code></td>
+<td>off</td>
+</tr>
+</tbody></table>
+<p><code>--engine-profile fast | balanced | deep</code> flips groups of these at once. <code>balanced</code> is the default and the configuration the benchmark numbers in <a href="language-maturity.html">language-maturity.md</a> are measured against.</p>
+<h2 id="where-bounds-live"><a class="docs-anchor" href="#where-bounds-live" aria-label="Link to where-bounds-live" data-pagefind-ignore>#</a>Where bounds live</h2>
+<p>Static analysis at scale means choosing where to stop. Nyx exposes its bounds rather than hiding them:</p>
+<ul>
+<li><strong>Inline depth</strong> is k=1. Callees larger than the inline body-size cap fall back to summary-based resolution.</li>
+<li><strong>SCC fixed-point</strong> is capped at 64 iterations. If a recursive cluster doesn&#39;t converge, the engine emits the best summary it has and records an <code>engine_note</code> on affected findings.</li>
+<li><strong>Lattice width</strong> is bounded. Taint origin sets cap at 32 entries per SSA value (<code>--max-origins</code>); points-to sets cap at 32 heap objects (<code>--max-pointsto</code>). Truncation is recorded as <code>OriginsTruncated</code> / <code>PointsToTruncated</code> so you can see when precision was lost.</li>
+<li><strong>Symbolic expressions</strong> cap at depth 32. Deeper expressions degrade to <code>Unknown</code> rather than growing without bound.</li>
+</ul>
+<p>Findings whose engine notes indicate a bound was hit can be filtered with <code>--require-converged</code> for strict CI gates. The flag drops over-reports and bails; under-reports (where the emitted finding is still real but the result set is a lower bound) are kept.</p>
+<h2 id="what-you-get-out"><a class="docs-anchor" href="#what-you-get-out" aria-label="Link to what-you-get-out" data-pagefind-ignore>#</a>What you get out</h2>
+<p>Each finding carries the source location, the sink location, the path in between (when symex produced one), the rule ID, severity, attack-surface score, confidence level, and a list of engine notes describing any precision loss along the way. Console output is human-readable; JSON and SARIF carry the full evidence object for tooling.</p>
+<p>For the JSON shape and SARIF mapping, see <a href="output.html">output.md</a>.</p>
+
+          </div>
+          <nav class="docs-prevnext" aria-label="Page navigation"><a class="docs-prevnext__link docs-prevnext__link--prev" href="auth.html">
+        <span class="docs-prevnext__label">Previous</span>
+        <span class="docs-prevnext__title">Auth analysis</span>
+      </a><a class="docs-prevnext__link docs-prevnext__link--next" href="advanced-analysis.html">
+        <span class="docs-prevnext__label">Next</span>
+        <span class="docs-prevnext__title">Advanced analysis</span>
+      </a></nav>
+        </article>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <p class="site-footer__copy">© 2026 Eli Peter · Nyx is licensed under GPL-3.0-or-later.</p>
+        <nav class="site-footer__nav" aria-label="Footer">
+          <a href="../../">Home</a>
+          <a href="../../scanner.html">Scanner</a>
+          <a href="../../agent.html">Agent</a>
+          <a href="../../news/">News</a>
+          <a href="../../docs/">Docs</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

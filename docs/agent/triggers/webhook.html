@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Git webhook trigger | Nyx Agent docs</title>
+    <meta name="description" content="POST /webhook/git accepts a push payload from any self-hosted git server, verifies an HMAC-SHA256 signature against a configured shared secret, optionally filters by branch, and triggers a scan. The..." />
+    <meta name="keywords" content="Nyx Agent, nyx-agent, local pentesting, live appsec testing, verified vulnerabilities, stored evidence, Triggers, Git webhook trigger, HMAC, toml, JSON, hmac" />
+    <meta name="author" content="Eli Peter" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <link rel="canonical" href="https://nyxscan.dev/docs/agent/triggers/webhook.html" />
+    <link rel="sitemap" type="application/xml" href="https://nyxscan.dev/sitemap.xml" />
+    <link rel="alternate" hreflang="en" href="https://nyxscan.dev/docs/agent/triggers/webhook.html" />
+    <link rel="alternate" hreflang="x-default" href="https://nyxscan.dev/docs/agent/triggers/webhook.html" />
+    <link rel="prev" href="../triggers/cron.html" />
+    <link rel="next" href="../ci/github-actions.html" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="64x64" href="../../../favicon-64.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../favicon-180.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="alternate" type="application/rss+xml" title="Nyx | News &amp; release notes" href="/news/feed.xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../styles.css" />
+    <script defer src="../../../docs/search.js"></script>
+
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Nyx" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="Git webhook trigger" />
+    <meta property="og:description" content="POST /webhook/git accepts a push payload from any self-hosted git server, verifies an HMAC-SHA256 signature against a configured shared secret, optionally filters by branch, and triggers a scan. The..." />
+    <meta property="og:url" content="https://nyxscan.dev/docs/agent/triggers/webhook.html" />
+    <meta property="og:image" content="https://nyxscan.dev/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Nyx Agent local pentesting documentation" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Git webhook trigger" />
+    <meta name="twitter:description" content="POST /webhook/git accepts a push payload from any self-hosted git server, verifies an HMAC-SHA256 signature against a configured shared secret, optionally filters by branch, and triggers a scan. The..." />
+    <meta name="twitter:image" content="https://nyxscan.dev/og-image.png" />
+    <meta name="twitter:image:alt" content="Nyx Agent local pentesting documentation" />
+    <meta name="theme-color" content="#F9F8F4" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://nyxscan.dev/#person",
+      "name": "Eli Peter",
+      "url": "https://github.com/elicpeter",
+      "sameAs": [
+        "https://github.com/elicpeter",
+        "https://github.com/sponsors/elicpeter"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://nyxscan.dev/#website",
+      "url": "https://nyxscan.dev/",
+      "name": "Nyx",
+      "description": "Local security tooling for deterministic scanning and live testing.",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://nyxscan.dev/#person"
+      }
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://nyxscan.dev/docs/agent/triggers/webhook.html#article",
+      "headline": "Git webhook trigger",
+      "name": "Git webhook trigger",
+      "url": "https://nyxscan.dev/docs/agent/triggers/webhook.html",
+      "description": "POST /webhook/git accepts a push payload from any self-hosted git server, verifies an HMAC-SHA256 signature against a configured shared secret, optionally filters by branch, and triggers a scan. The...",
+      "inLanguage": "en",
+      "articleSection": "Triggers",
+      "isPartOf": {
+        "@id": "https://nyxscan.dev/#website"
+      },
+      "publisher": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "author": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "image": "https://nyxscan.dev/og-image.png",
+      "mainEntityOfPage": "https://nyxscan.dev/docs/agent/triggers/webhook.html"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://nyxscan.dev/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Docs",
+          "item": "https://nyxscan.dev/docs/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Nyx Agent docs",
+          "item": "https://nyxscan.dev/docs/agent/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Git webhook trigger",
+          "item": "https://nyxscan.dev/docs/agent/triggers/webhook.html"
+        }
+      ],
+      "@id": "https://nyxscan.dev/docs/agent/triggers/webhook.html#breadcrumbs"
+    }
+  ]
+}
+    </script>
+  </head>
+  <body class="docs-body">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" aria-label="Primary navigation">
+      <div class="container site-header__inner">
+        <a class="brand" href="../../../" aria-label="Nyx home">
+          <img src="../../../assets/logo.png" alt="Nyx" class="brand-logo" />
+        </a>
+        <span class="header-wordmark">NYX</span>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="../../../scanner.html">Scanner</a>
+          <a href="../../../agent.html">Agent</a>
+          <a href="../../../news/">News</a>
+          <a href="../../../docs/" aria-current="page">Docs</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="docs-page">
+      <div class="docs-shell">
+        <nav class="docs-sidebar" aria-label="Documentation"><a class="docs-sidebar__brand" href="../">Agent docs</a><a class="docs-sidebar__home" href="../../">All docs</a><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Get started</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="../install.html">Install</a></li><li><a class="docs-sidebar__link" href="../quickstart.html">Quickstart</a></li><li><a class="docs-sidebar__link" href="../cli.html">CLI</a></li><li><a class="docs-sidebar__link" href="../config.html">Config</a></li><li><a class="docs-sidebar__link" href="../state-dir.html">State Directory</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Architecture</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="../architecture.html">Architecture</a></li><li><a class="docs-sidebar__link" href="../runs.html">Runs</a></li><li><a class="docs-sidebar__link" href="../attack-graph.html">Attack Graph</a></li><li><a class="docs-sidebar__link" href="../business-logic-templates.html">Business Logic Templates</a></li><li><a class="docs-sidebar__link" href="../events.html">Events</a></li><li><a class="docs-sidebar__link" href="../ai-runtime.html">AI Runtime</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Projects</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="../cli.html#project">CLI: Project</a></li><li><a class="docs-sidebar__link" href="../quickstart.html#create-a-project">Quickstart: Create a Project</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">HTTP API</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="../api.html">API</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Triggers</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="../triggers/index.html">Overview</a></li><li><a class="docs-sidebar__link" href="../triggers/cron.html">Cron</a></li><li><a class="docs-sidebar__link" href="../triggers/webhook.html" aria-current="page">Webhook</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">CI integration</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="../ci/github-actions.html">GitHub Actions</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Contributor docs</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="../dev/sqlx.html">SQLx</a></li><li><a class="docs-sidebar__link" href="../dev/frontend.html">Frontend</a></li></ul></div></nav>
+        <article class="docs-content">
+          <div class="docs-search docs-search--content" data-docs-search>
+    <label class="visually-hidden" for="docs-search-input">Search docs</label>
+    <div class="docs-search__control">
+      <span class="docs-search__icon" aria-hidden="true"></span>
+      <input id="docs-search-input" data-docs-search-input type="search" placeholder="Search docs" autocomplete="off" autocapitalize="none" spellcheck="false" role="combobox" aria-autocomplete="list" aria-controls="docs-search-results" aria-expanded="false" />
+      <kbd class="docs-search__key" aria-hidden="true">⌘K</kbd>
+    </div>
+    <div class="docs-search__panel" data-docs-search-panel hidden>
+      <div class="docs-search__status" data-docs-search-status></div>
+      <div class="docs-search__results" id="docs-search-results" data-docs-search-results role="listbox" aria-label="Search results"></div>
+    </div>
+  </div>
+          <div class="docs-prose" data-pagefind-body>
+<h1 id="git-webhook-trigger"><a class="docs-anchor" href="#git-webhook-trigger" aria-label="Link to git-webhook-trigger" data-pagefind-ignore>#</a>Git webhook trigger</h1>
+<p><code>POST /webhook/git</code> accepts a push payload from any self-hosted git
+server, verifies an HMAC-SHA256 signature against a configured shared
+secret, optionally filters by branch, and triggers a scan. The
+endpoint bypasses bearer-token auth because the HMAC IS the auth.</p>
+<h2 id="config"><a class="docs-anchor" href="#config" aria-label="Link to config" data-pagefind-ignore>#</a>Config</h2>
+<pre><code class="hljs language-toml"><span class="hljs-section">[triggers]</span>
+<span class="hljs-comment"># Shared secret resolution:</span>
+<span class="hljs-comment">#   - `env:NAME`  → reads the named environment variable (recommended)</span>
+<span class="hljs-comment">#   - any other value → treated as the literal secret (testing only)</span>
+<span class="hljs-attr">webhook_secret_ref</span> = <span class="hljs-string">&quot;env:NYX_WEBHOOK_SECRET&quot;</span>
+<span class="hljs-comment"># Optional branch filter; `None` accepts any branch.</span>
+<span class="hljs-attr">webhook_branch</span> = <span class="hljs-string">&quot;main&quot;</span></code></pre>
+<p>Set <code>NYX_WEBHOOK_SECRET</code> in the daemon&#39;s environment via a
+systemd <code>EnvironmentFile=</code> drop-in installed under <code>/etc/nyx/secret</code>
+with mode 0600 so only the daemon user can read it.</p>
+<p>On macOS, source the secret from a 0600 sidecar file in the
+LaunchAgent wrapper rather than pasting the value into the plist&#39;s
+<code>EnvironmentVariables</code> dict. <code>install -m 0644</code> on a plist makes it
+world-readable, so any local user could <code>plutil -extract EnvironmentVariables.NYX_WEBHOOK_SECRET raw -</code> the file and forge
+HMAC-valid <code>/webhook/git</code> deliveries (HMAC is the only auth on this
+endpoint). The recommended shape is a launchd wrapper:</p>
+<pre><code class="hljs language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-built_in">set</span> -euo pipefail
+NYX_WEBHOOK_SECRET=<span class="hljs-string">&quot;<span class="hljs-subst">$(cat <span class="hljs-string">&quot;<span class="hljs-variable">$HOME</span>/.config/nyx-agent/webhook.secret&quot;</span>)</span>&quot;</span>
+<span class="hljs-built_in">export</span> NYX_WEBHOOK_SECRET
+<span class="hljs-built_in">exec</span> /usr/local/bin/nyx-agent serve --headless</code></pre>
+<p>Save with mode 0700 and point the LaunchAgent&#39;s <code>ProgramArguments</code>
+at it. The sidecar file itself should be created with <code>install -m 0600</code>.</p>
+<p>The handler returns HTTP 503 when the ref is configured but the
+env var is unset, so a misconfigured host cannot accept
+unauthenticated triggers.</p>
+<h2 id="wire-format"><a class="docs-anchor" href="#wire-format" aria-label="Link to wire-format" data-pagefind-ignore>#</a>Wire format</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Method</td>
+<td><code>POST</code></td>
+</tr>
+<tr>
+<td>Path</td>
+<td><code>/webhook/git</code></td>
+</tr>
+<tr>
+<td>Header</td>
+<td><code>X-Hub-Signature-256: sha256=&lt;hex&gt;</code></td>
+</tr>
+<tr>
+<td>Body</td>
+<td>JSON with at least <code>&quot;ref&quot;: &quot;refs/heads/&lt;branch&gt;&quot;</code></td>
+</tr>
+</tbody></table>
+<p><code>X-Hub-Signature-256</code> is the GitHub / Gitea / Forgejo / Sourcehut
+convention; the value is <code>sha256=</code> followed by the lowercase hex
+encoding of <code>HMAC-SHA256(secret, body_bytes)</code>.</p>
+<p>Other fields in the payload are ignored, so a thin Gitea or Bitbucket
+push shape is accepted as-is.</p>
+<h2 id="response"><a class="docs-anchor" href="#response" aria-label="Link to response" data-pagefind-ignore>#</a>Response</h2>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>202 Accepted</code></td>
+<td>HMAC valid, branch matched (or filter unset), scan triggered. Body: <code>{ &quot;triggered&quot;: true, &quot;run_id&quot;: &quot;...&quot;, &quot;message&quot;: &quot;&quot; }</code>.</td>
+</tr>
+<tr>
+<td><code>200 OK</code></td>
+<td>HMAC valid but branch filter rejected the delivery. Body: <code>{ &quot;triggered&quot;: false, &quot;run_id&quot;: null, &quot;message&quot;: &quot;branch filter rejected...&quot; }</code>.</td>
+</tr>
+<tr>
+<td><code>401 Unauthorized</code></td>
+<td>Missing header, malformed signature, or HMAC mismatch.</td>
+</tr>
+<tr>
+<td><code>429 Too Many Requests</code></td>
+<td>Daemon dispatcher is saturated; the upstream git server should back off and retry.</td>
+</tr>
+<tr>
+<td><code>503 Service Unavailable</code></td>
+<td><code>webhook_secret_ref</code> configured but the secret cannot be resolved (unset env var).</td>
+</tr>
+</tbody></table>
+<p>The <code>200</code>-on-branch-skip shape is deliberate: upstream git servers
+mark the delivery as successful and stop retrying, while the operator
+can still tell from the JSON whether a scan fired.</p>
+<h2 id="worked-example"><a class="docs-anchor" href="#worked-example" aria-label="Link to worked-example" data-pagefind-ignore>#</a>Worked example</h2>
+<p>Operator config:</p>
+<pre><code class="hljs language-toml"><span class="hljs-section">[triggers]</span>
+<span class="hljs-attr">webhook_secret_ref</span> = <span class="hljs-string">&quot;env:NYX_WEBHOOK_SECRET&quot;</span>
+<span class="hljs-attr">webhook_branch</span> = <span class="hljs-string">&quot;main&quot;</span></code></pre>
+<p>Daemon env: <code>NYX_WEBHOOK_SECRET=hunter2</code>.</p>
+<p>Sign + send:</p>
+<pre><code class="hljs language-bash">BODY=<span class="hljs-string">&#x27;{&quot;ref&quot;:&quot;refs/heads/main&quot;,&quot;after&quot;:&quot;deadbeef&quot;}&#x27;</span>
+SIG=<span class="hljs-string">&quot;sha256=<span class="hljs-subst">$(printf &#x27;%s&#x27; <span class="hljs-string">&quot;<span class="hljs-variable">$BODY</span>&quot;</span> | openssl dgst -sha256 -hmac <span class="hljs-string">&quot;<span class="hljs-variable">$NYX_WEBHOOK_SECRET</span>&quot;</span> -hex | awk &#x27;{print $2}&#x27;)</span>&quot;</span>
+curl -X POST http://127.0.0.1:4747/webhook/git \
+  -H <span class="hljs-string">&quot;X-Hub-Signature-256: <span class="hljs-variable">$SIG</span>&quot;</span> \
+  -H <span class="hljs-string">&#x27;content-type: application/json&#x27;</span> \
+  -d <span class="hljs-string">&quot;<span class="hljs-variable">$BODY</span>&quot;</span>
+<span class="hljs-comment"># → 202 Accepted, body: {&quot;triggered&quot;:true,&quot;run_id&quot;:&quot;...&quot;,&quot;message&quot;:&quot;&quot;}</span></code></pre>
+<h2 id="self-hosted-git-servers"><a class="docs-anchor" href="#self-hosted-git-servers" aria-label="Link to self-hosted-git-servers" data-pagefind-ignore>#</a>Self-hosted git servers</h2>
+<table>
+<thead>
+<tr>
+<th>Server</th>
+<th>Where to paste the URL + secret</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GitHub Enterprise</td>
+<td>Settings → Webhooks → Add webhook; content type <code>application/json</code>; choose &quot;Just the push event&quot;; secret = your <code>NYX_WEBHOOK_SECRET</code>.</td>
+</tr>
+<tr>
+<td>Gitea / Forgejo</td>
+<td>Settings → Webhooks → Gitea → URL + secret; default events include push.</td>
+</tr>
+<tr>
+<td>Bitbucket Server</td>
+<td>Repository → Webhooks → secret + push event.</td>
+</tr>
+<tr>
+<td>Sourcehut</td>
+<td>hg/builds webhook config; signature header name is the same.</td>
+</tr>
+</tbody></table>
+<h2 id="security-model"><a class="docs-anchor" href="#security-model" aria-label="Link to security-model" data-pagefind-ignore>#</a>Security model</h2>
+<ul>
+<li>The token never leaves the daemon: the HMAC verifies the body the
+upstream server sent, the body must match the signature, and the
+comparison is constant-time (<code>subtle::ConstantTimeEq</code>).</li>
+<li>The endpoint bypasses the SPA&#39;s bearer-token gate because it carries
+its own auth, so do not put it behind a reverse proxy that strips
+the <code>X-Hub-Signature-256</code> header.</li>
+<li>Body size is capped at 1 MiB; payloads above that return HTTP 400.</li>
+<li>The handler does not log the secret or the raw body. If a webhook
+fails verification, the failure surfaces as a 401 with no further
+detail.</li>
+</ul>
+<h2 id="operator-checklist"><a class="docs-anchor" href="#operator-checklist" aria-label="Link to operator-checklist" data-pagefind-ignore>#</a>Operator checklist</h2>
+<ul>
+<li><input disabled="" type="checkbox"> <code>[triggers].webhook_secret_ref</code> set in <code>nyx-agent.toml</code>.</li>
+<li><input disabled="" type="checkbox"> Matching env var exported in the daemon&#39;s process environment.</li>
+<li><input disabled="" type="checkbox"> Daemon reachable from the upstream git server (loopback if both
+run on the same host; otherwise put a TLS terminator in front).</li>
+<li><input disabled="" type="checkbox"> <code>[triggers].webhook_branch</code> matches the branch you actually want
+to scan, or leave it unset to accept every branch.</li>
+<li><input disabled="" type="checkbox"> Test delivery from the git server&#39;s webhook UI returns <code>202</code>.</li>
+</ul>
+
+          </div>
+          <nav class="docs-prevnext" aria-label="Page navigation"><a class="docs-prevnext__link docs-prevnext__link--prev" href="../triggers/cron.html">
+        <span class="docs-prevnext__label">Previous</span>
+        <span class="docs-prevnext__title">Cron</span>
+      </a><a class="docs-prevnext__link docs-prevnext__link--next" href="../ci/github-actions.html">
+        <span class="docs-prevnext__label">Next</span>
+        <span class="docs-prevnext__title">GitHub Actions</span>
+      </a></nav>
+        </article>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <p class="site-footer__copy">© 2026 Eli Peter · Nyx Agent is licensed under AGPL-3.0-or-later.</p>
+        <nav class="site-footer__nav" aria-label="Footer">
+          <a href="../../../">Home</a>
+          <a href="../../../scanner.html">Scanner</a>
+          <a href="../../../agent.html">Agent</a>
+          <a href="../../../news/">News</a>
+          <a href="../../../docs/">Docs</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,1253 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Configuration | Nyx Agent docs</title>
+    <meta name="description" content="Nyx Agent loads its configuration from nyx-agent.toml. The file is optional: when missing, every section falls back to defaults, so read-only commands like nyx-agent doctor work in a fresh checkout..." />
+    <meta name="keywords" content="Nyx Agent, nyx-agent, local pentesting, live appsec testing, verified vulnerabilities, stored evidence, Get started, Configuration, toml, ai, AI, cron" />
+    <meta name="author" content="Eli Peter" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <link rel="canonical" href="https://nyxscan.dev/docs/agent/config.html" />
+    <link rel="sitemap" type="application/xml" href="https://nyxscan.dev/sitemap.xml" />
+    <link rel="alternate" hreflang="en" href="https://nyxscan.dev/docs/agent/config.html" />
+    <link rel="alternate" hreflang="x-default" href="https://nyxscan.dev/docs/agent/config.html" />
+    <link rel="prev" href="cli.html" />
+    <link rel="next" href="state-dir.html" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="64x64" href="../../favicon-64.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../../favicon-180.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="alternate" type="application/rss+xml" title="Nyx | News &amp; release notes" href="/news/feed.xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../styles.css" />
+    <script defer src="../../docs/search.js"></script>
+
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Nyx" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="Configuration" />
+    <meta property="og:description" content="Nyx Agent loads its configuration from nyx-agent.toml. The file is optional: when missing, every section falls back to defaults, so read-only commands like nyx-agent doctor work in a fresh checkout..." />
+    <meta property="og:url" content="https://nyxscan.dev/docs/agent/config.html" />
+    <meta property="og:image" content="https://nyxscan.dev/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Nyx Agent local pentesting documentation" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Configuration" />
+    <meta name="twitter:description" content="Nyx Agent loads its configuration from nyx-agent.toml. The file is optional: when missing, every section falls back to defaults, so read-only commands like nyx-agent doctor work in a fresh checkout..." />
+    <meta name="twitter:image" content="https://nyxscan.dev/og-image.png" />
+    <meta name="twitter:image:alt" content="Nyx Agent local pentesting documentation" />
+    <meta name="theme-color" content="#F9F8F4" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://nyxscan.dev/#person",
+      "name": "Eli Peter",
+      "url": "https://github.com/elicpeter",
+      "sameAs": [
+        "https://github.com/elicpeter",
+        "https://github.com/sponsors/elicpeter"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://nyxscan.dev/#website",
+      "url": "https://nyxscan.dev/",
+      "name": "Nyx",
+      "description": "Local security tooling for deterministic scanning and live testing.",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://nyxscan.dev/#person"
+      }
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://nyxscan.dev/docs/agent/config.html#article",
+      "headline": "Configuration",
+      "name": "Configuration",
+      "url": "https://nyxscan.dev/docs/agent/config.html",
+      "description": "Nyx Agent loads its configuration from nyx-agent.toml. The file is optional: when missing, every section falls back to defaults, so read-only commands like nyx-agent doctor work in a fresh checkout...",
+      "inLanguage": "en",
+      "articleSection": "Get started",
+      "isPartOf": {
+        "@id": "https://nyxscan.dev/#website"
+      },
+      "publisher": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "author": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "image": "https://nyxscan.dev/og-image.png",
+      "mainEntityOfPage": "https://nyxscan.dev/docs/agent/config.html"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://nyxscan.dev/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Docs",
+          "item": "https://nyxscan.dev/docs/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Nyx Agent docs",
+          "item": "https://nyxscan.dev/docs/agent/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Configuration",
+          "item": "https://nyxscan.dev/docs/agent/config.html"
+        }
+      ],
+      "@id": "https://nyxscan.dev/docs/agent/config.html#breadcrumbs"
+    }
+  ]
+}
+    </script>
+  </head>
+  <body class="docs-body">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" aria-label="Primary navigation">
+      <div class="container site-header__inner">
+        <a class="brand" href="../../" aria-label="Nyx home">
+          <img src="../../assets/logo.png" alt="Nyx" class="brand-logo" />
+        </a>
+        <span class="header-wordmark">NYX</span>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="../../scanner.html">Scanner</a>
+          <a href="../../agent.html">Agent</a>
+          <a href="../../news/">News</a>
+          <a href="../../docs/" aria-current="page">Docs</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="docs-page">
+      <div class="docs-shell">
+        <nav class="docs-sidebar" aria-label="Documentation"><a class="docs-sidebar__brand" href="./">Agent docs</a><a class="docs-sidebar__home" href="../">All docs</a><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Get started</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="install.html">Install</a></li><li><a class="docs-sidebar__link" href="quickstart.html">Quickstart</a></li><li><a class="docs-sidebar__link" href="cli.html">CLI</a></li><li><a class="docs-sidebar__link" href="config.html" aria-current="page">Config</a></li><li><a class="docs-sidebar__link" href="state-dir.html">State Directory</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Architecture</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="architecture.html">Architecture</a></li><li><a class="docs-sidebar__link" href="runs.html">Runs</a></li><li><a class="docs-sidebar__link" href="attack-graph.html">Attack Graph</a></li><li><a class="docs-sidebar__link" href="business-logic-templates.html">Business Logic Templates</a></li><li><a class="docs-sidebar__link" href="events.html">Events</a></li><li><a class="docs-sidebar__link" href="ai-runtime.html">AI Runtime</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Projects</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="cli.html#project">CLI: Project</a></li><li><a class="docs-sidebar__link" href="quickstart.html#create-a-project">Quickstart: Create a Project</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">HTTP API</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="api.html">API</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Triggers</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="triggers/index.html">Overview</a></li><li><a class="docs-sidebar__link" href="triggers/cron.html">Cron</a></li><li><a class="docs-sidebar__link" href="triggers/webhook.html">Webhook</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">CI integration</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="ci/github-actions.html">GitHub Actions</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Contributor docs</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="dev/sqlx.html">SQLx</a></li><li><a class="docs-sidebar__link" href="dev/frontend.html">Frontend</a></li></ul></div></nav>
+        <article class="docs-content">
+          <div class="docs-search docs-search--content" data-docs-search>
+    <label class="visually-hidden" for="docs-search-input">Search docs</label>
+    <div class="docs-search__control">
+      <span class="docs-search__icon" aria-hidden="true"></span>
+      <input id="docs-search-input" data-docs-search-input type="search" placeholder="Search docs" autocomplete="off" autocapitalize="none" spellcheck="false" role="combobox" aria-autocomplete="list" aria-controls="docs-search-results" aria-expanded="false" />
+      <kbd class="docs-search__key" aria-hidden="true">⌘K</kbd>
+    </div>
+    <div class="docs-search__panel" data-docs-search-panel hidden>
+      <div class="docs-search__status" data-docs-search-status></div>
+      <div class="docs-search__results" id="docs-search-results" data-docs-search-results role="listbox" aria-label="Search results"></div>
+    </div>
+  </div>
+          <div class="docs-prose" data-pagefind-body>
+<h1 id="configuration"><a class="docs-anchor" href="#configuration" aria-label="Link to configuration" data-pagefind-ignore>#</a>Configuration</h1>
+<p>Nyx Agent loads its configuration from <code>nyx-agent.toml</code>. The file is
+optional: when missing, every section falls back to defaults, so
+read-only commands like <code>nyx-agent doctor</code> work in a fresh checkout
+with no config on disk.</p>
+<h2 id="where-the-file-lives"><a class="docs-anchor" href="#where-the-file-lives" aria-label="Link to where-the-file-lives" data-pagefind-ignore>#</a>Where the file lives</h2>
+<p>The agent looks for <code>./nyx-agent.toml</code> relative to the current
+working directory. Override with <code>--config &lt;PATH&gt;</code> on any subcommand:</p>
+<pre><code class="hljs language-bash">nyx-agent --config /etc/nyx-agent.toml serve</code></pre>
+<p><code>nyx-agent doctor</code> prints whether the file was found and which
+sections parsed.</p>
+<h2 id="schema-overview"><a class="docs-anchor" href="#schema-overview" aria-label="Link to schema-overview" data-pagefind-ignore>#</a>Schema overview</h2>
+<table>
+<thead>
+<tr>
+<th>Section</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>[general]</code></td>
+<td>Log level, state directory override.</td>
+</tr>
+<tr>
+<td><code>[performance]</code></td>
+<td>Static-pass concurrency and per-repo timeout.</td>
+</tr>
+<tr>
+<td><code>[sandbox]</code></td>
+<td>Sandbox enable + backend selection.</td>
+</tr>
+<tr>
+<td><code>[ai]</code></td>
+<td>AI runtime, model, concurrency, per-run budget cap.</td>
+</tr>
+<tr>
+<td><code>[ui]</code></td>
+<td>HTTP listen address, browser auto-open.</td>
+</tr>
+<tr>
+<td><code>[triggers]</code></td>
+<td>Push/PR triggers + webhook secret + branch filter.</td>
+</tr>
+<tr>
+<td><code>[nyx]</code></td>
+<td>Override the discovered <code>nyx</code> binary or its minimum version.</td>
+</tr>
+<tr>
+<td><code>[run]</code></td>
+<td>Verifier knobs and optional scanner orchestration.</td>
+</tr>
+<tr>
+<td><code>[env]</code></td>
+<td>Docker compose env-builder pull policy.</td>
+</tr>
+<tr>
+<td><code>[[project]]</code></td>
+<td>One block per product; declares repos.</td>
+</tr>
+<tr>
+<td><code>[project.launch]</code></td>
+<td>Optional local app orchestration for one project.</td>
+</tr>
+<tr>
+<td><code>[[schedule]]</code></td>
+<td>One cron-driven scan entry; repeated for multiple schedules.</td>
+</tr>
+</tbody></table>
+<p>Unknown top-level fields and unknown fields inside any section are
+rejected at parse time. A typo like <code>state_directory = &quot;...&quot;</code>
+fails the load rather than silently going to default.</p>
+<h2 id="general"><a class="docs-anchor" href="#general" aria-label="Link to general" data-pagefind-ignore>#</a><code>[general]</code></h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>log_level</code></td>
+<td>string</td>
+<td><code>info</code></td>
+<td><code>tracing</code> filter for stderr (e.g. <code>info</code>, <code>debug</code>, <code>nyx=trace</code>).</td>
+</tr>
+<tr>
+<td><code>state_dir</code></td>
+<td>path (optional)</td>
+<td>unset</td>
+<td>Override the state directory. Falls back to <code>dirs::data_dir()/nyx-agent</code> when unset.</td>
+</tr>
+</tbody></table>
+<h2 id="performance"><a class="docs-anchor" href="#performance" aria-label="Link to performance" data-pagefind-ignore>#</a><code>[performance]</code></h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>max_parallel_scans</code></td>
+<td>u32</td>
+<td><code>4</code></td>
+<td>Reserved for future use by the run dispatcher.</td>
+</tr>
+<tr>
+<td><code>scan_timeout_secs</code></td>
+<td>u64</td>
+<td><code>600</code></td>
+<td>Reserved for future use.</td>
+</tr>
+<tr>
+<td><code>static_concurrency</code></td>
+<td>usize (optional)</td>
+<td>unset</td>
+<td>Explicit fan-out for the static-pass. <code>None</code> lets the dispatcher compute <code>min(num_cpus / 2, len(repos))</code>. A configured <code>0</code> floors to <code>1</code>.</td>
+</tr>
+<tr>
+<td><code>per_repo_timeout_secs</code></td>
+<td>u64 (optional)</td>
+<td>unset</td>
+<td>Per-repo budget for the static-pass scan. <code>None</code> resolves to 30 minutes. A repo that exceeds the budget records <code>Inconclusive(StaticPassTimeout)</code> while the rest of the run continues.</td>
+</tr>
+<tr>
+<td><code>scheduler_tick_secs</code></td>
+<td>u64 (optional)</td>
+<td>unset</td>
+<td>Cadence at which the cron scheduler wakes to evaluate <code>[[schedule]]</code> entries. <code>None</code> resolves to 60 seconds; a configured <code>0</code> floors to <code>1</code>. Lower only when a sub-minute cron granularity is required; tighter polling spends more CPU.</td>
+</tr>
+</tbody></table>
+<h2 id="sandbox"><a class="docs-anchor" href="#sandbox" aria-label="Link to sandbox" data-pagefind-ignore>#</a><code>[sandbox]</code></h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>enabled</code></td>
+<td>bool</td>
+<td><code>true</code></td>
+<td>Toggle for the sandbox layer.</td>
+</tr>
+<tr>
+<td><code>allow_network</code></td>
+<td>bool</td>
+<td><code>false</code></td>
+<td>Whether sandboxed jobs may reach the network.</td>
+</tr>
+<tr>
+<td><code>backend</code></td>
+<td>enum</td>
+<td><code>auto</code></td>
+<td>Backend selector. See below.</td>
+</tr>
+</tbody></table>
+<p><code>backend</code> values (kebab-case):</p>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Lane / Platform</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>auto</code></td>
+<td>Pick the strongest available backend at runtime.</td>
+</tr>
+<tr>
+<td><code>process</code></td>
+<td>No kernel isolation. Static-pass only. Always works.</td>
+</tr>
+<tr>
+<td><code>birdcage</code></td>
+<td>macOS Seatbelt profile shipped with the agent.</td>
+</tr>
+<tr>
+<td><code>libkrun</code></td>
+<td>Lightweight microVM on Linux via libkrun.</td>
+</tr>
+<tr>
+<td><code>firecracker</code></td>
+<td>Lightweight microVM on Linux via Firecracker.</td>
+</tr>
+<tr>
+<td><code>docker</code></td>
+<td>Docker container fallback. Slowest, requires the docker daemon.</td>
+</tr>
+</tbody></table>
+<p><code>nyx-agent doctor</code> prints which backends probe healthy on this host.</p>
+<h2 id="ai"><a class="docs-anchor" href="#ai" aria-label="Link to ai" data-pagefind-ignore>#</a><code>[ai]</code></h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>provider</code></td>
+<td>string (optional)</td>
+<td>unset</td>
+<td>Free-form provider tag surfaced in the UI.</td>
+</tr>
+<tr>
+<td><code>model</code></td>
+<td>string (optional)</td>
+<td>unset</td>
+<td>Model identifier (e.g. <code>claude-opus-4-7</code>).</td>
+</tr>
+<tr>
+<td><code>api_base</code></td>
+<td>string (optional)</td>
+<td>unset</td>
+<td>Base URL for local OpenAI-compatible runtimes.</td>
+</tr>
+<tr>
+<td><code>runtime</code></td>
+<td>enum</td>
+<td><code>none</code></td>
+<td>AI runtime selection. See below.</td>
+</tr>
+<tr>
+<td><code>max_concurrent_one_shot</code></td>
+<td>u32</td>
+<td><code>4</code></td>
+<td>Cap on in-flight <code>one_shot</code> AI calls per run, shared across payload synthesis, spec derivation, and chain reasoning. <code>0</code> floors to <code>1</code> to avoid a deadlocked semaphore acquire.</td>
+</tr>
+<tr>
+<td><code>default_run_budget_usd_micros</code></td>
+<td>i64 (optional)</td>
+<td>unset</td>
+<td>Per-run AI budget cap in USD micros stamped on new <code>(run_id, kind)</code> rows. Unset means unlimited; set a positive value to enable the cap.</td>
+</tr>
+<tr>
+<td><code>payload_synthesis_per_call_cap_usd_micros</code></td>
+<td>i64 (optional)</td>
+<td>unset</td>
+<td>Per-call cap forwarded into each PayloadSynthesis <code>Budget</code>. Clamps a single call below the shared per-run bucket. Unset means unlimited unless the shared run cap is lower.</td>
+</tr>
+<tr>
+<td><code>spec_derivation_per_call_cap_usd_micros</code></td>
+<td>i64 (optional)</td>
+<td>unset</td>
+<td>Per-call cap for each SpecDerivation call. Same fall-back rules.</td>
+</tr>
+<tr>
+<td><code>chain_reasoning_per_call_cap_usd_micros</code></td>
+<td>i64 (optional)</td>
+<td>unset</td>
+<td>Per-call cap for the single ChainReasoning call. Same fall-back rules.</td>
+</tr>
+<tr>
+<td><code>novel_discovery_per_call_cap_usd_micros</code></td>
+<td>i64 (optional)</td>
+<td>unset</td>
+<td>Per-call cap for each NovelFindingDiscovery batch. Same fall-back rules.</td>
+</tr>
+<tr>
+<td><code>exploration_soft_cap_usd_micros</code></td>
+<td>i64 (optional)</td>
+<td>unset</td>
+<td>Per-task soft cap for AI Exploration. Crossing it emits a single warning; the run continues until the hard cap below trips. Falls back to <code>$5.00</code> (<code>5_000_000</code>) when unset or non-positive.</td>
+</tr>
+<tr>
+<td><code>exploration_run_cap_usd_micros</code></td>
+<td>i64 (optional)</td>
+<td>unset</td>
+<td>Per-run hard cap for AI Exploration. The pass halts if cumulative spend reaches this value. Falls back to <code>$10.00</code> (<code>10_000_000</code>) when unset or non-positive.</td>
+</tr>
+</tbody></table>
+<p><code>runtime</code> values (kebab-case):</p>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>none</code></td>
+<td>AI features off. Static-pass only.</td>
+</tr>
+<tr>
+<td><code>anthropic</code></td>
+<td>Hosted Anthropic API using the operator&#39;s API key. The wizard stores the key in the OS keychain under account <code>ai-anthropic</code>.</td>
+</tr>
+<tr>
+<td><code>local-llm</code></td>
+<td>Local OpenAI-compatible runtime (LM Studio, Ollama, vLLM). Endpoint goes in <code>api_base</code>; set <code>model</code> when the server requires one. Any bearer token lives in the keychain under <code>ai-local-llm</code>.</td>
+</tr>
+<tr>
+<td><code>claude-code</code></td>
+<td>Optional local adapter that drives an already-installed <code>claude</code> CLI on <code>$PATH</code>.</td>
+</tr>
+<tr>
+<td><code>codex</code></td>
+<td>Optional local adapter that drives an already-installed <code>codex</code> CLI on <code>$PATH</code>.</td>
+</tr>
+</tbody></table>
+<p>API keys never live in TOML. The wizard at first launch writes them
+to the OS keychain.</p>
+<p>Nyx Agent does not include or resell access to model providers. Direct
+API and local endpoint runtimes are the official BYOK paths; CLI
+runtimes are optional local adapters for users who have installed and
+authenticated those tools themselves under the relevant provider terms.</p>
+<h2 id="ui"><a class="docs-anchor" href="#ui" aria-label="Link to ui" data-pagefind-ignore>#</a><code>[ui]</code></h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>listen_addr</code></td>
+<td>string</td>
+<td><code>127.0.0.1:8765</code></td>
+<td><code>host:port</code> the HTTP + WebSocket server binds to.</td>
+</tr>
+<tr>
+<td><code>open_browser</code></td>
+<td>bool</td>
+<td><code>true</code></td>
+<td>Open the SPA in the default browser on <code>serve</code> startup. <code>--no-open</code> / <code>--headless</code> overrides this at the CLI.</td>
+</tr>
+</tbody></table>
+<p>The default address is loopback-only. Binding <code>0.0.0.0:...</code>
+exposes the agent without auth and is not recommended; pair with
+TLS + token auth (see <code>docs/security-posture.md</code> once it lands).</p>
+<h2 id="triggers"><a class="docs-anchor" href="#triggers" aria-label="Link to triggers" data-pagefind-ignore>#</a><code>[triggers]</code></h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>on_push</code></td>
+<td>bool</td>
+<td><code>false</code></td>
+<td>Reserved trigger flag.</td>
+</tr>
+<tr>
+<td><code>on_pr</code></td>
+<td>bool</td>
+<td><code>false</code></td>
+<td>Reserved trigger flag.</td>
+</tr>
+<tr>
+<td><code>schedule_cron</code></td>
+<td>string (optional)</td>
+<td>unset</td>
+<td>Reserved. Use <code>[[schedule]]</code> entries instead for current cron behavior.</td>
+</tr>
+<tr>
+<td><code>webhook_secret_ref</code></td>
+<td>string (optional)</td>
+<td>unset</td>
+<td>HMAC-SHA256 secret reference for <code>POST /webhook/git</code>. Shape: <code>env:&lt;NAME&gt;</code> resolves to the environment variable, anything else is treated as the literal secret. Empty secrets are rejected. When unset, the webhook handler returns 503.</td>
+</tr>
+<tr>
+<td><code>webhook_branch</code></td>
+<td>string (optional)</td>
+<td>unset</td>
+<td>Optional branch filter. When set, only payloads whose <code>ref</code> equals <code>refs/heads/&lt;branch&gt;</code> trigger a scan.</td>
+</tr>
+</tbody></table>
+<p>See <code>docs/triggers/webhook.md</code> for the full handler contract.</p>
+<h2 id="nyx"><a class="docs-anchor" href="#nyx" aria-label="Link to nyx" data-pagefind-ignore>#</a><code>[nyx]</code></h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>binary_path</code></td>
+<td>path (optional)</td>
+<td>unset</td>
+<td>Override the discovered <code>nyx</code> binary. When unset, the runner falls back to a <code>$PATH</code> lookup.</td>
+</tr>
+<tr>
+<td><code>min_version</code></td>
+<td>string (optional)</td>
+<td>unset</td>
+<td>Override the built-in minimum-supported <code>nyx</code> version. Useful in integration tests; the resolver clamps to the built-in floor (<code>MINIMUM_NYX_VERSION</code>) so an under-floor override does not silently weaken the check.</td>
+</tr>
+</tbody></table>
+<h2 id="run"><a class="docs-anchor" href="#run" aria-label="Link to run" data-pagefind-ignore>#</a><code>[run]</code></h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>replay_stable_check</code></td>
+<td>bool</td>
+<td><code>false</code></td>
+<td>When <code>true</code>, the deterministic payload runner re-executes each <code>(vuln, benign)</code> pair a second time and stamps <code>replay_stable</code> on the resulting <code>VerifyResult</code>. Adds roughly 2x cost per verify.</td>
+</tr>
+<tr>
+<td><code>allow_state_changing_live_probes</code></td>
+<td>bool</td>
+<td><code>false</code></td>
+<td>Allow live verification plans to use HTTP methods likely to mutate target state (<code>POST</code>, <code>PUT</code>, <code>PATCH</code>, <code>DELETE</code>).</td>
+</tr>
+<tr>
+<td><code>browser_checks_enabled</code></td>
+<td>bool</td>
+<td><code>false</code></td>
+<td>Allow browser-driven verification and auth-session acquisition when the local runtime is available. Confirmed browser attempts save redacted replay evidence under the run trace directory.</td>
+</tr>
+<tr>
+<td><code>exploit_mode_enabled</code></td>
+<td>bool</td>
+<td><code>false</code></td>
+<td>Master opt-in for invasive verification. State-changing probes still require <code>allow_state_changing_live_probes = true</code>; setting that older flag by itself is not enough.</td>
+</tr>
+<tr>
+<td><code>exploit_dry_run</code></td>
+<td>bool</td>
+<td><code>false</code></td>
+<td>Evaluate guarded live plans and write audit records without sending HTTP/browser traffic where feasible.</td>
+</tr>
+<tr>
+<td><code>business_logic_templates_enabled</code></td>
+<td>bool</td>
+<td><code>true</code></td>
+<td>Generate first-class business-logic pentest candidates from route/auth metadata. Generated plans still pass through normal verifier safety gates.</td>
+</tr>
+<tr>
+<td><code>research_mode_enabled</code></td>
+<td>bool</td>
+<td><code>false</code></td>
+<td>Enable Vuln Research Mode. This adds product-invariant hypotheses from the semantic route model and prior candidate memory, prioritizes those candidates in attack planning/exploration, and uses deeper research prompts. It does not relax live execution gates.</td>
+</tr>
+<tr>
+<td><code>unsafe_attack_agent_enabled</code></td>
+<td>bool</td>
+<td><code>false</code></td>
+<td>Run the pre-MVP unrestricted local attack-agent phase after normal verification. Intended only for disposable user-owned dev apps; once invoked it does not use the guarded live-verifier policy. The phase runs seven specialist agents, then a critical chain hunter and final triage pass.</td>
+</tr>
+<tr>
+<td><code>business_logic_template_ids</code></td>
+<td>array of strings</td>
+<td><code>[]</code></td>
+<td>Optional allowlist of template ids. Empty means every registered template is considered. Use <code>nyx-agent business-logic templates</code> or <code>GET /api/v1/business-logic/templates</code> to list ids.</td>
+</tr>
+<tr>
+<td><code>exploit_request_cap</code></td>
+<td>int (optional)</td>
+<td>unset (<code>10</code>)</td>
+<td>Per-candidate cap for guarded live HTTP/browser actions. <code>0</code> is floored to <code>1</code>.</td>
+</tr>
+<tr>
+<td><code>exploit_requests_per_second</code></td>
+<td>int (optional)</td>
+<td>unset (<code>5</code>)</td>
+<td>Per-candidate rate limit for guarded live HTTP/browser actions. <code>0</code> is floored to <code>1</code>.</td>
+</tr>
+<tr>
+<td><code>exploit_reset_after_state_changing</code></td>
+<td>bool</td>
+<td><code>true</code></td>
+<td>Ask the environment orchestration layer to reset/rollback after allowed state-changing probes when the active environment supports it.</td>
+</tr>
+<tr>
+<td><code>enable_zap_baseline</code></td>
+<td>bool</td>
+<td><code>true</code></td>
+<td>Run <code>zap-baseline.py</code> against live target URLs when the binary is present on PATH. Missing binaries are skipped.</td>
+</tr>
+<tr>
+<td><code>enable_nuclei</code></td>
+<td>bool</td>
+<td><code>true</code></td>
+<td>Run <code>nuclei</code> against live target URLs when the binary is present on PATH. Missing binaries are skipped.</td>
+</tr>
+<tr>
+<td><code>enable_trivy</code></td>
+<td>bool</td>
+<td><code>true</code></td>
+<td>Run <code>trivy fs</code> against repo workspaces when present on PATH. Dependency, IaC, and secret findings become AI exploration context.</td>
+</tr>
+<tr>
+<td><code>enable_osv_scanner</code></td>
+<td>bool</td>
+<td><code>true</code></td>
+<td>Run <code>osv-scanner</code> against repo workspaces when present on PATH. Dependency findings become AI exploration context.</td>
+</tr>
+<tr>
+<td><code>enable_secret_scanning</code></td>
+<td>bool</td>
+<td><code>true</code></td>
+<td>Run <code>gitleaks</code> against repo workspaces when present on PATH; if absent, fall back to <code>detect-secrets</code>. Secret findings become AI exploration context.</td>
+</tr>
+<tr>
+<td><code>enable_katana</code></td>
+<td>bool</td>
+<td><code>true</code></td>
+<td>Run <code>katana</code> against live target URLs when present on PATH. Sensitive crawled routes become live-test candidates.</td>
+</tr>
+<tr>
+<td><code>enable_httpx</code></td>
+<td>bool</td>
+<td><code>true</code></td>
+<td>Run ProjectDiscovery <code>httpx</code> against live target URLs when present on PATH. Interesting HTTP metadata becomes live-test candidates.</td>
+</tr>
+<tr>
+<td><code>enable_aggressive_sqlmap</code></td>
+<td>bool</td>
+<td><code>false</code></td>
+<td>Reserved for explicit sqlmap use. sqlmap is not auto-enabled because it is aggressive and has GPL/proprietary-integration constraints.</td>
+</tr>
+</tbody></table>
+<p>Exploit mode is intentionally a two-key system. Nyx Agent defaults to
+non-destructive live verification. State-changing HTTP methods,
+browser actions that may mutate data, and aggressive external probes
+are rejected unless exploit mode is enabled and the specific
+state-changing gate is also enabled. The local server UI exposes the
+same per-run controls in the <strong>Start pentest</strong> modal, so an operator
+can opt into an invasive run without editing <code>nyx-agent.toml</code>.</p>
+<p>Example opt-in for a disposable local target:</p>
+<pre><code class="hljs language-toml"><span class="hljs-section">[run]</span>
+<span class="hljs-attr">exploit_mode_enabled</span> = <span class="hljs-literal">true</span>
+<span class="hljs-attr">allow_state_changing_live_probes</span> = <span class="hljs-literal">true</span>
+<span class="hljs-attr">exploit_request_cap</span> = <span class="hljs-number">5</span>
+<span class="hljs-attr">exploit_requests_per_second</span> = <span class="hljs-number">2</span>
+<span class="hljs-attr">exploit_reset_after_state_changing</span> = <span class="hljs-literal">true</span>
+<span class="hljs-attr">business_logic_template_ids</span> = [<span class="hljs-string">&quot;tenant_object_isolation&quot;</span>, <span class="hljs-string">&quot;file_permission_revalidation&quot;</span>]</code></pre>
+<p>Use <code>exploit_dry_run = true</code> to inspect generated policy audit
+records before sending live traffic. With both safety keys enabled,
+dry-run still generates selected business-logic candidates and records
+template summary rows, but the live verifier does not send guarded
+HTTP/browser traffic.</p>
+<p>Business-logic templates that seed objects, submit coupon/price data,
+change permissions, deliver webhook payloads, or send chatbot prompts
+are only generated when the same two gates are enabled. They still
+pass through request caps, rate limits, target URL scope checks,
+auth-session acquisition, and reset-after-state-changing handling.
+See <a href="business-logic-templates.html"><code>business-logic-templates.md</code></a> for
+template ids, dry-run examples, skip reasons, and provenance shape.</p>
+<p>Vuln Research Mode is separate from exploit mode:</p>
+<pre><code class="hljs language-toml"><span class="hljs-section">[run]</span>
+<span class="hljs-attr">research_mode_enabled</span> = <span class="hljs-literal">true</span></code></pre>
+<p>Research mode increases reasoning depth and candidate generation for
+authorized product-logic review. It adds <code>ResearchMode</code> candidates for
+invariants such as lifecycle bugs, stale access, replay, downgrade or
+entitlement mismatch, invite/team/org transitions, webhook/event
+consistency, AI-agent indirect actions, and background job side
+effects. The candidates carry <code>research_mode_provenance</code> in
+<code>affected_components</code>, and research-mode exploration findings carry the
+same provenance in their verdict blob. Live HTTP/browser execution
+still goes through the same target scope, request cap, rate limit,
+exploit-mode, state-changing, dry-run, and reset gates.</p>
+<p>Unsafe attack-agent mode is a separate pre-MVP local-only phase:</p>
+<pre><code class="hljs language-toml"><span class="hljs-section">[run]</span>
+<span class="hljs-attr">unsafe_attack_agent_enabled</span> = <span class="hljs-literal">true</span></code></pre>
+<p>It runs after normal verification while the configured local app is
+still up. The agent receives repo workspaces, target URLs, prior
+candidates, and existing vulnerabilities, then may use CLI tools to
+attack the dev app directly and record <code>verified_vulnerabilities</code> with
+proof artifacts. It is intentionally not routed through
+<code>ExploitSafetyPolicy</code>; use it only against disposable local targets.</p>
+<p>When enabled, the phase runs serially as nine attack passes:</p>
+<table>
+<thead>
+<tr>
+<th>Pass</th>
+<th>Focus</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>business_logic</code></td>
+<td>Workflow, state-machine, role-transition, invite, quota, entitlement, lifecycle, replay, and order-of-operation bugs.</td>
+</tr>
+<tr>
+<td><code>payments_billing</code></td>
+<td>Checkout, subscriptions, invoices, coupons, trials, refunds, webhooks, payment status, and plan enforcement.</td>
+</tr>
+<tr>
+<td><code>user_data_privacy</code></td>
+<td>IDORs, cross-tenant reads/writes, exports/imports, files, logs, analytics payloads, admin views, and deleted-user data.</td>
+</tr>
+<tr>
+<td><code>auth_session</code></td>
+<td>Authentication, authorization, sessions, cookies, password reset, magic links, OAuth, MFA, CSRF, account linking, and privilege escalation.</td>
+</tr>
+<tr>
+<td><code>api_input</code></td>
+<td>Mass assignment, validation gaps, schema mismatch, hidden fields, file uploads, SSRF-like fetches, parser confusion, injection, and deserialization.</td>
+</tr>
+<tr>
+<td><code>infra_dev_prod</code></td>
+<td>Secrets, env config, debug routes, local services, dev mailers, seed credentials, logs, queues, storage, admin tooling, CORS, and deployment assumptions.</td>
+</tr>
+<tr>
+<td><code>abuse_automation</code></td>
+<td>Rate limits, brute force, enumeration, scraping, invite/email/SMS spam, cost abuse, queue flooding, resource exhaustion, and free-tier bypass.</td>
+</tr>
+<tr>
+<td><code>critical_chain_hunter</code></td>
+<td>Cross-domain exploit chains that combine smaller primitives into account takeover, cross-tenant compromise, payment bypass, persistent admin access, or secret exposure.</td>
+</tr>
+<tr>
+<td><code>triage</code></td>
+<td>Deduplication, dev-only classification, focused confirmation, and material severity/impact upgrades.</td>
+</tr>
+</tbody></table>
+<p>Each pass receives the current candidates and verified vulnerabilities,
+including findings produced by earlier attack passes. The prompt also
+warns that dev mailers, mock payment providers, localhost-only services,
+seed credentials, debug routes, and synthetic fixtures are not
+production vulnerabilities by themselves unless the same trust boundary
+is production-relevant or the behavior creates a real local risk. Each
+attack pass gets a 30-minute agent-loop wall-clock cap, so an individual
+specialist is not stopped by the generic 15-minute adapter default.</p>
+<p>Optional scanner findings are persisted as pentest candidates. Live web
+findings still pass live verification before surfacing as verified
+vulnerabilities; source/package findings are recorded as bounded context
+for AI exploration and triage. Nyx Agent does not bundle these scanners; it
+invokes local executables on PATH when available.</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Upstream license</th>
+<th>Commercial use note</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>OWASP ZAP / <code>zap-baseline.py</code></td>
+<td>Apache-2.0</td>
+<td>Generally compatible with commercial products when notices and other Apache-2.0 conditions are preserved.</td>
+</tr>
+<tr>
+<td>Nuclei</td>
+<td>MIT</td>
+<td>Generally compatible with commercial products when the MIT copyright and permission notice are preserved.</td>
+</tr>
+<tr>
+<td>Trivy</td>
+<td>Apache-2.0</td>
+<td>Generally compatible with commercial products when notices and other Apache-2.0 conditions are preserved.</td>
+</tr>
+<tr>
+<td>OSV-Scanner</td>
+<td>Apache-2.0</td>
+<td>Generally compatible with commercial products when notices and other Apache-2.0 conditions are preserved.</td>
+</tr>
+<tr>
+<td>Gitleaks</td>
+<td>MIT</td>
+<td>Generally compatible with commercial products when the MIT copyright and permission notice are preserved.</td>
+</tr>
+<tr>
+<td>detect-secrets</td>
+<td>Apache-2.0</td>
+<td>Generally compatible with commercial products when notices and other Apache-2.0 conditions are preserved.</td>
+</tr>
+<tr>
+<td>Katana</td>
+<td>MIT</td>
+<td>Generally compatible with commercial products when the MIT copyright and permission notice is preserved.</td>
+</tr>
+<tr>
+<td>ProjectDiscovery httpx</td>
+<td>MIT</td>
+<td>Generally compatible with commercial products when the MIT copyright and permission notice is preserved.</td>
+</tr>
+<tr>
+<td>sqlmap</td>
+<td>GPL-2.0-or-later with project clarifications / optional commercial license</td>
+<td>Internal use is usually different from redistribution, but embedding or parsing sqlmap results in proprietary software is treated by sqlmap upstream as requiring GPL compliance or a separate sqlmap commercial license. Get legal review before shipping this path.</td>
+</tr>
+</tbody></table>
+<h2 id="project"><a class="docs-anchor" href="#project" aria-label="Link to project" data-pagefind-ignore>#</a><code>[[project]]</code></h2>
+<p>Each <code>[[project]]</code> block declares one product and groups its repos
+under nested <code>[[project.repo]]</code> blocks. Top-level <code>[[repo]]</code> blocks
+are rejected by the parser.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>n/a</td>
+<td>Unique project name. Also used as the workspace directory prefix.</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>string (optional)</td>
+<td>unset</td>
+<td>Free-form description surfaced in the UI.</td>
+</tr>
+<tr>
+<td><code>target_base_url</code></td>
+<td>string (optional)</td>
+<td>unset</td>
+<td>Base URL the sandbox env-builder dials for dynamic checks against the running stack.</td>
+</tr>
+<tr>
+<td><code>env_config</code></td>
+<td>TOML value (optional)</td>
+<td>unset</td>
+<td>Structured env overrides merged into the project&#39;s docker-compose / sandbox runtime. Opaque to the agent.</td>
+</tr>
+<tr>
+<td><code>launch</code></td>
+<td>table (optional)</td>
+<td>unset</td>
+<td>Build/start/health/seed/reset/login recipe used before scans. See below.</td>
+</tr>
+<tr>
+<td><code>runtime_profile</code></td>
+<td>table (optional)</td>
+<td>unset</td>
+<td>Auth/session metadata for live verification. Prefer env refs over raw secrets.</td>
+</tr>
+<tr>
+<td><code>repo</code></td>
+<td><code>[[project.repo]]</code></td>
+<td>empty</td>
+<td>Repos belonging to this project. See below.</td>
+</tr>
+</tbody></table>
+<p>When <code>[project.launch]</code> is omitted, scans still run. If a project has
+<code>target_base_url</code> but no stored launch profile, Nyx Agent creates a
+conservative already-running profile and health-checks the target URL.
+For local-path repos, <code>mode = &quot;auto&quot;</code> can detect root-level Docker
+Compose files or simple <code>package.json</code> / <code>Cargo.toml</code> start commands.</p>
+<h3 id="projectlaunch"><a class="docs-anchor" href="#projectlaunch" aria-label="Link to projectlaunch" data-pagefind-ignore>#</a><code>[project.launch]</code></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>name</code></td>
+<td>string (optional)</td>
+<td><code>local dev</code></td>
+<td>Operator label for the default launch profile.</td>
+</tr>
+<tr>
+<td><code>mode</code></td>
+<td>string (optional)</td>
+<td>inferred</td>
+<td><code>auto</code>, <code>already-running</code>, <code>custom-commands</code>, or <code>docker-compose</code>.</td>
+</tr>
+<tr>
+<td><code>target_urls</code></td>
+<td>array of strings</td>
+<td><code>[target_base_url]</code> when set</td>
+<td>In-scope local URLs handed to live probes and AI exploration.</td>
+</tr>
+<tr>
+<td><code>env_files</code></td>
+<td>array of strings</td>
+<td><code>[]</code></td>
+<td>Env files resolved relative to the command working directory.</td>
+</tr>
+<tr>
+<td><code>env_vars</code></td>
+<td>array of tables</td>
+<td><code>[]</code></td>
+<td>Env var names forwarded from the daemon process.</td>
+</tr>
+<tr>
+<td><code>build</code> / <code>start</code> / <code>seed</code> / <code>login</code> / <code>reset</code> / <code>stop</code></td>
+<td>array of command tables</td>
+<td><code>[]</code></td>
+<td>Ordered shell commands for the target lifecycle.</td>
+</tr>
+<tr>
+<td><code>health</code></td>
+<td>array of tables</td>
+<td>target URL check</td>
+<td>Readiness checks. HTTP checks retry until timeout; command checks must exit 0.</td>
+</tr>
+</tbody></table>
+<p>Command table fields:</p>
+<pre><code class="hljs language-toml"><span class="hljs-attr">command</span> = <span class="hljs-string">&quot;npm run dev&quot;</span>
+<span class="hljs-attr">repo</span> = <span class="hljs-string">&quot;web&quot;</span>                  <span class="hljs-comment"># alias: repo_name</span>
+<span class="hljs-attr">working_directory</span> = <span class="hljs-string">&quot;apps/web&quot;</span>
+<span class="hljs-attr">timeout_secs</span> = <span class="hljs-number">120</span>            <span class="hljs-comment"># alias: timeout_seconds</span>
+<span class="hljs-attr">stdin</span> = <span class="hljs-string">&quot;y\n&quot;</span>                 <span class="hljs-comment"># optional text written to stdin after spawn</span></code></pre>
+<p>HTTP health check:</p>
+<pre><code class="hljs language-toml"><span class="hljs-section">[[project.launch.health]]</span>
+<span class="hljs-attr">url</span> = <span class="hljs-string">&quot;http://localhost:3000/health&quot;</span>
+<span class="hljs-attr">timeout_secs</span> = <span class="hljs-number">60</span></code></pre>
+<p>Seed commands run after the app is healthy and before the static and
+live scan phases. Login commands run after seed hooks and are intended
+for local session setup. Reset commands run after state-changing live
+probes when <code>[run] exploit_reset_after_state_changing = true</code>. Start,
+build, seed, login, reset, and stop stdout/stderr are captured under
+<code>&lt;state&gt;/logs/environment/&lt;run-id&gt;/</code>.</p>
+<h3 id="projectruntimeprofile"><a class="docs-anchor" href="#projectruntimeprofile" aria-label="Link to projectruntimeprofile" data-pagefind-ignore>#</a><code>[project.runtime_profile]</code></h3>
+<p>Runtime profiles describe authenticated roles that live verification can
+use. Each role gets a named auth session, and authorization probes can
+compare the same request as different roles.</p>
+<pre><code class="hljs language-toml"><span class="hljs-section">[project.runtime_profile]</span>
+<span class="hljs-attr">target_base_url</span> = <span class="hljs-string">&quot;http://localhost:3000&quot;</span>
+
+<span class="hljs-section">[[project.runtime_profile.auth_profiles]]</span>
+<span class="hljs-attr">role</span> = <span class="hljs-string">&quot;user_a&quot;</span>
+<span class="hljs-attr">mode</span> = <span class="hljs-string">&quot;header_injection&quot;</span>
+<span class="hljs-attr">bearer_token_env</span> = <span class="hljs-string">&quot;NYX_AGENT_USER_A_TOKEN&quot;</span>
+<span class="hljs-attr">tenant</span> = <span class="hljs-string">&quot;tenant-a&quot;</span>
+
+  <span class="hljs-section">[[project.runtime_profile.auth_profiles.owned_objects]]</span>
+  <span class="hljs-attr">name</span> = <span class="hljs-string">&quot;project&quot;</span>
+  <span class="hljs-attr">id</span> = <span class="hljs-string">&quot;proj-user-a-1&quot;</span>
+  <span class="hljs-attr">route</span> = <span class="hljs-string">&quot;/api/projects/{id}&quot;</span>
+  <span class="hljs-attr">marker</span> = <span class="hljs-string">&quot;nyx-agent-user-a-project&quot;</span>
+
+<span class="hljs-section">[[project.runtime_profile.auth_profiles]]</span>
+<span class="hljs-attr">role</span> = <span class="hljs-string">&quot;user_b&quot;</span>
+<span class="hljs-attr">mode</span> = <span class="hljs-string">&quot;header_injection&quot;</span>
+<span class="hljs-attr">bearer_token_env</span> = <span class="hljs-string">&quot;NYX_AGENT_USER_B_TOKEN&quot;</span>
+<span class="hljs-attr">tenant</span> = <span class="hljs-string">&quot;tenant-b&quot;</span>
+
+<span class="hljs-section">[[project.runtime_profile.auth_profiles]]</span>
+<span class="hljs-attr">role</span> = <span class="hljs-string">&quot;admin&quot;</span>
+<span class="hljs-attr">mode</span> = <span class="hljs-string">&quot;session_import&quot;</span>
+<span class="hljs-attr">session_import_path</span> = <span class="hljs-string">&quot;sessions/admin-storage-state.json&quot;</span></code></pre>
+<p><code>owned_objects</code> are optional pre-seeded IDs for horizontal
+authorization checks. Nyx Agent treats the id and marker as positive live
+evidence markers: <code>user_b</code> must receive the same marker from <code>user_a</code>&#39;s
+object before an IDOR-style vulnerability can verify.</p>
+<p><code>tenant</code> is optional metadata used in the Authorization Matrix. When a
+role comparison or object ownership check runs, Nyx Agent records one row
+for the allowed control and one row for the challenged access with the
+role, tenant, resource/object, owner role, action, endpoint, expected
+decision, observed HTTP/marker result, confidence, candidate id,
+verification attempt id, and run id.</p>
+<p>The local UI exposes an <code>AI setup</code> action in the auth profiles panel for
+projects with local repos. Clicking it inspects the checked-out source
+for login routes, object-shaped routes, and admin signals, then saves
+named role profiles and any seeded owned objects into
+<code>project.runtime_profile</code>. Pentests do not run this discovery step; they
+only use the saved profiles selected before the run.</p>
+<h3 id="projectrepo"><a class="docs-anchor" href="#projectrepo" aria-label="Link to projectrepo" data-pagefind-ignore>#</a><code>[[project.repo]]</code></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>n/a</td>
+<td>Unique repo name.</td>
+</tr>
+<tr>
+<td><code>i_own_this</code></td>
+<td>bool</td>
+<td><code>false</code></td>
+<td>Operator attestation. The daemon refuses to ingest a repo without <code>i_own_this = true</code>.</td>
+</tr>
+<tr>
+<td><code>enabled</code></td>
+<td>bool</td>
+<td><code>true</code></td>
+<td>Skip the repo when set to <code>false</code>.</td>
+</tr>
+<tr>
+<td><code>source</code></td>
+<td>table</td>
+<td>n/a</td>
+<td>Repo source. Either a <code>git</code> or <code>local-path</code> variant (tag field <code>kind</code>).</td>
+</tr>
+</tbody></table>
+<p><code>source</code> variants:</p>
+<pre><code class="hljs language-toml"><span class="hljs-attr">source</span> = { kind = <span class="hljs-string">&quot;git&quot;</span>, url = <span class="hljs-string">&quot;git@github.com:org/repo.git&quot;</span>, branch = <span class="hljs-string">&quot;main&quot;</span>, auth = <span class="hljs-string">&quot;ssh-key:~/.ssh/id_ed25519&quot;</span> }
+<span class="hljs-attr">source</span> = { kind = <span class="hljs-string">&quot;local-path&quot;</span>, path = <span class="hljs-string">&quot;/srv/repos/monolith&quot;</span> }</code></pre>
+<p><code>auth</code> accepted shapes: <code>ssh-key:&lt;path&gt;</code>, <code>token-env:&lt;var&gt;</code>,
+<code>gh-app:&lt;id&gt;</code>. Unknown <code>kind</code> values fail the load.</p>
+<h2 id="schedule"><a class="docs-anchor" href="#schedule" aria-label="Link to schedule" data-pagefind-ignore>#</a><code>[[schedule]]</code></h2>
+<p>One cron-driven scan entry. The scheduler evaluates every entry
+once per minute and fires matching ones against the configured repo
+filter.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>cron</code></td>
+<td>string</td>
+<td>n/a</td>
+<td>5-field cron expression (<code>minute hour day-of-month month day-of-week</code>). Example: <code>0 3 * * 1</code> = 03:00 every Monday.</td>
+</tr>
+<tr>
+<td><code>repo</code></td>
+<td>string (optional)</td>
+<td>unset</td>
+<td>Limit the run to one configured repo. <code>None</code> scans every enabled repo.</td>
+</tr>
+<tr>
+<td><code>label</code></td>
+<td>string</td>
+<td><code>&quot;scheduled&quot;</code></td>
+<td>Operator-readable label surfaced in tracing spans and the UI.</td>
+</tr>
+</tbody></table>
+<p>See <code>docs/triggers/cron.md</code> for the full scheduler contract.</p>
+<h2 id="worked-example"><a class="docs-anchor" href="#worked-example" aria-label="Link to worked-example" data-pagefind-ignore>#</a>Worked example</h2>
+<pre><code class="hljs language-toml"><span class="hljs-section">[general]</span>
+<span class="hljs-attr">log_level</span> = <span class="hljs-string">&quot;info&quot;</span>
+
+<span class="hljs-section">[performance]</span>
+<span class="hljs-attr">static_concurrency</span> = <span class="hljs-number">4</span>
+<span class="hljs-attr">per_repo_timeout_secs</span> = <span class="hljs-number">1200</span>
+
+<span class="hljs-section">[sandbox]</span>
+<span class="hljs-attr">enabled</span> = <span class="hljs-literal">true</span>
+<span class="hljs-attr">allow_network</span> = <span class="hljs-literal">false</span>
+<span class="hljs-attr">backend</span> = <span class="hljs-string">&quot;auto&quot;</span>
+
+<span class="hljs-section">[ai]</span>
+<span class="hljs-attr">runtime</span> = <span class="hljs-string">&quot;anthropic&quot;</span>
+<span class="hljs-attr">model</span> = <span class="hljs-string">&quot;claude-opus-4-7&quot;</span>
+<span class="hljs-attr">max_concurrent_one_shot</span> = <span class="hljs-number">4</span>
+<span class="hljs-attr">default_run_budget_usd_micros</span> = <span class="hljs-number">2_500_000</span>  <span class="hljs-comment"># Optional: $2.50 per run</span>
+
+<span class="hljs-section">[ui]</span>
+<span class="hljs-attr">listen_addr</span> = <span class="hljs-string">&quot;127.0.0.1:8765&quot;</span>
+<span class="hljs-attr">open_browser</span> = <span class="hljs-literal">true</span>
+
+<span class="hljs-section">[triggers]</span>
+<span class="hljs-attr">webhook_secret_ref</span> = <span class="hljs-string">&quot;env:NYX_WEBHOOK_SECRET&quot;</span>
+<span class="hljs-attr">webhook_branch</span> = <span class="hljs-string">&quot;main&quot;</span>
+
+<span class="hljs-section">[nyx]</span>
+<span class="hljs-comment"># binary_path = &quot;/opt/nyx/bin/nyx&quot;</span>
+
+<span class="hljs-section">[run]</span>
+<span class="hljs-attr">replay_stable_check</span> = <span class="hljs-literal">false</span>
+<span class="hljs-attr">business_logic_templates_enabled</span> = <span class="hljs-literal">true</span>
+<span class="hljs-attr">business_logic_template_ids</span> = []
+
+<span class="hljs-section">[[project]]</span>
+<span class="hljs-attr">name</span> = <span class="hljs-string">&quot;acme-app&quot;</span>
+<span class="hljs-attr">description</span> = <span class="hljs-string">&quot;Acme web product&quot;</span>
+<span class="hljs-attr">target_base_url</span> = <span class="hljs-string">&quot;http://localhost:3000&quot;</span>
+
+  <span class="hljs-section">[project.launch]</span>
+  <span class="hljs-attr">mode</span> = <span class="hljs-string">&quot;custom-commands&quot;</span>
+  <span class="hljs-attr">env_files</span> = [<span class="hljs-string">&quot;.env.test&quot;</span>]
+
+    <span class="hljs-section">[[project.launch.build]]</span>
+    <span class="hljs-attr">command</span> = <span class="hljs-string">&quot;npm ci&quot;</span>
+    <span class="hljs-attr">repo</span> = <span class="hljs-string">&quot;acme-frontend&quot;</span>
+
+    <span class="hljs-section">[[project.launch.start]]</span>
+    <span class="hljs-attr">command</span> = <span class="hljs-string">&quot;npm run dev&quot;</span>
+    <span class="hljs-attr">repo</span> = <span class="hljs-string">&quot;acme-frontend&quot;</span>
+    <span class="hljs-attr">timeout_secs</span> = <span class="hljs-number">120</span>
+
+    <span class="hljs-section">[[project.launch.health]]</span>
+    <span class="hljs-attr">url</span> = <span class="hljs-string">&quot;http://localhost:3000/health&quot;</span>
+    <span class="hljs-attr">timeout_secs</span> = <span class="hljs-number">60</span>
+
+    <span class="hljs-section">[[project.launch.seed]]</span>
+    <span class="hljs-attr">command</span> = <span class="hljs-string">&quot;npm run seed:test&quot;</span>
+    <span class="hljs-attr">repo</span> = <span class="hljs-string">&quot;acme-backend&quot;</span>
+
+    <span class="hljs-section">[[project.launch.reset]]</span>
+    <span class="hljs-attr">command</span> = <span class="hljs-string">&quot;npm run db:reset&quot;</span>
+    <span class="hljs-attr">repo</span> = <span class="hljs-string">&quot;acme-backend&quot;</span>
+
+  <span class="hljs-section">[[project.repo]]</span>
+  <span class="hljs-attr">name</span> = <span class="hljs-string">&quot;acme-backend&quot;</span>
+  <span class="hljs-attr">i_own_this</span> = <span class="hljs-literal">true</span>
+  <span class="hljs-attr">source</span> = { kind = <span class="hljs-string">&quot;local-path&quot;</span>, path = <span class="hljs-string">&quot;/srv/repos/acme-backend&quot;</span> }
+
+  <span class="hljs-section">[[project.repo]]</span>
+  <span class="hljs-attr">name</span> = <span class="hljs-string">&quot;acme-frontend&quot;</span>
+  <span class="hljs-attr">i_own_this</span> = <span class="hljs-literal">true</span>
+  <span class="hljs-attr">source</span> = { kind = <span class="hljs-string">&quot;git&quot;</span>, url = <span class="hljs-string">&quot;git@github.com:acme/frontend.git&quot;</span>, branch = <span class="hljs-string">&quot;main&quot;</span> }
+
+<span class="hljs-section">[[schedule]]</span>
+<span class="hljs-attr">cron</span> = <span class="hljs-string">&quot;0 3 * * 1&quot;</span>
+<span class="hljs-attr">repo</span> = <span class="hljs-string">&quot;acme-backend&quot;</span>
+<span class="hljs-attr">label</span> = <span class="hljs-string">&quot;weekly-monday-3am&quot;</span></code></pre>
+<h2 id="failure-modes"><a class="docs-anchor" href="#failure-modes" aria-label="Link to failure-modes" data-pagefind-ignore>#</a>Failure modes</h2>
+<table>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>Cause / Fix</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>failed to parse config at &lt;path&gt;: unknown field ...</code></td>
+<td>Typo in a field name. Sections deny unknown fields. Check the schema tables above.</td>
+</tr>
+<tr>
+<td><code>failed to parse config at &lt;path&gt;: missing field ...</code></td>
+<td>A required field is unset. <code>name</code> on <code>[[project]]</code> / <code>[[project.repo]]</code>, <code>cron</code> on <code>[[schedule]]</code>, <code>url</code> on a <code>git</code> source.</td>
+</tr>
+<tr>
+<td><code>failed to read config at &lt;path&gt;: ...</code></td>
+<td>Permission issue or the path passed to <code>--config</code> is wrong.</td>
+</tr>
+<tr>
+<td><code>no repositories selected; configure one in nyx-agent.toml</code></td>
+<td>The TOML has zero <code>[[project.repo]]</code> blocks or every repo is <code>enabled = false</code>.</td>
+</tr>
+<tr>
+<td><code>invalid [[schedule]] config: ...</code></td>
+<td>A cron expression failed to parse or the referenced repo does not exist. The daemon refuses to start.</td>
+</tr>
+<tr>
+<td>Daemon accepts webhooks but every call returns <code>503</code></td>
+<td><code>triggers.webhook_secret_ref</code> is unset, points at an unset env var, or resolves to an empty string.</td>
+</tr>
+</tbody></table>
+<h2 id="related-pages"><a class="docs-anchor" href="#related-pages" aria-label="Link to related-pages" data-pagefind-ignore>#</a>Related pages</h2>
+<ul>
+<li><a href="cli.html">CLI reference</a></li>
+<li><a href="quickstart.html">Quickstart</a></li>
+<li><a href="triggers/cron.html">Cron trigger</a></li>
+<li><a href="triggers/webhook.html">Webhook trigger</a></li>
+</ul>
+
+          </div>
+          <nav class="docs-prevnext" aria-label="Page navigation"><a class="docs-prevnext__link docs-prevnext__link--prev" href="cli.html">
+        <span class="docs-prevnext__label">Previous</span>
+        <span class="docs-prevnext__title">CLI</span>
+      </a><a class="docs-prevnext__link docs-prevnext__link--next" href="state-dir.html">
+        <span class="docs-prevnext__label">Next</span>
+        <span class="docs-prevnext__title">State Directory</span>
+      </a></nav>
+        </article>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <p class="site-footer__copy">© 2026 Eli Peter · Nyx Agent is licensed under AGPL-3.0-or-later.</p>
+        <nav class="site-footer__nav" aria-label="Footer">
+          <a href="../../">Home</a>
+          <a href="../../scanner.html">Scanner</a>
+          <a href="../../agent.html">Agent</a>
+          <a href="../../news/">News</a>
+          <a href="../../docs/">Docs</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

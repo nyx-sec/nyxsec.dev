@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Roadmap | Nyx docs</title>
+    <meta name="description" content="The current focus is straightforward. Run Nyx against real open-source repositories and real CVEs, then close the gap between what it finds and what it should find." />
+    <meta name="keywords" content="Nyx, Nyx scanner, SAST, static analysis, Rust security scanner, local-first SAST, Project, Roadmap, SSA, go, taint" />
+    <meta name="author" content="Eli Peter" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <link rel="canonical" href="https://nyxscan.dev/docs/nyx/roadmap.html" />
+    <link rel="sitemap" type="application/xml" href="https://nyxscan.dev/sitemap.xml" />
+    <link rel="alternate" hreflang="en" href="https://nyxscan.dev/docs/nyx/roadmap.html" />
+    <link rel="alternate" hreflang="x-default" href="https://nyxscan.dev/docs/nyx/roadmap.html" />
+    <link rel="prev" href="detectors/taint.html" />
+    <link rel="next" href="changelog.html" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="64x64" href="../../favicon-64.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../../favicon-180.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="alternate" type="application/rss+xml" title="Nyx | News &amp; release notes" href="/news/feed.xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../styles.css" />
+    <script defer src="../../docs/search.js"></script>
+
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Nyx" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="Roadmap" />
+    <meta property="og:description" content="The current focus is straightforward. Run Nyx against real open-source repositories and real CVEs, then close the gap between what it finds and what it should find." />
+    <meta property="og:url" content="https://nyxscan.dev/docs/nyx/roadmap.html" />
+    <meta property="og:image" content="https://nyxscan.dev/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Nyx Scanner local-first security documentation" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Roadmap" />
+    <meta name="twitter:description" content="The current focus is straightforward. Run Nyx against real open-source repositories and real CVEs, then close the gap between what it finds and what it should find." />
+    <meta name="twitter:image" content="https://nyxscan.dev/og-image.png" />
+    <meta name="twitter:image:alt" content="Nyx Scanner local-first security documentation" />
+    <meta name="theme-color" content="#F9F8F4" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://nyxscan.dev/#person",
+      "name": "Eli Peter",
+      "url": "https://github.com/elicpeter",
+      "sameAs": [
+        "https://github.com/elicpeter",
+        "https://github.com/sponsors/elicpeter"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://nyxscan.dev/#website",
+      "url": "https://nyxscan.dev/",
+      "name": "Nyx",
+      "description": "Local security tooling for deterministic scanning and live testing.",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://nyxscan.dev/#person"
+      }
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://nyxscan.dev/docs/nyx/roadmap.html#article",
+      "headline": "Roadmap",
+      "name": "Roadmap",
+      "url": "https://nyxscan.dev/docs/nyx/roadmap.html",
+      "description": "The current focus is straightforward. Run Nyx against real open-source repositories and real CVEs, then close the gap between what it finds and what it should find.",
+      "inLanguage": "en",
+      "articleSection": "Project",
+      "isPartOf": {
+        "@id": "https://nyxscan.dev/#website"
+      },
+      "publisher": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "author": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "image": "https://nyxscan.dev/og-image.png",
+      "mainEntityOfPage": "https://nyxscan.dev/docs/nyx/roadmap.html"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://nyxscan.dev/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Docs",
+          "item": "https://nyxscan.dev/docs/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Nyx Scanner docs",
+          "item": "https://nyxscan.dev/docs/nyx/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Roadmap",
+          "item": "https://nyxscan.dev/docs/nyx/roadmap.html"
+        }
+      ],
+      "@id": "https://nyxscan.dev/docs/nyx/roadmap.html#breadcrumbs"
+    }
+  ]
+}
+    </script>
+  </head>
+  <body class="docs-body">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" aria-label="Primary navigation">
+      <div class="container site-header__inner">
+        <a class="brand" href="../../" aria-label="Nyx home">
+          <img src="../../assets/logo.png" alt="Nyx" class="brand-logo" />
+        </a>
+        <span class="header-wordmark">NYX</span>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="../../scanner.html">Scanner</a>
+          <a href="../../agent.html">Agent</a>
+          <a href="../../news/">News</a>
+          <a href="../../docs/" aria-current="page">Docs</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="docs-page">
+      <div class="docs-shell">
+        <nav class="docs-sidebar" aria-label="Documentation"><a class="docs-sidebar__brand" href="./">Nyx docs</a><a class="docs-sidebar__home" href="../">All docs</a><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Getting started</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="quickstart.html">Quickstart</a></li><li><a class="docs-sidebar__link" href="installation.html">Installation</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Using nyx</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="cli.html">CLI reference</a></li><li><a class="docs-sidebar__link" href="serve.html">Browser UI</a></li><li><a class="docs-sidebar__link" href="dynamic.html">Dynamic verification</a></li><li><a class="docs-sidebar__link" href="configuration.html">Configuration</a></li><li><a class="docs-sidebar__link" href="output.html">Output formats</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Coverage</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="language-maturity.html">Language maturity</a></li><li><a class="docs-sidebar__link" href="rules.html">Rules</a></li><li><a class="docs-sidebar__link" href="auth.html">Auth analysis</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Under the hood</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="how-it-works.html">How it works</a></li><li><a class="docs-sidebar__link" href="advanced-analysis.html">Advanced analysis</a></li><li><a class="docs-sidebar__link" href="detectors.html">Detectors</a><ul class="docs-sidebar__sublist"><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/patterns.html">Patterns</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/cfg.html">CFG</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/state.html">State</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/taint.html">Taint</a></li></ul></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Project</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="roadmap.html" aria-current="page">Roadmap</a></li><li><a class="docs-sidebar__link" href="changelog.html">Changelog</a></li></ul></div></nav>
+        <article class="docs-content">
+          <div class="docs-search docs-search--content" data-docs-search>
+    <label class="visually-hidden" for="docs-search-input">Search docs</label>
+    <div class="docs-search__control">
+      <span class="docs-search__icon" aria-hidden="true"></span>
+      <input id="docs-search-input" data-docs-search-input type="search" placeholder="Search docs" autocomplete="off" autocapitalize="none" spellcheck="false" role="combobox" aria-autocomplete="list" aria-controls="docs-search-results" aria-expanded="false" />
+      <kbd class="docs-search__key" aria-hidden="true">⌘K</kbd>
+    </div>
+    <div class="docs-search__panel" data-docs-search-panel hidden>
+      <div class="docs-search__status" data-docs-search-status></div>
+      <div class="docs-search__results" id="docs-search-results" data-docs-search-results role="listbox" aria-label="Search results"></div>
+    </div>
+  </div>
+          <div class="docs-prose" data-pagefind-body>
+<h1 id="roadmap"><a class="docs-anchor" href="#roadmap" aria-label="Link to roadmap" data-pagefind-ignore>#</a>Roadmap</h1>
+<h2 id="now-recall-and-precision-on-real-codebases"><a class="docs-anchor" href="#now-recall-and-precision-on-real-codebases" aria-label="Link to now-recall-and-precision-on-real-codebases" data-pagefind-ignore>#</a>Now: recall and precision on real codebases</h2>
+<p>The current focus is straightforward. Run Nyx against real open-source repositories and real CVEs, then close the gap between what it finds and what it should find.</p>
+<p>That means:</p>
+<ul>
+<li><strong>Recall.</strong> Pick CVEs with public fixes. Reproduce them on the vulnerable commit. If Nyx misses, figure out why (missing source, missing sink, lost flow across a call, dropped at a sanitizer that was not actually a sanitizer) and fix the underlying analysis, not the fixture.</li>
+<li><strong>Precision.</strong> Triage the noise on large repos (phpMyAdmin, Nextcloud, and others). Each false positive gets reduced to a pattern: receiver-type gate, non-crypto context for <code>md5</code>/<code>sha1</code>, type-safe sink suppression, etc. Land the gate, re-run the corpus, confirm the count drops without taking real bugs with it.</li>
+<li><strong>Corpus discipline.</strong> Every fix lands with a fixture (positive or negative) and a corpus row. Rule-level F1 on <code>tests/benchmark/corpus/</code> is the scoreboard. CI floors only ratchet up.</li>
+</ul>
+<p>The scanner internals (SSA, cross-file summaries, abstract interpretation, symbolic execution, auth analysis) are in place. They get refined in service of the recall/precision work, not extended for their own sake.</p>
+<h2 id="later-dynamic-capability"><a class="docs-anchor" href="#later-dynamic-capability" aria-label="Link to later-dynamic-capability" data-pagefind-ignore>#</a>Later: dynamic capability</h2>
+<p>Static analysis confirms a flow exists. Dynamic execution confirms it fires. The plan is a local sandbox that picks up entry points Nyx already identifies, builds a harness, injects a payload, and watches for the crash or shell. Pairs naturally with fuzzing (libFuzzer, cargo-fuzz, go-fuzz, HTTP) where the static engine picks the targets.</p>
+<p>Not started. Lands after the static side is honest on real corpora.</p>
+<h2 id="later-still-reasoning-layer"><a class="docs-anchor" href="#later-still-reasoning-layer" aria-label="Link to later-still-reasoning-layer" data-pagefind-ignore>#</a>Later still: reasoning layer</h2>
+<p>Embeddings for cross-codebase pattern similarity. LLM-assisted detection for logic bugs that resist taint modeling. Automated exploit refinement loops. All speculative until the foundation is solid.</p>
+
+          </div>
+          <nav class="docs-prevnext" aria-label="Page navigation"><a class="docs-prevnext__link docs-prevnext__link--prev" href="detectors/taint.html">
+        <span class="docs-prevnext__label">Previous</span>
+        <span class="docs-prevnext__title">Taint</span>
+      </a><a class="docs-prevnext__link docs-prevnext__link--next" href="changelog.html">
+        <span class="docs-prevnext__label">Next</span>
+        <span class="docs-prevnext__title">Changelog</span>
+      </a></nav>
+        </article>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <p class="site-footer__copy">© 2026 Eli Peter · Nyx is licensed under GPL-3.0-or-later.</p>
+        <nav class="site-footer__nav" aria-label="Footer">
+          <a href="../../">Home</a>
+          <a href="../../scanner.html">Scanner</a>
+          <a href="../../agent.html">Agent</a>
+          <a href="../../news/">News</a>
+          <a href="../../docs/">Docs</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

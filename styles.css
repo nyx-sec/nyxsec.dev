@@ -160,6 +160,10 @@ pre {
   height: 64px;
 }
 
+.site-header--compact .site-header__inner {
+  height: 58px;
+}
+
 .brand {
   display: inline-flex;
   align-items: center;
@@ -395,6 +399,67 @@ main {
   position: absolute;
   right: 10px;
   color: var(--line-strong);
+}
+
+/* ── Product split home ── */
+.product-home {
+  background: var(--bg);
+}
+
+.product-split {
+  display: grid;
+  min-height: calc(100vh - 58px);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-bottom: 1px solid var(--line);
+}
+
+.product-pane {
+  display: grid;
+  align-content: space-between;
+  min-height: calc(100vh - 58px);
+  padding: clamp(42px, 6vw, 78px);
+  gap: 42px;
+}
+
+.product-pane + .product-pane {
+  border-left: 1px solid var(--line);
+}
+
+.product-pane--agent {
+  background: var(--bg-soft);
+}
+
+.product-pane__copy {
+  max-width: 640px;
+}
+
+.product-pane h2 {
+  max-width: 620px;
+  margin-bottom: 18px;
+  font-size: clamp(2.45rem, 4.6vw, 4.9rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+}
+
+.product-pane p:not(.eyebrow) {
+  max-width: 620px;
+  margin-bottom: 24px;
+  color: var(--muted);
+  font-size: clamp(1rem, 1.35vw, 1.12rem);
+  line-height: 1.72;
+}
+
+.product-actions {
+  margin-bottom: 0;
+}
+
+.product-pane__media {
+  align-self: end;
+}
+
+.product-pane__media .app-frame {
+  max-width: 680px;
+  box-shadow: var(--shadow-md);
 }
 
 /* ── Buttons ── */
@@ -687,6 +752,12 @@ main {
   box-shadow: var(--shadow-sm);
 }
 
+.article-media .app-frame img {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
 .article-body h2 {
   margin-top: 44px;
   margin-bottom: 12px;
@@ -940,6 +1011,16 @@ main {
   font-weight: 600;
 }
 
+.stage-table td:first-child {
+  width: 180px;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.stage-table td:nth-child(2) {
+  font-weight: 400;
+}
+
 .cell--yes {
   color: var(--green);
   font-weight: 500;
@@ -1101,6 +1182,25 @@ main {
 
 /* ── Responsive ── */
 @media (max-width: 960px) {
+  .product-split {
+    min-height: auto;
+    grid-template-columns: 1fr;
+  }
+
+  .product-pane {
+    min-height: auto;
+    padding: 54px 40px;
+  }
+
+  .product-pane + .product-pane {
+    border-top: 1px solid var(--line);
+    border-left: none;
+  }
+
+  .product-pane__media .app-frame {
+    max-width: none;
+  }
+
   .hero__inner {
     grid-template-columns: 1fr;
     gap: 40px;
@@ -1160,6 +1260,15 @@ main {
   .hero__inner {
     padding: 48px 0 0;
     gap: 32px;
+  }
+
+  .product-pane {
+    padding: 46px 20px;
+    gap: 30px;
+  }
+
+  .product-pane h2 {
+    font-size: clamp(2.25rem, 14vw, 3.1rem);
   }
 
   .button-row {
@@ -1237,7 +1346,17 @@ main {
 
   .nav a {
     font-size: 0.85rem;
-    padding: 6px 8px;
+    padding: 6px 7px;
+  }
+
+  .nav-github {
+    margin-left: 4px;
+  }
+}
+
+@media (max-width: 520px) {
+  .header-wordmark {
+    display: none;
   }
 }
 
@@ -1254,7 +1373,7 @@ main {
 }
 
 /* ─────────────────────────────────────────
-   Docs — sidebar + prose
+   Docs - sidebar + prose
 ───────────────────────────────────────── */
 .docs-page {
   padding: 0;
@@ -1291,6 +1410,20 @@ main {
   font-size: 1.2rem;
   letter-spacing: -0.01em;
   color: var(--text);
+}
+
+.docs-sidebar__home {
+  display: inline-block;
+  margin: -4px 0 20px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.docs-sidebar__home:hover {
+  color: var(--accent);
 }
 
 .docs-search {
@@ -1849,6 +1982,20 @@ main {
   color: var(--muted);
 }
 
+.docs-index__group--product h2 {
+  font-size: 1.02rem;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--text);
+}
+
+.docs-index__group--product p {
+  margin: 0 0 16px;
+  color: var(--text-2);
+  font-size: 0.94rem;
+  line-height: 1.55;
+}
+
 .docs-index__group ul {
   list-style: none;
   margin: 0;
@@ -1871,7 +2018,7 @@ main {
   text-underline-offset: 3px;
 }
 
-/* highlight.js — palette tuned for terminal-bg */
+/* highlight.js - palette tuned for terminal-bg */
 .hljs {
   color: #e5e1d7;
   background: transparent;

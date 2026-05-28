@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Auth analysis | Nyx docs</title>
+    <meta name="description" content="Rust is the stable target. Python and Go have shipped precision work as of 0.7.0 (FastAPI cross-file dependencies, Go DAO-helper filtering, same-file caller-scope IPA) and are usable on real..." />
+    <meta name="keywords" content="Nyx, Nyx scanner, SAST, static analysis, Rust security scanner, local-first SAST, Coverage, Auth analysis, Rust, Python, Go, FastAPI" />
+    <meta name="author" content="Eli Peter" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <link rel="canonical" href="https://nyxscan.dev/docs/nyx/auth.html" />
+    <link rel="sitemap" type="application/xml" href="https://nyxscan.dev/sitemap.xml" />
+    <link rel="alternate" hreflang="en" href="https://nyxscan.dev/docs/nyx/auth.html" />
+    <link rel="alternate" hreflang="x-default" href="https://nyxscan.dev/docs/nyx/auth.html" />
+    <link rel="prev" href="rules.html" />
+    <link rel="next" href="how-it-works.html" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="64x64" href="../../favicon-64.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../../favicon-180.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="alternate" type="application/rss+xml" title="Nyx | News &amp; release notes" href="/news/feed.xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../styles.css" />
+    <script defer src="../../docs/search.js"></script>
+
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Nyx" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="Auth analysis" />
+    <meta property="og:description" content="Rust is the stable target. Python and Go have shipped precision work as of 0.7.0 (FastAPI cross-file dependencies, Go DAO-helper filtering, same-file caller-scope IPA) and are usable on real..." />
+    <meta property="og:url" content="https://nyxscan.dev/docs/nyx/auth.html" />
+    <meta property="og:image" content="https://nyxscan.dev/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Nyx Scanner local-first security documentation" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Auth analysis" />
+    <meta name="twitter:description" content="Rust is the stable target. Python and Go have shipped precision work as of 0.7.0 (FastAPI cross-file dependencies, Go DAO-helper filtering, same-file caller-scope IPA) and are usable on real..." />
+    <meta name="twitter:image" content="https://nyxscan.dev/og-image.png" />
+    <meta name="twitter:image:alt" content="Nyx Scanner local-first security documentation" />
+    <meta name="theme-color" content="#F9F8F4" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://nyxscan.dev/#person",
+      "name": "Eli Peter",
+      "url": "https://github.com/elicpeter",
+      "sameAs": [
+        "https://github.com/elicpeter",
+        "https://github.com/sponsors/elicpeter"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://nyxscan.dev/#website",
+      "url": "https://nyxscan.dev/",
+      "name": "Nyx",
+      "description": "Local security tooling for deterministic scanning and live testing.",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://nyxscan.dev/#person"
+      }
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://nyxscan.dev/docs/nyx/auth.html#article",
+      "headline": "Auth analysis",
+      "name": "Auth analysis",
+      "url": "https://nyxscan.dev/docs/nyx/auth.html",
+      "description": "Rust is the stable target. Python and Go have shipped precision work as of 0.7.0 (FastAPI cross-file dependencies, Go DAO-helper filtering, same-file caller-scope IPA) and are usable on real...",
+      "inLanguage": "en",
+      "articleSection": "Coverage",
+      "isPartOf": {
+        "@id": "https://nyxscan.dev/#website"
+      },
+      "publisher": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "author": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "image": "https://nyxscan.dev/og-image.png",
+      "mainEntityOfPage": "https://nyxscan.dev/docs/nyx/auth.html"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://nyxscan.dev/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Docs",
+          "item": "https://nyxscan.dev/docs/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Nyx Scanner docs",
+          "item": "https://nyxscan.dev/docs/nyx/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Auth analysis",
+          "item": "https://nyxscan.dev/docs/nyx/auth.html"
+        }
+      ],
+      "@id": "https://nyxscan.dev/docs/nyx/auth.html#breadcrumbs"
+    }
+  ]
+}
+    </script>
+  </head>
+  <body class="docs-body">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" aria-label="Primary navigation">
+      <div class="container site-header__inner">
+        <a class="brand" href="../../" aria-label="Nyx home">
+          <img src="../../assets/logo.png" alt="Nyx" class="brand-logo" />
+        </a>
+        <span class="header-wordmark">NYX</span>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="../../scanner.html">Scanner</a>
+          <a href="../../agent.html">Agent</a>
+          <a href="../../news/">News</a>
+          <a href="../../docs/" aria-current="page">Docs</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="docs-page">
+      <div class="docs-shell">
+        <nav class="docs-sidebar" aria-label="Documentation"><a class="docs-sidebar__brand" href="./">Nyx docs</a><a class="docs-sidebar__home" href="../">All docs</a><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Getting started</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="quickstart.html">Quickstart</a></li><li><a class="docs-sidebar__link" href="installation.html">Installation</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Using nyx</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="cli.html">CLI reference</a></li><li><a class="docs-sidebar__link" href="serve.html">Browser UI</a></li><li><a class="docs-sidebar__link" href="dynamic.html">Dynamic verification</a></li><li><a class="docs-sidebar__link" href="configuration.html">Configuration</a></li><li><a class="docs-sidebar__link" href="output.html">Output formats</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Coverage</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="language-maturity.html">Language maturity</a></li><li><a class="docs-sidebar__link" href="rules.html">Rules</a></li><li><a class="docs-sidebar__link" href="auth.html" aria-current="page">Auth analysis</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Under the hood</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="how-it-works.html">How it works</a></li><li><a class="docs-sidebar__link" href="advanced-analysis.html">Advanced analysis</a></li><li><a class="docs-sidebar__link" href="detectors.html">Detectors</a><ul class="docs-sidebar__sublist"><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/patterns.html">Patterns</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/cfg.html">CFG</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/state.html">State</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/taint.html">Taint</a></li></ul></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Project</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="roadmap.html">Roadmap</a></li><li><a class="docs-sidebar__link" href="changelog.html">Changelog</a></li></ul></div></nav>
+        <article class="docs-content">
+          <div class="docs-search docs-search--content" data-docs-search>
+    <label class="visually-hidden" for="docs-search-input">Search docs</label>
+    <div class="docs-search__control">
+      <span class="docs-search__icon" aria-hidden="true"></span>
+      <input id="docs-search-input" data-docs-search-input type="search" placeholder="Search docs" autocomplete="off" autocapitalize="none" spellcheck="false" role="combobox" aria-autocomplete="list" aria-controls="docs-search-results" aria-expanded="false" />
+      <kbd class="docs-search__key" aria-hidden="true">⌘K</kbd>
+    </div>
+    <div class="docs-search__panel" data-docs-search-panel hidden>
+      <div class="docs-search__status" data-docs-search-status></div>
+      <div class="docs-search__results" id="docs-search-results" data-docs-search-results role="listbox" aria-label="Search results"></div>
+    </div>
+  </div>
+          <div class="docs-prose" data-pagefind-body>
+<h1 id="auth-analysis"><a class="docs-anchor" href="#auth-analysis" aria-label="Link to auth-analysis" data-pagefind-ignore>#</a>Auth analysis</h1>
+<p><strong>Rust is the stable target.</strong> Python and Go have shipped precision work as of 0.7.0 (FastAPI cross-file dependencies, Go DAO-helper filtering, same-file caller-scope IPA) and are usable on real codebases. Ruby, Java, JavaScript, and TypeScript have rule scaffolding in <a href="https://github.com/elicpeter/nyx/blob/master/src/auth_analysis/config.rs"><code>src/auth_analysis/config.rs</code></a> but no benchmark corpus yet; treat findings there as preview.</p>
+<h2 id="what-it-catches"><a class="docs-anchor" href="#what-it-catches" aria-label="Link to what-it-catches" data-pagefind-ignore>#</a>What it catches</h2>
+<p>The Rust rule is <code>rs.auth.missing_ownership_check</code>. It fires when a request handler reaches a privileged operation that takes a scoped identifier (<code>*_id</code>, row reference, scoped resource) without a preceding ownership or membership check.</p>
+<p>Concretely, it looks for these patterns of authorization in the function body and flags the call when none are present:</p>
+<ul>
+<li>A call to a recognised authorization helper. Defaults: <code>check_ownership</code>, <code>has_ownership</code>, <code>require_ownership</code>, <code>ensure_ownership</code>, <code>is_owner</code>, <code>authorize</code>, <code>verify_access</code>, <code>has_permission</code>, <code>can_access</code>, <code>can_manage</code>, plus <code>*_membership</code> and <code>require_{group,org,workspace,tenant,team}_member</code> variants. Extend in <code>[analysis.languages.rust]</code>.</li>
+<li>An ownership-equality check on a row reference: <code>if owner_id != user.id { return 403 }</code> or any <code>field_id != self_actor</code> shape. The check writes <code>AuthCheck</code> evidence back to the row-fetch arguments via <code>AnalysisUnit.row_field_vars</code>.</li>
+<li>A self-actor reference: <code>let user = require_auth(...).await?</code> followed by use of <code>user.id</code>, <code>user.user_id</code>, <code>user.uid</code>. The actor is recognised from typed extractor params (<code>Extension&lt;Session&gt;</code>, <code>CurrentUser</code>, etc.) and from typed helper bindings.</li>
+<li>A typed extractor wrapper that proves route-level capability/policy enforcement: meilisearch-style <code>GuardedData&lt;ActionPolicy&lt;X&gt;, _&gt;</code>. Recognised by outer wrapper name (last segment, case-insensitive <code>starts_with</code>) so <code>GuardedData&lt;ActionPolicy&lt;X&gt;, Data&lt;AuthController&gt;&gt;</code> is classified by the outer <code>GuardedData</code>, not by whether an inner generic arg substring-matches <code>auth</code>. Configured via <code>policy_guard_names</code> (Rust default: <code>[&quot;Guarded&quot;]</code>). Distinct from authentication-only wrappers so the pattern doesn&#39;t pollute regular call recognition.</li>
+<li>A SQL query that joins through an ACL table or filters by <code>user_id</code> predicate. Detected without a SQL parser via <a href="https://github.com/elicpeter/nyx/blob/master/src/auth_analysis/sql_semantics.rs"><code>sql_semantics.rs</code></a>; the authorized result variable propagates through <code>let row = ...prepare(LIT)...</code>, <code>for row in result</code>, <code>let id = row.get(...)</code>.</li>
+<li>A helper-summary lift: handler calls <code>validate_target(db, widget_id, user.id)</code> whose body contains a <code>require_*_member</code> call. Cross-function summaries are merged at fixed-point (capped at 4 iterations).</li>
+</ul>
+<p>Handlers registered through attribute macros (<code>#[get(&quot;/path&quot;)]</code>, <code>#[routes::path(…)]</code>) or external service-config builders are also walked for typed-extractor guards, complementing the <code>.route(...)</code> registration path.</p>
+<h2 id="caller-scope-entity-exemption"><a class="docs-anchor" href="#caller-scope-entity-exemption" aria-label="Link to caller-scope-entity-exemption" data-pagefind-ignore>#</a>Caller-scope-entity exemption</h2>
+<p><code>&lt;entity&gt;.id</code> / <code>&lt;entity&gt;.pk</code> is not flagged when <code>&lt;entity&gt;</code> is a unit parameter named after a multi-tenant scope primitive: <code>organization</code> / <code>org</code>, <code>project</code>, <code>team</code>, <code>workspace</code>, <code>tenant</code>, <code>account</code>, <code>community</code>, <code>group</code>, <code>repository</code> / <code>repo</code>, <code>company</code>. The argument represents the caller&#39;s scope, not a user-controlled target, so internal helpers like <code>def get_environments(request, organization): Environment.objects.filter(organization_id=organization.id, …)</code> inherit the caller&#39;s authorization. Other field names (<code>.name</code>, <code>.slug</code>) still flag, and <code>user</code> / <code>member</code> / <code>actor</code> are deliberately excluded; those are handled by the actor-context recogniser.</p>
+<h2 id="project-level-web-framework-gate-rust"><a class="docs-anchor" href="#project-level-web-framework-gate-rust" aria-label="Link to project-level-web-framework-gate-rust" data-pagefind-ignore>#</a>Project-level web-framework gate (Rust)</h2>
+<p>In Rust, the <code>context_inputs</code> and param-name arms of the user-input heuristic are gated by a project-level web-framework signal. The signal is three-valued:</p>
+<ul>
+<li><code>Some(true)</code>: the project&#39;s <code>Cargo.toml</code> names <code>axum</code>, <code>actix-web</code>, or <code>rocket</code>, OR the file directly imports one (<code>axum::</code>, <code>actix_web::</code>, <code>rocket::</code>, <code>axum_extra::</code>). Heuristics stay on.</li>
+<li><code>Some(false)</code>: <code>Cargo.toml</code> was inspected and named no web framework, AND the file does not directly import one. Heuristics off; only <code>RouteHandler</code> classification (concrete route-registration evidence) survives.</li>
+<li><code>None</code>: no detection ran (single-file scan with no project root). Heuristics on; behavior unchanged.</li>
+</ul>
+<p>This avoids a class of FPs in non-web Rust crates where a debug-session handle named <code>session</code> would trip on <code>session.update(cx, …)</code>-style desktop-app code. Other languages keep prior behavior; the gate is currently Rust-only.</p>
+<h2 id="python-fastapi-cross-file-dependencies"><a class="docs-anchor" href="#python-fastapi-cross-file-dependencies" aria-label="Link to python-fastapi-cross-file-dependencies" data-pagefind-ignore>#</a>Python: FastAPI cross-file dependencies</h2>
+<p>FastAPI&#39;s <code>include_router</code> chain is resolved across files. A child router declared in <code>routes/task_instances.py</code> and attached on a parent in <code>routes/__init__.py</code> inherits the parent&#39;s <code>dependencies=[...]</code>.</p>
+<ul>
+<li>Module-level <code>router = APIRouter(dependencies=[Security(...)])</code> is pre-walked once per file and merged onto every <code>@&lt;router&gt;.&lt;verb&gt;(...)</code> route attached in the same file.</li>
+<li><code>&lt;parent&gt;.include_router(&lt;child_module&gt;.&lt;child_var&gt;)</code> edges are captured per file in pass 1, persisted into <code>GlobalSummaries::router_facts_by_module</code>, and lifted onto the active file&#39;s <code>AuthorizationModel::cross_file_router_deps</code> at pass 2 entry. Transitive lifts (grandparent to parent to child) iterate to fixpoint.</li>
+<li><code>Security(callable, scopes=[...])</code> is recognised distinctly from <code>Depends(callable)</code> and promotes the synthetic <code>AuthCheck</code> to <code>AuthCheckKind::Other</code> (route-level scope-checked authorization). Bare <code>Depends(callable)</code> is still a Login-only check.</li>
+</ul>
+<p>Module identity is the file basename without <code>.py</code>. This is sufficient for airflow-style <code>task_instances.router</code> naming; a project with two files of the same name in different subtrees will currently collide.</p>
+<h2 id="go-dao-helper-id-scalar-precision-pass"><a class="docs-anchor" href="#go-dao-helper-id-scalar-precision-pass" aria-label="Link to go-dao-helper-id-scalar-precision-pass" data-pagefind-ignore>#</a>Go: DAO-helper id-scalar precision pass</h2>
+<p>For non-route Go units, a parameter whose declared type is a bounded primitive scalar (<code>int64</code>, <code>uint32</code>, <code>string</code>, <code>bool</code>, <code>byte</code>, <code>rune</code>, <code>float64</code>, etc.) and whose name is id-shaped (<code>id</code>, <code>*Id</code>, <code>*_id</code>, <code>*ids</code>) is dropped from <code>unit.params</code> before ownership-check evaluation.</p>
+<p>Real Go HTTP handlers always carry a framework-request-typed param (<code>*http.Request</code>, <code>*gin.Context</code>, <code>echo.Context</code>, <code>*fiber.Ctx</code>); per-framework route extractors set <code>include_id_like_typed=true</code> so id-shaped path params survive on real routes. The filter only fires when the unit was not classified as a route handler, so helpers like <code>func GetRunByRepoAndID(ctx, repoID, runID int64)</code> are recognised as DAO callees and the ownership check is expected at the calling route handler, not inside the helper.</p>
+<h2 id="same-file-caller-scope-ipa"><a class="docs-anchor" href="#same-file-caller-scope-ipa" aria-label="Link to same-file-caller-scope-ipa" data-pagefind-ignore>#</a>Same-file caller-scope IPA</h2>
+<p>When a private helper is called only from authorized route handlers in the same file, the caller&#39;s auth checks lift onto the helper as synthetic <code>is_route_level=true</code> <code>AuthCheck</code> entries.</p>
+<ul>
+<li>Iterated to a small fixpoint so transitive chains (route to mid_helper to leaf_helper) are covered.</li>
+<li>Refuses to authorize helpers with no in-file caller, helpers called from a mix of authorized and unauthorized callers, and helpers called only from un-lifted helpers.</li>
+<li>Cross-file caller-scope lifting is not implemented yet.</li>
+</ul>
+<p>This closes the FastAPI / Django / Flask shape where a route authenticates via decorator or dependency, then delegates to a private helper that performs the sink.</p>
+<h2 id="sink-classification"><a class="docs-anchor" href="#sink-classification" aria-label="Link to sink-classification" data-pagefind-ignore>#</a>Sink classification</h2>
+<p>The same call name can be safe on a local collection and dangerous on a database. The detector categorises each candidate sink before deciding whether to flag:</p>
+<table>
+<thead>
+<tr>
+<th>Class</th>
+<th>Examples</th>
+<th>Default treatment</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>InMemoryLocal</code></td>
+<td><code>map.insert</code>, <code>set.insert</code>, <code>vec.push</code> on tracked local</td>
+<td>Never a sink</td>
+</tr>
+<tr>
+<td><code>RealtimePublish</code></td>
+<td><code>realtime.publish_to_group</code>, <code>pubsub.send</code></td>
+<td>Sink unless ownership is established for the channel scope</td>
+</tr>
+<tr>
+<td><code>OutboundNetwork</code></td>
+<td><code>http.post</code>, <code>reqwest::Client::post</code></td>
+<td>Sink unless a sanitiser is on the path</td>
+</tr>
+<tr>
+<td><code>CacheCrossTenant</code></td>
+<td><code>redis.set</code>, <code>memcached.set</code> with scoped keys</td>
+<td>Sink unless tenant is checked</td>
+</tr>
+<tr>
+<td><code>DbMutation</code></td>
+<td><code>db.insert</code>, <code>repo.save</code> with scoped IDs</td>
+<td>Sink unless ownership is established</td>
+</tr>
+<tr>
+<td><code>DbCrossTenantRead</code></td>
+<td><code>db.query</code> returning rows from a tenant scope</td>
+<td>Sink unless ACL-join or tenant predicate is present</td>
+</tr>
+</tbody></table>
+<p>Receiver type drives the classification when SSA type facts are available, so <code>client.send(...)</code> correctly resolves through the receiver&#39;s inferred type.</p>
+<h2 id="what-it-cant-catch"><a class="docs-anchor" href="#what-it-cant-catch" aria-label="Link to what-it-cant-catch" data-pagefind-ignore>#</a>What it can&#39;t catch</h2>
+<ul>
+<li><strong>Non-Rust frameworks</strong>, in practice. Scaffolding exists; coverage doesn&#39;t.</li>
+<li><strong>Type-system authorization.</strong> A typestate pattern that makes unauthenticated handlers fail to compile (<code>fn endpoint(user: AuthenticatedUser&lt;Admin&gt;)</code>) is invisible. This is mostly fine because the type system already enforced the check, but the rule won&#39;t credit it.</li>
+<li><strong>Authorization performed only via macros</strong> that the AST doesn&#39;t expose as a recognisable call.</li>
+<li><strong>Cross-async-boundary actor binding.</strong> If the handler awaits <code>let user = require_auth(...).await?</code> and then spawns a task that uses <code>user.id</code> after a <code>tokio::spawn</code>, the spawn body is treated as a separate scope.</li>
+</ul>
+<h2 id="the-taint-based-variant"><a class="docs-anchor" href="#the-taint-based-variant" aria-label="Link to the-taint-based-variant" data-pagefind-ignore>#</a>The taint-based variant</h2>
+<p>A second rule, <code>rs.auth.missing_ownership_check.taint</code>, folds the same logic into the SSA/taint engine using the <code>Cap::UNAUTHORIZED_ID</code> capability (bit 12). Request-bound handler parameters seed <code>UNAUTHORIZED_ID</code> into taint state; ownership checks act as sanitizers that strip the cap; sinks that take scoped IDs require it absent.</p>
+<p>This path is <strong>off by default</strong> while the standalone analyser carries the stable signal. Enable both:</p>
+<pre><code class="hljs language-toml"><span class="hljs-section">[scanner]</span>
+<span class="hljs-attr">enable_auth_as_taint</span> = <span class="hljs-literal">true</span></code></pre>
+<p>Run them together; if both fire for the same site, treat it as the same finding (the taint variant carries fuller flow evidence).</p>
+<h2 id="tuning"><a class="docs-anchor" href="#tuning" aria-label="Link to tuning" data-pagefind-ignore>#</a>Tuning</h2>
+<h3 id="add-a-project-specific-authorization-helper"><a class="docs-anchor" href="#add-a-project-specific-authorization-helper" aria-label="Link to add-a-project-specific-authorization-helper" data-pagefind-ignore>#</a>Add a project-specific authorization helper</h3>
+<pre><code class="hljs language-toml"><span class="hljs-section">[[analysis.languages.rust.rules]]</span>
+<span class="hljs-attr">matchers</span> = [<span class="hljs-string">&quot;require_subscription&quot;</span>, <span class="hljs-string">&quot;ensure_paid_seat&quot;</span>]
+<span class="hljs-attr">kind</span>     = <span class="hljs-string">&quot;sanitizer&quot;</span>
+<span class="hljs-attr">cap</span>      = <span class="hljs-string">&quot;unauthorized_id&quot;</span></code></pre>
+<p>The same rule recognised in the standalone analyser also strips <code>Cap::UNAUTHORIZED_ID</code> for the taint-based variant.</p>
+<h3 id="add-a-project-specific-typed-extractor-policy-wrapper"><a class="docs-anchor" href="#add-a-project-specific-typed-extractor-policy-wrapper" aria-label="Link to add-a-project-specific-typed-extractor-policy-wrapper" data-pagefind-ignore>#</a>Add a project-specific typed-extractor policy wrapper</h3>
+<pre><code class="hljs language-toml"><span class="hljs-section">[analysis.languages.rust.auth]</span>
+<span class="hljs-attr">policy_guard_names</span> = [<span class="hljs-string">&quot;MyAppGuarded&quot;</span>, <span class="hljs-string">&quot;PolicyExtractor&quot;</span>]</code></pre>
+<p>Matched as last-segment + case-insensitive <code>starts_with</code> (so a single entry <code>&quot;Guarded&quot;</code> covers <code>Guarded</code>, <code>GuardedData</code>, <code>GuardedRoute</code>). Distinct from <code>login_guard_names</code> and <code>admin_guard_names</code>.</p>
+<h3 id="recognised-actor-names"><a class="docs-anchor" href="#recognised-actor-names" aria-label="Link to recognised-actor-names" data-pagefind-ignore>#</a>Recognised actor names</h3>
+<p>Recognised by default: <code>user.id</code>, <code>user.user_id</code>, <code>user.uid</code>, <code>session.user_id</code>, <code>current_user.id</code>, plus typed extractor parameters with <code>CurrentUser</code>, <code>SessionUser</code>, <code>AuthUser</code>, <code>Extension&lt;...&gt;</code> shapes. To add a custom binding pattern, file an issue or add a fixture; the heuristic lives in <a href="https://github.com/elicpeter/nyx/blob/master/src/auth_analysis/extract/common.rs"><code>src/auth_analysis/extract/common.rs</code></a> under the <code>*self_actor*</code> helpers (<code>collect_self_actor_binding</code>, <code>collect_typed_extractor_self_actor</code>, <code>is_self_actor_type_text</code>).</p>
+<h3 id="suppress"><a class="docs-anchor" href="#suppress" aria-label="Link to suppress" data-pagefind-ignore>#</a>Suppress</h3>
+<p>Inline:</p>
+<pre><code class="hljs language-rust">db.<span class="hljs-title function_ invoke__">insert</span>(widget_id, value)?;  <span class="hljs-comment">// nyx:ignore rs.auth.missing_ownership_check</span></code></pre>
+<p>Or filter by severity / confidence in CI:</p>
+<pre><code class="hljs language-bash">nyx scan . --severity <span class="hljs-string">&quot;&gt;=MEDIUM&quot;</span> --min-confidence medium</code></pre>
+<h2 id="in-the-ui"><a class="docs-anchor" href="#in-the-ui" aria-label="Link to in-the-ui" data-pagefind-ignore>#</a>In the UI</h2>
+<p>Auth findings render alongside taint findings in the <a href="serve.html">browser UI</a>. The flow visualiser shows the sink call, the actor reference (when one was found), and any helper-summary path the engine traversed; the How to fix panel mirrors the rule&#39;s recommendation.</p>
+<p align="center"><img src="assets/screenshots/docs/serve-finding-detail.png" alt="Nyx finding detail: numbered source → call → sink walk with a How to fix panel and an inline evidence object" width="900"/></p><h2 id="benchmark-corpus"><a class="docs-anchor" href="#benchmark-corpus" aria-label="Link to benchmark-corpus" data-pagefind-ignore>#</a>Benchmark corpus</h2>
+<p>The Rust auth corpus at <a href="https://github.com/elicpeter/nyx/tree/master/tests/benchmark/corpus/rust/auth/"><code>tests/benchmark/corpus/rust/auth/</code></a> covers the recognised authorization patterns, true-positive controls, typed-extractor guard injection, and the project-level web-framework gate (full-Cargo.toml fixtures under <code>safe_non_web_rust_project/</code> and <code>unsafe_actix_web_project_no_check/</code>). Per-row metrics live under the Rust auth row in <code>tests/benchmark/RESULTS.md</code>.</p>
+
+          </div>
+          <nav class="docs-prevnext" aria-label="Page navigation"><a class="docs-prevnext__link docs-prevnext__link--prev" href="rules.html">
+        <span class="docs-prevnext__label">Previous</span>
+        <span class="docs-prevnext__title">Rules</span>
+      </a><a class="docs-prevnext__link docs-prevnext__link--next" href="how-it-works.html">
+        <span class="docs-prevnext__label">Next</span>
+        <span class="docs-prevnext__title">How it works</span>
+      </a></nav>
+        </article>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <p class="site-footer__copy">© 2026 Eli Peter · Nyx is licensed under GPL-3.0-or-later.</p>
+        <nav class="site-footer__nav" aria-label="Footer">
+          <a href="../../">Home</a>
+          <a href="../../scanner.html">Scanner</a>
+          <a href="../../agent.html">Agent</a>
+          <a href="../../news/">News</a>
+          <a href="../../docs/">Docs</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

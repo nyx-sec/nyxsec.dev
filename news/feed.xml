@@ -4,10 +4,10 @@
      xmlns:dc="http://purl.org/dc/elements/1.1/"
      xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Nyx — News &amp; release notes</title>
+    <title>Nyx | News &amp; release notes</title>
     <link>https://nyxscan.dev/news/</link>
     <atom:link href="https://nyxscan.dev/news/feed.xml" rel="self" type="application/rss+xml" />
-    <description>Release notes and project updates for Nyx, the open-source, local-first SAST scanner written in Rust. Taint analysis, cross-file detection, SARIF output, and a local triage UI.</description>
+    <description>Release notes and project updates for Nyx and Nyx Agent.</description>
     <language>en-us</language>
     <copyright>Eli Peter</copyright>
     <managingEditor>noreply@nyxscan.dev (Eli Peter)</managingEditor>
@@ -17,13 +17,22 @@
     <ttl>1440</ttl>
     <image>
       <url>https://nyxscan.dev/og-image.png</url>
-      <title>Nyx — News &amp; release notes</title>
+      <title>Nyx | News &amp; release notes</title>
       <link>https://nyxscan.dev/news/</link>
       <width>1200</width>
       <height>630</height>
     </image>
-    <lastBuildDate>Mon, 11 May 2026 00:00:00 -0400</lastBuildDate>
-    <pubDate>Mon, 11 May 2026 00:00:00 -0400</pubDate>
+    <lastBuildDate>Tue, 26 May 2026 00:00:00 -0500</lastBuildDate>
+    <pubDate>Tue, 26 May 2026 00:00:00 -0500</pubDate>
+
+    <item>
+      <title>Nyx Agent is live</title>
+      <link>https://nyxscan.dev/news/nyx-agent.html</link>
+      <guid isPermaLink="true">https://nyxscan.dev/news/nyx-agent.html</guid>
+      <pubDate>Tue, 26 May 2026 00:00:00 -0500</pubDate>
+      <dc:creator>Eli Peter</dc:creator>
+      <description>Nyx Agent runs local pentests against development apps. It reads the repo, checks the local target, and keeps proof with the run.</description>
+    </item>
 
     <item>
       <title>More bug classes, less auth noise</title>

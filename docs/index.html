@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Documentation | Nyx — local-first Rust SAST scanner</title>
-    <meta name="description" content="Documentation for Nyx, the open-source, local-first SAST scanner written in Rust. Quickstart, CLI reference, detectors, configuration, and language coverage." />
-    <meta name="keywords" content="Nyx, Nyx scanner, Nyx documentation, SAST, static analysis, Rust security scanner, local-first SAST, taint analysis, SARIF" />
+    <title>Documentation | Nyx</title>
+    <meta name="description" content="Documentation for Nyx Scanner and Nyx Agent: local source-to-sink scanning, local pentesting, CLI usage, configuration, APIs, and operations." />
+    <meta name="keywords" content="Nyx documentation, Nyx Scanner docs, Nyx Agent docs, local security tools, SAST, local pentesting" />
     <meta name="author" content="Eli Peter" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
     <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1" />
@@ -13,12 +13,12 @@
     <link rel="sitemap" type="application/xml" href="https://nyxscan.dev/sitemap.xml" />
     <link rel="alternate" hreflang="en" href="https://nyxscan.dev/docs/" />
     <link rel="alternate" hreflang="x-default" href="https://nyxscan.dev/docs/" />
-    <link rel="next" href="quickstart.html" />
+    <link rel="next" href="nyx/" />
     <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png" />
     <link rel="icon" type="image/png" sizes="64x64" href="../favicon-64.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="../favicon-180.png" />
     <link rel="manifest" href="/manifest.json" />
-    <link rel="alternate" type="application/rss+xml" title="Nyx — News &amp; release notes" href="/news/feed.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Nyx | News &amp; release notes" href="/news/feed.xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
@@ -29,18 +29,18 @@
     <meta property="og:site_name" content="Nyx" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:title" content="Documentation" />
-    <meta property="og:description" content="Documentation for Nyx, the open-source, local-first SAST scanner written in Rust. Quickstart, CLI reference, detectors, configuration, and language coverage." />
+    <meta property="og:description" content="Documentation for Nyx Scanner and Nyx Agent: local source-to-sink scanning, local pentesting, CLI usage, configuration, APIs, and operations." />
     <meta property="og:url" content="https://nyxscan.dev/docs/" />
     <meta property="og:image" content="https://nyxscan.dev/og-image.png" />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Nyx — local-first Rust SAST scanner" />
+    <meta property="og:image:alt" content="Nyx documentation for local security tools" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Documentation" />
-    <meta name="twitter:description" content="Documentation for Nyx, the open-source, local-first SAST scanner written in Rust. Quickstart, CLI reference, detectors, configuration, and language coverage." />
+    <meta name="twitter:description" content="Documentation for Nyx Scanner and Nyx Agent: local source-to-sink scanning, local pentesting, CLI usage, configuration, APIs, and operations." />
     <meta name="twitter:image" content="https://nyxscan.dev/og-image.png" />
-    <meta name="twitter:image:alt" content="Nyx — local-first Rust SAST scanner" />
+    <meta name="twitter:image:alt" content="Nyx documentation for local security tools" />
     <meta name="theme-color" content="#F9F8F4" />
     <script type="application/ld+json">
 {
@@ -61,20 +61,21 @@
       "@id": "https://nyxscan.dev/#website",
       "url": "https://nyxscan.dev/",
       "name": "Nyx",
-      "description": "Local-first, open-source SAST scanner written in Rust.",
+      "description": "Local security tooling for deterministic scanning and live testing.",
       "inLanguage": "en",
       "publisher": {
         "@id": "https://nyxscan.dev/#person"
       }
     },
     {
-      "@type": "TechArticle",
+      "@type": "CollectionPage",
       "@id": "https://nyxscan.dev/docs/#page",
       "headline": "Documentation",
       "name": "Documentation",
       "url": "https://nyxscan.dev/docs/",
-      "description": "Documentation for Nyx, the open-source, local-first SAST scanner written in Rust. Quickstart, CLI reference, detectors, configuration, and language coverage.",
+      "description": "Documentation for Nyx Scanner and Nyx Agent: local source-to-sink scanning, local pentesting, CLI usage, configuration, APIs, and operations.",
       "inLanguage": "en",
+      "articleSection": "Documentation",
       "isPartOf": {
         "@id": "https://nyxscan.dev/#website"
       },
@@ -84,7 +85,8 @@
       "author": {
         "@id": "https://nyxscan.dev/#person"
       },
-      "image": "https://nyxscan.dev/og-image.png"
+      "image": "https://nyxscan.dev/og-image.png",
+      "mainEntityOfPage": "https://nyxscan.dev/docs/"
     },
     {
       "@type": "BreadcrumbList",
@@ -118,16 +120,23 @@
         </a>
         <span class="header-wordmark">NYX</span>
         <nav class="nav" aria-label="Main navigation">
+          <a href="../scanner.html">Scanner</a>
+          <a href="../agent.html">Agent</a>
           <a href="../news/">News</a>
           <a href="../docs/" aria-current="page">Docs</a>
-          <a class="nav-github" href="https://github.com/elicpeter/nyx">GitHub</a>
         </nav>
       </div>
     </header>
 
     <main id="main" class="docs-page">
       <div class="docs-shell">
-        <nav class="docs-sidebar" aria-label="Documentation"><a class="docs-sidebar__brand" href="">Docs</a><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Getting started</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="quickstart.html">Quickstart</a></li><li><a class="docs-sidebar__link" href="installation.html">Installation</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Using nyx</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="cli.html">CLI reference</a></li><li><a class="docs-sidebar__link" href="serve.html">Browser UI</a></li><li><a class="docs-sidebar__link" href="dynamic.html">Dynamic verification</a></li><li><a class="docs-sidebar__link" href="configuration.html">Configuration</a></li><li><a class="docs-sidebar__link" href="output.html">Output formats</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Coverage</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="language-maturity.html">Language maturity</a></li><li><a class="docs-sidebar__link" href="rules.html">Rules</a></li><li><a class="docs-sidebar__link" href="auth.html">Auth analysis</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Under the hood</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="how-it-works.html">How it works</a></li><li><a class="docs-sidebar__link" href="advanced-analysis.html">Advanced analysis</a></li><li><a class="docs-sidebar__link" href="detectors.html">Detectors</a><ul class="docs-sidebar__sublist"><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/patterns.html">Patterns</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/cfg.html">CFG</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/state.html">State</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/taint.html">Taint</a></li></ul></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Project</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="roadmap.html">Roadmap</a></li><li><a class="docs-sidebar__link" href="changelog.html">Changelog</a></li></ul></div></nav>
+        <nav class="docs-sidebar" aria-label="Documentation">
+    <a class="docs-sidebar__brand" href="">Docs</a>
+    <div class="docs-sidebar__group">
+      <h2 class="docs-sidebar__heading">Products</h2>
+      <ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="nyx/">Nyx Scanner</a></li><li><a class="docs-sidebar__link" href="agent/">Nyx Agent</a></li></ul>
+    </div>
+  </nav>
         <article class="docs-content">
           <div class="docs-search docs-search--content" data-docs-search>
     <label class="visually-hidden" for="docs-search-input">Search docs</label>
@@ -142,24 +151,17 @@
     </div>
   </div>
           <div class="docs-prose" data-pagefind-body>
-<h1 id="nyx-documentation">Nyx documentation</h1>
-<p class="docs-index__lede">Local-first SAST for developers. Source-to-sink taint, browser triage, SARIF, CI. Get running in minutes, then read deeper.</p>
-<div class="docs-index__grid">
-  <section class="docs-index__group">
-        <h2>Getting started</h2>
-        <ul><li><a href="quickstart.html">Quickstart</a></li><li><a href="installation.html">Installation</a></li></ul>
-      </section><section class="docs-index__group">
-        <h2>Using nyx</h2>
-        <ul><li><a href="cli.html">CLI reference</a></li><li><a href="serve.html">Browser UI</a></li><li><a href="dynamic.html">Dynamic verification</a></li><li><a href="configuration.html">Configuration</a></li><li><a href="output.html">Output formats</a></li></ul>
-      </section><section class="docs-index__group">
-        <h2>Coverage</h2>
-        <ul><li><a href="language-maturity.html">Language maturity</a></li><li><a href="rules.html">Rules</a></li><li><a href="auth.html">Auth analysis</a></li></ul>
-      </section><section class="docs-index__group">
-        <h2>Under the hood</h2>
-        <ul><li><a href="how-it-works.html">How it works</a></li><li><a href="advanced-analysis.html">Advanced analysis</a></li><li><a href="detectors.html">Detectors</a></li></ul>
-      </section><section class="docs-index__group">
-        <h2>Project</h2>
-        <ul><li><a href="roadmap.html">Roadmap</a></li><li><a href="changelog.html">Changelog</a></li></ul>
+<h1 id="documentation">Documentation</h1>
+<p class="docs-index__lede">Choose the product you are working with. Nyx Scanner docs stay focused on deterministic source scanning; Nyx Agent docs cover local pentesting, project runs, evidence, triggers, and APIs.</p>
+<div class="docs-index__grid docs-index__grid--products">
+  <section class="docs-index__group docs-index__group--product">
+        <h2><a href="nyx/">Nyx Scanner</a></h2>
+        <p>Deterministic source-to-sink scanning for local code. No cloud, no account, no telemetry.</p>
+        <ul><li><a href="nyx/quickstart.html">Quickstart</a></li><li><a href="nyx/installation.html">Installation</a></li><li><a href="nyx/cli.html">CLI reference</a></li></ul>
+      </section><section class="docs-index__group docs-index__group--product">
+        <h2><a href="agent/">Nyx Agent</a></h2>
+        <p>Local pentesting against development apps with route exploration, verification, evidence capture, triggers, and project-level runs.</p>
+        <ul><li><a href="agent/quickstart.html">Quickstart</a></li><li><a href="agent/install.html">Install</a></li><li><a href="agent/cli.html">CLI</a></li></ul>
       </section>
 </div>
           </div>
@@ -170,12 +172,13 @@
 
     <footer class="site-footer">
       <div class="container site-footer__inner">
-        <p class="site-footer__copy">© 2026 Eli Peter · Nyx is licensed under GPL-3.0-or-later.</p>
+        <p class="site-footer__copy">© 2026 Eli Peter · Nyx is an independent open-source security project.</p>
         <nav class="site-footer__nav" aria-label="Footer">
           <a href="../">Home</a>
+          <a href="../scanner.html">Scanner</a>
+          <a href="../agent.html">Agent</a>
           <a href="../news/">News</a>
           <a href="../docs/">Docs</a>
-          <a href="https://github.com/elicpeter/nyx">GitHub</a>
         </nav>
       </div>
     </footer>

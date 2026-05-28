@@ -3,14 +3,11 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>News & release notes | Nyx — local-first Rust SAST scanner</title>
-    <meta
-      name="description"
-      content="Release notes and project updates for Nyx, the open-source, local-first SAST scanner written in Rust. Read what shipped in each version — taint analysis, cross-file detection, SARIF output, local triage UI, and more."
-    />
+    <title>News & release notes | Nyx and Nyx Agent</title>
+    <meta name="description" content="Release notes and project updates for Nyx and Nyx Agent." />
     <meta
       name="keywords"
-      content="Nyx scanner, Nyx release notes, Rust SAST, local-first security scanner, taint analysis, SARIF, static analysis, vulnerability scanner changelog, open-source SAST"
+      content="Nyx scanner, Nyx Agent, Nyx release notes, Rust SAST, local-first security scanner, taint analysis, SARIF, static analysis, vulnerability scanner changelog, open-source SAST"
     />
     <meta name="author" content="Eli Peter" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
@@ -23,7 +20,7 @@
     <link rel="icon" type="image/png" sizes="64x64" href="../favicon-64.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="../favicon-180.png" />
     <link rel="manifest" href="/manifest.json" />
-    <link rel="alternate" type="application/rss+xml" title="Nyx — News &amp; release notes" href="/news/feed.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Nyx | News &amp; release notes" href="/news/feed.xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
@@ -32,25 +29,19 @@
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Nyx" />
     <meta property="og:locale" content="en_US" />
-    <meta property="og:title" content="News & release notes | Nyx — local-first Rust SAST scanner" />
-    <meta
-      property="og:description"
-      content="Release notes and project updates for Nyx, the open-source, local-first SAST scanner written in Rust. Taint analysis, cross-file detection, SARIF output, and a local triage UI."
-    />
+    <meta property="og:title" content="News & release notes | Nyx and Nyx Agent" />
+    <meta property="og:description" content="Release notes and project updates for Nyx and Nyx Agent." />
     <meta property="og:url" content="https://nyxscan.dev/news/" />
     <meta property="og:image" content="https://nyxscan.dev/og-image.png" />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Nyx — local-first Rust SAST scanner" />
+    <meta property="og:image:alt" content="Nyx local-first Rust SAST scanner" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="News & release notes | Nyx" />
-    <meta
-      name="twitter:description"
-      content="Release notes for Nyx, the open-source local-first Rust SAST scanner: taint analysis, SARIF, cross-file detection."
-    />
+    <meta name="twitter:title" content="News & release notes | Nyx and Nyx Agent" />
+    <meta name="twitter:description" content="Release notes and project updates for Nyx and Nyx Agent." />
     <meta name="twitter:image" content="https://nyxscan.dev/og-image.png" />
-    <meta name="twitter:image:alt" content="Nyx — local-first Rust SAST scanner" />
+    <meta name="twitter:image:alt" content="Nyx local-first Rust SAST scanner" />
     <meta name="theme-color" content="#F9F8F4" />
 
     <script type="application/ld+json">
@@ -96,7 +87,7 @@
             "@id": "https://nyxscan.dev/news/#collection",
             "url": "https://nyxscan.dev/news/",
             "name": "News & release notes | Nyx",
-            "description": "Release notes and project updates for Nyx, the open-source local-first SAST scanner written in Rust.",
+            "description": "Release notes and project updates for Nyx and Nyx Agent.",
             "inLanguage": "en",
             "isPartOf": { "@id": "https://nyxscan.dev/#website" },
             "breadcrumb": { "@id": "https://nyxscan.dev/news/#breadcrumbs" },
@@ -108,11 +99,26 @@
             "@id": "https://nyxscan.dev/news/#blog",
             "name": "Nyx News",
             "url": "https://nyxscan.dev/news/",
-            "description": "Release notes and project updates for Nyx, the open-source local-first SAST scanner written in Rust.",
+            "description": "Release notes and project updates for Nyx and Nyx Agent.",
             "inLanguage": "en",
             "publisher": { "@id": "https://nyxscan.dev/#person" },
             "author": { "@id": "https://nyxscan.dev/#person" },
             "blogPost": [
+              {
+                "@type": "BlogPosting",
+                "@id": "https://nyxscan.dev/news/nyx-agent.html#post",
+                "headline": "Nyx Agent is live",
+                "description": "Nyx Agent runs local pentests against development apps. It reads the repo, checks the local target, and keeps proof with the run.",
+                "url": "https://nyxscan.dev/news/nyx-agent.html",
+                "mainEntityOfPage": "https://nyxscan.dev/news/nyx-agent.html",
+                "datePublished": "2026-05-26",
+                "dateModified": "2026-05-26",
+                "inLanguage": "en",
+                "image": "https://nyxscan.dev/og-image.png",
+                "author": { "@id": "https://nyxscan.dev/#person" },
+                "publisher": { "@id": "https://nyxscan.dev/#person" },
+                "keywords": "Nyx Agent, local pentesting, live verification, evidence"
+              },
               {
                 "@type": "BlogPosting",
                 "@id": "https://nyxscan.dev/news/nyx-0-7-0.html#post",
@@ -234,6 +240,8 @@
         </a>
         <span class="header-wordmark">NYX</span>
         <nav class="nav" aria-label="Main navigation">
+          <a href="../scanner.html">Scanner</a>
+          <a href="../agent.html">Agent</a>
           <a href="./" aria-current="page">News</a>
           <a href="../docs/">Docs</a>
           <a class="nav-github" href="https://github.com/elicpeter/nyx">GitHub</a>
@@ -242,10 +250,26 @@
     </header>
 
     <main id="main" class="news-page">
-      <h1 class="visually-hidden">Nyx news and release notes — local-first Rust SAST scanner</h1>
+      <h1 class="visually-hidden">Nyx and Nyx Agent news and release notes</h1>
 
       <div class="container news-shell">
         <section class="news-feed" aria-label="News articles">
+          <article class="news-feed-item">
+            <a
+              class="news-feed-item__media news-feed-item__media--logo"
+              href="nyx-agent.html"
+              aria-label="Read Nyx Agent launch news"
+            >
+              <img src="../assets/logo.png" alt="Nyx Agent launch visual" loading="eager" decoding="async" />
+            </a>
+            <div class="news-feed-item__copy">
+              <time class="news-feed-item__date" datetime="2026-05-26">May 26, 2026</time>
+              <h2><a href="nyx-agent.html">Nyx Agent is live.</a></h2>
+              <p>Local pentests for dev apps: repo context, live checks, stored proof, and opt-in destructive runs.</p>
+              <a class="news-read-more" href="nyx-agent.html">Read more</a>
+            </div>
+          </article>
+
           <article class="news-feed-item">
             <a class="news-feed-item__media" href="nyx-0-7-0.html" aria-label="Read Nyx 0.7.0 release news">
               <img src="../assets/news/nyx-0-7-0.png" alt="Nyx 0.7.0 release visual" loading="eager" decoding="async" />
@@ -358,9 +382,12 @@
       <div class="container site-footer__inner">
         <p>Nyx is an independent open-source security project.</p>
         <nav aria-label="Footer links">
-          <a href="https://github.com/elicpeter/nyx">GitHub</a>
+          <a href="../">Home</a>
+          <a href="../scanner.html">Scanner</a>
+          <a href="../agent.html">Agent</a>
           <a href="./">News</a>
           <a href="../docs/">Docs</a>
+          <a href="https://github.com/elicpeter/nyx">GitHub</a>
           <a href="https://crates.io/crates/nyx-scanner">crates.io</a>
           <a href="https://docs.rs/nyx-scanner/latest/nyx_scanner/">Rustdocs</a>
           <a href="https://github.com/elicpeter/nyx/releases">Releases</a>

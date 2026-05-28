@@ -1,0 +1,719 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CLI reference | Nyx Agent docs</title>
+    <meta name="description" content="nyx-agent is a single binary with ten subcommands. This page documents every subcommand that currently ships, the flags it accepts, and the exit codes it returns. Subcommands the binary advertises..." />
+    <meta name="keywords" content="Nyx Agent, nyx-agent, local pentesting, live appsec testing, verified vulnerabilities, stored evidence, Get started, CLI reference, toml, api, API, WebSocket" />
+    <meta name="author" content="Eli Peter" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <link rel="canonical" href="https://nyxscan.dev/docs/agent/cli.html" />
+    <link rel="sitemap" type="application/xml" href="https://nyxscan.dev/sitemap.xml" />
+    <link rel="alternate" hreflang="en" href="https://nyxscan.dev/docs/agent/cli.html" />
+    <link rel="alternate" hreflang="x-default" href="https://nyxscan.dev/docs/agent/cli.html" />
+    <link rel="prev" href="quickstart.html" />
+    <link rel="next" href="config.html" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="64x64" href="../../favicon-64.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../../favicon-180.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="alternate" type="application/rss+xml" title="Nyx | News &amp; release notes" href="/news/feed.xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../styles.css" />
+    <script defer src="../../docs/search.js"></script>
+
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Nyx" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="CLI reference" />
+    <meta property="og:description" content="nyx-agent is a single binary with ten subcommands. This page documents every subcommand that currently ships, the flags it accepts, and the exit codes it returns. Subcommands the binary advertises..." />
+    <meta property="og:url" content="https://nyxscan.dev/docs/agent/cli.html" />
+    <meta property="og:image" content="https://nyxscan.dev/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Nyx Agent local pentesting documentation" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="CLI reference" />
+    <meta name="twitter:description" content="nyx-agent is a single binary with ten subcommands. This page documents every subcommand that currently ships, the flags it accepts, and the exit codes it returns. Subcommands the binary advertises..." />
+    <meta name="twitter:image" content="https://nyxscan.dev/og-image.png" />
+    <meta name="twitter:image:alt" content="Nyx Agent local pentesting documentation" />
+    <meta name="theme-color" content="#F9F8F4" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://nyxscan.dev/#person",
+      "name": "Eli Peter",
+      "url": "https://github.com/elicpeter",
+      "sameAs": [
+        "https://github.com/elicpeter",
+        "https://github.com/sponsors/elicpeter"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://nyxscan.dev/#website",
+      "url": "https://nyxscan.dev/",
+      "name": "Nyx",
+      "description": "Local security tooling for deterministic scanning and live testing.",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://nyxscan.dev/#person"
+      }
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://nyxscan.dev/docs/agent/cli.html#article",
+      "headline": "CLI reference",
+      "name": "CLI reference",
+      "url": "https://nyxscan.dev/docs/agent/cli.html",
+      "description": "nyx-agent is a single binary with ten subcommands. This page documents every subcommand that currently ships, the flags it accepts, and the exit codes it returns. Subcommands the binary advertises...",
+      "inLanguage": "en",
+      "articleSection": "Get started",
+      "isPartOf": {
+        "@id": "https://nyxscan.dev/#website"
+      },
+      "publisher": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "author": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "image": "https://nyxscan.dev/og-image.png",
+      "mainEntityOfPage": "https://nyxscan.dev/docs/agent/cli.html"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://nyxscan.dev/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Docs",
+          "item": "https://nyxscan.dev/docs/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Nyx Agent docs",
+          "item": "https://nyxscan.dev/docs/agent/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "CLI reference",
+          "item": "https://nyxscan.dev/docs/agent/cli.html"
+        }
+      ],
+      "@id": "https://nyxscan.dev/docs/agent/cli.html#breadcrumbs"
+    }
+  ]
+}
+    </script>
+  </head>
+  <body class="docs-body">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" aria-label="Primary navigation">
+      <div class="container site-header__inner">
+        <a class="brand" href="../../" aria-label="Nyx home">
+          <img src="../../assets/logo.png" alt="Nyx" class="brand-logo" />
+        </a>
+        <span class="header-wordmark">NYX</span>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="../../scanner.html">Scanner</a>
+          <a href="../../agent.html">Agent</a>
+          <a href="../../news/">News</a>
+          <a href="../../docs/" aria-current="page">Docs</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="docs-page">
+      <div class="docs-shell">
+        <nav class="docs-sidebar" aria-label="Documentation"><a class="docs-sidebar__brand" href="./">Agent docs</a><a class="docs-sidebar__home" href="../">All docs</a><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Get started</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="install.html">Install</a></li><li><a class="docs-sidebar__link" href="quickstart.html">Quickstart</a></li><li><a class="docs-sidebar__link" href="cli.html" aria-current="page">CLI</a></li><li><a class="docs-sidebar__link" href="config.html">Config</a></li><li><a class="docs-sidebar__link" href="state-dir.html">State Directory</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Architecture</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="architecture.html">Architecture</a></li><li><a class="docs-sidebar__link" href="runs.html">Runs</a></li><li><a class="docs-sidebar__link" href="attack-graph.html">Attack Graph</a></li><li><a class="docs-sidebar__link" href="business-logic-templates.html">Business Logic Templates</a></li><li><a class="docs-sidebar__link" href="events.html">Events</a></li><li><a class="docs-sidebar__link" href="ai-runtime.html">AI Runtime</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Projects</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="cli.html#project" aria-current="page">CLI: Project</a></li><li><a class="docs-sidebar__link" href="quickstart.html#create-a-project">Quickstart: Create a Project</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">HTTP API</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="api.html">API</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Triggers</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="triggers/index.html">Overview</a></li><li><a class="docs-sidebar__link" href="triggers/cron.html">Cron</a></li><li><a class="docs-sidebar__link" href="triggers/webhook.html">Webhook</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">CI integration</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="ci/github-actions.html">GitHub Actions</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Contributor docs</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="dev/sqlx.html">SQLx</a></li><li><a class="docs-sidebar__link" href="dev/frontend.html">Frontend</a></li></ul></div></nav>
+        <article class="docs-content">
+          <div class="docs-search docs-search--content" data-docs-search>
+    <label class="visually-hidden" for="docs-search-input">Search docs</label>
+    <div class="docs-search__control">
+      <span class="docs-search__icon" aria-hidden="true"></span>
+      <input id="docs-search-input" data-docs-search-input type="search" placeholder="Search docs" autocomplete="off" autocapitalize="none" spellcheck="false" role="combobox" aria-autocomplete="list" aria-controls="docs-search-results" aria-expanded="false" />
+      <kbd class="docs-search__key" aria-hidden="true">⌘K</kbd>
+    </div>
+    <div class="docs-search__panel" data-docs-search-panel hidden>
+      <div class="docs-search__status" data-docs-search-status></div>
+      <div class="docs-search__results" id="docs-search-results" data-docs-search-results role="listbox" aria-label="Search results"></div>
+    </div>
+  </div>
+          <div class="docs-prose" data-pagefind-body>
+<h1 id="cli-reference"><a class="docs-anchor" href="#cli-reference" aria-label="Link to cli-reference" data-pagefind-ignore>#</a>CLI reference</h1>
+<p><code>nyx-agent</code> is a single binary with ten subcommands. This page
+documents every subcommand that currently ships, the flags it accepts,
+and the exit codes it returns. Subcommands the binary advertises in
+<code>--help</code> but that are not yet wired (<code>reverify</code>, <code>budget</code>) are called
+out at the bottom so an operator knows not to script against them.</p>
+<p>The shipping binary is <code>nyx-agent</code>; the product brand is &quot;Nyx Agent&quot;.
+Both names appear here for the reasons explained in <code>README.md</code>.</p>
+<h2 id="global-flags"><a class="docs-anchor" href="#global-flags" aria-label="Link to global-flags" data-pagefind-ignore>#</a>Global flags</h2>
+<p>These three flags are accepted by every subcommand (including the
+default <code>serve</code>). Pass them before the subcommand name, e.g.
+<code>nyx-agent --log-level debug scan</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--config PATH</code></td>
+<td><code>./nyx-agent.toml</code></td>
+<td>Path to the config file. <code>nyx-agent</code> runs with built-in defaults when the path does not exist; see <code>docs/config.md</code> (forthcoming).</td>
+</tr>
+<tr>
+<td><code>--state-dir PATH</code></td>
+<td><code>dirs::data_dir()</code> plus <code>nyx-agent/</code></td>
+<td>Override the state directory. Persists runs, findings, repro bundles, ingested repos, logs, and the SQLite store.</td>
+</tr>
+<tr>
+<td><code>--log-level FILTER</code></td>
+<td><code>info</code></td>
+<td>Filter passed to <code>tracing-subscriber</code>. Accepts <code>info</code>, <code>debug</code>, <code>nyx-agent=trace,sqlx=warn</code>, etc. Applied to stderr only.</td>
+</tr>
+</tbody></table>
+<p>When no subcommand is given, <code>nyx-agent</code> runs <code>serve</code> with no flags.
+That is the documented &quot;double-click the binary&quot; path.</p>
+<p>The subcommand wiring lives in <code>crates/nyx-agent/src/main.rs</code>
+(<code>match cli.command.unwrap_or(...)</code>). Read that block alongside this
+page if you need to confirm which subcommand a flag attaches to.</p>
+<h2 id="serve"><a class="docs-anchor" href="#serve" aria-label="Link to serve" data-pagefind-ignore>#</a><code>serve</code></h2>
+<p>Run the long-lived HTTP/UI daemon. Default when no subcommand is given.</p>
+<pre><code class="hljs language-bash">nyx-agent serve</code></pre>
+<p>Binds to <code>[ui] listen_addr</code> (default <code>127.0.0.1:8765</code>), opens the
+operator&#39;s default browser at the ready URL, and streams the
+<code>/api/v1/...</code> API plus the embedded SPA at <code>/</code>. The
+<a href="quickstart.html"><code>docs/quickstart.md</code></a> page walks through a first run
+end to end.</p>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--listen ADDR</code></td>
+<td><code>[ui] listen_addr</code> from config</td>
+<td>Override the listen address. Pass <code>0.0.0.0:8765</code> to bind non-loopback; pair with TLS + the bearer token.</td>
+</tr>
+<tr>
+<td><code>--no-open</code></td>
+<td>off</td>
+<td>Skip the browser launch. The daemon still binds and serves.</td>
+</tr>
+<tr>
+<td><code>--headless</code></td>
+<td>off</td>
+<td>Skip the browser launch AND disable bearer-token auth. Intended for CI smoke tests. Never run a public daemon in <code>--headless</code>.</td>
+</tr>
+<tr>
+<td><code>--open-cmd CMD</code></td>
+<td><code>webbrowser::open</code></td>
+<td>Replace the default browser launcher. The ready URL is appended as the last argument. <code>--open-cmd /bin/echo</code> is the test recipe.</td>
+</tr>
+</tbody></table>
+<p>Triggers wired into <code>serve</code> at startup:</p>
+<ul>
+<li>The HTTP API and WebSocket event stream (<code>crates/nyx-agent-api/</code>).</li>
+<li>The in-process cron scheduler, if <code>[[schedule]]</code> entries exist.
+See <a href="triggers/cron.html"><code>docs/triggers/cron.md</code></a>.</li>
+<li><code>POST /webhook/git</code>, if <code>[triggers] webhook_secret_ref</code> is set.
+See <a href="triggers/webhook.html"><code>docs/triggers/webhook.md</code></a>.</li>
+<li>A bounded MPSC scan queue (depth 16). A full queue returns HTTP 429
+to the caller instead of stalling on backpressure.</li>
+</ul>
+<p><code>Ctrl+C</code> shuts the daemon down cleanly: the HTTP listener closes,
+the scheduler stops, the in-flight scan worker drains, and the
+SQLite store closes.</p>
+<p><strong>Exit codes.</strong> <code>0</code> on clean shutdown. <code>1</code> on bind failure or any
+unrecoverable HTTP server error.</p>
+<h2 id="reset-db"><a class="docs-anchor" href="#reset-db" aria-label="Link to reset-db" data-pagefind-ignore>#</a><code>reset db</code></h2>
+<p>Delete the local SQLite store for the resolved state directory.</p>
+<pre><code class="hljs language-bash">nyx-agent reset db
+nyx-agent reset db --<span class="hljs-built_in">yes</span></code></pre>
+<p><code>reset db</code> removes <code>state.db</code>, <code>state.db-wal</code>, and <code>state.db-shm</code>.
+It leaves the rest of the state directory alone, including
+<code>auth_token</code>, logs, traces, bundles, ingested repos, and project
+workspaces.</p>
+<p>Before deleting files, the command checks whether <code>lsof</code> reports the
+database as open and refuses to continue when a running <code>nyx-agent</code>
+process still holds it. Without <code>--yes</code>, it prompts for <code>reset</code> on
+stdin.</p>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--yes</code>, <code>-y</code></td>
+<td>off</td>
+<td>Skip the interactive confirmation prompt.</td>
+</tr>
+</tbody></table>
+<p><strong>Exit codes.</strong> <code>0</code> when the files were removed or no database files
+existed. <code>1</code> when the database is open or confirmation fails.</p>
+<h2 id="scan"><a class="docs-anchor" href="#scan" aria-label="Link to scan" data-pagefind-ignore>#</a><code>scan</code></h2>
+<p>Run a one-shot scan from the command line. Mirrors the <code>POST /api/v1/projects/:project_id/scan</code> path used by the SPA, but writes
+its output to stdout (and optionally to a JSON report on disk).</p>
+<p>Scan selection is project-scoped. <code>--project NAME</code> (repeatable)
+targets a whole project; pair with <code>--repo NAME</code> (repeatable) to
+narrow within the selected projects. Bare <code>--repo</code> without a
+<code>--project</code> is rejected to keep scoping explicit.</p>
+<pre><code class="hljs language-bash">nyx-agent scan
+nyx-agent scan --project acme-app
+nyx-agent scan --project acme-app --repo acme-backend
+nyx-agent scan --project acme-app --output report.json --since-ref origin/main
+nyx-agent scan --project acme-app --exploit-mode --allow-state-changing-live-probes --business-template tenant_object_isolation
+nyx-agent scan --project acme-app --research-mode
+nyx-agent scan --project acme-app --unsafe-attack-agent</code></pre>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--project PROJECT</code></td>
+<td>Project to scan, by name from <code>[[project]] name</code> in config. Pass once per project; omit to scan every enabled project.</td>
+</tr>
+<tr>
+<td><code>--repo REPO</code></td>
+<td>Repository to scan, narrowed within <code>--project</code>. Requires at least one <code>--project</code> to be set. Matched against <code>[[project.repo]] name</code>. Pass <code>--repo</code> once per repo.</td>
+</tr>
+<tr>
+<td><code>--headless</code></td>
+<td>Suppress human-readable stdout so only <code>--output PATH</code> carries machine-readable signal. Errors still go to stderr. Pair with <code>--output</code> in CI lanes that consume the JSON report and ignore console output.</td>
+</tr>
+<tr>
+<td><code>--output PATH</code></td>
+<td>Write a machine-readable JSON report to <code>PATH</code>. Consumed by <code>pr-comment --report</code> and external dashboards.</td>
+</tr>
+<tr>
+<td><code>--since-ref REF</code></td>
+<td>Filter the report to findings whose <code>path</code> was touched by <code>git diff --name-only --diff-filter=AMR REF...HEAD</code> in each workspace. Computed per repo; requires a git workspace.</td>
+</tr>
+<tr>
+<td><code>--exploit-mode</code></td>
+<td>Enable exploit mode for this scan without editing <code>nyx-agent.toml</code>. State-changing probes still also require <code>--allow-state-changing-live-probes</code>.</td>
+</tr>
+<tr>
+<td><code>--allow-state-changing-live-probes</code></td>
+<td>Allow mutating live probes for this scan when exploit mode is enabled.</td>
+</tr>
+<tr>
+<td><code>--exploit-dry-run</code></td>
+<td>Evaluate guarded live plans and write audit records without sending HTTP/browser traffic.</td>
+</tr>
+<tr>
+<td><code>--research-mode</code></td>
+<td>Enable Vuln Research Mode for this scan. Adds product-invariant hypotheses and deeper planning/exploration without relaxing live execution gates.</td>
+</tr>
+<tr>
+<td><code>--unsafe-attack-agent</code></td>
+<td>Run the final unrestricted local attack-agent phase: seven serial specialists, a critical chain hunter, and final attack triage. Intended only for disposable user-owned dev apps.</td>
+</tr>
+<tr>
+<td><code>--no-business-logic-templates</code></td>
+<td>Disable business-logic template candidate synthesis for this scan.</td>
+</tr>
+<tr>
+<td><code>--business-template ID</code></td>
+<td>Restrict business-logic template synthesis to the given id. Repeat for multiple ids.</td>
+</tr>
+<tr>
+<td><code>--no-orchestration</code></td>
+<td>Run the scan without starting or health-checking the project&#39;s launch profile. Static scanning and source-only analysis still run.</td>
+</tr>
+<tr>
+<td><code>--app-url URL</code></td>
+<td>One-shot local app URL for this scan. Requires exactly one selected project.</td>
+</tr>
+<tr>
+<td><code>--health-url URL</code></td>
+<td>One-shot readiness URL. Defaults to <code>--app-url</code> when omitted.</td>
+</tr>
+<tr>
+<td><code>--health-timeout-secs N</code></td>
+<td>Readiness timeout for the one-shot URL check.</td>
+</tr>
+<tr>
+<td><code>--build-command CMD</code></td>
+<td>One-shot setup command. Repeat for multiple commands.</td>
+</tr>
+<tr>
+<td><code>--start-command CMD</code></td>
+<td>One-shot app start command. Repeat for multiple commands.</td>
+</tr>
+<tr>
+<td><code>--seed-command CMD</code></td>
+<td>One-shot seed command run after readiness. Repeat for multiple commands.</td>
+</tr>
+<tr>
+<td><code>--login-command CMD</code></td>
+<td>One-shot login/session setup command run after seed. Repeat for multiple commands.</td>
+</tr>
+<tr>
+<td><code>--reset-command CMD</code></td>
+<td>One-shot reset command used after state-changing probes. Repeat for multiple commands.</td>
+</tr>
+<tr>
+<td><code>--stop-command CMD</code></td>
+<td>One-shot teardown command. Repeat for multiple commands.</td>
+</tr>
+</tbody></table>
+<p>Each invocation drives the full pipeline per project: ingest, static
+lane via the upstream <code>nyx</code> scanner, AI payload synthesis, spec
+derivation, chain reasoning, novel-finding discovery, AI exploration,
+and the deterministic payload verifier. Each AI pass is a no-op
+when <code>[ai] runtime = &quot;none&quot;</code> or no API key is available; the static
+lane always runs. When multiple projects are selected, the
+dispatcher walks them sequentially and emits one run per project.</p>
+<p>When a project has a default launch profile, <code>scan</code> starts the local
+target app, waits for health checks, runs seed/login hooks, captures
+target stdout/stderr under the state directory, and shuts the app down
+after the run. Omit launch configuration, or pass <code>--no-orchestration</code>,
+to keep the older static-only behavior.</p>
+<p>The stdout summary line, then per-repo outcome lines, are emitted
+in this order (one block per project):</p>
+<!-- nyx: verbatim -->
+<pre><code class="hljs language-plain"><span class="hljs-params">scan:</span> project <span class="hljs-symbol">&lt;project&gt;</span> run <span class="hljs-symbol">&lt;run-id&gt;</span> finished <span class="hljs-keyword">in</span> <span class="hljs-symbol">&lt;ms&gt;</span>ms <span class="hljs-operator">-</span> <span class="hljs-symbol">&lt;n&gt;</span> succeeded, <span class="hljs-symbol">&lt;n&gt;</span> inconclusive, <span class="hljs-symbol">&lt;n&gt;</span> failed
+  <span class="hljs-operator">-</span> <span class="hljs-symbol">&lt;repo&gt;</span>: <span class="hljs-symbol">&lt;Outcome&gt;</span> (<span class="hljs-params">diags:</span> <span class="hljs-symbol">&lt;n&gt;</span>, <span class="hljs-symbol">&lt;ms&gt;</span>ms)</code></pre>
+<!-- /nyx: verbatim --><p>When <code>--output PATH</code> is supplied, the JSON report is written after
+the verifier pass completes and includes both the findings table
+and any cross-repo chains discovered in the run.</p>
+<p><strong>Edge cases.</strong></p>
+<ul>
+<li><code>--repo</code> without <code>--project</code>: stderr emits <code>scan: --repo requires --project context (or use --project to scan whole projects)</code> and
+exit <code>2</code>.</li>
+<li>No matching repos: stderr emits <code>scan: no repositories selected; configure one in nyx-agent.toml</code> and exit <code>1</code>.</li>
+<li><code>--since-ref</code> starts with <code>-</code>: scan refuses, since the value
+would be parsed as a git option (<code>scan: --since-ref &#39;...&#39; must not start with &#39;-&#39;</code>). Exit <code>1</code>.</li>
+<li><code>--since-ref</code> resolves to a ref <code>git diff</code> cannot compute (bad
+ref, shallow clone): the diff command&#39;s stderr is propagated and
+exit code is <code>1</code>. CI fails loudly rather than silently scanning
+every path.</li>
+<li>Repo ingest fails (auth, attestation, network): the failing repo
+is reported and <code>RepoFailed</code> is emitted on the event bus. If
+every repo fails ingest, the run is finalised <code>Failed</code> and scan
+exits <code>1</code>.</li>
+</ul>
+<p><strong>Exit codes.</strong> <code>0</code> if every repo succeeded and no ingest errors
+occurred. <code>1</code> if any repo failed or scan refused to start. <code>2</code> if
+<code>--repo</code> was passed without <code>--project</code>.</p>
+<h2 id="business-logic"><a class="docs-anchor" href="#business-logic" aria-label="Link to business-logic" data-pagefind-ignore>#</a><code>business-logic</code></h2>
+<p>Inspect business-logic pentest template metadata.</p>
+<pre><code class="hljs language-bash">nyx-agent business-logic templates
+nyx-agent business-logic templates --json</code></pre>
+<p>The JSON form returns the same registry exposed by
+<code>GET /api/v1/business-logic/templates</code>, including template id,
+version, category, mutability, route-pattern support, oracle
+description, and whether the template is executable or metadata-only.</p>
+<h2 id="project"><a class="docs-anchor" href="#project" aria-label="Link to project" data-pagefind-ignore>#</a><code>project</code></h2>
+<p>Manage <code>Project</code> rows in the agent&#39;s state DB. Projects are the
+top-level scan unit; repos are nested under a project via
+<code>[[project.repo]]</code> in <code>nyx-agent.toml</code> and via a <code>project_id</code> FK in
+the SQLite store. Every CLI/API/sandbox surface operates per
+project, so the canonical first step in a fresh deployment is
+<code>nyx-agent project create</code>.</p>
+<pre><code class="hljs language-bash">nyx-agent project create acme-app --description <span class="hljs-string">&quot;Acme web product&quot;</span> --target-base-url http://localhost:3000
+nyx-agent project list
+nyx-agent project show acme-app
+nyx-agent project add-repo acme-app acme-backend --path /abs/path/backend --i-own-this
+nyx-agent project add-repo acme-app acme-frontend --git-url https://github.com/acme/frontend.git --branch main --i-own-this
+nyx-agent project delete acme-app</code></pre>
+<h3 id="project-create-name"><a class="docs-anchor" href="#project-create-name" aria-label="Link to project-create-name" data-pagefind-ignore>#</a><code>project create NAME</code></h3>
+<p>Create a project row by name. The name must be unique; the daemon
+returns an error if the name is already taken.</p>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--description TEXT</code></td>
+<td>Optional free-form description shown in the SPA&#39;s project header.</td>
+</tr>
+<tr>
+<td><code>--target-base-url URL</code></td>
+<td>Optional base URL for the project&#39;s deployed target. Flows into the sandbox env-builder as a compose override so confirmed exploits can address the right host.</td>
+</tr>
+</tbody></table>
+<h3 id="project-list"><a class="docs-anchor" href="#project-list" aria-label="Link to project-list" data-pagefind-ignore>#</a><code>project list</code></h3>
+<p>List every project row, alphabetical by name.</p>
+<h3 id="project-show-name"><a class="docs-anchor" href="#project-show-name" aria-label="Link to project-show-name" data-pagefind-ignore>#</a><code>project show NAME</code></h3>
+<p>Print one project plus the repos attached to it. Useful as a
+sanity check after <code>add-repo</code>.</p>
+<h3 id="project-delete-name"><a class="docs-anchor" href="#project-delete-name" aria-label="Link to project-delete-name" data-pagefind-ignore>#</a><code>project delete NAME</code></h3>
+<p>Delete a project by name. Cascades to attached repos via the FK,
+so removing a project removes the repo rows it owned as well.</p>
+<h3 id="project-add-repo-project-name"><a class="docs-anchor" href="#project-add-repo-project-name" aria-label="Link to project-add-repo-project-name" data-pagefind-ignore>#</a><code>project add-repo PROJECT NAME</code></h3>
+<p>Attach a repo to an existing project. The source is either local
+(<code>--path</code>) or git (<code>--git-url</code>); the two are mutually exclusive.</p>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--path PATH</code></td>
+<td>Absolute path to a checkout on disk. Mutually exclusive with <code>--git-url</code>.</td>
+</tr>
+<tr>
+<td><code>--git-url URL</code></td>
+<td>Remote git clone URL. Mutually exclusive with <code>--path</code>.</td>
+</tr>
+<tr>
+<td><code>--branch REF</code></td>
+<td>Optional branch hint for git sources. Defaults to the remote HEAD.</td>
+</tr>
+<tr>
+<td><code>--auth DESCRIPTOR</code></td>
+<td>Optional credential descriptor for git sources. Accepts <code>ssh-key:&lt;path&gt;</code>, <code>token-env:&lt;var&gt;</code>, or <code>gh-app:&lt;id&gt;</code>.</td>
+</tr>
+<tr>
+<td><code>--i-own-this</code></td>
+<td>Required attestation. The daemon refuses to ingest a repo without it.</td>
+</tr>
+</tbody></table>
+<p><strong>Exit codes.</strong> <code>0</code> on success. <code>1</code> on a missing project, a
+duplicate name, or a store error.</p>
+<h2 id="pr-comment"><a class="docs-anchor" href="#pr-comment" aria-label="Link to pr-comment" data-pagefind-ignore>#</a><code>pr-comment</code></h2>
+<p>Post (or update) a dedup&#39;d PR comment summarising <code>Verified</code>
+findings plus cross-repo chain findings from a previous
+<code>scan --output</code> run. Intended for GitHub Actions; reads its config
+from flags plus the standard GHA environment variables.</p>
+<pre><code class="hljs language-bash">nyx-agent scan --output report.json --since-ref <span class="hljs-variable">${{ github.base_ref }</span>}
+nyx-agent pr-comment --report report.json</code></pre>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--report PATH</code></td>
+<td>(required)</td>
+<td>Path to <code>report.json</code> produced by <code>scan --output</code>.</td>
+</tr>
+<tr>
+<td><code>--repo OWNER/REPO</code></td>
+<td><code>$GITHUB_REPOSITORY</code></td>
+<td>Target GitHub repository. Required outside Actions.</td>
+</tr>
+<tr>
+<td><code>--pr N</code></td>
+<td>parsed from <code>$GITHUB_REF</code> or <code>$GITHUB_EVENT_PATH</code></td>
+<td>Pull request number.</td>
+</tr>
+<tr>
+<td><code>--ui-url URL</code></td>
+<td>none</td>
+<td>Operator-local UI base. Each finding links back here. Trailing slash optional.</td>
+</tr>
+<tr>
+<td><code>--gh-api URL</code></td>
+<td><code>https://api.github.com</code></td>
+<td>GitHub REST base. Override for GitHub Enterprise.</td>
+</tr>
+<tr>
+<td><code>--token-env ENV</code></td>
+<td><code>GITHUB_TOKEN</code></td>
+<td>Name of the env var that holds the PAT or GitHub Apps token. The token never appears in argv or logs.</td>
+</tr>
+</tbody></table>
+<p>Dedup is achieved by embedding a hidden HTML marker
+(<code>&lt;!-- nyx-agent:pr-comment v1 --&gt;</code>) at the top of the comment
+body. Subsequent runs list the PR&#39;s comments, locate the carrier,
+and <code>PATCH</code> it in place. There is at most one Nyx Agent comment per
+PR.</p>
+<p>Comments are only created for <code>Verified</code> findings and cross-repo
+chain members. <code>Open</code>, <code>Quarantine</code>, and <code>Inconclusive</code> findings
+stay in the operator&#39;s local UI; the PR comment is intentionally
+narrow so reviewers see signal, not noise.</p>
+<p><strong>Edge cases.</strong></p>
+<ul>
+<li>Missing token: stderr emits <code>pr-comment: env var &#39;&lt;name&gt;&#39; is empty or unset</code> and exit <code>1</code>.</li>
+<li>Missing PR number: stderr emits <code>pr-comment: --pr not provided and could not be derived from $GITHUB_REF / $GITHUB_EVENT_PATH</code> and exit <code>1</code>.</li>
+<li>Report contains nothing post-filter: stdout reports <code>report contains no Confirmed or cross-repo chain findings; skipping comment</code> and exit <code>0</code>. No comment is created.</li>
+</ul>
+<p><strong>Exit codes.</strong> <code>0</code> on success or empty-report skip. <code>1</code> on bad
+config, GitHub API failure, or transport error. See
+<a href="ci/github-actions.html"><code>docs/ci/github-actions.md</code></a> for the
+shipped composite Action that wires this together.</p>
+<h2 id="inspect"><a class="docs-anchor" href="#inspect" aria-label="Link to inspect" data-pagefind-ignore>#</a><code>inspect</code></h2>
+<p>Inspect persisted state. Subcommand-driven; each variant prints a
+terse listing the operator can grep, pipe, or paste into a ticket.</p>
+<pre><code class="hljs language-bash">nyx-agent inspect quarantine</code></pre>
+<h3 id="inspect-quarantine"><a class="docs-anchor" href="#inspect-quarantine" aria-label="Link to inspect-quarantine" data-pagefind-ignore>#</a><code>inspect quarantine</code></h3>
+<p>List AI-discovered findings and candidate findings that are still
+in quarantine, i.e. not yet promoted by the dynamic-confirm
+verifier or a manual operator. Output is one row per finding /
+candidate plus a tally line:</p>
+<!-- nyx: verbatim -->
+<pre><code class="hljs language-plain">kind    <span class="hljs-built_in"> id</span>                                 cap                  repo           <span class="hljs-built_in"> path</span>:line
+finding  <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">id</span>&gt;</span>                               </span><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">cap</span>&gt;</span>                </span><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">repo</span>&gt;</span>          </span><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">path</span>&gt;</span>:</span><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">line</span>&gt;</span>
+candid.  </span><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">id</span>&gt;</span>                               </span><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">cap</span>&gt;</span>                </span><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">repo</span>&gt;</span>          </span><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">path</span>&gt;</span>:</span><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">line</span>&gt;</span>
+
+</span><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">n</span>&gt;</span> finding(s) + </span><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">m</span>&gt;</span> candidate(s) quarantined</span></code></pre>
+<!-- /nyx: verbatim --><p>When the quarantine is empty, stdout is the single line
+<code>quarantine: empty</code> and exit <code>0</code>.</p>
+<p><strong>Exit codes.</strong> <code>0</code> always (read-only).</p>
+<h2 id="traces"><a class="docs-anchor" href="#traces" aria-label="Link to traces" data-pagefind-ignore>#</a><code>traces</code></h2>
+<p>Print AI conversation traces persisted by the store. Optionally
+scoped to a finding.</p>
+<pre><code class="hljs language-bash">nyx-agent traces
+nyx-agent traces --finding &lt;finding-id&gt;</code></pre>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--finding FINDING</code></td>
+<td>Scope the listing to a single finding id. Omit to list every trace row currently persisted (sorted by <code>started_at</code>).</td>
+</tr>
+</tbody></table>
+<p>The omitted-<code>--finding</code> form is a transitional listing built by
+unioning every per-task-kind bucket
+(<code>PayloadSynthesis</code>, <code>SpecDerivation</code>, <code>ChainReasoning</code>,
+<code>NovelFindings</code>, <code>Exploration</code>). A dedicated global reader will
+replace it once the store grows one.</p>
+<p>Columns: <code>task</code>, <code>runtime</code>, <code>model</code>, <code>prompt_version</code>, <code>cost($)</code>,
+<code>dur_ms</code>, <code>finding_id</code>. Costs are formatted from
+<code>cost_usd_micros / 1_000_000</code> to four decimal places.</p>
+<p>When the result set is empty, stdout is <code>traces: no rows match</code>
+and exit <code>0</code>.</p>
+<p><strong>Exit codes.</strong> <code>0</code> always (read-only).</p>
+<h2 id="doctor"><a class="docs-anchor" href="#doctor" aria-label="Link to doctor" data-pagefind-ignore>#</a><code>doctor</code></h2>
+<p>Verify that the state directory, config, SQLite schema, upstream
+<code>nyx</code> binary, optional CLI AI adapters, and sandbox backend selection
+look healthy. Runs before logging is initialised so it prints to
+stdout directly.</p>
+<pre><code class="hljs language-bash">nyx-agent doctor</code></pre>
+<p>Output, in order:</p>
+<ol>
+<li>State directory location.</li>
+<li>Log file path (<code>state-dir/logs/nyx-agent.log.json</code>).</li>
+<li>Config status: <code>OK at &lt;path&gt;</code> or <code>not found at &lt;path&gt; (using defaults)</code>.</li>
+<li>SQLite store path and current schema version.</li>
+<li>Upstream <code>nyx</code>: resolved binary path, detected version, and the
+minimum supported version. Failure modes are emitted on stderr
+with one of:<ul>
+<li><code>nyx FAIL: not found</code> plus an <code>install the upstream nyx scanner ...</code> hint.</li>
+<li><code>nyx FAIL: version too old (...)</code>.</li>
+</ul>
+</li>
+<li><code>claude-code</code>: detected version and path, or <code>unavailable (...)</code>
+when the binary is missing or below the minimum.</li>
+<li><code>codex</code>: detected version and path, or <code>unavailable (...)</code> when
+the binary is missing or below the minimum.</li>
+<li>Sandbox backend selection for the chain and fast lanes, with
+the simultaneous-job caps. Each line ends with <code>default</code> when
+the cap is the built-in fallback (chain 2 / fast 8 from
+<code>LaneConcurrency::defaults()</code>) and <code>configured</code> when the
+operator set <code>[performance] chain_lane_concurrency</code> /
+<code>fast_lane_concurrency</code> in <code>nyx-agent.toml</code>.</li>
+</ol>
+<p>The <code>doctor</code> subcommand exits non-zero only when the <code>nyx</code>
+discovery fails. CLI AI adapter and sandbox checks are informational.</p>
+<p><a href="install.html"><code>docs/install.md</code></a> covers each line in more depth,
+including the recovery action for every failure mode.</p>
+<p><strong>Exit codes.</strong> <code>0</code> if the upstream <code>nyx</code> binary is present and
+satisfies <code>[nyx] min_version</code>. <code>1</code> if <code>nyx</code> is missing or too old.</p>
+<h2 id="stubs-that-are-not-yet-wired"><a class="docs-anchor" href="#stubs-that-are-not-yet-wired" aria-label="Link to stubs-that-are-not-yet-wired" data-pagefind-ignore>#</a>Stubs that are not yet wired</h2>
+<p><code>nyx-agent --help</code> lists two further subcommands that <code>clap</code>
+advertises but the binary panics on:</p>
+<table>
+<thead>
+<tr>
+<th>Subcommand</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>reverify --run RUN --finding FINDING</code></td>
+<td>Stub. Calls <code>todo!()</code> at <code>crates/nyx-agent/src/main.rs:249</code>. Will surface a manual re-verification path against a previously-confirmed finding.</td>
+</tr>
+<tr>
+<td><code>budget</code></td>
+<td>Stub. Same <code>todo!()</code> site. Will print AI spend rolled up by run and by prompt version.</td>
+</tr>
+</tbody></table>
+<p>Until those panics are replaced with real wiring, do not script
+against them; the binary will abort with an <code>unimplemented!</code>
+message and exit <code>101</code> (Rust&#39;s default panic exit code).</p>
+<h2 id="cross-links"><a class="docs-anchor" href="#cross-links" aria-label="Link to cross-links" data-pagefind-ignore>#</a>Cross-links</h2>
+<ul>
+<li><a href="install.html"><code>docs/install.md</code></a>: toolchain, <code>nyx</code> scanner setup,
+the per-line <code>doctor</code> walkthrough.</li>
+<li><a href="quickstart.html"><code>docs/quickstart.md</code></a>: the same surfaces in
+worked-example form.</li>
+<li><a href="triggers/cron.html"><code>docs/triggers/cron.md</code></a> and
+<a href="triggers/webhook.html"><code>docs/triggers/webhook.md</code></a>: scan-trigger
+surfaces baked into <code>serve</code>.</li>
+<li><a href="ci/github-actions.html"><code>docs/ci/github-actions.md</code></a>: the shipped
+composite Action that drives <code>scan --output</code> plus <code>pr-comment</code>.</li>
+</ul>
+
+          </div>
+          <nav class="docs-prevnext" aria-label="Page navigation"><a class="docs-prevnext__link docs-prevnext__link--prev" href="quickstart.html">
+        <span class="docs-prevnext__label">Previous</span>
+        <span class="docs-prevnext__title">Quickstart</span>
+      </a><a class="docs-prevnext__link docs-prevnext__link--next" href="config.html">
+        <span class="docs-prevnext__label">Next</span>
+        <span class="docs-prevnext__title">Config</span>
+      </a></nav>
+        </article>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <p class="site-footer__copy">© 2026 Eli Peter · Nyx Agent is licensed under AGPL-3.0-or-later.</p>
+        <nav class="site-footer__nav" aria-label="Footer">
+          <a href="../../">Home</a>
+          <a href="../../scanner.html">Scanner</a>
+          <a href="../../agent.html">Agent</a>
+          <a href="../../news/">News</a>
+          <a href="../../docs/">Docs</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

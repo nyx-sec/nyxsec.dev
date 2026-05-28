@@ -2,14 +2,32 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://nyxscan.dev/</loc>
-    <lastmod>2026-05-11</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://nyxscan.dev/news/</loc>
-    <lastmod>2026-05-11</lastmod>
+    <loc>https://nyxscan.dev/scanner.html</loc>
+    <lastmod>2026-05-26</lastmod>
     <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://nyxscan.dev/agent.html</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://nyxscan.dev/news/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nyxscan.dev/news/nyx-agent.html</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
@@ -56,117 +74,243 @@
   </url>
   <url>
     <loc>https://nyxscan.dev/docs/</loc>
-    <lastmod>2026-05-11</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://nyxscan.dev/docs/quickstart.html</loc>
-    <lastmod>2026-05-11</lastmod>
+    <loc>https://nyxscan.dev/docs/nyx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://nyxscan.dev/docs/nyx/quickstart.html</loc>
+    <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://nyxscan.dev/docs/installation.html</loc>
-    <lastmod>2026-05-11</lastmod>
+    <loc>https://nyxscan.dev/docs/nyx/installation.html</loc>
+    <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://nyxscan.dev/docs/cli.html</loc>
-    <lastmod>2026-05-11</lastmod>
+    <loc>https://nyxscan.dev/docs/nyx/cli.html</loc>
+    <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://nyxscan.dev/docs/serve.html</loc>
-    <lastmod>2026-05-11</lastmod>
+    <loc>https://nyxscan.dev/docs/nyx/serve.html</loc>
+    <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://nyxscan.dev/docs/configuration.html</loc>
-    <lastmod>2026-05-11</lastmod>
+    <loc>https://nyxscan.dev/docs/nyx/dynamic.html</loc>
+    <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://nyxscan.dev/docs/output.html</loc>
-    <lastmod>2026-05-11</lastmod>
+    <loc>https://nyxscan.dev/docs/nyx/configuration.html</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nyxscan.dev/docs/nyx/output.html</loc>
+    <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://nyxscan.dev/docs/language-maturity.html</loc>
-    <lastmod>2026-05-11</lastmod>
+    <loc>https://nyxscan.dev/docs/nyx/language-maturity.html</loc>
+    <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://nyxscan.dev/docs/rules.html</loc>
-    <lastmod>2026-05-11</lastmod>
+    <loc>https://nyxscan.dev/docs/nyx/rules.html</loc>
+    <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://nyxscan.dev/docs/auth.html</loc>
-    <lastmod>2026-05-11</lastmod>
+    <loc>https://nyxscan.dev/docs/nyx/auth.html</loc>
+    <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://nyxscan.dev/docs/how-it-works.html</loc>
-    <lastmod>2026-05-11</lastmod>
+    <loc>https://nyxscan.dev/docs/nyx/how-it-works.html</loc>
+    <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://nyxscan.dev/docs/advanced-analysis.html</loc>
-    <lastmod>2026-05-11</lastmod>
+    <loc>https://nyxscan.dev/docs/nyx/advanced-analysis.html</loc>
+    <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://nyxscan.dev/docs/detectors.html</loc>
-    <lastmod>2026-05-11</lastmod>
+    <loc>https://nyxscan.dev/docs/nyx/detectors.html</loc>
+    <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://nyxscan.dev/docs/detectors/patterns.html</loc>
-    <lastmod>2026-05-11</lastmod>
+    <loc>https://nyxscan.dev/docs/nyx/detectors/patterns.html</loc>
+    <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://nyxscan.dev/docs/detectors/cfg.html</loc>
-    <lastmod>2026-05-11</lastmod>
+    <loc>https://nyxscan.dev/docs/nyx/detectors/cfg.html</loc>
+    <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://nyxscan.dev/docs/detectors/state.html</loc>
-    <lastmod>2026-05-11</lastmod>
+    <loc>https://nyxscan.dev/docs/nyx/detectors/state.html</loc>
+    <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://nyxscan.dev/docs/detectors/taint.html</loc>
-    <lastmod>2026-05-11</lastmod>
+    <loc>https://nyxscan.dev/docs/nyx/detectors/taint.html</loc>
+    <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://nyxscan.dev/docs/roadmap.html</loc>
-    <lastmod>2026-05-11</lastmod>
+    <loc>https://nyxscan.dev/docs/nyx/roadmap.html</loc>
+    <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://nyxscan.dev/docs/changelog.html</loc>
-    <lastmod>2026-05-11</lastmod>
+    <loc>https://nyxscan.dev/docs/nyx/changelog.html</loc>
+    <lastmod>2026-05-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://nyxscan.dev/docs/agent/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://nyxscan.dev/docs/agent/quickstart.html</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nyxscan.dev/docs/agent/install.html</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nyxscan.dev/docs/agent/cli.html</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nyxscan.dev/docs/agent/config.html</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nyxscan.dev/docs/agent/state-dir.html</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://nyxscan.dev/docs/agent/architecture.html</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://nyxscan.dev/docs/agent/runs.html</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://nyxscan.dev/docs/agent/attack-graph.html</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://nyxscan.dev/docs/agent/business-logic-templates.html</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://nyxscan.dev/docs/agent/events.html</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://nyxscan.dev/docs/agent/ai-runtime.html</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://nyxscan.dev/docs/agent/api.html</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://nyxscan.dev/docs/agent/triggers/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://nyxscan.dev/docs/agent/triggers/cron.html</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://nyxscan.dev/docs/agent/triggers/webhook.html</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://nyxscan.dev/docs/agent/ci/github-actions.html</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://nyxscan.dev/docs/agent/dev/sqlx.html</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://nyxscan.dev/docs/agent/dev/frontend.html</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
   </url>
   <url>
     <loc>https://nyxscan.dev/llms.txt</loc>

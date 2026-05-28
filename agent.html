@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Nyx Agent | Local pentesting for dev apps</title>
+    <meta
+      name="description"
+      content="Nyx Agent runs live pentests against development apps. It reads the repo, checks the local target, and keeps proof with the run."
+    />
+    <meta name="author" content="Eli Peter" />
+    <meta name="application-name" content="Nyx Agent" />
+    <meta
+      name="keywords"
+      content="Nyx Agent, nyx-agent, local pentesting, live appsec testing, verified vulnerabilities, stored evidence"
+    />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="https://nyxscan.dev/agent.html" />
+    <link rel="sitemap" type="application/xml" href="https://nyxscan.dev/sitemap.xml" />
+    <link rel="me" href="https://github.com/elicpeter" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon-180.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Nyx" />
+    <meta property="og:title" content="Nyx Agent | Local pentesting for dev apps" />
+    <meta
+      property="og:description"
+      content="Run a local pentest against a development app and keep proof with the run."
+    />
+    <meta property="og:url" content="https://nyxscan.dev/agent.html" />
+    <meta property="og:image" content="https://nyxscan.dev/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Nyx Agent local pentesting for dev apps" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Nyx Agent | Local pentesting for dev apps" />
+    <meta
+      name="twitter:description"
+      content="Run a local pentest against a development app and keep proof with the run."
+    />
+    <meta name="twitter:image" content="https://nyxscan.dev/og-image.png" />
+    <meta name="twitter:image:alt" content="Nyx Agent local pentesting for dev apps" />
+    <meta name="twitter:domain" content="nyxscan.dev" />
+    <meta name="twitter:url" content="https://nyxscan.dev/agent.html" />
+    <meta name="theme-color" content="#F9F8F4" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": ["SoftwareApplication", "SoftwareSourceCode"],
+        "@id": "https://nyxscan.dev/agent.html#software",
+        "name": "Nyx Agent",
+        "alternateName": ["nyx-agent"],
+        "url": "https://nyxscan.dev/agent.html",
+        "applicationCategory": "SecurityApplication",
+        "applicationSubCategory": "Local Pentesting",
+        "operatingSystem": "Cross-platform",
+        "programmingLanguage": "Rust, TypeScript",
+        "codeRepository": "https://github.com/nyx-sec/nyx-agent",
+        "license": "https://spdx.org/licenses/AGPL-3.0-or-later.html",
+        "description": "Nyx Agent runs live pentests against development apps. It reads the repo, checks the local target, and keeps proof with the run.",
+        "keywords": [
+          "local pentesting",
+          "live application security testing",
+          "verified vulnerabilities",
+          "stored evidence",
+          "developer security tooling"
+        ],
+        "featureList": [
+          "Local pentest runs",
+          "Target launch and readiness checks",
+          "Route and API exploration",
+          "Live verification",
+          "Request and response evidence",
+          "Local run history and triage state"
+        ],
+        "isAccessibleForFree": true
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" aria-label="Primary navigation">
+      <div class="container site-header__inner">
+        <a class="brand" href="." aria-label="Nyx home">
+          <img src="assets/logo.png" alt="Nyx" class="brand-logo" />
+        </a>
+        <span class="header-wordmark">NYX</span>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="scanner.html">Scanner</a>
+          <a href="agent.html" aria-current="page">Agent</a>
+          <a href="news/">News</a>
+          <a href="docs/">Docs</a>
+          <a class="nav-github" href="https://github.com/nyx-sec/nyx-agent">GitHub</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="container hero__inner">
+          <div class="hero__copy">
+            <h1 id="hero-title" class="hero__subtitle">Nyx Agent</h1>
+            <p class="hero__body">
+              Live pentests for dev apps. It reads the repo, checks the local target, and keeps proof with the run.
+            </p>
+
+            <div class="button-row" aria-label="Primary links">
+              <a class="button button--primary" href="https://github.com/nyx-sec/nyx-agent">GitHub</a>
+              <a class="button button--ghost" href="#support">Commercial use</a>
+            </div>
+          </div>
+
+          <div class="hero__visual" aria-hidden="true">
+            <div class="app-frame">
+              <div class="app-frame__bar"><span></span><span></span><span></span></div>
+              <img
+                src="assets/screenshots/nyx-agent-demo.gif"
+                width="1800"
+                height="1113"
+                alt=""
+                loading="eager"
+                fetchpriority="high"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="hero__stats">
+          <div class="container">
+            <ul class="hero-facts" aria-label="Nyx Agent summary">
+              <li>Local target</li>
+              <li>Live checks</li>
+              <li>Stored proof</li>
+              <li>Opt-in destructive mode</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--tinted" aria-labelledby="flow-title">
+        <div class="container">
+          <div class="section-intro section-intro--wide">
+            <h2 id="flow-title">From code to proof.</h2>
+            <p>
+              Point Nyx Agent at a repo and a local URL. It launches or watches the app, runs Nyx, explores routes, and
+              verifies selected findings against the running target.
+            </p>
+          </div>
+
+          <div class="compare-table-wrap">
+            <table class="compare-table stage-table" aria-label="Nyx Agent run flow">
+              <thead>
+                <tr>
+                  <th scope="col">Step</th>
+                  <th scope="col">Output</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Scan</td>
+                  <td>Static findings from <code>nyx</code>.</td>
+                </tr>
+                <tr>
+                  <td>Explore</td>
+                  <td>Routes, forms, auth state, and API shape.</td>
+                </tr>
+                <tr>
+                  <td>Verify</td>
+                  <td>Requests, responses, traces, and run history.</td>
+                </tr>
+                <tr>
+                  <td>Triage</td>
+                  <td>Confirmed issues with status and evidence.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="cli-title">
+        <div class="container install-layout">
+          <div class="install-copy">
+            <h2 id="cli-title">CLI first.</h2>
+            <p>Use the dashboard when you want to watch the run or inspect proof.</p>
+          </div>
+
+          <div class="terminal" aria-label="Nyx Agent CLI commands">
+            <div class="terminal__bar"><span></span><span></span><span></span></div>
+            <pre><code>nyx-agent scan ./apps/web --target-url http://127.0.0.1:3000
+nyx-agent serve</code></pre>
+          </div>
+
+          <div class="inline-links" aria-label="Nyx Agent resources">
+            <a href="https://github.com/nyx-sec/nyx-agent">GitHub</a>
+            <a href="docs/agent/">Docs</a>
+            <a href="news/nyx-agent.html">Launch notes</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--tinted" id="support" aria-labelledby="support-title">
+        <div class="container text-block">
+          <h2 id="support-title">Open source, with commercial terms available.</h2>
+          <p>
+            Nyx Agent is AGPLv3-or-later. Commercial licenses, paid support, onboarding, private policy packs, and
+            enterprise terms are available.
+          </p>
+
+          <div class="inline-links" aria-label="Support links">
+            <a href="https://github.com/sponsors/elicpeter">Sponsor</a>
+            <a href="https://github.com/nyx-sec/nyx-agent">Agent repo</a>
+            <a href="https://github.com/elicpeter/nyx">Scanner repo</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <p>Nyx is an independent open-source security project.</p>
+        <nav aria-label="Footer links">
+          <a href="./">Home</a>
+          <a href="scanner.html">Scanner</a>
+          <a href="agent.html">Agent</a>
+          <a href="agent.html#support">Support</a>
+          <a href="https://github.com/nyx-sec/nyx-agent">Agent GitHub</a>
+          <a href="https://github.com/elicpeter/nyx">Nyx GitHub</a>
+          <a href="news/">News</a>
+          <a href="docs/">Docs</a>
+          <a href="https://crates.io/crates/nyx-scanner">crates.io</a>
+          <a href="https://docs.rs/nyx-scanner/latest/nyx_scanner/">Rustdocs</a>
+          <a href="https://github.com/sponsors/elicpeter">Sponsor</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

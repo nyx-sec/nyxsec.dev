@@ -1,0 +1,546 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Nyx Scanner | Deterministic local-first security scanning</title>
+    <meta
+      name="description"
+      content="Nyx is an open-source, deterministic local-first security scanner for developers. Find source-to-sink attack paths, inspect evidence in a browser UI, export SARIF, and run scans in CI."
+    />
+    <meta name="author" content="Eli Peter" />
+    <meta name="application-name" content="Nyx" />
+    <meta
+      name="keywords"
+      content="Nyx, nyx-scanner, deterministic security scanner, open-source SAST, static application security testing, local-first security scanner, source-to-sink taint analysis, SARIF, Rust security tooling"
+    />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="https://nyxscan.dev/scanner.html" />
+    <link rel="alternate" type="text/plain" href="https://nyxscan.dev/llms.txt" title="llms.txt" />
+    <link rel="alternate" type="text/plain" href="https://nyxscan.dev/llms-full.txt" title="llms-full.txt" />
+    <link rel="sitemap" type="application/xml" href="https://nyxscan.dev/sitemap.xml" />
+    <link rel="me" href="https://github.com/elicpeter" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon-180.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="alternate" type="application/rss+xml" title="Nyx | News &amp; release notes" href="/news/feed.xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+    <link rel="preload" href="assets/screenshots/overview.webp" as="image" type="image/webp" fetchpriority="high" />
+    <link rel="stylesheet" href="styles.css" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Nyx" />
+    <meta property="og:title" content="Nyx Scanner | Deterministic local-first security scanning" />
+    <meta
+      property="og:description"
+      content="Open-source deterministic security scanning with source-to-sink analysis, local browser triage, SARIF, and CI support."
+    />
+    <meta property="og:url" content="https://nyxscan.dev/scanner.html" />
+    <meta property="og:image" content="https://nyxscan.dev/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Nyx local-first security scanner for developers" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Nyx Scanner | Deterministic local-first security scanning" />
+    <meta
+      name="twitter:description"
+      content="Open-source deterministic security scanning with source-to-sink analysis, local browser triage, SARIF, and CI support."
+    />
+    <meta name="twitter:image" content="https://nyxscan.dev/og-image.png" />
+    <meta name="twitter:image:alt" content="Nyx local-first security scanner for developers" />
+    <meta name="twitter:domain" content="nyxscan.dev" />
+    <meta name="twitter:url" content="https://nyxscan.dev/scanner.html" />
+    <meta name="theme-color" content="#F9F8F4" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image:secure_url" content="https://nyxscan.dev/og-image.png" />
+    <meta property="og:updated_time" content="2026-05-26T00:00:00-05:00" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": ["SoftwareApplication", "SoftwareSourceCode"],
+        "@id": "https://nyxscan.dev/scanner.html#software",
+        "name": "Nyx",
+        "alternateName": ["Nyx Scanner", "nyx-scanner"],
+        "url": "https://nyxscan.dev/scanner.html",
+        "mainEntityOfPage": {
+          "@id": "https://nyxscan.dev/scanner.html#webpage"
+        },
+        "applicationCategory": "SecurityApplication",
+        "applicationSubCategory": "Static Application Security Testing",
+        "operatingSystem": "Cross-platform",
+        "programmingLanguage": "Rust",
+        "softwareVersion": "0.7.0",
+        "softwareRequirements": "Rust 1.88+ for Cargo installs",
+        "codeRepository": "https://github.com/elicpeter/nyx",
+        "downloadUrl": "https://crates.io/crates/nyx-scanner",
+        "installUrl": "https://nyxscan.dev/docs/nyx/installation.html",
+        "license": "https://spdx.org/licenses/GPL-3.0-or-later.html",
+        "description": "Nyx is an open-source, deterministic local-first security scanner for developers. Find source-to-sink attack paths, inspect evidence in a browser UI, export SARIF, and run scans in CI.",
+        "keywords": [
+          "open-source SAST",
+          "static application security testing",
+          "local-first security scanner",
+          "source-to-sink taint analysis",
+          "cross-file interprocedural taint",
+          "SARIF",
+          "Rust security tooling"
+        ],
+        "featureList": [
+          "Cross-file interprocedural taint analysis",
+          "Source-to-sink attack path detection",
+          "Local browser triage UI",
+          "SARIF output for GitHub Code Scanning",
+          "GitHub Actions integration",
+          "No code upload, no account required",
+          "Runs fully offline",
+          "SQL injection detection",
+          "Command injection detection",
+          "Path traversal detection",
+          "SSRF detection",
+          "XSS detection",
+          "Unsafe deserialization detection",
+          "Python, JavaScript, TypeScript, Go, Java, PHP, Ruby, Rust, C, C++ support"
+        ],
+        "screenshot": "https://nyxscan.dev/og-image.png",
+        "author": {
+          "@type": "Person",
+          "name": "Eli Peter",
+          "url": "https://github.com/elicpeter"
+        },
+        "maintainer": {
+          "@type": "Person",
+          "name": "Eli Peter",
+          "url": "https://github.com/elicpeter"
+        },
+        "offers": {
+          "@type": "Offer",
+          "url": "https://crates.io/crates/nyx-scanner",
+          "price": 0,
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock"
+        },
+        "isAccessibleForFree": true,
+        "sameAs": [
+          "https://github.com/elicpeter/nyx",
+          "https://crates.io/crates/nyx-scanner",
+          "https://docs.rs/nyx-scanner/latest/nyx_scanner/",
+          "https://nyxscan.dev/docs/nyx/"
+        ]
+      }
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://nyxscan.dev/#website",
+            "url": "https://nyxscan.dev/",
+            "name": "Nyx",
+            "alternateName": "nyxscan.dev",
+            "description": "Open-source, local-first security scanning for developers.",
+            "inLanguage": "en-US",
+            "publisher": {
+              "@id": "https://nyxscan.dev/#person"
+            },
+            "about": {
+              "@id": "https://nyxscan.dev/scanner.html#software"
+            },
+            "sameAs": [
+              "https://github.com/elicpeter/nyx",
+              "https://crates.io/crates/nyx-scanner",
+              "https://docs.rs/nyx-scanner/latest/nyx_scanner/",
+              "https://nyxscan.dev/docs/nyx/"
+            ]
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://nyxscan.dev/scanner.html#webpage",
+            "url": "https://nyxscan.dev/scanner.html",
+            "name": "Nyx Scanner | Deterministic local-first security scanning",
+            "description": "Nyx is an open-source, deterministic local-first security scanner for developers. Find source-to-sink attack paths, inspect evidence in a browser UI, export SARIF, and run scans in CI.",
+            "isPartOf": {
+              "@id": "https://nyxscan.dev/#website"
+            },
+            "about": {
+              "@id": "https://nyxscan.dev/scanner.html#software"
+            },
+            "primaryImageOfPage": {
+              "@type": "ImageObject",
+              "url": "https://nyxscan.dev/og-image.png",
+              "width": 1200,
+              "height": 630
+            },
+            "dateModified": "2026-05-26",
+            "inLanguage": "en-US"
+          },
+          {
+            "@type": "Person",
+            "@id": "https://nyxscan.dev/#person",
+            "name": "Eli Peter",
+            "url": "https://github.com/elicpeter",
+            "sameAs": ["https://github.com/elicpeter"]
+          }
+        ]
+      }
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Does Nyx upload my source code anywhere?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. The scanner runs on your machine, the UI binds to 127.0.0.1 only, and there are no outbound connections at any point. No telemetry, no account, nothing leaves the box."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What languages does Nyx support?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Stable (CI-gateable): Python, JavaScript, TypeScript. Beta: Java, PHP, Ruby, Rust, Go. Preview (not recommended for gates yet): C, C++. All parse via tree-sitter and run through the same cross-file taint pipeline."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What kinds of bugs does Nyx find?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Nyx runs four detector families: taint analysis (cross-file source-to-sink), CFG structural (auth gaps, unguarded sinks), state model (use-after-close, resource leaks), and AST patterns (banned APIs, weak crypto). Taint analysis finds SQL injection, command injection, path traversal, SSRF, XSS, unsafe deserialization, code execution (eval, SSTI), and open redirect."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I use Nyx in CI without sending code to a third party?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Run nyx scan --format sarif --fail-on MEDIUM in any pipeline. The GitHub Action at elicpeter/nyx uploads SARIF to GitHub Code Scanning. No code leaves the runner."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is Nyx free?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. GPL-3.0, no paid tier, no usage limits. cargo install nyx-scanner and you have the full thing."
+            }
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" aria-label="Primary navigation">
+      <div class="container site-header__inner">
+        <a class="brand" href="." aria-label="Nyx home">
+          <img src="assets/logo.png" alt="Nyx" class="brand-logo" />
+        </a>
+        <span class="header-wordmark">NYX</span>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="scanner.html" aria-current="page">Scanner</a>
+          <a href="agent.html">Agent</a>
+          <a href="news/">News</a>
+          <a href="docs/">Docs</a>
+          <a class="nav-github" href="https://github.com/elicpeter/nyx">GitHub</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- Hero -->
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="container hero__inner">
+          <div class="hero__copy">
+            <h1 id="hero-title" class="hero__subtitle">Local-first security scanning for developers.</h1>
+            <p class="hero__body">
+              Find source-to-sink attack paths, inspect evidence in a browser UI, and keep triage decisions with your
+              code.
+            </p>
+
+            <div class="button-row" aria-label="Primary links">
+              <a class="button button--primary" href="#install">Get started</a>
+              <a class="button button--ghost" href="https://github.com/elicpeter/nyx">View on GitHub</a>
+            </div>
+          </div>
+
+          <div class="hero__visual" aria-hidden="true">
+            <div class="app-frame">
+              <div class="app-frame__bar"><span></span><span></span><span></span></div>
+              <picture>
+                <source srcset="assets/screenshots/overview.webp" type="image/webp" />
+                <img
+                  src="assets/screenshots/overview.png"
+                  width="1600"
+                  height="992"
+                  alt=""
+                  loading="eager"
+                  fetchpriority="high"
+                />
+              </picture>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero__stats">
+          <div class="container">
+            <ul class="hero-facts" aria-label="Nyx summary">
+              <li>Runs locally, no account required</li>
+              <li>Source-to-sink taint analysis</li>
+              <li>Browser triage UI</li>
+              <li>SARIF and GitHub Actions</li>
+              <!--              <li>3 CVEs reported</li>-->
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Demo -->
+      <section class="section section--tinted" aria-labelledby="demo-title">
+        <div class="container">
+          <div class="section-intro section-intro--wide">
+            <h2 id="demo-title">Scan in the CLI. Review in the browser.</h2>
+            <p>
+              The same local engine runs in your terminal and in CI. After a scan, <code>nyx serve</code> opens the
+              browser triage UI for findings, source context, and review state.
+            </p>
+          </div>
+
+          <figure class="media-frame media-frame--demo">
+            <img
+              src="assets/screenshots/demo-combo.gif"
+              width="1280"
+              height="960"
+              alt="Nyx demo showing CLI scan output and browser triage for source-to-sink findings"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>
+              Scan locally in the CLI or UI, then inspect source-to-sink evidence and triage findings in the Nyx UI.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- Install -->
+      <section class="section" id="install" aria-labelledby="install-title">
+        <div class="container install-layout">
+          <div class="install-copy">
+            <h2 id="install-title">Start with Cargo.</h2>
+            <p>Install the crate, scan a repository, then open the local review UI.</p>
+          </div>
+
+          <div class="terminal" aria-label="Nyx install commands">
+            <div class="terminal__bar">
+              <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+              <button class="terminal__copy" type="button" data-copy-target="install-commands">Copy</button>
+            </div>
+            <input
+              id="install-commands"
+              class="terminal__field"
+              type="text"
+              value="cargo install nyx-scanner && nyx serve"
+              readonly
+              spellcheck="false"
+            />
+          </div>
+
+          <div class="inline-links" aria-label="Install resources">
+            <a href="https://crates.io/crates/nyx-scanner">crates.io package</a>
+            <a href="docs/nyx/installation.html">installation docs</a>
+            <a href="https://github.com/elicpeter/nyx/releases">GitHub releases</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Why + Compare (merged) -->
+      <section class="section section--tinted" id="compare" aria-labelledby="compare-title">
+        <div class="container">
+          <div class="section-intro">
+            <h2 id="compare-title">Private code should stay private.</h2>
+            <p>
+              Most security scanners require a build environment, a cloud account, or both. Nyx runs analysis locally,
+              shows the full source-to-sink path, and keeps triage state in your repo. No uploads, no signups. It has
+              already found and reported three vulnerabilities in widely-used open-source projects.
+            </p>
+          </div>
+
+          <div class="compare-table-wrap">
+            <table class="compare-table" aria-label="Comparison of Nyx with Semgrep, CodeQL, Snyk, and Bandit">
+              <thead>
+                <tr>
+                  <th scope="col">Feature</th>
+                  <th scope="col">Nyx</th>
+                  <th scope="col">Semgrep</th>
+                  <th scope="col">CodeQL</th>
+                  <th scope="col">Snyk</th>
+                  <th scope="col">Bandit / ESLint</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Cross-file taint tracking</td>
+                  <td class="cell--yes">Yes</td>
+                  <td class="cell--partial">Pro only</td>
+                  <td class="cell--yes">Yes</td>
+                  <td class="cell--yes">Yes</td>
+                  <td class="cell--no">No</td>
+                </tr>
+                <tr>
+                  <td>Runs fully offline</td>
+                  <td class="cell--yes">Yes</td>
+                  <td class="cell--yes">Yes</td>
+                  <td class="cell--partial">Local (needs CodeQL CLI + build)</td>
+                  <td class="cell--no">No</td>
+                  <td class="cell--yes">Yes</td>
+                </tr>
+                <tr>
+                  <td>No code upload</td>
+                  <td class="cell--yes">Yes</td>
+                  <td class="cell--yes">Yes</td>
+                  <td class="cell--partial">Needs GitHub or local build step</td>
+                  <td class="cell--no">No (cloud analysis)</td>
+                  <td class="cell--yes">Yes</td>
+                </tr>
+                <tr>
+                  <td>No account required</td>
+                  <td class="cell--yes">Yes</td>
+                  <td class="cell--partial">Free tier needs signup</td>
+                  <td class="cell--partial">Needs GitHub account</td>
+                  <td class="cell--no">No</td>
+                  <td class="cell--yes">Yes</td>
+                </tr>
+                <tr>
+                  <td>Browser triage UI</td>
+                  <td class="cell--yes">Yes (local)</td>
+                  <td class="cell--no">No</td>
+                  <td class="cell--no">No</td>
+                  <td class="cell--yes">Yes (cloud only)</td>
+                  <td class="cell--no">No</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section class="section" id="faq" aria-labelledby="faq-title">
+        <div class="container">
+          <div class="section-intro">
+            <h2 id="faq-title">Frequently asked questions.</h2>
+          </div>
+
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary><h3>Does Nyx upload my source code anywhere?</h3></summary>
+              <p>
+                No. The scanner runs on your machine, the UI binds to <code>127.0.0.1</code> only, and there are no
+                outbound connections at any point. No telemetry, no account, nothing leaves the box.
+              </p>
+            </details>
+
+            <details class="faq-item">
+              <summary><h3>What languages does Nyx support?</h3></summary>
+              <p>
+                Stable (CI-gateable): Python, JavaScript, TypeScript. Beta: Java, PHP, Ruby, Rust, Go. Preview (not
+                recommended for gates yet): C, C++. All parse via tree-sitter and run through the same cross-file taint
+                pipeline.
+              </p>
+            </details>
+
+            <details class="faq-item">
+              <summary><h3>What kinds of bugs does it find?</h3></summary>
+              <p>
+                Nyx runs four detector families: taint analysis (cross-file source-to-sink), CFG structural (auth gaps,
+                unguarded sinks), state model (use-after-close, resource leaks), and AST patterns (banned APIs, weak
+                crypto). Taint analysis finds SQL injection, command injection, path traversal, SSRF, XSS, unsafe
+                deserialization, code execution (eval, SSTI), and open redirect. The CVE corpus covers 38 published
+                advisories across all 10 languages.
+              </p>
+            </details>
+
+            <details class="faq-item">
+              <summary><h3>Can I use it in CI without sending code to a third party?</h3></summary>
+              <p>
+                Yes. Run <code>nyx scan --format sarif --fail-on MEDIUM</code> in any pipeline. The GitHub Action at
+                <code>elicpeter/nyx</code> uploads SARIF to GitHub Code Scanning. No code leaves the runner.
+              </p>
+            </details>
+
+            <details class="faq-item">
+              <summary><h3>Is Nyx free?</h3></summary>
+              <p>
+                Yes. GPL-3.0, no paid tier, no usage limits. <code>cargo install nyx-scanner</code> and you have the
+                full thing.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <p>Nyx is an independent open-source security project.</p>
+        <nav aria-label="Footer links">
+          <a href="./">Home</a>
+          <a href="scanner.html">Scanner</a>
+          <a href="agent.html">Agent</a>
+          <a href="agent.html#support">Support</a>
+          <a href="news/">News</a>
+          <a href="docs/">Docs</a>
+          <a href="https://github.com/elicpeter/nyx">GitHub</a>
+          <a href="https://crates.io/crates/nyx-scanner">crates.io</a>
+          <a href="https://docs.rs/nyx-scanner/latest/nyx_scanner/">Rustdocs</a>
+          <a href="https://github.com/elicpeter/nyx/releases">Releases</a>
+          <a href="https://github.com/elicpeter/nyx/blob/master/ROADMAP.md">Roadmap</a>
+          <a href="https://github.com/elicpeter/nyx/blob/master/SECURITY.md">Security</a>
+          <a href="https://github.com/sponsors/elicpeter">Sponsor</a>
+        </nav>
+      </div>
+    </footer>
+    <script>
+      (function () {
+        document.querySelectorAll("[data-copy-target]").forEach(function (button) {
+          button.addEventListener("click", function () {
+            var target = document.getElementById(button.getAttribute("data-copy-target"));
+            if (!target) return;
+
+            var originalLabel = button.textContent;
+            var markCopied = function () {
+              button.textContent = "Copied";
+              window.setTimeout(function () {
+                button.textContent = originalLabel;
+              }, 1400);
+            };
+            var fallbackCopy = function () {
+              target.focus();
+              target.select();
+              document.execCommand("copy");
+              markCopied();
+            };
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              navigator.clipboard.writeText(target.value).then(markCopied).catch(fallbackCopy);
+            } else {
+              fallbackCopy();
+            }
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>

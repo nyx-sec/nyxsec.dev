@@ -1,7 +1,7 @@
 {
-  "name": "Nyx — Local-first security scanner",
+  "name": "Nyx | Local security stack",
   "short_name": "Nyx",
-  "description": "Open-source, local-first security scanner for developers. Source-to-sink taint analysis, browser triage UI, SARIF, CI.",
+  "description": "Local security tools for deterministic scanning and live testing.",
   "start_url": "/",
   "scope": "/",
   "display": "browser",

@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
 // Build nyxscan.dev/docs/ from markdown in docs-src/.
-// Source of truth lives in /Users/elipeter/nyx/docs (see tools/sync-docs.sh).
+// Source of truth lives in /Users/elipeter/nyx/docs and /Users/elipeter/nyctos/docs
+// (see tools/sync-docs.sh).
 
 const fs = require("fs");
 const path = require("path");
@@ -10,16 +11,75 @@ const { marked } = require("marked");
 const hljs = require("highlight.js");
 
 const ROOT = path.resolve(__dirname, "..");
-const SRC = path.join(ROOT, "docs-src");
+const SRC_ROOT = path.join(ROOT, "docs-src");
 const OUT = path.join(ROOT, "docs");
 const SITE_URL = "https://nyxscan.dev";
 
-const SITE_DESC =
-  "Documentation for Nyx, the open-source, local-first SAST scanner written in Rust. Quickstart, CLI reference, detectors, configuration, and language coverage.";
+const HUB_DESC =
+  "Documentation for Nyx Scanner and Nyx Agent: local source-to-sink scanning, local pentesting, CLI usage, configuration, APIs, and operations.";
 
-// ─────────────────────────────────────────
-// Marked config — highlight via highlight.js
-// ─────────────────────────────────────────
+const DOC_SETS = [
+  {
+    id: "nyx",
+    slug: "nyx",
+    sourceDir: path.join(SRC_ROOT, "nyx"),
+    shortName: "Nyx",
+    productName: "Nyx Scanner",
+    sidebarTitle: "Nyx docs",
+    indexTitle: "Nyx Scanner Documentation",
+    indexHeading: "Nyx Scanner documentation",
+    indexLede:
+      "Deterministic local-first SAST for source-to-sink taint, browser triage, SARIF, CI, configuration, and detector internals.",
+    description:
+      "Documentation for Nyx Scanner, the open-source, local-first SAST scanner written in Rust. Quickstart, CLI reference, detectors, configuration, and language coverage.",
+    productDescription:
+      "Deterministic source-to-sink scanning for local code. No cloud, no account, no telemetry.",
+    keywordsBase: [
+      "Nyx",
+      "Nyx scanner",
+      "SAST",
+      "static analysis",
+      "Rust security scanner",
+      "local-first SAST",
+    ],
+    github: "https://github.com/elicpeter/nyx",
+    licenseLine: "Nyx is licensed under GPL-3.0-or-later.",
+    ogAlt: "Nyx Scanner local-first security documentation",
+    suggestedLinks: ["quickstart.html", "installation.html", "cli.html"],
+  },
+  {
+    id: "agent",
+    slug: "agent",
+    sourceDir: path.join(SRC_ROOT, "agent"),
+    shortName: "Nyx Agent",
+    productName: "Nyx Agent",
+    sidebarTitle: "Agent docs",
+    indexTitle: "Nyx Agent Documentation",
+    indexHeading: "Nyx Agent documentation",
+    indexLede:
+      "Operator docs for local pentests against development apps: setup, daemon operation, projects, runs, API, triggers, CI, and AI runtime wiring.",
+    description:
+      "Documentation for Nyx Agent, the local pentesting product for development apps. Install, quickstart, CLI, configuration, API, triggers, runs, and architecture.",
+    productDescription:
+      "Local pentesting against development apps with route exploration, verification, evidence capture, triggers, and project-level runs.",
+    keywordsBase: [
+      "Nyx Agent",
+      "nyx-agent",
+      "local pentesting",
+      "live appsec testing",
+      "verified vulnerabilities",
+      "stored evidence",
+    ],
+    github: "https://github.com/nyx-sec/nyx-agent",
+    licenseLine: "Nyx Agent is licensed under AGPL-3.0-or-later.",
+    ogAlt: "Nyx Agent local pentesting documentation",
+    suggestedLinks: ["quickstart.html", "install.html", "cli.html"],
+  },
+];
+
+// ---------------------------------------------------------------------------
+// Marked config - highlight via highlight.js
+// ---------------------------------------------------------------------------
 marked.setOptions({
   gfm: true,
   breaks: false,
@@ -61,31 +121,37 @@ renderer.heading = function ({ tokens, depth }) {
   return `<h${depth} id="${id}"><a class="docs-anchor" href="#${id}" aria-label="Link to ${id}" data-pagefind-ignore>#</a>${inner}</h${depth}>\n`;
 };
 
-// Rewrite *.md / *.MD links → *.html so cross-page links work after build.
 renderer.link = function ({ href, title, tokens }) {
-  let h = href || "";
-  if (h && !/^[a-z]+:/i.test(h) && !h.startsWith("#") && !h.startsWith("//")) {
-    h = h.replace(/\.md(?=$|[#?])/i, ".html");
-    // Mdbook stub stripped CHANGELOG.md / ROADMAP.md → those map to lowercase pages.
-    h = h.replace(/(^|[\/])CHANGELOG\.html/, "$1changelog.html");
-    h = h.replace(/(^|[\/])ROADMAP\.html/, "$1roadmap.html");
-  }
+  const h = rewriteMarkdownHref(href || "");
   const inner = this.parser.parseInline(tokens);
   const titleAttr = title ? ` title="${escapeHtml(title)}"` : "";
-  return `<a href="${h}"${titleAttr}>${inner}</a>`;
+  return `<a href="${escapeAttr(h)}"${titleAttr}>${inner}</a>`;
 };
 
-// ─────────────────────────────────────────
-// Include resolver — mdbook {{#include path}}
-// ─────────────────────────────────────────
-function resolveIncludes(md, filePath) {
+function rewriteMarkdownHref(href) {
+  let h = href || "";
+  if (h && !/^[a-z]+:/i.test(h) && !h.startsWith("#") && !h.startsWith("//")) {
+    h = h.replace(/(^|\/)README\.md(?=$|[#?])/i, "$1index.html");
+    h = h.replace(/\.md(?=$|[#?])/i, ".html");
+    h = h.replace(/(^|\/)CHANGELOG\.html/, "$1changelog.html");
+    h = h.replace(/(^|\/)ROADMAP\.html/, "$1roadmap.html");
+  }
+  return h;
+}
+
+// ---------------------------------------------------------------------------
+// Include resolver - mdbook {{#include path}}
+// ---------------------------------------------------------------------------
+function resolveIncludes(md, filePath, set) {
   return md.replace(/\{\{\s*#include\s+([^}\s]+)\s*\}\}/g, (_, inc) => {
-    // Try relative to the file first, then docs-src root by basename.
-    const candidates = [path.resolve(path.dirname(filePath), inc), path.join(SRC, path.basename(inc))];
+    const candidates = [
+      path.resolve(path.dirname(filePath), inc),
+      path.join(set.sourceDir, path.basename(inc)),
+      path.join(SRC_ROOT, path.basename(inc)),
+    ];
     for (const c of candidates) {
       if (fs.existsSync(c)) {
         let inner = fs.readFileSync(c, "utf8");
-        // Strip a leading top-level H1 — page already provides one via title.
         inner = inner.replace(/^#\s+[^\n]+\n+/, "");
         return inner;
       }
@@ -95,29 +161,41 @@ function resolveIncludes(md, filePath) {
   });
 }
 
-// ─────────────────────────────────────────
-// SUMMARY.md → sidebar tree
-// ─────────────────────────────────────────
+// ---------------------------------------------------------------------------
+// SUMMARY.md -> sidebar tree
+// ---------------------------------------------------------------------------
 function parseSummary(md) {
   const sections = [];
   let current = null;
   const lines = md.split("\n");
   for (const raw of lines) {
     const line = raw.replace(/\r$/, "");
-    const heading = /^#\s+(.+)$/.exec(line);
+    const heading = /^(#{1,3})\s+(.+)$/.exec(line);
     if (heading) {
-      // Skip the doc's own H1 ("Summary").
-      if (/^summary$/i.test(heading[1].trim())) continue;
-      current = { title: heading[1].trim(), items: [] };
-      sections.push(current);
+      const level = heading[1].length;
+      const title = heading[2].trim();
+      if (/^summary$/i.test(title)) {
+        current = null;
+        continue;
+      }
+      if (level === 1 && sections.length === 0 && /docs|documentation/i.test(title)) {
+        current = null;
+        continue;
+      }
+      if (level <= 2) {
+        current = { title, items: [] };
+        sections.push(current);
+      }
       continue;
     }
-    const item = /^(\s*)-\s*\[([^\]]+)\]\(([^)]+)\)\s*$/.exec(line);
+
+    const item = /^(\s*)-\s*\[([^\]]+)\]\(([^)]+)\)(?:\s*:.*)?\s*$/.exec(line);
     if (item && current) {
       const indent = item[1].length;
+      const rawHref = item[3].trim();
       const node = {
-        title: item[2].trim(),
-        href: item[3].trim().replace(/\.md(?=$|[#?])/, ".html"),
+        title: humanizeLinkTitle(item[2].trim(), rawHref),
+        href: rewriteMarkdownHref(rawHref),
         children: [],
       };
       if (indent === 0 || current.items.length === 0) {
@@ -128,7 +206,50 @@ function parseSummary(md) {
       }
     }
   }
-  return sections;
+  return sections.filter((section) => section.items.length > 0);
+}
+
+function humanizeLinkTitle(rawTitle, href) {
+  const titleLooksLikePath = /\.md(?:$|[#?])/i.test(rawTitle) || rawTitle === href;
+  if (!titleLooksLikePath) return rawTitle;
+
+  const cleanHref = href.split(/[?#]/)[0];
+  let base = path.posix.basename(cleanHref, path.posix.extname(cleanHref));
+  if (/^README$/i.test(base)) base = "overview";
+
+  const title = humanizeSlug(base);
+  const hash = /#([^?]+)/.exec(href);
+  return hash ? `${title}: ${humanizeSlug(hash[1])}` : title;
+}
+
+function humanizeSlug(value) {
+  const acronyms = new Map([
+    ["ai", "AI"],
+    ["api", "API"],
+    ["ci", "CI"],
+    ["cli", "CLI"],
+    ["cfg", "CFG"],
+    ["csrf", "CSRF"],
+    ["dir", "Directory"],
+    ["github", "GitHub"],
+    ["hmac", "HMAC"],
+    ["sarif", "SARIF"],
+    ["sqlx", "SQLx"],
+    ["ui", "UI"],
+    ["websocket", "WebSocket"],
+  ]);
+  const smallWords = new Set(["a", "an", "and", "as", "for", "in", "of", "or", "the", "to", "with"]);
+  return String(value)
+    .replace(/\.md$/i, "")
+    .split(/[-_\s]+/)
+    .filter(Boolean)
+    .map((word, index) => {
+      const lower = word.toLowerCase();
+      if (acronyms.has(lower)) return acronyms.get(lower);
+      if (index > 0 && smallWords.has(lower)) return lower;
+      return lower.charAt(0).toUpperCase() + lower.slice(1);
+    })
+    .join(" ");
 }
 
 function flattenNav(sections) {
@@ -142,27 +263,87 @@ function flattenNav(sections) {
   return flat;
 }
 
-function navIndex(flat) {
+function stripUrlParts(href) {
+  return href.split(/[?#]/)[0];
+}
+
+function uniquePages(flat) {
+  const seen = new Set();
+  const pages = [];
+  for (const item of flat) {
+    const href = stripUrlParts(item.href);
+    if (!href || seen.has(href)) continue;
+    seen.add(href);
+    pages.push({ ...item, href });
+  }
+  return pages;
+}
+
+function navEntryFor(flat, href) {
+  return (
+    flat.find((n) => stripUrlParts(n.href) === href && !/[#?]/.test(n.href)) ||
+    flat.find((n) => stripUrlParts(n.href) === href) ||
+    null
+  );
+}
+
+function markdownRelFromHref(href) {
+  const clean = stripUrlParts(href);
+  if (!clean || clean.endsWith("/")) return null;
+  if (clean.endsWith("index.html")) {
+    const dir = clean.slice(0, -"index.html".length);
+    return `${dir}README.md`;
+  }
+  return clean.replace(/\.html$/i, ".md");
+}
+
+function outRelFromMarkdownRel(rel) {
+  const normalized = toUrlPath(rel);
+  if (/^README\.md$/i.test(path.posix.basename(normalized))) {
+    const dir = path.posix.dirname(normalized);
+    return dir === "." ? "index.html" : `${dir}/index.html`;
+  }
+  return normalized.replace(/\.md$/i, ".html");
+}
+
+function markdownFilesFromNav(set, flat) {
+  const refs = new Set();
+  for (const item of flat) {
+    const rel = markdownRelFromHref(item.href);
+    if (rel) refs.add(rel);
+  }
+
+  const files = [];
+  for (const rel of refs) {
+    const srcFile = path.join(set.sourceDir, rel);
+    if (fs.existsSync(srcFile)) {
+      files.push(rel);
+    } else {
+      console.warn(`warn: nav page not found for ${set.id}: ${rel}`);
+    }
+  }
+  return files;
+}
+
+function navIndex(flatPages) {
   const map = new Map();
-  for (const n of flat) map.set(n.href, n);
+  for (const n of flatPages) map.set(n.href, n);
   return map;
 }
 
-function deriveKeywords(title, section, body) {
-  const base = ["Nyx", "Nyx scanner", "SAST", "static analysis", "Rust security scanner", "local-first SAST"];
+function deriveKeywords(title, section, body, set) {
   const extra = [];
   if (section) extra.push(section);
   if (title) extra.push(title);
-  // Heuristic: pull a few ALL-CAPS tokens or common terms from body.
   const tokens =
     body.match(
-      /\b(taint|SARIF|CFG|SSA|SBOM|CVE|RCE|SSRF|XSS|FastAPI|Rust|Python|Go|JavaScript|TypeScript|Java|TOML|JSON)\b/gi,
+      /\b(taint|SARIF|CFG|SSA|SBOM|CVE|RCE|SSRF|XSS|FastAPI|Rust|Python|Go|JavaScript|TypeScript|Java|TOML|JSON|API|WebSocket|cron|HMAC|AI)\b/gi,
     ) || [];
   for (const t of tokens) if (!extra.includes(t)) extra.push(t);
-  return [...base, ...extra.slice(0, 6)];
+  return [...set.keywordsBase, ...extra.slice(0, 6)];
 }
 
-function pageJsonLd({ title, description, canonical, section, parentHref, parentTitle, isIndex }) {
+function pageJsonLd({ title, description, canonical, section, parentHref, parentTitle, isIndex, set }) {
   const breadcrumb = {
     "@type": "BreadcrumbList",
     itemListElement: [
@@ -170,23 +351,33 @@ function pageJsonLd({ title, description, canonical, section, parentHref, parent
       { "@type": "ListItem", position: 2, name: "Docs", item: `${SITE_URL}/docs/` },
     ],
   };
-  if (parentHref && parentTitle) {
+
+  if (set) {
     breadcrumb.itemListElement.push({
       "@type": "ListItem",
       position: 3,
-      name: parentTitle,
-      item: `${SITE_URL}/docs/${parentHref}`,
+      name: `${set.productName} docs`,
+      item: `${SITE_URL}/docs/${set.slug}/`,
     });
+  }
+
+  if (set && parentHref && parentTitle) {
     breadcrumb.itemListElement.push({
       "@type": "ListItem",
       position: 4,
+      name: parentTitle,
+      item: `${SITE_URL}/docs/${set.slug}/${parentHref}`,
+    });
+    breadcrumb.itemListElement.push({
+      "@type": "ListItem",
+      position: 5,
       name: title,
       item: canonical,
     });
-  } else if (!isIndex) {
+  } else if (set && !isIndex) {
     breadcrumb.itemListElement.push({
       "@type": "ListItem",
-      position: 3,
+      position: 4,
       name: title,
       item: canonical,
     });
@@ -205,43 +396,21 @@ function pageJsonLd({ title, description, canonical, section, parentHref, parent
     "@id": `${SITE_URL}/#website`,
     url: `${SITE_URL}/`,
     name: "Nyx",
-    description: "Local-first, open-source SAST scanner written in Rust.",
+    description: "Local security tooling for deterministic scanning and live testing.",
     inLanguage: "en",
     publisher: { "@id": `${SITE_URL}/#person` },
   };
 
-  if (isIndex) {
-    return {
-      "@context": "https://schema.org",
-      "@graph": [
-        person,
-        website,
-        {
-          "@type": "TechArticle",
-          "@id": `${canonical}#page`,
-          headline: title,
-          name: title,
-          url: canonical,
-          description,
-          inLanguage: "en",
-          isPartOf: { "@id": `${SITE_URL}/#website` },
-          publisher: { "@id": `${SITE_URL}/#person` },
-          author: { "@id": `${SITE_URL}/#person` },
-          image: `${SITE_URL}/og-image.png`,
-        },
-        { ...breadcrumb, "@id": `${canonical}#breadcrumbs` },
-      ],
-    };
-  }
-
+  const articleType = set ? "TechArticle" : "CollectionPage";
+  const articleId = isIndex ? `${canonical}#page` : `${canonical}#article`;
   return {
     "@context": "https://schema.org",
     "@graph": [
       person,
       website,
       {
-        "@type": "TechArticle",
-        "@id": `${canonical}#article`,
+        "@type": articleType,
+        "@id": articleId,
         headline: title,
         name: title,
         url: canonical,
@@ -259,15 +428,20 @@ function pageJsonLd({ title, description, canonical, section, parentHref, parent
   };
 }
 
-function renderSidebar(sections, currentHref) {
-  const norm = (h) => h.replace(/^\.\//, "");
+// ---------------------------------------------------------------------------
+// Sidebar + search
+// ---------------------------------------------------------------------------
+function renderSidebar(set, sections, currentHref) {
+  const norm = (h) => stripUrlParts(h).replace(/^\.\//, "");
   const isCurrent = (h) => norm(h) === norm(currentHref);
   const depth = currentHref.split("/").length - 1;
   const upPrefix = "../".repeat(depth);
   const rel = (h) => (upPrefix ? upPrefix + h : h);
+  const setRootHref = depth === 0 ? "./" : upPrefix;
 
   const parts = ['<nav class="docs-sidebar" aria-label="Documentation">'];
-  parts.push(`<a class="docs-sidebar__brand" href="${rel("")}">Docs</a>`);
+  parts.push(`<a class="docs-sidebar__brand" href="${setRootHref}">${escapeHtml(set.sidebarTitle)}</a>`);
+  parts.push(`<a class="docs-sidebar__home" href="${rel("../")}">All docs</a>`);
   for (const sec of sections) {
     parts.push(`<div class="docs-sidebar__group">`);
     parts.push(`<h2 class="docs-sidebar__heading">${escapeHtml(sec.title)}</h2>`);
@@ -293,6 +467,19 @@ function renderSidebar(sections, currentHref) {
   return parts.join("");
 }
 
+function renderHubSidebar() {
+  const items = DOC_SETS.map(
+    (set) => `<li><a class="docs-sidebar__link" href="${set.slug}/">${escapeHtml(set.productName)}</a></li>`,
+  ).join("");
+  return `<nav class="docs-sidebar" aria-label="Documentation">
+    <a class="docs-sidebar__brand" href="">Docs</a>
+    <div class="docs-sidebar__group">
+      <h2 class="docs-sidebar__heading">Products</h2>
+      <ul class="docs-sidebar__list">${items}</ul>
+    </div>
+  </nav>`;
+}
+
 function renderDocsSearch() {
   return `<div class="docs-search docs-search--content" data-docs-search>
     <label class="visually-hidden" for="docs-search-input">Search docs</label>
@@ -308,11 +495,15 @@ function renderDocsSearch() {
   </div>`;
 }
 
-// ─────────────────────────────────────────
+// ---------------------------------------------------------------------------
 // HTML helpers
-// ─────────────────────────────────────────
+// ---------------------------------------------------------------------------
 function escapeHtml(s) {
   return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
+function escapeAttr(s) {
+  return escapeHtml(s).replace(/'/g, "&#39;");
 }
 
 function extractFirstHeading(md) {
@@ -342,15 +533,23 @@ function plainSummary(md, max = 200) {
     .split(/\n\s*\n/)
     .map((p) => p.replace(/\s+/g, " ").trim())
     .filter(Boolean);
-  // Skip leads that end with a colon (set up a code/list); take the next.
   let para = paras.find((p) => p.length > 40 && !p.endsWith(":")) || paras[0] || "";
   if (para.length <= max) return para;
   return (
     para
       .slice(0, max - 1)
       .replace(/\s+\S*$/, "")
-      .replace(/[,;:]\s*$/, "") + "…"
+      .replace(/[,;:]\s*$/, "") + "..."
   );
+}
+
+function canonicalFor(set, outRelKey) {
+  if (!set) return `${SITE_URL}/docs/`;
+  if (outRelKey === "index.html") return `${SITE_URL}/docs/${set.slug}/`;
+  if (outRelKey.endsWith("/index.html")) {
+    return `${SITE_URL}/docs/${set.slug}/${outRelKey.slice(0, -"index.html".length)}`;
+  }
+  return `${SITE_URL}/docs/${set.slug}/${outRelKey}`;
 }
 
 function pageTemplate({
@@ -366,17 +565,24 @@ function pageTemplate({
   jsonLd,
   prevHref,
   nextHref,
+  set,
 }) {
   const p = depthPrefix;
-  const fullTitle = isIndex ? `${title} | Nyx — local-first Rust SAST scanner` : `${title} | Nyx docs`;
+  const fullTitle = set
+    ? isIndex
+      ? `${title} | Nyx docs`
+      : `${title} | ${set.shortName} docs`
+    : `${title} | Nyx`;
   const kw =
     keywords && keywords.length ? `\n    <meta name="keywords" content="${escapeHtml(keywords.join(", "))}" />` : "";
-  const prevLink = prevHref ? `\n    <link rel="prev" href="${prevHref}" />` : "";
-  const nextLink = nextHref ? `\n    <link rel="next" href="${nextHref}" />` : "";
+  const prevLink = prevHref ? `\n    <link rel="prev" href="${escapeAttr(prevHref)}" />` : "";
+  const nextLink = nextHref ? `\n    <link rel="next" href="${escapeAttr(nextHref)}" />` : "";
   const ogType = isIndex ? "website" : "article";
   const jsonLdBlock = jsonLd
     ? `\n    <script type="application/ld+json">\n${JSON.stringify(jsonLd, null, 2)}\n    </script>`
     : "";
+  const ogAlt = set ? set.ogAlt : "Nyx documentation for local security tools";
+  const footerLine = set ? set.licenseLine : "Nyx is an independent open-source security project.";
   return `<!doctype html>
 <html lang="en">
   <head>
@@ -395,7 +601,7 @@ function pageTemplate({
     <link rel="icon" type="image/png" sizes="64x64" href="${p}favicon-64.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="${p}favicon-180.png" />
     <link rel="manifest" href="/manifest.json" />
-    <link rel="alternate" type="application/rss+xml" title="Nyx — News &amp; release notes" href="/news/feed.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Nyx | News &amp; release notes" href="/news/feed.xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
@@ -412,12 +618,12 @@ function pageTemplate({
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Nyx — local-first Rust SAST scanner" />
+    <meta property="og:image:alt" content="${escapeHtml(ogAlt)}" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${escapeHtml(title)}" />
     <meta name="twitter:description" content="${escapeHtml(description)}" />
     <meta name="twitter:image" content="${SITE_URL}/og-image.png" />
-    <meta name="twitter:image:alt" content="Nyx — local-first Rust SAST scanner" />
+    <meta name="twitter:image:alt" content="${escapeHtml(ogAlt)}" />
     <meta name="theme-color" content="#F9F8F4" />${jsonLdBlock}
   </head>
   <body class="docs-body">
@@ -430,9 +636,10 @@ function pageTemplate({
         </a>
         <span class="header-wordmark">NYX</span>
         <nav class="nav" aria-label="Main navigation">
+          <a href="${p}scanner.html">Scanner</a>
+          <a href="${p}agent.html">Agent</a>
           <a href="${p}news/">News</a>
           <a href="${p}docs/" aria-current="page">Docs</a>
-          <a class="nav-github" href="https://github.com/elicpeter/nyx">GitHub</a>
         </nav>
       </div>
     </header>
@@ -452,12 +659,13 @@ ${body}
 
     <footer class="site-footer">
       <div class="container site-footer__inner">
-        <p class="site-footer__copy">© ${new Date().getFullYear()} Eli Peter · Nyx is licensed under GPL-3.0-or-later.</p>
+        <p class="site-footer__copy">© ${new Date().getFullYear()} Eli Peter · ${escapeHtml(footerLine)}</p>
         <nav class="site-footer__nav" aria-label="Footer">
           <a href="${p}">Home</a>
+          <a href="${p}scanner.html">Scanner</a>
+          <a href="${p}agent.html">Agent</a>
           <a href="${p}news/">News</a>
           <a href="${p}docs/">Docs</a>
-          <a href="https://github.com/elicpeter/nyx">GitHub</a>
         </nav>
       </div>
     </footer>
@@ -466,11 +674,11 @@ ${body}
 `;
 }
 
-function renderPrevNext(flat, href) {
-  const idx = flat.findIndex((x) => x.href === href);
+function renderPrevNext(flatPages, href) {
+  const idx = flatPages.findIndex((x) => x.href === href);
   if (idx < 0) return "";
-  const prev = idx > 0 ? flat[idx - 1] : null;
-  const next = idx < flat.length - 1 ? flat[idx + 1] : null;
+  const prev = idx > 0 ? flatPages[idx - 1] : null;
+  const next = idx < flatPages.length - 1 ? flatPages[idx + 1] : null;
   if (!prev && !next) return "";
   const depth = href.split("/").length - 1;
   const upPrefix = "../".repeat(depth);
@@ -490,13 +698,13 @@ function renderPrevNext(flat, href) {
   return `<nav class="docs-prevnext" aria-label="Page navigation">${prevHtml}${nextHtml}</nav>`;
 }
 
-// ─────────────────────────────────────────
+// ---------------------------------------------------------------------------
 // Build
-// ─────────────────────────────────────────
-function copyAssets() {
-  const srcAssets = path.join(SRC, "assets");
+// ---------------------------------------------------------------------------
+function copyAssets(set) {
+  const srcAssets = path.join(set.sourceDir, "assets");
   if (!fs.existsSync(srcAssets)) return;
-  const dst = path.join(OUT, "assets");
+  const dst = path.join(OUT, set.slug, "assets");
   fs.mkdirSync(dst, { recursive: true });
   copyRecursive(srcAssets, dst);
 }
@@ -512,7 +720,7 @@ function copySearchScript() {
 function runPagefind() {
   const bin = path.join(ROOT, "node_modules", ".bin", process.platform === "win32" ? "pagefind.cmd" : "pagefind");
   if (!fs.existsSync(bin)) {
-    throw new Error("Pagefind missing — run `npm install` first.");
+    throw new Error("Pagefind missing - run `npm install` first.");
   }
 
   execFileSync(
@@ -546,63 +754,49 @@ function copyRecursive(from, to) {
   }
 }
 
-function walkMd(dir, base = dir, acc = []) {
-  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-    if (entry.name === "SUMMARY.md") continue;
-    if (entry.name === "assets") continue;
-    const f = path.join(dir, entry.name);
-    if (entry.isDirectory()) walkMd(f, base, acc);
-    else if (entry.name.endsWith(".md")) {
-      acc.push(path.relative(base, f));
-    }
-  }
-  return acc;
+function toUrlPath(rel) {
+  return rel.split(path.sep).join("/");
 }
 
-function build() {
-  if (!fs.existsSync(SRC)) {
-    console.error("docs-src/ missing — run `npm run docs:sync` first.");
-    process.exit(1);
+function buildDocSet(set) {
+  const summaryPath = path.join(set.sourceDir, "SUMMARY.md");
+  if (!fs.existsSync(summaryPath)) {
+    throw new Error(`${summaryPath} missing - run \`npm run docs:sync\` first.`);
   }
 
-  fs.rmSync(OUT, { recursive: true, force: true });
-  fs.mkdirSync(OUT, { recursive: true });
-
-  const summaryRaw = fs.readFileSync(path.join(SRC, "SUMMARY.md"), "utf8");
+  const summaryRaw = fs.readFileSync(summaryPath, "utf8");
   const sections = parseSummary(summaryRaw);
   const flat = flattenNav(sections);
-  const navMap = navIndex(flat);
+  const flatPages = uniquePages(flat);
+  const navMap = navIndex(flatPages);
+  const mdFiles = markdownFilesFromNav(set, flat);
 
-  // Build each markdown page.
-  const mdFiles = walkMd(SRC);
   for (const rel of mdFiles) {
-    const srcFile = path.join(SRC, rel);
-    const outRel = rel.replace(/\.md$/i, ".html");
-    const outRelKey = outRel.replace(/\\/g, "/");
-    const outFile = path.join(OUT, outRel);
+    const srcFile = path.join(set.sourceDir, rel);
+    const outRelKey = outRelFromMarkdownRel(rel);
+    const outFile = path.join(OUT, set.slug, outRelKey);
     fs.mkdirSync(path.dirname(outFile), { recursive: true });
 
     let md = fs.readFileSync(srcFile, "utf8");
-    md = resolveIncludes(md, srcFile);
+    md = resolveIncludes(md, srcFile, set);
 
     const title = extractFirstHeading(md) || path.basename(rel, ".md");
-    const description = plainSummary(stripFirstHeading(md)) || SITE_DESC;
+    const description = plainSummary(stripFirstHeading(md)) || set.description;
 
     resetSlugs();
     const body = marked.parse(md, { renderer });
 
-    const depth = rel.split(path.sep).length;
-    const depthPrefix = "../".repeat(depth);
+    const docRel = `${set.slug}/${outRelKey}`;
+    const depthPrefix = "../".repeat(docRel.split("/").length);
+    const canonical = canonicalFor(set, outRelKey);
+    const sidebar = renderSidebar(set, sections, outRelKey);
+    const prevNext = renderPrevNext(flatPages, outRelKey);
 
-    const canonical = `${SITE_URL}/docs/${outRelKey}`;
-    const sidebar = renderSidebar(sections, outRelKey);
-    const prevNext = renderPrevNext(flat, outRelKey);
-
-    const navEntry = navMap.get(outRelKey);
+    const navEntry = navEntryFor(flat, outRelKey) || navMap.get(outRelKey);
     const section = navEntry ? navEntry.section : null;
-    const parentHref = navEntry && navEntry.parent ? navEntry.parent.href : null;
+    const parentHref = navEntry && navEntry.parent ? stripUrlParts(navEntry.parent.href) : null;
     const parentTitle = navEntry && navEntry.parent ? navEntry.parent.title : null;
-    const keywords = deriveKeywords(title, section, md);
+    const keywords = deriveKeywords(title, section, md, set);
     const jsonLd = pageJsonLd({
       title,
       description,
@@ -611,13 +805,14 @@ function build() {
       parentHref,
       parentTitle,
       isIndex: false,
+      set,
     });
 
-    const idx = flat.findIndex((x) => x.href === outRelKey);
+    const idx = flatPages.findIndex((x) => x.href === outRelKey);
     const upPrefix = "../".repeat(outRelKey.split("/").length - 1);
     const relPath = (h) => (upPrefix ? upPrefix + h : h);
-    const prevHref = idx > 0 ? relPath(flat[idx - 1].href) : null;
-    const nextHref = idx >= 0 && idx < flat.length - 1 ? relPath(flat[idx + 1].href) : null;
+    const prevHref = idx > 0 ? relPath(flatPages[idx - 1].href) : null;
+    const nextHref = idx >= 0 && idx < flatPages.length - 1 ? relPath(flatPages[idx + 1].href) : null;
 
     const html = pageTemplate({
       title,
@@ -632,24 +827,122 @@ function build() {
       jsonLd,
       prevHref,
       nextHref,
+      set,
     });
     fs.writeFileSync(outFile, html);
   }
 
-  // Build docs/index.html — overview + nav of every section.
-  writeIndex(sections, flat);
+  writeSetIndex(set, sections, flatPages);
+  copyAssets(set);
 
-  // Copy referenced assets.
-  copyAssets();
+  return { set, pageCount: mdFiles.length, sections, flatPages };
+}
 
-  // Emit the custom UI shell and Pagefind's generated search index.
-  copySearchScript();
-  runPagefind();
+function writeSetIndex(set, sections, flatPages) {
+  const cards = sections
+    .map((sec) => {
+      const items = sec.items
+        .map((it) => `<li><a href="${escapeAttr(it.href)}">${escapeHtml(it.title)}</a></li>`)
+        .join("");
+      return `<section class="docs-index__group">
+        <h2>${escapeHtml(sec.title)}</h2>
+        <ul>${items}</ul>
+      </section>`;
+    })
+    .join("");
 
-  // Warn about broken internal links so upstream markdown gets fixed.
-  checkInternalLinks();
+  const body = `<h1 id="${set.id}-documentation">${escapeHtml(set.indexHeading)}</h1>
+<p class="docs-index__lede">${escapeHtml(set.indexLede)}</p>
+<div class="docs-index__grid">
+  ${cards}
+</div>`;
 
-  console.log(`Built ${mdFiles.length} docs pages → ${OUT}`);
+  const canonical = canonicalFor(set, "index.html");
+  const jsonLd = pageJsonLd({
+    title: set.indexTitle,
+    description: set.description,
+    canonical,
+    section: "Documentation",
+    parentHref: null,
+    parentTitle: null,
+    isIndex: true,
+    set,
+  });
+  const html = pageTemplate({
+    title: set.indexTitle,
+    description: set.description,
+    keywords: [...set.keywordsBase, `${set.productName} docs`, "documentation"],
+    canonical,
+    sidebar: renderSidebar(set, sections, "index.html"),
+    prevNext: "",
+    body,
+    depthPrefix: "../../",
+    isIndex: true,
+    jsonLd,
+    nextHref: flatPages.length ? flatPages[0].href : null,
+    set,
+  });
+  fs.writeFileSync(path.join(OUT, set.slug, "index.html"), html);
+}
+
+function writeHubIndex(results) {
+  const bodyCards = results
+    .map(({ set, flatPages }) => {
+      const links = set.suggestedLinks
+        .filter((href) => flatPages.some((page) => page.href === href))
+        .map((href) => {
+          const page = flatPages.find((entry) => entry.href === href);
+          return `<li><a href="${set.slug}/${href}">${escapeHtml(page.title)}</a></li>`;
+        })
+        .join("");
+      return `<section class="docs-index__group docs-index__group--product">
+        <h2><a href="${set.slug}/">${escapeHtml(set.productName)}</a></h2>
+        <p>${escapeHtml(set.productDescription)}</p>
+        <ul>${links}</ul>
+      </section>`;
+    })
+    .join("");
+
+  const body = `<h1 id="documentation">Documentation</h1>
+<p class="docs-index__lede">Choose the product you are working with. Nyx Scanner docs stay focused on deterministic source scanning; Nyx Agent docs cover local pentesting, project runs, evidence, triggers, and APIs.</p>
+<div class="docs-index__grid docs-index__grid--products">
+  ${bodyCards}
+</div>`;
+
+  const title = "Documentation";
+  const canonical = canonicalFor(null, "index.html");
+  const jsonLd = pageJsonLd({
+    title,
+    description: HUB_DESC,
+    canonical,
+    section: "Documentation",
+    parentHref: null,
+    parentTitle: null,
+    isIndex: true,
+    set: null,
+  });
+  const html = pageTemplate({
+    title,
+    description: HUB_DESC,
+    keywords: [
+      "Nyx documentation",
+      "Nyx Scanner docs",
+      "Nyx Agent docs",
+      "local security tools",
+      "SAST",
+      "local pentesting",
+    ],
+    canonical,
+    sidebar: renderHubSidebar(),
+    prevNext: "",
+    body,
+    depthPrefix: "../",
+    isIndex: true,
+    jsonLd,
+    nextHref: "nyx/",
+    set: null,
+  });
+  fs.writeFileSync(path.join(OUT, "index.html"), html);
 }
 
 function checkInternalLinks() {
@@ -671,78 +964,37 @@ function checkInternalLinks() {
       const h = m[1];
       if (/^[a-z]+:/i.test(h) || h.startsWith("//") || h.startsWith("/") || h === "") continue;
       const target = path.resolve(dir, h);
-      // Targets outside OUT (e.g., ../news/) aren't validated here.
       if (!target.startsWith(OUT)) continue;
-      const candidates = target.endsWith("/")
+      const candidates = target.endsWith(path.sep)
         ? [path.join(target, "index.html")]
         : [target, path.join(target, "index.html")];
       if (!candidates.some((c) => fs.existsSync(c))) {
         broken++;
-        console.warn(`broken link: ${path.relative(ROOT, f)} → ${h}`);
+        console.warn(`broken link: ${path.relative(ROOT, f)} -> ${h}`);
       }
     }
   }
   if (broken === 0) console.log("All internal docs links resolve.");
 }
 
-function writeIndex(sections, flat) {
-  const title = "Documentation";
-  const description = SITE_DESC;
-  const canonical = `${SITE_URL}/docs/`;
-  const depthPrefix = "../";
+function build() {
+  if (!fs.existsSync(SRC_ROOT)) {
+    console.error("docs-src/ missing - run `npm run docs:sync` first.");
+    process.exit(1);
+  }
 
-  const cards = sections
-    .map((sec) => {
-      const items = sec.items.map((it) => `<li><a href="${it.href}">${escapeHtml(it.title)}</a></li>`).join("");
-      return `<section class="docs-index__group">
-        <h2>${escapeHtml(sec.title)}</h2>
-        <ul>${items}</ul>
-      </section>`;
-    })
-    .join("");
+  fs.rmSync(OUT, { recursive: true, force: true });
+  fs.mkdirSync(OUT, { recursive: true });
 
-  const body = `<h1 id="nyx-documentation">Nyx documentation</h1>
-<p class="docs-index__lede">Local-first SAST for developers. Source-to-sink taint, browser triage, SARIF, CI. Get running in minutes, then read deeper.</p>
-<div class="docs-index__grid">
-  ${cards}
-</div>`;
+  const results = DOC_SETS.map(buildDocSet);
+  writeHubIndex(results);
 
-  const sidebar = renderSidebar(sections, "index.html");
-  const jsonLd = pageJsonLd({
-    title,
-    description,
-    canonical,
-    section: "Documentation",
-    parentHref: null,
-    parentTitle: null,
-    isIndex: true,
-  });
-  const keywords = [
-    "Nyx",
-    "Nyx scanner",
-    "Nyx documentation",
-    "SAST",
-    "static analysis",
-    "Rust security scanner",
-    "local-first SAST",
-    "taint analysis",
-    "SARIF",
-  ];
-  const nextHref = flat.length ? flat[0].href : null;
-  const html = pageTemplate({
-    title,
-    description,
-    keywords,
-    canonical,
-    sidebar,
-    prevNext: "",
-    body,
-    depthPrefix,
-    isIndex: true,
-    jsonLd,
-    nextHref,
-  });
-  fs.writeFileSync(path.join(OUT, "index.html"), html);
+  copySearchScript();
+  runPagefind();
+  checkInternalLinks();
+
+  const count = results.reduce((sum, result) => sum + result.pageCount + 1, 1);
+  console.log(`Built ${count} docs pages -> ${OUT}`);
 }
 
 build();

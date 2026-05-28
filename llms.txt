@@ -2,9 +2,23 @@
 
 > Full technical reference: https://nyxscan.dev/llms-full.txt
 
-Nyx is an open-source, local-first security scanner for developers. It runs cross-file interprocedural taint analysis on your repository, then serves findings in a React UI bound to `127.0.0.1`. No cloud, no account, no source upload. Everything stays on your machine.
+Nyx is a local-first security stack for developers. The site root presents two products: deterministic source-to-sink scanning with Nyx, and live local testing with Nyx Agent.
+
+Nyx Scanner is an open-source, deterministic local-first security scanner. It runs cross-file interprocedural taint analysis on your repository, then serves findings in a React UI bound to `127.0.0.1`. No cloud, no account, no source upload. Everything stays on your machine.
 
 Current package version: `nyx-scanner` v0.7.0. Requires stable Rust 1.88+ for Cargo installs.
+
+## Nyx Agent
+
+Nyx Agent runs local pentests against development apps. Point it at a repo and a local URL; it can start or watch the app, map routes, run checks, and store request and response evidence.
+
+Nyx Agent is AGPLv3-or-later. Commercial licenses, paid support, onboarding help, private policy packs, and enterprise terms are available.
+
+Links:
+- Product page: https://nyxscan.dev/agent.html
+- Docs: https://nyxscan.dev/docs/agent/
+- Source code: https://github.com/nyx-sec/nyx-agent
+- Launch notes: https://nyxscan.dev/news/nyx-agent.html
 
 ## Install
 
@@ -105,9 +119,11 @@ GPL-3.0-or-later. Free, no paid tier, no usage limits.
 ## Links
 
 - Primary site: https://nyxscan.dev
+- Scanner page: https://nyxscan.dev/scanner.html
 - Source code: https://github.com/elicpeter/nyx
 - Crate: https://crates.io/crates/nyx-scanner
-- Docs: https://nyxscan.dev/docs/
+- Docs hub: https://nyxscan.dev/docs/
+- Scanner docs: https://nyxscan.dev/docs/nyx/
 - Rustdocs: https://docs.rs/nyx-scanner/latest/nyx_scanner/
 - Releases: https://github.com/elicpeter/nyx/releases
 
@@ -135,3 +151,7 @@ Nyx is under active development. APIs, detector behavior, and configuration opti
 - alternative to Semgrep
 - alternative to CodeQL
 - alternative to Snyk
+- local pentesting
+- live appsec verification
+- verified vulnerabilities
+- stored evidence

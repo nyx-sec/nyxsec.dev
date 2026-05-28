@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Detectors | Nyx docs</title>
+    <meta name="description" content="Nyx ships four independent detector families. They run together in --mode full, the default. Findings are merged, deduplicated, ranked, and printed in one result set." />
+    <meta name="keywords" content="Nyx, Nyx scanner, SAST, static analysis, Rust security scanner, local-first SAST, Under the hood, Detectors, Taint, taint, CFG, cfg" />
+    <meta name="author" content="Eli Peter" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <link rel="canonical" href="https://nyxscan.dev/docs/nyx/detectors.html" />
+    <link rel="sitemap" type="application/xml" href="https://nyxscan.dev/sitemap.xml" />
+    <link rel="alternate" hreflang="en" href="https://nyxscan.dev/docs/nyx/detectors.html" />
+    <link rel="alternate" hreflang="x-default" href="https://nyxscan.dev/docs/nyx/detectors.html" />
+    <link rel="prev" href="advanced-analysis.html" />
+    <link rel="next" href="detectors/patterns.html" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="64x64" href="../../favicon-64.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../../favicon-180.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="alternate" type="application/rss+xml" title="Nyx | News &amp; release notes" href="/news/feed.xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../styles.css" />
+    <script defer src="../../docs/search.js"></script>
+
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Nyx" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="Detectors" />
+    <meta property="og:description" content="Nyx ships four independent detector families. They run together in --mode full, the default. Findings are merged, deduplicated, ranked, and printed in one result set." />
+    <meta property="og:url" content="https://nyxscan.dev/docs/nyx/detectors.html" />
+    <meta property="og:image" content="https://nyxscan.dev/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Nyx Scanner local-first security documentation" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Detectors" />
+    <meta name="twitter:description" content="Nyx ships four independent detector families. They run together in --mode full, the default. Findings are merged, deduplicated, ranked, and printed in one result set." />
+    <meta name="twitter:image" content="https://nyxscan.dev/og-image.png" />
+    <meta name="twitter:image:alt" content="Nyx Scanner local-first security documentation" />
+    <meta name="theme-color" content="#F9F8F4" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://nyxscan.dev/#person",
+      "name": "Eli Peter",
+      "url": "https://github.com/elicpeter",
+      "sameAs": [
+        "https://github.com/elicpeter",
+        "https://github.com/sponsors/elicpeter"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://nyxscan.dev/#website",
+      "url": "https://nyxscan.dev/",
+      "name": "Nyx",
+      "description": "Local security tooling for deterministic scanning and live testing.",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://nyxscan.dev/#person"
+      }
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://nyxscan.dev/docs/nyx/detectors.html#article",
+      "headline": "Detectors",
+      "name": "Detectors",
+      "url": "https://nyxscan.dev/docs/nyx/detectors.html",
+      "description": "Nyx ships four independent detector families. They run together in --mode full, the default. Findings are merged, deduplicated, ranked, and printed in one result set.",
+      "inLanguage": "en",
+      "articleSection": "Under the hood",
+      "isPartOf": {
+        "@id": "https://nyxscan.dev/#website"
+      },
+      "publisher": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "author": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "image": "https://nyxscan.dev/og-image.png",
+      "mainEntityOfPage": "https://nyxscan.dev/docs/nyx/detectors.html"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://nyxscan.dev/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Docs",
+          "item": "https://nyxscan.dev/docs/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Nyx Scanner docs",
+          "item": "https://nyxscan.dev/docs/nyx/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Detectors",
+          "item": "https://nyxscan.dev/docs/nyx/detectors.html"
+        }
+      ],
+      "@id": "https://nyxscan.dev/docs/nyx/detectors.html#breadcrumbs"
+    }
+  ]
+}
+    </script>
+  </head>
+  <body class="docs-body">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" aria-label="Primary navigation">
+      <div class="container site-header__inner">
+        <a class="brand" href="../../" aria-label="Nyx home">
+          <img src="../../assets/logo.png" alt="Nyx" class="brand-logo" />
+        </a>
+        <span class="header-wordmark">NYX</span>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="../../scanner.html">Scanner</a>
+          <a href="../../agent.html">Agent</a>
+          <a href="../../news/">News</a>
+          <a href="../../docs/" aria-current="page">Docs</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="docs-page">
+      <div class="docs-shell">
+        <nav class="docs-sidebar" aria-label="Documentation"><a class="docs-sidebar__brand" href="./">Nyx docs</a><a class="docs-sidebar__home" href="../">All docs</a><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Getting started</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="quickstart.html">Quickstart</a></li><li><a class="docs-sidebar__link" href="installation.html">Installation</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Using nyx</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="cli.html">CLI reference</a></li><li><a class="docs-sidebar__link" href="serve.html">Browser UI</a></li><li><a class="docs-sidebar__link" href="dynamic.html">Dynamic verification</a></li><li><a class="docs-sidebar__link" href="configuration.html">Configuration</a></li><li><a class="docs-sidebar__link" href="output.html">Output formats</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Coverage</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="language-maturity.html">Language maturity</a></li><li><a class="docs-sidebar__link" href="rules.html">Rules</a></li><li><a class="docs-sidebar__link" href="auth.html">Auth analysis</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Under the hood</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="how-it-works.html">How it works</a></li><li><a class="docs-sidebar__link" href="advanced-analysis.html">Advanced analysis</a></li><li><a class="docs-sidebar__link" href="detectors.html" aria-current="page">Detectors</a><ul class="docs-sidebar__sublist"><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/patterns.html">Patterns</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/cfg.html">CFG</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/state.html">State</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/taint.html">Taint</a></li></ul></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Project</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="roadmap.html">Roadmap</a></li><li><a class="docs-sidebar__link" href="changelog.html">Changelog</a></li></ul></div></nav>
+        <article class="docs-content">
+          <div class="docs-search docs-search--content" data-docs-search>
+    <label class="visually-hidden" for="docs-search-input">Search docs</label>
+    <div class="docs-search__control">
+      <span class="docs-search__icon" aria-hidden="true"></span>
+      <input id="docs-search-input" data-docs-search-input type="search" placeholder="Search docs" autocomplete="off" autocapitalize="none" spellcheck="false" role="combobox" aria-autocomplete="list" aria-controls="docs-search-results" aria-expanded="false" />
+      <kbd class="docs-search__key" aria-hidden="true">⌘K</kbd>
+    </div>
+    <div class="docs-search__panel" data-docs-search-panel hidden>
+      <div class="docs-search__status" data-docs-search-status></div>
+      <div class="docs-search__results" id="docs-search-results" data-docs-search-results role="listbox" aria-label="Search results"></div>
+    </div>
+  </div>
+          <div class="docs-prose" data-pagefind-body>
+<h1 id="detectors"><a class="docs-anchor" href="#detectors" aria-label="Link to detectors" data-pagefind-ignore>#</a>Detectors</h1>
+<p>Nyx ships four independent detector families. They run together in <code>--mode full</code>, the default. Findings are merged, deduplicated, ranked, and printed in one result set.</p>
+<table>
+<thead>
+<tr>
+<th>Family</th>
+<th>Rule prefix</th>
+<th>Looks at</th>
+<th>What it finds</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="detectors/taint.html">Taint analysis</a></td>
+<td><code>taint-*</code></td>
+<td>Cross-file dataflow</td>
+<td>Unsanitized data flowing source to sink</td>
+</tr>
+<tr>
+<td><a href="detectors/cfg.html">CFG structural</a></td>
+<td><code>cfg-*</code></td>
+<td>Per-function control flow</td>
+<td>Auth gaps, unguarded sinks, error fallthrough, resource release on all paths</td>
+</tr>
+<tr>
+<td><a href="detectors/state.html">State model</a></td>
+<td><code>state-*</code></td>
+<td>Per-function state lattice</td>
+<td>Use-after-close, double-close, leaks, unauthenticated access</td>
+</tr>
+<tr>
+<td><a href="detectors/patterns.html">AST patterns</a></td>
+<td><code>&lt;lang&gt;.&lt;cat&gt;.&lt;name&gt;</code></td>
+<td>Tree-sitter structural match</td>
+<td>Banned APIs, weak crypto, dangerous constructs</td>
+</tr>
+</tbody></table>
+<p>The taint family is split into cap-specific rule classes when a sink callee carries multiple vulnerability classes:</p>
+<table>
+<thead>
+<tr>
+<th>Rule id</th>
+<th>Cap</th>
+<th>Surface</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>taint-unsanitised-flow</code></td>
+<td><code>sql_query</code>, <code>ssrf</code>, <code>code_exec</code>, <code>file_io</code>, <code>fmt_string</code>, <code>deserialize</code>, <code>crypto</code></td>
+<td>Catch-all class for the legacy caps that have not migrated to a dedicated rule id yet.</td>
+</tr>
+<tr>
+<td><code>taint-ldap-injection</code></td>
+<td><code>ldap_injection</code></td>
+<td>Attacker-controlled data concatenated into an LDAP filter or DN without RFC 4515 escaping. Receivers typed as <code>LdapClient</code> (JNDI <code>DirContext</code>, Spring <code>LdapTemplate</code>, ldapjs <code>Client</code>, python-ldap <code>LDAPObject</code>, ldap3 <code>Connection</code>) and chained <code>.search</code> / <code>.searchByEntity</code> / <code>.search_s</code> form the sink set.</td>
+</tr>
+<tr>
+<td><code>taint-xpath-injection</code></td>
+<td><code>xpath_injection</code></td>
+<td>Attacker-controlled string passed as the XPath expression to <code>xpath.evaluate</code> / <code>xpath.compile</code> / <code>document.evaluate</code> / <code>DOMXPath::query</code> / <code>etree.XPath</code>. Suppressed when the receiver was bound to an <code>XPathVariableResolver</code> (parameterised XPath shape).</td>
+</tr>
+<tr>
+<td><code>taint-header-injection</code></td>
+<td><code>header_injection</code></td>
+<td>Attacker-controlled bytes landing in an HTTP response header without <code>\r\n</code> stripping (response splitting, cache poisoning). Covers <code>setHeader</code> / <code>res.set</code> / <code>res.append</code> / <code>headers[&quot;X-Foo&quot;] = bar</code> / <code>Header().Set</code> / <code>add_header</code> / <code>setcookie</code> / <code>http.Header.Set</code>.</td>
+</tr>
+<tr>
+<td><code>taint-open-redirect</code></td>
+<td><code>open_redirect</code></td>
+<td>Attacker-controlled URL driving a redirect / <code>Location</code> header without an allowlist or relative-URL check. Includes the Spring MVC <code>return &quot;redirect:&quot; + url</code> view-name shape via the <code>__spring_redirect__</code> synthetic sink. Suppressed by <code>RelativeUrlValidated</code> (<code>startsWith(&quot;/&quot;)</code> family) and <code>HostAllowlistValidated</code> (<code>new URL(x).host === ALLOWED</code>, <code>urlparse(x).netloc == ...</code>) inline predicates.</td>
+</tr>
+<tr>
+<td><code>taint-template-injection</code></td>
+<td><code>ssti</code></td>
+<td>Attacker controls the <em>template source string</em> fed to a server-side renderer (Jinja2 / Mako / FreeMarker / Twig / Handlebars / EJS / Mustache / ERB / <code>text/template</code> / <code>html/template</code> / Smarty / Blade <code>Template(...)</code> / <code>compile(...)</code>), distinct from rendering a trusted template with tainted variables.</td>
+</tr>
+<tr>
+<td><code>taint-xxe</code></td>
+<td><code>xxe</code></td>
+<td>Attacker-controlled XML reaching a parser that resolves external entities. Covers JAXP <code>DocumentBuilder.parse</code> / <code>SAXParser.parse</code> / <code>XMLReader.parse</code>, lxml <code>etree.parse</code>, Nokogiri, fast-xml-parser, xml2js, libxml2 <code>xmlReadFile</code> / <code>xmlReadMemory</code>. Suppressed when the receiver carries a hardening fact in <code>xml_parser_config</code> (<code>secure_processing</code>, <code>disallow_doctype</code>, <code>processEntities: false</code>, <code>LIBXML_NOENT</code> not set).</td>
+</tr>
+<tr>
+<td><code>taint-prototype-pollution</code></td>
+<td><code>prototype_pollution</code></td>
+<td>Attacker-controlled key reaching an object property assignment that can mutate <code>Object.prototype</code>. JS/TS only. Covers <code>obj[tainted] = v</code> (synthetic <code>__index_set__</code> sink), library-mediated deep-merge / set helpers (<code>_.merge</code>, <code>_.set</code>, <code>dotProp.set</code>, <code>objectPath.set</code>, <code>setValue</code>), and jQuery&#39;s <code>extend(true, target, src)</code> deep-merge form via the <code>LiteralOnly</code> activation gate. Suppressed by constant-key fold (<code>__proto__</code> / <code>constructor</code> / <code>prototype</code> filtering), reject / allowlist guards on the key, and <code>Object.create(null)</code> receivers (flow-sensitive <code>NullPrototypeObject</code> type). Python equivalent (<code>dict.update</code>) is opt-in via <code>NYX_PYTHON_PROTO_POLLUTION=1</code>.</td>
+</tr>
+<tr>
+<td><code>taint-data-exfiltration</code></td>
+<td><code>data_exfil</code></td>
+<td>Sensitive data flowing into the payload of an outbound network request (body / headers / json on <code>fetch</code>, body on <code>XMLHttpRequest.send</code>). Distinct from SSRF: the destination is fixed but attacker-influenced bytes leave the process.</td>
+</tr>
+<tr>
+<td><code>rs.auth.missing_ownership_check.taint</code></td>
+<td><code>unauthorized_id</code></td>
+<td>Rust auth subsystem fold-in; see <a href="auth.html">auth.md</a>.</td>
+</tr>
+</tbody></table>
+<p>A single call site can fire several of these at once when it carries multiple gates. <code>fetch(taintedUrl, {body: tainted})</code> produces both an SSRF finding (URL flow) and a <code>taint-data-exfiltration</code> finding (body flow), each with its own cap mask rather than a conflated union.</p>
+<p>Each cap-class entry is registered in <code>CAP_RULE_REGISTRY</code> (<code>src/labels/mod.rs</code>) with its title, severity, OWASP 2021 code, and description. Browse the registry from the CLI with <code>nyx rules list --class-only</code>, or <code>nyx rules list --kind class --json</code> for machine output.</p>
+<p>For Rust auth-specific rules (<code>rs.auth.*</code>), see <a href="auth.html">auth.md</a>.</p>
+<h2 id="how-they-combine"><a class="docs-anchor" href="#how-they-combine" aria-label="Link to how-they-combine" data-pagefind-ignore>#</a>How they combine</h2>
+<p>In <code>--mode full</code>:</p>
+<ol>
+<li><strong>Taint and AST can both fire on one line.</strong> If <code>eval(userInput)</code> triggers both <code>js.code_exec.eval</code> (AST) and <code>taint-unsanitised-flow</code> (taint), both are kept with distinct rule IDs. The taint finding ranks higher because of the analysis-kind bonus.</li>
+<li><strong>State supersedes CFG on resource leaks.</strong> When <code>state-resource-leak</code> and <code>cfg-resource-leak</code> fire at the same location, the CFG one is dropped.</li>
+<li><strong>Exact duplicates are removed.</strong> Same line, column, rule ID, severity → one finding.</li>
+</ol>
+<h2 id="modes"><a class="docs-anchor" href="#modes" aria-label="Link to modes" data-pagefind-ignore>#</a>Modes</h2>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Active detectors</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>full</code> (default)</td>
+<td>All four</td>
+</tr>
+<tr>
+<td><code>ast</code></td>
+<td>AST patterns only</td>
+</tr>
+<tr>
+<td><code>cfg</code></td>
+<td>Taint + CFG + State (no AST patterns)</td>
+</tr>
+<tr>
+<td><code>taint</code></td>
+<td>Taint + State</td>
+</tr>
+</tbody></table>
+<h2 id="attack-surface-ranking"><a class="docs-anchor" href="#attack-surface-ranking" aria-label="Link to attack-surface-ranking" data-pagefind-ignore>#</a>Attack-surface ranking</h2>
+<p>Every finding gets a deterministic score. Findings are sorted by descending score by default. Disable with <code>--no-rank</code> or <code>output.attack_surface_ranking = false</code>.</p>
+<pre><code class="hljs language-plain"><span class="hljs-attr">score</span> = severity_base + analysis_kind + evidence_strength + state_bonus - validation_penalty</code></pre>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Values</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Severity base</td>
+<td>High=60, Medium=30, Low=10</td>
+</tr>
+<tr>
+<td>Analysis kind</td>
+<td>taint=+10, taint-data-exfiltration=+7, state=+8, cfg with evidence=+5, cfg without evidence=+3, ast=+0</td>
+</tr>
+<tr>
+<td>Evidence strength</td>
+<td>+1 per evidence item up to 4; +2 to +6 for source kind</td>
+</tr>
+<tr>
+<td>State bonus</td>
+<td>use-after-close / unauthed=+6, double-close=+3, must-leak=+2, may-leak=+1</td>
+</tr>
+<tr>
+<td>Validation penalty</td>
+<td>-5 if path-validated</td>
+</tr>
+</tbody></table>
+<p>DATA_EXFIL is calibrated below other taint classes by design. Severity is High only when the source carries credential / session material (cookies, env vars); other Sensitive sources (request headers, file system, database, caught exception) downgrade to Medium. Confidence is capped at Medium and only fires Medium when the abstract / symbolic domain corroborates a concrete string body reaching the outbound payload; otherwise it falls to Low. A guarded flow (<code>path_validated</code>) drops a confidence tier. The intent is to seat data-exfiltration findings below SSRF / SQLi / command-injection but above informational AST patterns.</p>
+<p>Source-kind contributions (taint only):</p>
+<table>
+<thead>
+<tr>
+<th>Source</th>
+<th>Bonus</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>User input (<code>req.body</code>, <code>argv</code>, <code>stdin</code>, <code>form</code>, <code>query</code>, <code>params</code>)</td>
+<td>+6</td>
+</tr>
+<tr>
+<td>Environment (<code>env::var</code>, <code>getenv</code>, <code>process.env</code>)</td>
+<td>+5</td>
+</tr>
+<tr>
+<td>Unknown</td>
+<td>+4</td>
+</tr>
+<tr>
+<td>File system</td>
+<td>+3</td>
+</tr>
+<tr>
+<td>Database</td>
+<td>+2</td>
+</tr>
+</tbody></table>
+<p>Approximate score ranges:</p>
+<table>
+<thead>
+<tr>
+<th>Finding type</th>
+<th>Score</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>High taint with user input</td>
+<td>76 to 81</td>
+</tr>
+<tr>
+<td>High state (use-after-close)</td>
+<td>~74</td>
+</tr>
+<tr>
+<td>High CFG structural</td>
+<td>63 to 68</td>
+</tr>
+<tr>
+<td>High DATA_EXFIL (cookie / env source, body confirmed)</td>
+<td>~76</td>
+</tr>
+<tr>
+<td>Medium taint with env source</td>
+<td>45 to 50</td>
+</tr>
+<tr>
+<td>Medium DATA_EXFIL (header / fs / db / caught-exception source)</td>
+<td>40 to 45</td>
+</tr>
+<tr>
+<td>Medium state (resource leak)</td>
+<td>~40</td>
+</tr>
+<tr>
+<td>Low AST-only pattern</td>
+<td>~10</td>
+</tr>
+</tbody></table>
+<p>For the engine&#39;s runtime model (passes, summaries, SCC fixed-point), see <a href="how-it-works.html">how-it-works.md</a>.</p>
+
+          </div>
+          <nav class="docs-prevnext" aria-label="Page navigation"><a class="docs-prevnext__link docs-prevnext__link--prev" href="advanced-analysis.html">
+        <span class="docs-prevnext__label">Previous</span>
+        <span class="docs-prevnext__title">Advanced analysis</span>
+      </a><a class="docs-prevnext__link docs-prevnext__link--next" href="detectors/patterns.html">
+        <span class="docs-prevnext__label">Next</span>
+        <span class="docs-prevnext__title">Patterns</span>
+      </a></nav>
+        </article>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <p class="site-footer__copy">© 2026 Eli Peter · Nyx is licensed under GPL-3.0-or-later.</p>
+        <nav class="site-footer__nav" aria-label="Footer">
+          <a href="../../">Home</a>
+          <a href="../../scanner.html">Scanner</a>
+          <a href="../../agent.html">Agent</a>
+          <a href="../../news/">News</a>
+          <a href="../../docs/">Docs</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>State directory | Nyx Agent docs</title>
+    <meta name="description" content="nyx-agent keeps every artifact that has to outlive a process under a single root directory: the SQLite store, repo workspaces, repro bundles, structured logs, and the local bearer token the API uses..." />
+    <meta name="keywords" content="Nyx Agent, nyx-agent, local pentesting, live appsec testing, verified vulnerabilities, stored evidence, Get started, State directory, API, toml, JSON, AI" />
+    <meta name="author" content="Eli Peter" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <link rel="canonical" href="https://nyxscan.dev/docs/agent/state-dir.html" />
+    <link rel="sitemap" type="application/xml" href="https://nyxscan.dev/sitemap.xml" />
+    <link rel="alternate" hreflang="en" href="https://nyxscan.dev/docs/agent/state-dir.html" />
+    <link rel="alternate" hreflang="x-default" href="https://nyxscan.dev/docs/agent/state-dir.html" />
+    <link rel="prev" href="config.html" />
+    <link rel="next" href="architecture.html" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="64x64" href="../../favicon-64.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../../favicon-180.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="alternate" type="application/rss+xml" title="Nyx | News &amp; release notes" href="/news/feed.xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../styles.css" />
+    <script defer src="../../docs/search.js"></script>
+
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Nyx" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="State directory" />
+    <meta property="og:description" content="nyx-agent keeps every artifact that has to outlive a process under a single root directory: the SQLite store, repo workspaces, repro bundles, structured logs, and the local bearer token the API uses..." />
+    <meta property="og:url" content="https://nyxscan.dev/docs/agent/state-dir.html" />
+    <meta property="og:image" content="https://nyxscan.dev/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Nyx Agent local pentesting documentation" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="State directory" />
+    <meta name="twitter:description" content="nyx-agent keeps every artifact that has to outlive a process under a single root directory: the SQLite store, repo workspaces, repro bundles, structured logs, and the local bearer token the API uses..." />
+    <meta name="twitter:image" content="https://nyxscan.dev/og-image.png" />
+    <meta name="twitter:image:alt" content="Nyx Agent local pentesting documentation" />
+    <meta name="theme-color" content="#F9F8F4" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://nyxscan.dev/#person",
+      "name": "Eli Peter",
+      "url": "https://github.com/elicpeter",
+      "sameAs": [
+        "https://github.com/elicpeter",
+        "https://github.com/sponsors/elicpeter"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://nyxscan.dev/#website",
+      "url": "https://nyxscan.dev/",
+      "name": "Nyx",
+      "description": "Local security tooling for deterministic scanning and live testing.",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://nyxscan.dev/#person"
+      }
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://nyxscan.dev/docs/agent/state-dir.html#article",
+      "headline": "State directory",
+      "name": "State directory",
+      "url": "https://nyxscan.dev/docs/agent/state-dir.html",
+      "description": "nyx-agent keeps every artifact that has to outlive a process under a single root directory: the SQLite store, repo workspaces, repro bundles, structured logs, and the local bearer token the API uses...",
+      "inLanguage": "en",
+      "articleSection": "Get started",
+      "isPartOf": {
+        "@id": "https://nyxscan.dev/#website"
+      },
+      "publisher": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "author": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "image": "https://nyxscan.dev/og-image.png",
+      "mainEntityOfPage": "https://nyxscan.dev/docs/agent/state-dir.html"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://nyxscan.dev/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Docs",
+          "item": "https://nyxscan.dev/docs/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Nyx Agent docs",
+          "item": "https://nyxscan.dev/docs/agent/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "State directory",
+          "item": "https://nyxscan.dev/docs/agent/state-dir.html"
+        }
+      ],
+      "@id": "https://nyxscan.dev/docs/agent/state-dir.html#breadcrumbs"
+    }
+  ]
+}
+    </script>
+  </head>
+  <body class="docs-body">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" aria-label="Primary navigation">
+      <div class="container site-header__inner">
+        <a class="brand" href="../../" aria-label="Nyx home">
+          <img src="../../assets/logo.png" alt="Nyx" class="brand-logo" />
+        </a>
+        <span class="header-wordmark">NYX</span>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="../../scanner.html">Scanner</a>
+          <a href="../../agent.html">Agent</a>
+          <a href="../../news/">News</a>
+          <a href="../../docs/" aria-current="page">Docs</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="docs-page">
+      <div class="docs-shell">
+        <nav class="docs-sidebar" aria-label="Documentation"><a class="docs-sidebar__brand" href="./">Agent docs</a><a class="docs-sidebar__home" href="../">All docs</a><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Get started</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="install.html">Install</a></li><li><a class="docs-sidebar__link" href="quickstart.html">Quickstart</a></li><li><a class="docs-sidebar__link" href="cli.html">CLI</a></li><li><a class="docs-sidebar__link" href="config.html">Config</a></li><li><a class="docs-sidebar__link" href="state-dir.html" aria-current="page">State Directory</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Architecture</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="architecture.html">Architecture</a></li><li><a class="docs-sidebar__link" href="runs.html">Runs</a></li><li><a class="docs-sidebar__link" href="attack-graph.html">Attack Graph</a></li><li><a class="docs-sidebar__link" href="business-logic-templates.html">Business Logic Templates</a></li><li><a class="docs-sidebar__link" href="events.html">Events</a></li><li><a class="docs-sidebar__link" href="ai-runtime.html">AI Runtime</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Projects</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="cli.html#project">CLI: Project</a></li><li><a class="docs-sidebar__link" href="quickstart.html#create-a-project">Quickstart: Create a Project</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">HTTP API</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="api.html">API</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Triggers</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="triggers/index.html">Overview</a></li><li><a class="docs-sidebar__link" href="triggers/cron.html">Cron</a></li><li><a class="docs-sidebar__link" href="triggers/webhook.html">Webhook</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">CI integration</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="ci/github-actions.html">GitHub Actions</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Contributor docs</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="dev/sqlx.html">SQLx</a></li><li><a class="docs-sidebar__link" href="dev/frontend.html">Frontend</a></li></ul></div></nav>
+        <article class="docs-content">
+          <div class="docs-search docs-search--content" data-docs-search>
+    <label class="visually-hidden" for="docs-search-input">Search docs</label>
+    <div class="docs-search__control">
+      <span class="docs-search__icon" aria-hidden="true"></span>
+      <input id="docs-search-input" data-docs-search-input type="search" placeholder="Search docs" autocomplete="off" autocapitalize="none" spellcheck="false" role="combobox" aria-autocomplete="list" aria-controls="docs-search-results" aria-expanded="false" />
+      <kbd class="docs-search__key" aria-hidden="true">⌘K</kbd>
+    </div>
+    <div class="docs-search__panel" data-docs-search-panel hidden>
+      <div class="docs-search__status" data-docs-search-status></div>
+      <div class="docs-search__results" id="docs-search-results" data-docs-search-results role="listbox" aria-label="Search results"></div>
+    </div>
+  </div>
+          <div class="docs-prose" data-pagefind-body>
+<h1 id="state-directory"><a class="docs-anchor" href="#state-directory" aria-label="Link to state-directory" data-pagefind-ignore>#</a>State directory</h1>
+<p><code>nyx-agent</code> keeps every artifact that has to outlive a process under
+a single root directory: the SQLite store, repo workspaces, repro
+bundles, structured logs, and the local bearer token the API uses
+to authenticate the embedded SPA. Resetting Nyx Agent on a host means
+removing that one directory.</p>
+<h2 id="where-it-lives"><a class="docs-anchor" href="#where-it-lives" aria-label="Link to where-it-lives" data-pagefind-ignore>#</a>Where it lives</h2>
+<p>On first launch the agent resolves the root in this order:</p>
+<ol>
+<li><code>--state-dir &lt;PATH&gt;</code> on the command line.</li>
+<li><code>[general] state_dir</code> in <code>nyx-agent.toml</code>.</li>
+<li><code>dirs::data_dir()/nyx-agent</code>. On macOS that&#39;s
+<code>~/Library/Application Support/nyx-agent</code>; on Linux,
+<code>$XDG_DATA_HOME/nyx-agent</code> (defaulting to <code>~/.local/share/nyx-agent</code>).</li>
+</ol>
+<p><code>nyx-agent doctor</code> prints the resolved path:</p>
+<pre><code class="hljs language-text">state dir OK at /Users/eli/Library/Application Support/nyx-agent</code></pre>
+<p>If <code>dirs::data_dir()</code> cannot resolve a base (no <code>HOME</code>, no
+<code>XDG_DATA_HOME</code>), startup fails with <code>could not resolve user data directory (HOME/XDG_DATA_HOME unset?)</code>. Pass <code>--state-dir</code> to work
+around it.</p>
+<h2 id="layout"><a class="docs-anchor" href="#layout" aria-label="Link to layout" data-pagefind-ignore>#</a>Layout</h2>
+<pre><code class="hljs language-text">&lt;state&gt;/
+├── state.db            SQLite store. Schema managed by the migrator.
+├── state.db-wal        WAL journal. Present while the daemon holds the pool open.
+├── state.db-shm        Shared-memory file for WAL readers.
+├── auth_token          Local bearer token (mode 0600). Minted on first serve.
+├── logs/
+│   └── agent.jsonl     One JSON event per line, written by the tracing JSON layer.
+├── repos/              Per-repo ingestion workspace, legacy flat layout.
+│   └── &lt;repo-name&gt;/
+├── projects/
+│   └── &lt;project-id&gt;/
+│       └── repos/
+│           └── &lt;repo-name&gt;/   Project-scoped workspace. New ingestions write here.
+├── bundles/            Repro bundles. One tarball per finding when the operator builds one.
+├── traces/             AI conversation logs and live-verification evidence.
+├── cache/              Reserved.
+├── findings/           Reserved.
+└── runs/               Reserved.</code></pre>
+<p>The root and every subdirectory in that list are created together
+by <code>StateDir::ensure</code> on the first <code>nyx-agent</code> invocation; later
+invocations are idempotent.</p>
+<h2 id="permissions"><a class="docs-anchor" href="#permissions" aria-label="Link to permissions" data-pagefind-ignore>#</a>Permissions</h2>
+<p>On Unix every directory in the tree is forced to mode <code>0700</code> on
+every <code>ensure()</code> call, so a second user account on the same host
+cannot read the agent&#39;s state even if the parent permissions are
+loose. <code>auth_token</code> is written with mode <code>0600</code>. On non-Unix
+platforms the permission step is a no-op.</p>
+<p>If <code>ensure</code> cannot set permissions (read-only filesystem, ACL
+conflict) the daemon fails to start with <code>failed to set permissions on &lt;path&gt;: &lt;io error&gt;</code>.</p>
+<h2 id="files"><a class="docs-anchor" href="#files" aria-label="Link to files" data-pagefind-ignore>#</a>Files</h2>
+<h3 id="statedb"><a class="docs-anchor" href="#statedb" aria-label="Link to statedb" data-pagefind-ignore>#</a><code>state.db</code></h3>
+<p>SQLite database. The pool opens with WAL journaling, <code>synchronous = NORMAL</code>, <code>foreign_keys = ON</code>, <code>cache_size = -8000</code> (8 MiB), and
+<code>temp_store = MEMORY</code>. The schema is managed by bundled SQLx
+migrations under <code>crates/nyx-agent-core/migrations/</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Migration</th>
+<th>Adds</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>0001_v1.sql</code></td>
+<td>Full baseline schema: product/projects, repos, runs, findings, harness specs, traces, AI budgets, quarantine data, launch profiles, Nyx signals, pentest candidates, verification attempts, vulnerabilities, attack graph, project integrations, business-logic template summaries, phase events, and supporting indexes.</td>
+</tr>
+</tbody></table>
+<p>The singleton <code>meta</code> row carries <code>schema_version</code> (mirrors
+<code>MAX(_sqlx_migrations.version)</code>), <code>created_at</code> (epoch ms of first
+install; never overwritten), and <code>agent_version</code> (the binary that
+opened the file most recently). Read it back with:</p>
+<pre><code class="hljs language-bash">sqlite3 <span class="hljs-string">&quot;&lt;state&gt;/state.db&quot;</span> \
+  <span class="hljs-string">&quot;SELECT schema_version, agent_version, datetime(created_at/1000, &#x27;unixepoch&#x27;) FROM meta WHERE id = 1;&quot;</span></code></pre>
+<p><code>nyx-agent doctor</code> prints the schema version on every run:</p>
+<pre><code class="hljs language-text">db OK at &lt;state&gt;/state.db (schema v1)</code></pre>
+<p>If migrations diverge (e.g. a newer binary then an older binary
+opens the file), the older binary refuses to start with <code>failed to apply migrations: ...</code>. Reverting to a newer binary fixes it; there
+is no down-migration story.</p>
+<p>Reset the database without touching other artifacts:</p>
+<pre><code class="hljs language-bash">nyx-agent reset db</code></pre>
+<p>That command removes <code>state.db</code>, <code>state.db-wal</code>, and <code>state.db-shm</code>
+after checking that no running <code>nyx-agent</code> process has the database open.
+Use <code>nyx-agent reset db --yes</code> in scripts.</p>
+<h3 id="authtoken"><a class="docs-anchor" href="#authtoken" aria-label="Link to authtoken" data-pagefind-ignore>#</a><code>auth_token</code></h3>
+<p>64 hex characters (32 random bytes). The HTTP + WebSocket server
+reads this on <code>serve</code> startup and requires every API client to
+present it as <code>Authorization: Bearer &lt;token&gt;</code>. Loopback-only
+binding makes this an additional defence in depth, not the primary
+control.</p>
+<p><code>--headless</code> skips minting the token; the SPA is not served in that
+mode, so no bearer is needed.</p>
+<p>Rotate by deleting the file: <code>serve</code> mints a fresh one on the next
+start. Live sessions invalidate at that point.</p>
+<h3 id="logsagentjsonl"><a class="docs-anchor" href="#logsagentjsonl" aria-label="Link to logsagentjsonl" data-pagefind-ignore>#</a><code>logs/agent.jsonl</code></h3>
+<p>Newline-delimited JSON, one record per <code>tracing</code> event. The format
+matches <code>tracing-subscriber</code>&#39;s <code>fmt::json</code> layer: <code>timestamp</code>,
+<code>level</code>, <code>target</code>, <code>fields</code>, and span fields the instrumented
+function attached (<code>run_id</code>, <code>task_id</code>, ...). Operators tail this
+file with <code>jq</code>:</p>
+<pre><code class="hljs language-bash"><span class="hljs-built_in">tail</span> -f <span class="hljs-string">&quot;&lt;state&gt;/logs/agent.jsonl&quot;</span> | jq -c <span class="hljs-string">&#x27;select(.level==&quot;ERROR&quot;)&#x27;</span></code></pre>
+<p>The stderr layer mirrors the same events at the level set by
+<code>--log-level</code> / <code>[general] log_level</code>; the JSON layer is always at
+full verbosity so the file is the canonical record.</p>
+<h3 id="tracesrun-idbrowserverificationattempt-id"><a class="docs-anchor" href="#tracesrun-idbrowserverificationattempt-id" aria-label="Link to tracesrun-idbrowserverificationattempt-id" data-pagefind-ignore>#</a><code>traces/&lt;run-id&gt;/browser_verification/&lt;attempt-id&gt;/</code></h3>
+<p>Browser-driven verification writes durable replay evidence here when a
+candidate is exercised through Playwright. The verification attempt row
+stores the file paths in <code>verification_attempts.artifact_paths_json</code>.
+Typical files are:</p>
+<ul>
+<li><code>browser-replay.json</code> and <code>browser-replay.mjs</code>: deterministic,
+redacted replay inputs.</li>
+<li><code>browser-final.png</code> plus any explicit screenshot-step captures.</li>
+<li><code>browser-dom.html</code> and <code>browser-focused-html.json</code>: redacted DOM
+evidence.</li>
+<li><code>browser-console.json</code> and <code>browser-timeline.json</code>: console output
+and action/navigation history.</li>
+<li><code>playwright-trace.zip</code> when trace capture is available and safe, or
+<code>playwright-trace-unavailable.json</code> when the executor falls back to
+the redacted replay artifacts.</li>
+</ul>
+<p>Session headers, cookies, bearer tokens, and token-like query/body
+values are redacted before Nyx Agent writes JSON, HTML, console, timeline,
+or replay files. Playwright traces are skipped when the plan or injected
+session headers contain secret-like values because the zip is not
+post-process-redacted.</p>
+<h2 id="directories"><a class="docs-anchor" href="#directories" aria-label="Link to directories" data-pagefind-ignore>#</a>Directories</h2>
+<h3 id="reposname"><a class="docs-anchor" href="#reposname" aria-label="Link to reposname" data-pagefind-ignore>#</a><code>repos/&lt;name&gt;/</code></h3>
+<p>Legacy flat layout. New ingestion calls land under <code>projects/&lt;id&gt;/repos/&lt;name&gt;/</code>
+instead; the flat directory remains for repos created before the
+project entity rolled out.</p>
+<h3 id="projectsproject-idreposrepo-name"><a class="docs-anchor" href="#projectsproject-idreposrepo-name" aria-label="Link to projectsproject-idreposrepo-name" data-pagefind-ignore>#</a><code>projects/&lt;project-id&gt;/repos/&lt;repo-name&gt;/</code></h3>
+<p>Per-repo ingestion workspace. For a <code>git</code>-sourced repo this is a
+shallow clone, refreshed via <code>git fetch</code> on subsequent runs. For a
+<code>local-path</code> source this is a read-only snapshot rebuilt per run
+and removed at end of run so concurrent IDE edits never race the
+scan. The workspace path is recorded on the <code>IngestedRepo</code> returned
+to the dispatcher and never assumed by anything outside the
+ingestion call.</p>
+<p>Two repos with the same name in different projects do not collide.</p>
+<h3 id="bundles"><a class="docs-anchor" href="#bundles" aria-label="Link to bundles" data-pagefind-ignore>#</a><code>bundles/</code></h3>
+<p>Repro bundles, one tarball per finding when an operator requests
+one. The path is recorded in <code>repro_bundles.path</code> so the API can
+serve it back over <code>GET /api/v1/findings/:id/repro</code> after verifying
+the on-disk path stays under this root.</p>
+<h3 id="cache-findings-runs"><a class="docs-anchor" href="#cache-findings-runs" aria-label="Link to cache-findings-runs" data-pagefind-ignore>#</a><code>cache/</code>, <code>findings/</code>, <code>runs/</code></h3>
+<p>Created on <code>ensure()</code> for parity with the spec but no shipping code
+writes here yet. Reserved.</p>
+<h2 id="override-examples"><a class="docs-anchor" href="#override-examples" aria-label="Link to override-examples" data-pagefind-ignore>#</a>Override examples</h2>
+<p>Run against a tempdir for a one-off scan:</p>
+<pre><code class="hljs language-bash">nyx-agent --state-dir /tmp/nyx-agent-scratch doctor
+nyx-agent --state-dir /tmp/nyx-agent-scratch scan --project demo</code></pre>
+<p>Pin the directory in <code>nyx-agent.toml</code> (handy for <code>systemd</code> /
+<code>launchd</code> units that set their own <code>HOME</code>):</p>
+<pre><code class="hljs language-toml"><span class="hljs-section">[general]</span>
+<span class="hljs-attr">state_dir</span> = <span class="hljs-string">&quot;/var/lib/nyx-agent&quot;</span></code></pre>
+<p>Either form works for any subcommand. <code>--state-dir</code> wins when both
+are set.</p>
+<h2 id="failure-modes"><a class="docs-anchor" href="#failure-modes" aria-label="Link to failure-modes" data-pagefind-ignore>#</a>Failure modes</h2>
+<table>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>Cause / Fix</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>could not resolve user data directory (HOME/XDG_DATA_HOME unset?)</code></td>
+<td>No default base. Pass <code>--state-dir</code> or set <code>[general] state_dir</code>.</td>
+</tr>
+<tr>
+<td><code>failed to create &lt;path&gt;: &lt;io&gt;</code></td>
+<td>Parent unwritable, ENOSPC, or filesystem refuses <code>0700</code>. Pick a writable root.</td>
+</tr>
+<tr>
+<td><code>failed to set permissions on &lt;path&gt;: &lt;io&gt;</code></td>
+<td>The filesystem cannot honour <code>0700</code> (e.g. NFS with <code>noexec</code>/ACLs). Move the state dir to a local FS, or override on Windows where the step is a no-op.</td>
+</tr>
+<tr>
+<td><code>failed to apply migrations: ...</code></td>
+<td>Older binary opening a newer database. Re-launch with the version that wrote the file.</td>
+</tr>
+<tr>
+<td><code>failed to open database at &lt;path&gt;: ...</code></td>
+<td><code>state.db</code> exists but is not a valid SQLite file, or the directory is read-only. Inspect with <code>sqlite3 &lt;path&gt;</code>.</td>
+</tr>
+<tr>
+<td>API returns <code>401 unauthorized</code> after deleting <code>auth_token</code></td>
+<td>Token was minted but the SPA still holds the previous value. Refresh the page.</td>
+</tr>
+</tbody></table>
+<h2 id="related-pages"><a class="docs-anchor" href="#related-pages" aria-label="Link to related-pages" data-pagefind-ignore>#</a>Related pages</h2>
+<ul>
+<li><a href="install.html">Install</a> for the runtime prerequisites that decide
+where <code>dirs::data_dir()</code> resolves.</li>
+<li><a href="config.html">Configuration</a> for <code>[general] state_dir</code> and every
+other section.</li>
+<li><a href="cli.html#global-flags">CLI</a> for <code>--state-dir</code>, <code>--config</code>, and
+<code>--log-level</code>.</li>
+</ul>
+
+          </div>
+          <nav class="docs-prevnext" aria-label="Page navigation"><a class="docs-prevnext__link docs-prevnext__link--prev" href="config.html">
+        <span class="docs-prevnext__label">Previous</span>
+        <span class="docs-prevnext__title">Config</span>
+      </a><a class="docs-prevnext__link docs-prevnext__link--next" href="architecture.html">
+        <span class="docs-prevnext__label">Next</span>
+        <span class="docs-prevnext__title">Architecture</span>
+      </a></nav>
+        </article>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <p class="site-footer__copy">© 2026 Eli Peter · Nyx Agent is licensed under AGPL-3.0-or-later.</p>
+        <nav class="site-footer__nav" aria-label="Footer">
+          <a href="../../">Home</a>
+          <a href="../../scanner.html">Scanner</a>
+          <a href="../../agent.html">Agent</a>
+          <a href="../../news/">News</a>
+          <a href="../../docs/">Docs</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

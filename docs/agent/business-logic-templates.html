@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Business Logic Templates | Nyx Agent docs</title>
+    <meta name="description" content="Nyx Agent includes reusable business-logic pentest templates for bugs normal scanners tend to miss. Templates are first-class metadata, but not a separate executor: they create normal..." />
+    <meta name="keywords" content="Nyx Agent, nyx-agent, local pentesting, live appsec testing, verified vulnerabilities, stored evidence, Architecture, Business Logic Templates, json, API, api, toml" />
+    <meta name="author" content="Eli Peter" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <link rel="canonical" href="https://nyxscan.dev/docs/agent/business-logic-templates.html" />
+    <link rel="sitemap" type="application/xml" href="https://nyxscan.dev/sitemap.xml" />
+    <link rel="alternate" hreflang="en" href="https://nyxscan.dev/docs/agent/business-logic-templates.html" />
+    <link rel="alternate" hreflang="x-default" href="https://nyxscan.dev/docs/agent/business-logic-templates.html" />
+    <link rel="prev" href="attack-graph.html" />
+    <link rel="next" href="events.html" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="64x64" href="../../favicon-64.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../../favicon-180.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="alternate" type="application/rss+xml" title="Nyx | News &amp; release notes" href="/news/feed.xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../styles.css" />
+    <script defer src="../../docs/search.js"></script>
+
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Nyx" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="Business Logic Templates" />
+    <meta property="og:description" content="Nyx Agent includes reusable business-logic pentest templates for bugs normal scanners tend to miss. Templates are first-class metadata, but not a separate executor: they create normal..." />
+    <meta property="og:url" content="https://nyxscan.dev/docs/agent/business-logic-templates.html" />
+    <meta property="og:image" content="https://nyxscan.dev/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Nyx Agent local pentesting documentation" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Business Logic Templates" />
+    <meta name="twitter:description" content="Nyx Agent includes reusable business-logic pentest templates for bugs normal scanners tend to miss. Templates are first-class metadata, but not a separate executor: they create normal..." />
+    <meta name="twitter:image" content="https://nyxscan.dev/og-image.png" />
+    <meta name="twitter:image:alt" content="Nyx Agent local pentesting documentation" />
+    <meta name="theme-color" content="#F9F8F4" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://nyxscan.dev/#person",
+      "name": "Eli Peter",
+      "url": "https://github.com/elicpeter",
+      "sameAs": [
+        "https://github.com/elicpeter",
+        "https://github.com/sponsors/elicpeter"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://nyxscan.dev/#website",
+      "url": "https://nyxscan.dev/",
+      "name": "Nyx",
+      "description": "Local security tooling for deterministic scanning and live testing.",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://nyxscan.dev/#person"
+      }
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://nyxscan.dev/docs/agent/business-logic-templates.html#article",
+      "headline": "Business Logic Templates",
+      "name": "Business Logic Templates",
+      "url": "https://nyxscan.dev/docs/agent/business-logic-templates.html",
+      "description": "Nyx Agent includes reusable business-logic pentest templates for bugs normal scanners tend to miss. Templates are first-class metadata, but not a separate executor: they create normal...",
+      "inLanguage": "en",
+      "articleSection": "Architecture",
+      "isPartOf": {
+        "@id": "https://nyxscan.dev/#website"
+      },
+      "publisher": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "author": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "image": "https://nyxscan.dev/og-image.png",
+      "mainEntityOfPage": "https://nyxscan.dev/docs/agent/business-logic-templates.html"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://nyxscan.dev/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Docs",
+          "item": "https://nyxscan.dev/docs/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Nyx Agent docs",
+          "item": "https://nyxscan.dev/docs/agent/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Business Logic Templates",
+          "item": "https://nyxscan.dev/docs/agent/business-logic-templates.html"
+        }
+      ],
+      "@id": "https://nyxscan.dev/docs/agent/business-logic-templates.html#breadcrumbs"
+    }
+  ]
+}
+    </script>
+  </head>
+  <body class="docs-body">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" aria-label="Primary navigation">
+      <div class="container site-header__inner">
+        <a class="brand" href="../../" aria-label="Nyx home">
+          <img src="../../assets/logo.png" alt="Nyx" class="brand-logo" />
+        </a>
+        <span class="header-wordmark">NYX</span>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="../../scanner.html">Scanner</a>
+          <a href="../../agent.html">Agent</a>
+          <a href="../../news/">News</a>
+          <a href="../../docs/" aria-current="page">Docs</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="docs-page">
+      <div class="docs-shell">
+        <nav class="docs-sidebar" aria-label="Documentation"><a class="docs-sidebar__brand" href="./">Agent docs</a><a class="docs-sidebar__home" href="../">All docs</a><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Get started</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="install.html">Install</a></li><li><a class="docs-sidebar__link" href="quickstart.html">Quickstart</a></li><li><a class="docs-sidebar__link" href="cli.html">CLI</a></li><li><a class="docs-sidebar__link" href="config.html">Config</a></li><li><a class="docs-sidebar__link" href="state-dir.html">State Directory</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Architecture</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="architecture.html">Architecture</a></li><li><a class="docs-sidebar__link" href="runs.html">Runs</a></li><li><a class="docs-sidebar__link" href="attack-graph.html">Attack Graph</a></li><li><a class="docs-sidebar__link" href="business-logic-templates.html" aria-current="page">Business Logic Templates</a></li><li><a class="docs-sidebar__link" href="events.html">Events</a></li><li><a class="docs-sidebar__link" href="ai-runtime.html">AI Runtime</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Projects</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="cli.html#project">CLI: Project</a></li><li><a class="docs-sidebar__link" href="quickstart.html#create-a-project">Quickstart: Create a Project</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">HTTP API</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="api.html">API</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Triggers</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="triggers/index.html">Overview</a></li><li><a class="docs-sidebar__link" href="triggers/cron.html">Cron</a></li><li><a class="docs-sidebar__link" href="triggers/webhook.html">Webhook</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">CI integration</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="ci/github-actions.html">GitHub Actions</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Contributor docs</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="dev/sqlx.html">SQLx</a></li><li><a class="docs-sidebar__link" href="dev/frontend.html">Frontend</a></li></ul></div></nav>
+        <article class="docs-content">
+          <div class="docs-search docs-search--content" data-docs-search>
+    <label class="visually-hidden" for="docs-search-input">Search docs</label>
+    <div class="docs-search__control">
+      <span class="docs-search__icon" aria-hidden="true"></span>
+      <input id="docs-search-input" data-docs-search-input type="search" placeholder="Search docs" autocomplete="off" autocapitalize="none" spellcheck="false" role="combobox" aria-autocomplete="list" aria-controls="docs-search-results" aria-expanded="false" />
+      <kbd class="docs-search__key" aria-hidden="true">⌘K</kbd>
+    </div>
+    <div class="docs-search__panel" data-docs-search-panel hidden>
+      <div class="docs-search__status" data-docs-search-status></div>
+      <div class="docs-search__results" id="docs-search-results" data-docs-search-results role="listbox" aria-label="Search results"></div>
+    </div>
+  </div>
+          <div class="docs-prose" data-pagefind-body>
+<h1 id="business-logic-templates"><a class="docs-anchor" href="#business-logic-templates" aria-label="Link to business-logic-templates" data-pagefind-ignore>#</a>Business Logic Templates</h1>
+<p>Nyx Agent includes reusable business-logic pentest templates for bugs
+normal scanners tend to miss. Templates are first-class metadata, but
+not a separate executor: they create normal <code>pentest_candidates</code> with
+normal live test plans, then the existing verifier handles auth
+sessions, policy gates, evidence review, verification attempts, and
+verified vulnerability storage.</p>
+<p>Templates run during candidate synthesis after route-model extraction.
+They inspect discovered backend routes, configured auth profiles, and
+the run safety settings.</p>
+<h2 id="discovering-templates"><a class="docs-anchor" href="#discovering-templates" aria-label="Link to discovering-templates" data-pagefind-ignore>#</a>Discovering Templates</h2>
+<p>CLI:</p>
+<pre><code class="hljs language-bash">nyx-agent business-logic templates
+nyx-agent business-logic templates --json</code></pre>
+<p>API:</p>
+<pre><code class="hljs language-bash">curl http://127.0.0.1:8765/api/v1/business-logic/templates</code></pre>
+<p>Each template exposes a stable <code>id</code>, <code>version</code>, <code>title</code>, <code>category</code>,
+<code>mutability</code>, required role descriptor, seed-data description,
+supported route patterns, oracle description, default severity, and
+whether it is executable or metadata-only.</p>
+<h2 id="safety"><a class="docs-anchor" href="#safety" aria-label="Link to safety" data-pagefind-ignore>#</a>Safety</h2>
+<p>Executable templates may create objects, submit checkout data, change
+file permissions, deliver webhook payloads, or create chatbot
+conversation state. Nyx Agent only generates these state-changing
+template candidates when both run gates are enabled:</p>
+<pre><code class="hljs language-toml"><span class="hljs-section">[run]</span>
+<span class="hljs-attr">exploit_mode_enabled</span> = <span class="hljs-literal">true</span>
+<span class="hljs-attr">allow_state_changing_live_probes</span> = <span class="hljs-literal">true</span></code></pre>
+<p>The project detail page&#39;s <strong>Start pentest</strong> action and
+<code>POST /api/v1/projects/:id/pentest</code> can set the same per-run gates
+without making a persistent config change. If the gates are not
+enabled, the run records structured skip reasons in
+<code>business_logic_template_runs</code>.</p>
+<p>Generated plans still pass through the normal live-verifier policy:
+request caps, rate limiting, dry-run mode, target URL scope checks,
+auth-session acquisition, and environment reset after state-changing
+actions.</p>
+<p>Authorization templates and research candidates that use role
+comparison or object ownership also populate the Authorization Matrix.
+Each live verification attempt writes an allowed-control row and a
+challenged-access row with expected and observed decisions, endpoint,
+resource/object id, owner role, tenant metadata when configured, body
+marker result, confidence, candidate id, verification attempt id, and
+evidence. The run detail UI groups these rows by endpoint/resource, and
+<code>GET /api/v1/runs/:id/authz-matrix</code> exposes the same data.</p>
+<h2 id="configuration"><a class="docs-anchor" href="#configuration" aria-label="Link to configuration" data-pagefind-ignore>#</a>Configuration</h2>
+<p>Business-logic template synthesis is enabled by default. Disable it
+globally:</p>
+<pre><code class="hljs language-toml"><span class="hljs-section">[run]</span>
+<span class="hljs-attr">business_logic_templates_enabled</span> = <span class="hljs-literal">false</span></code></pre>
+<p>Select a subset by id:</p>
+<pre><code class="hljs language-toml"><span class="hljs-section">[run]</span>
+<span class="hljs-attr">business_logic_template_ids</span> = [
+  <span class="hljs-string">&quot;tenant_object_isolation&quot;</span>,
+  <span class="hljs-string">&quot;webhook_replay_freshness&quot;</span>,
+  <span class="hljs-string">&quot;invite_accept_reuse&quot;</span>,
+]</code></pre>
+<p>The same selection can be supplied per run:</p>
+<pre><code class="hljs language-bash">nyx-agent scan \
+  --exploit-mode \
+  --allow-state-changing-live-probes \
+  --research-mode \
+  --business-template invite_accept_reuse \
+  --business-template password_reset_token_replay \
+  --business-template webhook_replay_freshness</code></pre>
+<p>Dry-run keeps candidate synthesis visible while the verifier policy
+blocks live traffic:</p>
+<pre><code class="hljs language-toml"><span class="hljs-section">[run]</span>
+<span class="hljs-attr">exploit_mode_enabled</span> = <span class="hljs-literal">true</span>
+<span class="hljs-attr">allow_state_changing_live_probes</span> = <span class="hljs-literal">true</span>
+<span class="hljs-attr">exploit_dry_run</span> = <span class="hljs-literal">true</span>
+<span class="hljs-attr">business_logic_template_ids</span> = [<span class="hljs-string">&quot;webhook_callback_trust_boundary&quot;</span>]</code></pre>
+<p>Vuln Research Mode complements templates. Templates create curated,
+template-provenance candidates for known business-logic patterns.
+Research mode adds separate <code>ResearchMode</code> candidates from the semantic
+route model and prior candidate memory when a product invariant looks
+risky but no concrete template applies yet. These include lifecycle
+bugs, stale access, replay, downgrade or entitlement mismatch,
+invite/team/org transitions, webhook/event consistency, AI-agent
+indirect actions, and background job side effects. Research-mode
+candidates still enter the same live verifier and safety gates as
+template candidates.</p>
+<p>Run summary example:</p>
+<pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;run_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;run-...&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;templates_considered&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;candidates_generated&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;templates_skipped&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;dry_run&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;templates&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;template_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;webhook_callback_trust_boundary&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;template_version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;1&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;generated_count&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;skipped_count&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;skip_reasons&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;dry_run&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span></code></pre>
+<h2 id="shipped-templates"><a class="docs-anchor" href="#shipped-templates" aria-label="Link to shipped-templates" data-pagefind-ignore>#</a>Shipped Templates</h2>
+<h3 id="tenant-object-isolation"><a class="docs-anchor" href="#tenant-object-isolation" aria-label="Link to tenant-object-isolation" data-pagefind-ignore>#</a>Tenant / Object Isolation</h3>
+<p>Looks for a <code>POST</code> collection route paired with a <code>GET</code> detail route,
+for example:</p>
+<pre><code class="hljs language-text">POST /api/projects
+GET  /api/projects/:id</code></pre>
+<p>Required roles: two configured non-anonymous roles such as <code>user_a</code>
+and <code>user_b</code>.</p>
+<p>The template seeds an object as the first role, captures the returned
+object id, and asks whether the second role can read the first role&#39;s
+object. Confirmation requires the forbidden-role response to contain
+the seeded marker.</p>
+<p>First-class IDOR/authz plans can also describe the ownership boundary
+directly. This shape runs the owner request and peer request through
+separate named sessions and verifies only when both live responses carry
+the same object-specific marker:</p>
+<pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;kind&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;authz_object_ownership&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;object&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;project&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;owner_role&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;user_a&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;proj-user-a-1&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;route&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/api/projects/{id}&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;positive_markers&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;nyx-agent-user-a-project&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;proj-user-a-1&quot;</span><span class="hljs-punctuation">]</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;accessor_role&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;user_b&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;owner_request&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;method&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;GET&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;path&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/api/projects/{{object_id}}&quot;</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;accessor_request&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;method&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;GET&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;path&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/api/projects/{{object_id}}&quot;</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;oracle&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;object_ownership_break&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;forbidden_status&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">401</span><span class="hljs-punctuation">,</span> <span class="hljs-number">403</span><span class="hljs-punctuation">,</span> <span class="hljs-number">404</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;positive_markers&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;nyx-agent-user-a-project&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;proj-user-a-1&quot;</span><span class="hljs-punctuation">]</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span></code></pre>
+<p>For UI-only authorization boundaries, the live verifier can compare the
+same browser workflow under two roles. The workflow below verifies only
+when both <code>admin</code> and <code>user</code> sessions render the same positive admin UI
+marker:</p>
+<pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;kind&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;authz_browser_role_comparison&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;allowed_role&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;admin&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;challenged_role&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;user&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;workflow&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;url&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/app/admin&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;steps&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+      <span class="hljs-punctuation">{</span><span class="hljs-attr">&quot;action&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;wait_for_selector&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;selector&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;main&quot;</span><span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;oracle&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;text_contains&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Admin Console&quot;</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span></code></pre>
+<pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;kind&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;http_workflow&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;template_provenance&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;template_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;tenant_object_isolation&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;template_version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;1&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Tenant/object isolation&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;category&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;authorization&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;mutability&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;state_changing&quot;</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;required_roles&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;user_a&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;user_b&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;seed_data&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;object_marker&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;nyx-agent-tenant-object-isolation-abc12345&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;owner_role&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;user_a&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;peer_role&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;user_b&quot;</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;steps&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;as&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;user_a&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;method&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;POST&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;path&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/api/projects&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;json&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;nyx-agent-tenant-object-isolation-abc12345&quot;</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;destructive&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;captures&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;object_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+          <span class="hljs-attr">&quot;from&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;body&quot;</span><span class="hljs-punctuation">,</span>
+          <span class="hljs-attr">&quot;regex&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;\&quot;(?:id|uuid|object_id|project_id|account_id)\&quot;\\s*:\\s*\&quot;?([A-Za-z0-9_.:-]+)\&quot;?&quot;</span>
+        <span class="hljs-punctuation">}</span>
+      <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;as&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;user_b&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;method&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;GET&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;path&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/api/projects/{{object_id}}&quot;</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;oracle&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;step&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;status_range&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2xx&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;body_contains&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;nyx-agent-tenant-object-isolation-abc12345&quot;</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span></code></pre>
+<h3 id="coupon-price-manipulation"><a class="docs-anchor" href="#coupon-price-manipulation" aria-label="Link to coupon-price-manipulation" data-pagefind-ignore>#</a>Coupon / Price Manipulation</h3>
+<p>Looks for state-changing checkout, cart, coupon, payment, billing,
+order, invoice, price, amount, total, discount, or promo surfaces.</p>
+<p>Required roles: one configured role if available; otherwise anonymous.</p>
+<p>The template submits a marker coupon plus a low controlled price value.
+Confirmation requires the response to echo the marker, so a mere 200
+status is not enough.</p>
+<pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;kind&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;http_workflow&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;required_roles&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;user&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;seed_data&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;coupon_marker&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;nyx-agent-coupon-price-manipulation-def67890&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;forced_price&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;0.01&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;role&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;user&quot;</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;steps&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;as&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;user&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;method&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;POST&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;path&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/api/checkout/coupon&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;json&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;coupon_code&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;nyx-agent-coupon-price-manipulation-def67890&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;total&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0.01</span>
+      <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;destructive&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;oracle&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;step&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;status_range&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2xx&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;body_contains&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;nyx-agent-coupon-price-manipulation-def67890&quot;</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span></code></pre>
+<h3 id="ai-chatbot-exploitability"><a class="docs-anchor" href="#ai-chatbot-exploitability" aria-label="Link to ai-chatbot-exploitability" data-pagefind-ignore>#</a>AI Chatbot Exploitability</h3>
+<p>Looks for state-changing AI/chat/assistant/bot/LLM/copilot routes or
+message-like request fields.</p>
+<p>Required roles: one configured role if available; otherwise anonymous.</p>
+<p>The template sends a prompt-injection probe that asks the app to emit a
+unique marker only when hidden system/developer instructions are
+exposed. Confirmation requires both the marker and <code>system prompt</code>
+evidence in the live response.</p>
+<h3 id="ai-chatbot-indirect-action-abuse"><a class="docs-anchor" href="#ai-chatbot-indirect-action-abuse" aria-label="Link to ai-chatbot-indirect-action-abuse" data-pagefind-ignore>#</a>AI / Chatbot Indirect Action Abuse</h3>
+<p>Looks for the same AI/chat/assistant surfaces, especially agent/tool or
+action-oriented routes. Required role: one configured role if available;
+otherwise anonymous.</p>
+<p>The template asks the assistant to perform a harmless indirect action,
+such as creating a labelled test draft/note, using a unique marker.
+Confirmation requires both the marker and explicit action-execution
+evidence in the live response.</p>
+<h3 id="file-access-after-permission-change"><a class="docs-anchor" href="#file-access-after-permission-change" aria-label="Link to file-access-after-permission-change" data-pagefind-ignore>#</a>File Access After Permission Change</h3>
+<p>Looks for a <code>POST</code> file/document collection route, a <code>GET</code> detail
+route, and a state-changing share/permission/access/collaborator
+route. Required roles: two configured non-anonymous roles.</p>
+<p>The template creates a file-like object as the owner role, performs a
+permission-change step, then asks whether the peer role can still read
+the seeded file marker. Confirmation requires a 2xx peer read response
+containing that marker.</p>
+<h3 id="webhook-callback-trust-boundary"><a class="docs-anchor" href="#webhook-callback-trust-boundary" aria-label="Link to webhook-callback-trust-boundary" data-pagefind-ignore>#</a>Webhook / Callback Trust Boundary</h3>
+<p>Looks for state-changing webhook/callback/receiver/integration/event
+routes or signature/event payload fields. Required role: anonymous
+when the route has no auth checks, otherwise one configured role.</p>
+<p>The template submits an unsigned event marker. Confirmation requires a
+2xx live response that reflects the marker.</p>
+<h3 id="webhook-replay-freshness"><a class="docs-anchor" href="#webhook-replay-freshness" aria-label="Link to webhook-replay-freshness" data-pagefind-ignore>#</a>Webhook Replay / Freshness</h3>
+<p>Looks for webhook/callback routes with event id, timestamp, signature,
+payload, or callback-like fields. Required role: anonymous when the
+route has no auth checks, otherwise one configured role.</p>
+<p>The template sends the same stale event id and timestamp twice.
+Confirmation requires the replay response to return 2xx and reflect the
+unique marker. This catches handlers that do not enforce freshness,
+signature timestamp windows, or idempotency.</p>
+<pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;kind&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;http_workflow&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;required_roles&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;anonymous&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;seed_data&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;event_marker&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;nyx-agent-webhook-replay-freshness-1234abcd&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;timestamp&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2000-01-01T00:00:00Z&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;role&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;anonymous&quot;</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;steps&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;as&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;anonymous&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;method&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;POST&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;path&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/webhooks/stripe&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;json&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;event_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;nyx-agent-webhook-replay-freshness-1234abcd&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;timestamp&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2000-01-01T00:00:00Z&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;signature&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;unsigned&quot;</span>
+      <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;destructive&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;as&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;anonymous&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;method&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;POST&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;path&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/webhooks/stripe&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;json&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;event_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;nyx-agent-webhook-replay-freshness-1234abcd&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;timestamp&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2000-01-01T00:00:00Z&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;signature&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;unsigned&quot;</span>
+      <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;destructive&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;oracle&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;step&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;status_range&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2xx&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;body_contains&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;nyx-agent-webhook-replay-freshness-1234abcd&quot;</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span></code></pre>
+<h3 id="invite-accept-reuse"><a class="docs-anchor" href="#invite-accept-reuse" aria-label="Link to invite-accept-reuse" data-pagefind-ignore>#</a>Invite Accept / Reuse</h3>
+<p>Looks for an invite creation route paired with an invite accept/join
+route. Required roles: two configured non-anonymous roles, such as
+<code>owner</code> and <code>invitee</code>.</p>
+<p>The template creates an invite, captures an invite token/id from the
+creation response, accepts it, then replays the same acceptance.
+Confirmation requires the replay response to reflect the invite marker.
+If no accept route or no second role is configured, Nyx Agent records a
+skip reason instead of emitting a weak plan.</p>
+<h3 id="password-reset-token-replay"><a class="docs-anchor" href="#password-reset-token-replay" aria-label="Link to password-reset-token-replay" data-pagefind-ignore>#</a>Password Reset Token Replay</h3>
+<p>Looks for password-reset request and reset-confirmation routes.
+Required roles: disposable victim and attacker/test accounts.</p>
+<p>The template requests a reset for a disposable marker email, captures a
+reset token/code from the response in test harnesses, submits the reset,
+then replays the same token. Confirmation requires the replay reset to
+reflect the marker. If the route model does not expose a request and
+confirmation pair, or the project lacks the required test accounts,
+Nyx Agent records a skip reason.</p>
+<h3 id="email-change-without-reauth"><a class="docs-anchor" href="#email-change-without-reauth" aria-label="Link to email-change-without-reauth" data-pagefind-ignore>#</a>Email Change Without Reauth</h3>
+<p>Looks for account/profile/settings email-change routes with email-like
+fields and no current-password, old-password, reauth, or MFA fields.
+Required role: one configured non-anonymous role.</p>
+<p>The template submits a disposable email marker. Confirmation requires a
+2xx response that reflects the new email marker, indicating the route
+accepted a sensitive account change without a reauth challenge.</p>
+<h3 id="subscription-downgrade-feature-retention"><a class="docs-anchor" href="#subscription-downgrade-feature-retention" aria-label="Link to subscription-downgrade-feature-retention" data-pagefind-ignore>#</a>Subscription Downgrade / Feature Retention</h3>
+<p>Looks for subscription, billing, plan, tier, downgrade, cancel, or
+change routes paired with premium feature/export/report/API routes.
+Required role: one configured non-anonymous role.</p>
+<p>The template downgrades a disposable subscription marker and then calls
+the premium feature route. Confirmation requires the post-downgrade
+feature response to reflect the marker.</p>
+<h3 id="refund-replay"><a class="docs-anchor" href="#refund-replay" aria-label="Link to refund-replay" data-pagefind-ignore>#</a>Refund / Replay</h3>
+<p>Looks for refund, return, reversal, chargeback, credit, payment id,
+order id, and amount routes. Required role: one configured
+non-anonymous role.</p>
+<p>The template submits the same refund marker twice with the same
+idempotency key. Confirmation requires the replay response to reflect
+the marker, which indicates replay/idempotency handling needs review.</p>
+<h3 id="oauth-callback-state-confusion"><a class="docs-anchor" href="#oauth-callback-state-confusion" aria-label="Link to oauth-callback-state-confusion" data-pagefind-ignore>#</a>OAuth Callback State Confusion</h3>
+<p>Looks for OAuth/OIDC/SSO callback or redirect routes with <code>state</code>,
+<code>code</code>, or <code>redirect_uri</code> fields. Required role: one configured role if
+available; otherwise anonymous.</p>
+<p>The template calls the callback with mismatched <code>state</code> and <code>code</code>
+markers and no prior browser session seed. Confirmation requires the
+callback response to reflect the mismatched state marker.</p>
+<h3 id="credit-exhaustion-bypass"><a class="docs-anchor" href="#credit-exhaustion-bypass" aria-label="Link to credit-exhaustion-bypass" data-pagefind-ignore>#</a>Credit Exhaustion Bypass</h3>
+<p>Looks for credit, quota, usage, metering, token, or generation routes.
+Required role: one configured non-anonymous role.</p>
+<p>The template replays a credit-consuming request with the same
+idempotency marker and zero-credit/quota hints. Confirmation requires
+the replay response to reflect the marker after the credit-exhaustion
+shape.</p>
+<h2 id="safe-skips"><a class="docs-anchor" href="#safe-skips" aria-label="Link to safe-skips" data-pagefind-ignore>#</a>Safe Skips</h2>
+<p>All shipped business-logic templates are executable, but only when the
+safety gates and enough route/auth/seed context are present. Missing
+gates produce the standard state-changing skip:</p>
+<pre><code class="hljs language-text">state-changing workflow requires exploit mode and allow_state_changing_live_probes</code></pre>
+<p>Missing roles or route pairs produce template-specific reasons, for
+example:</p>
+<pre><code class="hljs language-text">invite_accept_reuse: required auth profiles are missing for roles [&quot;inviter_role&quot;, &quot;invitee_role&quot;]
+password_reset_token_replay: needs password reset request and confirmation routes with a reset token/code seed
+subscription_downgrade_feature_retention: needs a downgrade route paired with a premium feature route</code></pre>
+<h2 id="provenance"><a class="docs-anchor" href="#provenance" aria-label="Link to provenance" data-pagefind-ignore>#</a>Provenance</h2>
+<p>Template-generated candidates include structured provenance in
+<code>affected_components[*].template_provenance</code> and in the verifier plan.
+Verification attempts copy that provenance into <code>request</code> and <code>oracle</code>
+under <code>business_logic_template</code>. Verified vulnerabilities inherit the
+candidate&#39;s affected components, so reports can show the source
+template without parsing <code>source</code> strings.</p>
+<p>Research-mode candidates use <code>source = &quot;ResearchMode&quot;</code> and include
+<code>affected_components[*].research_mode_provenance</code> with the mode
+version, source (<code>semantic_route_model</code> or <code>exploration_memory</code>),
+category, invariant, and related memory candidate ids when present.</p>
+<p>Example verified vulnerability fragment:</p>
+<pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;vuln-bl-...&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;source_candidate_ids&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;pc-bl-...&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;affected_components&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;kind&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;business_logic_template&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;template_provenance&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;template_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;tenant_object_isolation&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;template_version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;1&quot;</span>
+      <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;route_path&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/api/projects/:id&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;roles&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;user_b&quot;</span><span class="hljs-punctuation">]</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span></code></pre>
+
+          </div>
+          <nav class="docs-prevnext" aria-label="Page navigation"><a class="docs-prevnext__link docs-prevnext__link--prev" href="attack-graph.html">
+        <span class="docs-prevnext__label">Previous</span>
+        <span class="docs-prevnext__title">Attack Graph</span>
+      </a><a class="docs-prevnext__link docs-prevnext__link--next" href="events.html">
+        <span class="docs-prevnext__label">Next</span>
+        <span class="docs-prevnext__title">Events</span>
+      </a></nav>
+        </article>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <p class="site-footer__copy">© 2026 Eli Peter · Nyx Agent is licensed under AGPL-3.0-or-later.</p>
+        <nav class="site-footer__nav" aria-label="Footer">
+          <a href="../../">Home</a>
+          <a href="../../scanner.html">Scanner</a>
+          <a href="../../agent.html">Agent</a>
+          <a href="../../news/">News</a>
+          <a href="../../docs/">Docs</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

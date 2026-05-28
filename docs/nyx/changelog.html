@@ -1,0 +1,694 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Changelog | Nyx docs</title>
+    <meta name="description" content="All notable changes to Nyx are documented here. The format is based on Keep a Changelog and the project follows Semantic Versioning. For where Nyx is going, see the Roadmap." />
+    <meta name="keywords" content="Nyx, Nyx scanner, SAST, static analysis, Rust security scanner, local-first SAST, Project, Changelog, WebSocket, JSON, json, SARIF" />
+    <meta name="author" content="Eli Peter" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <link rel="canonical" href="https://nyxscan.dev/docs/nyx/changelog.html" />
+    <link rel="sitemap" type="application/xml" href="https://nyxscan.dev/sitemap.xml" />
+    <link rel="alternate" hreflang="en" href="https://nyxscan.dev/docs/nyx/changelog.html" />
+    <link rel="alternate" hreflang="x-default" href="https://nyxscan.dev/docs/nyx/changelog.html" />
+    <link rel="prev" href="roadmap.html" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="64x64" href="../../favicon-64.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../../favicon-180.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="alternate" type="application/rss+xml" title="Nyx | News &amp; release notes" href="/news/feed.xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../styles.css" />
+    <script defer src="../../docs/search.js"></script>
+
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Nyx" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="Changelog" />
+    <meta property="og:description" content="All notable changes to Nyx are documented here. The format is based on Keep a Changelog and the project follows Semantic Versioning. For where Nyx is going, see the Roadmap." />
+    <meta property="og:url" content="https://nyxscan.dev/docs/nyx/changelog.html" />
+    <meta property="og:image" content="https://nyxscan.dev/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Nyx Scanner local-first security documentation" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Changelog" />
+    <meta name="twitter:description" content="All notable changes to Nyx are documented here. The format is based on Keep a Changelog and the project follows Semantic Versioning. For where Nyx is going, see the Roadmap." />
+    <meta name="twitter:image" content="https://nyxscan.dev/og-image.png" />
+    <meta name="twitter:image:alt" content="Nyx Scanner local-first security documentation" />
+    <meta name="theme-color" content="#F9F8F4" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://nyxscan.dev/#person",
+      "name": "Eli Peter",
+      "url": "https://github.com/elicpeter",
+      "sameAs": [
+        "https://github.com/elicpeter",
+        "https://github.com/sponsors/elicpeter"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://nyxscan.dev/#website",
+      "url": "https://nyxscan.dev/",
+      "name": "Nyx",
+      "description": "Local security tooling for deterministic scanning and live testing.",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://nyxscan.dev/#person"
+      }
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://nyxscan.dev/docs/nyx/changelog.html#article",
+      "headline": "Changelog",
+      "name": "Changelog",
+      "url": "https://nyxscan.dev/docs/nyx/changelog.html",
+      "description": "All notable changes to Nyx are documented here. The format is based on Keep a Changelog and the project follows Semantic Versioning. For where Nyx is going, see the Roadmap.",
+      "inLanguage": "en",
+      "articleSection": "Project",
+      "isPartOf": {
+        "@id": "https://nyxscan.dev/#website"
+      },
+      "publisher": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "author": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "image": "https://nyxscan.dev/og-image.png",
+      "mainEntityOfPage": "https://nyxscan.dev/docs/nyx/changelog.html"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://nyxscan.dev/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Docs",
+          "item": "https://nyxscan.dev/docs/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Nyx Scanner docs",
+          "item": "https://nyxscan.dev/docs/nyx/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Changelog",
+          "item": "https://nyxscan.dev/docs/nyx/changelog.html"
+        }
+      ],
+      "@id": "https://nyxscan.dev/docs/nyx/changelog.html#breadcrumbs"
+    }
+  ]
+}
+    </script>
+  </head>
+  <body class="docs-body">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" aria-label="Primary navigation">
+      <div class="container site-header__inner">
+        <a class="brand" href="../../" aria-label="Nyx home">
+          <img src="../../assets/logo.png" alt="Nyx" class="brand-logo" />
+        </a>
+        <span class="header-wordmark">NYX</span>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="../../scanner.html">Scanner</a>
+          <a href="../../agent.html">Agent</a>
+          <a href="../../news/">News</a>
+          <a href="../../docs/" aria-current="page">Docs</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="docs-page">
+      <div class="docs-shell">
+        <nav class="docs-sidebar" aria-label="Documentation"><a class="docs-sidebar__brand" href="./">Nyx docs</a><a class="docs-sidebar__home" href="../">All docs</a><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Getting started</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="quickstart.html">Quickstart</a></li><li><a class="docs-sidebar__link" href="installation.html">Installation</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Using nyx</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="cli.html">CLI reference</a></li><li><a class="docs-sidebar__link" href="serve.html">Browser UI</a></li><li><a class="docs-sidebar__link" href="dynamic.html">Dynamic verification</a></li><li><a class="docs-sidebar__link" href="configuration.html">Configuration</a></li><li><a class="docs-sidebar__link" href="output.html">Output formats</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Coverage</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="language-maturity.html">Language maturity</a></li><li><a class="docs-sidebar__link" href="rules.html">Rules</a></li><li><a class="docs-sidebar__link" href="auth.html">Auth analysis</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Under the hood</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="how-it-works.html">How it works</a></li><li><a class="docs-sidebar__link" href="advanced-analysis.html">Advanced analysis</a></li><li><a class="docs-sidebar__link" href="detectors.html">Detectors</a><ul class="docs-sidebar__sublist"><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/patterns.html">Patterns</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/cfg.html">CFG</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/state.html">State</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/taint.html">Taint</a></li></ul></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Project</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="roadmap.html">Roadmap</a></li><li><a class="docs-sidebar__link" href="changelog.html" aria-current="page">Changelog</a></li></ul></div></nav>
+        <article class="docs-content">
+          <div class="docs-search docs-search--content" data-docs-search>
+    <label class="visually-hidden" for="docs-search-input">Search docs</label>
+    <div class="docs-search__control">
+      <span class="docs-search__icon" aria-hidden="true"></span>
+      <input id="docs-search-input" data-docs-search-input type="search" placeholder="Search docs" autocomplete="off" autocapitalize="none" spellcheck="false" role="combobox" aria-autocomplete="list" aria-controls="docs-search-results" aria-expanded="false" />
+      <kbd class="docs-search__key" aria-hidden="true">⌘K</kbd>
+    </div>
+    <div class="docs-search__panel" data-docs-search-panel hidden>
+      <div class="docs-search__status" data-docs-search-status></div>
+      <div class="docs-search__results" id="docs-search-results" data-docs-search-results role="listbox" aria-label="Search results"></div>
+    </div>
+  </div>
+          <div class="docs-prose" data-pagefind-body>
+<h1 id="changelog"><a class="docs-anchor" href="#changelog" aria-label="Link to changelog" data-pagefind-ignore>#</a>Changelog</h1>
+<p>All notable changes to Nyx are documented here. The format is based on <a href="https://keepachangelog.com/en/1.1.0/">Keep a Changelog</a> and the project follows <a href="https://semver.org/spec/v2.0.0.html">Semantic Versioning</a>. For where Nyx is going, see the <a href="roadmap.html">Roadmap</a>.</p>
+<h2 id="unreleased"><a class="docs-anchor" href="#unreleased" aria-label="Link to unreleased" data-pagefind-ignore>#</a>[Unreleased]</h2>
+<p>Three fronts this release: an attack-surface map, a sandboxed dynamic verifier, and a framework adapter registry that grounds both.</p>
+<p>The attack-surface map and chain composer turn the flat finding list into a route-to-sink graph. The dynamic verifier re-runs every Medium-or-higher finding against a payload corpus and stamps a Confirmed / NotConfirmed / Inconclusive / Unsupported verdict on each. The adapter registry (116 entries across 8 languages) covers HTTP, message-broker, scheduled-job, GraphQL, WebSocket, middleware, and migration entry points.</p>
+<h3 id="attack-surface-map"><a class="docs-anchor" href="#attack-surface-map" aria-label="Link to attack-surface-map" data-pagefind-ignore>#</a>Attack-surface map</h3>
+<ul>
+<li><strong><code>nyx surface</code> subcommand.</strong> Prints the project&#39;s entry points, datastores, external services, and dangerous local sinks as text, JSON, Graphviz <code>dot</code>, or rendered SVG. Loads the persisted <code>SurfaceMap</code> from the most recent indexed scan when available, or rebuilds inline from source. <code>--build</code> forces a full pass-1 + call-graph walk so DataStore / ExternalService / DangerousLocal nodes populate on an unscanned project.</li>
+<li><strong>Surface page in <code>nyx serve</code>.</strong> New <code>SurfacePage</code> renders the same graph in the browser UI, with ELK layout, sidebar navigation, and a wide-canvas SVG viewer. Persists alongside the index so the frontend reloads without a rescan.</li>
+<li><strong>Chain findings.</strong> <code>ChainFinding</code> records connect a route entry point to a downstream sink via the call graph + surface map. The composer scores <code>(impact × evidence)</code> per chain, queues the top-N for composite reverification, and wires the result into <code>findings.json</code> / SARIF / the dashboard. Chains rank above isolated findings.</li>
+</ul>
+<h3 id="framework-adapter-registry"><a class="docs-anchor" href="#framework-adapter-registry" aria-label="Link to framework-adapter-registry" data-pagefind-ignore>#</a>Framework adapter registry</h3>
+<p><code>src/dynamic/framework/</code> ships a <code>FrameworkAdapter</code> trait with concrete adapters across 8 languages (116 entries today, growing per release). Each adapter binds a route / handler / consumer pattern to a <code>FrameworkBinding</code> so the surface map and dynamic verifier can locate entry points without re-walking the AST.</p>
+<ul>
+<li><strong>HTTP routers.</strong> Flask, Django, FastAPI, Starlette (Python); Express, Koa, NestJS, Fastify (JS/TS); Spring, Quarkus, Micronaut, Jakarta Servlet (Java); Gin, Echo, Fiber, Chi (Go); Axum, Actix, Rocket, Warp (Rust); Rails, Sinatra, Hanami (Ruby); Laravel, Symfony, CodeIgniter (PHP).</li>
+<li><strong>New <code>EntryKind</code> variants.</strong> <code>ClassMethod</code>, <code>MessageHandler</code>, <code>ScheduledJob</code>, <code>GraphQLResolver</code>, <code>WebSocket</code>, <code>Middleware</code>, <code>Migration</code> join the existing <code>RouteHandler</code> / <code>Function</code> set so the surface map shows non-HTTP entry surfaces.</li>
+<li><strong>Message broker handlers.</strong> Kafka, AWS SQS, Google Pub/Sub, NATS, and RabbitMQ consumers across Python, Node, Java, and Go.</li>
+<li><strong>Scheduled jobs.</strong> Celery (Python), Sidekiq (Ruby), Quartz (Java), plain cron expression recognition.</li>
+<li><strong>GraphQL resolvers.</strong> Apollo, Relay, gqlgen, Juniper, Graphene.</li>
+<li><strong>WebSocket handlers.</strong> ws, Socket.IO, ActionCable, Django Channels.</li>
+<li><strong>Middleware + migrations.</strong> Express, Laravel, Spring, Django, Rails middleware; Django, Flask, Laravel, Rails, Prisma, Sequelize migration scripts.</li>
+<li><strong>Sanitizer-aware adapter strengthening.</strong> Every XXE, header-injection, open-redirect, SSTI, LDAP, XPath, deserialization, crypto, and data-exfiltration adapter rejects bindings when the surrounding source visibly hardens the parser (<code>disallow-doctype-decl</code>, <code>resolve_entities=False</code>, <code>libxml_disable_entity_loader</code>), routes the value through a known encoder (<code>LdapEncoder.filterEncode</code>, <code>escape_filter_chars</code>, <code>ldap_escape</code>), swaps a weak primitive for a CSPRNG (<code>secrets.token_bytes</code>, <code>crypto.randomBytes</code>, <code>SecureRandom</code>), or validates the destination host through an allowlist. Cuts adapter FPs without losing the genuinely dangerous calls.</li>
+</ul>
+<h3 id="dynamic-verification"><a class="docs-anchor" href="#dynamic-verification" aria-label="Link to dynamic-verification" data-pagefind-ignore>#</a>Dynamic verification</h3>
+<ul>
+<li><strong><code>nyx scan --verify</code>.</strong> Every finding with <code>Confidence &gt;= Medium</code> is re-executed inside a sandboxed harness against a curated payload corpus. The verdict (<code>Confirmed</code> / <code>NotConfirmed</code> / <code>Inconclusive</code> / <code>Unsupported</code>) lands on <code>Evidence.dynamic_verdict</code> and shows up in console output, JSON, SARIF, and the dashboard via a new <code>VerdictBadge</code> component on the finding detail page.</li>
+<li><strong>Backends.</strong> In-process on Linux with <code>Standard</code> / <code>Strict</code> hardening (namespace unshare, chroot, RLIMIT cap, seccomp filter), in-process on macOS via <code>sandbox-exec</code> with a profile-per-policy wrap, Docker with a published image-builder catalogue, and a Firecracker trait stub for future microVM execution. The Docker backend ships native binary support for Rust and Go so harnesses no longer need to drag a toolchain into every image.</li>
+<li><strong>Language coverage.</strong> Per-language harness emitters for Python, JS/TS, Go, Java, PHP, Ruby, Rust, C, and C++. Stub harness intercepts SQL, HTTP, Redis, and filesystem boundaries so the verdict reflects the sink, not the network. The <code>JSON_PARSE</code>, <code>UNAUTHORIZED_ID</code>, and <code>DATA_EXFIL</code> cap dispatchers are wired into every emitter that ships these caps (Python, JS, TS, Go, Java, PHP, Ruby, Rust), so the verdict pipeline closes the loop on each cap end-to-end rather than per-language piecemeal.</li>
+<li><strong>Abstract-interpretation and symex sanitizer suppression.</strong> Symbolic execution and the interval/string abstract domain are now consulted at verdict time, so a payload that the static engine would call dangerous but symex can prove never reaches the sink lands as NotConfirmed.</li>
+<li><strong>Guard-aware verdicts.</strong> When a known input-validation or output-sanitization middleware sits in front of a Confirmed sink (Spring <code>@PreAuthorize</code>, Express <code>helmet</code>, Nest <code>@UseGuards</code>, Django <code>@permission_classes</code>, and the per-language registry in <code>src/dynamic/framework/auth_markers.rs</code>), the verdict demotes to <code>ConfirmedWithKnownGuard</code> and the guard names land on <code>differential.known_guards</code>. Authentication-only filters do not trigger the demotion since they do not mitigate injection.</li>
+<li><strong>Repro bundles.</strong> Every verified finding writes a hermetic bundle to <code>~/.cache/nyx/dynamic/repro/&lt;spec_hash&gt;/</code> with <code>reproduce.sh</code>, <code>expected/{verdict.json,outcome.json,trace.jsonl}</code>, and a <code>docker_pull.sh</code> when the toolchain is pinned in <code>tools/image-builder/images.toml</code>. <code>--verbose</code> flushes the per-step <code>VerifyTrace</code> to stderr for live triage.</li>
+<li><strong>Real-engine harness paths.</strong> LDAP injection routes through an embedded LDAPv3 BER server, exercised from Java via JNDI <code>InitialDirContext</code> and from Python and PHP via pure-stdlib BER clients. XPath injection runs against the live parser in each language: Java <code>javax.xml.xpath</code>, PHP <code>DOMXPath</code>, JS <code>xpath</code> npm, Python <code>lxml</code>. <code>Cap::CRYPTO</code> lands a <code>WeakKey</code> probe across Python, Go, Java, PHP, and Rust that flags sub-2^16 keys produced by non-CSPRNG sources. A new <code>HeaderSmuggledInWire</code> oracle predicate catches CRLF smuggling on hand-rolled raw-socket HTTP servers (Python <code>http.server</code>, Node <code>net</code>, Rust <code>std::net::TcpListener</code>) where framework-level CRLF strip cannot intervene.</li>
+</ul>
+<h3 id="determinism-policy-telemetry"><a class="docs-anchor" href="#determinism-policy-telemetry" aria-label="Link to determinism-policy-telemetry" data-pagefind-ignore>#</a>Determinism, policy, telemetry</h3>
+<ul>
+<li><strong>YAML policy deny list.</strong> <code>src/policy.rs</code> is consulted before harness build. Network egress, filesystem writes outside the sandbox root, and process spawns can be denied per-rule; deny decisions land in the trace, redacted via the shared scrubber.</li>
+<li><strong>Seeded RNG.</strong> <code>dynamic::rand::SpecRng</code> is seeded from each <code>HarnessSpec</code> hash so two runs of the same spec produce identical payloads. <code>scripts/check_no_unseeded_rand.sh</code> audits the tree for unseeded <code>rand</code> usage on every CI run.</li>
+<li><strong><code>VerifyTrace</code> observability.</strong> Every per-step decision (probe selection, payload mutation, oracle check, deny verdict) writes to the trace stream and the repro bundle.</li>
+<li><strong>Schema-versioned telemetry.</strong> <code>events.jsonl</code> carries <code>schema_version</code>, <code>nyx_version</code>, <code>corpus_version</code>, <code>kind</code>, and <code>ts</code> on every envelope. PII and secret scrubbing runs on every persisted artefact via <code>src/utils/redact.rs</code>.</li>
+<li><strong><code>NYX_NO_TELEMETRY=1</code></strong> disables event persistence outright.</li>
+</ul>
+<h3 id="cve-corpus-and-ground-truth"><a class="docs-anchor" href="#cve-corpus-and-ground-truth" aria-label="Link to cve-corpus-and-ground-truth" data-pagefind-ignore>#</a>CVE corpus and ground truth</h3>
+<ul>
+<li><strong>New <code>Cap</code> corpora.</strong> Vulnerable + patched fixtures landed for the seven new cap classes (LDAP injection, XPath injection, header injection, open redirect, SSTI, XXE, prototype pollution) plus deserialization, crypto, JSON parsing, unauthorized-id, and data exfiltration. Every cap now carries at least one positive / negative / adversarial / unsupported fixture quad per supported language.</li>
+<li><strong>OWASP Benchmark v1.2 importer.</strong> <code>tests/eval_corpus/owasp_gt_convert.py</code> converts the OWASP Java Benchmark expected-results manifest into Nyx ground truth and lands a 16k-line <code>owasp_benchmark_v1.2.json</code> for evaluation.</li>
+<li><strong>NIST SARD importer.</strong> <code>tests/eval_corpus/sard_gt_convert.py</code> converts SARD test cases into the same format so cross-dataset recall numbers stay comparable.</li>
+<li><strong>Evaluation corpus tooling.</strong> <code>tests/eval_corpus/run_full.sh</code> runs the Nyx benchmark, OWASP Benchmark, and NIST SARD evaluation sets and writes <code>tests/eval_corpus/results.json</code>. <code>tests/eval_corpus/report.py</code> and <code>tabulate.py</code> produce the per-cap and per-language summary used to track coverage and accuracy.</li>
+</ul>
+<h3 id="engine"><a class="docs-anchor" href="#engine" aria-label="Link to engine" data-pagefind-ignore>#</a>Engine</h3>
+<ul>
+<li><strong>DB fast-fail preflight.</strong> <code>Indexer::init</code> reads the first 16 bytes of any candidate SQLite file and rejects anything without the standard <code>SQLite format 3\0</code> magic. Stops a misnamed JSON / text file from corrupting the index path with a SQLite error halfway through migration.</li>
+<li><strong>Symbolic-execution coverage.</strong> Symex now recognises a wider set of string operations (<code>substr</code>, <code>replace</code>, <code>to_lower</code>, <code>to_upper</code>, <code>trim</code>, <code>strlen</code>) per the value/transfer pipeline, and the abstract-interpretation framework reasons about interval and prefix/suffix string facts during the dynamic verdict pass.</li>
+</ul>
+<h3 id="cli"><a class="docs-anchor" href="#cli" aria-label="Link to cli" data-pagefind-ignore>#</a>CLI</h3>
+<ul>
+<li><strong><code>nyx scan --verify</code></strong> (enabled by default in standard builds) and <code>--backend {auto,process,docker}</code> select the dynamic-verification harness. <code>--no-verify</code> skips verification for a single run without changing config.</li>
+<li><strong><code>nyx scan --harden {standard,strict}</code></strong> picks the process-backend hardening profile. <code>standard</code> is no-new-privs plus a memory rlimit on Linux. <code>strict</code> layers namespace unshare, chroot to the workdir, and a default-deny seccomp filter on Linux, or wraps the harness with <code>sandbox-exec</code> on macOS.</li>
+<li><strong>Patch-validation CI mode.</strong> <code>--baseline FILE</code> reads a previous scan&#39;s JSON (or a stripped <code>.nyx/baseline.json</code> written by <code>--baseline-write</code>) and diffs it against the current scan on <code>stable_hash</code>, emitting <code>New</code> / <code>Resolved</code> / <code>FlippedConfirmed</code> / <code>FlippedNotConfirmed</code> transitions. <code>--gate {no-new-confirmed,resolve-all-confirmed}</code> exits non-zero when the diff violates the policy so CI fails the build instead of merging an unreviewed regression. The stripped baseline carries only <code>stable_hash</code>, <code>dynamic_verdict</code>, <code>severity</code>, <code>path</code>, and <code>rule_id</code>, so persisting it between scans does not leak source.</li>
+<li><strong><code>nyx scan --verify-all-confidence</code></strong> drops the Medium cutoff and re-verifies everything.</li>
+<li><strong><code>nyx scan --unsafe-sandbox</code></strong> disables hardening (development only, never for CI).</li>
+<li><strong><code>nyx verify-feedback &lt;finding_id&gt; --wrong &lt;reason&gt; | --right</code></strong> records a correction or confirmation for a finding&#39;s verdict in the local telemetry log.</li>
+<li><strong><code>nyx scan --explain-engine</code></strong> prints the effective engine configuration and exits without scanning.</li>
+<li><strong><code>nyx surface</code></strong> (described above) with <code>--format {text,json,dot,svg}</code> and <code>--build</code>.</li>
+</ul>
+<h3 id="frontend"><a class="docs-anchor" href="#frontend" aria-label="Link to frontend" data-pagefind-ignore>#</a>Frontend</h3>
+<ul>
+<li><strong>Surface page</strong> with ELK auto-layout and the shared node-style palette.</li>
+<li><strong>Verdict badge</strong> on finding detail, plus a dynamic-verdict section that surfaces the verdict, the payload that triggered it, and a link to the repro bundle.</li>
+<li><strong>Scan compare</strong> gains a dynamic-verdict diff column so two scans can be compared on what was confirmed versus what was downgraded.</li>
+</ul>
+<h3 id="license"><a class="docs-anchor" href="#license" aria-label="Link to license" data-pagefind-ignore>#</a>License</h3>
+<ul>
+<li><strong>Internal license grants documentation</strong> at <code>LICENSE-GRANTS.md</code>. Grant 1 covers Nyctos derived works. The repo stays GPL-3.0-or-later; the grants document scope of internal product licensing.</li>
+</ul>
+<h2 id="070---2026-05-11"><a class="docs-anchor" href="#070---2026-05-11" aria-label="Link to 070---2026-05-11" data-pagefind-ignore>#</a>[0.7.0] - 2026-05-11</h2>
+<p>A focused release that adds seven new vulnerability classes, ships two SSA sidecars for XML and XPath parser hardening, deepens cross-file authorization for FastAPI, trims roughly a thousand auth false positives on Go DAO helpers along with the dominant Hibernate Criteria SQL cluster, and runs a performance pass on the auth extractor, SCCP, and the global summaries map. A <code>nyx rules list</code> CLI surfaces the rule registry, the web UI gets a brand-aligned visual refresh, and the CVE corpus grows across Python, PHP, JavaScript, and C.</p>
+<h3 id="highlights"><a class="docs-anchor" href="#highlights" aria-label="Link to highlights" data-pagefind-ignore>#</a>Highlights</h3>
+<ul>
+<li>New caps for LDAP injection, XPath injection, header / CRLF injection, open redirect, server-side template injection, XXE, and prototype pollution, with per-language label rules across all eight supported languages.</li>
+<li>Cross-file FastAPI authorization: <code>include_router</code> chains and module-level <code>APIRouter(dependencies=[…])</code> now lift onto every attached route, with <code>Security(..., scopes=[...])</code> recognised distinctly from <code>Depends(...)</code>.</li>
+<li>Type-tracked XML and XPath hardening through two new SSA sidecars: parser bodies that set <code>secure_processing</code> / <code>processEntities: false</code> / <code>resolve_entities=False</code>, and <code>XPath</code> instances bound to <code>setXPathVariableResolver(...)</code>, are recognised as safe.</li>
+<li>~957 <code>go.auth.missing_ownership_check</code> findings closed on gitea-shaped DAO helpers (id-scalar precision pass), 169 of 216 openmrs <code>cfg-unguarded-sink</code> findings closed on Hibernate Criteria-API receivers, joomla and drupal <code>php.deser.unserialize</code> closed on <code>Serializable::unserialize($input)</code> magic-method bodies.</li>
+<li><code>nyx rules list</code> CLI subcommand, brand-aligned <code>nyx serve</code> visual refresh, and regenerated README / docs screenshots and GIFs.</li>
+</ul>
+<h3 id="detector-classes"><a class="docs-anchor" href="#detector-classes" aria-label="Link to detector-classes" data-pagefind-ignore>#</a>Detector classes</h3>
+<ul>
+<li>New <code>Cap</code> bits and canonical rule ids: <code>Cap::LDAP_INJECTION</code> / <code>taint-ldap-injection</code>, <code>Cap::XPATH_INJECTION</code> / <code>taint-xpath-injection</code>, <code>Cap::HEADER_INJECTION</code> / <code>taint-header-injection</code>, <code>Cap::OPEN_REDIRECT</code> / <code>taint-open-redirect</code>, <code>Cap::SSTI</code> / <code>taint-template-injection</code>, <code>Cap::XXE</code> / <code>taint-xxe</code>, <code>Cap::PROTOTYPE_POLLUTION</code> / <code>taint-prototype-pollution</code>. Each ships per-language sink, sanitizer, and gated-sink rules across JS/TS, Python, Java, PHP, Go, Ruby, Rust, and C/C++. Severity, OWASP 2021 mapping, and human-readable description live in <code>CAP_RULE_REGISTRY</code> in <code>src/labels/mod.rs</code>; <code>cap_rule_meta()</code> and <code>rule_id_for_caps()</code> are the public lookups.</li>
+<li><code>Cap</code> widened from <code>u16</code> to <code>u32</code> to fit the new bits. <code>Evidence.sink_caps</code> and <code>RuleInfo.cap_bits</code> follow. The serde decoder accepts any unsigned integer width so caches written before the bump still load. SQLite schema bumped from 3 to 4 to force a rescan, since older <code>source_caps</code> / <code>sanitizer_caps</code> / <code>sink_caps</code> blobs were emitted before any of the new bits could appear.</li>
+<li><code>owasp_bucket_for</code> consults <code>CAP_RULE_REGISTRY</code> first so adding a cap class no longer requires a second-table edit. The match requires an exact rule id or a recognised separator (<code> </code>, <code>(</code>, <code>.</code>) so a future <code>taint-ssrf-allowlist-violation</code> cannot silently inherit <code>taint-ssrf</code>&#39;s bucket. The legacy family-token table now also routes <code>xpath</code>, <code>header</code>, and <code>xxe</code> to A03 / A05.</li>
+<li><code>issue_category_label</code> (dashboard badge) routes the seven new rule-id prefixes to dedicated labels: LDAP Injection, XPath Injection, Header Injection, Open Redirect, Template Injection, XXE, Prototype Pollution.</li>
+</ul>
+<h3 id="engine-2"><a class="docs-anchor" href="#engine-2" aria-label="Link to engine-2" data-pagefind-ignore>#</a>Engine</h3>
+<ul>
+<li><strong>XML-parser configuration tracking.</strong> <code>src/ssa/xml_config.rs</code> runs alongside type-fact analysis and carries per-receiver <code>secure_processing</code> / <code>disallow_doctype</code> / <code>external_entities</code> flags forward through copy assignments and phi joins (meet for safe flags, sticky union for the unsafe <code>external_entities</code> polarity). <code>xxe_safe()</code> queries the result at the type-qualified <code>XmlParser.parse</code> sink and strips <code>Cap::XXE</code> when the parser was provably hardened (JAXP <code>setFeature(FEATURE_SECURE_PROCESSING, true)</code>, lxml <code>XMLParser(resolve_entities=False, no_network=True)</code>, fast-xml-parser <code>processEntities: false</code>). Persisted to <code>OptimizeResult.xml_parser_config</code>.</li>
+<li><strong>XPath-receiver configuration tracking.</strong> <code>src/ssa/xpath_config.rs</code> mirrors the XML sidecar for Java&#39;s <code>XPath</code> instances: <code>setXPathVariableResolver(...)</code> flips the receiver&#39;s <code>has_resolver</code> flag, copy assignments union, phi joins meet. <code>xpath_safe()</code> strips <code>Cap::XPATH_INJECTION</code> at <code>xpath.evaluate(expr, ...)</code> / <code>xpath.compile(expr)</code> sinks when the receiver was provably bound to a resolver. Persisted to <code>OptimizeResult.xpath_config</code>.</li>
+<li><strong>Five new <code>TypeKind</code> variants.</strong> <code>LdapClient</code> (JNDI <code>InitialDirContext</code> / <code>InitialLdapContext</code>, Spring <code>LdapTemplate</code>, ldapjs <code>createClient</code>, python-ldap <code>initialize</code>, ldap3 <code>Connection</code>), <code>XPathClient</code> (JAXP <code>newXPath</code>, lxml <code>etree.XPath</code>, npm <code>xpath</code>), <code>XmlParser</code> (JAXP factory products: <code>newDocumentBuilder</code>, <code>newSAXParser</code>, <code>getXMLReader</code>), <code>Template</code> (FreeMarker <code>new Template(...)</code> / <code>Configuration.getTemplate</code>), and <code>NullPrototypeObject</code> for JS/TS values produced by <code>Object.create(null)</code>. Wired into <code>constructor_type</code> for return-type inference and <code>TypeKind::label_prefix()</code> for type-qualified callee resolution. <code>XPathClient</code> is kept distinct from <code>DatabaseConnection</code> so a generic <code>pdo-&gt;query</code> SQL_QUERY sink does not collide with <code>xpath.query</code>.</li>
+<li><strong><code>GateActivation::LiteralOnly</code>.</strong> Strict literal-value activation: the gate fires only when the activation argument is a literal that matches <code>dangerous_values</code> / <code>dangerous_prefixes</code>. Unknown or dynamic activation argument suppresses (no conservative <code>ALL_ARGS_PAYLOAD</code> push). Used where the dangerous shape is identifiable only by an explicit literal flag, e.g. <code>jQuery.extend(true, target, src)</code> deep-merge against Backbone&#39;s <code>Model.extend({proto})</code>.</li>
+<li><strong>Two new path-state predicates for inline open-redirect sanitisers.</strong> <code>RelativeUrlValidated</code> covers <code>x.startsWith(&quot;/&quot;)</code>, <code>x.starts_with(&quot;/&quot;)</code>, <code>x.startswith(&quot;/&quot;)</code>, PHP <code>strpos($x, &quot;/&quot;) === 0</code>, and direct <code>x[0] === &quot;/&quot;</code>. <code>HostAllowlistValidated</code> covers <code>new URL(x).host === ALLOWED</code>, <code>urlparse(x).netloc == ALLOWED</code>, multi-statement <code>parsed.host_str() == &quot;...&quot;</code> for Rust, and <code>parsed.Host == &quot;...&quot;</code> / <code>parsed.Hostname() == &quot;...&quot;</code> for Go. Both clear <code>Cap::OPEN_REDIRECT</code> only on the validated branch, leaving any non-redirect taint downstream to fire on its own caps. The Go form gates on case-sensitive capital <code>H</code> so a lowercase <code>u.host == X</code> field comparison falls through to the generic <code>Comparison</code> predicate.</li>
+<li><strong><code>Object.create(null)</code> recogniser.</strong> <code>is_object_create_null_call</code> in <code>cfg/literals.rs</code> matches <code>Object.create(null)</code> (and parenthesised, awaited, or TS type-cast wrappers) and tags <code>CallMeta.produces_null_proto = true</code>. Type-fact analysis lifts the flag to <code>TypeKind::NullPrototypeObject</code> on the returned SSA value so the synthetic <code>__index_set__</code> sink is suppressed flow-sensitively. Phi joins drop the tag back to <code>Unknown</code> so a partial null-proto receiver still fires on the unsafe path.</li>
+<li><strong>CFG-layer prototype-pollution suppression</strong> at the synthetic <code>__index_set__</code> sink (JS/TS, recognised by the existing <code>try_lower_subscript_write</code> lowering). Three flow-insensitive shapes elide the <code>Sink(PROTOTYPE_POLLUTION)</code> label before SSA sees the node: constant-key fold (literal key not in <code>__proto__</code> / <code>constructor</code> / <code>prototype</code>), reject pattern (sibling <code>if (idx === &quot;__proto__&quot; || ...) return / throw / break;</code>), and allowlist pattern (ancestor <code>if (idx === &quot;name&quot; || idx === &quot;id&quot;) { obj[idx] = v }</code>). Walks stop at the enclosing function so closure-captured guards in an outer scope cannot silently authorise inner assignments.</li>
+<li><strong>Spring MVC <code>return &quot;redirect:&quot; + tainted</code> recogniser</strong> (Java). <code>try_lower_spring_redirect_return</code> in <code>cfg/mod.rs</code> matches the leftmost <code>+</code>-chain whose root is a <code>redirect:</code> string literal and emits a synthetic <code>__spring_redirect__</code> Call sink with <code>Sink(Cap::OPEN_REDIRECT)</code> between the predecessors and the Return node. Concatenated identifiers from anywhere in the right-hand chain feed the synthetic node&#39;s <code>arg_uses[0]</code>, so the taint pipeline carries any tainted suffix through OPEN_REDIRECT.</li>
+<li><strong>Subscript-set form classification for header sinks.</strong> <code>response.headers[&quot;X-Foo&quot;] = bar</code> / <code>headers[&quot;X-Foo&quot;] = bar</code> (Ruby <code>element_reference</code>, JS/TS <code>subscript_expression</code>, Python <code>subscript</code>) had no <code>property</code> field on the LHS. <code>push_node</code> now walks into the subscript&#39;s <code>object</code> and classifies its member-expression text, so <code>Cap::HEADER_INJECTION</code> fires on the bare bracket form alongside <code>setHeader</code> / <code>res.set</code> / <code>headers_mut.insert</code>.</li>
+<li><strong>PHP literal extraction</strong> extended in <code>cfg/literals.rs</code>: PHP <code>encapsed_string</code> (double-quoted) when every child is a pure-literal segment; boolean literals (<code>true</code> / <code>false</code>) for the jQuery <code>extend(true, ...)</code> <code>LiteralOnly</code> gate; leading-string <code>binary_expression</code> concat (<code>&quot;Location: &quot; . $url</code>, JS/TS <code>&quot;Location: &quot; + url</code>) so <code>dangerous_prefixes</code> matching activates on partially dynamic concatenations.</li>
+<li><strong>PHP receiver-text strip</strong> in <code>helpers::root_receiver_text</code> drops the leading <code>$</code> from <code>variable_name</code> nodes so <code>$smarty-&gt;fetch(...)</code> / <code>$twig-&gt;createTemplate(...)</code> reconstruct as <code>Smarty.fetch</code> / <code>Environment.createTemplate</code> for suffix-matcher gates.</li>
+<li><strong>Gate-callee resolution hardening for member-source rewrites.</strong> When <code>first_member_label</code> rewrites a call&#39;s <code>text</code> to a Source like <code>req.body</code>, the gate matcher now reads the call&#39;s <code>function</code> / <code>method</code> / <code>name</code> field instead, so <code>setValue(target, req.body, ...)</code> matches the <code>setValue</code> proto-pollution gate. Whitespace stripped from the function field so multi-line chains still match flat gate matchers.</li>
+<li><strong>Ruby option-constant lookup in gate activation.</strong> Bare <code>scope_resolution</code> / <code>constant</code> nodes (<code>Nokogiri::XML::ParseOptions::NOENT</code>) now fall back to the macro-arg extractor used by C/C++/PHP, so Nokogiri XXE gates activate on idiomatic option-flag arguments.</li>
+<li><strong>PHP <code>unary_op_expression</code> negation recognition.</strong> tree-sitter-php emits <code>unary_op_expression</code> for unary <code>!</code>; CFG <code>detect_negation</code> and condition-chain decomposition now match it, so <code>if (!validate($x))</code> no longer carries <code>condition_negated=false</code> and the surviving branch is the rejection arm, not the validated one.</li>
+<li><strong>PHP container kinds.</strong> <code>declaration_list</code>, <code>interface_declaration</code>, <code>trait_declaration</code>, <code>enum_declaration</code>, <code>enum_declaration_list</code> mapped to <code>Kind::Block</code> so methods inside them participate in CFG construction.</li>
+<li><strong>Go variadic <code>parameter_declaration</code> named-field handling</strong> for <code>collect_param_names</code>. <code>name</code> and <code>type</code> named fields read directly so type-segment identifiers no longer pollute the param-name set (<code>info *PackageInfo</code> no longer contributes <code>PackageInfo</code>).</li>
+<li><strong>Empty-formals SSA lowering signal.</strong> Per-parameter summary probing now seeds via <code>BodyMeta.param_destructured_fields</code>; JS/TS arrow <code>() =&gt; {…}</code> lowers with <code>with_params=true</code> so it is treated as &quot;explicitly zero formals&quot; rather than &quot;no formals info&quot;.</li>
+</ul>
+<h3 id="authorization"><a class="docs-anchor" href="#authorization" aria-label="Link to authorization" data-pagefind-ignore>#</a>Authorization</h3>
+<ul>
+<li><strong>FastAPI cross-file <code>include_router</code> dependency tracking.</strong> <code>auth_analysis/router_facts.rs</code> captures per-file router declarations (<code>&lt;router&gt; = X(deps=[…])</code>) and <code>&lt;parent&gt;.include_router(&lt;child_module&gt;.&lt;child_var&gt;)</code> edges in pass 1, persists them into <code>GlobalSummaries::router_facts_by_module</code>, and resolves them into the active file&#39;s <code>AuthorizationModel::cross_file_router_deps</code> at pass 2 entry. Transitive lifts (grandparent to parent to child) handled by iterative index walk. Module identity is the file basename without <code>.py</code>. Closes the airflow execution-API shape where a child router lives in <code>routes/task_instances.py</code> and its auth is declared on the parent in <code>routes/__init__.py</code>.</li>
+<li><strong>FastAPI router-level <code>dependencies=[...]</code> propagation.</strong> Module-level <code>router = APIRouter(dependencies=[Security(...)])</code> is pre-walked once per file and merged onto every <code>@&lt;router&gt;.&lt;verb&gt;(...)</code> route attached in the same file. Closes airflow execution-API routes that re-use a single <code>ti_id_router</code> declared once at module scope.</li>
+<li><strong>FastAPI <code>Security(callable, scopes=[...])</code> recognised distinctly from <code>Depends(callable)</code>.</strong> Scoped Security promotes the synthetic <code>AuthCheck</code> to <code>AuthCheckKind::Other</code> (route-level scope-checked authorization), not Login. New scope-tracking boolean threaded through <code>expand_decorator_calls</code> and <code>extract_fastapi_dependencies</code>.</li>
+<li><strong>Caller-scope IPA: same-file route-handler-to-helper auth lift.</strong> <code>apply_caller_scope_propagation</code> walks every non-route helper unit; if its in-file callers are non-empty AND every caller is itself an authorized route handler (route-level non-Login auth check) or already authorized via this same propagation, the caller&#39;s checks lift onto the helper as synthetic <code>is_route_level=true</code> <code>AuthCheck</code>s. Iterated to a small fixpoint so transitive helper chains (route to mid_helper to leaf_helper) are covered. Refuses to authorize helpers with no in-file caller, helpers called from a mix of authorized and unauthorized callers, and helpers called only from un-lifted helpers. Cross-file lifting is not implemented. Closes the dominant FastAPI / Django / Flask &quot;route authenticates via decorator/dependency, then delegates to a private helper that performs the sink&quot; FP shape on sentry / saleor / airflow.</li>
+<li><strong>Go DAO-helper id-scalar precision pass.</strong> For non-route Go units, a parameter whose declared type is a bounded primitive scalar (<code>int64</code>, <code>uint32</code>, <code>string</code>, <code>bool</code>, <code>byte</code>, <code>rune</code>, <code>float64</code>, …) and whose name is id-shaped (<code>id</code>, <code>*Id</code>, <code>*_id</code>, <code>*ids</code>) is dropped from <code>unit.params</code> before ownership-check evaluation. Real Go HTTP handlers always carry a framework-request-typed param (<code>*http.Request</code>, <code>*gin.Context</code>, <code>echo.Context</code>, <code>*fiber.Ctx</code>); per-framework route extractors set <code>include_id_like_typed=true</code> so id-shaped path params survive on real routes. Mirrors the existing Python <code>is_python_id_like_typed_param</code> filter. Closes ~957 <code>go.auth.missing_ownership_check</code> findings on gitea backend DAO helpers (<code>func GetRunByRepoAndID(ctx, repoID, runID int64)</code>, <code>func DeleteRunner(ctx, id int64)</code>, the entire <code>models/...</code> layer where the ownership check sits in the calling route handler) and equivalent shapes in minio / Go ORM codebases.</li>
+<li><strong>Bare-callee verb-name fallback gate.</strong> <code>list(...)</code>, <code>filter(...)</code>, <code>update(...)</code>, <code>create_audit_entry(...)</code>, <code>update_coding_agent_state(...)</code> (no receiver dot at all) no longer classify as <code>DbMutation</code> / <code>DbCrossTenantRead</code> via the loose verb-name fallback. Real ORM/DB calls carry a receiver (<code>User.find(id)</code>, <code>Model.objects.filter</code>, <code>repo.save(x)</code>); a bare <code>list(events)</code> is the Python builtin and <code>filter(fn, xs)</code> is <code>Iterable.filter</code>. New helper <code>receiver_is_simple_chain(callee)</code> requires a non-chained receiver dot. The realtime / outbound / cache prefix dispatches still match by chain root.</li>
+</ul>
+<h3 id="type-aware-sinks-and-validators"><a class="docs-anchor" href="#type-aware-sinks-and-validators" aria-label="Link to type-aware-sinks-and-validators" data-pagefind-ignore>#</a>Type-aware sinks and validators</h3>
+<ul>
+<li><strong>Java JPA / Hibernate Criteria API as structural SQL.</strong> <code>TypeKind::JpaCriteriaQuery</code> covers <code>CriteriaQuery&lt;T&gt;</code>, <code>CriteriaUpdate&lt;T&gt;</code>, <code>CriteriaDelete&lt;T&gt;</code>, <code>Subquery&lt;T&gt;</code>, <code>TypedQuery&lt;T&gt;</code>. <code>sink_args_jpa_criteria_query_safe</code> clears <code>cfg-unguarded-sink</code> SQL_QUERY when any positional argument to the sink call is JpaCriteriaQuery-typed (receiver excluded; receiver of <code>session.createQuery(cq)</code> is the Session/EntityManager channel, never the SQL payload). <code>cb.createQuery(...)</code>, <code>em.getCriteriaBuilder()</code>, and the JpaCriteriaQuery type chain inferred via constructor / factory return-type hints in <code>type_facts.rs</code>. Closes the dominant FP cluster on openmrs (169 of 216 cfg-unguarded-sink), xwiki, and keycloak Hibernate DAO methods.</li>
+<li><strong>Receiver-side validator registry.</strong> <code>labels::lookup_receiver_validator(lang, callee)</code> clears <code>Cap</code> from the receiver value (and call equivalents) on success, distinct from <code>Sanitizer</code> which clears caps from the return value. Python registers <code>relative_to =&gt; Cap::FILE_IO</code> so <code>path.relative_to(base)</code> drops the file-IO cap on the path. Closes the CVE-2024-23334 patched aiohttp <code>static_root_path.joinpath(filename).resolve().relative_to(static_root_path)</code> shape.</li>
+<li><strong>JS/TS Array-method validator-callback narrowing.</strong> <code>arr.filter(isSafeIdentifier)</code>, <code>arr.find(isValidId)</code>, <code>arr.findLast(...)</code> with a <code>BooleanTrueIsValid</code> callback (<code>isValid…</code>, <code>isSafe…</code>, <code>hasValid…</code> and snake-case variants) propagate <code>validated_must</code> through the call&#39;s return value. Resolves callback name from <code>info.arg_callees</code> (call-shape arguments) and SSA <code>value_defs[v].var_name</code> (bare-identifier callbacks, the dominant patched-CVE form). Strict-additive: anonymous arrows / opaque identifiers leave existing propagation untouched. <code>findIndex</code> / <code>every</code> / <code>some</code> excluded (scalar return shape). Motivated by CVE-2026-42353.</li>
+<li><strong>JS/TS ternary-branch source classification.</strong> <code>let arr = cond ? req.query.lng : &quot;&quot;;</code> previously lowered each branch to a labelless Assign with empty uses; the join phi saw no taint. <code>lower_ternary_branch</code> now runs <code>first_member_label</code> on the branch AST when no <code>Source</code> label is already attached.</li>
+<li><strong>PHP <code>fopen</code> modeled as <code>Sink(Cap::SSRF)</code></strong> (same dual SSRF / LFI shape as <code>file_get_contents</code>; fires only on tainted argument). Closes CVE-2026-33486 (roadiz/documents <code>DownloadedFile::fromUrl</code> wrapping <code>fopen($url, &#39;r&#39;)</code>).</li>
+<li><strong>PHP <code>Serializable::unserialize($input)</code> magic-method passthrough recognition.</strong> The legacy <code>Serializable</code> interface contract (deprecated since PHP 8.1) requires the implementation to call <code>\unserialize($input)</code> on the formal parameter inside <code>public function unserialize($x) { ... }</code>. PHP itself invokes the method when restoring an instance, so the body&#39;s call cannot be removed without breaking the interface. <code>php.deser.unserialize</code> now suppresses inside this exact shape (method named <code>unserialize</code>, single formal, bare-parameter argument). Class-level <code>Serializable</code> implementation is the actionable signal (fix is migration to <code>__serialize</code> / <code>__unserialize</code>). Closes joomla / drupal Serializable-implementing class FPs.</li>
+<li><strong>SQLAlchemy query-builder chained-call recognition.</strong> <code>select(X).filter_by(...)</code>, <code>query(X).filter(...)</code>, <code>select().join().where()</code> chains now anchor through the chain root primitive when the chain receiver type is opaque. New <code>db_query_builder_roots</code> config (Python defaults: <code>select</code>, <code>query</code>). Closes airflow <code>session.scalar(select(C).filter_by(conn_id=user_input))</code> shapes that previously dropped under the chained-call suppression in <code>classify_sink_class</code>.</li>
+<li><strong>Python non-sink container constructor recognition.</strong> Bare-callee <code>set()</code> / <code>dict()</code> / <code>list()</code> / <code>tuple()</code> / <code>frozenset()</code> / <code>defaultdict(...)</code> is treated as a non-sink constructor, so <code>verified_ids = set(); verified_ids.update(myteams)</code> does not classify the <code>.update</code> call as <code>DbMutation</code>. Type-annotation hint form <code>set[int]</code> / <code>dict[str, int]</code> recognised via PEP 585 generic suffix strip alongside the existing angle-bracket strip.</li>
+<li><strong>Python <code>request.match_info</code> source label</strong> (aiohttp path-parameter source).</li>
+<li><strong>New Python pattern <code>py.xss.make_response_format</code> (Tier B).</strong> Flask <code>make_response(&lt;f-string-or-concat&gt;)</code> reflection. Recognises both bare <code>make_response(...)</code> and <code>flask.make_response(...)</code>. Closes CVE-2023-6568 (mlflow auth <code>create_user</code> reflecting attacker-controlled <code>Content-Type</code> header into the response body).</li>
+</ul>
+<h3 id="language-coverage"><a class="docs-anchor" href="#language-coverage" aria-label="Link to language-coverage" data-pagefind-ignore>#</a>Language coverage</h3>
+<p>Per-language label rules expanded for the seven new caps.</p>
+<ul>
+<li><strong>JavaScript / TypeScript:</strong> ldapjs <code>LdapClient.search</code>, <code>escapeXpath</code> / <code>xpathEscape</code>, <code>document.evaluate</code> / npm <code>xpath.select</code>, <code>setHeader</code> / <code>res.set</code> / <code>res.append</code> / <code>res.headers[]=</code>, <code>stripCRLF</code> / <code>escapeHeader</code>, lodash / dot-prop / object-path deep-merge prototype-pollution gates, Handlebars / EJS / Mustache template sinks, fast-xml-parser / xml2js with <code>processEntities</code>-aware activation, <code>redirect</code> / <code>Location</code> open-redirect sinks.</li>
+<li><strong>Python:</strong> python-ldap <code>LDAPObject.search_s</code>, ldap3 <code>Connection.search</code>, lxml <code>etree.XPath</code> / <code>lxml.etree.parse</code> with parser-config awareness, Flask <code>response.headers[]=</code> / <code>make_response</code>, Jinja2 <code>Template(...)</code> and Mako <code>Template(...)</code> SSTI sinks, <code>flask.redirect</code> / <code>aiohttp HTTPFound</code> open-redirect.</li>
+<li><strong>Java / Kotlin:</strong> <code>DirContext.search</code>, <code>XPath.evaluate</code> / <code>XPath.compile</code>, JAXP <code>DocumentBuilder.parse</code> / <code>SAXParser.parse</code> / <code>XMLReader.parse</code>, FreeMarker <code>Template.process</code>, Spring <code>redirect:</code> view-name synthetic sink, <code>HttpServletResponse.setHeader</code> / <code>addHeader</code>.</li>
+<li><strong>PHP:</strong> <code>ldap_search</code> / <code>ldap_list</code> / <code>ldap_read</code>, <code>DOMXPath::query</code> / <code>DOMXPath::evaluate</code>, <code>header()</code> with leading-prefix activation, Smarty <code>fetch</code> / Twig <code>createTemplate</code> / Blade compile + <code>eval</code> template forms, <code>loadXML</code> / <code>simplexml_load_string</code> with <code>LIBXML_NOENT</code> activation.</li>
+<li><strong>Go:</strong> <code>go-ldap conn.Search</code>, <code>etree.Path</code> / <code>xmlpath.Compile</code>, <code>http.Header.Set</code> / <code>Response.Header().Set</code>, <code>html/template</code> and <code>text/template</code> <code>Parse(...)</code>, <code>encoding/xml.Unmarshal</code> / <code>Decoder.Decode</code>, <code>http.Redirect</code> with relative-URL / host-allowlist gating.</li>
+<li><strong>Ruby:</strong> <code>Net::LDAP#search</code>, <code>Nokogiri::XML::Document#xpath</code>, <code>response.headers[]=</code>, <code>ERB.new</code> SSTI, <code>Nokogiri::XML.parse</code> with <code>NOENT</code> / <code>DTDLOAD</code> activation, <code>redirect_to</code> with relative-URL gate.</li>
+<li><strong>C / C++:</strong> libldap <code>ldap_search_ext_s</code>, libxml2 <code>xmlXPathEval</code>, <code>curl_easy_setopt</code> with header-list activation, libxml2 <code>xmlReadFile</code> / <code>xmlReadMemory</code> with <code>XML_PARSE_NOENT</code> activation.</li>
+<li><strong>Rust:</strong> actix-web <code>HeaderMap.insert</code> / <code>HeaderValue::from_str</code> header-injection gates. <code>Redirect::to</code> retagged from <code>Cap::SSRF</code> to <code>Cap::OPEN_REDIRECT</code> so the open-redirect rule fires distinctly from the SSRF rule.</li>
+</ul>
+<p><code>NYX_PYTHON_PROTO_POLLUTION</code> opt-in flag: Python <code>dict.update</code> / <code>__dict__.update</code> proto-pollution gates are off by default because bare <code>update</code> overlaps too broadly with <code>Counter.update</code> and ordinary state-mutation patterns to ship as a default sink.</p>
+<h3 id="cve-corpus"><a class="docs-anchor" href="#cve-corpus" aria-label="Link to cve-corpus" data-pagefind-ignore>#</a>CVE corpus</h3>
+<ul>
+<li><strong>C.</strong> CVE-2017-1000117 (git argv injection via <code>ssh://-oProxyCommand=…</code>) vulnerable + patched fixtures under <code>tests/benchmark/cve_corpus/c/CVE-2017-1000117/</code>. Known remaining gap: array-element taint propagation, <code>c.cmdi.exec*</code> AST patterns, and dash-prefix-byte sanitizer recognition.</li>
+<li><strong>Python.</strong> CVE-2023-6568 (mlflow reflected XSS), CVE-2024-21513 (langchain SQL / Jinja), CVE-2024-23334 (aiohttp static-file path traversal) vulnerable + patched fixtures.</li>
+<li><strong>PHP.</strong> CVE-2026-33486 (roadiz/documents SSRF) vulnerable + patched fixtures.</li>
+<li><strong>JavaScript.</strong> CVE-2026-42353 (i18next-http-middleware path traversal) vulnerable + patched fixtures.</li>
+</ul>
+<h3 id="cli-2"><a class="docs-anchor" href="#cli-2" aria-label="Link to cli-2" data-pagefind-ignore>#</a>CLI</h3>
+<ul>
+<li><strong><code>nyx rules list</code></strong> subcommand. Surfaces the same registry the dashboard&#39;s <code>/api/rules</code> page reads from: built-in cap-class entries (one per <code>Cap</code> with a canonical rule id), per-language label rules (sink / source / sanitizer), gated sinks, and any custom rules from config. Filters: <code>--lang &lt;slug&gt;</code>, <code>--kind &lt;class|source|sink|sanitizer&gt;</code>, <code>--class-only</code> for registry entries only, <code>--no-class</code> for per-language rules only. <code>--json</code> for machine output. Cap-class entries carry <code>language = &quot;all&quot;</code> so a language filter still surfaces them unless <code>--no-class</code> is set.</li>
+<li><strong><code>RuleInfo.is_class</code> / <code>RuleInfo.emission_active</code> flags.</strong> Cap-class entries carry <code>is_class = true</code> so dashboards can group them separately. <code>emission_active = false</code> marks legacy classes (SQL_QUERY, SSRF, FILE_IO, FMT_STRING, DESERIALIZE, CODE_EXEC, CRYPTO) whose findings still surface under the catch-all <code>taint-unsanitised-flow</code> rule id; the seven new classes plus <code>unauthorized_id</code> and <code>data_exfil</code> are <code>emission_active = true</code>. The active set is pinned in <code>cap_rule_registry_emission_active_set_is_pinned</code> so a future migration of a legacy cap cannot drift silently.</li>
+<li><strong><code>parse_cap</code> and <code>CapName::FromStr</code></strong> accept the new short names: <code>ldap_injection</code> / <code>ldapi</code>, <code>xpath_injection</code> / <code>xpathi</code>, <code>header_injection</code> / <code>crlf</code> / <code>response_splitting</code>, <code>open_redirect</code> / <code>redirect</code>, <code>ssti</code> / <code>template_injection</code>, <code>xxe</code>, <code>prototype_pollution</code> / <code>proto_pollution</code>, plus the existing <code>data_exfil</code> alias. The <code>nyx config add-rule --cap</code> flag and <code>[analysis.languages.*.rules]</code> entries take any of these.</li>
+</ul>
+<h3 id="frontend-2"><a class="docs-anchor" href="#frontend-2" aria-label="Link to frontend-2" data-pagefind-ignore>#</a>Frontend</h3>
+<ul>
+<li><strong>Refreshed local web UI visual system</strong> around the mint-cyan Nyx brand: warmer light surfaces, deep green accents, updated severity / confidence colors, tighter typography, smaller radii, denser cards, table, badge, button, header, and sidebar styling, and matched graph / code-viewer colors.</li>
+<li><strong>Reworked <code>nyx serve</code> surfaces</strong> for a more operational layout. Overview uses the refreshed health-score card and chart grid; Scans has a fixed compact table with capped language badges; Scan Detail places summary and timing data side by side; Triage, Rules, Config, Explorer, Finding Detail, Scan Compare, and Debug pages received focused spacing, overflow, and density fixes.</li>
+<li><strong>Branded asset set</strong> shared between the SPA and the embedded server bundle: PNG favicons, Apple touch icon, sidebar logo image, refreshed SVG favicon, and Rust static handlers for the new <code>/logo.png</code> and favicon files.</li>
+<li><strong>Frontend <code>RuleListItem</code> and <code>RuleDetailView</code></strong> carry the new <code>is_class</code> flag so the dashboard&#39;s Rules page can group cap-class entries separately.</li>
+<li><strong>Regenerated README and docs screenshots and GIFs</strong> against the new UI at 1600x992, saving raw originals before framing and adding CLI GIF plus combined CLI-to-serve demo GIF capture support. Extended the screenshot capture workflow with mint-led framing copy, optional <code>nyxscan.dev</code> asset mirroring, WebP regeneration for mirrored PNGs, and raw <code>_raw</code> image / GIF outputs for downstream reuse.</li>
+</ul>
+<h3 id="performance"><a class="docs-anchor" href="#performance" aria-label="Link to performance" data-pagefind-ignore>#</a>Performance</h3>
+<ul>
+<li><strong>Hoisted <code>collect_top_level_units</code> out of the per-extractor loop</strong> in <code>extract_authorization_model</code>. Multi-extractor languages (Go gin+echo, JS/TS express+koa+fastify, Python flask+django, Rust axum+actix_web+rocket, Ruby sinatra) had been re-walking the entire AST and rebuilding the <code>Function</code>-kind unit set per extractor, then deduping by span. New <code>AuthExtractor::requires_top_level_units()</code> opt-out for Spring / Rails which build their own. Was 46% of <code>extract_authorization_model</code> wall-clock on the mattermost/server/channels/app subtree.</li>
+<li><strong>Single <code>AuthorizationModel</code> build per file in fused mode.</strong> The diag path and the per-file summary path each ran their own <code>extract_authorization_model</code>, duplicating the hoisted unit pass and every framework extractor&#39;s AST walk. Auth summaries now extract from the base model (pre var-types, pre helper-lifting) so the persisted per-file summary matches the legacy <code>extract_auth_summaries_by_key</code> path bit-for-bit.</li>
+<li><strong>O(N) shallow value-ref emission in <code>collect_unit_state</code>.</strong> The previous per-node <code>extract_value_refs(node, bytes)</code> walked the entire subtree on every recursion level (O(N²) per body) even though the recursion below already visits every descendant once. New <code>append_shallow_value_ref</code> emits the node&#39;s own ref and lets recursion handle the descent. Public callers of <code>extract_value_refs</code> (<code>collect_call</code>, <code>collect_condition</code>, assignment-side extraction) keep the deep walk. Was ~17% + 15% + 11% of wall-clock split across <code>build_function_unit_with_meta</code>, <code>collect_unit_state</code>, and <code>extract_value_refs</code> on mattermost.</li>
+<li><strong>Per-<code>ParsedFile</code> <code>body_const_facts_cache: OnceCell</code>.</strong> SSA + const-prop + type-fact build was running 2-3× per body across <code>run_cfg_analyses_with_lowered</code>, <code>run_auth_analyses</code>, and <code>collect_file_var_types</code>. Single-pass cache; gin profile dropped from 13.6% to ~4.5%.</li>
+<li><strong>SCCP switched from <code>HashMap&lt;SsaValue, _&gt;</code> and <code>HashSet&lt;(BlockId, BlockId)&gt;</code></strong> to dense <code>Vec</code> per-value lattice and per-destination predecessor <code>SmallVec&lt;[BlockId; 2]&gt;</code>. The inner fixed-point loop no longer SipHashes a 64-bit pair for every operand of every phi. Public <code>ConstPropResult</code> shape unchanged (one final O(num_values) HashMap conversion).</li>
+<li><strong><code>GlobalSummaries.by_key</code> switched to <code>FxHashMap</code></strong> (rustc-hash 2.1) from stdlib SipHash. <code>FuncKey</code> carries 3 String fields, so any HashMap operation hashes at least 30 bytes; FxHash is ~5× faster on this workload. Seed is fixed (no DoS hardening), fine for an in-process index keyed by program-derived names.</li>
+<li><code>large_go_module.go</code> perf fixture (1493 lines) added to <code>benches/perf_fixtures/</code>; <code>benches/scan_bench.rs</code> extended with auth-extractor, SCCP, and summary-resolution rows.</li>
+</ul>
+<h3 id="fixed-false-positives"><a class="docs-anchor" href="#fixed-false-positives" aria-label="Link to fixed-false-positives" data-pagefind-ignore>#</a>Fixed (false positives)</h3>
+<ul>
+<li><code>Object.create(null)</code> receivers no longer fire prototype-pollution at the synthetic <code>__index_set__</code> sink. Suppression is flow-sensitive via <code>TypeKind::NullPrototypeObject</code> so a phi join that only sometimes resolves to a null-proto receiver still fires on the unsafe path.</li>
+<li><code>cfg-unguarded-sink</code> over-fires on JS/TS object-literal property writes guarded by an explicit <code>__proto__</code> / <code>constructor</code> / <code>prototype</code> reject <code>if</code> (early <code>return</code> / <code>throw</code> / <code>break</code>) or by an allowlist <code>if</code> whose true arm contains the assignment. Resolved at the CFG layer before the SSA sink scan.</li>
+<li>Spring MVC <code>return &quot;redirect:&quot; + url</code> flagged generic <code>taint-unsanitised-flow</code> even when the redirect destination was the load-bearing taint. Now routed through the synthetic <code>__spring_redirect__</code> sink so the finding emerges as <code>taint-open-redirect</code>.</li>
+<li><code>$smarty-&gt;fetch(...)</code> / <code>$twig-&gt;createTemplate(...)</code> no longer drop their SSTI gate match on idiomatic PHP receiver shapes.</li>
+<li><code>setValue(target, req.body, ...)</code> and similar wrappers no longer gate-match on the rewritten Source <code>req.body</code> text.</li>
+<li>Nokogiri / lxml / fast-xml-parser parser bodies hardened with <code>setFeature</code> / <code>processEntities: false</code> / <code>XMLParser(resolve_entities=False)</code> no longer fire <code>taint-xxe</code>.</li>
+<li><code>XPath</code> instances bound to <code>setXPathVariableResolver(...)</code> no longer fire <code>taint-xpath-injection</code> on subsequent <code>xpath.evaluate(expr, ...)</code> sinks.</li>
+<li>Inline <code>if (!url.startsWith(&quot;/&quot;)) reject</code> and <code>if (new URL(url).host !== ALLOWED) reject</code> open-redirect sanitisers narrow <code>Cap::OPEN_REDIRECT</code> on the validated branch instead of falling through to the generic <code>Comparison</code> predicate. Other taint downstream still fires on its own caps.</li>
+<li>Rust <code>Redirect::to</code> no longer fires <code>taint-ssrf</code> for what is structurally an open redirect; retagged to <code>Cap::OPEN_REDIRECT</code>.</li>
+<li>~957 gitea backend DAO <code>go.auth.missing_ownership_check</code> findings (id-scalar precision pass).</li>
+<li>169 of 216 openmrs <code>cfg-unguarded-sink</code> findings (JpaCriteriaQuery type). Equivalent reductions on xwiki / keycloak Hibernate DAO clusters.</li>
+<li>joomla and drupal <code>php.deser.unserialize</code> flagged inside <code>Serializable::unserialize($input)</code> magic-method bodies.</li>
+<li>airflow execution-API routes flagged <code>missing_ownership_check</code> despite being authorized via cross-file <code>include_router</code> chains and module-level <code>APIRouter(dependencies=[…])</code> declarations.</li>
+<li>sentry <code>verified_ids = set(); verified_ids.update(myteams)</code> flagged as <code>DbMutation</code>.</li>
+<li>aiohttp <code>path.relative_to(static_root_path)</code> not recognised as a path-traversal validator.</li>
+<li>i18next-http-middleware <code>arr.filter(utils.isSafeIdentifier)</code> not narrowing taint on the result.</li>
+<li><code>cond ? req.query.lng : &quot;&quot;</code> ternary lost <code>Source</code> label on the truthy branch.</li>
+<li><code>if (!validate($x))</code> rejection-arm narrowing flipped on PHP unary <code>!</code>.</li>
+<li>mlflow <code>make_response(f&quot;Invalid content type: &#39;{content_type}&#39;&quot;)</code> (Tier B pattern).</li>
+<li>Bare-callee verb-name dispatch on Python builtins / locally-defined helpers (<code>list</code>, <code>filter</code>, <code>update</code>, <code>create_audit_entry</code>, <code>update_coding_agent_state</code>).</li>
+<li>FastAPI <code>Depends(...)</code> / <code>Security(...)</code> deps declared on a module-level <code>APIRouter</code> no longer dropped on every attached route.</li>
+<li>FastAPI <code>Security(callable, scopes=[...])</code> no longer downgraded to a Login-only check.</li>
+</ul>
+<h3 id="tests"><a class="docs-anchor" href="#tests" aria-label="Link to tests" data-pagefind-ignore>#</a>Tests</h3>
+<ul>
+<li>New per-cap integration suites: <code>tests/{xpath_injection,xxe,ssti,prototype_pollution,header_injection,open_redirect,ldap_injection}_tests.rs</code>, plus <code>python_proto_pollution_tests.rs</code> for the env-gated Python form. Per-cap fixture trees under <code>tests/fixtures/&lt;class&gt;/&lt;lang&gt;/</code> cover safe, unsafe, and irrelevant-baseline shapes for every supported language.</li>
+<li>Cross-file FastAPI integration test <code>tests/fastapi_cross_file_include_router_tests.rs</code> with airflow-shaped fixture tree under <code>tests/fixtures/auth_cross_file/airflow_execution_api_includes/</code>.</li>
+<li>New <code>cfg/cfg_tests.rs</code> covers ternary-branch CFG lowering shapes.</li>
+<li>New <code>summary/tests.rs</code> covers cross-file <code>include_router</code> summary persistence and resolution.</li>
+<li>Per-language safe / vuln auth and detector fixtures across Python, Java, Go, PHP, JS, TS.</li>
+</ul>
+<h3 id="other"><a class="docs-anchor" href="#other" aria-label="Link to other" data-pagefind-ignore>#</a>Other</h3>
+<ul>
+<li>Refactor passes across <code>auth_analysis</code>, <code>ssa/const_prop</code>, <code>ssa/type_facts</code>, <code>summary</code>, and the per-framework auth extractors (cleaner conditional checks, simpler function signatures, deduplicated assertions). No behaviour change.</li>
+<li>README links to a Simplified Chinese translation (<code>README.zh-CN.md</code>).</li>
+</ul>
+<h2 id="061---2026-05-03"><a class="docs-anchor" href="#061---2026-05-03" aria-label="Link to 061---2026-05-03" data-pagefind-ignore>#</a>[0.6.1] - 2026-05-03</h2>
+<p>A precision pass on auth and resource analysis plus three fresh CVE corpus pairs, plus a UTF-8 slice panic in the path abstract domain. Closes ~1900 Go auth FPs on gitea-shaped helpers, the mastodon/diaspora private-callback Ruby controller pattern, and a phantom-taint outbreak from JS/TS / Java lambda shorthand in jest-style nested test callbacks.</p>
+<h3 id="added"><a class="docs-anchor" href="#added" aria-label="Link to added" data-pagefind-ignore>#</a>Added</h3>
+<ul>
+<li>Java JDBC raw-SQL sinks. <code>Statement.execute</code>, <code>Statement.executeBatch</code>, and <code>Statement.executeLargeUpdate</code> modeled as <code>SQL_QUERY</code> sinks, classified via type-qualified resolution (<code>DatabaseConnection.execute</code>) so bare <code>execute</code> (Runnable, Executor, HttpClient) does not over-fire. <code>conn.createStatement()</code> and <code>conn.prepareCall()</code> now infer return type <code>DatabaseConnection</code>, so the JDBC chain <code>Statement s = conn.createStatement(); s.execute(q)</code> types <code>s</code> correctly. Closes GHSA-h8cj-hpmg-636v (Appsmith FilterDataServiceCE.dropTable). Vulnerable + patched Java fixtures added.</li>
+<li>Java/Kotlin <code>Pattern.matcher(value).matches()</code> chain recognised as a <code>ValidationCall</code> allowlist. Receiver of <code>.matcher(</code> must contain <code>regex</code> or <code>pattern</code>. Validation target is the <code>.matcher()</code> argument, not the bare <code>.matches()</code> receiver. Branch narrowing applies the <code>validated_must</code> to the input variable on the surviving branch. Same GHSA as above (<code>FILTER_TEMP_TABLE_NAME_PATTERN.matcher(tableName).matches()</code>).</li>
+<li>Per-parameter SSA summary probe now receives <code>BodyMeta.param_types</code>, so <code>extract_ssa_func_summary</code> runs a local <code>analyze_types_with_param_types</code> pass before extraction. Helper bodies whose sinks resolve only via type-qualified callees (e.g. <code>DatabaseConnection.execute</code> for JDBC <code>Statement.execute</code>) no longer drop the sink during cross-function summary extraction. Fixes the Appsmith helper <code>executeDbQuery(query)</code> that routed SQL through <code>statement.execute(query)</code>.</li>
+<li>Short-circuit branch condition CFG nodes now mirror <code>condition_vars</code> into <code>taint.uses</code>, so <code>apply_branch_predicates</code> interns the variable for short-circuit-decomposed validators (<code>if (x == null || !regex.matcher(x).matches()) throw</code>). Without this, the per-disjunct cond nodes built via <code>build_condition_chain</code> silently no-opped and <code>x</code> never reached <code>validated_must</code> on the surviving branch.</li>
+<li>Go <code>goqu.L(s)</code> and <code>goqu.Lit(s)</code> raw-SQL literal builders modeled as <code>SQL_QUERY</code> sinks. Safe siblings (<code>goqu.I</code> identifier, <code>goqu.C</code> column, <code>goqu.T</code> table, <code>goqu.V</code> parameterised value, <code>goqu.SUM</code>, <code>goqu.COUNT</code>, …) stay unlabeled. Gin source list extended with the array-returning siblings of the existing scalar helpers: <code>c.QueryArray</code>, <code>c.GetQueryArray</code>, <code>c.PostFormArray</code>, <code>c.GetPostFormArray</code>. Closes CVE-2026-41422 (daptin: <code>c.QueryArray(&quot;column&quot;)</code> → <code>goqu.L(project)</code> with the loop variable lifted through <code>for _, project := range columns</code>). Vulnerable + patched Go corpus pair under <code>tests/benchmark/cve_corpus/go/CVE-2026-41422/</code>.</li>
+<li>Go <code>for ident := range iter</code> def-use lifting. The <code>range_clause</code> child of <code>for_statement</code> is now consulted when <code>left</code>/<code>right</code> aren&#39;t direct fields of the <code>for</code> node, so taint from the iterable reaches the loop binding. Required for the daptin CVE shape above.</li>
+<li>Rust format-string named-argument lifting (<code>format!(&quot;...{x}...&quot;)</code>, stable since 1.58). Identifiers captured by <code>{name}</code> / <code>{name:fmt-spec}</code> are pulled into the call&#39;s <code>uses</code> for known format-style macros: <code>format</code>, <code>print</code>/<code>println</code>, <code>eprint</code>/<code>eprintln</code>, <code>write</code>/<code>writeln</code>, <code>panic</code>, <code>format_args</code>, <code>assert</code>/<code>debug_assert</code>, <code>todo</code>, <code>unimplemented</code>, <code>unreachable</code>, plus log-crate severity macros (<code>info</code>, <code>warn</code>, <code>error</code>, <code>debug</code>, <code>trace</code>). Recursive descent through one or two layers of expression wrapping (<code>format!(&quot;{x}&quot;).to_owned()</code>, RHS chained method calls). Without this, taint stopped at the macro boundary. <code>let q = format!(&quot;...{x}...&quot;)</code> carried no <code>x</code> because the identifier lives in format-string bytes rather than as a separate AST argument node. Mirrors the Python f-string lifter.</li>
+<li>Rust CVE corpus extended. CVE-2023-42456, CVE-2024-32884, CVE-2025-53549 vulnerable + patched fixtures under <code>tests/benchmark/cve_corpus/rust/</code>.</li>
+<li>Java lambda shorthand recognised by <code>extract_param_meta</code>. <code>lambda_expression</code>&#39;s <code>parameters</code> field as a bare <code>identifier</code> (<code>cmd -&gt; …</code>) or as an <code>inferred_parameters</code> wrapper around identifiers (<code>(a, b) -&gt; …</code>) was not matching the formal_parameter / spread_parameter kinds in <code>PARAM_CONFIG</code>, so the lambda appeared parameterless and the SSA pipeline treated its formals as closure captures. Mirrors the JS/TS arrow shorthand path.</li>
+</ul>
+<h3 id="fixed"><a class="docs-anchor" href="#fixed" aria-label="Link to fixed" data-pagefind-ignore>#</a>Fixed</h3>
+<ul>
+<li>Panic on non-ASCII input to <code>has_first_char_absolute_check</code> in the path abstract domain. The 32-byte search window around <code>[0]</code> was sliced as <code>&amp;clause[lo..hi]</code> (str), which panicked when <code>hi</code> landed inside a multi-byte UTF-8 char (e.g. the em dash <code>—</code>, bytes 34..37). Switched to <code>&amp;bytes[lo..hi]</code> with <code>windows()</code> byte-pattern checks; all needles are ASCII so the searches are equivalent. Surfaced by <code>cargo fuzz</code> (<code>scan_bytes</code> target, <code>.c</code> extension path, embedded <code>—</code> in a comment near <code>s[0] == &#39;/&#39;</code>). Regression test added.</li>
+</ul>
+<h3 id="fixed-false-positives-2"><a class="docs-anchor" href="#fixed-false-positives-2" aria-label="Link to fixed-false-positives-2" data-pagefind-ignore>#</a>Fixed (false positives)</h3>
+<ul>
+<li>Go <code>unit_has_user_input_evidence</code> framework-request-name allow-list narrowed for Go. <code>ctx</code>, <code>context</code>, <code>info</code>, <code>body</code>, <code>path</code>, <code>payload</code>, <code>dto</code>, <code>form</code>, <code>query</code> are no longer treated as user-input indicators on Go: in Go these are <code>context.Context</code> (cancellation/value-bag from the stdlib) or struct-pointer payload params (<code>info *PackageInfo</code>, <code>opts *FooOptions</code>), not request bindings. Go HTTP frameworks bind the request to per-framework typed params (<code>r *http.Request</code>, <code>c *gin.Context</code>, <code>c echo.Context</code>, <code>c *fiber.Ctx</code>); these arrive at the gate via <code>RouteHandler</code> kind or the type-aware param filter below. Stdlib <code>req</code> / <code>request</code> (the <code>*http.Request</code> convention) preserved. Other languages keep the broader allow-list.</li>
+<li>Go param collection drops <code>ctx context.Context</code> and <code>ctx context.CancelFunc</code> parameters entirely rather than seeding their names into <code>unit.params</code>. Tree-sitter-go&#39;s <code>parameter_declaration</code> exposes <code>name</code> and <code>type</code> as named fields; descend only into <code>name</code> so type-segment identifiers don&#39;t pollute the param-name set (<code>info *PackageInfo</code> no longer contributes <code>PackageInfo</code>). Together with the allow-list narrowing above, closes ~1900 <code>go.auth.missing_ownership_check</code> findings on gitea backend helpers whose only &quot;user-input evidence&quot; was the ubiquitous <code>ctx context.Context</code> first param.</li>
+<li>Ruby controller method visibility + filter-callback gate. Methods marked <code>private</code> (bare <code>private</code> directive, targeted <code>private :foo, :bar</code>, or <code>protected</code>) and Rails filter callback targets (<code>before_action</code>, <code>after_action</code>, <code>around_action</code>, their <code>prepend_*</code> / <code>append_*</code> / <code>skip_*</code> siblings, and the legacy <code>*_filter</code> aliases) are no longer emitted as <code>Function</code> units. Visibility tracking is class-body source-order with two directive forms (bare toggles default visibility, targeted explicitly marks named methods). Block-form filters (<code>before_action do … end</code>) carry no symbol arg and are correctly ignored. Closes mastodon / diaspora <code>rb.auth.missing_ownership_check</code> flood on <code>set_X</code> row-fetch helpers used as <code>before_action</code> callbacks.</li>
+<li>Field-LHS resource acquires no longer counted as local resource leaks at the <code>apply_assignment</code> site. <code>e-&gt;name = (char *)e + sizeof(*e)</code> (sub-buffer alias inside a returned struct) and <code>mem-&gt;buf = ptr</code> (local-into-field ownership transfer) now mark the RHS local <code>MOVED</code> and stop tracking the field as a separately OPEN resource. The parent struct owns the field&#39;s lifecycle. Cross-language (distinct from the Go-only <code>apply_call</code> field-LHS gate, which is restricted because JS/TS class-field acquires <code>this.fd = fs.openSync(...)</code> are the documented expected leak pattern in that path). Closes curl <code>entry_new</code> and equivalent C/C++ shapes in openssl / postgres.</li>
+<li>Empty-formals SSA lowering signal. <code>lower_to_ssa_with_params</code> now sets <code>with_params=true</code> even when <code>formal_params</code> is empty, so an arrow <code>() =&gt; {…}</code> is treated as &quot;explicitly zero formals&quot; rather than &quot;no formals info&quot;. External vars in a zero-formal arrow are now correctly tagged as synthetic closure captures, so the JS/TS / Java auto-seed pass cannot mistake a bubbled-up free var (e.g. <code>userId</code> lifted from a nested jest test callback) for a real handler formal. Closes 934 phantom taint findings on the outline test suite (<code>describe(&quot;…&quot;, () =&gt; { test(&quot;…&quot;, () =&gt; { server.post(…) }) })</code>-shaped fixtures).</li>
+<li>Rust integer-typed values now suppress <code>Cap::FILE_IO</code> at the abstract-domain leaf gate (previously HTML_ESCAPE only). An integer&#39;s decimal representation is digits with optional leading <code>-</code>, never path metacharacters (<code>/</code>, <code>\</code>, <code>.</code>); magnitude is irrelevant. Closes the sudo-rs RUSTSEC-2023-0069 patched FP <code>let uid: u32 = user.parse()?; path.push(uid.to_string())</code>.</li>
+</ul>
+<h2 id="060---2026-05-02"><a class="docs-anchor" href="#060---2026-05-02" aria-label="Link to 060---2026-05-02" data-pagefind-ignore>#</a>[0.6.0] - 2026-05-02</h2>
+<p>A focused release that splits data-exfiltration off from SSRF and ships sinks for outbound HTTP request bodies across all 10 languages, with calibration tuned so plain user input echoed back upstream does not fire.</p>
+<h3 id="added-2"><a class="docs-anchor" href="#added-2" aria-label="Link to added-2" data-pagefind-ignore>#</a>Added</h3>
+<ul>
+<li>New <code>taint-data-exfiltration</code> rule, separate from SSRF. Fires when a Sensitive-tier source (cookie, header, env, file, database, caught exception) reaches the body, headers, or json payload of an outbound HTTP call. Plain user input gets suppressed at emission time so a gateway echoing <code>req.body</code> back upstream is not flagged.</li>
+<li>Sinks ship for <code>fetch</code> body, <code>XMLHttpRequest.send</code>, Python <code>requests.post</code> and <code>httpx.AsyncClient.post</code>, Java JDK <code>HttpClient.send</code> with <code>BodyPublishers</code>, OkHttp builder chains, Apache HttpClient <code>execute</code>, RestTemplate, WebClient, Go <code>http.Post</code> and <code>http.NewRequest</code> + <code>Do</code>, Rust <code>reqwest</code>/<code>ureq</code>/<code>surf</code>/<code>hyper</code> body/json/form/multipart chains, Ruby <code>Net::HTTP.post</code> and RestClient, C and C++ <code>curl_easy_setopt(CURLOPT_POSTFIELDS, ...)</code> gated by the macro arg.</li>
+<li>Three suppression knobs:<ul>
+<li>Sanitizer convention. <code>logEvent</code>, <code>forwardPayload</code>, <code>tracker.send</code>, <code>analytics.track</code>, <code>metrics.report</code>, <code>serializeForUpstream</code> are treated as <code>Sanitizer(data_exfil)</code> by default. Add your own with the standard custom-rule path.</li>
+<li>Trusted destination allowlist in <code>detectors.data_exfil.trusted_destinations</code>. Matched against the abstract-string domain prefix; a literal or template prefix that begins with one of these entries drops the cap.</li>
+<li>Detector toggle <code>detectors.data_exfil.enabled = false</code> strips the cap before emission. Other taint classes are unaffected.</li>
+</ul>
+</li>
+<li>Calibration. Severity is High for cookie or env sources, Medium for header, file, database, or caught-exception sources. Confidence stays at Medium even with strong corroboration, drops to Low without abstract or symbolic backing, and drops one tier on path-validated flows. SARIF output carries a <code>properties.data_exfil_field</code> entry on data-exfil findings, set to the destination object-literal field the leak reached (<code>body</code>, <code>headers</code>, or <code>json</code>).</li>
+<li>Benchmark coverage. 13 vulnerable fixtures across 8 languages under <code>tests/benchmark/corpus/{lang}/data_exfil/</code> and 6 paired safe fixtures for the sensitivity gate and sanitizer convention. New <code>data_exfil</code> row in the per-class breakdown. Per-class CI floor at P, R, F1 ≥ 0.85 (current baseline is 1.000).</li>
+<li>Backwards taint walk recognises <code>Cap::DATA_EXFIL</code> and emits the same rule ID.</li>
+<li>Ruby SSRF coverage. <code>OpenURI.open_uri</code> now classified as an SSRF sink (the low-level fetcher that <code>URI.open</code> delegates to). Closes the CarrierWave CVE-2021-21288 download path and equivalent gem shapes that route through <code>OpenURI</code> directly.</li>
+<li>Ruby chained-call wrapper classification. Statement-level wrappers like <code>YAML.safe_load(File.read(filename))</code> and <code>Marshal.load(File.read(p))</code> now classify the inner sink for cross-function summary extraction. Without this, the outer call became a non-sink node and the inner sink was lost when the helper was summarised.</li>
+<li>Ruby CVE corpus. Vulnerable + patched fixtures added for CVE-2021-21288 (CarrierWave SSRF) and CVE-2023-38337 (rswag path traversal).</li>
+<li>Lodash <code>_.template</code> modeled as a gated <code>Cap::CODE_EXEC</code> sink. Activates on the template-string argument; suppresses when arg-1 carries a literal <code>{ evaluate: false }</code>. Closes Strapi CVE-2023-22621 (server-side template injection → RCE via <code>&lt;% … %&gt;</code> evaluate blocks). Vulnerable + patched fixtures added under <code>tests/benchmark/cve_corpus/javascript/CVE-2023-22621/</code>.</li>
+<li>JS/TS gated-sink kwarg extractor falls back to inspecting arg-1 object literals (<code>fn(x, { evaluate: false })</code>) when the language has no <code>keyword_argument</code> node. Required so the lodash gate can read its options object.</li>
+<li>Lodash double-call form (<code>_.template(t)(data)</code>) routes through <code>find_chained_inner_call</code> so the outer call&#39;s gated-sink rebinding fires.</li>
+<li>Cross-function helper-validation propagation. New <code>SsaFuncSummary.validated_params_to_return</code> field records parameter indices whose taint flow to the return value is fully validated by a dominating predicate (regex allowlist, type check, validation call) on every return path. At call sites, each tainted argument passed to a validated position, and the call&#39;s own return value, are marked <code>validated_must</code> / <code>validated_may</code> in the caller&#39;s SSA taint state, the same way an inline <code>if (!regex.test(x)) throw</code> would. Closes the helper-validator gap behind PayloadCMS CVE-2026-25544 (Drizzle SQL injection in <code>sanitizeValue</code>). Vulnerable + patched TypeScript fixtures added.</li>
+<li>Destructured-arg sibling expansion in per-parameter taint summary probing. JS/TS object-pattern formals (<code>({ column, operator, value }) =&gt; …</code>) now seed every binding sharing the slot, and any sibling reaching <code>validated_must</code> counts as the slot being validated. New <code>BodyMeta.param_destructured_fields</code> carries sibling lists alongside <code>params</code> and <code>param_types</code>. JS <code>PARAM_CONFIG</code> accepts <code>assignment_pattern</code> (default-value formals) and <code>object_pattern</code> (destructured formals).</li>
+<li>Regex-allowlist branch narrowing. <code>&lt;X&gt;.test(value)</code> / <code>&lt;X&gt;.match(value)</code> / <code>&lt;X&gt;.matches(value)</code> where the receiver name contains <code>regex</code> or <code>pattern</code> classifies as a <code>ValidationCall</code> and narrows the call&#39;s first argument, not the regex receiver. Was also extended to <code>extract_validation_target</code> so the surviving branch validates <code>value</code>, not the regex object. Motivated by Payload CVE-2026-25544 (<code>if (!SAFE_STRING_REGEX.test(value)) throw …</code>).</li>
+<li>TypeScript template-substring (<code>${fn(arg)}</code>) call-resolution arity-hint fallback. When CFG lowering drops <code>arg_uses</code> but <code>args</code> is non-empty, the resolver passes <code>None</code> so the unique-name fallback can still pick up the lone candidate.</li>
+<li>Caller-scope-entity exemption in <code>rs.auth.missing_ownership_check</code>. <code>&lt;entity&gt;.id</code> / <code>&lt;entity&gt;.pk</code> no longer fires when <code>&lt;entity&gt;</code> is a unit parameter named after a multi-tenant scope primitive: <code>organization</code> / <code>org</code>, <code>project</code>, <code>team</code>, <code>workspace</code>, <code>tenant</code>, <code>account</code>, <code>community</code>, <code>group</code>, <code>repository</code> / <code>repo</code>, <code>company</code>. Other field names (<code>.name</code>, <code>.slug</code>) still flag, and <code>user</code> / <code>member</code> / <code>actor</code> are deliberately excluded (handled by <code>is_actor_context_subject</code>). Closes a flood of FPs in Sentry / Saleor / Discourse / Mastodon-shaped multi-tenant helpers (<code>get_environments(request, organization)</code>, <code>_filter_releases_by_query(qs, organization, …)</code>).</li>
+<li>Auth value-ref walker recurses into the <code>value</code> child of <code>keyword_argument</code> / <code>keyword_arg</code> / <code>named_argument</code> nodes. <code>Model.objects.filter(organization_id=org.id)</code> no longer surfaces the kwarg key (<code>organization_id</code>) as a bare-identifier user-input subject. The schema column name is fixed at call time.</li>
+<li>Test-decorator denylist for Flask route extraction. <code>mock.patch</code>, <code>mock.patch.object</code> / <code>.dict</code> / <code>.multiple</code>, <code>unittest.mock.*</code>, <code>monkeypatch.setattr</code> / <code>setenv</code> / <code>delattr</code> / <code>delenv</code>, and <code>pytest.mark.parametrize</code> no longer collide with <code>&lt;app&gt;.patch</code> route registration. Stops every <code>@mock.patch(&quot;…&quot;)</code>-decorated test method from being attached as a Flask PATCH handler and flagged as <code>missing_ownership_check</code>.</li>
+<li>Typed-extractor route-level guard injection for axum and actix-web. Handlers registered via attribute macros (<code>#[get(&quot;/path&quot;)]</code>, <code>#[routes::path(…)]</code>) or via external service-config builders previously never had their typed-extractor guards seeded. New <code>apply_typed_extractor_guards_to_units</code> walks every <code>Function</code>-kind unit and injects guard checks from typed-extractor params, complementing the route-walk path that already covered <code>.route(...)</code> registration.</li>
+<li>New auth config key <code>policy_guard_names</code>. Typed-extractor wrappers that prove route-level capability/policy enforcement (e.g. meilisearch&#39;s <code>GuardedData&lt;ActionPolicy&lt;X&gt;, _&gt;</code>) are recognised distinctly from authentication-only wrappers. Matched as last-segment + case-insensitive <code>starts_with</code>. Rust default: <code>[&quot;Guarded&quot;]</code>. Distinct from <code>login_guard_names</code> so the pattern doesn&#39;t pollute regular call recognition (a function like <code>guarded_load(..)</code> is not a login guard).</li>
+<li>Outer-wrapper-aware classification of typed extractors. <code>GuardedData&lt;ActionPolicy&lt;X&gt;, Data&lt;AuthController&gt;&gt;</code> is classified by the outer <code>GuardedData</code> (policy-bearing → <code>AuthCheckKind::Other</code>), not by whether an inner generic arg substring-matches <code>auth</code>. Bare data-only extractors (<code>Path&lt;u64&gt;</code>, <code>Query&lt;X&gt;</code>, <code>Json&lt;X&gt;</code>, <code>Form&lt;X&gt;</code>, <code>State&lt;X&gt;</code>, <code>Extension&lt;X&gt;</code>, <code>Data&lt;X&gt;</code>) outer-name-match early-return to <code>None</code> regardless of inner type tokens. Reference-marker (<code>&amp;</code>, <code>&amp;mut</code>, <code>&amp;&#39;a</code>) and module-path (<code>std::collections::</code>) prefixes stripped before matching.</li>
+<li>Project-level web-framework signal in Rust auth analysis. New <code>FrameworkContext::lang_has_web_framework(lang)</code> is three-valued: <code>Some(true)</code> when manifest names a framework, <code>Some(false)</code> when the manifest was inspected and named none, <code>None</code> when no manifest was inspected. New <code>rust_file_imports_web_framework</code> does a per-file <code>axum::</code> / <code>actix_web::</code> / <code>rocket::</code> / <code>axum_extra::</code> import probe (8 KB head). When the project&#39;s Cargo.toml is inspected and lists no Rust web framework AND the file does not directly import one, the <code>context_inputs</code> and param-name-heuristic arms of <code>unit_has_user_input_evidence</code> are suppressed. <code>RouteHandler</code> classification (concrete route-registration evidence) still bypasses the gate. Closes a flood of <code>missing_ownership_check</code> FPs in non-web Rust crates such as zed-style desktop / GUI codebases where a debug-session handle named <code>session</code> would trip <code>matches_session_context</code> on <code>session.update(cx, …)</code>. Currently Rust-only; other languages keep prior behavior (<code>None</code>).</li>
+<li>Rust auth corpus extended with <code>safe_actix_guarded_data_extractor.rs</code> and <code>unsafe_actix_no_guarded_data_extractor.rs</code> (typed-extractor guard injection); <code>safe_non_web_rust_project/</code> and <code>unsafe_actix_web_project_no_check/</code> (full Cargo.toml + src/lib.rs project shapes for the framework-signal gate).</li>
+<li>Python auth corpus extended with <code>vuln_user_id_param_no_auth.py</code>, <code>safe_django_orm_caller_scoped_entity.py</code> (caller-scope-entity exemption), <code>safe_mock_patch_test_method.py</code> (test-decorator denylist).</li>
+<li>Go safe corpus extended with <code>safe_inner_call_close_in_arg.go</code> (<code>require.NoError(t, f.Close())</code> shape), <code>safe_struct_field_resource_owned_by_struct.go</code> (field-LHS ownership transfer), and a <code>vuln_resource_leak_no_close.go</code> regression guard.</li>
+</ul>
+<h3 id="fixed-false-positives-3"><a class="docs-anchor" href="#fixed-false-positives-3" aria-label="Link to fixed-false-positives-3" data-pagefind-ignore>#</a>Fixed (false positives)</h3>
+<ul>
+<li>C++ <code>cpp.memory.reinterpret_cast</code> no longer fires when the target type is well-defined by C++ aliasing rules. Suppressed targets: byte-pointer family (<code>char*</code>, <code>unsigned char*</code>, <code>signed char*</code>, <code>wchar_t*</code>, <code>uint8_t*</code>, <code>int8_t*</code>, <code>std::byte*</code>, <code>byte*</code>), <code>void*</code>, integer round-trip (<code>uintptr_t</code>, <code>intptr_t</code>, and <code>std::</code> variants, no pointer required), and the BSD socket address family (<code>sockaddr*</code>, <code>struct sockaddr*</code>, <code>sockaddr_in*</code>, <code>sockaddr_in6*</code>, <code>sockaddr_un*</code>, <code>sockaddr_storage*</code>). User-defined struct or class pointer targets keep firing. Closes ~70% over-fire on serialization, hashing, IPC, and socket-API code where the cast is the standard-blessed idiom.</li>
+<li>PHP <code>php.crypto.md5</code> and <code>php.crypto.sha1</code> suppress when the call&#39;s consuming context yields a non-cryptographic identifier name. Recognised contexts: assignment LHS (variable, <code>$obj-&gt;property</code>, <code>$arr[&#39;key&#39;]</code>), array element keys, subscript indices, return statements (resolved to enclosing method or function name with <code>get</code> prefix stripped), and method-call arguments where the method is a key/cache/lookup verb (<code>get</code>, <code>set</code>, <code>has</code>, <code>delete</code>, <code>fetch</code>, <code>store</code>, <code>find</code>, <code>getItem</code>, <code>setItem</code>). Names containing a crypto keyword (<code>password</code>, <code>secret</code>, <code>token</code>, <code>signature</code>, <code>hmac</code>, <code>digest</code>, <code>salt</code>, <code>key</code>) keep firing. Closes ETag generation, cache-key hashing, dedup fingerprint, and <code>getCacheKey()</code>-style false positives in real PHP repos (phpmyadmin, nextcloud).</li>
+<li>JS and TS <code>secrets.fallback_secret</code> no longer fire on empty-string fallbacks (<code>process.env.X || &quot;&quot;</code>). Developers write <code>|| &quot;&quot;</code> to satisfy non-undefined string types without committing a real secret. Non-empty literal fallbacks still fire.</li>
+<li>Path-traversal sink suppression accepts canonicalised-and-rooted shapes. New <code>PathFact::is_path_traversal_safe</code> predicate clears <code>Cap::FILE_IO</code> when the path is dotdot-free and either non-absolute or carries a verified prefix-lock. New <code>OPAQUE_PREFIX_LOCK</code> marker records the structural invariant (&quot;rooted under SOME prefix&quot;) when the <code>starts_with</code>-style guard&#39;s argument is a method call, field access, or configured root rather than a string literal. Closes the Ruby <code>File.expand_path + start_with?(root)</code> shape (rswag CVE-2023-38337 patched counterpart), the Python <code>os.path.realpath + .startswith(root)</code> shape, and the JS <code>path.resolve + .startsWith(root)</code> shape. <code>classify_path_assertion</code> extended to JS <code>.startsWith(...)</code>, Python <code>.startswith(...)</code>, Ruby <code>.start_with?(...)</code> (paren and paren-less), and Go <code>strings.HasPrefix(...)</code>.</li>
+<li>Branch narrowing now flips prefix-lock attachment under condition negation. For <code>if !target.startsWith(ROOT) { return; }</code> the lock attaches to the surviving block, not the rejection arm. Rejection-axis narrowing is unchanged because the rejection classifier is text-level and already accounts for leading <code>!</code>.</li>
+<li>Go field-LHS resource acquires no longer counted as local resource leaks. <code>b.cpuprof = os.Create(...)</code> transfers ownership to the containing struct; closure responsibility belongs to a paired <code>Stop()</code> / <code>Release()</code> method on the struct&#39;s lifecycle. Gated in both <code>state/transfer.rs::apply_call</code> and <code>cfg_analysis/resources.rs::run</code>. Restricted to Go (<code>Lang::Go</code> check). JS/TS class-field acquires (<code>this.fd = fs.openSync(...)</code>) keep being tracked because the leak fixtures rely on it. Production trigger: prometheus <code>cmd/promtool/tsdb.go::startProfiling</code> cluster (<code>b.cpuprof</code>, <code>b.memprof</code>, <code>b.blockprof</code>, <code>b.mtxprof</code>).</li>
+<li>Go inner-call release in argument position. <code>require.NoError(t, f.Close())</code>, <code>errs = append(errs, f.Close())</code>, JUnit <code>assertEquals(0, in.read())</code>: releases that live in argument position now mark the receiver <code>CLOSED</code>. Bare-receiver inner calls only (chained-receiver releases stay owned by <code>chain_proxies</code>); marks <code>CLOSED</code> only with no <code>DoubleClose</code> attribution; respects <code>in_defer</code> for symmetry.</li>
+</ul>
+<h3 id="other-2"><a class="docs-anchor" href="#other-2" aria-label="Link to other-2" data-pagefind-ignore>#</a>Other</h3>
+<ul>
+<li>Action download script warning for the mutable <code>latest</code> tag now references <code>v0.6.0</code> instead of <code>v0.5.0</code>.</li>
+</ul>
+<h2 id="050---2026-04-29"><a class="docs-anchor" href="#050---2026-04-29" aria-label="Link to 050---2026-04-29" data-pagefind-ignore>#</a>[0.5.0] - 2026-04-29</h2>
+<p>The biggest release since launch. The taint engine was rebuilt on top of an SSA IR, cross-file analysis was deepened across the board, and Nyx now ships a local web UI for triaging findings without leaving your machine.</p>
+<blockquote>
+<p>Heads-up: false positives or regressions on cross-file flows are possible. Please open an issue with a minimal reproduction if you hit one.</p>
+</blockquote>
+<h3 id="highlights-2"><a class="docs-anchor" href="#highlights-2" aria-label="Link to highlights-2" data-pagefind-ignore>#</a>Highlights</h3>
+<ul>
+<li><strong>New SSA-based taint engine.</strong> Block-level worklist analysis over a pruned SSA IR, replacing the legacy BFS engine across all 10 languages. More precise, easier to extend, and the foundation for everything else in this release.</li>
+<li><strong>Cross-file analysis.</strong> Function summaries (including the new SSA summaries) flow across files via SQLite-backed persistence. Callee bodies can be inlined for context-sensitive analysis (k=1) and walked symbolically across file boundaries.</li>
+<li><strong>Symbolic execution layer.</strong> Candidate findings are walked symbolically from source to sink, producing concrete attack witnesses, pruning infeasible paths, and (optionally) handing constraints off to Z3.</li>
+<li><strong>Local web UI (<code>nyx serve</code>).</strong> React + Vite frontend for browsing findings, viewing flow paths, and triaging results. Triage decisions persist to <code>.nyx/triage.json</code> so they version with your code.</li>
+<li><strong>Hostile-repo hardening.</strong> Path containment, loopback-only serving, CSRF tokens, bounded artifact reads. Safe to run on untrusted code.</li>
+<li><strong>Tighter false-positive controls.</strong> Type-aware sink suppression, abstract interpretation (intervals + string prefixes), constraint solving, allowlist and type-check guard recognition, and confidence scoring on every finding.</li>
+</ul>
+<h3 id="engine-3"><a class="docs-anchor" href="#engine-3" aria-label="Link to engine-3" data-pagefind-ignore>#</a>Engine</h3>
+<ul>
+<li>SSA IR with dominance-frontier phi insertion. The optimization pipeline runs constant propagation, branch pruning, copy propagation, alias analysis, DCE, type facts, and points-to in sequence.</li>
+<li>Multi-label classification. A single API can carry both Source and Sink labels (e.g. PHP <code>file_get_contents</code>, Java <code>readObject</code>).</li>
+<li>Gated sinks. <code>setAttribute</code>, <code>parseFromString</code>, etc. only activate when the constant attribute argument is dangerous, and only the payload argument is treated as taint-bearing.</li>
+<li>Container taint with per-index precision and bounded points-to. Aliased containers share heap identity correctly.</li>
+<li>Loop-aware analysis: induction-variable pruning, widening at loop heads, bounded unrolling in symex.</li>
+<li>Path-sensitive phi evaluation propagates validation when all tainted predecessors are guarded.</li>
+<li>Per-return-path summaries decompose function effects when paths produce different taint behavior.</li>
+<li>Cross-file SCC fixed-point. Mutually recursive functions across files now reach a joint convergence.</li>
+<li>Demand-driven backwards analysis (off by default) annotates findings with cutoff diagnostics.</li>
+<li>Direction-aware engine notes (<code>UnderReport</code>, <code>OverReport</code>, <code>Bail</code>) flow into confidence scoring, ranking, and the new <code>--require-converged</code> strict mode.</li>
+<li>Synthetic field-write inheritance: <code>u.Path = &quot;/foo&quot;</code> no longer drops taint carried by other fields of <code>u</code>. Fixes Owncast CVE-2023-3188 (SSRF).</li>
+<li>Phantom-Param-aware field suppression skips method/function references that share a base name with a tainted variable.</li>
+<li>Validation err-check narrowing for the two-statement Go idiom <code>_, err := strconv.Atoi(input); if err != nil { return }</code>: <code>input</code> is marked validated on the surviving <code>err == nil</code> branch.</li>
+<li>Go: <code>strings.Replace</code> / <code>strings.ReplaceAll</code> recognised as a sanitizer when the OLD literal contains a known-dangerous payload (shell metachars, path-traversal, HTML, SQL) and the NEW literal does not reintroduce one.</li>
+<li>Go: literal-strip cap detection extended to shell metachars (<code>;</code>, <code>|</code>, <code>&amp;</code>, <code>$</code>, backtick) and SQL metachars (<code>&#39;</code>, <code>&quot;</code>, <code>--</code>).</li>
+<li>Go: <code>interpreted_string_literal</code> / <code>raw_string_literal</code> handled in tree-sitter so const-string arg extraction works for Go&#39;s double-quoted and backtick forms.</li>
+</ul>
+<h3 id="symbolic-execution"><a class="docs-anchor" href="#symbolic-execution" aria-label="Link to symbolic-execution" data-pagefind-ignore>#</a>Symbolic Execution</h3>
+<ul>
+<li>Expression trees (<code>SymbolicValue</code>) preserve computation structure through the path walk: integers, strings, binary ops, concatenations, calls, phi merges.</li>
+<li>Witness strings reconstruct concrete attack payloads at sink nodes.</li>
+<li>Bounded multi-path forking with reachability pruning.</li>
+<li>Cross-file: callee summaries are modeled directly, and pre-lowered callee bodies are loaded from SQLite so witnesses can keep walking across files.</li>
+<li>Interprocedural mode: nested frames with full state propagation, transitive descent up to 3 levels, structured cutoff tracking.</li>
+<li>Field-sensitive symbolic heap with bounded fields per object.</li>
+<li>Symbolic string theory: <code>Substr</code>, <code>Replace</code>, <code>ToLower</code>, <code>ToUpper</code>, <code>Trim</code>, <code>StrLen</code> modeled with concrete folding and sanitizer pattern detection.</li>
+<li>Optional Z3 integration (compile-time <code>smt</code> feature) for cross-variable constraint solving.</li>
+</ul>
+<h3 id="security-coverage"><a class="docs-anchor" href="#security-coverage" aria-label="Link to security-coverage" data-pagefind-ignore>#</a>Security &amp; Coverage</h3>
+<ul>
+<li>Vulnerability classes added: SSRF (10 languages), deserialization (Python, Ruby, Java, PHP), and <code>Cap::UNAUTHORIZED_ID</code> for auth-as-taint (off by default behind config flag).</li>
+<li>Auth analysis: receiver-type sink gating, row-level ownership-equality detection, self-actor recognition (<code>let user = require_auth()</code>), sink classification (in-memory vs realtime vs outbound), helper-summary lifting, and SQL JOIN-through-ACL recognition.</li>
+<li>State analysis (resource lifecycle, use-after-close, leaks, unauthed access) is now on by default. RAII-aware for Rust and C++; recognizes Python <code>with</code>, Go <code>defer</code>, Java try-with-resources.</li>
+<li>Framework rule packs: Express, Flask/Django, Spring/JNDI, Rails. Per-language label depth significantly expanded.</li>
+<li>C/C++ taint depth: output-parameter source propagation, implicit definitions for uninitialized declarations.</li>
+<li>Negative test corpus (30 fixtures) and a 262-case benchmark with CI gates on rule-level Precision/Recall/F1.</li>
+</ul>
+<h3 id="detection-metrics"><a class="docs-anchor" href="#detection-metrics" aria-label="Link to detection-metrics" data-pagefind-ignore>#</a>Detection metrics</h3>
+<ul>
+<li>Aggregate rule-level F1 reaches <strong>0.998</strong> (P=0.995, R=1.000). All real-CVE fixtures fire; only one open FP (<code>go-safe-009</code>).</li>
+<li>Go: 98.0% F1 on the 53-case corpus (1 FP / 0 FNs).</li>
+<li>CVE-2023-3188 (owncast SSRF) now detects.</li>
+</ul>
+<h3 id="cli-output"><a class="docs-anchor" href="#cli-output" aria-label="Link to cli-output" data-pagefind-ignore>#</a>CLI &amp; Output</h3>
+<ul>
+<li><code>nyx serve</code>: local web UI on <code>localhost</code> only (refuses non-loopback binds).</li>
+<li><code>--require-converged</code> filters out findings where the engine bailed early.</li>
+<li>Analysis-engine toggles graduated from <code>NYX_*</code> env vars to first-class flags and <code>[analysis.engine]</code> config: <code>--constraint-solving</code>, <code>--abstract-interp</code>, <code>--context-sensitive</code>, <code>--symex</code>, <code>--cross-file-symex</code>, <code>--symex-interproc</code>, <code>--smt</code>, <code>--parse-timeout-ms</code>. Old env vars still work when Nyx is consumed as a library.</li>
+<li>Confidence (<code>High</code>/<code>Medium</code>/<code>Low</code>) shown on every finding, including console headers.</li>
+<li>Engine notes surfaced in console (<code>[capped: N notes, over-report]</code>), JSON (<code>engine_notes</code>, <code>confidence_capped</code>), and SARIF (<code>result.properties.loss_direction</code>).</li>
+<li>Flow paths reconstructed step-by-step with file/line/snippet for each hop.</li>
+<li>Concrete attack witness strings synthesized by the symbolic executor.</li>
+<li>Primary sink locations now point at the callee&#39;s real sink line; caller call sites are preserved as flow steps.</li>
+<li>Richer scan progress: explicit stages, timing breakdowns, language counters, skipped/reused file counts.</li>
+<li>Tighter taint-finding deduplication.</li>
+</ul>
+<h3 id="hardening"><a class="docs-anchor" href="#hardening" aria-label="Link to hardening" data-pagefind-ignore>#</a>Hardening</h3>
+<ul>
+<li>Centralized path containment rejects traversal, symlink escapes, and oversized reads across UI, debug, and triage routes.</li>
+<li><code>nyx serve</code> validates <code>Host</code> headers, requires per-session CSRF tokens for mutations, and refuses scans outside the original repo root.</li>
+<li>Walker re-validates symlink targets against the scan root.</li>
+<li>Bounded reads on framework manifests and <code>.nyx/triage.json</code> imports.</li>
+<li>UI falls back to plain text on pathologically long lines to defeat regex-DoS in syntax highlighting.</li>
+<li>Parser timeout is now configuration-backed with hostile-input regression coverage.</li>
+</ul>
+<h3 id="persistence"><a class="docs-anchor" href="#persistence" aria-label="Link to persistence" data-pagefind-ignore>#</a>Persistence</h3>
+<ul>
+<li>SQLite schema bumped to v2. Anonymous-function identity is now a structural DFS index instead of a byte offset, so inserting a line above an unchanged function no longer invalidates its <code>FuncKey</code>. Pre-0.5.0 caches are silently cleared on open; triage data and scan history are preserved.</li>
+<li>Engine-version metadata; persisted summaries and file hashes invalidate on mismatch.</li>
+<li>Stale SSA tables recreate when required columns are missing; deserialization failures log instead of silently dropping rows.</li>
+</ul>
+<h3 id="frontend-3"><a class="docs-anchor" href="#frontend-3" aria-label="Link to frontend-3" data-pagefind-ignore>#</a>Frontend</h3>
+<ul>
+<li>Replaced the legacy <code>app.js</code> with a React + Vite + TypeScript SPA.</li>
+<li>Interactive graph workspace for CFG and call-graph views (Graphology + ELK + Sigma) with neighborhood reduction and a full-page inspector.</li>
+<li>Triage UI with database-backed decisions (true positive, false positive, accepted risk, suppressed) and <code>.nyx/triage.json</code> round-trip.</li>
+<li>Scan history, rules management, and finding detail panels with evidence and flow visualization.</li>
+<li>Vitest browser-side test suite wired into CI.</li>
+<li>Bumped to React 19, Vite 8, TypeScript 6.0, ESLint 10, <code>@vitejs/plugin-react</code> 6, with aligned <code>@types/react*</code>.</li>
+<li><code>SSEContext</code>: typed <code>reconnectTimer</code> ref as <code>ReturnType&lt;typeof setTimeout&gt; | undefined</code> to satisfy TS 6&#39;s stricter <code>useRef</code> overloads.</li>
+<li><code>FindingsPage</code>: included <code>toast</code> in <code>useCallback</code> deps to avoid stale-closure warnings.</li>
+<li><code>tsconfig.json</code>: dropped <code>baseUrl</code>, using a relative <code>./src/*</code> path mapping instead.</li>
+</ul>
+<h3 id="removed"><a class="docs-anchor" href="#removed" aria-label="Link to removed" data-pagefind-ignore>#</a>Removed</h3>
+<ul>
+<li>Legacy BFS taint engine, <code>TaintTransfer</code>, <code>TaintState</code>, and the <code>NYX_LEGACY</code> fallback.</li>
+<li>Legacy vanilla-JS frontend (<code>app.js</code>).</li>
+</ul>
+<h2 id="040---2026-02-25"><a class="docs-anchor" href="#040---2026-02-25" aria-label="Link to 040---2026-02-25" data-pagefind-ignore>#</a>[0.4.0] - 2026-02-25</h2>
+<p>A precision and ergonomics release. Findings are now ranked, lower-noise by default, and easier to triage in CI.</p>
+<h3 id="highlights-3"><a class="docs-anchor" href="#highlights-3" aria-label="Link to highlights-3" data-pagefind-ignore>#</a>Highlights</h3>
+<ul>
+<li><strong>Attack-surface ranking.</strong> Every finding gets an exploitability score combining severity, analysis kind, evidence strength, and path-validation. Console output shows the score in the header line; <code>--no-rank</code> opts out.</li>
+<li><strong>Low-noise prioritization.</strong> Quality-category findings are excluded by default (<code>--include-quality</code> brings them back). High-frequency Quality rules are rolled up per <code>(file, rule)</code> with example occurrences. LOW budgets cap noise without ever displacing High/Medium findings.</li>
+<li><strong>State-model dataflow analysis.</strong> New per-variable resource-lifecycle and auth-level analysis catches use-after-close, double-close, must-leak, may-leak (branch-aware), and unauthenticated-sink access. Opt-in via <code>scanner.enable_state_analysis</code>.</li>
+<li><strong>Inline <code>nyx:ignore</code> suppressions</strong> with same-line and next-line directives, comma lists, wildcard suffixes, and string-literal guards across all 10 languages.</li>
+<li><strong>AST pattern overhaul.</strong> All 10 language pattern files rewritten with consistent metadata, namespaced IDs (<code>&lt;lang&gt;.&lt;category&gt;.&lt;specific&gt;</code>), and 30+ new patterns. 11 broken tree-sitter queries fixed.</li>
+<li><strong>Monotone forward-dataflow taint engine.</strong> Replaced the BFS engine with a proper worklist over a finite lattice. Termination is now guaranteed by lattice height, eliminating BFS-budget bailouts on large files.</li>
+<li><strong>Path-sensitive taint analysis.</strong> Branch predicates flow with the analysis. Contradictory guards prune infeasible paths; validation calls produce annotated findings without changing severity.</li>
+<li><strong>Interprocedural call graph.</strong> Whole-program graph with three-valued callee resolution (<code>Resolved</code>/<code>NotFound</code>/<code>Ambiguous</code>), SCC analysis, and topo ordering ready for bottom-up taint propagation.</li>
+</ul>
+<h3 id="cli-output-2"><a class="docs-anchor" href="#cli-output-2" aria-label="Link to cli-output-2" data-pagefind-ignore>#</a>CLI &amp; Output</h3>
+<ul>
+<li><code>--severity &lt;EXPR&gt;</code> replaces <code>--high-only</code>. Supports <code>HIGH</code>, <code>HIGH,MEDIUM</code>, <code>&gt;=MEDIUM</code>. Filtering is now applied at the output stage so taint and CFG findings are correctly downgraded too.</li>
+<li><code>--mode &lt;full|ast|cfg|taint&gt;</code> replaces <code>--ast-only</code> and <code>--cfg-only</code>.</li>
+<li><code>--index &lt;auto|off|rebuild&gt;</code> replaces <code>--no-index</code> and <code>--rebuild-index</code>.</li>
+<li><code>--fail-on &lt;SEVERITY&gt;</code> for CI exit-code gating.</li>
+<li><code>--min-score &lt;N&gt;</code> for ranking-aware filtering.</li>
+<li><code>--show-suppressed</code> reveals suppressed findings dimmed with <code>[SUPPRESSED]</code>.</li>
+<li><code>--keep-nonprod-severity</code> (renamed from <code>--include-nonprod</code>).</li>
+<li><code>--quiet</code> mirrors <code>output.quiet</code>.</li>
+<li>Console renderer overhauled: severity is the strongest visual anchor, file paths are dim blue, taint flows use <code>→</code> arrows, multi-line call chains are normalized.</li>
+<li>Confidence shown alongside score in the header line.</li>
+<li>Pattern-level confidence is now set at the pattern definition site, not heuristically inferred from severity.</li>
+</ul>
+<h3 id="breaking"><a class="docs-anchor" href="#breaking" aria-label="Link to breaking" data-pagefind-ignore>#</a>Breaking</h3>
+<ul>
+<li>Config and data directory renamed from <code>dev.ecpeter23.nyx</code> to <code>nyx</code>. Existing config and SQLite indexes at the old path won&#39;t be picked up. Copy them across or re-run <code>nyx scan</code>.</li>
+<li><code>Severity::from_str</code> now returns <code>Err</code> for unknown values instead of silently defaulting to Low.</li>
+</ul>
+<h3 id="notable-fixes"><a class="docs-anchor" href="#notable-fixes" aria-label="Link to notable-fixes" data-pagefind-ignore>#</a>Notable Fixes</h3>
+<ul>
+<li>KINDS-map audit across all 10 languages: 89 missing tree-sitter node types added. Switch/case, try/catch/finally, class bodies, lambdas, closures, and namespaces are no longer silently dropped.</li>
+<li><code>else_clause</code> mapping fixed for C, C++, Rust, JS, TS, Python, PHP. Code inside else blocks was being dropped from the CFG.</li>
+<li>Rust <code>if let</code> / <code>while let</code> taint propagation now works.</li>
+<li>Taint BFS non-termination on large JS files (the BFS engine has since been replaced).</li>
+<li>C++ <code>popen</code> pattern ID collision with C.</li>
+<li>Constant-arg sink suppression for AST patterns.</li>
+</ul>
+<h2 id="030---2026-02-25"><a class="docs-anchor" href="#030---2026-02-25" aria-label="Link to 030---2026-02-25" data-pagefind-ignore>#</a>[0.3.0] - 2026-02-25</h2>
+<p>Configurability, SARIF, and an aggressive false-positive purge.</p>
+<h3 id="highlights-4"><a class="docs-anchor" href="#highlights-4" aria-label="Link to highlights-4" data-pagefind-ignore>#</a>Highlights</h3>
+<ul>
+<li><strong>Configurable analysis rules.</strong> Sources, sanitizers, sinks, terminators, and event handlers can be defined per language in <code>nyx.local</code> or via <code>nyx config add-rule</code>/<code>add-terminator</code>. Config rules take priority over built-in rules.</li>
+<li><strong><code>nyx config</code> CLI subcommand</strong> with <code>show</code>, <code>path</code>, <code>add-rule</code>, <code>add-terminator</code>.</li>
+<li><strong>SARIF 2.1.0 output (<code>-f sarif</code>).</strong> Spec-compliant for GitHub Code Scanning, Azure DevOps, and other SARIF consumers.</li>
+<li><strong><code>SourceKind</code> taint classification.</strong> Findings carry an inferred source kind (<code>UserInput</code>, <code>EnvironmentConfig</code>, <code>FileSystem</code>, <code>Database</code>, <code>Unknown</code>) and severity is now derived from it instead of being hardcoded to High.</li>
+<li><strong>Non-prod severity downgrade by default.</strong> Findings in tests, vendor, benchmarks, examples, fixtures, build scripts, and <code>*.min.js</code> are downgraded one tier. <code>--include-nonprod</code> restores original severity.</li>
+<li><strong>Resource leak detection</strong> for Python, Ruby, PHP, JavaScript, and TypeScript (file handles, sockets, locks, mysqli, curl, fs streams).</li>
+<li><strong>Progress bars and quiet mode.</strong> Indicatif-driven progress for discovery, Pass 1, and Pass 2 (auto-hidden in JSON/SARIF/quiet modes).</li>
+</ul>
+<h3 id="performance-2"><a class="docs-anchor" href="#performance-2" aria-label="Link to performance-2" data-pagefind-ignore>#</a>Performance</h3>
+<ul>
+<li>Single fused parse+CFG pass replaces the previous two-parse summary extraction.</li>
+<li>Light-weight dataflow sweep in CFG builder is now O(N) per function instead of O(N²) over the whole file.</li>
+<li>Parallel summary merging via rayon fold/reduce.</li>
+<li>Indexed scans now read and hash each file once instead of up to 4 times.</li>
+<li>SQLite mutex mode relaxed (r2d2 + WAL provides safety without global lock).</li>
+<li>Zero-allocation taint hashing and in-place taint transfer.</li>
+</ul>
+<h3 id="notable-fixes-2"><a class="docs-anchor" href="#notable-fixes-2" aria-label="Link to notable-fixes-2" data-pagefind-ignore>#</a>Notable Fixes</h3>
+<ul>
+<li>One-hop constant-binding suppression: <code>cmd = &quot;git&quot;; subprocess.run([cmd, ...])</code> no longer flags.</li>
+<li>Exec-path guards (<code>which</code>, <code>resolve_binary</code>, <code>shutil.which</code>) recognized.</li>
+<li><code>signal.connect</code> / <code>event.connect</code> no longer match Python db-connection acquire patterns.</li>
+<li><code>threading.Lock()</code> without <code>.acquire()</code> no longer flags as unreleased.</li>
+<li><code>FileResponse(f)</code> / <code>send_file(f)</code> recognized as ownership transfer.</li>
+<li><code>el.href</code> no longer matches <code>location.href</code> patterns.</li>
+<li>Constant-only sink calls (<code>subprocess.run([&quot;make&quot;,&quot;clean&quot;])</code>) suppressed.</li>
+<li><code>std::cout</code> no longer treated as a sink.</li>
+<li>Break/continue inside loops correctly wires into the loop header/exit, fixing false unreachable-code findings.</li>
+<li>Preprocessor <code>#ifdef</code>/<code>#endif</code> blocks no longer orphan subsequent code in C/C++.</li>
+<li><code>freopen</code> no longer matches <code>fopen</code> acquire patterns.</li>
+<li>Struct-field, linked-list, and global assignment recognized as ownership transfers.</li>
+</ul>
+<h2 id="020---2026-02-24"><a class="docs-anchor" href="#020---2026-02-24" aria-label="Link to 020---2026-02-24" data-pagefind-ignore>#</a>[0.2.0] - 2026-02-24</h2>
+<p>The cross-file release.</p>
+<ul>
+<li><strong>Two-pass cross-file taint analysis.</strong> Pass 1 extracts <code>FuncSummary</code> per function (caps, propagation, callees), Pass 2 runs BFS taint propagation with cross-file callee resolution.</li>
+<li><strong>CFG analysis engine</strong> with five detectors: unguarded sinks, auth gaps in web handlers, unreachable security code, error fallthrough, resource leaks.</li>
+<li><strong>Cross-language interop</strong> via explicit <code>InteropEdge</code> structs (no false-positive name collisions).</li>
+<li><strong>Function summaries persisted to SQLite</strong> (<code>function_summaries</code> table).</li>
+<li><strong>Multi-language CFG + taint support</strong> for all 10 languages.</li>
+<li><strong>Resource leak detection</strong> for C/C++, Go, Rust, and Java.</li>
+<li><strong>Finding scoring system</strong> combining severity, entry-point proximity, path complexity, taint confirmation, and confidence.</li>
+<li><strong>Analysis modes</strong>: <code>Full</code> (default), <code>Ast</code> (<code>--ast-only</code>), <code>Taint</code> (<code>--cfg-only</code>).</li>
+<li><strong>Cap bitflags expanded</strong>: <code>ENV_VAR</code>, <code>HTML_ESCAPE</code>, <code>SHELL_ESCAPE</code>, <code>URL_ENCODE</code>, <code>JSON_PARSE</code>, <code>FILE_IO</code>.</li>
+<li>Performance: read-once/hash-once via <code>_from_bytes</code> variants, lock-free rayon, SQLite WAL + 8 MB cache + 256 MB mmap.</li>
+<li>Tracing instrumentation on all pipeline stages; criterion benchmark suite.</li>
+</ul>
+<h2 id="020-alpha---2025-06-28"><a class="docs-anchor" href="#020-alpha---2025-06-28" aria-label="Link to 020-alpha---2025-06-28" data-pagefind-ignore>#</a>[0.2.0-alpha] - 2025-06-28</h2>
+<ul>
+<li>Experimental intra-procedural CFG + taint analysis for Rust. Builds a CFG, applies dataflow, and flags unsanitised Source → Sink paths (e.g. <code>env::var</code> → <code>Command::new</code>).</li>
+<li>O(1) node-kind lookup via per-language PHF tables.</li>
+<li>Debug channel <code>target=cfg</code> (<code>RUST_LOG=nyx::cfg=debug</code>) to inspect generated graphs.</li>
+<li>Fixed Windows release pipeline (PowerShell has no <code>zip</code> command).</li>
+</ul>
+<h2 id="011-alpha---2025-06-25"><a class="docs-anchor" href="#011-alpha---2025-06-25" aria-label="Link to 011-alpha---2025-06-25" data-pagefind-ignore>#</a>[0.1.1-alpha] - 2025-06-25</h2>
+<ul>
+<li>Fixed <code>scan --no-index</code> not respecting the <code>max_results</code> config setting (#1).</li>
+<li>Integration tests covering indexing and scanning pipelines (#3, #4, #5, #8).</li>
+</ul>
+<h2 id="010-alpha---2025-06-25"><a class="docs-anchor" href="#010-alpha---2025-06-25" aria-label="Link to 010-alpha---2025-06-25" data-pagefind-ignore>#</a>[0.1.0-alpha] - 2025-06-25</h2>
+<p>Initial alpha release.</p>
+<ul>
+<li>Multi-language AST pattern scanning via <code>tree-sitter</code> for Rust, C/C++, Java, Go, PHP, Python, Ruby, TypeScript, JavaScript.</li>
+<li><code>scan</code> command: filesystem walker, pattern execution, console output.</li>
+<li><code>index</code> command: build, rebuild, and status reporting of SQLite-backed index.</li>
+<li><code>list</code> command: list indexed projects with optional verbosity.</li>
+<li><code>clean</code> command: remove one or all project indexes.</li>
+<li>Configuration system with <code>nyx.conf</code> (generated) and <code>nyx.local</code> (user overrides).</li>
+<li>Default severity levels: High, Medium, Low.</li>
+</ul>
+
+          </div>
+          <nav class="docs-prevnext" aria-label="Page navigation"><a class="docs-prevnext__link docs-prevnext__link--prev" href="roadmap.html">
+        <span class="docs-prevnext__label">Previous</span>
+        <span class="docs-prevnext__title">Roadmap</span>
+      </a><span class="docs-prevnext__spacer"></span></nav>
+        </article>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <p class="site-footer__copy">© 2026 Eli Peter · Nyx is licensed under GPL-3.0-or-later.</p>
+        <nav class="site-footer__nav" aria-label="Footer">
+          <a href="../../">Home</a>
+          <a href="../../scanner.html">Scanner</a>
+          <a href="../../agent.html">Agent</a>
+          <a href="../../news/">News</a>
+          <a href="../../docs/">Docs</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

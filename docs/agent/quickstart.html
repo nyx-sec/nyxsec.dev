@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Quickstart | Nyx Agent docs</title>
+    <meta name="description" content="You have nyx-agent built and nyx-agent doctor is green. This page takes you from a fresh state directory to a first scan and a findings list. Five minutes if the prerequisites are already in place..." />
+    <meta name="keywords" content="Nyx Agent, nyx-agent, local pentesting, live appsec testing, verified vulnerabilities, stored evidence, Get started, Quickstart, toml, go, TOML, AI" />
+    <meta name="author" content="Eli Peter" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <link rel="canonical" href="https://nyxscan.dev/docs/agent/quickstart.html" />
+    <link rel="sitemap" type="application/xml" href="https://nyxscan.dev/sitemap.xml" />
+    <link rel="alternate" hreflang="en" href="https://nyxscan.dev/docs/agent/quickstart.html" />
+    <link rel="alternate" hreflang="x-default" href="https://nyxscan.dev/docs/agent/quickstart.html" />
+    <link rel="prev" href="install.html" />
+    <link rel="next" href="cli.html" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="64x64" href="../../favicon-64.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../../favicon-180.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="alternate" type="application/rss+xml" title="Nyx | News &amp; release notes" href="/news/feed.xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../styles.css" />
+    <script defer src="../../docs/search.js"></script>
+
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Nyx" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="Quickstart" />
+    <meta property="og:description" content="You have nyx-agent built and nyx-agent doctor is green. This page takes you from a fresh state directory to a first scan and a findings list. Five minutes if the prerequisites are already in place..." />
+    <meta property="og:url" content="https://nyxscan.dev/docs/agent/quickstart.html" />
+    <meta property="og:image" content="https://nyxscan.dev/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Nyx Agent local pentesting documentation" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Quickstart" />
+    <meta name="twitter:description" content="You have nyx-agent built and nyx-agent doctor is green. This page takes you from a fresh state directory to a first scan and a findings list. Five minutes if the prerequisites are already in place..." />
+    <meta name="twitter:image" content="https://nyxscan.dev/og-image.png" />
+    <meta name="twitter:image:alt" content="Nyx Agent local pentesting documentation" />
+    <meta name="theme-color" content="#F9F8F4" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://nyxscan.dev/#person",
+      "name": "Eli Peter",
+      "url": "https://github.com/elicpeter",
+      "sameAs": [
+        "https://github.com/elicpeter",
+        "https://github.com/sponsors/elicpeter"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://nyxscan.dev/#website",
+      "url": "https://nyxscan.dev/",
+      "name": "Nyx",
+      "description": "Local security tooling for deterministic scanning and live testing.",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://nyxscan.dev/#person"
+      }
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://nyxscan.dev/docs/agent/quickstart.html#article",
+      "headline": "Quickstart",
+      "name": "Quickstart",
+      "url": "https://nyxscan.dev/docs/agent/quickstart.html",
+      "description": "You have nyx-agent built and nyx-agent doctor is green. This page takes you from a fresh state directory to a first scan and a findings list. Five minutes if the prerequisites are already in place...",
+      "inLanguage": "en",
+      "articleSection": "Get started",
+      "isPartOf": {
+        "@id": "https://nyxscan.dev/#website"
+      },
+      "publisher": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "author": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "image": "https://nyxscan.dev/og-image.png",
+      "mainEntityOfPage": "https://nyxscan.dev/docs/agent/quickstart.html"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://nyxscan.dev/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Docs",
+          "item": "https://nyxscan.dev/docs/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Nyx Agent docs",
+          "item": "https://nyxscan.dev/docs/agent/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Quickstart",
+          "item": "https://nyxscan.dev/docs/agent/quickstart.html"
+        }
+      ],
+      "@id": "https://nyxscan.dev/docs/agent/quickstart.html#breadcrumbs"
+    }
+  ]
+}
+    </script>
+  </head>
+  <body class="docs-body">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" aria-label="Primary navigation">
+      <div class="container site-header__inner">
+        <a class="brand" href="../../" aria-label="Nyx home">
+          <img src="../../assets/logo.png" alt="Nyx" class="brand-logo" />
+        </a>
+        <span class="header-wordmark">NYX</span>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="../../scanner.html">Scanner</a>
+          <a href="../../agent.html">Agent</a>
+          <a href="../../news/">News</a>
+          <a href="../../docs/" aria-current="page">Docs</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="docs-page">
+      <div class="docs-shell">
+        <nav class="docs-sidebar" aria-label="Documentation"><a class="docs-sidebar__brand" href="./">Agent docs</a><a class="docs-sidebar__home" href="../">All docs</a><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Get started</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="install.html">Install</a></li><li><a class="docs-sidebar__link" href="quickstart.html" aria-current="page">Quickstart</a></li><li><a class="docs-sidebar__link" href="cli.html">CLI</a></li><li><a class="docs-sidebar__link" href="config.html">Config</a></li><li><a class="docs-sidebar__link" href="state-dir.html">State Directory</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Architecture</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="architecture.html">Architecture</a></li><li><a class="docs-sidebar__link" href="runs.html">Runs</a></li><li><a class="docs-sidebar__link" href="attack-graph.html">Attack Graph</a></li><li><a class="docs-sidebar__link" href="business-logic-templates.html">Business Logic Templates</a></li><li><a class="docs-sidebar__link" href="events.html">Events</a></li><li><a class="docs-sidebar__link" href="ai-runtime.html">AI Runtime</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Projects</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="cli.html#project">CLI: Project</a></li><li><a class="docs-sidebar__link" href="quickstart.html#create-a-project" aria-current="page">Quickstart: Create a Project</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">HTTP API</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="api.html">API</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Triggers</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="triggers/index.html">Overview</a></li><li><a class="docs-sidebar__link" href="triggers/cron.html">Cron</a></li><li><a class="docs-sidebar__link" href="triggers/webhook.html">Webhook</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">CI integration</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="ci/github-actions.html">GitHub Actions</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Contributor docs</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="dev/sqlx.html">SQLx</a></li><li><a class="docs-sidebar__link" href="dev/frontend.html">Frontend</a></li></ul></div></nav>
+        <article class="docs-content">
+          <div class="docs-search docs-search--content" data-docs-search>
+    <label class="visually-hidden" for="docs-search-input">Search docs</label>
+    <div class="docs-search__control">
+      <span class="docs-search__icon" aria-hidden="true"></span>
+      <input id="docs-search-input" data-docs-search-input type="search" placeholder="Search docs" autocomplete="off" autocapitalize="none" spellcheck="false" role="combobox" aria-autocomplete="list" aria-controls="docs-search-results" aria-expanded="false" />
+      <kbd class="docs-search__key" aria-hidden="true">⌘K</kbd>
+    </div>
+    <div class="docs-search__panel" data-docs-search-panel hidden>
+      <div class="docs-search__status" data-docs-search-status></div>
+      <div class="docs-search__results" id="docs-search-results" data-docs-search-results role="listbox" aria-label="Search results"></div>
+    </div>
+  </div>
+          <div class="docs-prose" data-pagefind-body>
+<h1 id="quickstart"><a class="docs-anchor" href="#quickstart" aria-label="Link to quickstart" data-pagefind-ignore>#</a>Quickstart</h1>
+<p>You have <code>nyx-agent</code> built and <code>nyx-agent doctor</code> is green. This page
+takes you from a fresh state directory to a first scan and a
+findings list. Five minutes if the prerequisites are already in
+place; see <code>docs/install.md</code> if <code>doctor</code> reports anything missing.</p>
+<p>The shipping binary is <code>nyx-agent</code>. The product brand is &quot;Nyx Agent&quot;.
+Both names appear here for the reasons explained in <code>README.md</code>.</p>
+<h2 id="start-the-daemon"><a class="docs-anchor" href="#start-the-daemon" aria-label="Link to start-the-daemon" data-pagefind-ignore>#</a>Start the daemon</h2>
+<pre><code class="hljs language-bash">nyx-agent serve</code></pre>
+<p><code>serve</code> is the default subcommand, so <code>nyx-agent</code> with no arguments
+does the same thing. It binds <code>127.0.0.1:8765</code> (from <code>[ui] listen_addr</code>), opens your default browser, and prints the ready URL
+on stdout:</p>
+<!-- nyx: verbatim -->
+<pre><code class="hljs language-plain">ready <span class="hljs-keyword">on</span> <span class="hljs-title">http</span>://<span class="hljs-title">127</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-title">8765</span>
+<span class="hljs-keyword">first</span> launch detected; wizard <span class="hljs-keyword">at</span> <span class="hljs-keyword">http</span>://<span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">8765</span>/setup</code></pre>
+<!-- /nyx: verbatim --><p>The &quot;first launch detected&quot; line only appears when <code>nyx-agent.toml</code>
+is not yet on disk. The browser lands on <code>/setup</code> in that case;
+once you submit the wizard, subsequent starts go to <code>/</code>.</p>
+<p>Common flags:</p>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--listen ADDR</code></td>
+<td>Override <code>[ui] listen_addr</code>. Pass <code>0.0.0.0:8765</code> for a non-loopback bind. Pair with TLS + the bearer token; see <code>docs/security-posture.md</code> (forthcoming).</td>
+</tr>
+<tr>
+<td><code>--no-open</code></td>
+<td>Skip the browser launch. Daemon still binds and serves.</td>
+</tr>
+<tr>
+<td><code>--headless</code></td>
+<td>Skip the browser launch AND disable bearer-token auth, since headless mode is intended for CI smoke tests. Do not run a public daemon in <code>--headless</code>.</td>
+</tr>
+<tr>
+<td><code>--open-cmd CMD</code></td>
+<td>Replace the default browser launcher. <code>--open-cmd /bin/echo</code> is the test recipe: the daemon prints the ready URL through your launcher instead of opening a window.</td>
+</tr>
+<tr>
+<td><code>--log-level FILTER</code></td>
+<td>Global. Passed to <code>tracing-subscriber</code>. Examples: <code>info</code>, <code>debug</code>, <code>nyx-agent=trace,sqlx=warn</code>.</td>
+</tr>
+</tbody></table>
+<p><code>Ctrl+C</code> shuts the daemon down cleanly: it closes the HTTP listener,
+stops the in-process scheduler, drains any in-flight scan worker,
+and closes the SQLite store.</p>
+<h2 id="create-a-project"><a class="docs-anchor" href="#create-a-project" aria-label="Link to create-a-project" data-pagefind-ignore>#</a>Create a project</h2>
+<p>Nyx Agent groups one or more repos under a <code>Project</code>. Everything below
+(the wizard, the TOML, the scan command) operates per project, so a
+fresh deployment starts with a project row.</p>
+<p>The fastest path is the CLI:</p>
+<pre><code class="hljs language-bash">nyx-agent project create acme-app \
+  --description <span class="hljs-string">&quot;Acme web product&quot;</span> \
+  --target-base-url http://localhost:3000</code></pre>
+<p><code>project create</code> writes a row to the SQLite store and returns the
+generated <code>project_id</code>. The project name must be unique. From here
+you can attach repos via <code>nyx-agent project add-repo</code> (worked
+example below) or by hand-editing <code>nyx-agent.toml</code>.</p>
+<p>You can also create the project from the SPA after the first-launch
+wizard completes. The projects list lives at <code>/projects</code>.</p>
+<h2 id="walk-the-first-launch-wizard"><a class="docs-anchor" href="#walk-the-first-launch-wizard" aria-label="Link to walk-the-first-launch-wizard" data-pagefind-ignore>#</a>Walk the first-launch wizard</h2>
+<p>The SPA at <code>/setup</code> asks for five things. Each maps to a single
+config field; the daemon writes <code>nyx-agent.toml</code> only after you
+submit. The wizard refuses to submit until you tick
+<code>i_own_this = true</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Writes to</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AI runtime</td>
+<td><code>[ai] runtime</code></td>
+<td><code>none</code>, <code>anthropic</code>, <code>local-llm</code>, <code>claude-code</code>, or <code>codex</code>. <code>none</code> is the default and keeps scans fully local with no model provider.</td>
+</tr>
+<tr>
+<td>Anthropic API key</td>
+<td>OS keychain (not TOML)</td>
+<td>Required only when runtime is <code>anthropic</code>. This is the official Claude BYOK path. Persisted under <code>secrets::ACCOUNT_AI_ANTHROPIC</code>.</td>
+</tr>
+<tr>
+<td>Local LLM URL + token</td>
+<td><code>[ai] api_base</code> + keychain</td>
+<td>Required only when runtime is <code>local-llm</code>. OpenAI-compatible endpoint; set <code>[ai].model</code> if your server requires a specific model id.</td>
+</tr>
+<tr>
+<td>Sandbox backend</td>
+<td><code>[sandbox] backend</code></td>
+<td><code>auto</code> is the default and resolves at runtime; <code>process</code> is the safe fallback that always works. See <code>docs/sandbox.md</code> (forthcoming) for the full backend matrix.</td>
+</tr>
+<tr>
+<td><code>i_own_this</code></td>
+<td>(consent gate)</td>
+<td>Must be <code>true</code> to submit.</td>
+</tr>
+</tbody></table>
+<p>The wizard is mounted on the same daemon, so you do not need to
+restart after submitting. The SPA redirects to <code>/</code> once the POST
+returns <code>200</code>.</p>
+<p>Claude Code and Codex CLI runtimes are optional local adapters. Nyx Agent
+does not include or resell model access; use them only with credentials
+and usage patterns allowed by the provider terms.</p>
+<h2 id="attach-a-repo-to-the-project"><a class="docs-anchor" href="#attach-a-repo-to-the-project" aria-label="Link to attach-a-repo-to-the-project" data-pagefind-ignore>#</a>Attach a repo to the project</h2>
+<p>The wizard does not register repos. Two paths: the CLI or
+hand-editing <code>nyx-agent.toml</code>.</p>
+<p>CLI (uses the project you created above):</p>
+<pre><code class="hljs language-bash">nyx-agent project add-repo acme-app acme-backend \
+  --path /abs/path/to/your/checkout \
+  --i-own-this</code></pre>
+<p>For a remote git source:</p>
+<pre><code class="hljs language-bash">nyx-agent project add-repo acme-app acme-backend \
+  --git-url https://github.com/your-org/demo.git \
+  --branch main \
+  --i-own-this</code></pre>
+<p>TOML form (every repo lives inside a <code>[[project]]</code> block):</p>
+<pre><code class="hljs language-toml"><span class="hljs-section">[[project]]</span>
+<span class="hljs-attr">name</span> = <span class="hljs-string">&quot;acme-app&quot;</span>
+<span class="hljs-attr">description</span> = <span class="hljs-string">&quot;Acme web product&quot;</span>
+<span class="hljs-attr">target_base_url</span> = <span class="hljs-string">&quot;http://localhost:3000&quot;</span>
+
+  <span class="hljs-section">[project.launch]</span>
+  <span class="hljs-attr">mode</span> = <span class="hljs-string">&quot;custom-commands&quot;</span>
+
+    <span class="hljs-section">[[project.launch.build]]</span>
+    <span class="hljs-attr">command</span> = <span class="hljs-string">&quot;npm ci&quot;</span>
+    <span class="hljs-attr">repo</span> = <span class="hljs-string">&quot;acme-frontend&quot;</span>
+
+    <span class="hljs-section">[[project.launch.start]]</span>
+    <span class="hljs-attr">command</span> = <span class="hljs-string">&quot;npm run dev&quot;</span>
+    <span class="hljs-attr">repo</span> = <span class="hljs-string">&quot;acme-frontend&quot;</span>
+    <span class="hljs-attr">timeout_secs</span> = <span class="hljs-number">120</span>
+
+    <span class="hljs-section">[[project.launch.health]]</span>
+    <span class="hljs-attr">url</span> = <span class="hljs-string">&quot;http://localhost:3000/health&quot;</span>
+    <span class="hljs-attr">timeout_secs</span> = <span class="hljs-number">60</span>
+
+    <span class="hljs-section">[[project.launch.seed]]</span>
+    <span class="hljs-attr">command</span> = <span class="hljs-string">&quot;npm run seed:test&quot;</span>
+    <span class="hljs-attr">repo</span> = <span class="hljs-string">&quot;acme-backend&quot;</span>
+
+    <span class="hljs-section">[[project.launch.reset]]</span>
+    <span class="hljs-attr">command</span> = <span class="hljs-string">&quot;npm run db:reset&quot;</span>
+    <span class="hljs-attr">repo</span> = <span class="hljs-string">&quot;acme-backend&quot;</span>
+
+  <span class="hljs-section">[[project.repo]]</span>
+  <span class="hljs-attr">name</span> = <span class="hljs-string">&quot;acme-backend&quot;</span>
+  <span class="hljs-attr">i_own_this</span> = <span class="hljs-literal">true</span>
+  <span class="hljs-attr">enabled</span> = <span class="hljs-literal">true</span>
+
+    <span class="hljs-section">[project.repo.source]</span>
+    <span class="hljs-attr">kind</span> = <span class="hljs-string">&quot;local-path&quot;</span>
+    <span class="hljs-attr">path</span> = <span class="hljs-string">&quot;/abs/path/to/your/checkout&quot;</span>
+
+  <span class="hljs-section">[[project.repo]]</span>
+  <span class="hljs-attr">name</span> = <span class="hljs-string">&quot;acme-frontend&quot;</span>
+  <span class="hljs-attr">i_own_this</span> = <span class="hljs-literal">true</span>
+  <span class="hljs-attr">enabled</span> = <span class="hljs-literal">true</span>
+
+    <span class="hljs-section">[project.repo.source]</span>
+    <span class="hljs-attr">kind</span> = <span class="hljs-string">&quot;git&quot;</span>
+    <span class="hljs-attr">url</span> = <span class="hljs-string">&quot;https://github.com/your-org/frontend.git&quot;</span>
+    <span class="hljs-attr">branch</span> = <span class="hljs-string">&quot;main&quot;</span>             <span class="hljs-comment"># optional; defaults to the remote HEAD</span>
+    <span class="hljs-comment"># auth = &quot;token-env:GITHUB_TOKEN&quot;</span></code></pre>
+<p>Save the file and the daemon picks up the change on the next scan.
+There is no SIGHUP reload; the in-flight HTTP / WS / scheduler state
+keeps running, the config struct is re-read per scan.</p>
+<p>With <code>[project.launch]</code> present, a scan builds and starts the local app,
+waits for the health URL, runs seed hooks, and captures lifecycle logs
+under <code>&lt;state&gt;/logs/environment/&lt;run-id&gt;/</code>. Leave the launch table out
+when the app is already running and you only want static source context.</p>
+<p>Field reference:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>[[project]] name</code></td>
+<td>Unique project name. Used in CLI flags (<code>--project NAME</code>), in API paths (<code>/api/v1/projects/:id</code>), and in run records.</td>
+</tr>
+<tr>
+<td><code>[[project]] description</code></td>
+<td>Optional free-form description rendered in the SPA.</td>
+</tr>
+<tr>
+<td><code>[[project]] target_base_url</code></td>
+<td>Optional deployed-target base URL. Flows into the sandbox env-builder as a compose override so confirmed exploits can address the right host.</td>
+</tr>
+<tr>
+<td><code>[[project.repo]] name</code></td>
+<td>Operator-facing repo identifier. Used in <code>--repo NAME</code>, the UI, and run records. Must be unique within the project.</td>
+</tr>
+<tr>
+<td><code>[[project.repo]] i_own_this</code></td>
+<td>Per-repo consent gate. The daemon refuses to ingest without it.</td>
+</tr>
+<tr>
+<td><code>[[project.repo]] enabled</code></td>
+<td>Defaults to <code>true</code>. Set <code>false</code> to keep the entry in the file but skip it during scans.</td>
+</tr>
+<tr>
+<td><code>[project.repo.source] kind</code></td>
+<td><code>local-path</code> or <code>git</code>.</td>
+</tr>
+<tr>
+<td><code>[project.repo.source] path</code></td>
+<td><code>local-path</code> only. Absolute path to a checkout on disk.</td>
+</tr>
+<tr>
+<td><code>[project.repo.source] url</code></td>
+<td><code>git</code> only. Clone URL.</td>
+</tr>
+<tr>
+<td><code>[project.repo.source] branch</code></td>
+<td><code>git</code> only. Optional branch override.</td>
+</tr>
+<tr>
+<td><code>[project.repo.source] auth</code></td>
+<td><code>git</code> only. Credential descriptor: <code>ssh-key:&lt;path&gt;</code>, <code>token-env:&lt;var&gt;</code>, or <code>gh-app:&lt;id&gt;</code>.</td>
+</tr>
+</tbody></table>
+<h2 id="trigger-a-scan"><a class="docs-anchor" href="#trigger-a-scan" aria-label="Link to trigger-a-scan" data-pagefind-ignore>#</a>Trigger a scan</h2>
+<p>Three ways to kick a scan, all using the same dispatcher.</p>
+<p><strong>From the UI:</strong> open the project detail page and click <strong>Start
+pentest</strong>. The button opens a safety modal. Leave exploit mode and
+state-changing probes off for the default non-destructive run; turn
+both on only for an owned, disposable target where mutating live
+probes are acceptable. The page subscribes to the WebSocket and
+streams <code>RunStarted</code>, <code>RepoStarted</code>, <code>RepoFinished</code>, and
+<code>RunCompleted</code> frames as they arrive.</p>
+<p><strong>From the CLI:</strong></p>
+<pre><code class="hljs language-bash">nyx-agent scan --project acme-app
+nyx-agent scan --project acme-app --repo acme-backend</code></pre>
+<p>Without <code>--project</code>, every enabled project runs. <code>--repo NAME</code>
+narrows within the selected projects and is rejected unless at
+least one <code>--project</code> is set. With <code>--output report.json</code> the scan
+writes a machine-readable report you can pass to <code>pr-comment --report</code> or to an external dashboard. With <code>--since-ref main</code> the
+report is filtered to findings whose <code>path</code> the working tree
+changed against <code>main</code> (uses <code>git diff --name-only</code>); the scan
+exits non-zero if the diff cannot be computed.</p>
+<p><strong>Via HTTP</strong> (assumes the loopback default and an auth token):</p>
+<pre><code class="hljs language-bash">TOKEN=$(<span class="hljs-built_in">cat</span> ~/.local/share/nyx-agent/auth_token)
+curl -sS -X POST \
+  -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">$TOKEN</span>&quot;</span> \
+  http://127.0.0.1:8765/api/v1/projects/&lt;project_id&gt;/scan</code></pre>
+<p>The dispatcher responds <code>202</code> with a <code>run_id</code> you can poll on
+<code>/api/v1/runs/&lt;id&gt;</code> or subscribe to via <code>/api/v1/runs/&lt;id&gt;/events</code>
+(WebSocket). The <code>&lt;project_id&gt;</code> is the id returned from <code>nyx-agent project list</code> or <code>POST /api/v1/projects</code>. See <code>docs/api.md</code>
+(forthcoming) for the full route reference.</p>
+<h2 id="read-the-results"><a class="docs-anchor" href="#read-the-results" aria-label="Link to read-the-results" data-pagefind-ignore>#</a>Read the results</h2>
+<p>CLI (one block per scanned project):</p>
+<pre><code class="hljs language-plain"><span class="hljs-keyword">scan: </span>project acme-app run <span class="hljs-number">01</span>J... finished in <span class="hljs-number">12</span>_345ms - <span class="hljs-number">1</span> succeeded, <span class="hljs-number">0</span> inconclusive, <span class="hljs-number">0</span> failed
+  - acme-<span class="hljs-keyword">backend: </span>Succeeded (<span class="hljs-keyword">diags: </span><span class="hljs-number">7</span>, <span class="hljs-number">12</span>_180ms)</code></pre>
+<p>SPA: the findings table shows every persisted finding with severity,
+status, repo, path, and the cap label. Filters live on the toolbar.
+<code>Quarantine</code> is its own tab; findings the AI surfaced but the
+dynamic verifier did not yet confirm sit there until promoted.</p>
+<p>CLI inspectors:</p>
+<pre><code class="hljs language-bash">nyx-agent inspect quarantine    <span class="hljs-comment"># quarantined findings + AI candidates</span>
+nyx-agent traces                <span class="hljs-comment"># AI conversation traces (recent first)</span>
+nyx-agent traces --finding F... <span class="hljs-comment"># traces scoped to one finding</span></code></pre>
+<h2 id="recurring-remote-triggers"><a class="docs-anchor" href="#recurring-remote-triggers" aria-label="Link to recurring-remote-triggers" data-pagefind-ignore>#</a>Recurring + remote triggers</h2>
+<p>Two no-touch paths kick a scan without the daemon&#39;s UI or CLI:</p>
+<ul>
+<li><code>[[schedule]]</code> cron entries fire from the in-process scheduler.
+See <code>docs/triggers/cron.md</code>.</li>
+<li><code>POST /webhook/git</code> accepts HMAC-signed pushes from any
+self-hosted git server. See <code>docs/triggers/webhook.md</code>.</li>
+</ul>
+<p>For CI gating, the shipped composite GitHub Action runs a scan and
+posts a dedup&#39;d PR comment. See <code>docs/ci/github-actions.md</code>.</p>
+<h2 id="common-failure-modes"><a class="docs-anchor" href="#common-failure-modes" aria-label="Link to common-failure-modes" data-pagefind-ignore>#</a>Common failure modes</h2>
+<h3 id="scan-no-repositories-selected-configure-one-in-nyx-agenttoml"><a class="docs-anchor" href="#scan-no-repositories-selected-configure-one-in-nyx-agenttoml" aria-label="Link to scan-no-repositories-selected-configure-one-in-nyx-agenttoml" data-pagefind-ignore>#</a><code>scan: no repositories selected; configure one in nyx-agent.toml</code></h3>
+<p>No <code>[[project]]</code> blocks define any repos, every entry has <code>enabled = false</code>, or <code>--project NAME</code> / <code>--repo NAME</code> did not match a
+configured entry. Add one per the <a href="#attach-a-repo-to-the-project">Attach a repo to the
+project</a> section.</p>
+<h3 id="scan---repo-requires---project-context-or-use---project-to-scan-whole-projects"><a class="docs-anchor" href="#scan---repo-requires---project-context-or-use---project-to-scan-whole-projects" aria-label="Link to scan---repo-requires---project-context-or-use---project-to-scan-whole-projects" data-pagefind-ignore>#</a><code>scan: --repo requires --project context (or use --project to scan whole projects)</code></h3>
+<p><code>--repo NAME</code> was passed without a <code>--project</code>. Scoping is
+intentionally explicit; add <code>--project NAME</code> (repeatable) to
+narrow the search space first.</p>
+<h3 id="browser-opens-but-the-spa-shows-needs-configuration"><a class="docs-anchor" href="#browser-opens-but-the-spa-shows-needs-configuration" aria-label="Link to browser-opens-but-the-spa-shows-needs-configuration" data-pagefind-ignore>#</a>Browser opens but the SPA shows &quot;needs configuration&quot;</h3>
+<p><code>nyx-agent.toml</code> is missing. Either complete the wizard at <code>/setup</code>
+or write the file by hand and reload. The daemon does not require
+a restart.</p>
+<h3 id="error-bind-1270018765-address-already-in-use"><a class="docs-anchor" href="#error-bind-1270018765-address-already-in-use" aria-label="Link to error-bind-1270018765-address-already-in-use" data-pagefind-ignore>#</a><code>error: bind 127.0.0.1:8765: Address already in use</code></h3>
+<p>Another <code>nyx-agent serve</code> (or another process) holds the port. Stop
+the other process, or pass <code>--listen 127.0.0.1:0</code> to pick a free
+port and read the actual address off the <code>ready on ...</code> line.</p>
+<h3 id="scan-exits-1-with-no-diagnostics"><a class="docs-anchor" href="#scan-exits-1-with-no-diagnostics" aria-label="Link to scan-exits-1-with-no-diagnostics" data-pagefind-ignore>#</a>Scan exits 1 with no diagnostics</h3>
+<p>The static-pass succeeded but at least one repo reported a failure
+(ingest error, scanner panic, or <code>Inconclusive</code> outcome). The CLI
+report lists per-repo status; the SPA&#39;s run detail view shows the
+full failure path including <code>nyx</code> stderr.</p>
+<h2 id="related-pages"><a class="docs-anchor" href="#related-pages" aria-label="Link to related-pages" data-pagefind-ignore>#</a>Related pages</h2>
+<ul>
+<li><code>docs/install.md</code>: building from source and verifying <code>nyx-agent doctor</code>.</li>
+<li><code>docs/triggers/cron.md</code>: recurring scans via <code>[[schedule]]</code>.</li>
+<li><code>docs/triggers/webhook.md</code>: push-driven scans via signed HTTP.</li>
+<li><code>docs/ci/github-actions.md</code>: PR-gate composite Action.</li>
+</ul>
+
+          </div>
+          <nav class="docs-prevnext" aria-label="Page navigation"><a class="docs-prevnext__link docs-prevnext__link--prev" href="install.html">
+        <span class="docs-prevnext__label">Previous</span>
+        <span class="docs-prevnext__title">Install</span>
+      </a><a class="docs-prevnext__link docs-prevnext__link--next" href="cli.html">
+        <span class="docs-prevnext__label">Next</span>
+        <span class="docs-prevnext__title">CLI</span>
+      </a></nav>
+        </article>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <p class="site-footer__copy">© 2026 Eli Peter · Nyx Agent is licensed under AGPL-3.0-or-later.</p>
+        <nav class="site-footer__nav" aria-label="Footer">
+          <a href="../../">Home</a>
+          <a href="../../scanner.html">Scanner</a>
+          <a href="../../agent.html">Agent</a>
+          <a href="../../news/">News</a>
+          <a href="../../docs/">Docs</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Events | Nyx Agent docs</title>
+    <meta name="description" content="Nyx Agent publishes every observable state change to a single in-process tokio::sync::broadcast channel. The HTTP server fans the channel out over GET /api/v1/events as a WebSocket; the frontend's..." />
+    <meta name="keywords" content="Nyx Agent, nyx-agent, local pentesting, live appsec testing, verified vulnerabilities, stored evidence, Architecture, Events, api, WebSocket, AI, JSON" />
+    <meta name="author" content="Eli Peter" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <link rel="canonical" href="https://nyxscan.dev/docs/agent/events.html" />
+    <link rel="sitemap" type="application/xml" href="https://nyxscan.dev/sitemap.xml" />
+    <link rel="alternate" hreflang="en" href="https://nyxscan.dev/docs/agent/events.html" />
+    <link rel="alternate" hreflang="x-default" href="https://nyxscan.dev/docs/agent/events.html" />
+    <link rel="prev" href="business-logic-templates.html" />
+    <link rel="next" href="ai-runtime.html" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="64x64" href="../../favicon-64.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../../favicon-180.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="alternate" type="application/rss+xml" title="Nyx | News &amp; release notes" href="/news/feed.xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../styles.css" />
+    <script defer src="../../docs/search.js"></script>
+
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Nyx" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="Events" />
+    <meta property="og:description" content="Nyx Agent publishes every observable state change to a single in-process tokio::sync::broadcast channel. The HTTP server fans the channel out over GET /api/v1/events as a WebSocket; the frontend's..." />
+    <meta property="og:url" content="https://nyxscan.dev/docs/agent/events.html" />
+    <meta property="og:image" content="https://nyxscan.dev/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Nyx Agent local pentesting documentation" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Events" />
+    <meta name="twitter:description" content="Nyx Agent publishes every observable state change to a single in-process tokio::sync::broadcast channel. The HTTP server fans the channel out over GET /api/v1/events as a WebSocket; the frontend's..." />
+    <meta name="twitter:image" content="https://nyxscan.dev/og-image.png" />
+    <meta name="twitter:image:alt" content="Nyx Agent local pentesting documentation" />
+    <meta name="theme-color" content="#F9F8F4" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://nyxscan.dev/#person",
+      "name": "Eli Peter",
+      "url": "https://github.com/elicpeter",
+      "sameAs": [
+        "https://github.com/elicpeter",
+        "https://github.com/sponsors/elicpeter"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://nyxscan.dev/#website",
+      "url": "https://nyxscan.dev/",
+      "name": "Nyx",
+      "description": "Local security tooling for deterministic scanning and live testing.",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://nyxscan.dev/#person"
+      }
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://nyxscan.dev/docs/agent/events.html#article",
+      "headline": "Events",
+      "name": "Events",
+      "url": "https://nyxscan.dev/docs/agent/events.html",
+      "description": "Nyx Agent publishes every observable state change to a single in-process tokio::sync::broadcast channel. The HTTP server fans the channel out over GET /api/v1/events as a WebSocket; the frontend's...",
+      "inLanguage": "en",
+      "articleSection": "Architecture",
+      "isPartOf": {
+        "@id": "https://nyxscan.dev/#website"
+      },
+      "publisher": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "author": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "image": "https://nyxscan.dev/og-image.png",
+      "mainEntityOfPage": "https://nyxscan.dev/docs/agent/events.html"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://nyxscan.dev/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Docs",
+          "item": "https://nyxscan.dev/docs/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Nyx Agent docs",
+          "item": "https://nyxscan.dev/docs/agent/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Events",
+          "item": "https://nyxscan.dev/docs/agent/events.html"
+        }
+      ],
+      "@id": "https://nyxscan.dev/docs/agent/events.html#breadcrumbs"
+    }
+  ]
+}
+    </script>
+  </head>
+  <body class="docs-body">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" aria-label="Primary navigation">
+      <div class="container site-header__inner">
+        <a class="brand" href="../../" aria-label="Nyx home">
+          <img src="../../assets/logo.png" alt="Nyx" class="brand-logo" />
+        </a>
+        <span class="header-wordmark">NYX</span>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="../../scanner.html">Scanner</a>
+          <a href="../../agent.html">Agent</a>
+          <a href="../../news/">News</a>
+          <a href="../../docs/" aria-current="page">Docs</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="docs-page">
+      <div class="docs-shell">
+        <nav class="docs-sidebar" aria-label="Documentation"><a class="docs-sidebar__brand" href="./">Agent docs</a><a class="docs-sidebar__home" href="../">All docs</a><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Get started</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="install.html">Install</a></li><li><a class="docs-sidebar__link" href="quickstart.html">Quickstart</a></li><li><a class="docs-sidebar__link" href="cli.html">CLI</a></li><li><a class="docs-sidebar__link" href="config.html">Config</a></li><li><a class="docs-sidebar__link" href="state-dir.html">State Directory</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Architecture</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="architecture.html">Architecture</a></li><li><a class="docs-sidebar__link" href="runs.html">Runs</a></li><li><a class="docs-sidebar__link" href="attack-graph.html">Attack Graph</a></li><li><a class="docs-sidebar__link" href="business-logic-templates.html">Business Logic Templates</a></li><li><a class="docs-sidebar__link" href="events.html" aria-current="page">Events</a></li><li><a class="docs-sidebar__link" href="ai-runtime.html">AI Runtime</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Projects</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="cli.html#project">CLI: Project</a></li><li><a class="docs-sidebar__link" href="quickstart.html#create-a-project">Quickstart: Create a Project</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">HTTP API</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="api.html">API</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Triggers</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="triggers/index.html">Overview</a></li><li><a class="docs-sidebar__link" href="triggers/cron.html">Cron</a></li><li><a class="docs-sidebar__link" href="triggers/webhook.html">Webhook</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">CI integration</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="ci/github-actions.html">GitHub Actions</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Contributor docs</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="dev/sqlx.html">SQLx</a></li><li><a class="docs-sidebar__link" href="dev/frontend.html">Frontend</a></li></ul></div></nav>
+        <article class="docs-content">
+          <div class="docs-search docs-search--content" data-docs-search>
+    <label class="visually-hidden" for="docs-search-input">Search docs</label>
+    <div class="docs-search__control">
+      <span class="docs-search__icon" aria-hidden="true"></span>
+      <input id="docs-search-input" data-docs-search-input type="search" placeholder="Search docs" autocomplete="off" autocapitalize="none" spellcheck="false" role="combobox" aria-autocomplete="list" aria-controls="docs-search-results" aria-expanded="false" />
+      <kbd class="docs-search__key" aria-hidden="true">⌘K</kbd>
+    </div>
+    <div class="docs-search__panel" data-docs-search-panel hidden>
+      <div class="docs-search__status" data-docs-search-status></div>
+      <div class="docs-search__results" id="docs-search-results" data-docs-search-results role="listbox" aria-label="Search results"></div>
+    </div>
+  </div>
+          <div class="docs-prose" data-pagefind-body>
+<h1 id="events"><a class="docs-anchor" href="#events" aria-label="Link to events" data-pagefind-ignore>#</a>Events</h1>
+<p>Nyx Agent publishes every observable state change to a single in-process
+<code>tokio::sync::broadcast</code> channel. The HTTP server fans the channel
+out over <code>GET /api/v1/events</code> as a WebSocket; the frontend&#39;s
+LiveScanView reads it to drive per-repo badges, the AI trace viewer
+reads it to follow per-task token spend, and tests subscribe to it
+to assert ordering.</p>
+<p>This page documents the wire shape and the ordering contract. The
+typed source is <code>crates/nyx-agent-types/src/event.rs</code>.</p>
+<h2 id="wire-shape"><a class="docs-anchor" href="#wire-shape" aria-label="Link to wire-shape" data-pagefind-ignore>#</a>Wire shape</h2>
+<p>Every frame is one JSON-encoded <code>AgentEvent</code> value. The outer
+envelope tags the family:</p>
+<pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;kind&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Run&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;data&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;kind&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;RunStarted&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;run_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;...&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;...&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;...&quot;</span> <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span></code></pre>
+<p><code>kind</code> carries the family (<code>Run</code>, <code>Ai</code>, <code>Sandbox</code>, <code>Finding</code>,
+<code>Budget</code>, <code>Quarantine</code>, <code>Repro</code>); <code>data</code> carries a family-specific
+variant that also has its own <code>kind</code> discriminant. Both layers use
+serde internally-tagged enums, so a TypeScript consumer can pattern
+match on <code>event.kind</code> then <code>event.data.kind</code>.</p>
+<p><code>Run</code> and <code>Ai</code> are the only families that publish today. The other
+five are placeholder unit variants reserved for future publishers
+(<code>SandboxEvent</code>, <code>FindingEvent</code>, <code>BudgetEvent</code>, <code>QuarantineEvent</code>,
+<code>ReproEvent</code> are empty structs at
+<code>crates/nyx-agent-types/src/event.rs:180-192</code>). Subscribers should
+ignore unknown variants, not panic.</p>
+<h2 id="subscribing"><a class="docs-anchor" href="#subscribing" aria-label="Link to subscribing" data-pagefind-ignore>#</a>Subscribing</h2>
+<p><code>GET /api/v1/events[?run_id=&lt;id&gt;][&amp;token=&lt;token&gt;]</code></p>
+<p>WebSocket upgrade against the daemon. Bearer auth applies; pass the
+<code>Authorization: Bearer ...</code> header or the <code>?token=...</code> query param.</p>
+<table>
+<thead>
+<tr>
+<th>Query param</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>run_id</code></td>
+<td>Filter the live stream to one run. The server replays the buffered events for that run first, then streams matching live events.</td>
+</tr>
+<tr>
+<td><code>token</code></td>
+<td>Auth fallback for clients that cannot set the header.</td>
+</tr>
+</tbody></table>
+<p>Without <code>run_id</code>, every frame the broadcast channel publishes lands
+on the socket unfiltered. With <code>run_id</code>, the filter applies to
+every <code>RunEvent</code> variant that carries a <code>run_id</code> field (i.e. every
+variant except <code>Heartbeat</code>, which passes through any filter so the
+client can detect a healthy idle socket). <code>AiEvent</code> variants carry
+<code>run_id</code> only on <code>BudgetTick</code>; the others are not currently
+filtered.</p>
+<p>Client-initiated frames are dropped except for <code>ping</code> (mirrored to
+<code>pong</code>) and <code>close</code> (terminates the stream). The socket is
+server-push only.</p>
+<h2 id="runevent-per-run-lifecycle"><a class="docs-anchor" href="#runevent-per-run-lifecycle" aria-label="Link to runevent-per-run-lifecycle" data-pagefind-ignore>#</a><code>RunEvent</code>: per-run lifecycle</h2>
+<p>Run events fire in a fixed order. A subscriber that joins mid-run
+sees the buffered prefix replayed first, then live events from the
+join point onwards.</p>
+<pre><code class="hljs language-plain">RunStarted
+  ProjectStarted
+    RepoStarted        (<span class="hljs-literal">one</span> per repo)
+      RepoStaticDone | RepoFailed | RepoDynamicDone
+    RepoFinished       (<span class="hljs-literal">one</span> per repo, always <span class="hljs-keyword">after</span> <span class="hljs-keyword">the</span> above)
+    ... (more repos)
+  ProjectFinished
+RunFinished</code></pre>
+<table>
+<thead>
+<tr>
+<th>Variant</th>
+<th>Fired by</th>
+<th>Carries</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>RunStarted</code></td>
+<td>dispatcher, once per run</td>
+<td><code>run_id</code>, <code>project_id</code>, <code>repos: Vec&lt;String&gt;</code>, <code>started_at_ms</code></td>
+</tr>
+<tr>
+<td><code>ProjectStarted</code></td>
+<td>dispatcher, once per project</td>
+<td><code>run_id</code>, <code>project_id</code>, <code>project_name</code>, <code>started_at_ms</code></td>
+</tr>
+<tr>
+<td><code>RepoStarted</code></td>
+<td>rayon worker, once per repo</td>
+<td><code>run_id</code>, <code>project_id</code>, <code>repo</code>, <code>started_at_ms</code></td>
+</tr>
+<tr>
+<td><code>RepoStaticDone</code></td>
+<td>static-pass success</td>
+<td><code>n_diags: u32</code>, <code>elapsed_ms</code></td>
+</tr>
+<tr>
+<td><code>RepoFailed</code></td>
+<td>static-pass timeout / scanner refusal</td>
+<td><code>message: String</code>, <code>elapsed_ms</code></td>
+</tr>
+<tr>
+<td><code>RepoDynamicDone</code></td>
+<td>reserved for the sandbox publisher</td>
+<td><code>elapsed_ms</code></td>
+</tr>
+<tr>
+<td><code>RepoFinished</code></td>
+<td>terminator, always last per repo</td>
+<td><code>outcome: RepoOutcomeTag</code>, <code>elapsed_ms</code></td>
+</tr>
+<tr>
+<td><code>ProjectFinished</code></td>
+<td>dispatcher, once per project</td>
+<td><code>finished_at_ms</code></td>
+</tr>
+<tr>
+<td><code>RunFinished</code></td>
+<td>dispatcher, once per run</td>
+<td><code>finished_at_ms</code>, <code>wall_clock_ms</code>, <code>succeeded</code>, <code>inconclusive</code>, <code>failed</code></td>
+</tr>
+<tr>
+<td><code>Heartbeat</code></td>
+<td>reserved variant; no publisher today</td>
+<td><code>ts: i64</code></td>
+</tr>
+</tbody></table>
+<p><code>RepoFinished.outcome</code> is <code>RepoOutcomeTag::Success</code>,
+<code>Inconclusive</code>, or <code>Failed</code>. The full typed outcome lives on the
+in-process <code>RepoBundle</code>; the tag is the colour a UI badge needs.</p>
+<p>The publishers live at:</p>
+<ul>
+<li><code>crates/nyx-agent-core/src/run/mod.rs:282-348</code> (run / project / repo
+fan-out and terminators).</li>
+<li><code>crates/nyx-agent-core/src/run/mod.rs:404-464</code> (per-repo
+<code>RepoStarted</code> / <code>RepoStaticDone</code> / <code>RepoFailed</code> /
+<code>RepoFinished</code>).</li>
+<li><code>crates/nyx-agent/src/main.rs:578</code> (out-of-band <code>RepoFailed</code> when
+the API-driven scan path rejects the request before reaching the
+dispatcher).</li>
+</ul>
+<h2 id="aievent-per-task-ai-runtime-stream"><a class="docs-anchor" href="#aievent-per-task-ai-runtime-stream" aria-label="Link to aievent-per-task-ai-runtime-stream" data-pagefind-ignore>#</a><code>AiEvent</code>: per-task AI runtime stream</h2>
+<p>AI adapters publish into the same bus, one frame per token, tool
+call, cache event, budget tick, or halt. <code>task_id</code> is the
+caller-supplied identifier from the <code>Prompt</code> or <code>AgentTask</code>;
+subscribers fan out by <code>task_id</code> to multiplex concurrent calls on a
+single socket.</p>
+<table>
+<thead>
+<tr>
+<th>Variant</th>
+<th>Fired when</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>TokenReceived</code></td>
+<td>streaming text chunk arrives</td>
+</tr>
+<tr>
+<td><code>ToolCallStarted</code></td>
+<td>adapter invokes a tool</td>
+</tr>
+<tr>
+<td><code>ToolCallFinished</code></td>
+<td>tool returned (with <code>ok: bool</code>)</td>
+</tr>
+<tr>
+<td><code>CacheHit</code></td>
+<td>prompt cache served <code>tokens</code> tokens</td>
+</tr>
+<tr>
+<td><code>CacheMiss</code></td>
+<td>prompt cache wrote <code>tokens</code> tokens</td>
+</tr>
+<tr>
+<td><code>BudgetTick</code></td>
+<td>adapter charged the budget (carries <code>run_id</code> and <code>spent_usd_micros</code>)</td>
+</tr>
+<tr>
+<td><code>TaskHalted</code></td>
+<td>terminator; <code>reason: HaltReason</code> is <code>BudgetCapReached</code>, <code>OperatorCancelled</code>, or <code>UpstreamRefused</code></td>
+</tr>
+</tbody></table>
+<p>Adapter publishers live in
+<code>crates/nyx-agent-ai/src/adapter/anthropic.rs</code> and
+<code>crates/nyx-agent-ai/src/adapter/claude_code.rs</code>; the exploration task
+publishes one of its own at
+<code>crates/nyx-agent-ai/src/tasks/exploration.rs:262</code>.</p>
+<p><code>TaskHalted</code> is the only AI variant the adapter guarantees to send
+on every code path. The others fire on a best-effort basis: a
+backend that has no cache reports zero <code>CacheHit</code> / <code>CacheMiss</code>,
+and a non-streaming completion path skips <code>TokenReceived</code>.</p>
+<h2 id="replay-buffer"><a class="docs-anchor" href="#replay-buffer" aria-label="Link to replay-buffer" data-pagefind-ignore>#</a>Replay buffer</h2>
+<p>The HTTP server keeps a small in-memory ring per run so a
+LiveScanView that opens after the dispatcher kicks off still sees
+<code>RunStarted</code> and the first few <code>RepoStarted</code> frames. The buffer
+shape is fixed:</p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Value</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Frames per run</td>
+<td>128</td>
+<td><code>crates/nyx-agent-api/src/state.rs:113</code></td>
+</tr>
+<tr>
+<td>Tracked runs</td>
+<td>16</td>
+<td><code>crates/nyx-agent-api/src/state.rs:117</code></td>
+</tr>
+<tr>
+<td>Eviction</td>
+<td>least-recently-touched run</td>
+<td><code>crates/nyx-agent-api/src/state.rs:148-154</code></td>
+</tr>
+</tbody></table>
+<p><code>Heartbeat</code> frames are not buffered (no <code>run_id</code> to scope to).
+Every other <code>RunEvent</code> variant is. <code>AiEvent</code>, <code>SandboxEvent</code>, and
+the other placeholder families are not buffered today; if the WS
+client joined after the relevant frame, it is lost.</p>
+<p>A tap task in <code>crates/nyx-agent/src/main.rs:989-1000</code> subscribes
+to the broadcast channel and pushes every event into the replay
+buffer. When a WS client opens with <code>?run_id=&lt;id&gt;</code>, the handler
+calls <code>EventReplay::snapshot(run_id)</code> before joining the live
+stream, emits the snapshot frames first, then forwards live
+matches. Duplicate frames are harmless because frontend reducers
+fold per-key (e.g. <code>RepoStarted</code> for the same repo is
+idempotent).</p>
+<h2 id="bus-capacity-and-lagged"><a class="docs-anchor" href="#bus-capacity-and-lagged" aria-label="Link to bus-capacity-and-lagged" data-pagefind-ignore>#</a>Bus capacity and <code>Lagged</code></h2>
+<p>The broadcast channel is sized at startup:</p>
+<ul>
+<li>256 frames for the serve path (<code>crates/nyx-agent/src/main.rs:928</code>).</li>
+<li>16 frames for the headless wizard path
+(<code>crates/nyx-agent/src/main.rs:443</code>), since no WS clients
+attach.</li>
+</ul>
+<p>When a subscriber falls more than capacity frames behind, tokio
+drops the missed frames and surfaces a <code>RecvError::Lagged(n)</code> on
+the next <code>recv</code>. The WS handler translates that into a synthetic
+warning frame so the client can re-fetch state:</p>
+<pre><code class="hljs language-json"><span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;kind&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Lagged&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;skipped&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">42</span> <span class="hljs-punctuation">}</span></code></pre>
+<p><code>Lagged</code> is the only frame the WS layer fabricates; every other
+frame is a serialised <code>AgentEvent</code> value. Clients should treat
+<code>Lagged</code> as a hint to drop cached deltas and refetch
+<code>/api/v1/runs/&lt;id&gt;</code> for authoritative state.</p>
+<h2 id="related-pages"><a class="docs-anchor" href="#related-pages" aria-label="Link to related-pages" data-pagefind-ignore>#</a>Related pages</h2>
+<ul>
+<li><a href="api.html">api.md</a>: the rest of the <code>/api/v1/</code> surface, including
+the bearer-auth contract that gates the WS handshake.</li>
+<li><a href="runs.html">runs.md</a>: the run lifecycle these events project (the
+dispatcher&#39;s per-repo fan-out and the <code>RunBundle</code> aggregation
+that produces <code>RepoOutcomeTag</code>).</li>
+<li><a href="architecture.html">architecture.md</a>: where the broadcast channel
+sits in the wider tokio + rayon process model.</li>
+</ul>
+
+          </div>
+          <nav class="docs-prevnext" aria-label="Page navigation"><a class="docs-prevnext__link docs-prevnext__link--prev" href="business-logic-templates.html">
+        <span class="docs-prevnext__label">Previous</span>
+        <span class="docs-prevnext__title">Business Logic Templates</span>
+      </a><a class="docs-prevnext__link docs-prevnext__link--next" href="ai-runtime.html">
+        <span class="docs-prevnext__label">Next</span>
+        <span class="docs-prevnext__title">AI Runtime</span>
+      </a></nav>
+        </article>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <p class="site-footer__copy">© 2026 Eli Peter · Nyx Agent is licensed under AGPL-3.0-or-later.</p>
+        <nav class="site-footer__nav" aria-label="Footer">
+          <a href="../../">Home</a>
+          <a href="../../scanner.html">Scanner</a>
+          <a href="../../agent.html">Agent</a>
+          <a href="../../news/">News</a>
+          <a href="../../docs/">Docs</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

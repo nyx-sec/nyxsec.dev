@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Attack Graph | Nyx Agent docs</title>
+    <meta name="description" content="Nyx Agent stores an attack graph as a run-scoped index over the artifacts the scanner and agent pipeline already persist. It does not replace the source tables; nyxsignals, pentestcandidates..." />
+    <meta name="keywords" content="Nyx Agent, nyx-agent, local pentesting, live appsec testing, verified vulnerabilities, stored evidence, Architecture, Attack Graph, JSON, API, AI, json" />
+    <meta name="author" content="Eli Peter" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <link rel="canonical" href="https://nyxscan.dev/docs/agent/attack-graph.html" />
+    <link rel="sitemap" type="application/xml" href="https://nyxscan.dev/sitemap.xml" />
+    <link rel="alternate" hreflang="en" href="https://nyxscan.dev/docs/agent/attack-graph.html" />
+    <link rel="alternate" hreflang="x-default" href="https://nyxscan.dev/docs/agent/attack-graph.html" />
+    <link rel="prev" href="runs.html" />
+    <link rel="next" href="business-logic-templates.html" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="64x64" href="../../favicon-64.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../../favicon-180.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="alternate" type="application/rss+xml" title="Nyx | News &amp; release notes" href="/news/feed.xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../styles.css" />
+    <script defer src="../../docs/search.js"></script>
+
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Nyx" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="Attack Graph" />
+    <meta property="og:description" content="Nyx Agent stores an attack graph as a run-scoped index over the artifacts the scanner and agent pipeline already persist. It does not replace the source tables; nyxsignals, pentestcandidates..." />
+    <meta property="og:url" content="https://nyxscan.dev/docs/agent/attack-graph.html" />
+    <meta property="og:image" content="https://nyxscan.dev/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Nyx Agent local pentesting documentation" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Attack Graph" />
+    <meta name="twitter:description" content="Nyx Agent stores an attack graph as a run-scoped index over the artifacts the scanner and agent pipeline already persist. It does not replace the source tables; nyxsignals, pentestcandidates..." />
+    <meta name="twitter:image" content="https://nyxscan.dev/og-image.png" />
+    <meta name="twitter:image:alt" content="Nyx Agent local pentesting documentation" />
+    <meta name="theme-color" content="#F9F8F4" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://nyxscan.dev/#person",
+      "name": "Eli Peter",
+      "url": "https://github.com/elicpeter",
+      "sameAs": [
+        "https://github.com/elicpeter",
+        "https://github.com/sponsors/elicpeter"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://nyxscan.dev/#website",
+      "url": "https://nyxscan.dev/",
+      "name": "Nyx",
+      "description": "Local security tooling for deterministic scanning and live testing.",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://nyxscan.dev/#person"
+      }
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://nyxscan.dev/docs/agent/attack-graph.html#article",
+      "headline": "Attack Graph",
+      "name": "Attack Graph",
+      "url": "https://nyxscan.dev/docs/agent/attack-graph.html",
+      "description": "Nyx Agent stores an attack graph as a run-scoped index over the artifacts the scanner and agent pipeline already persist. It does not replace the source tables; nyxsignals, pentestcandidates...",
+      "inLanguage": "en",
+      "articleSection": "Architecture",
+      "isPartOf": {
+        "@id": "https://nyxscan.dev/#website"
+      },
+      "publisher": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "author": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "image": "https://nyxscan.dev/og-image.png",
+      "mainEntityOfPage": "https://nyxscan.dev/docs/agent/attack-graph.html"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://nyxscan.dev/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Docs",
+          "item": "https://nyxscan.dev/docs/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Nyx Agent docs",
+          "item": "https://nyxscan.dev/docs/agent/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Attack Graph",
+          "item": "https://nyxscan.dev/docs/agent/attack-graph.html"
+        }
+      ],
+      "@id": "https://nyxscan.dev/docs/agent/attack-graph.html#breadcrumbs"
+    }
+  ]
+}
+    </script>
+  </head>
+  <body class="docs-body">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" aria-label="Primary navigation">
+      <div class="container site-header__inner">
+        <a class="brand" href="../../" aria-label="Nyx home">
+          <img src="../../assets/logo.png" alt="Nyx" class="brand-logo" />
+        </a>
+        <span class="header-wordmark">NYX</span>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="../../scanner.html">Scanner</a>
+          <a href="../../agent.html">Agent</a>
+          <a href="../../news/">News</a>
+          <a href="../../docs/" aria-current="page">Docs</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="docs-page">
+      <div class="docs-shell">
+        <nav class="docs-sidebar" aria-label="Documentation"><a class="docs-sidebar__brand" href="./">Agent docs</a><a class="docs-sidebar__home" href="../">All docs</a><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Get started</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="install.html">Install</a></li><li><a class="docs-sidebar__link" href="quickstart.html">Quickstart</a></li><li><a class="docs-sidebar__link" href="cli.html">CLI</a></li><li><a class="docs-sidebar__link" href="config.html">Config</a></li><li><a class="docs-sidebar__link" href="state-dir.html">State Directory</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Architecture</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="architecture.html">Architecture</a></li><li><a class="docs-sidebar__link" href="runs.html">Runs</a></li><li><a class="docs-sidebar__link" href="attack-graph.html" aria-current="page">Attack Graph</a></li><li><a class="docs-sidebar__link" href="business-logic-templates.html">Business Logic Templates</a></li><li><a class="docs-sidebar__link" href="events.html">Events</a></li><li><a class="docs-sidebar__link" href="ai-runtime.html">AI Runtime</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Projects</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="cli.html#project">CLI: Project</a></li><li><a class="docs-sidebar__link" href="quickstart.html#create-a-project">Quickstart: Create a Project</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">HTTP API</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="api.html">API</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Triggers</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="triggers/index.html">Overview</a></li><li><a class="docs-sidebar__link" href="triggers/cron.html">Cron</a></li><li><a class="docs-sidebar__link" href="triggers/webhook.html">Webhook</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">CI integration</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="ci/github-actions.html">GitHub Actions</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Contributor docs</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="dev/sqlx.html">SQLx</a></li><li><a class="docs-sidebar__link" href="dev/frontend.html">Frontend</a></li></ul></div></nav>
+        <article class="docs-content">
+          <div class="docs-search docs-search--content" data-docs-search>
+    <label class="visually-hidden" for="docs-search-input">Search docs</label>
+    <div class="docs-search__control">
+      <span class="docs-search__icon" aria-hidden="true"></span>
+      <input id="docs-search-input" data-docs-search-input type="search" placeholder="Search docs" autocomplete="off" autocapitalize="none" spellcheck="false" role="combobox" aria-autocomplete="list" aria-controls="docs-search-results" aria-expanded="false" />
+      <kbd class="docs-search__key" aria-hidden="true">⌘K</kbd>
+    </div>
+    <div class="docs-search__panel" data-docs-search-panel hidden>
+      <div class="docs-search__status" data-docs-search-status></div>
+      <div class="docs-search__results" id="docs-search-results" data-docs-search-results role="listbox" aria-label="Search results"></div>
+    </div>
+  </div>
+          <div class="docs-prose" data-pagefind-body>
+<h1 id="attack-graph"><a class="docs-anchor" href="#attack-graph" aria-label="Link to attack-graph" data-pagefind-ignore>#</a>Attack Graph</h1>
+<p>Nyx Agent stores an attack graph as a run-scoped index over the artifacts
+the scanner and agent pipeline already persist. It does not replace the
+source tables; <code>nyx_signals</code>, <code>pentest_candidates</code>,
+<code>verification_attempts</code>, <code>verified_vulnerabilities</code>, <code>chains</code>,
+<code>route_models</code>, <code>business_logic_template_runs</code>, and
+<code>exploration_memory</code> remain
+authoritative. The graph gives those records a
+common set of nodes and edges so later UI and report surfaces can answer
+provenance and blast-radius questions without hand-joining every table.</p>
+<p>Source: <code>crates/nyx-agent-core/src/store/attack_graph.rs</code>,
+<code>crates/nyx-agent-core/migrations/0001_v1.sql</code>,
+<code>crates/nyx-agent-types/src/attack_graph.rs</code>.</p>
+<h2 id="schema"><a class="docs-anchor" href="#schema" aria-label="Link to schema" data-pagefind-ignore>#</a>Schema</h2>
+<p>Two tables back the graph:</p>
+<table>
+<thead>
+<tr>
+<th>Table</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>attack_graph_nodes</code></td>
+<td>Run-scoped nodes with <code>kind</code>, <code>stable_key</code>, optional <code>ref_id</code>, display <code>label</code>, and JSON properties.</td>
+</tr>
+<tr>
+<td><code>attack_graph_edges</code></td>
+<td>Directed relationships between nodes, with an edge <code>kind</code>, optional <code>evidence_ref</code>, and JSON properties.</td>
+</tr>
+</tbody></table>
+<p>Node ids and edge ids are deterministic BLAKE3-derived ids over their
+run, kind, and stable identity. Replaying the same artifact write for a
+run converges on the same graph row.</p>
+<p><code>ref_id</code> points back to the owning artifact when there is one, such as a
+<code>nyx_signals.id</code>, <code>pentest_candidates.id</code>, <code>verification_attempts.id</code>,
+<code>verified_vulnerabilities.id</code>, or <code>chains.id</code>. Route, endpoint,
+parameter, role, and object nodes usually rely on <code>stable_key</code> instead.</p>
+<h2 id="node-kinds"><a class="docs-anchor" href="#node-kinds" aria-label="Link to node-kinds" data-pagefind-ignore>#</a>Node Kinds</h2>
+<p>The shipped graph writers can represent these node kinds:</p>
+<table>
+<thead>
+<tr>
+<th>Kind</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>route</code></td>
+<td>A discovered application path, shared across frontend, backend, and API-client evidence for the same run.</td>
+</tr>
+<tr>
+<td><code>endpoint</code></td>
+<td>A method-specific backend route, API client call, or concrete request target.</td>
+</tr>
+<tr>
+<td><code>form</code></td>
+<td>A discovered HTML/JSX form, including action, method, and field metadata when available.</td>
+</tr>
+<tr>
+<td><code>parameter</code></td>
+<td>Path, query, body, tenant, or owner parameter discovered from route models.</td>
+</tr>
+<tr>
+<td><code>role</code></td>
+<td>Auth role or role-like check such as <code>authenticated</code>.</td>
+</tr>
+<tr>
+<td><code>object</code></td>
+<td>Application resource, service, model, or source object, including route resources and file locations.</td>
+</tr>
+<tr>
+<td><code>signal</code></td>
+<td>Static or scanner signal, including placeholder source nodes for external scanner leads.</td>
+</tr>
+<tr>
+<td><code>candidate</code></td>
+<td>Pentest candidate from Nyx signals, optional scanners, or AI candidate finding discovery.</td>
+</tr>
+<tr>
+<td><code>business_logic_template</code></td>
+<td>Registered template provenance for template-generated candidates.</td>
+</tr>
+<tr>
+<td><code>verification_attempt</code></td>
+<td>Live verification attempt that exercised a candidate or chain.</td>
+</tr>
+<tr>
+<td><code>verified_vulnerability</code></td>
+<td>Confirmed vulnerability row.</td>
+</tr>
+<tr>
+<td><code>chain</code></td>
+<td>Chain reasoning row and its members.</td>
+</tr>
+<tr>
+<td><code>exploration_memory</code></td>
+<td>Durable lesson from a prior exploration or verifier result.</td>
+</tr>
+</tbody></table>
+<h2 id="edge-kinds"><a class="docs-anchor" href="#edge-kinds" aria-label="Link to edge-kinds" data-pagefind-ignore>#</a>Edge Kinds</h2>
+<p>The graph keeps edge labels intentionally small:</p>
+<table>
+<thead>
+<tr>
+<th>Kind</th>
+<th>Typical direction</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>discovered_from</code></td>
+<td>Reserved for future importer provenance.</td>
+</tr>
+<tr>
+<td><code>targets</code></td>
+<td>Candidate, attempt, vulnerability, signal, or endpoint points at a route, endpoint, or parameter.</td>
+</tr>
+<tr>
+<td><code>uses_role</code></td>
+<td>Route, endpoint, candidate, or vulnerability depends on a role.</td>
+</tr>
+<tr>
+<td><code>touches_object</code></td>
+<td>Route, endpoint, signal, candidate, or vulnerability touches a resource or file object.</td>
+</tr>
+<tr>
+<td><code>derived_candidate</code></td>
+<td>Signal/source node produced a candidate.</td>
+</tr>
+<tr>
+<td><code>verified_as</code></td>
+<td>Candidate or verification attempt led to a verified vulnerability.</td>
+</tr>
+<tr>
+<td><code>chained_with</code></td>
+<td>Chain relates to member signals or vulnerabilities.</td>
+</tr>
+<tr>
+<td><code>learned_from</code></td>
+<td>Exploration memory points back to the candidate or verification attempt that produced the lesson.</td>
+</tr>
+</tbody></table>
+<h2 id="population"><a class="docs-anchor" href="#population" aria-label="Link to population" data-pagefind-ignore>#</a>Population</h2>
+<p>Graph rows are dual-written by the existing store accessors:</p>
+<ul>
+<li><code>RouteModelStore::upsert</code> records route, endpoint, form, parameter,
+role, and object nodes, then links route-source locations to existing
+Nyx signal nodes when line information overlaps. Semantic App Model v2
+fields are mirrored into endpoint properties and graph links:
+framework, handler, middleware/auth checks, role checks, path/query/body
+fields, tenant and owner fields, service calls, model names, resource
+names, response hints, and side-effect classifications.</li>
+<li><code>NyxSignalStore::insert</code> records signal nodes and file object links.</li>
+<li><code>PentestCandidateStore::insert</code> and <code>CandidateFindingStore::insert</code>
+record candidate nodes, source edges, and target/object/role links.
+Business-logic candidates additionally link their template node to
+the candidate and expose route, role, and object touch points from
+structured template metadata.</li>
+<li><code>VerificationAttemptStore::insert</code> records attempt nodes and request
+targets.</li>
+<li><code>VerifiedVulnerabilityStore::upsert</code> records verified vulnerability
+nodes and links source candidates, source signals, verification
+attempts, chains, and affected components.</li>
+<li><code>ChainStore::insert</code> records chain nodes and <code>chained_with</code> edges to
+member nodes when possible.</li>
+<li><code>ExplorationMemoryStore::upsert</code> records memory nodes, links them to
+candidate and verification-attempt provenance when available, and
+mirrors endpoint, role, and object context as graph links. These rows
+are durable across runs and are consumed by future AI exploration
+prompts and relevance ranking.</li>
+</ul>
+<p>Because the graph is derivative, reports remain compatible with older
+consumers. Existing <code>report.json</code>, run cards, vulnerabilities, findings,
+and chains keep their current shapes.</p>
+<h2 id="queries"><a class="docs-anchor" href="#queries" aria-label="Link to queries" data-pagefind-ignore>#</a>Queries</h2>
+<p><code>Store::attack_graph()</code> exposes graph queries for vulnerability evidence,
+blast-radius lookup, and chain planning:</p>
+<ul>
+<li><code>evidence_for_vulnerability(vulnerability_id)</code> walks inbound graph
+edges from a verified vulnerability and includes directly connected
+target, role, object, and chain context. This answers &quot;what evidence
+led to this vuln?&quot;</li>
+<li><code>vulnerabilities_touching(run_id, kind, stable_key)</code> starts from a
+route, object, role, or other graph node and walks connected graph
+edges to verified vulnerabilities. This answers &quot;what vulns touch this
+route/object/role?&quot;</li>
+<li><code>candidate_to_route(run_id, candidate_id)</code> returns the candidate&#39;s
+graph-backed route, endpoint, parameter, role, object, source-signal,
+and verification context.</li>
+<li><code>route_to_role_object(run_id, route_stable_key)</code> returns the route&#39;s
+endpoint/form context plus role and object edges. This is the compact
+&quot;what does this route require and touch?&quot; query.</li>
+<li><code>vuln_to_object_role(run_id, vulnerability_id)</code> returns a confirmed
+vulnerability&#39;s target, role, object, candidate, verification, and
+chain context.</li>
+<li><code>cross_repo_service_edges(run_id)</code> returns service-like target/object
+edges that cross repository boundaries when both sides carry repo
+metadata.</li>
+<li><code>chain_planning_input(run_id, max_chains)</code> builds the compact
+ChainReasoning input from graph nodes and edges. It includes candidates,
+signals, routes, endpoints, forms, parameters, roles, objects,
+verification attempts, verified vulnerabilities, and business-logic
+template provenance.</li>
+</ul>
+<h2 id="chain-planning"><a class="docs-anchor" href="#chain-planning" aria-label="Link to chain-planning" data-pagefind-ignore>#</a>Chain Planning</h2>
+<p>ChainReasoning is graph-native and runs after individual candidate/live
+verification has had a chance to add <code>verification_attempt</code> and
+<code>verified_vulnerability</code> nodes. The planner consumes the attack graph
+neighborhood instead of only static finding-flow summaries. Graph nodes
+are passed with stable graph ids, artifact <code>ref_id</code>s when present, route,
+role, object, and evidence-ref context. Graph edges are passed with edge
+ids, labels, evidence refs, source tags, and cross-repo flags.</p>
+<p>When the selected runtime supports agent loops (Claude Code or Codex),
+ChainReasoning runs in source-aware mode: the task receives repository
+workspace roots and can use read/search/shell inspection tools to look
+around the code before producing chain JSON. One-shot-only runtimes
+fall back to the compact graph-only prompt. Both modes pass through the
+same validation gate: every returned member id must exist in the graph
+and every adjacent pair must be backed by a graph edge.</p>
+<p>The model contract ranks chains with:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>member_ids</code></td>
+<td>Ordered graph node ids. Every adjacent pair must be connected by an input graph edge.</td>
+</tr>
+<tr>
+<td><code>rationale</code></td>
+<td>Human-readable exploitability rationale.</td>
+</tr>
+<tr>
+<td><code>prerequisites</code></td>
+<td>Required attacker state, roles, tenant/object state, or route reachability.</td>
+</tr>
+<tr>
+<td><code>evidence</code></td>
+<td>Specific graph-backed facts supporting the chain.</td>
+</tr>
+<tr>
+<td><code>blast_radius</code></td>
+<td>Affected routes, roles, objects, services, repos, or tenant boundaries.</td>
+</tr>
+<tr>
+<td><code>confidence</code></td>
+<td>Integer confidence from 0 to 100.</td>
+</tr>
+<tr>
+<td><code>missing_verification_steps</code></td>
+<td>Proof still needed before the chain is confirmed.</td>
+</tr>
+<tr>
+<td><code>edge_provenance</code></td>
+<td>Edge ids or evidence refs supporting the member-to-member links.</td>
+</tr>
+</tbody></table>
+<p>The AI task validates that every member id exists and that every adjacent
+member pair is backed by an input edge. This prevents weak leads from
+being promoted into serious chains unless the graph contains route,
+object, role, signal, candidate, verification, or service evidence for
+the link.</p>
+<p>Persisted <code>chains.member_ids</code> remains the ordered member id list for
+compatibility. The structured graph proof is persisted in
+<code>chains.evidence_blob</code> with <code>schema_version = 1</code>, including member
+metadata, edge provenance, prerequisites, evidence, blast radius,
+confidence, terminal live-proof state, and missing verification steps.
+Chains that terminate in a live verification attempt or verified
+vulnerability, with no model-declared proof gaps, are stored as
+<code>Verified</code> and materialized into <code>verified_vulnerabilities</code> with
+<code>chain_id</code> set. Chains without terminal live proof are stored as
+<code>NeedsChainVerification</code> and keep the missing proof steps in
+<code>evidence_blob</code>. <code>ChainStore::insert</code> still dual-writes the chain node
+and <code>chained_with</code> member edges into the graph.</p>
+<p>The chain UI reads the structured <code>evidence_blob</code> to show graph-backed
+paths, edge evidence, confidence, blast radius, and missing proof gaps.
+Older chains without this blob still render their rationale and member
+ids.</p>
+
+          </div>
+          <nav class="docs-prevnext" aria-label="Page navigation"><a class="docs-prevnext__link docs-prevnext__link--prev" href="runs.html">
+        <span class="docs-prevnext__label">Previous</span>
+        <span class="docs-prevnext__title">Runs</span>
+      </a><a class="docs-prevnext__link docs-prevnext__link--next" href="business-logic-templates.html">
+        <span class="docs-prevnext__label">Next</span>
+        <span class="docs-prevnext__title">Business Logic Templates</span>
+      </a></nav>
+        </article>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <p class="site-footer__copy">© 2026 Eli Peter · Nyx Agent is licensed under AGPL-3.0-or-later.</p>
+        <nav class="site-footer__nav" aria-label="Footer">
+          <a href="../../">Home</a>
+          <a href="../../scanner.html">Scanner</a>
+          <a href="../../agent.html">Agent</a>
+          <a href="../../news/">News</a>
+          <a href="../../docs/">Docs</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

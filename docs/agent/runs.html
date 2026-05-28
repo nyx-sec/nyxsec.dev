@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Runs | Nyx Agent docs</title>
+    <meta name="description" content="A run is one execution of a scan against a project's repos. The dispatcher mints a run id, fans out the static pass per repo on a rayon pool, aggregates the results into a RunBundle, and writes a..." />
+    <meta name="keywords" content="Nyx Agent, nyx-agent, local pentesting, live appsec testing, verified vulnerabilities, stored evidence, Architecture, Runs, toml, rust, WebSocket, api" />
+    <meta name="author" content="Eli Peter" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <link rel="canonical" href="https://nyxscan.dev/docs/agent/runs.html" />
+    <link rel="sitemap" type="application/xml" href="https://nyxscan.dev/sitemap.xml" />
+    <link rel="alternate" hreflang="en" href="https://nyxscan.dev/docs/agent/runs.html" />
+    <link rel="alternate" hreflang="x-default" href="https://nyxscan.dev/docs/agent/runs.html" />
+    <link rel="prev" href="architecture.html" />
+    <link rel="next" href="attack-graph.html" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="64x64" href="../../favicon-64.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../../favicon-180.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="alternate" type="application/rss+xml" title="Nyx | News &amp; release notes" href="/news/feed.xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../styles.css" />
+    <script defer src="../../docs/search.js"></script>
+
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Nyx" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="Runs" />
+    <meta property="og:description" content="A run is one execution of a scan against a project's repos. The dispatcher mints a run id, fans out the static pass per repo on a rayon pool, aggregates the results into a RunBundle, and writes a..." />
+    <meta property="og:url" content="https://nyxscan.dev/docs/agent/runs.html" />
+    <meta property="og:image" content="https://nyxscan.dev/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Nyx Agent local pentesting documentation" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Runs" />
+    <meta name="twitter:description" content="A run is one execution of a scan against a project's repos. The dispatcher mints a run id, fans out the static pass per repo on a rayon pool, aggregates the results into a RunBundle, and writes a..." />
+    <meta name="twitter:image" content="https://nyxscan.dev/og-image.png" />
+    <meta name="twitter:image:alt" content="Nyx Agent local pentesting documentation" />
+    <meta name="theme-color" content="#F9F8F4" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://nyxscan.dev/#person",
+      "name": "Eli Peter",
+      "url": "https://github.com/elicpeter",
+      "sameAs": [
+        "https://github.com/elicpeter",
+        "https://github.com/sponsors/elicpeter"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://nyxscan.dev/#website",
+      "url": "https://nyxscan.dev/",
+      "name": "Nyx",
+      "description": "Local security tooling for deterministic scanning and live testing.",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://nyxscan.dev/#person"
+      }
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://nyxscan.dev/docs/agent/runs.html#article",
+      "headline": "Runs",
+      "name": "Runs",
+      "url": "https://nyxscan.dev/docs/agent/runs.html",
+      "description": "A run is one execution of a scan against a project's repos. The dispatcher mints a run id, fans out the static pass per repo on a rayon pool, aggregates the results into a RunBundle, and writes a...",
+      "inLanguage": "en",
+      "articleSection": "Architecture",
+      "isPartOf": {
+        "@id": "https://nyxscan.dev/#website"
+      },
+      "publisher": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "author": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "image": "https://nyxscan.dev/og-image.png",
+      "mainEntityOfPage": "https://nyxscan.dev/docs/agent/runs.html"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://nyxscan.dev/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Docs",
+          "item": "https://nyxscan.dev/docs/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Nyx Agent docs",
+          "item": "https://nyxscan.dev/docs/agent/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Runs",
+          "item": "https://nyxscan.dev/docs/agent/runs.html"
+        }
+      ],
+      "@id": "https://nyxscan.dev/docs/agent/runs.html#breadcrumbs"
+    }
+  ]
+}
+    </script>
+  </head>
+  <body class="docs-body">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" aria-label="Primary navigation">
+      <div class="container site-header__inner">
+        <a class="brand" href="../../" aria-label="Nyx home">
+          <img src="../../assets/logo.png" alt="Nyx" class="brand-logo" />
+        </a>
+        <span class="header-wordmark">NYX</span>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="../../scanner.html">Scanner</a>
+          <a href="../../agent.html">Agent</a>
+          <a href="../../news/">News</a>
+          <a href="../../docs/" aria-current="page">Docs</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="docs-page">
+      <div class="docs-shell">
+        <nav class="docs-sidebar" aria-label="Documentation"><a class="docs-sidebar__brand" href="./">Agent docs</a><a class="docs-sidebar__home" href="../">All docs</a><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Get started</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="install.html">Install</a></li><li><a class="docs-sidebar__link" href="quickstart.html">Quickstart</a></li><li><a class="docs-sidebar__link" href="cli.html">CLI</a></li><li><a class="docs-sidebar__link" href="config.html">Config</a></li><li><a class="docs-sidebar__link" href="state-dir.html">State Directory</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Architecture</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="architecture.html">Architecture</a></li><li><a class="docs-sidebar__link" href="runs.html" aria-current="page">Runs</a></li><li><a class="docs-sidebar__link" href="attack-graph.html">Attack Graph</a></li><li><a class="docs-sidebar__link" href="business-logic-templates.html">Business Logic Templates</a></li><li><a class="docs-sidebar__link" href="events.html">Events</a></li><li><a class="docs-sidebar__link" href="ai-runtime.html">AI Runtime</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Projects</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="cli.html#project">CLI: Project</a></li><li><a class="docs-sidebar__link" href="quickstart.html#create-a-project">Quickstart: Create a Project</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">HTTP API</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="api.html">API</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Triggers</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="triggers/index.html">Overview</a></li><li><a class="docs-sidebar__link" href="triggers/cron.html">Cron</a></li><li><a class="docs-sidebar__link" href="triggers/webhook.html">Webhook</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">CI integration</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="ci/github-actions.html">GitHub Actions</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Contributor docs</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="dev/sqlx.html">SQLx</a></li><li><a class="docs-sidebar__link" href="dev/frontend.html">Frontend</a></li></ul></div></nav>
+        <article class="docs-content">
+          <div class="docs-search docs-search--content" data-docs-search>
+    <label class="visually-hidden" for="docs-search-input">Search docs</label>
+    <div class="docs-search__control">
+      <span class="docs-search__icon" aria-hidden="true"></span>
+      <input id="docs-search-input" data-docs-search-input type="search" placeholder="Search docs" autocomplete="off" autocapitalize="none" spellcheck="false" role="combobox" aria-autocomplete="list" aria-controls="docs-search-results" aria-expanded="false" />
+      <kbd class="docs-search__key" aria-hidden="true">⌘K</kbd>
+    </div>
+    <div class="docs-search__panel" data-docs-search-panel hidden>
+      <div class="docs-search__status" data-docs-search-status></div>
+      <div class="docs-search__results" id="docs-search-results" data-docs-search-results role="listbox" aria-label="Search results"></div>
+    </div>
+  </div>
+          <div class="docs-prose" data-pagefind-body>
+<h1 id="runs"><a class="docs-anchor" href="#runs" aria-label="Link to runs" data-pagefind-ignore>#</a>Runs</h1>
+<p>A <strong>run</strong> is one execution of a scan against a project&#39;s repos. The
+dispatcher mints a run id, fans out the static pass per repo on a
+rayon pool, aggregates the results into a <code>RunBundle</code>, and writes a
+row into the <code>runs</code> SQLite table. Every event the run produces
+carries the run id so subscribers can group across the bus and the
+DB without a side lookup.</p>
+<p>Source: <code>crates/nyx-agent-core/src/run/mod.rs</code>,
+<code>crates/nyx-agent-core/src/store/run.rs</code>,
+<code>crates/nyx-agent/src/main.rs</code> (the binary&#39;s <code>scan</code> subcommand).</p>
+<h2 id="run-id"><a class="docs-anchor" href="#run-id" aria-label="Link to run-id" data-pagefind-ignore>#</a>Run id</h2>
+<pre><code class="hljs language-plain">run-&lt;unix-ms-<span class="hljs-keyword">as</span>-<span class="hljs-number">13</span>-<span class="hljs-built_in">hex</span>&gt;-&lt;counter-<span class="hljs-keyword">as</span>-<span class="hljs-number">8</span>-<span class="hljs-built_in">hex</span>&gt;</code></pre>
+<p>The counter is a process-local <code>AtomicU64</code> bumped on every mint, so
+two runs started inside the same millisecond still produce
+different ids. Run ids sort lexicographically when minted from the
+same process: the millisecond prefix dominates and the counter
+breaks ties in order.</p>
+<p>The minter lives at <code>crates/nyx-agent-core/src/run/mod.rs:494</code>.
+Tests pin both the uniqueness and the monotonicity guarantee.</p>
+<p>The id is intentionally not folded into the finding-id hash; see
+<a href="#stability-across-runs">findings stability</a> below.</p>
+<h2 id="lifecycle"><a class="docs-anchor" href="#lifecycle" aria-label="Link to lifecycle" data-pagefind-ignore>#</a>Lifecycle</h2>
+<p>A run walks one project at a time. <code>scan --project p</code>
+(or <code>scan</code> against a single configured project) hands the
+dispatcher:</p>
+<ul>
+<li>the resolved <code>Project</code>,</li>
+<li>a fresh <code>Run</code> (<code>Run::new()</code>),</li>
+<li>an <code>Arc&lt;dyn ScanLane&lt;Diag&gt;&gt;</code> (the production lane wraps
+<code>nyx_agent_nyx::NyxRunner</code>, which shells out to <code>nyx scan</code>),</li>
+<li>a <code>Vec&lt;WorkspaceHandle&gt;</code>, one per enabled repo.</li>
+</ul>
+<p><code>RunDispatcher::dispatch_project</code> runs synchronously on a
+<code>tokio::task::spawn_blocking</code> worker. Inside, it:</p>
+<ol>
+<li>Emits <code>RunStarted</code> then <code>ProjectStarted</code> on the event bus.</li>
+<li>Builds a fresh rayon <code>ThreadPoolBuilder::new().num_threads(N)</code>
+pool where <code>N</code> is the resolved static-pass fan-out (see
+<a href="#concurrency">concurrency</a>).</li>
+<li>Maps every workspace into the pool with
+<code>into_par_iter().map(run_one_repo)</code>. Each <code>run_one_repo</code> call
+emits <code>RepoStarted</code>, calls the lane&#39;s <code>scan_blocking</code>, emits
+<code>RepoStaticDone</code> or <code>RepoFailed</code>, and always emits
+<code>RepoFinished</code> regardless of outcome.</li>
+<li>Collects the per-repo outcomes into a <code>Vec&lt;RepoBundle&lt;D&gt;&gt;</code>.</li>
+<li>Builds a <code>CrossRepoCallgraphStub</code> listing the repos that
+succeeded (edges are reserved for the cross-repo chain runner
+and stay empty today).</li>
+<li>Emits <code>ProjectFinished</code> then <code>RunFinished</code> with the per-tag
+counts and wall-clock duration.</li>
+</ol>
+<p>After dispatch returns, the <code>scan</code> subcommand persists every
+<code>RepoOutcome::Success</code> diag through <code>persist_run_results</code>
+(<code>crates/nyx-agent/src/main.rs:1243</code>), then calls <code>finalise_run</code>
+to update the <code>runs</code> row&#39;s status, finished-at, and wall clock.</p>
+<p>Lane errors are recoverable: a panicking rayon worker or a sqlx
+failure between dispatch and finalise still flips the <code>runs</code> row
+off <code>Running</code>. The <code>runs</code> row is never left wedged at <code>Running</code>
+across process restart by the dispatch path.</p>
+<h2 id="concurrency"><a class="docs-anchor" href="#concurrency" aria-label="Link to concurrency" data-pagefind-ignore>#</a>Concurrency</h2>
+<p>Default fan-out is <code>min(num_cpus / 2, repo_count)</code>, floored at 1.
+<code>available_parallelism</code> failures fall back to 2 cores.</p>
+<pre><code class="hljs language-toml"><span class="hljs-section">[performance]</span>
+<span class="hljs-comment"># Override the per-run static-pass fan-out. Omit to let the</span>
+<span class="hljs-comment"># dispatcher derive from CPU + repo count.</span>
+<span class="hljs-attr">static_concurrency</span> = <span class="hljs-number">4</span>
+
+<span class="hljs-comment"># Per-repo budget for the static pass. Default 1800 (30 minutes).</span>
+<span class="hljs-attr">per_repo_timeout_secs</span> = <span class="hljs-number">600</span></code></pre>
+<p>A repo that exceeds its budget is recorded as
+<code>Inconclusive(StaticPassTimeout)</code> and its <code>RepoFailed</code> event names
+<code>static-pass timeout after Ns</code>. The slow repo never blocks the
+rest of the run.</p>
+<p>Configured <code>static_concurrency = 0</code> is floored to 1 by both the
+config layer and the dispatcher. See
+<a href="config.html"><code>docs/config.md</code></a> for the full <code>[performance]</code> block.</p>
+<p>The resolver lives at
+<code>crates/nyx-agent-core/src/run/mod.rs:475</code>.</p>
+<h2 id="per-repo-outcomes"><a class="docs-anchor" href="#per-repo-outcomes" aria-label="Link to per-repo-outcomes" data-pagefind-ignore>#</a>Per-repo outcomes</h2>
+<pre><code class="hljs language-rust"><span class="hljs-keyword">pub</span> <span class="hljs-keyword">enum</span> <span class="hljs-title class_">RepoOutcome</span>&lt;D&gt; {
+    <span class="hljs-title function_ invoke__">Success</span>(<span class="hljs-type">Vec</span>&lt;D&gt;),
+    <span class="hljs-title function_ invoke__">Inconclusive</span>(InconclusiveReason),
+    <span class="hljs-title function_ invoke__">Failed</span>(<span class="hljs-type">String</span>),
+}</code></pre>
+<p>The only <code>InconclusiveReason</code> variant today is <code>StaticPassTimeout</code>;
+the enum is shaped so the chain runner and sandbox lanes can add
+their own variants without breaking serialised bundles.</p>
+<p>The compressed <code>RepoOutcomeTag</code> (<code>Success</code> / <code>Inconclusive</code> /
+<code>Failed</code>) rides on the <code>RepoFinished</code> event so a UI badge can
+colour the row without deserialising the full bundle.</p>
+<p>Counts roll up via <code>RunBundle::counts()</code> into a <code>RunCounts</code>
+struct (<code>succeeded</code>, <code>inconclusive</code>, <code>failed</code>). The
+<code>RunFinished</code> event carries these three numbers.</p>
+<h2 id="events"><a class="docs-anchor" href="#events" aria-label="Link to events" data-pagefind-ignore>#</a>Events</h2>
+<p>The dispatcher publishes through the shared
+<code>broadcast::Sender&lt;AgentEvent&gt;</code> (<code>crates/nyx-agent-types/src/event.rs</code>).
+Order is fixed:</p>
+<pre><code class="hljs language-plain">RunStarted
+  ProjectStarted
+    RepoStarted (<span class="hljs-keyword">per</span> repo, <span class="hljs-keyword">in</span> pool <span class="hljs-keyword">order</span>)
+    RepoStaticDone <span class="hljs-operator">|</span> RepoFailed
+    RepoFinished
+  ProjectFinished
+RunFinished</code></pre>
+<p>Per-repo events always carry the <code>project_id</code> so the WebSocket
+client can group by project without a <code>GET /api/v1/repos/:name</code>
+side trip. A closed bus (no subscribers) is fine: the send error
+is dropped and the static pass keeps running. WebSocket
+subscribers attach lazily through
+<a href="api.html#events-websocket"><code>docs/api.md</code></a>; the bus is created up
+front with <code>broadcast::channel(N)</code> so an early subscriber sees
+the very first <code>RunStarted</code>.</p>
+<p><code>RepoDynamicDone</code> is reserved for the sandbox publisher: the
+static-pass dispatcher does not emit it. The variant lives in
+<code>RunEvent</code> so the sandbox crate can publish on the same bus
+without changing the event enum&#39;s shape.</p>
+<h2 id="persistence"><a class="docs-anchor" href="#persistence" aria-label="Link to persistence" data-pagefind-ignore>#</a>Persistence</h2>
+<p>Two tables touch each run:</p>
+<table>
+<thead>
+<tr>
+<th>Table</th>
+<th>Written by</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>runs</code></td>
+<td><code>finalise_run</code> (<code>status</code>, <code>finished_at</code>, <code>wall_clock_ms</code>)</td>
+</tr>
+<tr>
+<td><code>findings</code></td>
+<td><code>persist_run_results</code> (one row per static-pass diag)</td>
+</tr>
+<tr>
+<td><code>business_logic_template_runs</code></td>
+<td>Business-logic template synthesis counts and skip reasons.</td>
+</tr>
+<tr>
+<td><code>route_models</code></td>
+<td>Semantic App Model v2 route discovery output for the run.</td>
+</tr>
+<tr>
+<td><code>verification_attempts</code></td>
+<td>Live HTTP/browser verifier rows. Browser attempts attach replay artifact paths.</td>
+</tr>
+<tr>
+<td><code>authz_matrix_entries</code></td>
+<td>Expected-vs-observed authorization decisions from role comparison and object ownership verification.</td>
+</tr>
+<tr>
+<td><code>verified_vulnerabilities</code></td>
+<td>User-facing confirmed vulnerabilities promoted from successful live attempts.</td>
+</tr>
+<tr>
+<td><code>exploration_memory</code></td>
+<td>Durable lessons from live verification, AI exploration audit, NoPlan outcomes, and rejected confirmations.</td>
+</tr>
+<tr>
+<td><code>attack_graph_nodes</code>, <code>attack_graph_edges</code></td>
+<td>Store dual-writes for route models, signals, candidates, verification attempts, authorization matrix entries, verified vulnerabilities, and chains.</td>
+</tr>
+</tbody></table>
+<p>The <code>runs</code> row schema (see
+<code>crates/nyx-agent-core/src/store/run.rs:50</code>):</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>id</code></td>
+<td>The minted run id.</td>
+</tr>
+<tr>
+<td><code>started_at</code></td>
+<td>epoch ms.</td>
+</tr>
+<tr>
+<td><code>finished_at</code></td>
+<td>epoch ms, NULL while running.</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>Pending</code> / <code>Running</code> / <code>Succeeded</code> / <code>Failed</code> / <code>Halted</code>.</td>
+</tr>
+<tr>
+<td><code>triggered_by</code></td>
+<td><code>Manual</code> / <code>Cron</code> / <code>Webhook</code> / <code>PR</code> / <code>UI</code>.</td>
+</tr>
+<tr>
+<td><code>git_ref</code></td>
+<td>Optional git ref the scan ran against.</td>
+</tr>
+<tr>
+<td><code>parent_run_id</code></td>
+<td>Optional pointer to a prior run.</td>
+</tr>
+<tr>
+<td><code>wall_clock_ms</code></td>
+<td>Dispatcher wall clock.</td>
+</tr>
+<tr>
+<td><code>total_ai_spend_usd_micros</code></td>
+<td>Bumped by the AI runtime, not the dispatcher.</td>
+</tr>
+</tbody></table>
+<p><code>RunStore::list_by_status(&quot;Running&quot;)</code> is what
+<code>GET /api/v1/runs?status=Running</code> reads; default with no query
+string is <code>Running</code>. The endpoint also accepts <code>project_id</code> to keep
+run lists scoped to one project. The full record shape is what
+<code>GET /api/v1/runs/:id</code> returns. See
+<a href="api.html#runs"><code>docs/api.md</code></a>.</p>
+<p>Graph rows are derivative and run-scoped. They let later consumers
+walk from a verified vulnerability back to the evidence that produced
+it, or from a route/object/role to the verified vulnerabilities that
+touch it, without changing the existing finding and report shapes. See
+<a href="attack-graph.html"><code>attack-graph.md</code></a>.</p>
+<p>Authorization matrix rows are also run-scoped. For every successful
+role-comparison or object-ownership verification attempt, the verifier
+stores the allowed control and challenged access as separate rows. Each
+row captures role, optional tenant, resource/object id, owner role,
+action, endpoint, expected decision, observed decision, HTTP status,
+body-marker result, confidence, candidate id, verification attempt id,
+and evidence JSON. <code>GET /api/v1/runs/:id/authz-matrix</code> returns these
+rows for the run detail UI.</p>
+<p><code>route_models.model_blob</code> stores the Semantic App Model v2 JSON. Backend
+endpoints retain the original route fields (<code>method</code>, <code>path</code>, <code>params</code>,
+<code>middleware</code>, <code>auth_checks</code>, <code>role_checks</code>, <code>body_fields</code>,
+<code>state_changing</code>, <code>confidence</code>, and <code>evidence</code>) and add semantic fields:
+<code>framework</code>, <code>handler_name</code>, <code>query_params</code>, <code>request_fields</code>,
+<code>response_hints</code>, <code>service_calls</code>, <code>model_names</code>, <code>resource_names</code>,
+<code>tenant_fields</code>, <code>owner_fields</code>, and <code>side_effects</code>. The extractor has
+framework-aware paths for Express/Nest-style TypeScript and JavaScript,
+FastAPI/Flask-style Python decorators, Rails and Laravel declarations,
+OpenAPI/Swagger specs, plus regex fallbacks for older route-like code.</p>
+<p>Browser verification attempts persist replay evidence under
+<code>&lt;state&gt;/traces/&lt;run-id&gt;/browser_verification/&lt;attempt-id&gt;/</code> and attach
+those paths to the attempt row. Reports and the SPA surface those paths
+through the vulnerability&#39;s <code>verification_attempt_ids</code>, so a human can
+inspect screenshots, redacted DOM/console/timeline captures, and the
+deterministic replay JSON/script for the proof.</p>
+<p><code>exploration_memory</code> is not a JSON log. Each row is queryable by
+project, repo, run, result, and dedupe key. It stores the attempted
+hypothesis, endpoint, role/object context, confirmed/rejected/
+inconclusive/blocked result, reason, useful markers, auth/session
+notes, follow-up ideas, and optional links to the candidate,
+verification attempt, or AI trace that produced the lesson. Future AI
+exploration loads the most relevant rows for the repo, compacts them
+into the prompt as &quot;learned from prior runs,&quot; and records that prompt
+context on the Exploration trace. The SPA exposes the same rows on the
+run detail view via <code>GET /api/v1/runs/:id/exploration-memory</code>.</p>
+<h2 id="stability-across-runs"><a class="docs-anchor" href="#stability-across-runs" aria-label="Link to stability-across-runs" data-pagefind-ignore>#</a>Stability across runs</h2>
+<p>Findings get stable, run-id-independent ids. Two runs over the
+same source tree produce the same finding ids, so the UI&#39;s
+last-seen / first-seen timestamps line up correctly and a finding
+that appears once stays correlated across re-scans.</p>
+<p>The hash domain is <code>(repo, path, Some(line), cap, rule)</code>. The run
+id is intentionally <strong>not</strong> folded in. See
+<code>finding_id_hash</code> at <code>crates/nyx-agent-core/src/store/finding.rs:79</code>
+and the <code>rerun_on_identical_sources_produces_identical_finding_ids</code>
+test in <code>run/mod.rs:749</code>.</p>
+<h2 id="workspaces-and-snapshots"><a class="docs-anchor" href="#workspaces-and-snapshots" aria-label="Link to workspaces-and-snapshots" data-pagefind-ignore>#</a>Workspaces and snapshots</h2>
+<p>Each repo lands inside the dispatcher as a <code>WorkspaceHandle</code>
+(<code>crates/nyx-agent-core/src/run/workspace.rs</code>). The handle wraps
+an <code>Arc&lt;IngestedRepo&gt;</code>, so clones are cheap and the snapshot
+directory persists until the last clone drops. Production code
+clones one handle into a name-keyed <code>HashMap</code> before dispatch so
+the AI passes (payload synthesis, spec derivation, chain
+reasoning) can read source after the dispatcher consumes the
+original <code>Vec</code>. The dispatcher&#39;s bundle keeps <strong>only</strong> per-repo
+names and outcomes; it does not extend snapshot lifetime.</p>
+<p>Snapshot layout and cleanup live in
+<a href="state-dir.html"><code>docs/state-dir.md</code></a>. Repo ingestion details live
+in <a href="architecture.html"><code>docs/architecture.md</code></a>.</p>
+<h2 id="triggers"><a class="docs-anchor" href="#triggers" aria-label="Link to triggers" data-pagefind-ignore>#</a>Triggers</h2>
+<p>Runs originate from one of five surfaces. The
+<code>triggered_by</code> column records which:</p>
+<ul>
+<li><code>Manual</code>: operator ran <code>nyx-agent scan</code> from the CLI.</li>
+<li><code>Cron</code>: in-process scheduler fired a <code>[[schedule]]</code> entry. See
+<a href="triggers/cron.html"><code>docs/triggers/cron.md</code></a>.</li>
+<li><code>Webhook</code>: <code>POST /webhook/git</code> was verified. See
+<a href="triggers/webhook.html"><code>docs/triggers/webhook.md</code></a>.</li>
+<li><code>PR</code>: the GitHub Action ran a scan against a pull request. See
+<a href="ci/github-actions.html"><code>docs/ci/github-actions.md</code></a>.</li>
+<li><code>UI</code>: the SPA dispatched a scan through the API.</li>
+</ul>
+<h2 id="related"><a class="docs-anchor" href="#related" aria-label="Link to related" data-pagefind-ignore>#</a>Related</h2>
+<ul>
+<li><a href="cli.html#scan"><code>docs/cli.md#scan</code></a>: every flag the <code>scan</code>
+subcommand accepts.</li>
+<li><a href="config.html"><code>docs/config.md</code></a>: the full <code>[performance]</code> block.</li>
+<li><a href="api.html"><code>docs/api.md</code></a>: the <code>/runs</code> routes and the WebSocket
+event stream.</li>
+<li><a href="architecture.html"><code>docs/architecture.md</code></a>: the broader
+dispatcher + AI-pass pipeline this page details.</li>
+</ul>
+
+          </div>
+          <nav class="docs-prevnext" aria-label="Page navigation"><a class="docs-prevnext__link docs-prevnext__link--prev" href="architecture.html">
+        <span class="docs-prevnext__label">Previous</span>
+        <span class="docs-prevnext__title">Architecture</span>
+      </a><a class="docs-prevnext__link docs-prevnext__link--next" href="attack-graph.html">
+        <span class="docs-prevnext__label">Next</span>
+        <span class="docs-prevnext__title">Attack Graph</span>
+      </a></nav>
+        </article>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <p class="site-footer__copy">© 2026 Eli Peter · Nyx Agent is licensed under AGPL-3.0-or-later.</p>
+        <nav class="site-footer__nav" aria-label="Footer">
+          <a href="../../">Home</a>
+          <a href="../../scanner.html">Scanner</a>
+          <a href="../../agent.html">Agent</a>
+          <a href="../../news/">News</a>
+          <a href="../../docs/">Docs</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

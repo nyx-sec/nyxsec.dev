@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GitHub Actions integration | Nyx Agent docs</title>
+    <meta name="description" content="The nyx-agent repo ships a composite Action at .github/actions/nyx-agent/action.yml that runs the scanner against a pull request, writes a machine-readable report, and posts (or updates) a single..." />
+    <meta name="keywords" content="Nyx Agent, nyx-agent, local pentesting, live appsec testing, verified vulnerabilities, stored evidence, CI integration, GitHub Actions integration, AI, JSON, json, API" />
+    <meta name="author" content="Eli Peter" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <link rel="canonical" href="https://nyxscan.dev/docs/agent/ci/github-actions.html" />
+    <link rel="sitemap" type="application/xml" href="https://nyxscan.dev/sitemap.xml" />
+    <link rel="alternate" hreflang="en" href="https://nyxscan.dev/docs/agent/ci/github-actions.html" />
+    <link rel="alternate" hreflang="x-default" href="https://nyxscan.dev/docs/agent/ci/github-actions.html" />
+    <link rel="prev" href="../triggers/webhook.html" />
+    <link rel="next" href="../dev/sqlx.html" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="64x64" href="../../../favicon-64.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../favicon-180.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="alternate" type="application/rss+xml" title="Nyx | News &amp; release notes" href="/news/feed.xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../styles.css" />
+    <script defer src="../../../docs/search.js"></script>
+
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Nyx" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="GitHub Actions integration" />
+    <meta property="og:description" content="The nyx-agent repo ships a composite Action at .github/actions/nyx-agent/action.yml that runs the scanner against a pull request, writes a machine-readable report, and posts (or updates) a single..." />
+    <meta property="og:url" content="https://nyxscan.dev/docs/agent/ci/github-actions.html" />
+    <meta property="og:image" content="https://nyxscan.dev/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Nyx Agent local pentesting documentation" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="GitHub Actions integration" />
+    <meta name="twitter:description" content="The nyx-agent repo ships a composite Action at .github/actions/nyx-agent/action.yml that runs the scanner against a pull request, writes a machine-readable report, and posts (or updates) a single..." />
+    <meta name="twitter:image" content="https://nyxscan.dev/og-image.png" />
+    <meta name="twitter:image:alt" content="Nyx Agent local pentesting documentation" />
+    <meta name="theme-color" content="#F9F8F4" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://nyxscan.dev/#person",
+      "name": "Eli Peter",
+      "url": "https://github.com/elicpeter",
+      "sameAs": [
+        "https://github.com/elicpeter",
+        "https://github.com/sponsors/elicpeter"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://nyxscan.dev/#website",
+      "url": "https://nyxscan.dev/",
+      "name": "Nyx",
+      "description": "Local security tooling for deterministic scanning and live testing.",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://nyxscan.dev/#person"
+      }
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://nyxscan.dev/docs/agent/ci/github-actions.html#article",
+      "headline": "GitHub Actions integration",
+      "name": "GitHub Actions integration",
+      "url": "https://nyxscan.dev/docs/agent/ci/github-actions.html",
+      "description": "The nyx-agent repo ships a composite Action at .github/actions/nyx-agent/action.yml that runs the scanner against a pull request, writes a machine-readable report, and posts (or updates) a single...",
+      "inLanguage": "en",
+      "articleSection": "CI integration",
+      "isPartOf": {
+        "@id": "https://nyxscan.dev/#website"
+      },
+      "publisher": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "author": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "image": "https://nyxscan.dev/og-image.png",
+      "mainEntityOfPage": "https://nyxscan.dev/docs/agent/ci/github-actions.html"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://nyxscan.dev/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Docs",
+          "item": "https://nyxscan.dev/docs/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Nyx Agent docs",
+          "item": "https://nyxscan.dev/docs/agent/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "GitHub Actions integration",
+          "item": "https://nyxscan.dev/docs/agent/ci/github-actions.html"
+        }
+      ],
+      "@id": "https://nyxscan.dev/docs/agent/ci/github-actions.html#breadcrumbs"
+    }
+  ]
+}
+    </script>
+  </head>
+  <body class="docs-body">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" aria-label="Primary navigation">
+      <div class="container site-header__inner">
+        <a class="brand" href="../../../" aria-label="Nyx home">
+          <img src="../../../assets/logo.png" alt="Nyx" class="brand-logo" />
+        </a>
+        <span class="header-wordmark">NYX</span>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="../../../scanner.html">Scanner</a>
+          <a href="../../../agent.html">Agent</a>
+          <a href="../../../news/">News</a>
+          <a href="../../../docs/" aria-current="page">Docs</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="docs-page">
+      <div class="docs-shell">
+        <nav class="docs-sidebar" aria-label="Documentation"><a class="docs-sidebar__brand" href="../">Agent docs</a><a class="docs-sidebar__home" href="../../">All docs</a><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Get started</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="../install.html">Install</a></li><li><a class="docs-sidebar__link" href="../quickstart.html">Quickstart</a></li><li><a class="docs-sidebar__link" href="../cli.html">CLI</a></li><li><a class="docs-sidebar__link" href="../config.html">Config</a></li><li><a class="docs-sidebar__link" href="../state-dir.html">State Directory</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Architecture</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="../architecture.html">Architecture</a></li><li><a class="docs-sidebar__link" href="../runs.html">Runs</a></li><li><a class="docs-sidebar__link" href="../attack-graph.html">Attack Graph</a></li><li><a class="docs-sidebar__link" href="../business-logic-templates.html">Business Logic Templates</a></li><li><a class="docs-sidebar__link" href="../events.html">Events</a></li><li><a class="docs-sidebar__link" href="../ai-runtime.html">AI Runtime</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Projects</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="../cli.html#project">CLI: Project</a></li><li><a class="docs-sidebar__link" href="../quickstart.html#create-a-project">Quickstart: Create a Project</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">HTTP API</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="../api.html">API</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Triggers</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="../triggers/index.html">Overview</a></li><li><a class="docs-sidebar__link" href="../triggers/cron.html">Cron</a></li><li><a class="docs-sidebar__link" href="../triggers/webhook.html">Webhook</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">CI integration</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="../ci/github-actions.html" aria-current="page">GitHub Actions</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Contributor docs</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="../dev/sqlx.html">SQLx</a></li><li><a class="docs-sidebar__link" href="../dev/frontend.html">Frontend</a></li></ul></div></nav>
+        <article class="docs-content">
+          <div class="docs-search docs-search--content" data-docs-search>
+    <label class="visually-hidden" for="docs-search-input">Search docs</label>
+    <div class="docs-search__control">
+      <span class="docs-search__icon" aria-hidden="true"></span>
+      <input id="docs-search-input" data-docs-search-input type="search" placeholder="Search docs" autocomplete="off" autocapitalize="none" spellcheck="false" role="combobox" aria-autocomplete="list" aria-controls="docs-search-results" aria-expanded="false" />
+      <kbd class="docs-search__key" aria-hidden="true">⌘K</kbd>
+    </div>
+    <div class="docs-search__panel" data-docs-search-panel hidden>
+      <div class="docs-search__status" data-docs-search-status></div>
+      <div class="docs-search__results" id="docs-search-results" data-docs-search-results role="listbox" aria-label="Search results"></div>
+    </div>
+  </div>
+          <div class="docs-prose" data-pagefind-body>
+<h1 id="github-actions-integration"><a class="docs-anchor" href="#github-actions-integration" aria-label="Link to github-actions-integration" data-pagefind-ignore>#</a>GitHub Actions integration</h1>
+<p>The <code>nyx-agent</code> repo ships a composite Action at
+<code>.github/actions/nyx-agent/action.yml</code> that runs the scanner against a
+pull request, writes a machine-readable report, and posts (or updates)
+a single grouped PR comment summarising Confirmed + cross-repo chain
+findings. Everything else (Open, Quarantine, Inconclusive, AI trace
+viewer, repro bundles) stays in the operator&#39;s local UI.</p>
+<h2 id="what-the-action-does"><a class="docs-anchor" href="#what-the-action-does" aria-label="Link to what-the-action-does" data-pagefind-ignore>#</a>What the Action does</h2>
+<p>The Action runs in two steps:</p>
+<ol>
+<li><strong><code>nyx-agent scan</code></strong> against the current checkout. Writes a JSON
+report to <code>&lt;state-dir&gt;/report.json</code>. The <code>--since-ref</code> flag filters
+findings to paths the PR touched (the base ref&#39;s <code>git diff --name-only</code> view); the underlying scan still walks the whole
+repository but the emitted report contains only PR-relevant rows.</li>
+<li><strong><code>nyx-agent pr-comment</code></strong> reads the report, filters to findings
+with <code>status = Verified</code> (Confirmed by the dynamic verifier) or
+members of a cross-repo chain, groups them by <code>(repo, path)</code> and
+severity, and posts a Markdown comment via the GitHub REST API.</li>
+</ol>
+<p>A hidden HTML marker (<code>&lt;!-- nyx-agent:pr-comment v1 --&gt;</code>) at the top
+of the comment body is used to recognise an existing comment on
+subsequent runs - the second push to the same PR updates the comment
+in place rather than creating a new one.</p>
+<h2 id="permissions"><a class="docs-anchor" href="#permissions" aria-label="Link to permissions" data-pagefind-ignore>#</a>Permissions</h2>
+<p>The Action requires the <code>pull-requests: write</code> GitHub Actions
+permission so the bot can create or update the comment. Read-only
+forks (<code>pull_request_target</code> is recommended over <code>pull_request</code> for
+this reason) only need their default <code>contents: read</code>. The Action
+exits cleanly when the report carries no Confirmed or cross-repo
+chain findings; no comment is posted in that case.</p>
+<pre><code class="hljs language-yaml"><span class="hljs-attr">permissions:</span>
+  <span class="hljs-attr">contents:</span> <span class="hljs-string">read</span>
+  <span class="hljs-attr">pull-requests:</span> <span class="hljs-string">write</span></code></pre>
+<h2 id="inputs"><a class="docs-anchor" href="#inputs" aria-label="Link to inputs" data-pagefind-ignore>#</a>Inputs</h2>
+<table>
+<thead>
+<tr>
+<th>input</th>
+<th>required</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>nyx-agent-binary</code></td>
+<td>no</td>
+<td>Path to the binary. Defaults to <code>nyx-agent</code> (PATH lookup).</td>
+</tr>
+<tr>
+<td><code>config</code></td>
+<td>no</td>
+<td>Path to <code>nyx-agent.toml</code>. Defaults to <code>./nyx-agent.toml</code>.</td>
+</tr>
+<tr>
+<td><code>state-dir</code></td>
+<td>no</td>
+<td>State directory override. Defaults to a per-run tempdir under <code>$RUNNER_TEMP</code>.</td>
+</tr>
+<tr>
+<td><code>ui-url</code></td>
+<td>no</td>
+<td>Base URL of the operator&#39;s local UI. Used to deep-link the comment back to <code>&lt;ui-url&gt;/runs/&lt;run_id&gt;</code>. Empty = no link.</td>
+</tr>
+<tr>
+<td><code>gh-api</code></td>
+<td>no</td>
+<td>GitHub REST base. Override for GHE; defaults to <code>https://api.github.com</code>.</td>
+</tr>
+<tr>
+<td><code>gh-token</code></td>
+<td>yes</td>
+<td>Token with <code>pull-requests: write</code>. Use <code>${{ github.token }}</code>.</td>
+</tr>
+</tbody></table>
+<h2 id="workflow-example"><a class="docs-anchor" href="#workflow-example" aria-label="Link to workflow-example" data-pagefind-ignore>#</a>Workflow example</h2>
+<pre><code class="hljs language-yaml"><span class="hljs-attr">name:</span> <span class="hljs-string">nyx-agent</span>
+<span class="hljs-attr">on:</span>
+  <span class="hljs-attr">pull_request:</span>
+    <span class="hljs-attr">branches:</span> [<span class="hljs-string">main</span>]
+
+<span class="hljs-attr">permissions:</span>
+  <span class="hljs-attr">contents:</span> <span class="hljs-string">read</span>
+  <span class="hljs-attr">pull-requests:</span> <span class="hljs-string">write</span>
+
+<span class="hljs-attr">jobs:</span>
+  <span class="hljs-attr">nyx-agent:</span>
+    <span class="hljs-attr">runs-on:</span> <span class="hljs-string">self-hosted</span>   <span class="hljs-comment"># nyx-agent binary must be installed</span>
+    <span class="hljs-attr">steps:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/checkout@v4</span>
+        <span class="hljs-attr">with:</span>
+          <span class="hljs-attr">fetch-depth:</span> <span class="hljs-number">0</span>    <span class="hljs-comment"># required for `git diff base_ref...HEAD`</span>
+
+      <span class="hljs-bullet">-</span> <span class="hljs-attr">uses:</span> <span class="hljs-string">./.github/actions/nyx-agent</span>
+        <span class="hljs-attr">with:</span>
+          <span class="hljs-attr">ui-url:</span> <span class="hljs-string">https://nyx.example.internal</span>
+          <span class="hljs-attr">gh-token:</span> <span class="hljs-string">${{</span> <span class="hljs-string">github.token</span> <span class="hljs-string">}}</span></code></pre>
+<p><code>fetch-depth: 0</code> is load-bearing: the scan computes
+<code>git diff --name-only --diff-filter=AMR &lt;base_ref&gt;...HEAD</code> to drive
+<code>--since-ref</code>, and the default shallow clone leaves the base ref
+unreachable. Set <code>fetch-depth: 0</code> or pass <code>--no-shallow</code> to your
+custom checkout step.</p>
+<h2 id="nyx-agenttoml-shape"><a class="docs-anchor" href="#nyx-agenttoml-shape" aria-label="Link to nyx-agenttoml-shape" data-pagefind-ignore>#</a><code>nyx-agent.toml</code> shape</h2>
+<p>Point the repo config at the PR checkout via <code>local-path</code> source:</p>
+<pre><code class="hljs language-toml"><span class="hljs-section">[general]</span>
+<span class="hljs-attr">log_level</span> = <span class="hljs-string">&quot;info&quot;</span>
+
+<span class="hljs-section">[[repo]]</span>
+<span class="hljs-attr">name</span>        = <span class="hljs-string">&quot;self&quot;</span>
+<span class="hljs-attr">i_own_this</span>  = <span class="hljs-literal">true</span>
+<span class="hljs-attr">enabled</span>     = <span class="hljs-literal">true</span>
+<span class="hljs-attr">source</span> = { kind = <span class="hljs-string">&quot;local-path&quot;</span>, path = <span class="hljs-string">&quot;.&quot;</span> }</code></pre>
+<p>When the action runs from <code>$GITHUB_WORKSPACE</code>, the agent ingests the
+checkout (<code>Phase 05</code> snapshot path), runs the static scan, and
+proceeds through the AI passes if <code>[ai]</code> is configured with a key
+from the runner&#39;s secrets store.</p>
+<h2 id="secrets-handling"><a class="docs-anchor" href="#secrets-handling" aria-label="Link to secrets-handling" data-pagefind-ignore>#</a>Secrets handling</h2>
+<p>The <code>gh-token</code> input is consumed via the <code>GITHUB_TOKEN</code> environment
+variable. It is <strong>never</strong> placed on argv and <strong>never</strong> echoed to
+logs:</p>
+<ul>
+<li>The CLI reads the value from <code>$GITHUB_TOKEN</code> only when the
+<code>pr-comment</code> step runs, then forwards it via the <code>Authorization</code>
+header set on the <code>reqwest::Client</code> (with <code>set_sensitive(true)</code> so
+the <code>tracing</code> HTTP middleware does not log it).</li>
+<li>Anthropic / Claude Code keys (if you enable the AI passes) are read
+from <code>keyring</code> on the operator host or from <code>NYX_*</code> env vars per
+the Phase 09 secrets layout - not via this Action&#39;s inputs.</li>
+</ul>
+<h2 id="dedup-contract"><a class="docs-anchor" href="#dedup-contract" aria-label="Link to dedup-contract" data-pagefind-ignore>#</a>Dedup contract</h2>
+<p>Re-running the workflow against the same PR (e.g. after a push) is a
+<strong>replace, not append</strong> operation:</p>
+<ol>
+<li>The <code>pr-comment</code> step <code>GET /repos/{owner}/{repo}/issues/{pr}/comments</code>
+and walks the result looking for the marker.</li>
+<li>If found, the existing comment is updated via <code>PATCH /repos/{owner}/{repo}/issues/comments/{id}</code>.</li>
+<li>If not found, a new comment is created.</li>
+</ol>
+<p>This means the comment surface is bounded by the number of distinct
+markers we ship. Right now there is exactly one
+(<code>&lt;!-- nyx-agent:pr-comment v1 --&gt;</code>). Schema bumps will mint a new
+marker so the older one becomes invisible to the new binary and a
+fresh comment lands - giving operators a clean swap rather than an
+update that mixes old and new shape.</p>
+<h2 id="what-lands-on-the-pr-vs-the-local-ui"><a class="docs-anchor" href="#what-lands-on-the-pr-vs-the-local-ui" aria-label="Link to what-lands-on-the-pr-vs-the-local-ui" data-pagefind-ignore>#</a>What lands on the PR vs. the local UI</h2>
+<table>
+<thead>
+<tr>
+<th>Where</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PR comment</td>
+<td><code>Verified</code> (Confirmed by Phase 19 verifier), or chain member where the chain has <code>cross_repo = true</code>.</td>
+</tr>
+<tr>
+<td>Local UI only</td>
+<td>Everything else: <code>Open</code> (static-pass only, unverified), <code>Quarantine</code> (AI-proposed, awaiting verifier), <code>Closed</code> (verifier rejected), <code>Inconclusive</code> (static pass timeouts / spec derivation failures).</td>
+</tr>
+</tbody></table>
+<p>This split keeps the PR conversation focused on the high-signal rows
+the verifier confirmed; the noisier static surface stays where
+operators triage it, not where reviewers see it.</p>
+<h2 id="report-json-schema"><a class="docs-anchor" href="#report-json-schema" aria-label="Link to report-json-schema" data-pagefind-ignore>#</a>Report JSON schema</h2>
+<p>The intermediate <code>report.json</code> is the only file the <code>pr-comment</code> step
+reads. Its shape (<code>schema_version = 1</code>):</p>
+<pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;schema_version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;run_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;...&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;started_at&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1700000000000</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;finished_at&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1700000010000</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;status&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Succeeded&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;triggered_by&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Manual&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;repos&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;self&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;since_ref&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;main&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;findings&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;...&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;repo&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;self&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;path&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;src/handler.py&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;line&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">42</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;cap&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;sqli&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;rule&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;py.sqli.untainted-format-string&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;severity&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;High&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;status&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Verified&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;finding_origin&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Static&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;chain_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">null</span></span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;chains&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;...&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;cross_repo&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;member_ids&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;...&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;...&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;rationale&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;controller-in-repo-A reaches sink-in-repo-B&quot;</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span></code></pre>
+<p>External dashboards (Slack, JIRA, custom triage tools) can consume
+this directly without re-running the scan; pass <code>--output</code> alone
+(without <code>pr-comment</code>) to use the file as a JSON artefact.</p>
+<h2 id="diagnosing-failures"><a class="docs-anchor" href="#diagnosing-failures" aria-label="Link to diagnosing-failures" data-pagefind-ignore>#</a>Diagnosing failures</h2>
+<ul>
+<li><strong><code>scan: \</code>git diff base_ref...HEAD` ... failed`</strong> - the base ref
+is not reachable. Set <code>fetch-depth: 0</code> on the checkout step.</li>
+<li><strong><code>pr-comment: env var \</code>GITHUB_TOKEN` is empty or unset`</strong> -
+<code>gh-token</code> was not passed, or the workflow&#39;s <code>permissions:</code> block
+omits <code>pull-requests: write</code>.</li>
+<li><strong><code>pr-comment: github api error: create comment returned 403</code></strong> -
+same as above; the token can read but not write the PR. Confirm
+the workflow has <code>permissions: pull-requests: write</code> and that the
+PR is not from a fork (<code>pull_request_target</code> is the standard
+recipe for fork-aware bot comments).</li>
+<li><strong>PR comment was not posted but the step succeeded</strong> - the report
+contained no Confirmed or cross-repo chain findings. Open the
+operator&#39;s local UI to triage <code>Open</code> / <code>Quarantine</code> rows; only
+high-signal rows land on the PR by design.</li>
+</ul>
+
+          </div>
+          <nav class="docs-prevnext" aria-label="Page navigation"><a class="docs-prevnext__link docs-prevnext__link--prev" href="../triggers/webhook.html">
+        <span class="docs-prevnext__label">Previous</span>
+        <span class="docs-prevnext__title">Webhook</span>
+      </a><a class="docs-prevnext__link docs-prevnext__link--next" href="../dev/sqlx.html">
+        <span class="docs-prevnext__label">Next</span>
+        <span class="docs-prevnext__title">SQLx</span>
+      </a></nav>
+        </article>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <p class="site-footer__copy">© 2026 Eli Peter · Nyx Agent is licensed under AGPL-3.0-or-later.</p>
+        <nav class="site-footer__nav" aria-label="Footer">
+          <a href="../../../">Home</a>
+          <a href="../../../scanner.html">Scanner</a>
+          <a href="../../../agent.html">Agent</a>
+          <a href="../../../news/">News</a>
+          <a href="../../../docs/">Docs</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

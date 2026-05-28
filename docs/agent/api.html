@@ -1,0 +1,983 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HTTP API | Nyx Agent docs</title>
+    <meta name="description" content="The daemon serves a versioned HTTP and WebSocket API under /api/v1/ on the loopback address. The SPA at / and the WebSocket events stream at /api/v1/events are the primary consumers; every endpoint..." />
+    <meta name="keywords" content="Nyx Agent, nyx-agent, local pentesting, live appsec testing, verified vulnerabilities, stored evidence, HTTP API, HTTP API, API, WebSocket, api, HMAC" />
+    <meta name="author" content="Eli Peter" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <link rel="canonical" href="https://nyxscan.dev/docs/agent/api.html" />
+    <link rel="sitemap" type="application/xml" href="https://nyxscan.dev/sitemap.xml" />
+    <link rel="alternate" hreflang="en" href="https://nyxscan.dev/docs/agent/api.html" />
+    <link rel="alternate" hreflang="x-default" href="https://nyxscan.dev/docs/agent/api.html" />
+    <link rel="prev" href="ai-runtime.html" />
+    <link rel="next" href="triggers/index.html" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="64x64" href="../../favicon-64.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../../favicon-180.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="alternate" type="application/rss+xml" title="Nyx | News &amp; release notes" href="/news/feed.xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../styles.css" />
+    <script defer src="../../docs/search.js"></script>
+
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Nyx" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="HTTP API" />
+    <meta property="og:description" content="The daemon serves a versioned HTTP and WebSocket API under /api/v1/ on the loopback address. The SPA at / and the WebSocket events stream at /api/v1/events are the primary consumers; every endpoint..." />
+    <meta property="og:url" content="https://nyxscan.dev/docs/agent/api.html" />
+    <meta property="og:image" content="https://nyxscan.dev/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Nyx Agent local pentesting documentation" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="HTTP API" />
+    <meta name="twitter:description" content="The daemon serves a versioned HTTP and WebSocket API under /api/v1/ on the loopback address. The SPA at / and the WebSocket events stream at /api/v1/events are the primary consumers; every endpoint..." />
+    <meta name="twitter:image" content="https://nyxscan.dev/og-image.png" />
+    <meta name="twitter:image:alt" content="Nyx Agent local pentesting documentation" />
+    <meta name="theme-color" content="#F9F8F4" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://nyxscan.dev/#person",
+      "name": "Eli Peter",
+      "url": "https://github.com/elicpeter",
+      "sameAs": [
+        "https://github.com/elicpeter",
+        "https://github.com/sponsors/elicpeter"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://nyxscan.dev/#website",
+      "url": "https://nyxscan.dev/",
+      "name": "Nyx",
+      "description": "Local security tooling for deterministic scanning and live testing.",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://nyxscan.dev/#person"
+      }
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://nyxscan.dev/docs/agent/api.html#article",
+      "headline": "HTTP API",
+      "name": "HTTP API",
+      "url": "https://nyxscan.dev/docs/agent/api.html",
+      "description": "The daemon serves a versioned HTTP and WebSocket API under /api/v1/ on the loopback address. The SPA at / and the WebSocket events stream at /api/v1/events are the primary consumers; every endpoint...",
+      "inLanguage": "en",
+      "articleSection": "HTTP API",
+      "isPartOf": {
+        "@id": "https://nyxscan.dev/#website"
+      },
+      "publisher": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "author": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "image": "https://nyxscan.dev/og-image.png",
+      "mainEntityOfPage": "https://nyxscan.dev/docs/agent/api.html"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://nyxscan.dev/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Docs",
+          "item": "https://nyxscan.dev/docs/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Nyx Agent docs",
+          "item": "https://nyxscan.dev/docs/agent/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "HTTP API",
+          "item": "https://nyxscan.dev/docs/agent/api.html"
+        }
+      ],
+      "@id": "https://nyxscan.dev/docs/agent/api.html#breadcrumbs"
+    }
+  ]
+}
+    </script>
+  </head>
+  <body class="docs-body">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" aria-label="Primary navigation">
+      <div class="container site-header__inner">
+        <a class="brand" href="../../" aria-label="Nyx home">
+          <img src="../../assets/logo.png" alt="Nyx" class="brand-logo" />
+        </a>
+        <span class="header-wordmark">NYX</span>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="../../scanner.html">Scanner</a>
+          <a href="../../agent.html">Agent</a>
+          <a href="../../news/">News</a>
+          <a href="../../docs/" aria-current="page">Docs</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="docs-page">
+      <div class="docs-shell">
+        <nav class="docs-sidebar" aria-label="Documentation"><a class="docs-sidebar__brand" href="./">Agent docs</a><a class="docs-sidebar__home" href="../">All docs</a><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Get started</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="install.html">Install</a></li><li><a class="docs-sidebar__link" href="quickstart.html">Quickstart</a></li><li><a class="docs-sidebar__link" href="cli.html">CLI</a></li><li><a class="docs-sidebar__link" href="config.html">Config</a></li><li><a class="docs-sidebar__link" href="state-dir.html">State Directory</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Architecture</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="architecture.html">Architecture</a></li><li><a class="docs-sidebar__link" href="runs.html">Runs</a></li><li><a class="docs-sidebar__link" href="attack-graph.html">Attack Graph</a></li><li><a class="docs-sidebar__link" href="business-logic-templates.html">Business Logic Templates</a></li><li><a class="docs-sidebar__link" href="events.html">Events</a></li><li><a class="docs-sidebar__link" href="ai-runtime.html">AI Runtime</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Projects</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="cli.html#project">CLI: Project</a></li><li><a class="docs-sidebar__link" href="quickstart.html#create-a-project">Quickstart: Create a Project</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">HTTP API</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="api.html" aria-current="page">API</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Triggers</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="triggers/index.html">Overview</a></li><li><a class="docs-sidebar__link" href="triggers/cron.html">Cron</a></li><li><a class="docs-sidebar__link" href="triggers/webhook.html">Webhook</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">CI integration</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="ci/github-actions.html">GitHub Actions</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Contributor docs</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="dev/sqlx.html">SQLx</a></li><li><a class="docs-sidebar__link" href="dev/frontend.html">Frontend</a></li></ul></div></nav>
+        <article class="docs-content">
+          <div class="docs-search docs-search--content" data-docs-search>
+    <label class="visually-hidden" for="docs-search-input">Search docs</label>
+    <div class="docs-search__control">
+      <span class="docs-search__icon" aria-hidden="true"></span>
+      <input id="docs-search-input" data-docs-search-input type="search" placeholder="Search docs" autocomplete="off" autocapitalize="none" spellcheck="false" role="combobox" aria-autocomplete="list" aria-controls="docs-search-results" aria-expanded="false" />
+      <kbd class="docs-search__key" aria-hidden="true">⌘K</kbd>
+    </div>
+    <div class="docs-search__panel" data-docs-search-panel hidden>
+      <div class="docs-search__status" data-docs-search-status></div>
+      <div class="docs-search__results" id="docs-search-results" data-docs-search-results role="listbox" aria-label="Search results"></div>
+    </div>
+  </div>
+          <div class="docs-prose" data-pagefind-body>
+<h1 id="http-api"><a class="docs-anchor" href="#http-api" aria-label="Link to http-api" data-pagefind-ignore>#</a>HTTP API</h1>
+<p>The daemon serves a versioned HTTP and WebSocket API under
+<code>/api/v1/</code> on the loopback address. The SPA at <code>/</code> and the
+WebSocket events stream at <code>/api/v1/events</code> are the primary
+consumers; every endpoint is reachable from <code>curl</code> once the bearer
+token is known.</p>
+<p>This page lists every route, the request shape, the response shape,
+and the status codes the handler can emit. Routes are grouped by
+concern.</p>
+<h2 id="conventions"><a class="docs-anchor" href="#conventions" aria-label="Link to conventions" data-pagefind-ignore>#</a>Conventions</h2>
+<ul>
+<li>Base path: <code>/api/v1</code>. The daemon binds to <code>127.0.0.1:&lt;port&gt;</code> by
+default. See <a href="config.html#general">config.md</a> for the bind
+address.</li>
+<li>Authentication: a bearer token (<code>Authorization: Bearer &lt;token&gt;</code>)
+on every route except <code>/api/v1/health</code>, the three setup wizard
+routes while setup is pending, and <code>POST /webhook/git</code> (which
+carries its own HMAC). The token lives at
+<code>&lt;state_dir&gt;/auth_token</code> and is minted on first daemon launch;
+see <a href="state-dir.html">state-dir.md</a>.</li>
+<li>Query-string token fallback: requests may also pass
+<code>?token=&lt;token&gt;</code> instead of the header. Useful for WebSocket
+clients that cannot set request headers.</li>
+<li>Content type: every request and response body is JSON unless
+the route is documented otherwise (markdown, HTML, tar, SSE).</li>
+<li>Error envelope: every non-success response is
+<code>{&quot;error&quot;: {&quot;code&quot;: &quot;&lt;machine_code&gt;&quot;, &quot;message&quot;: &quot;&lt;text&gt;&quot;}}</code>.
+Codes are <code>not_found</code>, <code>bad_request</code>, <code>unauthorized</code>,
+<code>store_error</code>, <code>scan_rejected</code>, <code>shutting_down</code>,
+<code>scan_backpressure</code>, <code>scan_internal</code>, <code>internal</code>.</li>
+<li>Timestamps: every <code>*_at</code> or <code>*_at_ms</code> field is epoch
+milliseconds. Durations carry the <code>_ms</code> suffix.</li>
+</ul>
+<h2 id="route-summary"><a class="docs-anchor" href="#route-summary" aria-label="Link to route-summary" data-pagefind-ignore>#</a>Route summary</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Path</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GET</td>
+<td><code>/api/v1/health</code></td>
+<td>Liveness probe, version</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/v1/setup/status</code></td>
+<td>Wizard state, config path</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/v1/setup</code></td>
+<td>Wizard commit</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/v1/setup/doctor</code></td>
+<td>Wizard pre-commit checks</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/v1/projects</code></td>
+<td>List projects</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/v1/projects</code></td>
+<td>Create project</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/v1/projects/:id</code></td>
+<td>Get project</td>
+</tr>
+<tr>
+<td>PATCH</td>
+<td><code>/api/v1/projects/:id</code></td>
+<td>Patch project</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td><code>/api/v1/projects/:id</code></td>
+<td>Delete project (cascades to repos)</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/v1/projects/:id/repos</code></td>
+<td>List repos in project</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/v1/projects/:id/repos</code></td>
+<td>Add repo to project</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/v1/projects/:id/repos/test</code></td>
+<td>Probe repo connectivity</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/v1/projects/:id/repos/:name</code></td>
+<td>Get repo</td>
+</tr>
+<tr>
+<td>PATCH</td>
+<td><code>/api/v1/projects/:id/repos/:name</code></td>
+<td>Patch repo</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td><code>/api/v1/projects/:id/repos/:name</code></td>
+<td>Delete repo (clears workspace)</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/v1/projects/:id/scan</code></td>
+<td>Trigger a scan</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/v1/projects/:id/pentest</code></td>
+<td>Start a project pentest</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/v1/projects/:id/vulnerabilities</code></td>
+<td>Verified vulnerabilities for project</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/v1/runs</code></td>
+<td>List runs by status</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/v1/runs/:id</code></td>
+<td>Get run</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/v1/runs/:id/findings</code></td>
+<td>Findings for run plus diff status</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/v1/runs/:id/verification-attempts</code></td>
+<td>Live verification attempts and artifacts</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/v1/runs/:id/vulnerabilities</code></td>
+<td>Verified vulnerabilities for run</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/v1/runs/:id/events.jsonl</code></td>
+<td>Download persisted run event stream</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/v1/runs/:id/summary</code></td>
+<td>Run-card JSON</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/v1/runs/:id/summary.md</code></td>
+<td>Run-card markdown</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/v1/runs/:id/summary.html</code></td>
+<td>Run-card HTML</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/v1/findings</code></td>
+<td>List findings (filtered)</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/v1/vulnerabilities</code></td>
+<td>Verified vulnerabilities across projects</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/v1/findings/:id</code></td>
+<td>Get finding</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/v1/findings/:id/repro-bundle</code></td>
+<td>Build a repro bundle</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/v1/findings/:id/repro-bundle.tar</code></td>
+<td>Download bundle tar</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/v1/findings/:id/replay</code></td>
+<td>Replay bundle (SSE stream)</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/v1/findings/:id/traces</code></td>
+<td>AI traces for finding</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/v1/traces/:id</code></td>
+<td>Get trace</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/v1/chains</code></td>
+<td>List chains (requires <code>run_id</code>)</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/v1/chains/:id</code></td>
+<td>Get chain</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/v1/quarantine</code></td>
+<td>List quarantined items</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/v1/quarantine/:id/promote</code></td>
+<td>Promote out of quarantine</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/v1/quarantine/:id/dismiss</code></td>
+<td>Dismiss quarantined item</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/v1/events</code></td>
+<td>WebSocket event stream</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/webhook/git</code></td>
+<td>HMAC-authed git push webhook</td>
+</tr>
+</tbody></table>
+<h2 id="health"><a class="docs-anchor" href="#health" aria-label="Link to health" data-pagefind-ignore>#</a>Health</h2>
+<p><code>GET /api/v1/health</code></p>
+<p>Liveness probe. Bypasses bearer auth. Response:</p>
+<pre><code class="hljs language-json"><span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;status&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ok&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;0.1.0&quot;</span> <span class="hljs-punctuation">}</span></code></pre>
+<h2 id="setup-wizard"><a class="docs-anchor" href="#setup-wizard" aria-label="Link to setup-wizard" data-pagefind-ignore>#</a>Setup wizard</h2>
+<p><code>GET /api/v1/setup/status</code></p>
+<p>Returns whether <code>nyx-agent.toml</code> exists on disk and where the wizard
+would write it.</p>
+<pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;complete&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;config_path&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/Users/me/Library/Application Support/nyx-agent/nyx-agent.toml&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;ai_runtime&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;none&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;sandbox_backend&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;auto&quot;</span>
+<span class="hljs-punctuation">}</span></code></pre>
+<p><code>POST /api/v1/setup</code></p>
+<p>Commits the wizard&#39;s three choices to disk. The handler writes
+<code>nyx-agent.toml</code> atomically (mode 0600) and stashes secrets in the OS
+keychain.</p>
+<p>Request:</p>
+<pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;ai_runtime&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;anthropic | none | local-llm | claude-code | codex&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;anthropic_api_key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;sk-...&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;local_llm_url&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;http://127.0.0.1:8080/v1&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;local_llm_token&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">null</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;sandbox_backend&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;auto | process | birdcage | libkrun | firecracker | docker&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;i_own_this&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
+<span class="hljs-punctuation">}</span></code></pre>
+<p><code>i_own_this</code> must be <code>true</code>. The daemon refuses to write the
+config otherwise.</p>
+<p>Response: <code>{ &quot;ok&quot;: true, &quot;config_path&quot;: &quot;...&quot; }</code>.</p>
+<p>Errors: 400 (<code>i_own_this</code> false; unknown enum value; missing API
+key for <code>anthropic</code>; missing endpoint for <code>local-llm</code>), 500
+(keychain unreachable, fs write failed).</p>
+<p><code>POST /api/v1/setup/doctor</code></p>
+<p>Per-check probe used by the wizard&#39;s preflight step. Returns one
+row per check rather than a single pass/fail so the UI can surface
+targeted hints.</p>
+<p>Request:</p>
+<pre><code class="hljs language-json"><span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;ai_runtime&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;local-llm&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;local_llm_url&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;http://127.0.0.1:1234/v1&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;sandbox_backend&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;birdcage&quot;</span> <span class="hljs-punctuation">}</span></code></pre>
+<p>Response:</p>
+<pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;checks&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;state-dir&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;passed&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;message&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;state directory writable&quot;</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ai-local-llm&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;passed&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;message&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Local OpenAI-compatible endpoint configured at http://127.0.0.1:1234/v1; one-shot helpers enabled. Set [ai].model if the server requires a specific model id.&quot;</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;sandbox&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;passed&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;message&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;birdcage ready on this host&quot;</span> <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span></code></pre>
+<p>The sandbox check routes through <code>nyx_agent_sandbox::probe</code> so its
+verdict matches what the run-time auto-selector would see. <code>auto</code>
+returns the advisory message <code>Backend will be chosen at scan time</code>.</p>
+<h2 id="projects"><a class="docs-anchor" href="#projects" aria-label="Link to projects" data-pagefind-ignore>#</a>Projects</h2>
+<p>A project owns repos. Scans run against a project; a project
+without repos is legal but scanning it does nothing.</p>
+<p><code>GET /api/v1/projects</code></p>
+<p>Returns <code>Vec&lt;ProjectRecord&gt;</code>. Fields:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>id</code></td>
+<td>string</td>
+<td><code>proj-&lt;slug&gt;-&lt;epoch-hex&gt;</code></td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>unique</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>string | null</td>
+<td>operator note</td>
+</tr>
+<tr>
+<td><code>target_base_url</code></td>
+<td>string | null</td>
+<td>hint for HTTP-shaped scans</td>
+</tr>
+<tr>
+<td><code>env_config_json</code></td>
+<td>string | null</td>
+<td>serialised <code>nyx-agent-env</code> envelope</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td>number</td>
+<td>epoch ms</td>
+</tr>
+<tr>
+<td><code>updated_at</code></td>
+<td>number</td>
+<td>epoch ms</td>
+</tr>
+</tbody></table>
+<p><code>POST /api/v1/projects</code></p>
+<pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;alpha&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;demo project&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;target_base_url&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;http://localhost:3000&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;env_config&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> ... <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span></code></pre>
+<p><code>env_config</code> is any JSON; the daemon re-serialises it into
+<code>env_config_json</code> verbatim. Returns the created <code>ProjectRecord</code>.
+400 on empty name or duplicate name.</p>
+<p><code>GET /api/v1/projects/:id</code></p>
+<p>Returns the project. 404 if absent.</p>
+<p><code>PATCH /api/v1/projects/:id</code></p>
+<p>Tri-state patch over the mutable fields:</p>
+<pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;new value | null | &lt;omit&gt;&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;target_base_url&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;...&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;env_config&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> ... <span class="hljs-punctuation">}</span> 
+<span class="hljs-punctuation">}</span></code></pre>
+<p>Each field has three modes: omit the key to leave unchanged, send
+<code>null</code> to clear, send a value to set. Returns the patched record.</p>
+<p><code>DELETE /api/v1/projects/:id</code></p>
+<p>Removes the project. Cascades to every repo via the schema&#39;s
+foreign-key constraint. Response:</p>
+<pre><code class="hljs language-json"><span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;ok&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;message&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;deleted 1 project row(s); repos cascaded&quot;</span> <span class="hljs-punctuation">}</span></code></pre>
+<h2 id="repos"><a class="docs-anchor" href="#repos" aria-label="Link to repos" data-pagefind-ignore>#</a>Repos</h2>
+<p>A repo is the unit of scan execution. Repos live under one
+project. Names are globally unique across the install (the schema
+makes <code>repos.name</code> a primary key).</p>
+<p><code>GET /api/v1/projects/:id/repos</code></p>
+<p><code>Vec&lt;RepoRecord&gt;</code>. Fields include <code>name</code>, <code>project_id</code>,
+<code>source_kind</code>, <code>source_url_or_path</code>, <code>branch</code>, <code>auth_ref</code>,
+<code>i_own_this</code>, <code>last_scan_run_id</code>, <code>last_scan_finished_at</code>,
+<code>created_at</code>, <code>updated_at</code>.</p>
+<p><code>POST /api/v1/projects/:id/repos</code></p>
+<pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;alpha&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;source_kind&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;git | local-path | github | gitlab | local&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;source_url_or_path&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;git@github.com:org/repo.git&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;branch&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;main&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;auth_ref&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;env:GITHUB_TOKEN&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;i_own_this&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
+<span class="hljs-punctuation">}</span></code></pre>
+<p><code>i_own_this</code> must be <code>true</code>. The handler refuses to silently
+re-home a repo that already exists under a different project.</p>
+<p><code>POST /api/v1/projects/:id/repos/test</code></p>
+<p>Read-only connectivity probe. For <code>git</code> / <code>github</code> / <code>gitlab</code>,
+runs <code>git -c credential.helper= ls-remote --exit-code &lt;url&gt;</code> with
+a 15s timeout. For <code>local-path</code> / <code>local</code>, stats the path and
+parses the on-disk <code>.git/config</code> to surface the existing remote.</p>
+<p>Request:</p>
+<pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;source_kind&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;git&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;source_url_or_path&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;git@github.com:org/repo.git&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;branch&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;main&quot;</span>
+<span class="hljs-punctuation">}</span></code></pre>
+<p>Response:</p>
+<pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;ok&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;message&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ls-remote reached upstream; branch `main` exists&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;on_disk_git_remote&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">null</span></span>
+<span class="hljs-punctuation">}</span></code></pre>
+<p><code>on_disk_git_remote</code> is populated only for local-path probes.</p>
+<p><code>GET /api/v1/projects/:id/repos/:name</code></p>
+<p>Returns the repo. 404 when the repo is missing or belongs to a
+different project.</p>
+<p><code>PATCH /api/v1/projects/:id/repos/:name</code></p>
+<p>Same tri-state semantics as the project patch. <code>i_own_this</code>
+cannot be cleared via PATCH; remove the repo instead.</p>
+<p><code>DELETE /api/v1/projects/:id/repos/:name</code></p>
+<p>Removes the row and the on-disk workspace at
+<code>&lt;state&gt;/repos/&lt;name&gt;/</code>. Returns a status body whose message
+notes whether the workspace was removed cleanly.</p>
+<h2 id="scans"><a class="docs-anchor" href="#scans" aria-label="Link to scans" data-pagefind-ignore>#</a>Scans</h2>
+<p><code>POST /api/v1/projects/:id/scan?repo=&lt;name&gt;</code></p>
+<p>Triggers a scan. The optional <code>repo</code> filter scopes the run to a
+single repo; without it every enabled repo in the project is
+scanned.</p>
+<p>Response: <code>{ &quot;run_id&quot;: &quot;run-...&quot; }</code>.</p>
+<p>Status codes: 200 on dispatch, 400 (<code>scan_rejected</code>) on bad
+input, 429 (<code>scan_backpressure</code>) when the dispatcher queue is
+full, 503 (<code>shutting_down</code>) during a graceful exit.</p>
+<h3 id="business-logic-template-registry"><a class="docs-anchor" href="#business-logic-template-registry" aria-label="Link to business-logic-template-registry" data-pagefind-ignore>#</a>Business-Logic Template Registry</h3>
+<p><code>GET /api/v1/business-logic/templates</code></p>
+<p>Lists registered business-logic templates. Each row includes stable
+<code>id</code>, <code>version</code>, title, category, mutability, required role
+descriptor, seed-data description, supported route patterns, oracle
+description, default severity, and whether the template is executable
+or metadata-only.</p>
+<pre><code class="hljs language-json"><span class="hljs-punctuation">[</span>
+  <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;tenant_object_isolation&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;1&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Tenant/object isolation&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;category&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;authorization&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;mutability&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;state_changing&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;required_roles&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;two_distinct_non_anonymous_roles&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;supported_route_patterns&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;POST collection route paired with GET detail route&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;availability&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;executable&quot;</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">]</span></code></pre>
+<p><code>POST /api/v1/projects/:id/pentest</code></p>
+<p>Starts a project-scoped pentest after launch-profile readiness
+checks pass. The request body is optional; omitted fields default to
+safe mode:</p>
+<pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;exploit_mode_enabled&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;allow_state_changing_live_probes&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;exploit_dry_run&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;business_logic_templates_enabled&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;research_mode_enabled&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;unsafe_attack_agent_enabled&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;business_logic_template_ids&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;tenant_object_isolation&quot;</span><span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span></code></pre>
+<p>These fields are per-run overrides, not persistent config writes.
+The project detail page&#39;s <strong>Start pentest</strong> button opens the same
+safety options. Leave both values <code>false</code> for the default
+non-destructive run. Set both to <code>true</code> only for owned, disposable
+targets where state-changing probes are acceptable.</p>
+<p><code>allow_state_changing_live_probes = true</code> is rejected unless
+<code>exploit_mode_enabled = true</code>; this prevents older clients or stale
+config from enabling mutating live probes without the explicit
+exploit-mode opt-in.</p>
+<p><code>business_logic_template_ids</code> restricts synthesis to specific
+template ids for this run. Unknown ids are rejected with 400.
+<code>exploit_dry_run = true</code> lets operators inspect generated candidates
+and policy audit rows without sending guarded live traffic.</p>
+<p><code>research_mode_enabled = true</code> enables Vuln Research Mode for this run;
+omit it to use <code>[run] research_mode_enabled</code> from config. It adds
+<code>ResearchMode</code> product-invariant candidates, prioritizes them in AI
+attack planning/exploration, and records research provenance on
+candidates and research-mode exploration findings. It is not an
+execution-safety override; exploit mode, state-changing, target-scope,
+request-cap, rate-limit, dry-run, and reset gates still apply.</p>
+<p><code>unsafe_attack_agent_enabled = true</code> runs the final unrestricted local
+attack-agent phase for this run. It is intended for disposable
+user-owned dev apps and does not route the agent&#39;s actions through the
+guarded live-verifier policy. The phase runs seven specialist agents,
+then a critical chain hunter and final triage pass.</p>
+<p>The attack-agent passes run serially in this order:
+<code>business_logic</code>, <code>payments_billing</code>, <code>user_data_privacy</code>,
+<code>auth_session</code>, <code>api_input</code>, <code>infra_dev_prod</code>, <code>abuse_automation</code>,
+<code>critical_chain_hunter</code>, <code>triage</code>. Each pass gets the same target URLs
+and workspaces, plus the current candidates and verified
+vulnerabilities. Findings from earlier passes can therefore become
+context for later passes. Each pass writes its own trace artifact
+directory and records an <code>agent_profile</code> in the trace verifier blob.
+Each pass has a 30-minute agent-loop wall-clock cap.</p>
+<p>Response: <code>{ &quot;run_id&quot;: &quot;run-...&quot; }</code>.</p>
+<p>Status codes: 200 on dispatch, 400 (<code>scan_rejected</code>) on incomplete
+launch profile, missing repos, unsafe exploit options, or other bad
+input; 429 (<code>scan_backpressure</code>) when the dispatcher queue is full;
+503 (<code>shutting_down</code>) during a graceful exit.</p>
+<h2 id="runs"><a class="docs-anchor" href="#runs" aria-label="Link to runs" data-pagefind-ignore>#</a>Runs</h2>
+<p><code>GET /api/v1/runs?status=&lt;status&gt;&amp;project_id=&lt;project_id&gt;</code></p>
+<p>Defaults to <code>status=Running</code>. Use <code>Finished</code>, <code>Failed</code>, etc., to
+filter. <code>project_id</code> is optional; when present, the project must exist
+and only that project&#39;s runs are returned. Returns <code>Vec&lt;RunRecord&gt;</code>.</p>
+<p><code>GET /api/v1/runs/:id</code></p>
+<p>Returns the run. 404 if absent.</p>
+<p><code>GET /api/v1/runs/:id/findings</code></p>
+<p>Findings produced by the run, each tagged with a diff status
+against the most recent prior run on the install:</p>
+<pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;run_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;run-...&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;prior_run_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;run-...&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;items&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;...&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;...&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;...&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;diff_status&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;new | unchanged&quot;</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span></code></pre>
+<p><code>diff_status</code> is <code>new</code> when <code>first_seen &gt;= run.started_at</code>,
+otherwise <code>unchanged</code>. The <code>regressed</code> and <code>closed</code> variants are
+reserved for when a per-run finding-membership history lands.</p>
+<p><code>GET /api/v1/runs/:id/verification-attempts</code></p>
+<p>Returns <code>Vec&lt;VerificationAttemptRecord&gt;</code> for the run. Browser
+verification attempts include <code>artifact_paths</code> pointing at durable
+evidence files under the state directory: redacted replay JSON and
+script files, screenshots, DOM/focused HTML captures, console logs,
+action/navigation timelines, and either a Playwright trace zip or a
+trace-unavailable note when trace capture could not be used safely.</p>
+<p><code>GET /api/v1/runs/:id/candidates</code></p>
+<p>Returns <code>Vec&lt;PentestCandidateRecord&gt;</code> for the run. Candidates are
+unverified hypotheses until a live verification attempt confirms them.
+<code>source</code> and <code>source_ids</code> preserve attribution across Nyx signals,
+route/API discovery, OpenAPI specs, JavaScript bundle endpoint
+extraction, forms, and optional scanner imports.
+Business-logic template candidates also include
+<code>affected_components[*].template_provenance</code> with <code>template_id</code> and
+<code>template_version</code>.</p>
+<p><code>GET /api/v1/runs/:id/business-logic</code></p>
+<p>Returns per-run business-logic synthesis counts and skip reasons:</p>
+<pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;run_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;run-...&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;templates_considered&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">2</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;candidates_generated&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;templates_skipped&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;dry_run&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;templates&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;template_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;tenant_object_isolation&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;template_version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;1&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;generated_count&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;skipped_count&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;skip_reasons&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;dry_run&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;template_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;password_reset_token_misuse&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;template_version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;1&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;generated_count&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;skipped_count&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;skip_reasons&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;current route/auth model does not expose reset-token seed data or a safe inbox capture path&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;dry_run&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span></code></pre>
+<p><code>GET /api/v1/runs/:id/vulnerabilities</code></p>
+<p>Returns live-verified vulnerabilities for the run. Each row carries
+<code>verification_attempt_ids</code>; resolve those through
+<code>/runs/:id/verification-attempts</code> to inspect replay evidence.
+Business-logic verified vulnerabilities retain the candidate&#39;s
+<code>template_provenance</code> in <code>affected_components</code>.</p>
+<p><code>GET /api/v1/runs/:id/events.jsonl</code></p>
+<p>Streams the persisted live-event log for the run as newline-delimited
+JSON. Each line is <code>{ &quot;ts_ms&quot;: &lt;epoch-ms&gt;, &quot;event&quot;: &lt;AgentEvent&gt; }</code>.</p>
+<p><code>GET /api/v1/runs/:id/summary</code></p>
+<p>Run card as JSON. Carries per-repo counts, per-severity totals,
+chain links, and the AI cost summary. Backed by
+<code>nyx_agent_core::report::build_run_card</code>.</p>
+<p><code>GET /api/v1/runs/:id/summary.md</code></p>
+<p>Same run card rendered to markdown. <code>Content-Type: text/markdown; charset=utf-8</code>.</p>
+<p><code>GET /api/v1/runs/:id/summary.html</code></p>
+<p>Same run card rendered to HTML. <code>Content-Type: text/html; charset=utf-8</code>.</p>
+<h2 id="findings"><a class="docs-anchor" href="#findings" aria-label="Link to findings" data-pagefind-ignore>#</a>Findings</h2>
+<p><code>GET /api/v1/findings</code></p>
+<p>Composite filter; every field is optional and ANDed server-side.
+Quarantined rows are hidden unless <code>include_quarantine=true</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Query</th>
+<th>Type</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>repo</code></td>
+<td>string</td>
+<td>exact match</td>
+</tr>
+<tr>
+<td><code>run_id</code></td>
+<td>string</td>
+<td>exact match</td>
+</tr>
+<tr>
+<td><code>cap</code></td>
+<td>string</td>
+<td>capability tag</td>
+</tr>
+<tr>
+<td><code>origin</code></td>
+<td>string</td>
+<td><code>Static</code> / <code>AiExploration</code> / etc.</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>string</td>
+<td><code>Open</code> / <code>Verified</code> / <code>Closed</code> / <code>Quarantine</code></td>
+</tr>
+<tr>
+<td><code>severity</code></td>
+<td>string</td>
+<td><code>Low</code> / <code>Medium</code> / <code>High</code> / <code>Critical</code></td>
+</tr>
+<tr>
+<td><code>triage_state</code></td>
+<td>string</td>
+<td><code>Open</code> / <code>Triaged</code> / etc.</td>
+</tr>
+<tr>
+<td><code>chain_id</code></td>
+<td>string</td>
+<td>restrict to chain members</td>
+</tr>
+<tr>
+<td><code>include_quarantine</code></td>
+<td>bool</td>
+<td>default <code>false</code></td>
+</tr>
+</tbody></table>
+<p>Returns <code>Vec&lt;FindingRecord&gt;</code>.</p>
+<p><code>GET /api/v1/findings/:id</code></p>
+<p>Returns the finding. 404 if absent.</p>
+<h2 id="chains"><a class="docs-anchor" href="#chains" aria-label="Link to chains" data-pagefind-ignore>#</a>Chains</h2>
+<p>A chain groups two or more findings whose flow steps connect
+across repos. The chain runner stamps the <code>chain_id</code> field on
+each member finding.</p>
+<p><code>GET /api/v1/chains?run_id=&lt;id&gt;</code></p>
+<p>Lists chains for the run. <code>run_id</code> is required; omit returns 400.</p>
+<p><code>GET /api/v1/chains/:id</code></p>
+<p>Returns the chain.</p>
+<h2 id="traces"><a class="docs-anchor" href="#traces" aria-label="Link to traces" data-pagefind-ignore>#</a>Traces</h2>
+<p>Every AI-runtime invocation persists a row to <code>agent_traces</code>. The
+row carries tokens-in, tokens-out, USD micros spent, cache
+hit/miss counts, and the conversation jsonl path (when the
+adapter recorded one).</p>
+<p><code>GET /api/v1/findings/:id/traces</code></p>
+<p>Trace rows linked to this finding via <code>finding_id</code>. Today the
+linkage covers the verifier pass; payload-synthesis and
+spec-derivation rows still leave <code>finding_id</code> unset.</p>
+<p><code>GET /api/v1/traces/:id</code></p>
+<p>Returns a single trace row.</p>
+<h2 id="quarantine"><a class="docs-anchor" href="#quarantine" aria-label="Link to quarantine" data-pagefind-ignore>#</a>Quarantine</h2>
+<p>Quarantined items combine two sources: findings with
+<code>status = &#39;Quarantine&#39;</code> and candidate findings produced by AI
+exploration that have not yet been dynamic-confirmed. The API
+folds them into a single list so the operator sees one queue.</p>
+<p><code>GET /api/v1/quarantine</code></p>
+<p>Returns <code>Vec&lt;QuarantineItem&gt;</code> sorted by <code>last_seen</code> descending
+(candidates fall to the bottom because they carry no
+<code>last_seen</code>).</p>
+<p><code>POST /api/v1/quarantine/:id/promote</code></p>
+<p>When the id starts with <code>cand-</code>, promotes a candidate to a
+finding (status <code>Open</code>, attack provenance <code>ManualPromote</code>). For a
+quarantined finding row, flips the status to <code>Open</code> so the row
+reappears in the Findings browser. Manual promote skips the
+dynamic-confirm gate by design.</p>
+<p><code>POST /api/v1/quarantine/:id/dismiss</code></p>
+<p>Sets a candidate&#39;s status to <code>Dismissed</code>, or a finding&#39;s status
+to <code>Closed</code>.</p>
+<h2 id="repro-bundles"><a class="docs-anchor" href="#repro-bundles" aria-label="Link to repro-bundles" data-pagefind-ignore>#</a>Repro bundles</h2>
+<p>A repro bundle is a USTAR-format tar containing a <code>repro.sh</code>
+script and the source files referenced by the finding&#39;s evidence.
+Bundles live under <code>&lt;state&gt;/bundles/</code>.</p>
+<p><code>POST /api/v1/findings/:id/repro-bundle</code></p>
+<p>Builds (or rebuilds) a bundle for the finding. Returns the
+manifest:</p>
+<pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;finding_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;...&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;bundle_path&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/.../bundles/&lt;id&gt;.tar&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;sha256&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;...&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;files&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span> ... <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span></code></pre>
+<p><code>GET /api/v1/findings/:id/repro-bundle.tar</code></p>
+<p>Downloads the most recent bundle. Builds one inline if none
+exists yet. Response headers carry
+<code>X-Nyx-Bundle-Sha256: &lt;hex&gt;</code> so a script can verify integrity
+without parsing the manifest. The handler refuses to serve a
+bundle whose canonical path escapes the configured bundles root.</p>
+<p><code>POST /api/v1/findings/:id/replay</code></p>
+<p>Server-sent events stream. Extracts the bundle into a tempdir
+and runs <code>bash repro.sh</code> with a 120s wall-clock ceiling. Emits:</p>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>Data</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>start</code></td>
+<td><code>{ finding_id, bundle_path, started_at_ms }</code></td>
+</tr>
+<tr>
+<td><code>stdout</code></td>
+<td>raw line</td>
+</tr>
+<tr>
+<td><code>stderr</code></td>
+<td>raw line</td>
+</tr>
+<tr>
+<td><code>error</code></td>
+<td>error string</td>
+</tr>
+<tr>
+<td><code>end</code></td>
+<td>`{ exit_code, status: &quot;Pass&quot;</td>
+</tr>
+</tbody></table>
+<p>The bundle&#39;s stored sha256 is compared to the on-disk bytes
+before extraction. A mismatch returns 500. Tar entries containing
+<code>..</code> components or absolute paths are rejected.</p>
+<h2 id="events-websocket"><a class="docs-anchor" href="#events-websocket" aria-label="Link to events-websocket" data-pagefind-ignore>#</a>Events WebSocket</h2>
+<p><code>GET /api/v1/events?run_id=&lt;id&gt;</code></p>
+<p>WebSocket upgrade. Bearer auth is enforced; pass
+<code>?token=&lt;token&gt;</code> if the client cannot send the header.</p>
+<p>Without <code>run_id</code>, every <code>AgentEvent</code> lands on the socket. With
+<code>run_id</code>, the server replays the buffered events for that run
+first, then streams live events filtered to the same run.
+Heartbeats pass through any filter.</p>
+<p>Frames are JSON-encoded <code>AgentEvent</code> values. The replay buffer
+caps at 128 frames per run across 16 tracked runs; older frames
+drop silently. A <code>Lagged</code> warning frame is emitted when the
+client falls behind the broadcast channel:</p>
+<pre><code class="hljs language-json"><span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;kind&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Lagged&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;skipped&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">42</span> <span class="hljs-punctuation">}</span></code></pre>
+<p>Client-initiated frames are ignored except for <code>ping</code> (mirrored
+to <code>pong</code>) and <code>close</code> (terminates the stream).</p>
+<p><code>RunEvent</code> variants on the stream: <code>Heartbeat</code>, <code>RunStarted</code>,
+<code>ProjectStarted</code>, <code>RepoStarted</code>, <code>RepoStaticDone</code>,
+<code>RepoDynamicDone</code>, <code>RepoFailed</code>, <code>RepoFinished</code>,
+<code>ProjectFinished</code>, <code>RunFinished</code>. See <a href="events.html">events.md</a> for
+the ordering contract, AI runtime variants, and the field-by-field
+shape sourced from <code>crates/nyx-agent-types/src/event.rs</code>.</p>
+<h2 id="git-webhook"><a class="docs-anchor" href="#git-webhook" aria-label="Link to git-webhook" data-pagefind-ignore>#</a>Git webhook</h2>
+<p><code>POST /webhook/git</code></p>
+<p>HMAC-authed push trigger. Bypasses bearer auth because the HMAC
+itself is the auth. See <a href="triggers/webhook.html">docs/triggers/webhook.md</a>
+for the operator setup.</p>
+<p>Request:</p>
+<pre><code class="hljs language-plain"><span class="hljs-params">X-Hub-Signature-256:</span> sha256<span class="hljs-operator">=</span><span class="hljs-symbol">&lt;hex&gt;</span>
+<span class="hljs-params">Content-Type:</span> application<span class="hljs-symbol">/json</span>
+
+{ <span class="hljs-string">&quot;ref&quot;</span>: <span class="hljs-string">&quot;refs/heads/main&quot;</span>, ... }</code></pre>
+<p>The signature is computed over the raw body bytes. The handler
+buffers up to 1 MiB and refuses larger bodies with 413. A
+matching signature dispatches a scan; a wrong branch returns 200
+with <code>triggered: false</code> so the upstream git server records a
+successful delivery and stops retrying.</p>
+<p>Response on dispatch: 202 Accepted,
+<code>{ &quot;triggered&quot;: true, &quot;run_id&quot;: &quot;run-...&quot;, &quot;message&quot;: &quot;&quot; }</code>.</p>
+<p>Status codes: 401 (missing or invalid signature), 503
+(<code>webhook_secret_ref</code> configured but the referenced env var is
+unset), 400 (body too large or unreadable), 202 (scan
+dispatched), 200 (branch filter rejected the delivery).</p>
+<h2 id="related-pages"><a class="docs-anchor" href="#related-pages" aria-label="Link to related-pages" data-pagefind-ignore>#</a>Related pages</h2>
+<ul>
+<li><a href="config.html">config.md</a> for the operator settings the wizard
+writes.</li>
+<li><a href="state-dir.html">state-dir.md</a> for where <code>auth_token</code>,
+<code>bundles/</code>, and <code>logs/agent.jsonl</code> live.</li>
+<li><a href="cli.html">cli.md</a> for the <code>nyx-agent scan</code> shortcut that calls
+this API.</li>
+<li><a href="triggers/webhook.html">triggers/webhook.md</a> and
+<a href="triggers/cron.html">triggers/cron.md</a> for the two automated
+trigger surfaces.</li>
+<li><a href="ci/github-actions.html">ci/github-actions.md</a> for the composite
+action that drives a scan from a GitHub workflow.</li>
+</ul>
+
+          </div>
+          <nav class="docs-prevnext" aria-label="Page navigation"><a class="docs-prevnext__link docs-prevnext__link--prev" href="ai-runtime.html">
+        <span class="docs-prevnext__label">Previous</span>
+        <span class="docs-prevnext__title">AI Runtime</span>
+      </a><a class="docs-prevnext__link docs-prevnext__link--next" href="triggers/index.html">
+        <span class="docs-prevnext__label">Next</span>
+        <span class="docs-prevnext__title">Overview</span>
+      </a></nav>
+        </article>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <p class="site-footer__copy">© 2026 Eli Peter · Nyx Agent is licensed under AGPL-3.0-or-later.</p>
+        <nav class="site-footer__nav" aria-label="Footer">
+          <a href="../../">Home</a>
+          <a href="../../scanner.html">Scanner</a>
+          <a href="../../agent.html">Agent</a>
+          <a href="../../news/">News</a>
+          <a href="../../docs/">Docs</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>
