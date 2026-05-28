@@ -135,20 +135,36 @@
 
     <footer class="site-footer">
       <div class="container site-footer__inner">
-        <p>Nyx is an independent open-source security project.</p>
-        <nav aria-label="Footer links">
-          <a href="../">Home</a>
-          <a href="../scanner.html">Scanner</a>
-          <a href="../agent.html">Agent</a>
-          <a href="https://github.com/elicpeter/nyx">GitHub</a>
-          <a href="./">News</a>
-          <a href="../docs/">Docs</a>
-          <a href="https://crates.io/crates/nyx-scanner">crates.io</a>
-          <a href="https://docs.rs/nyx-scanner/latest/nyx_scanner/">Rustdocs</a>
-          <a href="https://github.com/elicpeter/nyx/releases">Releases</a>
-          <a href="https://github.com/elicpeter/nyx/blob/master/ROADMAP.md">Roadmap</a>
-          <a href="https://github.com/elicpeter/nyx/blob/master/SECURITY.md">Security</a>
-          <a href="https://github.com/sponsors/elicpeter">Sponsor</a>
+        <div class="site-footer__summary">
+          <span class="site-footer__brand">Nyx</span>
+          <p class="site-footer__copy">Nyx is an independent open-source security project.</p>
+        </div>
+        <nav class="site-footer__nav" aria-label="Footer links">
+          <div class="site-footer__group" role="group" aria-labelledby="footer-project">
+            <span id="footer-project" class="site-footer__heading">Project</span>
+            <a href="../">Home</a>
+            <a href="./">News</a>
+            <a href="../docs/">All docs</a>
+            <a href="https://github.com/sponsors/elicpeter">Sponsor</a>
+          </div>
+          <div class="site-footer__group" role="group" aria-labelledby="footer-scanner">
+            <span id="footer-scanner" class="site-footer__heading">Scanner</span>
+            <a href="../scanner.html">Overview</a>
+            <a href="../docs/nyx/">Docs</a>
+            <a href="https://github.com/elicpeter/nyx">GitHub</a>
+            <a href="https://crates.io/crates/nyx-scanner">crates.io</a>
+            <a href="https://docs.rs/nyx-scanner/latest/nyx_scanner/">Rustdocs</a>
+            <a href="https://github.com/elicpeter/nyx/releases">Releases</a>
+            <a href="https://github.com/elicpeter/nyx/blob/master/ROADMAP.md">Roadmap</a>
+            <a href="https://github.com/elicpeter/nyx/blob/master/SECURITY.md">Security</a>
+          </div>
+          <div class="site-footer__group" role="group" aria-labelledby="footer-agent">
+            <span id="footer-agent" class="site-footer__heading">Agent</span>
+            <a href="../agent.html">Overview</a>
+            <a href="../docs/agent/">Docs</a>
+            <a href="https://github.com/nyx-sec/nyx-agent">GitHub</a>
+            <a href="../agent.html#support">Support</a>
+          </div>
         </nav>
       </div>
     </footer>

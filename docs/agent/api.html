@@ -969,13 +969,33 @@ action that drives a scan from a GitHub workflow.</li>
 
     <footer class="site-footer">
       <div class="container site-footer__inner">
-        <p class="site-footer__copy">© 2026 Eli Peter · Nyx Agent is licensed under AGPL-3.0-or-later.</p>
+        <div class="site-footer__summary">
+          <span class="site-footer__brand">Nyx</span>
+          <p class="site-footer__copy">© 2026 Eli Peter · Nyx Agent is licensed under AGPL-3.0-or-later.</p>
+        </div>
         <nav class="site-footer__nav" aria-label="Footer">
-          <a href="../../">Home</a>
-          <a href="../../scanner.html">Scanner</a>
-          <a href="../../agent.html">Agent</a>
-          <a href="../../news/">News</a>
-          <a href="../../docs/">Docs</a>
+          <div class="site-footer__group" role="group" aria-labelledby="footer-project">
+            <span id="footer-project" class="site-footer__heading">Project</span>
+            <a href="../../">Home</a>
+            <a href="../../news/">News</a>
+            <a href="../../docs/">All docs</a>
+            <a href="https://github.com/sponsors/elicpeter">Sponsor</a>
+          </div>
+          <div class="site-footer__group" role="group" aria-labelledby="footer-scanner">
+            <span id="footer-scanner" class="site-footer__heading">Scanner</span>
+            <a href="../../scanner.html">Overview</a>
+            <a href="../../docs/nyx/">Docs</a>
+            <a href="https://github.com/elicpeter/nyx">GitHub</a>
+            <a href="https://crates.io/crates/nyx-scanner">crates.io</a>
+            <a href="https://docs.rs/nyx-scanner/latest/nyx_scanner/">Rustdocs</a>
+          </div>
+          <div class="site-footer__group" role="group" aria-labelledby="footer-agent">
+            <span id="footer-agent" class="site-footer__heading">Agent</span>
+            <a href="../../agent.html">Overview</a>
+            <a href="../../docs/agent/">Docs</a>
+            <a href="https://github.com/nyx-sec/nyx-agent">GitHub</a>
+            <a href="../../agent.html#support">Support</a>
+          </div>
         </nav>
       </div>
     </footer>

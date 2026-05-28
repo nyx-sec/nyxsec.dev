@@ -659,13 +659,33 @@ ${body}
 
     <footer class="site-footer">
       <div class="container site-footer__inner">
-        <p class="site-footer__copy">© ${new Date().getFullYear()} Eli Peter · ${escapeHtml(footerLine)}</p>
+        <div class="site-footer__summary">
+          <span class="site-footer__brand">Nyx</span>
+          <p class="site-footer__copy">© ${new Date().getFullYear()} Eli Peter · ${escapeHtml(footerLine)}</p>
+        </div>
         <nav class="site-footer__nav" aria-label="Footer">
-          <a href="${p}">Home</a>
-          <a href="${p}scanner.html">Scanner</a>
-          <a href="${p}agent.html">Agent</a>
-          <a href="${p}news/">News</a>
-          <a href="${p}docs/">Docs</a>
+          <div class="site-footer__group" role="group" aria-labelledby="footer-project">
+            <span id="footer-project" class="site-footer__heading">Project</span>
+            <a href="${p}">Home</a>
+            <a href="${p}news/">News</a>
+            <a href="${p}docs/">All docs</a>
+            <a href="https://github.com/sponsors/elicpeter">Sponsor</a>
+          </div>
+          <div class="site-footer__group" role="group" aria-labelledby="footer-scanner">
+            <span id="footer-scanner" class="site-footer__heading">Scanner</span>
+            <a href="${p}scanner.html">Overview</a>
+            <a href="${p}docs/nyx/">Docs</a>
+            <a href="https://github.com/elicpeter/nyx">GitHub</a>
+            <a href="https://crates.io/crates/nyx-scanner">crates.io</a>
+            <a href="https://docs.rs/nyx-scanner/latest/nyx_scanner/">Rustdocs</a>
+          </div>
+          <div class="site-footer__group" role="group" aria-labelledby="footer-agent">
+            <span id="footer-agent" class="site-footer__heading">Agent</span>
+            <a href="${p}agent.html">Overview</a>
+            <a href="${p}docs/agent/">Docs</a>
+            <a href="https://github.com/nyx-sec/nyx-agent">GitHub</a>
+            <a href="${p}agent.html#support">Support</a>
+          </div>
         </nav>
       </div>
     </footer>
