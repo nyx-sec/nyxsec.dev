@@ -1,4 +1,6 @@
 /index.html / 301
+/scanner /scanner.html 301
+/agent /agent.html 301
 /news /news/ 301
 /docs /docs/ 301
 /docs/quickstart.html /docs/nyx/quickstart.html 301

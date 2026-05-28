@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Roadmap | Nyx docs</title>
-    <meta name="description" content="The current focus is straightforward. Run Nyx against real open-source repositories and real CVEs, then close the gap between what it finds and what it should find." />
+    <meta name="description" content="The current focus is straightforward. Run Nyx against real open-source repositories and real CVEs, then close the gap between what it finds and what it..." />
     <meta name="keywords" content="Nyx, Nyx scanner, SAST, static analysis, Rust security scanner, local-first SAST, Project, Roadmap, SSA, go, taint" />
     <meta name="author" content="Eli Peter" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
@@ -30,7 +30,7 @@
     <meta property="og:site_name" content="Nyx" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:title" content="Roadmap" />
-    <meta property="og:description" content="The current focus is straightforward. Run Nyx against real open-source repositories and real CVEs, then close the gap between what it finds and what it should find." />
+    <meta property="og:description" content="The current focus is straightforward. Run Nyx against real open-source repositories and real CVEs, then close the gap between what it finds and what it..." />
     <meta property="og:url" content="https://nyxscan.dev/docs/nyx/roadmap.html" />
     <meta property="og:image" content="https://nyxscan.dev/og-image.png" />
     <meta property="og:image:type" content="image/png" />
@@ -39,7 +39,7 @@
     <meta property="og:image:alt" content="Nyx Scanner local-first security documentation" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Roadmap" />
-    <meta name="twitter:description" content="The current focus is straightforward. Run Nyx against real open-source repositories and real CVEs, then close the gap between what it finds and what it should find." />
+    <meta name="twitter:description" content="The current focus is straightforward. Run Nyx against real open-source repositories and real CVEs, then close the gap between what it finds and what it..." />
     <meta name="twitter:image" content="https://nyxscan.dev/og-image.png" />
     <meta name="twitter:image:alt" content="Nyx Scanner local-first security documentation" />
     <meta name="theme-color" content="#F9F8F4" />
@@ -58,15 +58,105 @@
       ]
     },
     {
+      "@type": "Organization",
+      "@id": "https://nyxscan.dev/#organization",
+      "name": "Nyx",
+      "alternateName": [
+        "Nyx Scanner",
+        "Nyx Agent",
+        "nyxscan.dev"
+      ],
+      "url": "https://nyxscan.dev/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://nyxscan.dev/assets/logo.png",
+        "width": 512,
+        "height": 512
+      },
+      "founder": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "sameAs": [
+        "https://github.com/elicpeter/nyx",
+        "https://github.com/nyx-sec/nyx-agent",
+        "https://github.com/sponsors/elicpeter"
+      ],
+      "knowsAbout": [
+        "Static Application Security Testing",
+        "source-to-sink taint analysis",
+        "local pentesting",
+        "software supply chain security",
+        "SARIF"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "commercial licensing and support",
+        "email": "contact@nyxsec.dev",
+        "availableLanguage": [
+          "en"
+        ]
+      }
+    },
+    {
       "@type": "WebSite",
       "@id": "https://nyxscan.dev/#website",
       "url": "https://nyxscan.dev/",
       "name": "Nyx",
+      "alternateName": "nyxscan.dev",
       "description": "Local security tooling for deterministic scanning and live testing.",
-      "inLanguage": "en",
+      "inLanguage": "en-US",
       "publisher": {
+        "@id": "https://nyxscan.dev/#organization"
+      },
+      "creator": {
         "@id": "https://nyxscan.dev/#person"
       }
+    },
+    {
+      "@type": [
+        "SoftwareApplication",
+        "SoftwareSourceCode"
+      ],
+      "@id": "https://nyxscan.dev/scanner.html#software",
+      "name": "Nyx",
+      "alternateName": [
+        "Nyx Scanner",
+        "nyx-scanner"
+      ],
+      "url": "https://nyxscan.dev/scanner.html",
+      "applicationCategory": "SecurityApplication",
+      "applicationSubCategory": "Static Application Security Testing",
+      "operatingSystem": "Cross-platform",
+      "programmingLanguage": "Rust",
+      "codeRepository": "https://github.com/elicpeter/nyx",
+      "downloadUrl": "https://crates.io/crates/nyx-scanner",
+      "installUrl": "https://nyxscan.dev/docs/nyx/installation.html",
+      "softwareHelp": "https://nyxscan.dev/docs/nyx/",
+      "releaseNotes": "https://nyxscan.dev/news/nyx-0-7-0.html",
+      "license": "https://spdx.org/licenses/GPL-3.0-or-later.html",
+      "description": "Documentation for Nyx Scanner, the open-source, local-first SAST scanner written in Rust. Quickstart, CLI reference, detectors, configuration, and language coverage.",
+      "featureList": [
+        "Cross-file interprocedural taint analysis",
+        "Local browser triage UI",
+        "SARIF output for CI",
+        "No account or source upload required"
+      ],
+      "maintainer": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "author": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "publisher": {
+        "@id": "https://nyxscan.dev/#organization"
+      },
+      "isAccessibleForFree": true,
+      "sameAs": [
+        "https://github.com/elicpeter/nyx",
+        "https://nyxscan.dev/docs/nyx/",
+        "https://crates.io/crates/nyx-scanner",
+        "https://docs.rs/nyx-scanner/latest/nyx_scanner/"
+      ]
     },
     {
       "@type": "TechArticle",
@@ -74,20 +164,26 @@
       "headline": "Roadmap",
       "name": "Roadmap",
       "url": "https://nyxscan.dev/docs/nyx/roadmap.html",
-      "description": "The current focus is straightforward. Run Nyx against real open-source repositories and real CVEs, then close the gap between what it finds and what it should find.",
-      "inLanguage": "en",
+      "description": "The current focus is straightforward. Run Nyx against real open-source repositories and real CVEs, then close the gap between what it finds and what it...",
+      "inLanguage": "en-US",
       "articleSection": "Project",
       "isPartOf": {
         "@id": "https://nyxscan.dev/#website"
       },
       "publisher": {
-        "@id": "https://nyxscan.dev/#person"
+        "@id": "https://nyxscan.dev/#organization"
       },
       "author": {
         "@id": "https://nyxscan.dev/#person"
       },
       "image": "https://nyxscan.dev/og-image.png",
-      "mainEntityOfPage": "https://nyxscan.dev/docs/nyx/roadmap.html"
+      "mainEntityOfPage": "https://nyxscan.dev/docs/nyx/roadmap.html",
+      "about": {
+        "@id": "https://nyxscan.dev/scanner.html#software"
+      },
+      "mainEntity": {
+        "@id": "https://nyxscan.dev/scanner.html#software"
+      }
     },
     {
       "@type": "BreadcrumbList",

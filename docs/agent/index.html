@@ -57,15 +57,103 @@
       ]
     },
     {
+      "@type": "Organization",
+      "@id": "https://nyxscan.dev/#organization",
+      "name": "Nyx",
+      "alternateName": [
+        "Nyx Scanner",
+        "Nyx Agent",
+        "nyxscan.dev"
+      ],
+      "url": "https://nyxscan.dev/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://nyxscan.dev/assets/logo.png",
+        "width": 512,
+        "height": 512
+      },
+      "founder": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "sameAs": [
+        "https://github.com/elicpeter/nyx",
+        "https://github.com/nyx-sec/nyx-agent",
+        "https://github.com/sponsors/elicpeter"
+      ],
+      "knowsAbout": [
+        "Static Application Security Testing",
+        "source-to-sink taint analysis",
+        "local pentesting",
+        "software supply chain security",
+        "SARIF"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "commercial licensing and support",
+        "email": "contact@nyxsec.dev",
+        "availableLanguage": [
+          "en"
+        ]
+      }
+    },
+    {
       "@type": "WebSite",
       "@id": "https://nyxscan.dev/#website",
       "url": "https://nyxscan.dev/",
       "name": "Nyx",
+      "alternateName": "nyxscan.dev",
       "description": "Local security tooling for deterministic scanning and live testing.",
-      "inLanguage": "en",
+      "inLanguage": "en-US",
       "publisher": {
+        "@id": "https://nyxscan.dev/#organization"
+      },
+      "creator": {
         "@id": "https://nyxscan.dev/#person"
       }
+    },
+    {
+      "@type": [
+        "SoftwareApplication",
+        "SoftwareSourceCode"
+      ],
+      "@id": "https://nyxscan.dev/agent.html#software",
+      "name": "Nyx Agent",
+      "alternateName": [
+        "nyx-agent"
+      ],
+      "url": "https://nyxscan.dev/agent.html",
+      "applicationCategory": "SecurityApplication",
+      "applicationSubCategory": "Local Application Security Testing",
+      "operatingSystem": "Cross-platform",
+      "programmingLanguage": "Rust, TypeScript",
+      "codeRepository": "https://github.com/nyx-sec/nyx-agent",
+      "downloadUrl": "https://github.com/nyx-sec/nyx-agent",
+      "installUrl": "https://nyxscan.dev/docs/agent/install.html",
+      "softwareHelp": "https://nyxscan.dev/docs/agent/",
+      "releaseNotes": "https://nyxscan.dev/news/nyx-agent.html",
+      "license": "https://spdx.org/licenses/AGPL-3.0-or-later.html",
+      "description": "Documentation for Nyx Agent, the local pentesting product for development apps. Install, quickstart, CLI, configuration, API, triggers, runs, and architecture.",
+      "featureList": [
+        "Local pentest runs for development apps",
+        "Route and API exploration",
+        "Live verification with stored evidence",
+        "Project-level run history and triggers"
+      ],
+      "maintainer": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "author": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "publisher": {
+        "@id": "https://nyxscan.dev/#organization"
+      },
+      "isAccessibleForFree": true,
+      "sameAs": [
+        "https://github.com/nyx-sec/nyx-agent",
+        "https://nyxscan.dev/docs/agent/",
+        "https://github.com/nyx-sec/nyx-agent"
+      ]
     },
     {
       "@type": "TechArticle",
@@ -74,19 +162,25 @@
       "name": "Nyx Agent Documentation",
       "url": "https://nyxscan.dev/docs/agent/",
       "description": "Documentation for Nyx Agent, the local pentesting product for development apps. Install, quickstart, CLI, configuration, API, triggers, runs, and architecture.",
-      "inLanguage": "en",
+      "inLanguage": "en-US",
       "articleSection": "Documentation",
       "isPartOf": {
         "@id": "https://nyxscan.dev/#website"
       },
       "publisher": {
-        "@id": "https://nyxscan.dev/#person"
+        "@id": "https://nyxscan.dev/#organization"
       },
       "author": {
         "@id": "https://nyxscan.dev/#person"
       },
       "image": "https://nyxscan.dev/og-image.png",
-      "mainEntityOfPage": "https://nyxscan.dev/docs/agent/"
+      "mainEntityOfPage": "https://nyxscan.dev/docs/agent/",
+      "about": {
+        "@id": "https://nyxscan.dev/agent.html#software"
+      },
+      "mainEntity": {
+        "@id": "https://nyxscan.dev/agent.html#software"
+      }
     },
     {
       "@type": "BreadcrumbList",

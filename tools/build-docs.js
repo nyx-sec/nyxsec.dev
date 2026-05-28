@@ -43,6 +43,21 @@ const DOC_SETS = [
       "local-first SAST",
     ],
     github: "https://github.com/elicpeter/nyx",
+    softwareId: `${SITE_URL}/scanner.html#software`,
+    productUrl: `${SITE_URL}/scanner.html`,
+    alternateNames: ["Nyx Scanner", "nyx-scanner"],
+    applicationSubCategory: "Static Application Security Testing",
+    programmingLanguage: "Rust",
+    licenseUrl: "https://spdx.org/licenses/GPL-3.0-or-later.html",
+    packageUrl: "https://crates.io/crates/nyx-scanner",
+    rustdocsUrl: "https://docs.rs/nyx-scanner/latest/nyx_scanner/",
+    releaseNotesUrl: `${SITE_URL}/news/nyx-0-7-0.html`,
+    featureList: [
+      "Cross-file interprocedural taint analysis",
+      "Local browser triage UI",
+      "SARIF output for CI",
+      "No account or source upload required",
+    ],
     licenseLine: "Nyx is licensed under GPL-3.0-or-later.",
     ogAlt: "Nyx Scanner local-first security documentation",
     suggestedLinks: ["quickstart.html", "installation.html", "cli.html"],
@@ -71,6 +86,21 @@ const DOC_SETS = [
       "stored evidence",
     ],
     github: "https://github.com/nyx-sec/nyx-agent",
+    softwareId: `${SITE_URL}/agent.html#software`,
+    productUrl: `${SITE_URL}/agent.html`,
+    alternateNames: ["nyx-agent"],
+    applicationSubCategory: "Local Application Security Testing",
+    programmingLanguage: "Rust, TypeScript",
+    licenseUrl: "https://spdx.org/licenses/AGPL-3.0-or-later.html",
+    packageUrl: "https://github.com/nyx-sec/nyx-agent",
+    rustdocsUrl: null,
+    releaseNotesUrl: `${SITE_URL}/news/nyx-agent.html`,
+    featureList: [
+      "Local pentest runs for development apps",
+      "Route and API exploration",
+      "Live verification with stored evidence",
+      "Project-level run history and triggers",
+    ],
     licenseLine: "Nyx Agent is licensed under AGPL-3.0-or-later.",
     ogAlt: "Nyx Agent local pentesting documentation",
     suggestedLinks: ["quickstart.html", "install.html", "cli.html"],
@@ -391,40 +421,112 @@ function pageJsonLd({ title, description, canonical, section, parentHref, parent
     sameAs: ["https://github.com/elicpeter", "https://github.com/sponsors/elicpeter"],
   };
 
+  const organization = {
+    "@type": "Organization",
+    "@id": `${SITE_URL}/#organization`,
+    name: "Nyx",
+    alternateName: ["Nyx Scanner", "Nyx Agent", "nyxscan.dev"],
+    url: `${SITE_URL}/`,
+    logo: {
+      "@type": "ImageObject",
+      url: `${SITE_URL}/assets/logo.png`,
+      width: 512,
+      height: 512,
+    },
+    founder: { "@id": `${SITE_URL}/#person` },
+    sameAs: [
+      "https://github.com/elicpeter/nyx",
+      "https://github.com/nyx-sec/nyx-agent",
+      "https://github.com/sponsors/elicpeter",
+    ],
+    knowsAbout: [
+      "Static Application Security Testing",
+      "source-to-sink taint analysis",
+      "local pentesting",
+      "software supply chain security",
+      "SARIF",
+    ],
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "commercial licensing and support",
+      email: "contact@nyxsec.dev",
+      availableLanguage: ["en"],
+    },
+  };
+
   const website = {
     "@type": "WebSite",
     "@id": `${SITE_URL}/#website`,
     url: `${SITE_URL}/`,
     name: "Nyx",
+    alternateName: "nyxscan.dev",
     description: "Local security tooling for deterministic scanning and live testing.",
-    inLanguage: "en",
-    publisher: { "@id": `${SITE_URL}/#person` },
+    inLanguage: "en-US",
+    publisher: { "@id": `${SITE_URL}/#organization` },
+    creator: { "@id": `${SITE_URL}/#person` },
   };
+
+  const software = set
+    ? {
+        "@type": ["SoftwareApplication", "SoftwareSourceCode"],
+        "@id": set.softwareId,
+        name: set.id === "nyx" ? "Nyx" : set.productName,
+        alternateName: set.alternateNames,
+        url: set.productUrl,
+        applicationCategory: "SecurityApplication",
+        applicationSubCategory: set.applicationSubCategory,
+        operatingSystem: "Cross-platform",
+        programmingLanguage: set.programmingLanguage,
+        codeRepository: set.github,
+        downloadUrl: set.packageUrl,
+        installUrl: canonicalFor(set, set.id === "nyx" ? "installation.html" : "install.html"),
+        softwareHelp: `${SITE_URL}/docs/${set.slug}/`,
+        releaseNotes: set.releaseNotesUrl,
+        license: set.licenseUrl,
+        description: set.description,
+        featureList: set.featureList,
+        maintainer: { "@id": `${SITE_URL}/#person` },
+        author: { "@id": `${SITE_URL}/#person` },
+        publisher: { "@id": `${SITE_URL}/#organization` },
+        isAccessibleForFree: true,
+        sameAs: [set.github, `${SITE_URL}/docs/${set.slug}/`, set.packageUrl, set.rustdocsUrl].filter(Boolean),
+      }
+    : null;
 
   const articleType = set ? "TechArticle" : "CollectionPage";
   const articleId = isIndex ? `${canonical}#page` : `${canonical}#article`;
+  const graph = [
+    person,
+    organization,
+    website,
+    {
+      "@type": articleType,
+      "@id": articleId,
+      headline: title,
+      name: title,
+      url: canonical,
+      description,
+      inLanguage: "en-US",
+      articleSection: section || "Documentation",
+      isPartOf: { "@id": `${SITE_URL}/#website` },
+      publisher: { "@id": `${SITE_URL}/#organization` },
+      author: { "@id": `${SITE_URL}/#person` },
+      image: `${SITE_URL}/og-image.png`,
+      mainEntityOfPage: canonical,
+      ...(set
+        ? {
+            about: { "@id": set.softwareId },
+            mainEntity: { "@id": set.softwareId },
+          }
+        : {}),
+    },
+    { ...breadcrumb, "@id": `${canonical}#breadcrumbs` },
+  ];
+  if (software) graph.splice(3, 0, software);
+
   return {
     "@context": "https://schema.org",
-    "@graph": [
-      person,
-      website,
-      {
-        "@type": articleType,
-        "@id": articleId,
-        headline: title,
-        name: title,
-        url: canonical,
-        description,
-        inLanguage: "en",
-        articleSection: section || "Documentation",
-        isPartOf: { "@id": `${SITE_URL}/#website` },
-        publisher: { "@id": `${SITE_URL}/#person` },
-        author: { "@id": `${SITE_URL}/#person` },
-        image: `${SITE_URL}/og-image.png`,
-        mainEntityOfPage: canonical,
-      },
-      { ...breadcrumb, "@id": `${canonical}#breadcrumbs` },
-    ],
+    "@graph": graph,
   };
 }
 
@@ -515,7 +617,7 @@ function stripFirstHeading(md) {
   return md.replace(/^#\s+[^\n]+\n+/, "");
 }
 
-function plainSummary(md, max = 200) {
+function plainSummary(md, max = 158) {
   const stripped = md
     .replace(/```[\s\S]*?```/g, "")
     .replace(/^---[\s\S]*?---/m, "")

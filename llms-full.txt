@@ -4,6 +4,30 @@ Nyx is a local-first security stack for developers. The site root presents two p
 
 Nyx Scanner is an open-source, deterministic local-first security scanner. It runs cross-file interprocedural taint analysis on a repository and serves findings in a React UI bound to `127.0.0.1`. No cloud, no account, no source upload. Everything stays on your machine.
 
+## Entity map
+
+Primary entity:
+- Name: Nyx
+- Type: independent open-source security project and local security tooling site
+- Canonical website: https://nyxscan.dev/
+- Creator/maintainer: Eli Peter, https://github.com/elicpeter
+- Sponsor page: https://github.com/sponsors/elicpeter
+
+Products:
+- Nyx Scanner (`nyx-scanner`): deterministic local-first SAST, cross-file interprocedural source-to-sink taint analysis, local browser triage, SARIF, CI.
+- Nyx Agent (`nyx-agent`): local pentesting for development apps, route/API exploration, live verification, request/response evidence, project runs, triggers.
+
+Canonical source repositories:
+- Nyx Scanner: https://github.com/elicpeter/nyx
+- Nyx Agent: https://github.com/nyx-sec/nyx-agent
+
+Licensing:
+- Nyx Scanner: GPL-3.0-or-later, free, no paid tier, no usage limits.
+- Nyx Agent: AGPLv3-or-later; commercial licenses, paid support, onboarding, private policy packs, and enterprise terms are available.
+
+Commercial/support contact:
+- contact@nyxsec.dev
+
 ## Canonical URL map
 
 Site root and machine-readable indexes:

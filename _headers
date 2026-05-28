@@ -13,6 +13,14 @@
   Cache-Control: public, max-age=0, must-revalidate
   X-Robots-Tag: index, follow, max-image-preview:large
 
+/scanner.html
+  Cache-Control: public, max-age=0, must-revalidate
+  X-Robots-Tag: index, follow, max-image-preview:large, max-snippet:-1
+
+/agent.html
+  Cache-Control: public, max-age=0, must-revalidate
+  X-Robots-Tag: index, follow, max-image-preview:large, max-snippet:-1
+
 /news/*
   Cache-Control: public, max-age=0, must-revalidate
   X-Robots-Tag: index, follow, max-image-preview:large
@@ -65,3 +73,11 @@
 
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
+
+/assets/screenshots/*.mp4
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Type: video/mp4
+
+/assets/screenshots/*.webm
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Type: video/webm

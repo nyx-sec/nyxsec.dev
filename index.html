@@ -28,7 +28,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
-    <link rel="preload" href="assets/screenshots/overview.webp" as="image" type="image/webp" fetchpriority="high" />
+    <link
+      rel="preload"
+      href="assets/screenshots/demo-combo-poster.webp"
+      as="image"
+      type="image/webp"
+      fetchpriority="high"
+    />
     <link rel="stylesheet" href="styles.css" />
 
     <meta property="og:type" content="website" />
@@ -54,7 +60,7 @@
     <meta name="theme-color" content="#F9F8F4" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:image:secure_url" content="https://nyxscan.dev/og-image.png" />
-    <meta property="og:updated_time" content="2026-05-26T00:00:00-05:00" />
+    <meta property="og:updated_time" content="2026-05-28T00:00:00-05:00" />
 
     <script type="application/ld+json">
       {
@@ -69,6 +75,9 @@
             "description": "Local security tooling for deterministic scanning and live testing.",
             "inLanguage": "en-US",
             "publisher": {
+              "@id": "https://nyxscan.dev/#organization"
+            },
+            "creator": {
               "@id": "https://nyxscan.dev/#person"
             }
           },
@@ -87,7 +96,7 @@
               "width": 1200,
               "height": 630
             },
-            "dateModified": "2026-05-26",
+            "dateModified": "2026-05-28",
             "inLanguage": "en-US",
             "mainEntity": {
               "@id": "https://nyxscan.dev/#products"
@@ -98,7 +107,41 @@
             "@id": "https://nyxscan.dev/#person",
             "name": "Eli Peter",
             "url": "https://github.com/elicpeter",
-            "sameAs": ["https://github.com/elicpeter"]
+            "sameAs": ["https://github.com/elicpeter", "https://github.com/sponsors/elicpeter"]
+          },
+          {
+            "@type": "Organization",
+            "@id": "https://nyxscan.dev/#organization",
+            "name": "Nyx",
+            "alternateName": ["Nyx Scanner", "Nyx Agent", "nyxscan.dev"],
+            "url": "https://nyxscan.dev/",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://nyxscan.dev/assets/logo.png",
+              "width": 512,
+              "height": 512
+            },
+            "founder": {
+              "@id": "https://nyxscan.dev/#person"
+            },
+            "sameAs": [
+              "https://github.com/elicpeter/nyx",
+              "https://github.com/nyx-sec/nyx-agent",
+              "https://github.com/sponsors/elicpeter"
+            ],
+            "knowsAbout": [
+              "Static Application Security Testing",
+              "source-to-sink taint analysis",
+              "local pentesting",
+              "software supply chain security",
+              "SARIF"
+            ],
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "contactType": "commercial licensing and support",
+              "email": "contact@nyxsec.dev",
+              "availableLanguage": ["en"]
+            }
           },
           {
             "@type": "ItemList",
@@ -119,8 +162,28 @@
                   "operatingSystem": "Cross-platform",
                   "programmingLanguage": "Rust",
                   "codeRepository": "https://github.com/elicpeter/nyx",
+                  "downloadUrl": "https://crates.io/crates/nyx-scanner",
+                  "installUrl": "https://nyxscan.dev/docs/nyx/installation.html",
+                  "softwareHelp": "https://nyxscan.dev/docs/nyx/",
+                  "releaseNotes": "https://nyxscan.dev/news/nyx-0-7-0.html",
                   "license": "https://spdx.org/licenses/GPL-3.0-or-later.html",
-                  "description": "Nyx is a deterministic local-first security scanner for source-to-sink analysis, browser triage, SARIF, and CI."
+                  "description": "Nyx is a deterministic local-first security scanner for source-to-sink analysis, browser triage, SARIF, and CI.",
+                  "featureList": [
+                    "Cross-file interprocedural taint analysis",
+                    "Local browser triage UI",
+                    "SARIF output for CI",
+                    "No account or source upload required"
+                  ],
+                  "isAccessibleForFree": true,
+                  "publisher": {
+                    "@id": "https://nyxscan.dev/#organization"
+                  },
+                  "sameAs": [
+                    "https://github.com/elicpeter/nyx",
+                    "https://crates.io/crates/nyx-scanner",
+                    "https://docs.rs/nyx-scanner/latest/nyx_scanner/",
+                    "https://nyxscan.dev/docs/nyx/"
+                  ]
                 }
               },
               {
@@ -137,8 +200,23 @@
                   "operatingSystem": "Cross-platform",
                   "programmingLanguage": "Rust, TypeScript",
                   "codeRepository": "https://github.com/nyx-sec/nyx-agent",
+                  "downloadUrl": "https://github.com/nyx-sec/nyx-agent",
+                  "installUrl": "https://nyxscan.dev/docs/agent/install.html",
+                  "softwareHelp": "https://nyxscan.dev/docs/agent/",
+                  "releaseNotes": "https://nyxscan.dev/news/nyx-agent.html",
                   "license": "https://spdx.org/licenses/AGPL-3.0-or-later.html",
-                  "description": "Nyx Agent runs live local tests against development apps and keeps proof with the run."
+                  "description": "Nyx Agent runs live local tests against development apps and keeps proof with the run.",
+                  "featureList": [
+                    "Local pentest runs for development apps",
+                    "Route and API exploration",
+                    "Live verification with stored evidence",
+                    "Project-level run history and triggers"
+                  ],
+                  "isAccessibleForFree": true,
+                  "publisher": {
+                    "@id": "https://nyxscan.dev/#organization"
+                  },
+                  "sameAs": ["https://github.com/nyx-sec/nyx-agent", "https://nyxscan.dev/docs/agent/"]
                 }
               }
             ]
@@ -182,7 +260,19 @@
           <div class="product-pane__media" aria-hidden="true">
             <div class="app-frame">
               <div class="app-frame__bar"><span></span><span></span><span></span></div>
-              <img src="assets/screenshots/demo-combo.gif" width="1280" height="960" alt="" loading="eager" />
+              <video
+                width="960"
+                height="596"
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                poster="assets/screenshots/demo-combo-poster.webp"
+              >
+                <source src="assets/screenshots/demo-combo.webm" type="video/webm" />
+                <source src="assets/screenshots/demo-combo.mp4" type="video/mp4" />
+              </video>
             </div>
           </div>
         </article>
@@ -203,7 +293,19 @@
           <div class="product-pane__media" aria-hidden="true">
             <div class="app-frame">
               <div class="app-frame__bar"><span></span><span></span><span></span></div>
-              <img src="assets/screenshots/nyx-agent-demo.gif" width="1800" height="1113" alt="" loading="lazy" />
+              <video
+                width="960"
+                height="594"
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                poster="assets/screenshots/nyx-agent-demo-poster.webp"
+              >
+                <source src="assets/screenshots/nyx-agent-demo.webm" type="video/webm" />
+                <source src="assets/screenshots/nyx-agent-demo.mp4" type="video/mp4" />
+              </video>
             </div>
           </div>
         </article>

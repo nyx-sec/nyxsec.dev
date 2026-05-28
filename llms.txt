@@ -8,6 +8,17 @@ Nyx Scanner is an open-source, deterministic local-first security scanner. It ru
 
 Current package version: `nyx-scanner` v0.7.0. Requires stable Rust 1.88+ for Cargo installs.
 
+## Entity map
+
+- Brand/site: Nyx, https://nyxscan.dev/
+- Creator and maintainer: Eli Peter, https://github.com/elicpeter
+- Product 1: Nyx Scanner (`nyx-scanner`), deterministic local-first SAST for source-to-sink taint analysis.
+- Product 2: Nyx Agent (`nyx-agent`), local pentesting and live appsec verification for development apps.
+- Canonical scanner repo: https://github.com/elicpeter/nyx
+- Canonical agent repo: https://github.com/nyx-sec/nyx-agent
+- Commercial/support contact for Nyx Agent: contact@nyxsec.dev
+- Machine-readable sitemap: https://nyxscan.dev/sitemap.xml
+
 ## Nyx Agent
 
 Nyx Agent runs local pentests against development apps. Point it at a repo and a local URL; it can start or watch the app, map routes, run checks, and store request and response evidence.

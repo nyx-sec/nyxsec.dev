@@ -27,6 +27,23 @@ mkdir -p "$NYX_DEST" "$AGENT_DEST"
 cp -R "$NYX_REPO/docs/." "$NYX_DEST/"
 cp -R "$NYX_AGENT_REPO/docs/." "$AGENT_DEST/"
 
+# Nyx docs reference screenshots from the scanner repo's top-level assets
+# directory. Mirror those into docs-src so the docs build can publish them.
+if [ -d "$NYX_REPO/assets/screenshots" ]; then
+  [ -L "$NYX_DEST/assets" ] && rm "$NYX_DEST/assets"
+  mkdir -p "$NYX_DEST/assets/screenshots/docs"
+  [ -f "$NYX_REPO/assets/screenshots/cli-scan.png" ] &&
+    cp "$NYX_REPO/assets/screenshots/cli-scan.png" "$NYX_DEST/assets/screenshots/cli-scan.png"
+  if [ -d "$NYX_REPO/assets/screenshots/docs" ]; then
+    for screenshot in "$NYX_REPO/assets/screenshots/docs/"*.png; do
+      case "$screenshot" in
+        *_raw.png) continue ;;
+      esac
+      cp "$screenshot" "$NYX_DEST/assets/screenshots/docs/"
+    done
+  fi
+fi
+
 # Stub files use mdbook {{#include ../CHANGELOG.md}}; copy targets too.
 [ -f "$NYX_REPO/CHANGELOG.md" ] && cp "$NYX_REPO/CHANGELOG.md" "$NYX_DEST/CHANGELOG.md"
 [ -f "$NYX_REPO/ROADMAP.md" ] && cp "$NYX_REPO/ROADMAP.md" "$NYX_DEST/ROADMAP.md"

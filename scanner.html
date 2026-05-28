@@ -6,7 +6,7 @@
     <title>Nyx Scanner | Deterministic local-first security scanning</title>
     <meta
       name="description"
-      content="Nyx is an open-source, deterministic local-first security scanner for developers. Find source-to-sink attack paths, inspect evidence in a browser UI, export SARIF, and run scans in CI."
+      content="Nyx Scanner is open-source local-first SAST for source-to-sink attack paths, browser triage, SARIF, and CI without uploading code."
     />
     <meta name="author" content="Eli Peter" />
     <meta name="application-name" content="Nyx" />
@@ -57,7 +57,7 @@
     <meta name="theme-color" content="#F9F8F4" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:image:secure_url" content="https://nyxscan.dev/og-image.png" />
-    <meta property="og:updated_time" content="2026-05-26T00:00:00-05:00" />
+    <meta property="og:updated_time" content="2026-05-28T00:00:00-05:00" />
 
     <script type="application/ld+json">
       {
@@ -79,6 +79,8 @@
         "codeRepository": "https://github.com/elicpeter/nyx",
         "downloadUrl": "https://crates.io/crates/nyx-scanner",
         "installUrl": "https://nyxscan.dev/docs/nyx/installation.html",
+        "softwareHelp": "https://nyxscan.dev/docs/nyx/",
+        "releaseNotes": "https://nyxscan.dev/news/nyx-0-7-0.html",
         "license": "https://spdx.org/licenses/GPL-3.0-or-later.html",
         "description": "Nyx is an open-source, deterministic local-first security scanner for developers. Find source-to-sink attack paths, inspect evidence in a browser UI, export SARIF, and run scans in CI.",
         "keywords": [
@@ -117,6 +119,9 @@
           "name": "Eli Peter",
           "url": "https://github.com/elicpeter"
         },
+        "publisher": {
+          "@id": "https://nyxscan.dev/#organization"
+        },
         "offers": {
           "@type": "Offer",
           "url": "https://crates.io/crates/nyx-scanner",
@@ -147,6 +152,9 @@
             "description": "Open-source, local-first security scanning for developers.",
             "inLanguage": "en-US",
             "publisher": {
+              "@id": "https://nyxscan.dev/#organization"
+            },
+            "creator": {
               "@id": "https://nyxscan.dev/#person"
             },
             "about": {
@@ -177,15 +185,52 @@
               "width": 1200,
               "height": 630
             },
-            "dateModified": "2026-05-26",
-            "inLanguage": "en-US"
+            "dateModified": "2026-05-28",
+            "inLanguage": "en-US",
+            "mainEntity": {
+              "@id": "https://nyxscan.dev/scanner.html#software"
+            }
           },
           {
             "@type": "Person",
             "@id": "https://nyxscan.dev/#person",
             "name": "Eli Peter",
             "url": "https://github.com/elicpeter",
-            "sameAs": ["https://github.com/elicpeter"]
+            "sameAs": ["https://github.com/elicpeter", "https://github.com/sponsors/elicpeter"]
+          },
+          {
+            "@type": "Organization",
+            "@id": "https://nyxscan.dev/#organization",
+            "name": "Nyx",
+            "alternateName": ["Nyx Scanner", "Nyx Agent", "nyxscan.dev"],
+            "url": "https://nyxscan.dev/",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://nyxscan.dev/assets/logo.png",
+              "width": 512,
+              "height": 512
+            },
+            "founder": {
+              "@id": "https://nyxscan.dev/#person"
+            },
+            "sameAs": [
+              "https://github.com/elicpeter/nyx",
+              "https://github.com/nyx-sec/nyx-agent",
+              "https://github.com/sponsors/elicpeter"
+            ],
+            "knowsAbout": [
+              "Static Application Security Testing",
+              "source-to-sink taint analysis",
+              "local pentesting",
+              "software supply chain security",
+              "SARIF"
+            ],
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "contactType": "commercial licensing and support",
+              "email": "contact@nyxsec.dev",
+              "availableLanguage": ["en"]
+            }
           }
         ]
       }
@@ -319,14 +364,17 @@
           </div>
 
           <figure class="media-frame media-frame--demo">
-            <img
-              src="assets/screenshots/demo-combo.gif"
-              width="1280"
-              height="960"
-              alt="Nyx demo showing CLI scan output and browser triage for source-to-sink findings"
-              loading="lazy"
-              decoding="async"
-            />
+            <video
+              width="960"
+              height="596"
+              controls
+              preload="none"
+              poster="assets/screenshots/demo-combo-poster.webp"
+              aria-label="Nyx demo showing CLI scan output and browser triage for source-to-sink findings"
+            >
+              <source src="assets/screenshots/demo-combo.webm" type="video/webm" />
+              <source src="assets/screenshots/demo-combo.mp4" type="video/mp4" />
+            </video>
             <figcaption>
               Scan locally in the CLI or UI, then inspect source-to-sink evidence and triage findings in the Nyx UI.
             </figcaption>

@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Events | Nyx Agent docs</title>
-    <meta name="description" content="Nyx Agent publishes every observable state change to a single in-process tokio::sync::broadcast channel. The HTTP server fans the channel out over GET /api/v1/events as a WebSocket; the frontend's..." />
+    <meta name="description" content="Nyx Agent publishes every observable state change to a single in-process tokio::sync::broadcast channel. The HTTP server fans the channel out over GET..." />
     <meta name="keywords" content="Nyx Agent, nyx-agent, local pentesting, live appsec testing, verified vulnerabilities, stored evidence, Architecture, Events, api, WebSocket, AI, JSON" />
     <meta name="author" content="Eli Peter" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
@@ -30,7 +30,7 @@
     <meta property="og:site_name" content="Nyx" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:title" content="Events" />
-    <meta property="og:description" content="Nyx Agent publishes every observable state change to a single in-process tokio::sync::broadcast channel. The HTTP server fans the channel out over GET /api/v1/events as a WebSocket; the frontend's..." />
+    <meta property="og:description" content="Nyx Agent publishes every observable state change to a single in-process tokio::sync::broadcast channel. The HTTP server fans the channel out over GET..." />
     <meta property="og:url" content="https://nyxscan.dev/docs/agent/events.html" />
     <meta property="og:image" content="https://nyxscan.dev/og-image.png" />
     <meta property="og:image:type" content="image/png" />
@@ -39,7 +39,7 @@
     <meta property="og:image:alt" content="Nyx Agent local pentesting documentation" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Events" />
-    <meta name="twitter:description" content="Nyx Agent publishes every observable state change to a single in-process tokio::sync::broadcast channel. The HTTP server fans the channel out over GET /api/v1/events as a WebSocket; the frontend's..." />
+    <meta name="twitter:description" content="Nyx Agent publishes every observable state change to a single in-process tokio::sync::broadcast channel. The HTTP server fans the channel out over GET..." />
     <meta name="twitter:image" content="https://nyxscan.dev/og-image.png" />
     <meta name="twitter:image:alt" content="Nyx Agent local pentesting documentation" />
     <meta name="theme-color" content="#F9F8F4" />
@@ -58,15 +58,103 @@
       ]
     },
     {
+      "@type": "Organization",
+      "@id": "https://nyxscan.dev/#organization",
+      "name": "Nyx",
+      "alternateName": [
+        "Nyx Scanner",
+        "Nyx Agent",
+        "nyxscan.dev"
+      ],
+      "url": "https://nyxscan.dev/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://nyxscan.dev/assets/logo.png",
+        "width": 512,
+        "height": 512
+      },
+      "founder": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "sameAs": [
+        "https://github.com/elicpeter/nyx",
+        "https://github.com/nyx-sec/nyx-agent",
+        "https://github.com/sponsors/elicpeter"
+      ],
+      "knowsAbout": [
+        "Static Application Security Testing",
+        "source-to-sink taint analysis",
+        "local pentesting",
+        "software supply chain security",
+        "SARIF"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "commercial licensing and support",
+        "email": "contact@nyxsec.dev",
+        "availableLanguage": [
+          "en"
+        ]
+      }
+    },
+    {
       "@type": "WebSite",
       "@id": "https://nyxscan.dev/#website",
       "url": "https://nyxscan.dev/",
       "name": "Nyx",
+      "alternateName": "nyxscan.dev",
       "description": "Local security tooling for deterministic scanning and live testing.",
-      "inLanguage": "en",
+      "inLanguage": "en-US",
       "publisher": {
+        "@id": "https://nyxscan.dev/#organization"
+      },
+      "creator": {
         "@id": "https://nyxscan.dev/#person"
       }
+    },
+    {
+      "@type": [
+        "SoftwareApplication",
+        "SoftwareSourceCode"
+      ],
+      "@id": "https://nyxscan.dev/agent.html#software",
+      "name": "Nyx Agent",
+      "alternateName": [
+        "nyx-agent"
+      ],
+      "url": "https://nyxscan.dev/agent.html",
+      "applicationCategory": "SecurityApplication",
+      "applicationSubCategory": "Local Application Security Testing",
+      "operatingSystem": "Cross-platform",
+      "programmingLanguage": "Rust, TypeScript",
+      "codeRepository": "https://github.com/nyx-sec/nyx-agent",
+      "downloadUrl": "https://github.com/nyx-sec/nyx-agent",
+      "installUrl": "https://nyxscan.dev/docs/agent/install.html",
+      "softwareHelp": "https://nyxscan.dev/docs/agent/",
+      "releaseNotes": "https://nyxscan.dev/news/nyx-agent.html",
+      "license": "https://spdx.org/licenses/AGPL-3.0-or-later.html",
+      "description": "Documentation for Nyx Agent, the local pentesting product for development apps. Install, quickstart, CLI, configuration, API, triggers, runs, and architecture.",
+      "featureList": [
+        "Local pentest runs for development apps",
+        "Route and API exploration",
+        "Live verification with stored evidence",
+        "Project-level run history and triggers"
+      ],
+      "maintainer": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "author": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "publisher": {
+        "@id": "https://nyxscan.dev/#organization"
+      },
+      "isAccessibleForFree": true,
+      "sameAs": [
+        "https://github.com/nyx-sec/nyx-agent",
+        "https://nyxscan.dev/docs/agent/",
+        "https://github.com/nyx-sec/nyx-agent"
+      ]
     },
     {
       "@type": "TechArticle",
@@ -74,20 +162,26 @@
       "headline": "Events",
       "name": "Events",
       "url": "https://nyxscan.dev/docs/agent/events.html",
-      "description": "Nyx Agent publishes every observable state change to a single in-process tokio::sync::broadcast channel. The HTTP server fans the channel out over GET /api/v1/events as a WebSocket; the frontend's...",
-      "inLanguage": "en",
+      "description": "Nyx Agent publishes every observable state change to a single in-process tokio::sync::broadcast channel. The HTTP server fans the channel out over GET...",
+      "inLanguage": "en-US",
       "articleSection": "Architecture",
       "isPartOf": {
         "@id": "https://nyxscan.dev/#website"
       },
       "publisher": {
-        "@id": "https://nyxscan.dev/#person"
+        "@id": "https://nyxscan.dev/#organization"
       },
       "author": {
         "@id": "https://nyxscan.dev/#person"
       },
       "image": "https://nyxscan.dev/og-image.png",
-      "mainEntityOfPage": "https://nyxscan.dev/docs/agent/events.html"
+      "mainEntityOfPage": "https://nyxscan.dev/docs/agent/events.html",
+      "about": {
+        "@id": "https://nyxscan.dev/agent.html#software"
+      },
+      "mainEntity": {
+        "@id": "https://nyxscan.dev/agent.html#software"
+      }
     },
     {
       "@type": "BreadcrumbList",

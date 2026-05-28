@@ -58,15 +58,105 @@
       ]
     },
     {
+      "@type": "Organization",
+      "@id": "https://nyxscan.dev/#organization",
+      "name": "Nyx",
+      "alternateName": [
+        "Nyx Scanner",
+        "Nyx Agent",
+        "nyxscan.dev"
+      ],
+      "url": "https://nyxscan.dev/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://nyxscan.dev/assets/logo.png",
+        "width": 512,
+        "height": 512
+      },
+      "founder": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "sameAs": [
+        "https://github.com/elicpeter/nyx",
+        "https://github.com/nyx-sec/nyx-agent",
+        "https://github.com/sponsors/elicpeter"
+      ],
+      "knowsAbout": [
+        "Static Application Security Testing",
+        "source-to-sink taint analysis",
+        "local pentesting",
+        "software supply chain security",
+        "SARIF"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "commercial licensing and support",
+        "email": "contact@nyxsec.dev",
+        "availableLanguage": [
+          "en"
+        ]
+      }
+    },
+    {
       "@type": "WebSite",
       "@id": "https://nyxscan.dev/#website",
       "url": "https://nyxscan.dev/",
       "name": "Nyx",
+      "alternateName": "nyxscan.dev",
       "description": "Local security tooling for deterministic scanning and live testing.",
-      "inLanguage": "en",
+      "inLanguage": "en-US",
       "publisher": {
+        "@id": "https://nyxscan.dev/#organization"
+      },
+      "creator": {
         "@id": "https://nyxscan.dev/#person"
       }
+    },
+    {
+      "@type": [
+        "SoftwareApplication",
+        "SoftwareSourceCode"
+      ],
+      "@id": "https://nyxscan.dev/scanner.html#software",
+      "name": "Nyx",
+      "alternateName": [
+        "Nyx Scanner",
+        "nyx-scanner"
+      ],
+      "url": "https://nyxscan.dev/scanner.html",
+      "applicationCategory": "SecurityApplication",
+      "applicationSubCategory": "Static Application Security Testing",
+      "operatingSystem": "Cross-platform",
+      "programmingLanguage": "Rust",
+      "codeRepository": "https://github.com/elicpeter/nyx",
+      "downloadUrl": "https://crates.io/crates/nyx-scanner",
+      "installUrl": "https://nyxscan.dev/docs/nyx/installation.html",
+      "softwareHelp": "https://nyxscan.dev/docs/nyx/",
+      "releaseNotes": "https://nyxscan.dev/news/nyx-0-7-0.html",
+      "license": "https://spdx.org/licenses/GPL-3.0-or-later.html",
+      "description": "Documentation for Nyx Scanner, the open-source, local-first SAST scanner written in Rust. Quickstart, CLI reference, detectors, configuration, and language coverage.",
+      "featureList": [
+        "Cross-file interprocedural taint analysis",
+        "Local browser triage UI",
+        "SARIF output for CI",
+        "No account or source upload required"
+      ],
+      "maintainer": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "author": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "publisher": {
+        "@id": "https://nyxscan.dev/#organization"
+      },
+      "isAccessibleForFree": true,
+      "sameAs": [
+        "https://github.com/elicpeter/nyx",
+        "https://nyxscan.dev/docs/nyx/",
+        "https://crates.io/crates/nyx-scanner",
+        "https://docs.rs/nyx-scanner/latest/nyx_scanner/"
+      ]
     },
     {
       "@type": "TechArticle",
@@ -75,19 +165,25 @@
       "name": "CLI Reference",
       "url": "https://nyxscan.dev/docs/nyx/cli.html",
       "description": "Deprecated aliases: --ast-only (use --mode ast), --cfg-only (use --mode cfg), --all-targets (use --mode full).",
-      "inLanguage": "en",
+      "inLanguage": "en-US",
       "articleSection": "Using nyx",
       "isPartOf": {
         "@id": "https://nyxscan.dev/#website"
       },
       "publisher": {
-        "@id": "https://nyxscan.dev/#person"
+        "@id": "https://nyxscan.dev/#organization"
       },
       "author": {
         "@id": "https://nyxscan.dev/#person"
       },
       "image": "https://nyxscan.dev/og-image.png",
-      "mainEntityOfPage": "https://nyxscan.dev/docs/nyx/cli.html"
+      "mainEntityOfPage": "https://nyxscan.dev/docs/nyx/cli.html",
+      "about": {
+        "@id": "https://nyxscan.dev/scanner.html#software"
+      },
+      "mainEntity": {
+        "@id": "https://nyxscan.dev/scanner.html#software"
+      }
     },
     {
       "@type": "BreadcrumbList",

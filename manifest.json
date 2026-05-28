@@ -2,6 +2,8 @@
   "name": "Nyx | Local security stack",
   "short_name": "Nyx",
   "description": "Local security tools for deterministic scanning and live testing.",
+  "id": "/",
+  "categories": ["developer", "security", "utilities"],
   "start_url": "/",
   "scope": "/",
   "display": "browser",
@@ -31,6 +33,20 @@
       "sizes": "1200x630",
       "type": "image/png",
       "purpose": "any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/assets/screenshots/overview.webp",
+      "sizes": "1600x992",
+      "type": "image/webp",
+      "label": "Nyx Scanner overview dashboard"
+    },
+    {
+      "src": "/assets/screenshots/nyx-agent-demo-poster.webp",
+      "sizes": "960x594",
+      "type": "image/webp",
+      "label": "Nyx Agent project dashboard"
     }
   ]
 }

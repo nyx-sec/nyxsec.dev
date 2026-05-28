@@ -57,13 +57,57 @@
       ]
     },
     {
+      "@type": "Organization",
+      "@id": "https://nyxscan.dev/#organization",
+      "name": "Nyx",
+      "alternateName": [
+        "Nyx Scanner",
+        "Nyx Agent",
+        "nyxscan.dev"
+      ],
+      "url": "https://nyxscan.dev/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://nyxscan.dev/assets/logo.png",
+        "width": 512,
+        "height": 512
+      },
+      "founder": {
+        "@id": "https://nyxscan.dev/#person"
+      },
+      "sameAs": [
+        "https://github.com/elicpeter/nyx",
+        "https://github.com/nyx-sec/nyx-agent",
+        "https://github.com/sponsors/elicpeter"
+      ],
+      "knowsAbout": [
+        "Static Application Security Testing",
+        "source-to-sink taint analysis",
+        "local pentesting",
+        "software supply chain security",
+        "SARIF"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "commercial licensing and support",
+        "email": "contact@nyxsec.dev",
+        "availableLanguage": [
+          "en"
+        ]
+      }
+    },
+    {
       "@type": "WebSite",
       "@id": "https://nyxscan.dev/#website",
       "url": "https://nyxscan.dev/",
       "name": "Nyx",
+      "alternateName": "nyxscan.dev",
       "description": "Local security tooling for deterministic scanning and live testing.",
-      "inLanguage": "en",
+      "inLanguage": "en-US",
       "publisher": {
+        "@id": "https://nyxscan.dev/#organization"
+      },
+      "creator": {
         "@id": "https://nyxscan.dev/#person"
       }
     },
@@ -74,13 +118,13 @@
       "name": "Documentation",
       "url": "https://nyxscan.dev/docs/",
       "description": "Documentation for Nyx Scanner and Nyx Agent: local source-to-sink scanning, local pentesting, CLI usage, configuration, APIs, and operations.",
-      "inLanguage": "en",
+      "inLanguage": "en-US",
       "articleSection": "Documentation",
       "isPartOf": {
         "@id": "https://nyxscan.dev/#website"
       },
       "publisher": {
-        "@id": "https://nyxscan.dev/#person"
+        "@id": "https://nyxscan.dev/#organization"
       },
       "author": {
         "@id": "https://nyxscan.dev/#person"

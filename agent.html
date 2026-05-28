@@ -16,15 +16,25 @@
     />
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <link rel="canonical" href="https://nyxscan.dev/agent.html" />
+    <link rel="alternate" type="text/plain" href="https://nyxscan.dev/llms.txt" title="llms.txt" />
+    <link rel="alternate" type="text/plain" href="https://nyxscan.dev/llms-full.txt" title="llms-full.txt" />
     <link rel="sitemap" type="application/xml" href="https://nyxscan.dev/sitemap.xml" />
     <link rel="me" href="https://github.com/elicpeter" />
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
     <link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="favicon-180.png" />
     <link rel="manifest" href="/manifest.json" />
+    <link rel="alternate" type="application/rss+xml" title="Nyx | News &amp; release notes" href="/news/feed.xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+    <link
+      rel="preload"
+      href="assets/screenshots/nyx-agent-demo-poster.webp"
+      as="image"
+      type="image/webp"
+      fetchpriority="high"
+    />
     <link rel="stylesheet" href="styles.css" />
 
     <meta property="og:type" content="website" />
@@ -51,38 +61,150 @@
     <meta name="twitter:domain" content="nyxscan.dev" />
     <meta name="twitter:url" content="https://nyxscan.dev/agent.html" />
     <meta name="theme-color" content="#F9F8F4" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image:secure_url" content="https://nyxscan.dev/og-image.png" />
+    <meta property="og:updated_time" content="2026-05-28T00:00:00-05:00" />
 
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": ["SoftwareApplication", "SoftwareSourceCode"],
-        "@id": "https://nyxscan.dev/agent.html#software",
-        "name": "Nyx Agent",
-        "alternateName": ["nyx-agent"],
-        "url": "https://nyxscan.dev/agent.html",
-        "applicationCategory": "SecurityApplication",
-        "applicationSubCategory": "Local Pentesting",
-        "operatingSystem": "Cross-platform",
-        "programmingLanguage": "Rust, TypeScript",
-        "codeRepository": "https://github.com/nyx-sec/nyx-agent",
-        "license": "https://spdx.org/licenses/AGPL-3.0-or-later.html",
-        "description": "Nyx Agent runs live pentests against development apps. It reads the repo, checks the local target, and keeps proof with the run.",
-        "keywords": [
-          "local pentesting",
-          "live application security testing",
-          "verified vulnerabilities",
-          "stored evidence",
-          "developer security tooling"
-        ],
-        "featureList": [
-          "Local pentest runs",
-          "Target launch and readiness checks",
-          "Route and API exploration",
-          "Live verification",
-          "Request and response evidence",
-          "Local run history and triage state"
-        ],
-        "isAccessibleForFree": true
+        "@graph": [
+          {
+            "@type": "Person",
+            "@id": "https://nyxscan.dev/#person",
+            "name": "Eli Peter",
+            "url": "https://github.com/elicpeter",
+            "sameAs": ["https://github.com/elicpeter", "https://github.com/sponsors/elicpeter"]
+          },
+          {
+            "@type": "Organization",
+            "@id": "https://nyxscan.dev/#organization",
+            "name": "Nyx",
+            "alternateName": ["Nyx Scanner", "Nyx Agent", "nyxscan.dev"],
+            "url": "https://nyxscan.dev/",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://nyxscan.dev/assets/logo.png",
+              "width": 512,
+              "height": 512
+            },
+            "founder": {
+              "@id": "https://nyxscan.dev/#person"
+            },
+            "sameAs": [
+              "https://github.com/elicpeter/nyx",
+              "https://github.com/nyx-sec/nyx-agent",
+              "https://github.com/sponsors/elicpeter"
+            ],
+            "knowsAbout": [
+              "local pentesting",
+              "live application security testing",
+              "verified vulnerabilities",
+              "stored evidence",
+              "developer security tooling"
+            ],
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "contactType": "commercial licensing and support",
+              "email": "contact@nyxsec.dev",
+              "availableLanguage": ["en"]
+            }
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://nyxscan.dev/#website",
+            "url": "https://nyxscan.dev/",
+            "name": "Nyx",
+            "alternateName": "nyxscan.dev",
+            "description": "Local security tooling for deterministic scanning and live testing.",
+            "inLanguage": "en-US",
+            "publisher": {
+              "@id": "https://nyxscan.dev/#organization"
+            },
+            "creator": {
+              "@id": "https://nyxscan.dev/#person"
+            }
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://nyxscan.dev/agent.html#webpage",
+            "url": "https://nyxscan.dev/agent.html",
+            "name": "Nyx Agent | Local pentesting for dev apps",
+            "description": "Nyx Agent runs live pentests against development apps. It reads the repo, checks the local target, and keeps proof with the run.",
+            "isPartOf": {
+              "@id": "https://nyxscan.dev/#website"
+            },
+            "about": {
+              "@id": "https://nyxscan.dev/agent.html#software"
+            },
+            "primaryImageOfPage": {
+              "@type": "ImageObject",
+              "url": "https://nyxscan.dev/og-image.png",
+              "width": 1200,
+              "height": 630
+            },
+            "dateModified": "2026-05-28",
+            "inLanguage": "en-US",
+            "mainEntity": {
+              "@id": "https://nyxscan.dev/agent.html#software"
+            }
+          },
+          {
+            "@type": ["SoftwareApplication", "SoftwareSourceCode"],
+            "@id": "https://nyxscan.dev/agent.html#software",
+            "name": "Nyx Agent",
+            "alternateName": ["nyx-agent"],
+            "url": "https://nyxscan.dev/agent.html",
+            "mainEntityOfPage": {
+              "@id": "https://nyxscan.dev/agent.html#webpage"
+            },
+            "applicationCategory": "SecurityApplication",
+            "applicationSubCategory": "Local Application Security Testing",
+            "operatingSystem": "Cross-platform",
+            "programmingLanguage": "Rust, TypeScript",
+            "codeRepository": "https://github.com/nyx-sec/nyx-agent",
+            "downloadUrl": "https://github.com/nyx-sec/nyx-agent",
+            "installUrl": "https://nyxscan.dev/docs/agent/install.html",
+            "softwareHelp": "https://nyxscan.dev/docs/agent/",
+            "releaseNotes": "https://nyxscan.dev/news/nyx-agent.html",
+            "license": "https://spdx.org/licenses/AGPL-3.0-or-later.html",
+            "description": "Nyx Agent runs live pentests against development apps. It reads the repo, checks the local target, and keeps proof with the run.",
+            "keywords": [
+              "local pentesting",
+              "live application security testing",
+              "verified vulnerabilities",
+              "stored evidence",
+              "developer security tooling"
+            ],
+            "featureList": [
+              "Local pentest runs",
+              "Target launch and readiness checks",
+              "Route and API exploration",
+              "Live verification",
+              "Request and response evidence",
+              "Local run history and triage state"
+            ],
+            "screenshot": "https://nyxscan.dev/assets/screenshots/nyx-agent-demo-poster.webp",
+            "author": {
+              "@id": "https://nyxscan.dev/#person"
+            },
+            "maintainer": {
+              "@id": "https://nyxscan.dev/#person"
+            },
+            "publisher": {
+              "@id": "https://nyxscan.dev/#organization"
+            },
+            "offers": {
+              "@type": "Offer",
+              "url": "https://github.com/nyx-sec/nyx-agent",
+              "price": 0,
+              "priceCurrency": "USD",
+              "availability": "https://schema.org/InStock"
+            },
+            "isAccessibleForFree": true,
+            "sameAs": ["https://github.com/nyx-sec/nyx-agent", "https://nyxscan.dev/docs/agent/"]
+          }
+        ]
       }
     </script>
   </head>
@@ -123,14 +245,19 @@
           <div class="hero__visual" aria-hidden="true">
             <div class="app-frame">
               <div class="app-frame__bar"><span></span><span></span><span></span></div>
-              <img
-                src="assets/screenshots/nyx-agent-demo.gif"
-                width="1800"
-                height="1113"
-                alt=""
-                loading="eager"
-                fetchpriority="high"
-              />
+              <video
+                width="960"
+                height="594"
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                poster="assets/screenshots/nyx-agent-demo-poster.webp"
+              >
+                <source src="assets/screenshots/nyx-agent-demo.webm" type="video/webm" />
+                <source src="assets/screenshots/nyx-agent-demo.mp4" type="video/mp4" />
+              </video>
             </div>
           </div>
         </div>
