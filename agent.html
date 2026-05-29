@@ -182,7 +182,12 @@
               "Route and API exploration",
               "Live verification",
               "Request and response evidence",
-              "Local run history and triage state"
+              "Local run history and triage state",
+              "Attack graph over routes, roles, objects, and evidence",
+              "Auth and object ownership verification",
+              "Business logic pentest templates",
+              "Cron, webhook, and CI-triggered runs",
+              "AI exploration runtime with budget tracking"
             ],
             "screenshot": "https://nyxsec.dev/assets/screenshots/nyx-agent-demo-poster.webp",
             "author": {
@@ -312,6 +317,94 @@
                 <tr>
                   <td>Triage</td>
                   <td>Confirmed issues with status and evidence.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="skills" aria-labelledby="skills-title">
+        <div class="container">
+          <div class="section-intro section-intro--wide">
+            <h2 id="skills-title">Built for the messy middle.</h2>
+            <p>
+              Static scanners find leads. Crawlers exercise URLs. Proxy sessions prove what a person already knows. Nyx
+              Agent connects those lanes into one local run: source context, live checks, stored proof, and the graph
+              that explains how the evidence fits together.
+            </p>
+          </div>
+
+          <div class="compare-table-wrap">
+            <table
+              class="compare-table"
+              aria-label="Comparison of Nyx Agent with static scanners, web crawlers, and manual proxy workflows"
+            >
+              <thead>
+                <tr>
+                  <th scope="col">Capability</th>
+                  <th scope="col">Nyx Agent</th>
+                  <th scope="col">Static scanner</th>
+                  <th scope="col">Web crawler / DAST</th>
+                  <th scope="col">Manual proxy</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Repo-aware route and API discovery</td>
+                  <td class="cell--yes">Yes</td>
+                  <td class="cell--partial">Source clues only</td>
+                  <td class="cell--partial">Runtime only</td>
+                  <td class="cell--partial">Operator driven</td>
+                </tr>
+                <tr>
+                  <td>Static signal to live verification</td>
+                  <td class="cell--yes">Yes</td>
+                  <td class="cell--no">No</td>
+                  <td class="cell--partial">Runtime findings only</td>
+                  <td class="cell--partial">Manual</td>
+                </tr>
+                <tr>
+                  <td>Request, response, and replay evidence</td>
+                  <td class="cell--yes">Yes</td>
+                  <td class="cell--partial">Logs / SARIF</td>
+                  <td class="cell--yes">Yes</td>
+                  <td class="cell--partial">Session exports</td>
+                </tr>
+                <tr>
+                  <td>Auth, role, and object ownership checks</td>
+                  <td class="cell--yes">Yes</td>
+                  <td class="cell--partial">Pattern hints</td>
+                  <td class="cell--partial">Needs setup</td>
+                  <td class="cell--partial">Manual</td>
+                </tr>
+                <tr>
+                  <td>Attack graph for chains and blast radius</td>
+                  <td class="cell--yes">Yes</td>
+                  <td class="cell--no">No</td>
+                  <td class="cell--no">No</td>
+                  <td class="cell--partial">Notes only</td>
+                </tr>
+                <tr>
+                  <td>Business logic pentest templates</td>
+                  <td class="cell--yes">Yes</td>
+                  <td class="cell--no">No</td>
+                  <td class="cell--partial">Limited</td>
+                  <td class="cell--partial">Manual</td>
+                </tr>
+                <tr>
+                  <td>Cron, webhook, and PR-triggered runs</td>
+                  <td class="cell--yes">Yes</td>
+                  <td class="cell--partial">CI only</td>
+                  <td class="cell--partial">Varies</td>
+                  <td class="cell--no">No</td>
+                </tr>
+                <tr>
+                  <td>Local run history and triage state</td>
+                  <td class="cell--yes">Yes</td>
+                  <td class="cell--partial">Report files</td>
+                  <td class="cell--partial">Tool database</td>
+                  <td class="cell--partial">Ad hoc</td>
                 </tr>
               </tbody>
             </table>

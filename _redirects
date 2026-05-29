@@ -3,6 +3,8 @@
 /agent.html /agent 301
 /news /news/ 301
 /docs /docs/ 301
+/docs/nyx-agent /docs/agent/ 301
+/docs/nyx-agent.html /docs/agent/ 301
 /docs/quickstart /docs/nyx/quickstart 301
 /docs/quickstart.html /docs/nyx/quickstart 301
 /docs/installation /docs/nyx/installation 301
