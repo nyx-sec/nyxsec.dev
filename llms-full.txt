@@ -114,9 +114,9 @@ External:
 
 Agent metadata:
 - Current binary: `nyx-agent`
-- Status: pre-MVP; the core loop works, packaging is still moving.
+- Status: pre-MVP; the core loop works, and the agent is installable with `cargo install nyx-agent`.
 - Default daemon bind: `127.0.0.1:8765`
-- Source install/build path today: `cargo build --workspace`, `cargo run --bin nyx-agent -- doctor`, `cargo run --bin nyx-agent -- serve`
+- Install path today: `cargo install nyx-agent`, `nyx-agent doctor`, `nyx-agent serve`
 - Agent docs: https://nyxsec.dev/docs/agent/
 - Agent source code: https://github.com/nyx-sec/nyx-agent
 - Agent license: AGPLv3-or-later; commercial terms available.
@@ -129,8 +129,9 @@ The pitch: bring much of the workflow people pay external AI pentesting companie
 
 Typical commands:
 ```bash
-cargo run --bin nyx-agent -- scan --project acme-app --app-url http://127.0.0.1:3000
-cargo run --bin nyx-agent -- serve
+cargo install nyx-agent
+nyx-agent scan --project acme-app --app-url http://127.0.0.1:3000
+nyx-agent serve
 nyx-agent doctor
 nyx-agent scan --project acme-app --unsafe-attack-agent
 nyx-agent pr-comment --report report.json
@@ -227,13 +228,11 @@ git clone https://github.com/elicpeter/nyx.git
 cd nyx && cargo build --release
 ```
 
-**Nyx Agent from source while packaging is moving:**
+**Nyx Agent with Cargo:**
 ```bash
-git clone https://github.com/nyx-sec/nyx-agent.git
-cd nyx-agent
-cargo build --workspace
-cargo run --bin nyx-agent -- doctor
-cargo run --bin nyx-agent -- serve
+cargo install nyx-agent
+nyx-agent doctor
+nyx-agent serve
 ```
 
 ---

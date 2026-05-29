@@ -31,7 +31,7 @@
       <guid isPermaLink="true">https://nyxsec.dev/news/nyx-agent</guid>
       <pubDate>Tue, 26 May 2026 00:00:00 -0500</pubDate>
       <dc:creator>Eli Peter</dc:creator>
-      <description>Nyx Agent runs local pentests against development apps. It reads the repo, checks the local target, and keeps proof with the run.</description>
+      <description>Nyx Agent runs local pentests against development apps. Install it with cargo install nyx-agent, then keep repo context, live checks, and proof together.</description>
     </item>
 
     <item>

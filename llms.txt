@@ -62,14 +62,12 @@ cargo install nyx-scanner
 
 Requires Rust 1.88+. Pre-built binaries for Linux and macOS (x86_64, ARM64) are on the [Releases page](https://github.com/elicpeter/nyx/releases).
 
-Nyx Agent is currently installed from source while packaging is moving:
+Nyx Agent is installed from crates.io with Cargo:
 
 ```bash
-git clone https://github.com/nyx-sec/nyx-agent.git
-cd nyx-agent
-cargo build --workspace
-cargo run --bin nyx-agent -- doctor
-cargo run --bin nyx-agent -- serve
+cargo install nyx-agent
+nyx-agent doctor
+nyx-agent serve
 ```
 
 ## Basic usage
@@ -184,7 +182,7 @@ Nyx Agent: AGPLv3-or-later. Free and open source; commercial licensing and suppo
 
 Nyx is under active development. APIs, detector behavior, and configuration options may change between releases. Results may contain false positives or false negatives; manual review is expected. C and C++ are Preview tier and should be paired with clang-based tooling before use as a hard CI gate.
 
-Nyx Agent is pre-MVP. The core local pentest loop works, but packaging and some docs are still moving. Destructive and unsafe attack-agent modes can mutate data, create accounts, submit payloads, corrupt fixtures, or knock over the dev app; use them only against disposable targets you own.
+Nyx Agent is pre-MVP. The core local pentest loop works, and the agent can be installed with `cargo install nyx-agent`. Destructive and unsafe attack-agent modes can mutate data, create accounts, submit payloads, corrupt fixtures, or knock over the dev app; use them only against disposable targets you own.
 
 ## Key topics
 

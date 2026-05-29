@@ -321,7 +321,7 @@
             </div>
           </div>
 
-          <div class="hero__visual" aria-hidden="true">
+          <div class="hero__visual">
             <div class="app-frame">
               <div class="app-frame__bar"><span></span><span></span><span></span></div>
               <picture>
@@ -330,7 +330,7 @@
                   src="assets/screenshots/overview.png"
                   width="1600"
                   height="992"
-                  alt=""
+                  alt="Nyx Scanner overview dashboard showing health score, findings, scan metrics, and issue categories."
                   loading="eager"
                   fetchpriority="high"
                 />
@@ -367,8 +367,11 @@
             <video
               width="960"
               height="596"
-              controls
-              preload="none"
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="metadata"
               poster="assets/screenshots/demo-combo-poster.webp"
               aria-label="Nyx demo showing CLI scan output and browser triage for source-to-sink findings"
             >

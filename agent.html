@@ -63,7 +63,7 @@
     <meta name="theme-color" content="#F9F8F4" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:image:secure_url" content="https://nyxsec.dev/og-image.png" />
-    <meta property="og:updated_time" content="2026-05-28T00:00:00-05:00" />
+    <meta property="og:updated_time" content="2026-05-29T00:00:00-05:00" />
 
     <script type="application/ld+json">
       {
@@ -143,7 +143,7 @@
               "width": 1200,
               "height": 630
             },
-            "dateModified": "2026-05-28",
+            "dateModified": "2026-05-29",
             "inLanguage": "en-US",
             "mainEntity": {
               "@id": "https://nyxsec.dev/agent#software"
@@ -163,7 +163,7 @@
             "operatingSystem": "Cross-platform",
             "programmingLanguage": "Rust, TypeScript",
             "codeRepository": "https://github.com/nyx-sec/nyx-agent",
-            "downloadUrl": "https://github.com/nyx-sec/nyx-agent",
+            "downloadUrl": "https://crates.io/crates/nyx-agent",
             "installUrl": "https://nyxsec.dev/docs/agent/install",
             "softwareHelp": "https://nyxsec.dev/docs/agent/",
             "releaseNotes": "https://nyxsec.dev/news/nyx-agent",
@@ -196,13 +196,17 @@
             },
             "offers": {
               "@type": "Offer",
-              "url": "https://github.com/nyx-sec/nyx-agent",
+              "url": "https://crates.io/crates/nyx-agent",
               "price": 0,
               "priceCurrency": "USD",
               "availability": "https://schema.org/InStock"
             },
             "isAccessibleForFree": true,
-            "sameAs": ["https://github.com/nyx-sec/nyx-agent", "https://nyxsec.dev/docs/agent/"]
+            "sameAs": [
+              "https://github.com/nyx-sec/nyx-agent",
+              "https://crates.io/crates/nyx-agent",
+              "https://nyxsec.dev/docs/agent/"
+            ]
           }
         ]
       }
@@ -237,7 +241,7 @@
             </p>
 
             <div class="button-row" aria-label="Primary links">
-              <a class="button button--primary" href="https://github.com/nyx-sec/nyx-agent">GitHub</a>
+              <a class="button button--primary" href="#install">Get Started</a>
               <a class="button button--ghost" href="#support">Commercial use</a>
             </div>
           </div>
@@ -315,22 +319,32 @@
         </div>
       </section>
 
-      <section class="section" aria-labelledby="cli-title">
+      <section class="section" id="install" aria-labelledby="install-title">
         <div class="container install-layout">
           <div class="install-copy">
-            <h2 id="cli-title">CLI first.</h2>
-            <p>Use the dashboard when you want to watch the run or inspect proof.</p>
+            <h2 id="install-title">Start with Cargo.</h2>
+            <p>Install the crate and start the local Agent dashboard.</p>
           </div>
 
-          <div class="terminal" aria-label="Nyx Agent CLI commands">
-            <div class="terminal__bar"><span></span><span></span><span></span></div>
-            <pre><code>nyx-agent scan ./apps/web --target-url http://127.0.0.1:3000
-nyx-agent serve</code></pre>
+          <div class="terminal" aria-label="Nyx Agent install command">
+            <div class="terminal__bar">
+              <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+              <button class="terminal__copy" type="button" data-copy-target="install-commands">Copy</button>
+            </div>
+            <input
+              id="install-commands"
+              class="terminal__field"
+              type="text"
+              value="cargo install nyx-agent && nyx-agent"
+              readonly
+              spellcheck="false"
+            />
           </div>
 
           <div class="inline-links" aria-label="Nyx Agent resources">
+            <a href="https://crates.io/crates/nyx-agent">crates.io package</a>
+            <a href="docs/agent/install">installation docs</a>
             <a href="https://github.com/nyx-sec/nyx-agent">GitHub</a>
-            <a href="docs/agent/">Docs</a>
           </div>
         </div>
       </section>
@@ -383,5 +397,35 @@ nyx-agent serve</code></pre>
         </nav>
       </div>
     </footer>
+    <script>
+      (function () {
+        document.querySelectorAll("[data-copy-target]").forEach(function (button) {
+          button.addEventListener("click", function () {
+            var target = document.getElementById(button.getAttribute("data-copy-target"));
+            if (!target) return;
+
+            var originalLabel = button.textContent;
+            var markCopied = function () {
+              button.textContent = "Copied";
+              window.setTimeout(function () {
+                button.textContent = originalLabel;
+              }, 1400);
+            };
+            var fallbackCopy = function () {
+              target.focus();
+              target.select();
+              document.execCommand("copy");
+              markCopied();
+            };
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              navigator.clipboard.writeText(target.value).then(markCopied).catch(fallbackCopy);
+            } else {
+              fallbackCopy();
+            }
+          });
+        });
+      })();
+    </script>
   </body>
 </html>

@@ -92,7 +92,7 @@ const DOC_SETS = [
     applicationSubCategory: "Local Application Security Testing",
     programmingLanguage: "Rust, TypeScript",
     licenseUrl: "https://spdx.org/licenses/AGPL-3.0-or-later.html",
-    packageUrl: "https://github.com/nyx-sec/nyx-agent",
+    packageUrl: "https://crates.io/crates/nyx-agent",
     rustdocsUrl: null,
     releaseNotesUrl: `${SITE_URL}/news/nyx-agent`,
     featureList: [

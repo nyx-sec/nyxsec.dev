@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Install | Nyx Agent docs</title>
-    <meta name="description" content="This page walks through building Nyx Agent from source and wiring its external dependencies. The shipping binary is nyx-agent; the product brand is &quot;Nyx..." />
+    <meta name="description" content="Install Nyx Agent with cargo install nyx-agent, wire external dependencies, and verify the nyx-agent doctor checks." />
     <meta name="keywords" content="Nyx Agent, nyx-agent, local pentesting, live appsec testing, verified vulnerabilities, stored evidence, Get started, Install, Rust, rust, toml, AI" />
     <meta name="author" content="Eli Peter" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
@@ -29,7 +29,7 @@
     <meta property="og:site_name" content="Nyx" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:title" content="Install" />
-    <meta property="og:description" content="This page walks through building Nyx Agent from source and wiring its external dependencies. The shipping binary is nyx-agent; the product brand is &quot;Nyx..." />
+    <meta property="og:description" content="Install Nyx Agent with cargo install nyx-agent, wire external dependencies, and verify the nyx-agent doctor checks." />
     <meta property="og:url" content="https://nyxsec.dev/docs/agent/install" />
     <meta property="og:image" content="https://nyxsec.dev/og-image.png" />
     <meta property="og:image:type" content="image/png" />
@@ -38,7 +38,7 @@
     <meta property="og:image:alt" content="Nyx Agent local pentesting documentation" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Install" />
-    <meta name="twitter:description" content="This page walks through building Nyx Agent from source and wiring its external dependencies. The shipping binary is nyx-agent; the product brand is &quot;Nyx..." />
+    <meta name="twitter:description" content="Install Nyx Agent with cargo install nyx-agent, wire external dependencies, and verify the nyx-agent doctor checks." />
     <meta name="twitter:image" content="https://nyxsec.dev/og-image.png" />
     <meta name="twitter:image:alt" content="Nyx Agent local pentesting documentation" />
     <meta name="theme-color" content="#F9F8F4" />
@@ -128,7 +128,7 @@
       "operatingSystem": "Cross-platform",
       "programmingLanguage": "Rust, TypeScript",
       "codeRepository": "https://github.com/nyx-sec/nyx-agent",
-      "downloadUrl": "https://github.com/nyx-sec/nyx-agent",
+      "downloadUrl": "https://crates.io/crates/nyx-agent",
       "installUrl": "https://nyxsec.dev/docs/agent/install",
       "softwareHelp": "https://nyxsec.dev/docs/agent/",
       "releaseNotes": "https://nyxsec.dev/news/nyx-agent",
@@ -153,7 +153,7 @@
       "sameAs": [
         "https://github.com/nyx-sec/nyx-agent",
         "https://nyxsec.dev/docs/agent/",
-        "https://github.com/nyx-sec/nyx-agent"
+        "https://crates.io/crates/nyx-agent"
       ]
     },
     {
@@ -162,7 +162,7 @@
       "headline": "Install",
       "name": "Install",
       "url": "https://nyxsec.dev/docs/agent/install",
-      "description": "This page walks through building Nyx Agent from source and wiring its external dependencies. The shipping binary is nyx-agent; the product brand is \"Nyx...",
+      "description": "Install Nyx Agent with cargo install nyx-agent, wire external dependencies, and verify the nyx-agent doctor checks.",
       "inLanguage": "en-US",
       "articleSection": "Get started",
       "isPartOf": {
@@ -253,12 +253,16 @@
   </div>
           <div class="docs-prose" data-pagefind-body>
 <h1 id="install"><a class="docs-anchor" href="#install" aria-label="Link to install" data-pagefind-ignore>#</a>Install</h1>
-<p>This page walks through building Nyx Agent from source and wiring its
-external dependencies. The shipping binary is <code>nyx-agent</code>; the product
-brand is &quot;Nyx Agent&quot;. Both names appear here for the reasons explained in
-<code>README.md</code>.</p>
-<p>Nyx Agent has no prebuilt packages yet. Every install is a source build
-against the workspace in this repository.</p>
+<p>This page walks through installing Nyx Agent with Cargo, wiring its
+external dependencies, and optionally building from source. The shipping
+binary is <code>nyx-agent</code>; the product brand is &quot;Nyx Agent&quot;. Both names
+appear here for the reasons explained in <code>README.md</code>.</p>
+<h2 id="install-with-cargo"><a class="docs-anchor" href="#install-with-cargo" aria-label="Link to install-with-cargo" data-pagefind-ignore>#</a>Install with Cargo</h2>
+<pre><code class="hljs language-bash">cargo install nyx-agent
+nyx-agent doctor</code></pre>
+<p><code>cargo install nyx-agent</code> builds and installs the <code>nyx-agent</code>
+binary on your Cargo bin path. If your shell cannot find it after
+install, make sure <code>~/.cargo/bin</code> is on <code>PATH</code>.</p>
 <h2 id="prerequisites"><a class="docs-anchor" href="#prerequisites" aria-label="Link to prerequisites" data-pagefind-ignore>#</a>Prerequisites</h2>
 <table>
 <thead>
@@ -281,7 +285,7 @@ against the workspace in this repository.</p>
 <tr>
 <td>Node.js + <code>npm</code></td>
 <td>Node 18+</td>
-<td>Required only for <code>cargo build --release</code> (the release build bundles the SPA). Debug builds ship a stub page and skip Node.</td>
+<td>Required only for source builds with <code>cargo build --release</code> (the release build bundles the SPA). Debug builds ship a stub page and skip Node.</td>
 </tr>
 <tr>
 <td>AI runtime</td>
@@ -296,6 +300,8 @@ against the workspace in this repository.</p>
 </tbody></table>
 <p>Linux and macOS are the supported targets. Windows is untested.</p>
 <h2 id="build-from-source"><a class="docs-anchor" href="#build-from-source" aria-label="Link to build-from-source" data-pagefind-ignore>#</a>Build from source</h2>
+<p>Use a source checkout when you want to develop Nyx Agent itself or build
+from an unreleased commit.</p>
 <pre><code class="hljs language-bash">git <span class="hljs-built_in">clone</span> &lt;repo-url&gt; nyx-agent
 <span class="hljs-built_in">cd</span> nyx-agent
 cargo build --release</code></pre>
@@ -377,7 +383,7 @@ bundles, logs, and the bearer-token file (<code>auth_token</code>, mode <code>06
 <h2 id="verify-the-install"><a class="docs-anchor" href="#verify-the-install" aria-label="Link to verify-the-install" data-pagefind-ignore>#</a>Verify the install</h2>
 <p><code>nyx-agent doctor</code> runs every health check the daemon performs at
 startup and exits non-zero on any failure:</p>
-<pre><code class="hljs language-bash">./target/release/nyx-agent doctor</code></pre>
+<pre><code class="hljs language-bash">nyx-agent doctor</code></pre>
 <p>Sample output:</p>
 <pre><code class="hljs language-plain">state dir OK at /home/op/.<span class="hljs-keyword">local</span>/<span class="hljs-keyword">share</span>/nyx-agent
 logs -&gt; /home/op/.<span class="hljs-keyword">local</span>/<span class="hljs-keyword">share</span>/nyx-agent/logs/agent.jsonl
