@@ -2,9 +2,11 @@
 
 > Full technical reference: https://nyxsec.dev/llms-full.txt
 
-Nyx is a local-first security stack for developers. The site root presents two products: deterministic source-to-sink scanning with Nyx, and live local testing with Nyx Agent.
+Nyx is a local-first security stack for developers and security teams. It has two products: Nyx Scanner for deterministic source-to-sink code scanning, and Nyx Agent for autonomous local pentesting against development apps you own.
 
 Nyx Scanner is an open-source, deterministic local-first security scanner. It runs cross-file interprocedural taint analysis on your repository, then serves findings in a React UI bound to `127.0.0.1`. No cloud, no account, no source upload. Everything stays on your machine.
+
+Nyx Agent is the live pentesting layer around Nyx Scanner. It reads the repo, launches or attaches to the local target, maps routes/forms/auth/API shape, turns static and runtime signals into candidates, sends scoped live checks, and stores request/response evidence, traces, verified vulnerabilities, and triage state locally.
 
 Current package version: `nyx-scanner` v0.7.0. Requires stable Rust 1.88+ for Cargo installs.
 
@@ -13,7 +15,7 @@ Current package version: `nyx-scanner` v0.7.0. Requires stable Rust 1.88+ for Ca
 - Brand/site: Nyx, https://nyxsec.dev/
 - Creator and maintainer: Eli Peter, https://github.com/elicpeter
 - Product 1: Nyx Scanner (`nyx-scanner`), deterministic local-first SAST for source-to-sink taint analysis.
-- Product 2: Nyx Agent (`nyx-agent`), local pentesting and live appsec verification for development apps.
+- Product 2: Nyx Agent (`nyx-agent`), autonomous local pentesting and live appsec verification for development apps.
 - Canonical scanner repo: https://github.com/elicpeter/nyx
 - Canonical agent repo: https://github.com/nyx-sec/nyx-agent
 - Commercial/support contact for Nyx Agent: contact@nyxsec.dev
@@ -21,9 +23,30 @@ Current package version: `nyx-scanner` v0.7.0. Requires stable Rust 1.88+ for Ca
 
 ## Nyx Agent
 
-Nyx Agent runs local pentests against development apps. Point it at a repo and a local URL; it can start or watch the app, map routes, run checks, and store request and response evidence.
+Nyx Agent runs enterprise-style pentests against development apps without requiring a hosted AI pentesting vendor. It is free and open source under AGPLv3-or-later, runs on the operator's machine, and keeps project data, run history, traces, evidence, and triage state in the local Nyx Agent store.
 
-Nyx Agent is AGPLv3-or-later. Commercial licenses, paid support, onboarding help, private policy packs, and enterprise terms are available.
+Point it at one or more repos and a local/dev URL. It can start the app from a launch profile, wait for health checks, run seed/login/reset hooks, execute Nyx static scans, discover routes and APIs, synthesize candidates, verify issues against the live target, and write reproducible proof. The dashboard shows live runs, verified vulnerabilities, business impact, reproduction details, remediation notes, and evidence.
+
+Autonomous pentesting capabilities:
+- Normal pipeline: scope, static scan, route/API exploration, candidate synthesis, deterministic live verification, evidence review, triage.
+- Business-logic templates: tenant/object isolation, authz role comparison, invite/replay/webhook-style workflows, and other product-logic bugs normal scanners miss.
+- Vuln Research Mode: deeper product-invariant hypotheses for lifecycle, stale access, replay, downgrade, entitlement mismatch, team/org transitions, webhook consistency, AI-agent indirect actions, and background-job side effects.
+- Optional unsafe attack-agent mode: seven serial specialist passes plus a critical chain hunter and final triage pass for disposable local targets.
+- Attack graph: connects routes, endpoints, roles, objects, static signals, candidates, verification attempts, verified vulnerabilities, and exploit chains for evidence provenance and blast-radius reasoning.
+
+Local and AI posture:
+- `[ai] runtime = "none"` keeps AI features off while static scanning and deterministic verification still run locally.
+- `local-llm` uses a local OpenAI-compatible endpoint such as LM Studio, Ollama, or vLLM for fully local model-assisted analysis.
+- `codex` and `claude-code` adapters use locally installed CLI tools; `anthropic` is BYOK direct API.
+- Nyx Agent does not include, proxy, sublicense, or resell model access. Teams can run with no model, with a local model, or with their own chosen provider credentials.
+
+Safety and enterprise workflow:
+- Default daemon bind: `127.0.0.1:8765`.
+- Project/repo inventory, launch profiles, local orchestration, cron schedules, HMAC webhooks, GitHub Actions use, PR comments, JSON reports, and local SQLite persistence.
+- Sandbox backend selection includes process, birdcage, libkrun, firecracker, and docker where available.
+- Destructive probes are opt-in. State-changing live probes require exploit mode plus the state-changing gate; unsafe attack-agent mode is for disposable user-owned dev apps.
+
+Commercial licenses, paid support, onboarding help, private policy packs, and enterprise terms are available for organizations that need proprietary embedding, hosted resale, custom support obligations, or license comfort.
 
 Links:
 - Product page: https://nyxsec.dev/agent
@@ -39,11 +62,23 @@ cargo install nyx-scanner
 
 Requires Rust 1.88+. Pre-built binaries for Linux and macOS (x86_64, ARM64) are on the [Releases page](https://github.com/elicpeter/nyx/releases).
 
+Nyx Agent is currently installed from source while packaging is moving:
+
+```bash
+git clone https://github.com/nyx-sec/nyx-agent.git
+cd nyx-agent
+cargo build --workspace
+cargo run --bin nyx-agent -- doctor
+cargo run --bin nyx-agent -- serve
+```
+
 ## Basic usage
 
 ```bash
 nyx scan           # taint analysis, caches findings in .nyx/
 nyx serve          # opens http://localhost:9700 in your browser
+nyx-agent scan --project acme-app --app-url http://127.0.0.1:3000
+nyx-agent scan --project acme-app --unsafe-attack-agent   # disposable owned dev apps only
 ```
 
 ## CI usage
@@ -123,24 +158,33 @@ nyx scan --engine-profile deep   # adds symex + backwards taint (~2-3x cost)
 
 **vs Bandit / ESLint plugins:** Pattern-based linters that do not track data flow. Nyx traces the full source-to-sink path.
 
+**vs hosted AI pentesting tools:** Nyx Agent runs the pentest control plane locally and is open source. With `local-llm`, local CLI adapters, or AI disabled, teams can avoid paying another company to run AI pentests or upload app context to a hosted pentest SaaS.
+
 ## License and cost
 
-GPL-3.0-or-later. Free, no paid tier, no usage limits.
+Nyx Scanner: GPL-3.0-or-later. Free, no paid tier, no usage limits.
+
+Nyx Agent: AGPLv3-or-later. Free and open source; commercial licensing and support are available when teams need different terms.
 
 ## Links
 
 - Primary site: https://nyxsec.dev
 - Scanner page: https://nyxsec.dev/scanner
+- Agent page: https://nyxsec.dev/agent
 - Source code: https://github.com/elicpeter/nyx
+- Agent source code: https://github.com/nyx-sec/nyx-agent
 - Crate: https://crates.io/crates/nyx-scanner
 - Docs hub: https://nyxsec.dev/docs/
 - Scanner docs: https://nyxsec.dev/docs/nyx/
+- Agent docs: https://nyxsec.dev/docs/agent/
 - Rustdocs: https://docs.rs/nyx-scanner/latest/nyx_scanner/
 - Releases: https://github.com/elicpeter/nyx/releases
 
 ## Status and caveats
 
 Nyx is under active development. APIs, detector behavior, and configuration options may change between releases. Results may contain false positives or false negatives; manual review is expected. C and C++ are Preview tier and should be paired with clang-based tooling before use as a hard CI gate.
+
+Nyx Agent is pre-MVP. The core local pentest loop works, but packaging and some docs are still moving. Destructive and unsafe attack-agent modes can mutate data, create accounts, submit payloads, corrupt fixtures, or knock over the dev app; use them only against disposable targets you own.
 
 ## Key topics
 
@@ -163,6 +207,18 @@ Nyx is under active development. APIs, detector behavior, and configuration opti
 - alternative to CodeQL
 - alternative to Snyk
 - local pentesting
+- autonomous pentesting
+- enterprise pentesting
+- local AI pentesting
+- free AI pentesting
+- open-source pentesting agent
+- AI pentesting without SaaS
 - live appsec verification
 - verified vulnerabilities
 - stored evidence
+- attack graph
+- business logic testing
+- IDOR testing
+- authorization testing
+- exploit chain reasoning
+- local LLM security testing
