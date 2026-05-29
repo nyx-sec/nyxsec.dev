@@ -9,12 +9,12 @@
     <meta name="author" content="Eli Peter" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
     <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1" />
-    <link rel="canonical" href="https://nyxscan.dev/docs/nyx/advanced-analysis.html" />
-    <link rel="sitemap" type="application/xml" href="https://nyxscan.dev/sitemap.xml" />
-    <link rel="alternate" hreflang="en" href="https://nyxscan.dev/docs/nyx/advanced-analysis.html" />
-    <link rel="alternate" hreflang="x-default" href="https://nyxscan.dev/docs/nyx/advanced-analysis.html" />
-    <link rel="prev" href="how-it-works.html" />
-    <link rel="next" href="detectors.html" />
+    <link rel="canonical" href="https://nyxsec.dev/docs/nyx/advanced-analysis" />
+    <link rel="sitemap" type="application/xml" href="https://nyxsec.dev/sitemap.xml" />
+    <link rel="alternate" hreflang="en" href="https://nyxsec.dev/docs/nyx/advanced-analysis" />
+    <link rel="alternate" hreflang="x-default" href="https://nyxsec.dev/docs/nyx/advanced-analysis" />
+    <link rel="prev" href="how-it-works" />
+    <link rel="next" href="detectors" />
     <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32.png" />
     <link rel="icon" type="image/png" sizes="64x64" href="../../favicon-64.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="../../favicon-180.png" />
@@ -31,8 +31,8 @@
     <meta property="og:locale" content="en_US" />
     <meta property="og:title" content="Advanced Analysis" />
     <meta property="og:description" content="Nyx layers several analysis passes on top of the core SSA taint engine. Most are switchable via config ([analysis.engine] in nyx.conf / nyx.local), a..." />
-    <meta property="og:url" content="https://nyxscan.dev/docs/nyx/advanced-analysis.html" />
-    <meta property="og:image" content="https://nyxscan.dev/og-image.png" />
+    <meta property="og:url" content="https://nyxsec.dev/docs/nyx/advanced-analysis" />
+    <meta property="og:image" content="https://nyxsec.dev/og-image.png" />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -40,7 +40,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Advanced Analysis" />
     <meta name="twitter:description" content="Nyx layers several analysis passes on top of the core SSA taint engine. Most are switchable via config ([analysis.engine] in nyx.conf / nyx.local), a..." />
-    <meta name="twitter:image" content="https://nyxscan.dev/og-image.png" />
+    <meta name="twitter:image" content="https://nyxsec.dev/og-image.png" />
     <meta name="twitter:image:alt" content="Nyx Scanner local-first security documentation" />
     <meta name="theme-color" content="#F9F8F4" />
     <script type="application/ld+json">
@@ -49,7 +49,7 @@
   "@graph": [
     {
       "@type": "Person",
-      "@id": "https://nyxscan.dev/#person",
+      "@id": "https://nyxsec.dev/#person",
       "name": "Eli Peter",
       "url": "https://github.com/elicpeter",
       "sameAs": [
@@ -59,22 +59,23 @@
     },
     {
       "@type": "Organization",
-      "@id": "https://nyxscan.dev/#organization",
+      "@id": "https://nyxsec.dev/#organization",
       "name": "Nyx",
       "alternateName": [
         "Nyx Scanner",
         "Nyx Agent",
-        "nyxscan.dev"
+        "NyxSec",
+        "nyxsec.dev"
       ],
-      "url": "https://nyxscan.dev/",
+      "url": "https://nyxsec.dev/",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://nyxscan.dev/assets/logo.png",
+        "url": "https://nyxsec.dev/assets/logo.png",
         "width": 512,
         "height": 512
       },
       "founder": {
-        "@id": "https://nyxscan.dev/#person"
+        "@id": "https://nyxsec.dev/#person"
       },
       "sameAs": [
         "https://github.com/elicpeter/nyx",
@@ -99,17 +100,17 @@
     },
     {
       "@type": "WebSite",
-      "@id": "https://nyxscan.dev/#website",
-      "url": "https://nyxscan.dev/",
+      "@id": "https://nyxsec.dev/#website",
+      "url": "https://nyxsec.dev/",
       "name": "Nyx",
-      "alternateName": "nyxscan.dev",
+      "alternateName": "nyxsec.dev",
       "description": "Local security tooling for deterministic scanning and live testing.",
       "inLanguage": "en-US",
       "publisher": {
-        "@id": "https://nyxscan.dev/#organization"
+        "@id": "https://nyxsec.dev/#organization"
       },
       "creator": {
-        "@id": "https://nyxscan.dev/#person"
+        "@id": "https://nyxsec.dev/#person"
       }
     },
     {
@@ -117,22 +118,22 @@
         "SoftwareApplication",
         "SoftwareSourceCode"
       ],
-      "@id": "https://nyxscan.dev/scanner.html#software",
+      "@id": "https://nyxsec.dev/scanner#software",
       "name": "Nyx",
       "alternateName": [
         "Nyx Scanner",
         "nyx-scanner"
       ],
-      "url": "https://nyxscan.dev/scanner.html",
+      "url": "https://nyxsec.dev/scanner",
       "applicationCategory": "SecurityApplication",
       "applicationSubCategory": "Static Application Security Testing",
       "operatingSystem": "Cross-platform",
       "programmingLanguage": "Rust",
       "codeRepository": "https://github.com/elicpeter/nyx",
       "downloadUrl": "https://crates.io/crates/nyx-scanner",
-      "installUrl": "https://nyxscan.dev/docs/nyx/installation.html",
-      "softwareHelp": "https://nyxscan.dev/docs/nyx/",
-      "releaseNotes": "https://nyxscan.dev/news/nyx-0-7-0.html",
+      "installUrl": "https://nyxsec.dev/docs/nyx/installation",
+      "softwareHelp": "https://nyxsec.dev/docs/nyx/",
+      "releaseNotes": "https://nyxsec.dev/news/nyx-0-7-0",
       "license": "https://spdx.org/licenses/GPL-3.0-or-later.html",
       "description": "Documentation for Nyx Scanner, the open-source, local-first SAST scanner written in Rust. Quickstart, CLI reference, detectors, configuration, and language coverage.",
       "featureList": [
@@ -142,47 +143,47 @@
         "No account or source upload required"
       ],
       "maintainer": {
-        "@id": "https://nyxscan.dev/#person"
+        "@id": "https://nyxsec.dev/#person"
       },
       "author": {
-        "@id": "https://nyxscan.dev/#person"
+        "@id": "https://nyxsec.dev/#person"
       },
       "publisher": {
-        "@id": "https://nyxscan.dev/#organization"
+        "@id": "https://nyxsec.dev/#organization"
       },
       "isAccessibleForFree": true,
       "sameAs": [
         "https://github.com/elicpeter/nyx",
-        "https://nyxscan.dev/docs/nyx/",
+        "https://nyxsec.dev/docs/nyx/",
         "https://crates.io/crates/nyx-scanner",
         "https://docs.rs/nyx-scanner/latest/nyx_scanner/"
       ]
     },
     {
       "@type": "TechArticle",
-      "@id": "https://nyxscan.dev/docs/nyx/advanced-analysis.html#article",
+      "@id": "https://nyxsec.dev/docs/nyx/advanced-analysis#article",
       "headline": "Advanced Analysis",
       "name": "Advanced Analysis",
-      "url": "https://nyxscan.dev/docs/nyx/advanced-analysis.html",
+      "url": "https://nyxsec.dev/docs/nyx/advanced-analysis",
       "description": "Nyx layers several analysis passes on top of the core SSA taint engine. Most are switchable via config ([analysis.engine] in nyx.conf / nyx.local), a...",
       "inLanguage": "en-US",
       "articleSection": "Under the hood",
       "isPartOf": {
-        "@id": "https://nyxscan.dev/#website"
+        "@id": "https://nyxsec.dev/#website"
       },
       "publisher": {
-        "@id": "https://nyxscan.dev/#organization"
+        "@id": "https://nyxsec.dev/#organization"
       },
       "author": {
-        "@id": "https://nyxscan.dev/#person"
+        "@id": "https://nyxsec.dev/#person"
       },
-      "image": "https://nyxscan.dev/og-image.png",
-      "mainEntityOfPage": "https://nyxscan.dev/docs/nyx/advanced-analysis.html",
+      "image": "https://nyxsec.dev/og-image.png",
+      "mainEntityOfPage": "https://nyxsec.dev/docs/nyx/advanced-analysis",
       "about": {
-        "@id": "https://nyxscan.dev/scanner.html#software"
+        "@id": "https://nyxsec.dev/scanner#software"
       },
       "mainEntity": {
-        "@id": "https://nyxscan.dev/scanner.html#software"
+        "@id": "https://nyxsec.dev/scanner#software"
       }
     },
     {
@@ -192,28 +193,28 @@
           "@type": "ListItem",
           "position": 1,
           "name": "Home",
-          "item": "https://nyxscan.dev/"
+          "item": "https://nyxsec.dev/"
         },
         {
           "@type": "ListItem",
           "position": 2,
           "name": "Docs",
-          "item": "https://nyxscan.dev/docs/"
+          "item": "https://nyxsec.dev/docs/"
         },
         {
           "@type": "ListItem",
           "position": 3,
           "name": "Nyx Scanner docs",
-          "item": "https://nyxscan.dev/docs/nyx/"
+          "item": "https://nyxsec.dev/docs/nyx/"
         },
         {
           "@type": "ListItem",
           "position": 4,
           "name": "Advanced Analysis",
-          "item": "https://nyxscan.dev/docs/nyx/advanced-analysis.html"
+          "item": "https://nyxsec.dev/docs/nyx/advanced-analysis"
         }
       ],
-      "@id": "https://nyxscan.dev/docs/nyx/advanced-analysis.html#breadcrumbs"
+      "@id": "https://nyxsec.dev/docs/nyx/advanced-analysis#breadcrumbs"
     }
   ]
 }
@@ -229,8 +230,8 @@
         </a>
         <span class="header-wordmark">NYX</span>
         <nav class="nav" aria-label="Main navigation">
-          <a href="../../scanner.html">Scanner</a>
-          <a href="../../agent.html">Agent</a>
+          <a href="../../scanner">Scanner</a>
+          <a href="../../agent">Agent</a>
           <a href="../../news/">News</a>
           <a href="../../docs/" aria-current="page">Docs</a>
         </nav>
@@ -239,7 +240,7 @@
 
     <main id="main" class="docs-page">
       <div class="docs-shell">
-        <nav class="docs-sidebar" aria-label="Documentation"><a class="docs-sidebar__brand" href="./">Nyx docs</a><a class="docs-sidebar__home" href="../">All docs</a><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Getting started</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="quickstart.html">Quickstart</a></li><li><a class="docs-sidebar__link" href="installation.html">Installation</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Using nyx</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="cli.html">CLI reference</a></li><li><a class="docs-sidebar__link" href="serve.html">Browser UI</a></li><li><a class="docs-sidebar__link" href="dynamic.html">Dynamic verification</a></li><li><a class="docs-sidebar__link" href="configuration.html">Configuration</a></li><li><a class="docs-sidebar__link" href="output.html">Output formats</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Coverage</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="language-maturity.html">Language maturity</a></li><li><a class="docs-sidebar__link" href="rules.html">Rules</a></li><li><a class="docs-sidebar__link" href="auth.html">Auth analysis</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Under the hood</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="how-it-works.html">How it works</a></li><li><a class="docs-sidebar__link" href="advanced-analysis.html" aria-current="page">Advanced analysis</a></li><li><a class="docs-sidebar__link" href="detectors.html">Detectors</a><ul class="docs-sidebar__sublist"><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/patterns.html">Patterns</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/cfg.html">CFG</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/state.html">State</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/taint.html">Taint</a></li></ul></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Project</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="roadmap.html">Roadmap</a></li><li><a class="docs-sidebar__link" href="changelog.html">Changelog</a></li></ul></div></nav>
+        <nav class="docs-sidebar" aria-label="Documentation"><a class="docs-sidebar__brand" href="./">Nyx docs</a><a class="docs-sidebar__home" href="../">All docs</a><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Getting started</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="quickstart">Quickstart</a></li><li><a class="docs-sidebar__link" href="installation">Installation</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Using nyx</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="cli">CLI reference</a></li><li><a class="docs-sidebar__link" href="serve">Browser UI</a></li><li><a class="docs-sidebar__link" href="dynamic">Dynamic verification</a></li><li><a class="docs-sidebar__link" href="configuration">Configuration</a></li><li><a class="docs-sidebar__link" href="output">Output formats</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Coverage</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="language-maturity">Language maturity</a></li><li><a class="docs-sidebar__link" href="rules">Rules</a></li><li><a class="docs-sidebar__link" href="auth">Auth analysis</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Under the hood</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="how-it-works">How it works</a></li><li><a class="docs-sidebar__link" href="advanced-analysis" aria-current="page">Advanced analysis</a></li><li><a class="docs-sidebar__link" href="detectors">Detectors</a><ul class="docs-sidebar__sublist"><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/patterns">Patterns</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/cfg">CFG</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/state">State</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/taint">Taint</a></li></ul></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Project</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="roadmap">Roadmap</a></li><li><a class="docs-sidebar__link" href="changelog">Changelog</a></li></ul></div></nav>
         <article class="docs-content">
           <div class="docs-search docs-search--content" data-docs-search>
     <label class="visually-hidden" for="docs-search-input">Search docs</label>
@@ -262,10 +263,10 @@ library users with no CLI entry point, a <code>NYX_*</code> environment variable
 five precision-tuning passes (abstract interpretation, context sensitivity,
 symbolic execution, constraint solving, field-sensitive points-to) are
 <strong>on by default</strong> because the benchmark numbers in
-<a href="language-maturity.html">language-maturity.md</a> are measured with them on.
+<a href="language-maturity">language-maturity.md</a> are measured with them on.
 The demand-driven backwards walk and hierarchy fan-out sit alongside but
 are not user-toggleable in the same way.</p>
-<p>See <a href="configuration.html#analysisengine"><code>Configuration</code></a> for the full config
+<p>See <a href="configuration#analysisengine"><code>Configuration</code></a> for the full config
 surface and CLI flag table. This page explains what each pass does, why it
 helps, how to disable it, and what it does not cover.</p>
 <hr>
@@ -648,10 +649,10 @@ pre-commit fast path), the AST-only scan mode (<code>--mode ast</code>) skips CF
 taint, and all four advanced passes entirely and is the right tool.</p>
 
           </div>
-          <nav class="docs-prevnext" aria-label="Page navigation"><a class="docs-prevnext__link docs-prevnext__link--prev" href="how-it-works.html">
+          <nav class="docs-prevnext" aria-label="Page navigation"><a class="docs-prevnext__link docs-prevnext__link--prev" href="how-it-works">
         <span class="docs-prevnext__label">Previous</span>
         <span class="docs-prevnext__title">How it works</span>
-      </a><a class="docs-prevnext__link docs-prevnext__link--next" href="detectors.html">
+      </a><a class="docs-prevnext__link docs-prevnext__link--next" href="detectors">
         <span class="docs-prevnext__label">Next</span>
         <span class="docs-prevnext__title">Detectors</span>
       </a></nav>
@@ -675,7 +676,7 @@ taint, and all four advanced passes entirely and is the right tool.</p>
           </div>
           <div class="site-footer__group" role="group" aria-labelledby="footer-scanner">
             <span id="footer-scanner" class="site-footer__heading">Scanner</span>
-            <a href="../../scanner.html">Overview</a>
+            <a href="../../scanner">Overview</a>
             <a href="../../docs/nyx/">Docs</a>
             <a href="https://github.com/elicpeter/nyx">GitHub</a>
             <a href="https://crates.io/crates/nyx-scanner">crates.io</a>
@@ -683,10 +684,10 @@ taint, and all four advanced passes entirely and is the right tool.</p>
           </div>
           <div class="site-footer__group" role="group" aria-labelledby="footer-agent">
             <span id="footer-agent" class="site-footer__heading">Agent</span>
-            <a href="../../agent.html">Overview</a>
+            <a href="../../agent">Overview</a>
             <a href="../../docs/agent/">Docs</a>
             <a href="https://github.com/nyx-sec/nyx-agent">GitHub</a>
-            <a href="../../agent.html#support">Support</a>
+            <a href="../../agent#support">Support</a>
           </div>
         </nav>
       </div>

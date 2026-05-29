@@ -2,10 +2,10 @@
 Project: Nyx
 Maintainer: Eli Peter
 Source: https://github.com/elicpeter/nyx
-Site: https://nyxscan.dev
+Site: https://nyxsec.dev
 
 /* Site */
 Built as a static landing page.
-Primary docs: https://nyxscan.dev/docs/
+Primary docs: https://nyxsec.dev/docs/
 Rustdocs: https://docs.rs/nyx-scanner/latest/nyx_scanner/
 License: GPL-3.0-or-later for Nyx.

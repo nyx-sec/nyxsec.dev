@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
-// Build nyxscan.dev/docs/ from markdown in docs-src/.
+// Build nyxsec.dev/docs/ from markdown in docs-src/.
 // Source of truth lives in /Users/elipeter/nyx/docs and /Users/elipeter/nyctos/docs
 // (see tools/sync-docs.sh).
 
@@ -13,7 +13,7 @@ const hljs = require("highlight.js");
 const ROOT = path.resolve(__dirname, "..");
 const SRC_ROOT = path.join(ROOT, "docs-src");
 const OUT = path.join(ROOT, "docs");
-const SITE_URL = "https://nyxscan.dev";
+const SITE_URL = "https://nyxsec.dev";
 
 const HUB_DESC =
   "Documentation for Nyx Scanner and Nyx Agent: local source-to-sink scanning, local pentesting, CLI usage, configuration, APIs, and operations.";
@@ -43,15 +43,15 @@ const DOC_SETS = [
       "local-first SAST",
     ],
     github: "https://github.com/elicpeter/nyx",
-    softwareId: `${SITE_URL}/scanner.html#software`,
-    productUrl: `${SITE_URL}/scanner.html`,
+    softwareId: `${SITE_URL}/scanner#software`,
+    productUrl: `${SITE_URL}/scanner`,
     alternateNames: ["Nyx Scanner", "nyx-scanner"],
     applicationSubCategory: "Static Application Security Testing",
     programmingLanguage: "Rust",
     licenseUrl: "https://spdx.org/licenses/GPL-3.0-or-later.html",
     packageUrl: "https://crates.io/crates/nyx-scanner",
     rustdocsUrl: "https://docs.rs/nyx-scanner/latest/nyx_scanner/",
-    releaseNotesUrl: `${SITE_URL}/news/nyx-0-7-0.html`,
+    releaseNotesUrl: `${SITE_URL}/news/nyx-0-7-0`,
     featureList: [
       "Cross-file interprocedural taint analysis",
       "Local browser triage UI",
@@ -86,15 +86,15 @@ const DOC_SETS = [
       "stored evidence",
     ],
     github: "https://github.com/nyx-sec/nyx-agent",
-    softwareId: `${SITE_URL}/agent.html#software`,
-    productUrl: `${SITE_URL}/agent.html`,
+    softwareId: `${SITE_URL}/agent#software`,
+    productUrl: `${SITE_URL}/agent`,
     alternateNames: ["nyx-agent"],
     applicationSubCategory: "Local Application Security Testing",
     programmingLanguage: "Rust, TypeScript",
     licenseUrl: "https://spdx.org/licenses/AGPL-3.0-or-later.html",
     packageUrl: "https://github.com/nyx-sec/nyx-agent",
     rustdocsUrl: null,
-    releaseNotesUrl: `${SITE_URL}/news/nyx-agent.html`,
+    releaseNotesUrl: `${SITE_URL}/news/nyx-agent`,
     featureList: [
       "Local pentest runs for development apps",
       "Route and API exploration",
@@ -152,7 +152,7 @@ renderer.heading = function ({ tokens, depth }) {
 };
 
 renderer.link = function ({ href, title, tokens }) {
-  const h = rewriteMarkdownHref(href || "");
+  const h = publicHref(rewriteMarkdownHref(href || ""));
   const inner = this.parser.parseInline(tokens);
   const titleAttr = title ? ` title="${escapeHtml(title)}"` : "";
   return `<a href="${escapeAttr(h)}"${titleAttr}>${inner}</a>`;
@@ -167,6 +167,22 @@ function rewriteMarkdownHref(href) {
     h = h.replace(/(^|\/)ROADMAP\.html/, "$1roadmap.html");
   }
   return h;
+}
+
+function publicHref(href) {
+  if (!href || /^[a-z]+:/i.test(href) || href.startsWith("#") || href.startsWith("//")) {
+    return href;
+  }
+
+  const match = /^([^?#]*)([?#].*)?$/.exec(href);
+  const base = match ? match[1] : href;
+  const suffix = match && match[2] ? match[2] : "";
+
+  if (base === "index.html") return `./${suffix}`;
+  if (base === "/index.html") return `/${suffix}`;
+  if (base.endsWith("/index.html")) return `${base.slice(0, -"index.html".length)}${suffix}`;
+  if (base.endsWith(".html")) return `${base.slice(0, -".html".length)}${suffix}`;
+  return href;
 }
 
 // ---------------------------------------------------------------------------
@@ -396,7 +412,7 @@ function pageJsonLd({ title, description, canonical, section, parentHref, parent
       "@type": "ListItem",
       position: 4,
       name: parentTitle,
-      item: `${SITE_URL}/docs/${set.slug}/${parentHref}`,
+      item: `${SITE_URL}/docs/${set.slug}/${publicHref(parentHref)}`,
     });
     breadcrumb.itemListElement.push({
       "@type": "ListItem",
@@ -425,7 +441,7 @@ function pageJsonLd({ title, description, canonical, section, parentHref, parent
     "@type": "Organization",
     "@id": `${SITE_URL}/#organization`,
     name: "Nyx",
-    alternateName: ["Nyx Scanner", "Nyx Agent", "nyxscan.dev"],
+    alternateName: ["Nyx Scanner", "Nyx Agent", "NyxSec", "nyxsec.dev"],
     url: `${SITE_URL}/`,
     logo: {
       "@type": "ImageObject",
@@ -459,7 +475,7 @@ function pageJsonLd({ title, description, canonical, section, parentHref, parent
     "@id": `${SITE_URL}/#website`,
     url: `${SITE_URL}/`,
     name: "Nyx",
-    alternateName: "nyxscan.dev",
+    alternateName: "nyxsec.dev",
     description: "Local security tooling for deterministic scanning and live testing.",
     inLanguage: "en-US",
     publisher: { "@id": `${SITE_URL}/#organization` },
@@ -538,7 +554,7 @@ function renderSidebar(set, sections, currentHref) {
   const isCurrent = (h) => norm(h) === norm(currentHref);
   const depth = currentHref.split("/").length - 1;
   const upPrefix = "../".repeat(depth);
-  const rel = (h) => (upPrefix ? upPrefix + h : h);
+  const rel = (h) => publicHref(upPrefix ? upPrefix + h : h);
   const setRootHref = depth === 0 ? "./" : upPrefix;
 
   const parts = ['<nav class="docs-sidebar" aria-label="Documentation">'];
@@ -651,7 +667,7 @@ function canonicalFor(set, outRelKey) {
   if (outRelKey.endsWith("/index.html")) {
     return `${SITE_URL}/docs/${set.slug}/${outRelKey.slice(0, -"index.html".length)}`;
   }
-  return `${SITE_URL}/docs/${set.slug}/${outRelKey}`;
+  return `${SITE_URL}/docs/${set.slug}/${outRelKey.replace(/\.html$/i, "")}`;
 }
 
 function pageTemplate({
@@ -738,8 +754,8 @@ function pageTemplate({
         </a>
         <span class="header-wordmark">NYX</span>
         <nav class="nav" aria-label="Main navigation">
-          <a href="${p}scanner.html">Scanner</a>
-          <a href="${p}agent.html">Agent</a>
+          <a href="${p}scanner">Scanner</a>
+          <a href="${p}agent">Agent</a>
           <a href="${p}news/">News</a>
           <a href="${p}docs/" aria-current="page">Docs</a>
         </nav>
@@ -775,7 +791,7 @@ ${body}
           </div>
           <div class="site-footer__group" role="group" aria-labelledby="footer-scanner">
             <span id="footer-scanner" class="site-footer__heading">Scanner</span>
-            <a href="${p}scanner.html">Overview</a>
+            <a href="${p}scanner">Overview</a>
             <a href="${p}docs/nyx/">Docs</a>
             <a href="https://github.com/elicpeter/nyx">GitHub</a>
             <a href="https://crates.io/crates/nyx-scanner">crates.io</a>
@@ -783,10 +799,10 @@ ${body}
           </div>
           <div class="site-footer__group" role="group" aria-labelledby="footer-agent">
             <span id="footer-agent" class="site-footer__heading">Agent</span>
-            <a href="${p}agent.html">Overview</a>
+            <a href="${p}agent">Overview</a>
             <a href="${p}docs/agent/">Docs</a>
             <a href="https://github.com/nyx-sec/nyx-agent">GitHub</a>
-            <a href="${p}agent.html#support">Support</a>
+            <a href="${p}agent#support">Support</a>
           </div>
         </nav>
       </div>
@@ -806,13 +822,13 @@ function renderPrevNext(flatPages, href) {
   const upPrefix = "../".repeat(depth);
   const rel = (h) => (upPrefix ? upPrefix + h : h);
   const prevHtml = prev
-    ? `<a class="docs-prevnext__link docs-prevnext__link--prev" href="${rel(prev.href)}">
+    ? `<a class="docs-prevnext__link docs-prevnext__link--prev" href="${publicHref(rel(prev.href))}">
         <span class="docs-prevnext__label">Previous</span>
         <span class="docs-prevnext__title">${escapeHtml(prev.title)}</span>
       </a>`
     : '<span class="docs-prevnext__spacer"></span>';
   const nextHtml = next
-    ? `<a class="docs-prevnext__link docs-prevnext__link--next" href="${rel(next.href)}">
+    ? `<a class="docs-prevnext__link docs-prevnext__link--next" href="${publicHref(rel(next.href))}">
         <span class="docs-prevnext__label">Next</span>
         <span class="docs-prevnext__title">${escapeHtml(next.title)}</span>
       </a>`
@@ -901,6 +917,7 @@ function buildDocSet(set) {
 
     let md = fs.readFileSync(srcFile, "utf8");
     md = resolveIncludes(md, srcFile, set);
+    md = md.replace(/nyxscan\.dev/g, "nyxsec.dev");
 
     const title = extractFirstHeading(md) || path.basename(rel, ".md");
     const description = plainSummary(stripFirstHeading(md)) || set.description;
@@ -933,8 +950,8 @@ function buildDocSet(set) {
     const idx = flatPages.findIndex((x) => x.href === outRelKey);
     const upPrefix = "../".repeat(outRelKey.split("/").length - 1);
     const relPath = (h) => (upPrefix ? upPrefix + h : h);
-    const prevHref = idx > 0 ? relPath(flatPages[idx - 1].href) : null;
-    const nextHref = idx >= 0 && idx < flatPages.length - 1 ? relPath(flatPages[idx + 1].href) : null;
+    const prevHref = idx > 0 ? publicHref(relPath(flatPages[idx - 1].href)) : null;
+    const nextHref = idx >= 0 && idx < flatPages.length - 1 ? publicHref(relPath(flatPages[idx + 1].href)) : null;
 
     const html = pageTemplate({
       title,
@@ -964,7 +981,7 @@ function writeSetIndex(set, sections, flatPages) {
   const cards = sections
     .map((sec) => {
       const items = sec.items
-        .map((it) => `<li><a href="${escapeAttr(it.href)}">${escapeHtml(it.title)}</a></li>`)
+        .map((it) => `<li><a href="${escapeAttr(publicHref(it.href))}">${escapeHtml(it.title)}</a></li>`)
         .join("");
       return `<section class="docs-index__group">
         <h2>${escapeHtml(sec.title)}</h2>
@@ -1001,7 +1018,7 @@ function writeSetIndex(set, sections, flatPages) {
     depthPrefix: "../../",
     isIndex: true,
     jsonLd,
-    nextHref: flatPages.length ? flatPages[0].href : null,
+    nextHref: flatPages.length ? publicHref(flatPages[0].href) : null,
     set,
   });
   fs.writeFileSync(path.join(OUT, set.slug, "index.html"), html);
@@ -1014,7 +1031,7 @@ function writeHubIndex(results) {
         .filter((href) => flatPages.some((page) => page.href === href))
         .map((href) => {
           const page = flatPages.find((entry) => entry.href === href);
-          return `<li><a href="${set.slug}/${href}">${escapeHtml(page.title)}</a></li>`;
+          return `<li><a href="${set.slug}/${publicHref(href)}">${escapeHtml(page.title)}</a></li>`;
         })
         .join("");
       return `<section class="docs-index__group docs-index__group--product">
@@ -1089,7 +1106,7 @@ function checkInternalLinks() {
       if (!target.startsWith(OUT)) continue;
       const candidates = target.endsWith(path.sep)
         ? [path.join(target, "index.html")]
-        : [target, path.join(target, "index.html")];
+        : [target, `${target}.html`, path.join(target, "index.html")];
       if (!candidates.some((c) => fs.existsSync(c))) {
         broken++;
         console.warn(`broken link: ${path.relative(ROOT, f)} -> ${h}`);

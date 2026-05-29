@@ -9,12 +9,12 @@
     <meta name="author" content="Eli Peter" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
     <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1" />
-    <link rel="canonical" href="https://nyxscan.dev/docs/agent/architecture.html" />
-    <link rel="sitemap" type="application/xml" href="https://nyxscan.dev/sitemap.xml" />
-    <link rel="alternate" hreflang="en" href="https://nyxscan.dev/docs/agent/architecture.html" />
-    <link rel="alternate" hreflang="x-default" href="https://nyxscan.dev/docs/agent/architecture.html" />
-    <link rel="prev" href="state-dir.html" />
-    <link rel="next" href="runs.html" />
+    <link rel="canonical" href="https://nyxsec.dev/docs/agent/architecture" />
+    <link rel="sitemap" type="application/xml" href="https://nyxsec.dev/sitemap.xml" />
+    <link rel="alternate" hreflang="en" href="https://nyxsec.dev/docs/agent/architecture" />
+    <link rel="alternate" hreflang="x-default" href="https://nyxsec.dev/docs/agent/architecture" />
+    <link rel="prev" href="state-dir" />
+    <link rel="next" href="runs" />
     <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32.png" />
     <link rel="icon" type="image/png" sizes="64x64" href="../../favicon-64.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="../../favicon-180.png" />
@@ -31,8 +31,8 @@
     <meta property="og:locale" content="en_US" />
     <meta property="og:title" content="Architecture" />
     <meta property="og:description" content="Nyx Agent ships as one binary, nyx-agent, that runs as a local daemon. This page maps the workspace crates, the subprocess boundary to the upstream nyx..." />
-    <meta property="og:url" content="https://nyxscan.dev/docs/agent/architecture.html" />
-    <meta property="og:image" content="https://nyxscan.dev/og-image.png" />
+    <meta property="og:url" content="https://nyxsec.dev/docs/agent/architecture" />
+    <meta property="og:image" content="https://nyxsec.dev/og-image.png" />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -40,7 +40,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Architecture" />
     <meta name="twitter:description" content="Nyx Agent ships as one binary, nyx-agent, that runs as a local daemon. This page maps the workspace crates, the subprocess boundary to the upstream nyx..." />
-    <meta name="twitter:image" content="https://nyxscan.dev/og-image.png" />
+    <meta name="twitter:image" content="https://nyxsec.dev/og-image.png" />
     <meta name="twitter:image:alt" content="Nyx Agent local pentesting documentation" />
     <meta name="theme-color" content="#F9F8F4" />
     <script type="application/ld+json">
@@ -49,7 +49,7 @@
   "@graph": [
     {
       "@type": "Person",
-      "@id": "https://nyxscan.dev/#person",
+      "@id": "https://nyxsec.dev/#person",
       "name": "Eli Peter",
       "url": "https://github.com/elicpeter",
       "sameAs": [
@@ -59,22 +59,23 @@
     },
     {
       "@type": "Organization",
-      "@id": "https://nyxscan.dev/#organization",
+      "@id": "https://nyxsec.dev/#organization",
       "name": "Nyx",
       "alternateName": [
         "Nyx Scanner",
         "Nyx Agent",
-        "nyxscan.dev"
+        "NyxSec",
+        "nyxsec.dev"
       ],
-      "url": "https://nyxscan.dev/",
+      "url": "https://nyxsec.dev/",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://nyxscan.dev/assets/logo.png",
+        "url": "https://nyxsec.dev/assets/logo.png",
         "width": 512,
         "height": 512
       },
       "founder": {
-        "@id": "https://nyxscan.dev/#person"
+        "@id": "https://nyxsec.dev/#person"
       },
       "sameAs": [
         "https://github.com/elicpeter/nyx",
@@ -99,17 +100,17 @@
     },
     {
       "@type": "WebSite",
-      "@id": "https://nyxscan.dev/#website",
-      "url": "https://nyxscan.dev/",
+      "@id": "https://nyxsec.dev/#website",
+      "url": "https://nyxsec.dev/",
       "name": "Nyx",
-      "alternateName": "nyxscan.dev",
+      "alternateName": "nyxsec.dev",
       "description": "Local security tooling for deterministic scanning and live testing.",
       "inLanguage": "en-US",
       "publisher": {
-        "@id": "https://nyxscan.dev/#organization"
+        "@id": "https://nyxsec.dev/#organization"
       },
       "creator": {
-        "@id": "https://nyxscan.dev/#person"
+        "@id": "https://nyxsec.dev/#person"
       }
     },
     {
@@ -117,21 +118,21 @@
         "SoftwareApplication",
         "SoftwareSourceCode"
       ],
-      "@id": "https://nyxscan.dev/agent.html#software",
+      "@id": "https://nyxsec.dev/agent#software",
       "name": "Nyx Agent",
       "alternateName": [
         "nyx-agent"
       ],
-      "url": "https://nyxscan.dev/agent.html",
+      "url": "https://nyxsec.dev/agent",
       "applicationCategory": "SecurityApplication",
       "applicationSubCategory": "Local Application Security Testing",
       "operatingSystem": "Cross-platform",
       "programmingLanguage": "Rust, TypeScript",
       "codeRepository": "https://github.com/nyx-sec/nyx-agent",
       "downloadUrl": "https://github.com/nyx-sec/nyx-agent",
-      "installUrl": "https://nyxscan.dev/docs/agent/install.html",
-      "softwareHelp": "https://nyxscan.dev/docs/agent/",
-      "releaseNotes": "https://nyxscan.dev/news/nyx-agent.html",
+      "installUrl": "https://nyxsec.dev/docs/agent/install",
+      "softwareHelp": "https://nyxsec.dev/docs/agent/",
+      "releaseNotes": "https://nyxsec.dev/news/nyx-agent",
       "license": "https://spdx.org/licenses/AGPL-3.0-or-later.html",
       "description": "Documentation for Nyx Agent, the local pentesting product for development apps. Install, quickstart, CLI, configuration, API, triggers, runs, and architecture.",
       "featureList": [
@@ -141,46 +142,46 @@
         "Project-level run history and triggers"
       ],
       "maintainer": {
-        "@id": "https://nyxscan.dev/#person"
+        "@id": "https://nyxsec.dev/#person"
       },
       "author": {
-        "@id": "https://nyxscan.dev/#person"
+        "@id": "https://nyxsec.dev/#person"
       },
       "publisher": {
-        "@id": "https://nyxscan.dev/#organization"
+        "@id": "https://nyxsec.dev/#organization"
       },
       "isAccessibleForFree": true,
       "sameAs": [
         "https://github.com/nyx-sec/nyx-agent",
-        "https://nyxscan.dev/docs/agent/",
+        "https://nyxsec.dev/docs/agent/",
         "https://github.com/nyx-sec/nyx-agent"
       ]
     },
     {
       "@type": "TechArticle",
-      "@id": "https://nyxscan.dev/docs/agent/architecture.html#article",
+      "@id": "https://nyxsec.dev/docs/agent/architecture#article",
       "headline": "Architecture",
       "name": "Architecture",
-      "url": "https://nyxscan.dev/docs/agent/architecture.html",
+      "url": "https://nyxsec.dev/docs/agent/architecture",
       "description": "Nyx Agent ships as one binary, nyx-agent, that runs as a local daemon. This page maps the workspace crates, the subprocess boundary to the upstream nyx...",
       "inLanguage": "en-US",
       "articleSection": "Architecture",
       "isPartOf": {
-        "@id": "https://nyxscan.dev/#website"
+        "@id": "https://nyxsec.dev/#website"
       },
       "publisher": {
-        "@id": "https://nyxscan.dev/#organization"
+        "@id": "https://nyxsec.dev/#organization"
       },
       "author": {
-        "@id": "https://nyxscan.dev/#person"
+        "@id": "https://nyxsec.dev/#person"
       },
-      "image": "https://nyxscan.dev/og-image.png",
-      "mainEntityOfPage": "https://nyxscan.dev/docs/agent/architecture.html",
+      "image": "https://nyxsec.dev/og-image.png",
+      "mainEntityOfPage": "https://nyxsec.dev/docs/agent/architecture",
       "about": {
-        "@id": "https://nyxscan.dev/agent.html#software"
+        "@id": "https://nyxsec.dev/agent#software"
       },
       "mainEntity": {
-        "@id": "https://nyxscan.dev/agent.html#software"
+        "@id": "https://nyxsec.dev/agent#software"
       }
     },
     {
@@ -190,28 +191,28 @@
           "@type": "ListItem",
           "position": 1,
           "name": "Home",
-          "item": "https://nyxscan.dev/"
+          "item": "https://nyxsec.dev/"
         },
         {
           "@type": "ListItem",
           "position": 2,
           "name": "Docs",
-          "item": "https://nyxscan.dev/docs/"
+          "item": "https://nyxsec.dev/docs/"
         },
         {
           "@type": "ListItem",
           "position": 3,
           "name": "Nyx Agent docs",
-          "item": "https://nyxscan.dev/docs/agent/"
+          "item": "https://nyxsec.dev/docs/agent/"
         },
         {
           "@type": "ListItem",
           "position": 4,
           "name": "Architecture",
-          "item": "https://nyxscan.dev/docs/agent/architecture.html"
+          "item": "https://nyxsec.dev/docs/agent/architecture"
         }
       ],
-      "@id": "https://nyxscan.dev/docs/agent/architecture.html#breadcrumbs"
+      "@id": "https://nyxsec.dev/docs/agent/architecture#breadcrumbs"
     }
   ]
 }
@@ -227,8 +228,8 @@
         </a>
         <span class="header-wordmark">NYX</span>
         <nav class="nav" aria-label="Main navigation">
-          <a href="../../scanner.html">Scanner</a>
-          <a href="../../agent.html">Agent</a>
+          <a href="../../scanner">Scanner</a>
+          <a href="../../agent">Agent</a>
           <a href="../../news/">News</a>
           <a href="../../docs/" aria-current="page">Docs</a>
         </nav>
@@ -237,7 +238,7 @@
 
     <main id="main" class="docs-page">
       <div class="docs-shell">
-        <nav class="docs-sidebar" aria-label="Documentation"><a class="docs-sidebar__brand" href="./">Agent docs</a><a class="docs-sidebar__home" href="../">All docs</a><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Get started</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="install.html">Install</a></li><li><a class="docs-sidebar__link" href="quickstart.html">Quickstart</a></li><li><a class="docs-sidebar__link" href="cli.html">CLI</a></li><li><a class="docs-sidebar__link" href="config.html">Config</a></li><li><a class="docs-sidebar__link" href="state-dir.html">State Directory</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Architecture</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="architecture.html" aria-current="page">Architecture</a></li><li><a class="docs-sidebar__link" href="runs.html">Runs</a></li><li><a class="docs-sidebar__link" href="attack-graph.html">Attack Graph</a></li><li><a class="docs-sidebar__link" href="business-logic-templates.html">Business Logic Templates</a></li><li><a class="docs-sidebar__link" href="events.html">Events</a></li><li><a class="docs-sidebar__link" href="ai-runtime.html">AI Runtime</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Projects</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="cli.html#project">CLI: Project</a></li><li><a class="docs-sidebar__link" href="quickstart.html#create-a-project">Quickstart: Create a Project</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">HTTP API</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="api.html">API</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Triggers</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="triggers/index.html">Overview</a></li><li><a class="docs-sidebar__link" href="triggers/cron.html">Cron</a></li><li><a class="docs-sidebar__link" href="triggers/webhook.html">Webhook</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">CI integration</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="ci/github-actions.html">GitHub Actions</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Contributor docs</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="dev/sqlx.html">SQLx</a></li><li><a class="docs-sidebar__link" href="dev/frontend.html">Frontend</a></li></ul></div></nav>
+        <nav class="docs-sidebar" aria-label="Documentation"><a class="docs-sidebar__brand" href="./">Agent docs</a><a class="docs-sidebar__home" href="../">All docs</a><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Get started</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="install">Install</a></li><li><a class="docs-sidebar__link" href="quickstart">Quickstart</a></li><li><a class="docs-sidebar__link" href="cli">CLI</a></li><li><a class="docs-sidebar__link" href="config">Config</a></li><li><a class="docs-sidebar__link" href="state-dir">State Directory</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Architecture</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="architecture" aria-current="page">Architecture</a></li><li><a class="docs-sidebar__link" href="runs">Runs</a></li><li><a class="docs-sidebar__link" href="attack-graph">Attack Graph</a></li><li><a class="docs-sidebar__link" href="business-logic-templates">Business Logic Templates</a></li><li><a class="docs-sidebar__link" href="events">Events</a></li><li><a class="docs-sidebar__link" href="ai-runtime">AI Runtime</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Projects</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="cli#project">CLI: Project</a></li><li><a class="docs-sidebar__link" href="quickstart#create-a-project">Quickstart: Create a Project</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">HTTP API</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="api">API</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Triggers</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="triggers/">Overview</a></li><li><a class="docs-sidebar__link" href="triggers/cron">Cron</a></li><li><a class="docs-sidebar__link" href="triggers/webhook">Webhook</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">CI integration</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="ci/github-actions">GitHub Actions</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Contributor docs</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="dev/sqlx">SQLx</a></li><li><a class="docs-sidebar__link" href="dev/frontend">Frontend</a></li></ul></div></nav>
         <article class="docs-content">
           <div class="docs-search docs-search--content" data-docs-search>
     <label class="visually-hidden" for="docs-search-input">Search docs</label>
@@ -258,8 +259,8 @@ This page maps the workspace crates, the subprocess boundary to the
 upstream <code>nyx</code> scanner, the in-process event bus, and the layout of
 the tokio runtime that drives the whole thing.</p>
 <p>If you only want operator details (paths, ports, flags) read
-<a href="cli.html"><code>cli.md</code></a>, <a href="config.html"><code>config.md</code></a>, or
-<a href="state-dir.html"><code>state-dir.md</code></a> instead.</p>
+<a href="cli"><code>cli.md</code></a>, <a href="config"><code>config.md</code></a>, or
+<a href="state-dir"><code>state-dir.md</code></a> instead.</p>
 <h2 id="crate-map"><a class="docs-anchor" href="#crate-map" aria-label="Link to crate-map" data-pagefind-ignore>#</a>Crate map</h2>
 <p>The workspace lives under <code>crates/</code> and breaks into eight crates.
 Dependencies fan in toward <code>nyx-agent-types</code>; nothing depends on
@@ -334,7 +335,7 @@ and drives four concurrent surfaces:</p>
 <code>tokio::net::TcpListener::bind</code>. The router is built in
 <code>nyx_agent_api::build_router</code> and falls back to the embedded SPA
 for unknown paths. Default bind is <code>127.0.0.1:8765</code> (see
-<a href="config.html"><code>config.md</code></a>).</li>
+<a href="config"><code>config.md</code></a>).</li>
 <li><strong>Scan worker.</strong> A <code>tokio::sync::mpsc</code> channel feeds an inline
 task in <code>serve</code> (<code>crates/nyx-agent/src/main.rs:937</code>). API
 handlers and the cron scheduler push <code>ScanRequest</code>s onto the
@@ -456,16 +457,16 @@ the pool is shared via <code>Arc</code> inside <code>Store</code>.</p>
 <code>trace</code>, <code>budget</code>, <code>feedback</code>, <code>repro</code>, <code>project</code>, <code>schedule</code>,
 <code>webhook</code>, <code>product</code>, and <code>attack_graph</code>. SQLx migrations live
 alongside; the prepared-query cache regen flow is documented in
-<a href="dev/sqlx.html"><code>dev/sqlx.md</code></a>.</p>
+<a href="dev/sqlx"><code>dev/sqlx.md</code></a>.</p>
 <p>The attack graph is a run-scoped index over existing artifacts, not
 a replacement for them. Route models, Nyx signals, pentest
 candidates, verification attempts, verified vulnerabilities, and
 chains dual-write graph nodes / edges so callers can ask &quot;what
 evidence led to this vuln?&quot; and &quot;what vulns touch this route,
-object, or role?&quot; See <a href="attack-graph.html"><code>attack-graph.md</code></a>.</p>
+object, or role?&quot; See <a href="attack-graph"><code>attack-graph.md</code></a>.</p>
 <p>The state directory layout (where the SQLite file, logs, repo
 workspaces, and repro bundles land) is documented in
-<a href="state-dir.html"><code>state-dir.md</code></a>.</p>
+<a href="state-dir"><code>state-dir.md</code></a>.</p>
 <h2 id="ai-runtime"><a class="docs-anchor" href="#ai-runtime" aria-label="Link to ai-runtime" data-pagefind-ignore>#</a>AI runtime</h2>
 <p>The <code>AiRuntime</code> trait in
 <code>crates/nyx-agent-ai/src/runtime.rs:18</code> is vendor-neutral. Shipped
@@ -497,30 +498,30 @@ needs. The shim lives at
 in release builds and bakes the resulting <code>dist/</code> into the binary
 via <code>rust-embed</code>. Debug builds skip the build step and proxy
 through <code>frontend/</code>&#39;s dev server. The two-mode behavior is
-documented in <a href="dev/frontend.html"><code>dev/frontend.md</code></a>.</p>
+documented in <a href="dev/frontend"><code>dev/frontend.md</code></a>.</p>
 <p><code>/setup.json</code> is served separately from the embedded bundle: the
 SPA fetches it on boot to discover the bearer token (when auth is
 enforced) and the daemon&#39;s setup state. See
 <code>crates/nyx-agent-ui/src/lib.rs</code>.</p>
 <h2 id="related-pages"><a class="docs-anchor" href="#related-pages" aria-label="Link to related-pages" data-pagefind-ignore>#</a>Related pages</h2>
 <ul>
-<li><a href="install.html"><code>install.md</code></a>: toolchain, build flags, and the
+<li><a href="install"><code>install.md</code></a>: toolchain, build flags, and the
 <code>nyx</code> binary dependency.</li>
-<li><a href="cli.html"><code>cli.md</code></a>: every <code>nyx-agent</code> subcommand and the
+<li><a href="cli"><code>cli.md</code></a>: every <code>nyx-agent</code> subcommand and the
 daemon entry point.</li>
-<li><a href="config.html"><code>config.md</code></a>: every TOML section, including the
+<li><a href="config"><code>config.md</code></a>: every TOML section, including the
 <code>[performance]</code>, <code>[sandbox]</code>, and <code>[ai]</code> knobs referenced above.</li>
-<li><a href="state-dir.html"><code>state-dir.md</code></a>: on-disk paths the daemon
+<li><a href="state-dir"><code>state-dir.md</code></a>: on-disk paths the daemon
 reads and writes.</li>
-<li><a href="api.html"><code>api.md</code></a>: the HTTP and WebSocket surface that the
+<li><a href="api"><code>api.md</code></a>: the HTTP and WebSocket surface that the
 router and event bus serve.</li>
 </ul>
 
           </div>
-          <nav class="docs-prevnext" aria-label="Page navigation"><a class="docs-prevnext__link docs-prevnext__link--prev" href="state-dir.html">
+          <nav class="docs-prevnext" aria-label="Page navigation"><a class="docs-prevnext__link docs-prevnext__link--prev" href="state-dir">
         <span class="docs-prevnext__label">Previous</span>
         <span class="docs-prevnext__title">State Directory</span>
-      </a><a class="docs-prevnext__link docs-prevnext__link--next" href="runs.html">
+      </a><a class="docs-prevnext__link docs-prevnext__link--next" href="runs">
         <span class="docs-prevnext__label">Next</span>
         <span class="docs-prevnext__title">Runs</span>
       </a></nav>
@@ -544,7 +545,7 @@ router and event bus serve.</li>
           </div>
           <div class="site-footer__group" role="group" aria-labelledby="footer-scanner">
             <span id="footer-scanner" class="site-footer__heading">Scanner</span>
-            <a href="../../scanner.html">Overview</a>
+            <a href="../../scanner">Overview</a>
             <a href="../../docs/nyx/">Docs</a>
             <a href="https://github.com/elicpeter/nyx">GitHub</a>
             <a href="https://crates.io/crates/nyx-scanner">crates.io</a>
@@ -552,10 +553,10 @@ router and event bus serve.</li>
           </div>
           <div class="site-footer__group" role="group" aria-labelledby="footer-agent">
             <span id="footer-agent" class="site-footer__heading">Agent</span>
-            <a href="../../agent.html">Overview</a>
+            <a href="../../agent">Overview</a>
             <a href="../../docs/agent/">Docs</a>
             <a href="https://github.com/nyx-sec/nyx-agent">GitHub</a>
-            <a href="../../agent.html#support">Support</a>
+            <a href="../../agent#support">Support</a>
           </div>
         </nav>
       </div>

@@ -9,12 +9,12 @@
     <meta name="author" content="Eli Peter" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
     <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1" />
-    <link rel="canonical" href="https://nyxscan.dev/docs/nyx/rules.html" />
-    <link rel="sitemap" type="application/xml" href="https://nyxscan.dev/sitemap.xml" />
-    <link rel="alternate" hreflang="en" href="https://nyxscan.dev/docs/nyx/rules.html" />
-    <link rel="alternate" hreflang="x-default" href="https://nyxscan.dev/docs/nyx/rules.html" />
-    <link rel="prev" href="language-maturity.html" />
-    <link rel="next" href="auth.html" />
+    <link rel="canonical" href="https://nyxsec.dev/docs/nyx/rules" />
+    <link rel="sitemap" type="application/xml" href="https://nyxsec.dev/sitemap.xml" />
+    <link rel="alternate" hreflang="en" href="https://nyxsec.dev/docs/nyx/rules" />
+    <link rel="alternate" hreflang="x-default" href="https://nyxsec.dev/docs/nyx/rules" />
+    <link rel="prev" href="language-maturity" />
+    <link rel="next" href="auth" />
     <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32.png" />
     <link rel="icon" type="image/png" sizes="64x64" href="../../favicon-64.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="../../favicon-180.png" />
@@ -31,8 +31,8 @@
     <meta property="og:locale" content="en_US" />
     <meta property="og:title" content="Rule reference" />
     <meta property="og:description" content="Every finding Nyx emits has a rule ID. This page enumerates the IDs that ship with the scanner, grouped by family." />
-    <meta property="og:url" content="https://nyxscan.dev/docs/nyx/rules.html" />
-    <meta property="og:image" content="https://nyxscan.dev/og-image.png" />
+    <meta property="og:url" content="https://nyxsec.dev/docs/nyx/rules" />
+    <meta property="og:image" content="https://nyxsec.dev/og-image.png" />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -40,7 +40,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Rule reference" />
     <meta name="twitter:description" content="Every finding Nyx emits has a rule ID. This page enumerates the IDs that ship with the scanner, grouped by family." />
-    <meta name="twitter:image" content="https://nyxscan.dev/og-image.png" />
+    <meta name="twitter:image" content="https://nyxsec.dev/og-image.png" />
     <meta name="twitter:image:alt" content="Nyx Scanner local-first security documentation" />
     <meta name="theme-color" content="#F9F8F4" />
     <script type="application/ld+json">
@@ -49,7 +49,7 @@
   "@graph": [
     {
       "@type": "Person",
-      "@id": "https://nyxscan.dev/#person",
+      "@id": "https://nyxsec.dev/#person",
       "name": "Eli Peter",
       "url": "https://github.com/elicpeter",
       "sameAs": [
@@ -59,22 +59,23 @@
     },
     {
       "@type": "Organization",
-      "@id": "https://nyxscan.dev/#organization",
+      "@id": "https://nyxsec.dev/#organization",
       "name": "Nyx",
       "alternateName": [
         "Nyx Scanner",
         "Nyx Agent",
-        "nyxscan.dev"
+        "NyxSec",
+        "nyxsec.dev"
       ],
-      "url": "https://nyxscan.dev/",
+      "url": "https://nyxsec.dev/",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://nyxscan.dev/assets/logo.png",
+        "url": "https://nyxsec.dev/assets/logo.png",
         "width": 512,
         "height": 512
       },
       "founder": {
-        "@id": "https://nyxscan.dev/#person"
+        "@id": "https://nyxsec.dev/#person"
       },
       "sameAs": [
         "https://github.com/elicpeter/nyx",
@@ -99,17 +100,17 @@
     },
     {
       "@type": "WebSite",
-      "@id": "https://nyxscan.dev/#website",
-      "url": "https://nyxscan.dev/",
+      "@id": "https://nyxsec.dev/#website",
+      "url": "https://nyxsec.dev/",
       "name": "Nyx",
-      "alternateName": "nyxscan.dev",
+      "alternateName": "nyxsec.dev",
       "description": "Local security tooling for deterministic scanning and live testing.",
       "inLanguage": "en-US",
       "publisher": {
-        "@id": "https://nyxscan.dev/#organization"
+        "@id": "https://nyxsec.dev/#organization"
       },
       "creator": {
-        "@id": "https://nyxscan.dev/#person"
+        "@id": "https://nyxsec.dev/#person"
       }
     },
     {
@@ -117,22 +118,22 @@
         "SoftwareApplication",
         "SoftwareSourceCode"
       ],
-      "@id": "https://nyxscan.dev/scanner.html#software",
+      "@id": "https://nyxsec.dev/scanner#software",
       "name": "Nyx",
       "alternateName": [
         "Nyx Scanner",
         "nyx-scanner"
       ],
-      "url": "https://nyxscan.dev/scanner.html",
+      "url": "https://nyxsec.dev/scanner",
       "applicationCategory": "SecurityApplication",
       "applicationSubCategory": "Static Application Security Testing",
       "operatingSystem": "Cross-platform",
       "programmingLanguage": "Rust",
       "codeRepository": "https://github.com/elicpeter/nyx",
       "downloadUrl": "https://crates.io/crates/nyx-scanner",
-      "installUrl": "https://nyxscan.dev/docs/nyx/installation.html",
-      "softwareHelp": "https://nyxscan.dev/docs/nyx/",
-      "releaseNotes": "https://nyxscan.dev/news/nyx-0-7-0.html",
+      "installUrl": "https://nyxsec.dev/docs/nyx/installation",
+      "softwareHelp": "https://nyxsec.dev/docs/nyx/",
+      "releaseNotes": "https://nyxsec.dev/news/nyx-0-7-0",
       "license": "https://spdx.org/licenses/GPL-3.0-or-later.html",
       "description": "Documentation for Nyx Scanner, the open-source, local-first SAST scanner written in Rust. Quickstart, CLI reference, detectors, configuration, and language coverage.",
       "featureList": [
@@ -142,47 +143,47 @@
         "No account or source upload required"
       ],
       "maintainer": {
-        "@id": "https://nyxscan.dev/#person"
+        "@id": "https://nyxsec.dev/#person"
       },
       "author": {
-        "@id": "https://nyxscan.dev/#person"
+        "@id": "https://nyxsec.dev/#person"
       },
       "publisher": {
-        "@id": "https://nyxscan.dev/#organization"
+        "@id": "https://nyxsec.dev/#organization"
       },
       "isAccessibleForFree": true,
       "sameAs": [
         "https://github.com/elicpeter/nyx",
-        "https://nyxscan.dev/docs/nyx/",
+        "https://nyxsec.dev/docs/nyx/",
         "https://crates.io/crates/nyx-scanner",
         "https://docs.rs/nyx-scanner/latest/nyx_scanner/"
       ]
     },
     {
       "@type": "TechArticle",
-      "@id": "https://nyxscan.dev/docs/nyx/rules.html#article",
+      "@id": "https://nyxsec.dev/docs/nyx/rules#article",
       "headline": "Rule reference",
       "name": "Rule reference",
-      "url": "https://nyxscan.dev/docs/nyx/rules.html",
+      "url": "https://nyxsec.dev/docs/nyx/rules",
       "description": "Every finding Nyx emits has a rule ID. This page enumerates the IDs that ship with the scanner, grouped by family.",
       "inLanguage": "en-US",
       "articleSection": "Coverage",
       "isPartOf": {
-        "@id": "https://nyxscan.dev/#website"
+        "@id": "https://nyxsec.dev/#website"
       },
       "publisher": {
-        "@id": "https://nyxscan.dev/#organization"
+        "@id": "https://nyxsec.dev/#organization"
       },
       "author": {
-        "@id": "https://nyxscan.dev/#person"
+        "@id": "https://nyxsec.dev/#person"
       },
-      "image": "https://nyxscan.dev/og-image.png",
-      "mainEntityOfPage": "https://nyxscan.dev/docs/nyx/rules.html",
+      "image": "https://nyxsec.dev/og-image.png",
+      "mainEntityOfPage": "https://nyxsec.dev/docs/nyx/rules",
       "about": {
-        "@id": "https://nyxscan.dev/scanner.html#software"
+        "@id": "https://nyxsec.dev/scanner#software"
       },
       "mainEntity": {
-        "@id": "https://nyxscan.dev/scanner.html#software"
+        "@id": "https://nyxsec.dev/scanner#software"
       }
     },
     {
@@ -192,28 +193,28 @@
           "@type": "ListItem",
           "position": 1,
           "name": "Home",
-          "item": "https://nyxscan.dev/"
+          "item": "https://nyxsec.dev/"
         },
         {
           "@type": "ListItem",
           "position": 2,
           "name": "Docs",
-          "item": "https://nyxscan.dev/docs/"
+          "item": "https://nyxsec.dev/docs/"
         },
         {
           "@type": "ListItem",
           "position": 3,
           "name": "Nyx Scanner docs",
-          "item": "https://nyxscan.dev/docs/nyx/"
+          "item": "https://nyxsec.dev/docs/nyx/"
         },
         {
           "@type": "ListItem",
           "position": 4,
           "name": "Rule reference",
-          "item": "https://nyxscan.dev/docs/nyx/rules.html"
+          "item": "https://nyxsec.dev/docs/nyx/rules"
         }
       ],
-      "@id": "https://nyxscan.dev/docs/nyx/rules.html#breadcrumbs"
+      "@id": "https://nyxsec.dev/docs/nyx/rules#breadcrumbs"
     }
   ]
 }
@@ -229,8 +230,8 @@
         </a>
         <span class="header-wordmark">NYX</span>
         <nav class="nav" aria-label="Main navigation">
-          <a href="../../scanner.html">Scanner</a>
-          <a href="../../agent.html">Agent</a>
+          <a href="../../scanner">Scanner</a>
+          <a href="../../agent">Agent</a>
           <a href="../../news/">News</a>
           <a href="../../docs/" aria-current="page">Docs</a>
         </nav>
@@ -239,7 +240,7 @@
 
     <main id="main" class="docs-page">
       <div class="docs-shell">
-        <nav class="docs-sidebar" aria-label="Documentation"><a class="docs-sidebar__brand" href="./">Nyx docs</a><a class="docs-sidebar__home" href="../">All docs</a><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Getting started</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="quickstart.html">Quickstart</a></li><li><a class="docs-sidebar__link" href="installation.html">Installation</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Using nyx</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="cli.html">CLI reference</a></li><li><a class="docs-sidebar__link" href="serve.html">Browser UI</a></li><li><a class="docs-sidebar__link" href="dynamic.html">Dynamic verification</a></li><li><a class="docs-sidebar__link" href="configuration.html">Configuration</a></li><li><a class="docs-sidebar__link" href="output.html">Output formats</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Coverage</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="language-maturity.html">Language maturity</a></li><li><a class="docs-sidebar__link" href="rules.html" aria-current="page">Rules</a></li><li><a class="docs-sidebar__link" href="auth.html">Auth analysis</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Under the hood</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="how-it-works.html">How it works</a></li><li><a class="docs-sidebar__link" href="advanced-analysis.html">Advanced analysis</a></li><li><a class="docs-sidebar__link" href="detectors.html">Detectors</a><ul class="docs-sidebar__sublist"><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/patterns.html">Patterns</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/cfg.html">CFG</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/state.html">State</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/taint.html">Taint</a></li></ul></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Project</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="roadmap.html">Roadmap</a></li><li><a class="docs-sidebar__link" href="changelog.html">Changelog</a></li></ul></div></nav>
+        <nav class="docs-sidebar" aria-label="Documentation"><a class="docs-sidebar__brand" href="./">Nyx docs</a><a class="docs-sidebar__home" href="../">All docs</a><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Getting started</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="quickstart">Quickstart</a></li><li><a class="docs-sidebar__link" href="installation">Installation</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Using nyx</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="cli">CLI reference</a></li><li><a class="docs-sidebar__link" href="serve">Browser UI</a></li><li><a class="docs-sidebar__link" href="dynamic">Dynamic verification</a></li><li><a class="docs-sidebar__link" href="configuration">Configuration</a></li><li><a class="docs-sidebar__link" href="output">Output formats</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Coverage</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="language-maturity">Language maturity</a></li><li><a class="docs-sidebar__link" href="rules" aria-current="page">Rules</a></li><li><a class="docs-sidebar__link" href="auth">Auth analysis</a></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Under the hood</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="how-it-works">How it works</a></li><li><a class="docs-sidebar__link" href="advanced-analysis">Advanced analysis</a></li><li><a class="docs-sidebar__link" href="detectors">Detectors</a><ul class="docs-sidebar__sublist"><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/patterns">Patterns</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/cfg">CFG</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/state">State</a></li><li><a class="docs-sidebar__link docs-sidebar__link--sub" href="detectors/taint">Taint</a></li></ul></li></ul></div><div class="docs-sidebar__group"><h2 class="docs-sidebar__heading">Project</h2><ul class="docs-sidebar__list"><li><a class="docs-sidebar__link" href="roadmap">Roadmap</a></li><li><a class="docs-sidebar__link" href="changelog">Changelog</a></li></ul></div></nav>
         <article class="docs-content">
           <div class="docs-search docs-search--content" data-docs-search>
     <label class="visually-hidden" for="docs-search-input">Search docs</label>
@@ -259,7 +260,7 @@
 <blockquote>
 <p>This page is written by hand and drifts against the code. Authoritative sources: <a href="https://github.com/elicpeter/nyx/tree/master/src/patterns"><code>src/patterns/&lt;lang&gt;.rs</code></a> for AST patterns, <a href="https://github.com/elicpeter/nyx/tree/master/src/labels"><code>src/labels/&lt;lang&gt;.rs</code></a> for taint matchers, and <a href="https://github.com/elicpeter/nyx/blob/master/src/auth_analysis/config.rs"><code>src/auth_analysis/config.rs</code></a> for auth rules. If a rule fires that isn&#39;t listed here, the source file is right and this page is wrong.</p>
 </blockquote>
-<p>If you&#39;d rather browse rules interactively, <a href="serve.html"><code>nyx serve</code></a> ships a Rules page that lists every loaded matcher with its language, kind, and capability:</p>
+<p>If you&#39;d rather browse rules interactively, <a href="serve"><code>nyx serve</code></a> ships a Rules page that lists every loaded matcher with its language, kind, and capability:</p>
 <p align="center"><img src="assets/screenshots/docs/serve-rules.png" alt="Nyx Rules page: filterable list of 218 rules with language, kind (SOURCE/SANITIZER/SINK), capability, and finding count columns" width="900"/></p><h2 id="id-format"><a class="docs-anchor" href="#id-format" aria-label="Link to id-format" data-pagefind-ignore>#</a>ID format</h2>
 <table>
 <thead>
@@ -358,7 +359,7 @@
 <td>High</td>
 </tr>
 </tbody></table>
-<p>Each cap-class entry is registered in <code>CAP_RULE_REGISTRY</code> (<code>src/labels/mod.rs</code>). Browse the registry from the CLI with <code>nyx rules list --class-only</code>, or via the dashboard&#39;s Rules page. The matcher sets (sources, sanitizers, sinks, gated sinks) live per-language in <code>src/labels/&lt;lang&gt;.rs</code>. <a href="language-maturity.html">Language maturity</a> gives per-language counts and what&#39;s covered.</p>
+<p>Each cap-class entry is registered in <code>CAP_RULE_REGISTRY</code> (<code>src/labels/mod.rs</code>). Browse the registry from the CLI with <code>nyx rules list --class-only</code>, or via the dashboard&#39;s Rules page. The matcher sets (sources, sanitizers, sinks, gated sinks) live per-language in <code>src/labels/&lt;lang&gt;.rs</code>. <a href="language-maturity">Language maturity</a> gives per-language counts and what&#39;s covered.</p>
 <h3 id="cfg-structural"><a class="docs-anchor" href="#cfg-structural" aria-label="Link to cfg-structural" data-pagefind-ignore>#</a>CFG structural</h3>
 <table>
 <thead>
@@ -446,7 +447,7 @@
 <td>High (gated by <code>scanner.enable_auth_as_taint</code>)</td>
 </tr>
 </tbody></table>
-<p>See <a href="auth.html">auth.md</a> for scope, the five sink-classes, and tuning.</p>
+<p>See <a href="auth">auth.md</a> for scope, the five sink-classes, and tuning.</p>
 <h2 id="ast-patterns-by-language"><a class="docs-anchor" href="#ast-patterns-by-language" aria-label="Link to ast-patterns-by-language" data-pagefind-ignore>#</a>AST patterns by language</h2>
 <p>Each language ships a tree-sitter pattern registry. Structural match on the pattern, no dataflow. Some patterns also have a Tier B heuristic guard (e.g. SQL execute must receive a concatenation, not a literal) noted in the registry.</p>
 <p>The tables below are generated from <code>src/patterns/&lt;lang&gt;.rs</code> by <a href="https://github.com/elicpeter/nyx/tree/master/tools/docgen"><code>tools/docgen</code></a>. Run <code>cargo run --features docgen --bin nyx-docgen</code> after changing the registry to refresh them.</p>
@@ -1341,10 +1342,10 @@
 <p>Source for both the enum and the <code>to_cap</code> mapping: <a href="https://github.com/elicpeter/nyx/blob/master/src/labels/mod.rs"><code>src/labels/mod.rs</code></a> (<code>Cap</code> and <code>CAP_RULE_REGISTRY</code>) and <a href="https://github.com/elicpeter/nyx/blob/master/src/utils/config.rs"><code>src/utils/config.rs</code></a> (<code>CapName</code>).</p>
 
           </div>
-          <nav class="docs-prevnext" aria-label="Page navigation"><a class="docs-prevnext__link docs-prevnext__link--prev" href="language-maturity.html">
+          <nav class="docs-prevnext" aria-label="Page navigation"><a class="docs-prevnext__link docs-prevnext__link--prev" href="language-maturity">
         <span class="docs-prevnext__label">Previous</span>
         <span class="docs-prevnext__title">Language maturity</span>
-      </a><a class="docs-prevnext__link docs-prevnext__link--next" href="auth.html">
+      </a><a class="docs-prevnext__link docs-prevnext__link--next" href="auth">
         <span class="docs-prevnext__label">Next</span>
         <span class="docs-prevnext__title">Auth analysis</span>
       </a></nav>
@@ -1368,7 +1369,7 @@
           </div>
           <div class="site-footer__group" role="group" aria-labelledby="footer-scanner">
             <span id="footer-scanner" class="site-footer__heading">Scanner</span>
-            <a href="../../scanner.html">Overview</a>
+            <a href="../../scanner">Overview</a>
             <a href="../../docs/nyx/">Docs</a>
             <a href="https://github.com/elicpeter/nyx">GitHub</a>
             <a href="https://crates.io/crates/nyx-scanner">crates.io</a>
@@ -1376,10 +1377,10 @@
           </div>
           <div class="site-footer__group" role="group" aria-labelledby="footer-agent">
             <span id="footer-agent" class="site-footer__heading">Agent</span>
-            <a href="../../agent.html">Overview</a>
+            <a href="../../agent">Overview</a>
             <a href="../../docs/agent/">Docs</a>
             <a href="https://github.com/nyx-sec/nyx-agent">GitHub</a>
-            <a href="../../agent.html#support">Support</a>
+            <a href="../../agent#support">Support</a>
           </div>
         </nav>
       </div>

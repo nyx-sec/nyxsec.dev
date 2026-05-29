@@ -9,7 +9,7 @@ Nyx Scanner is an open-source, deterministic local-first security scanner. It ru
 Primary entity:
 - Name: Nyx
 - Type: independent open-source security project and local security tooling site
-- Canonical website: https://nyxscan.dev/
+- Canonical website: https://nyxsec.dev/
 - Creator/maintainer: Eli Peter, https://github.com/elicpeter
 - Sponsor page: https://github.com/sponsors/elicpeter
 
@@ -31,55 +31,55 @@ Commercial/support contact:
 ## Canonical URL map
 
 Site root and machine-readable indexes:
-- Home: https://nyxscan.dev/
-- Nyx Scanner: https://nyxscan.dev/scanner.html
-- Nyx Agent: https://nyxscan.dev/agent.html
-- Sitemap: https://nyxscan.dev/sitemap.xml
-- llms.txt (short): https://nyxscan.dev/llms.txt
-- llms-full.txt (this file): https://nyxscan.dev/llms-full.txt
-- News RSS feed: https://nyxscan.dev/news/feed.xml
-- robots.txt: https://nyxscan.dev/robots.txt
+- Home: https://nyxsec.dev/
+- Nyx Scanner: https://nyxsec.dev/scanner
+- Nyx Agent: https://nyxsec.dev/agent
+- Sitemap: https://nyxsec.dev/sitemap.xml
+- llms.txt (short): https://nyxsec.dev/llms.txt
+- llms-full.txt (this file): https://nyxsec.dev/llms-full.txt
+- News RSS feed: https://nyxsec.dev/news/feed.xml
+- robots.txt: https://nyxsec.dev/robots.txt
 
 Documentation:
-- Docs index: https://nyxscan.dev/docs/
-- Nyx Scanner docs: https://nyxscan.dev/docs/nyx/
-- Scanner quickstart: https://nyxscan.dev/docs/nyx/quickstart.html
-- Scanner installation: https://nyxscan.dev/docs/nyx/installation.html
-- Scanner CLI reference: https://nyxscan.dev/docs/nyx/cli.html
-- Scanner configuration: https://nyxscan.dev/docs/nyx/configuration.html
-- Scanner output formats: https://nyxscan.dev/docs/nyx/output.html
-- Scanner local UI (`nyx serve`): https://nyxscan.dev/docs/nyx/serve.html
-- Scanner authentication tracking: https://nyxscan.dev/docs/nyx/auth.html
-- Scanner custom rules: https://nyxscan.dev/docs/nyx/rules.html
-- Scanner how it works: https://nyxscan.dev/docs/nyx/how-it-works.html
-- Scanner advanced analysis: https://nyxscan.dev/docs/nyx/advanced-analysis.html
-- Scanner detectors overview: https://nyxscan.dev/docs/nyx/detectors.html
-- Scanner detectors, patterns: https://nyxscan.dev/docs/nyx/detectors/patterns.html
-- Scanner detectors, CFG: https://nyxscan.dev/docs/nyx/detectors/cfg.html
-- Scanner detectors, state: https://nyxscan.dev/docs/nyx/detectors/state.html
-- Scanner detectors, taint: https://nyxscan.dev/docs/nyx/detectors/taint.html
-- Scanner language maturity: https://nyxscan.dev/docs/nyx/language-maturity.html
-- Scanner roadmap: https://nyxscan.dev/docs/nyx/roadmap.html
-- Scanner changelog: https://nyxscan.dev/docs/nyx/changelog.html
-- Nyx Agent docs: https://nyxscan.dev/docs/agent/
-- Agent quickstart: https://nyxscan.dev/docs/agent/quickstart.html
-- Agent install: https://nyxscan.dev/docs/agent/install.html
-- Agent CLI reference: https://nyxscan.dev/docs/agent/cli.html
-- Agent configuration: https://nyxscan.dev/docs/agent/config.html
-- Agent API: https://nyxscan.dev/docs/agent/api.html
-- Agent triggers: https://nyxscan.dev/docs/agent/triggers/
-- Agent GitHub Actions: https://nyxscan.dev/docs/agent/ci/github-actions.html
+- Docs index: https://nyxsec.dev/docs/
+- Nyx Scanner docs: https://nyxsec.dev/docs/nyx/
+- Scanner quickstart: https://nyxsec.dev/docs/nyx/quickstart
+- Scanner installation: https://nyxsec.dev/docs/nyx/installation
+- Scanner CLI reference: https://nyxsec.dev/docs/nyx/cli
+- Scanner configuration: https://nyxsec.dev/docs/nyx/configuration
+- Scanner output formats: https://nyxsec.dev/docs/nyx/output
+- Scanner local UI (`nyx serve`): https://nyxsec.dev/docs/nyx/serve
+- Scanner authentication tracking: https://nyxsec.dev/docs/nyx/auth
+- Scanner custom rules: https://nyxsec.dev/docs/nyx/rules
+- Scanner how it works: https://nyxsec.dev/docs/nyx/how-it-works
+- Scanner advanced analysis: https://nyxsec.dev/docs/nyx/advanced-analysis
+- Scanner detectors overview: https://nyxsec.dev/docs/nyx/detectors
+- Scanner detectors, patterns: https://nyxsec.dev/docs/nyx/detectors/patterns
+- Scanner detectors, CFG: https://nyxsec.dev/docs/nyx/detectors/cfg
+- Scanner detectors, state: https://nyxsec.dev/docs/nyx/detectors/state
+- Scanner detectors, taint: https://nyxsec.dev/docs/nyx/detectors/taint
+- Scanner language maturity: https://nyxsec.dev/docs/nyx/language-maturity
+- Scanner roadmap: https://nyxsec.dev/docs/nyx/roadmap
+- Scanner changelog: https://nyxsec.dev/docs/nyx/changelog
+- Nyx Agent docs: https://nyxsec.dev/docs/agent/
+- Agent quickstart: https://nyxsec.dev/docs/agent/quickstart
+- Agent install: https://nyxsec.dev/docs/agent/install
+- Agent CLI reference: https://nyxsec.dev/docs/agent/cli
+- Agent configuration: https://nyxsec.dev/docs/agent/config
+- Agent API: https://nyxsec.dev/docs/agent/api
+- Agent triggers: https://nyxsec.dev/docs/agent/triggers/
+- Agent GitHub Actions: https://nyxsec.dev/docs/agent/ci/github-actions
 
 Release notes:
-- News index: https://nyxscan.dev/news/
-- Nyx Agent launch: https://nyxscan.dev/news/nyx-agent.html
-- Nyx 0.7.0: https://nyxscan.dev/news/nyx-0-7-0.html
-- Nyx 0.6.0: https://nyxscan.dev/news/nyx-0-6-0.html
-- Nyx 0.5.0: https://nyxscan.dev/news/nyx-0-5-0.html
-- Nyx 0.4.0: https://nyxscan.dev/news/nyx-0-4-0.html
-- Nyx 0.3.0: https://nyxscan.dev/news/nyx-0-3-0.html
-- Nyx 0.2.0: https://nyxscan.dev/news/nyx-0-2-0.html
-- Alpha releases: https://nyxscan.dev/news/nyx-alpha.html
+- News index: https://nyxsec.dev/news/
+- Nyx Agent launch: https://nyxsec.dev/news/nyx-agent
+- Nyx 0.7.0: https://nyxsec.dev/news/nyx-0-7-0
+- Nyx 0.6.0: https://nyxsec.dev/news/nyx-0-6-0
+- Nyx 0.5.0: https://nyxsec.dev/news/nyx-0-5-0
+- Nyx 0.4.0: https://nyxsec.dev/news/nyx-0-4-0
+- Nyx 0.3.0: https://nyxsec.dev/news/nyx-0-3-0
+- Nyx 0.2.0: https://nyxsec.dev/news/nyx-0-2-0
+- Alpha releases: https://nyxsec.dev/news/nyx-alpha
 
 External:
 - Source code: https://github.com/elicpeter/nyx
@@ -95,11 +95,11 @@ External:
 
 - Current package: `nyx-scanner` v0.7.0
 - Rust requirement: stable Rust 1.88+ for Cargo installs
-- Primary site: https://nyxscan.dev
-- Scanner page: https://nyxscan.dev/scanner.html
+- Primary site: https://nyxsec.dev
+- Scanner page: https://nyxsec.dev/scanner
 - Source code: https://github.com/elicpeter/nyx
 - Crate: https://crates.io/crates/nyx-scanner
-- Docs: https://nyxscan.dev/docs/nyx/
+- Docs: https://nyxsec.dev/docs/nyx/
 - Rustdocs: https://docs.rs/nyx-scanner/latest/nyx_scanner/
 - Releases: https://github.com/elicpeter/nyx/releases
 - Security policy: https://github.com/elicpeter/nyx/blob/master/SECURITY.md
@@ -131,10 +131,10 @@ Destructive checks are opt-in and meant for disposable development data.
 Nyx Agent is open source under AGPLv3-or-later. Commercial licenses, paid support, onboarding help, private policy packs, and enterprise terms are available for teams that need proprietary embedding, hosted resale, custom support obligations, or license comfort.
 
 Links:
-- Product page: https://nyxscan.dev/agent.html
-- Docs: https://nyxscan.dev/docs/agent/
+- Product page: https://nyxsec.dev/agent
+- Docs: https://nyxsec.dev/docs/agent/
 - Source code: https://github.com/nyx-sec/nyx-agent
-- Launch notes: https://nyxscan.dev/news/nyx-agent.html
+- Launch notes: https://nyxsec.dev/news/nyx-agent
 
 ---
 
@@ -413,7 +413,7 @@ Or add rules from the CLI: `nyx config add-rule --lang javascript --matcher esca
 
 Available cap values: `env_var`, `html_escape`, `shell_escape`, `url_encode`, `json_parse`, `file_io`, `fmt_string`, `sql_query`, `deserialize`, `ssrf`, `data_exfil`, `code_exec`, `crypto`, `unauthorized_id`, `all`.
 
-Full schema: [Configuration docs](https://nyxscan.dev/docs/nyx/configuration.html).
+Full schema: [Configuration docs](https://nyxsec.dev/docs/nyx/configuration).
 
 ---
 

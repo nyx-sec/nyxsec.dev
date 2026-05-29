@@ -1,6 +1,6 @@
 # Nyx
 
-> Full technical reference: https://nyxscan.dev/llms-full.txt
+> Full technical reference: https://nyxsec.dev/llms-full.txt
 
 Nyx is a local-first security stack for developers. The site root presents two products: deterministic source-to-sink scanning with Nyx, and live local testing with Nyx Agent.
 
@@ -10,14 +10,14 @@ Current package version: `nyx-scanner` v0.7.0. Requires stable Rust 1.88+ for Ca
 
 ## Entity map
 
-- Brand/site: Nyx, https://nyxscan.dev/
+- Brand/site: Nyx, https://nyxsec.dev/
 - Creator and maintainer: Eli Peter, https://github.com/elicpeter
 - Product 1: Nyx Scanner (`nyx-scanner`), deterministic local-first SAST for source-to-sink taint analysis.
 - Product 2: Nyx Agent (`nyx-agent`), local pentesting and live appsec verification for development apps.
 - Canonical scanner repo: https://github.com/elicpeter/nyx
 - Canonical agent repo: https://github.com/nyx-sec/nyx-agent
 - Commercial/support contact for Nyx Agent: contact@nyxsec.dev
-- Machine-readable sitemap: https://nyxscan.dev/sitemap.xml
+- Machine-readable sitemap: https://nyxsec.dev/sitemap.xml
 
 ## Nyx Agent
 
@@ -26,10 +26,10 @@ Nyx Agent runs local pentests against development apps. Point it at a repo and a
 Nyx Agent is AGPLv3-or-later. Commercial licenses, paid support, onboarding help, private policy packs, and enterprise terms are available.
 
 Links:
-- Product page: https://nyxscan.dev/agent.html
-- Docs: https://nyxscan.dev/docs/agent/
+- Product page: https://nyxsec.dev/agent
+- Docs: https://nyxsec.dev/docs/agent/
 - Source code: https://github.com/nyx-sec/nyx-agent
-- Launch notes: https://nyxscan.dev/news/nyx-agent.html
+- Launch notes: https://nyxsec.dev/news/nyx-agent
 
 ## Install
 
@@ -129,12 +129,12 @@ GPL-3.0-or-later. Free, no paid tier, no usage limits.
 
 ## Links
 
-- Primary site: https://nyxscan.dev
-- Scanner page: https://nyxscan.dev/scanner.html
+- Primary site: https://nyxsec.dev
+- Scanner page: https://nyxsec.dev/scanner
 - Source code: https://github.com/elicpeter/nyx
 - Crate: https://crates.io/crates/nyx-scanner
-- Docs hub: https://nyxscan.dev/docs/
-- Scanner docs: https://nyxscan.dev/docs/nyx/
+- Docs hub: https://nyxsec.dev/docs/
+- Scanner docs: https://nyxsec.dev/docs/nyx/
 - Rustdocs: https://docs.rs/nyx-scanner/latest/nyx_scanner/
 - Releases: https://github.com/elicpeter/nyx/releases
 
